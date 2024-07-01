@@ -1,0 +1,107 @@
+<div class="page-contact">
+
+    <div class="section-contact"> 
+      <div class="col1-ctct"> 
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+            <nz-form-item class="cls-nom col-5">
+              <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="userName" nzRequired >
+                  <span>Nom et prénom</span>
+              </nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                  <input nz-input id="userName" formControlName="userName" />
+              </nz-form-control>
+            </nz-form-item>
+        
+            <nz-form-item class="cls-tel col-5">
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Telephone" nzRequired>Téléphone</nz-form-label>
+              <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  [nzValidateStatus]="validateForm.controls['Telephone']">
+                  <nz-input-group>
+                  <input formControlName="Telephone" id="'Telephone'" nz-input />
+                  </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>      
+              
+            <nz-form-item class="cls-email col-5">
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Email">E-mail</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                  <input nz-input formControlName="Email" id="Email" />
+              </nz-form-control>
+            </nz-form-item>
+    
+            <nz-form-label [nzSpan]="7" nzRequired>Message</nz-form-label>
+              <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Votre message ici">
+                <nz-textarea-count [nzMaxCharacterCount]="2000">
+                  <textarea formControlName="Message" nz-input rows="2" placeholder="Votre message"></textarea>
+                </nz-textarea-count>
+              </nz-form-control>
+            </nz-form-item>
+    
+            <nz-form-item nz-row class="register-area col-btn">
+              <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                  <button class="btn-envoyer" nz-button nzType="primary">Envoyer</button>
+              </nz-form-control>
+            </nz-form-item>
+        </form>
+        
+    
+
+      </div>
+      
+
+
+      <div class="col2-ctct"> 
+        
+
+        <div class="ctct-cord">
+       <div class="ctct-title">
+          <img class="img1-piece" src="/assets/icon-blanc.svg">
+          <h2 class="txt1-pieces blanc font-site">Contactez-nous</h2>
+        </div>
+        <div class="blanc font-site2  mt-18">
+          <p class="fs-19 blanc">
+           <i class="fa-solid fa-phone mr-r"></i> <a class=" fs-19 blanc" href="tel:01 64 62 25 70">01 64 62 25 70</a> 
+            <br>
+            <a class="mrg-l-20 fs-19 blanc" href="tel:06 05 81 01 53">06 05 81 01 53</a>
+            <br>
+            <a class="mrg-l-20 fs-19 blanc" href="tel:07 69 38 98 08">07 69 38 98 08</a>
+          </p>
+        </div>
+        <div class="blanc font-site2  mt-18">
+          <i class=" mr-r fa-solid fa-envelope"></i> 
+            <a class="fs-19 blanc" href="mailto:concepttravaux@gmail.com">concepttravaux&#64;gmail.com</a>
+            <br>
+            <a class="mrg-l-20 fs-19 blanc" href="mailto:contact@concept-et-travaux.fr">contact&#64;concept-et-travaux.fr</a>
+            <br>
+            <a class="mrg-l-20 fs-19 blanc" href="mailto:devis@concept-et-travaux.fr">devis&#64;concept-et-travaux.fr</a>
+
+        </div>
+        
+          <div class="blanc font-site2  mt-18 flx-cntct">
+            <p class="fs-19"><i class=" mr-r fa-solid fa-location-dot mr-10"></i> 21 place de la République<br><p class="mrg-l-20 fs-19">75003 Paris</p>
+            </p>
+          </div>
+         
+          <div class="blanc font-site2  mt-18">
+            <p class="fs-19"><i class=" mr-r fa-solid fa-clock"></i>Du Lundi au Samedi : <br>
+              <p class="mrg-l-20 fs-19">09:00h - 18:00h</p>
+          </div>
+          
+        </div>
+
+       <div class="map mt-30">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.5031343929904!2d2.359741376129098!3d48.867684400052894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66f79ae813485%3A0xb3d336b5e1befde2!2s21%20Pl.%20de%20la%20R%C3%A9publique%2C%2075003%20Paris%2C%20France!5e0!3m2!1sen!2sma!4v1719484983161!5m2!1sen!2sma" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+       </div>
+
+
+
+
+      </div>
+
+
+    </div>
+  </div>

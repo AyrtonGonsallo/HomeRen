@@ -1,0 +1,83 @@
+textarea, pre, textarea:focus{
+  resize: none !important;
+  width: 100%;
+  border: none !important;
+  height: 100%;
+  min-height: 100% !important;
+  overflow: visible !important;
+  box-sizing: border-box; 
+}
+.section1 h1, .section1 p{text-shadow: 1px 1px 3px #00000047;}
+.bg-section1{
+    background-image: url('/assets/bg-faq.webp');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.section1, .faq{
+    max-width: 1440px;
+    margin: auto;
+    padding: 4% 1% 4% 1%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@media only screen and (max-width: 800px) {
+.section1, .section2, .section3{ gap: 15px !important;padding: 20px;}
+}
+@media only screen and (max-width: 497px) {
+  .faq-content {
+    grid-template-columns: 1fr !important;
+    gap: 25px;
+  }
+    .section1, .section2, .section3{padding: 20px 15px;}
+}
+/***********************************/
+.faq-img{width: 17px;margin-top:-10px;margin-right:6px;}
+.faq{
+    gap: 17px;
+} 
+  .faq-content {
+    display: grid;
+   
+    gap: 65px;
+  }
+  
+  .faq-column {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .faq-column h3 {
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .faq-item {
+    margin-bottom: 20px;
+  }
+  
+  .faq-question {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .faq-answer {
+    margin: 0;
+    padding-left: 15px;
+    font-size: 17px;
+  }
+@media only screen and (max-width: 1440px) {
+  .section1, .faq{padding: 4% 3% 4% 3%;}
+
+}
+@media only screen and (max-width: 497px) {
+    .section1, .faq{padding: 20px;}
+    .faq-content {
+        gap: 0px;
+        flex-direction: column;
+    }
+}

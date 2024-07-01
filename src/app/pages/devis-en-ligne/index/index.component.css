@@ -1,0 +1,85 @@
+.f-w-4{font-weight: 400;}
+.mt-12{margin-top:12px;}
+.section-devis{
+    padding: 2% 4%;
+    max-width: 1440px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0px;
+}
+.devis-content{gap: 20px;display: flex;flex-direction: column;}
+.col-pcs-devis {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.pcs-devis {
+    width: 20%;
+    cursor: pointer;
+}
+.ttl-dv-pc{
+    font-weight: 600;
+    font-size: 22px;
+}
+.pcs-devis-ttle{
+    padding:10px;
+    background-color: var(--color1);   
+     width: fit-content;
+    margin-top: -65px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    position: relative;}
+ .mr-b-2{margin-bottom:20px;}
+ /********************************************************/
+ .steps-content {
+    margin-top: 0px;
+    min-height: 200px;
+    text-align: center;
+    padding-top: 10px;
+  }
+  .steps-action {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+  }
+  .ant-btn, button {
+    line-height: 0.5715;
+    position: relative;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    border:none !important;
+    box-shadow: none;
+    padding: 11px 32px;
+    height: 46px;
+    color: #fff;
+    border-radius: 0px;
+    background: #ffc736;
+  }
+  button:hover{
+    background: var(--color2);
+    color: var(--color-white);
+  }
+.ant-steps-item-icon {
+    display: none !important;
+}
+/************************* Respo *************************/
+@media only screen and (max-width: 1440px) {
+.steps-content{padding-top: 0px !important;}
+}
+@media only screen and (max-width: 1024px) {
+.pcs-devis {width: 31%;}
+}
+@media only screen and (max-width: 800px) {
+    .section-devis{padding: 20px;}
+    .devis-content{ gap: 15px;}
+}
+@media only screen and (max-width: 497px) {
+    .pcs-devis {width: 47%;}
+}
+@media only screen and (max-width: 375px) {
+    .pcs-devis {width: 100%;}
+}
+

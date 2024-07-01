@@ -1,0 +1,47 @@
+<div class="section-connexion"> 
+
+
+    <div class="col1-cnx"> 
+
+      <!-- <div class="mt-18 s-m-ftr blanc"><a href="/"><i class="fab fa-facebook-f mr-10"></i></a> <a href="/"><i class="fab fa-instagram mr-10"></i></a></div> -->
+
+
+    </div>
+    
+
+
+    <div class="col2-cnx"> 
+      
+      <div class="ctct-title">
+        <h1 class="txt1-pieces noir font-site center">Plonger dans l'univers HomeRen !</h1>
+      </div>
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <nz-form-item class="cls-email col-5">
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Email">E-mail</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+              <input nz-input formControlName="Email" id="Email" />
+          </nz-form-control>
+        </nz-form-item>
+    
+        <nz-form-item class="cls-mdp col-5">
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Password" nzRequired>Mot de passe</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+               <input nz-input type="Password" id="Password" formControlName="Password"/>
+            </nz-form-control>
+        </nz-form-item>
+        <a href="/" class="a-form">J’ai oublié mon mot de passe</a>
+    
+        <nz-form-item nz-row class="register-area col-btn">
+          <nz-form-control [nzSpan]="14" [nzOffset]="6">
+            <button class="btn-envoyer" nz-button nzType="primary">Accéder à HomeRen</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+          
+    
+
+      </div>
+
+
+
+    </div>

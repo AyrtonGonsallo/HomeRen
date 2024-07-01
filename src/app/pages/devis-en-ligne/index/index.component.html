@@ -1,0 +1,49 @@
+<div class="section-devis">
+   <div class="devis-title">
+    <h1 class="center gris font-site">Demandez votre devis gratuit</h1>
+    <!-- <p class="center f-w-4 fs-30 m-w-p"><strong> Vous avez un projet de rénovation en tête ?</strong>Remplissez notre formulaire en ligne pour une estimation personnalisée et sans engagement.</p> -->
+   </div>
+   <nz-steps [nzCurrent]="current">
+      <nz-step nzIcon="user"></nz-step>
+      <nz-step nzIcon="user"></nz-step>
+      <nz-step nzIcon="user"></nz-step>
+    </nz-steps>
+    
+    <div class="steps-content" >
+      <div class="devis-content" *ngIf="current == 0">
+         <p class="ttl-dv-pc"><strong>Je rénove une pièce</strong></p>
+         <div *ngFor="let ppc of pieces_par_categories">
+            <p class="fs-20 mr-b-2 jaune"><strong>{{ppc?.Titre}}</strong></p>
+            <div class="col-pcs-devis" >
+               
+               <div class="pcs-devis" id="piece-{{piece.ID}}" *ngFor="let piece of ppc.Pieces" (click)="selectPiece(piece.ID)">
+                  <img src="{{baseurl}}/files/{{piece.Image_presentation}}" alt="">
+                  <p class="blanc pcs-devis-ttle"><strong>{{piece.Titre}}</strong></p>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="devis-content" *ngIf="current == 1">
+         étape 2
+      </div>
+      <div class="devis-content" *ngIf="current == 2">
+         étape 3
+      </div>
+    </div>
+    <div class="steps-action">
+      <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+        <span>Précédent</span>
+      </button>
+      <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
+        <span>Suivant</span>
+      </button>
+      <button nz-button nzType="primary" class="btn-etps" (click)="done()" *ngIf="current === 2">
+        <span>Fin</span>
+      </button>
+    </div>
+   
+
+
+</div>
+
+

@@ -1,0 +1,27 @@
+<div class="bg-section1">
+    <div class="section1">
+        <h1 class="center blanc">Foire aux Questions (FAQ)</h1>
+    </div>
+</div>
+<section class="faq">
+   <div class="faq-content">
+      <div class="faq-column" >
+        <h2 class="cat-faq jaune"  *ngFor="let cat of question?.CategorieQuestionFaqs">{{cat.Titre}}</h2>
+        <div class="faq-item" >
+          <h3 class="faq-question"> {{question?.Question}}</h3>
+          <p [innerHTML]="question?.Reponse"></p>
+        </div>
+        
+      </div>
+      
+    </div>
+  </section>
+  
+  
+<div class="bg-phrase-dacc">
+    <div class="section-phrase-dacc">
+      <span class="txt1-sldr blanc fs-34 center">Des travaux de rénovation ?</span>
+      <span class="txt2-sldr blanc fs-27 center"><strong>Réalisons-les ensemble !</strong> Transformez votre maison avec HOMEREN</span>
+      <a class="btn-site ph-dacc" href="/">Devis en ligne</a>
+   </div>
+  </div>
