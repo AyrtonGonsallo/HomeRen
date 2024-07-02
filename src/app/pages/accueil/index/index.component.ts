@@ -47,7 +47,7 @@ export class IndexComponent {
       } else {
         // Handle non-browser environment (if needed)
         const contentPieces = [];
-        console.warn('docuemnt object is not defined. Running in a non-browser environment.');
+        console.warn('document object is not defined. Running in a non-browser environment.');
       }
       
     }, 2000);

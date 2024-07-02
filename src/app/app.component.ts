@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router ,NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { ApiConceptsEtTravauxService } from './services/api-concepts-et-travaux.service';
@@ -9,7 +9,7 @@ import { environment } from './environments/environment';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   baseurl=environment.apiUrl
   title = 'HomeRen';
   currentUrl: string ='';
@@ -22,6 +22,7 @@ export class AppComponent {
       name: 'robots',
       content: "noindex, nofollow"
     });
+   
     this.router.events.subscribe((event) => {
      
       if (event instanceof NavigationEnd) {
@@ -30,16 +31,34 @@ export class AppComponent {
           var urlparts = window.location.href.split('/');
           // Use urlparts in your browser-specific code
         } else {
-          // Handle non-browser environment (if needed)
-          var urlparts=['/',"/"];
-          console.warn('Window object is not defined. Running in a non-browser environment.');
+          let eeurl=event.urlAfterRedirects.split('/').pop();
+          if(eeurl!=undefined)
+            {
+              this.currentUrl = eeurl;
+            }
+          
+            console.log("current url", this.currentUrl);
+            // Handle non-browser environment (if needed)
+            var urlparts=[this.currentUrl];
+            console.warn('Window object is not defined. Running in a non-browser environment.');
         }
         this.currentUrl=urlparts[urlparts.length-1]
         console.log("current url",this.currentUrl)
-        if(document){
-          this.add_meta_for_url(this.currentUrl)
+        let title=(this.currentUrl=="")?"home":this.currentUrl;
+        this.userService.getFrontPageByTitle(title).subscribe(
+          (response) => {
+            this.page_seo_details = response;
+            console.log("réponse de la requette getFrontPageByTitle",this.page_seo_details);
+          },
+          (error) => {
+            console.error('Erreur lors de la recuperation des details seo :', error);
+          }
+        );
+        setTimeout(() => {
+          this.add_meta_for_url()
+        }, 2000);  
 
-        }
+        
       }
       
     });
@@ -48,12 +67,9 @@ export class AppComponent {
 
   }
 
-  add_meta_for_url(Url:string){
-    let title=(Url=="")?"home":Url;
-    this.userService.getFrontPageByTitle(title).subscribe(
-      (response) => {
-        this.page_seo_details = response;
-        console.log("réponse de la requette getFrontPageByTitle",this.page_seo_details);
+  add_meta_for_url(){
+    
+        
         this.titleService.setTitle(this.page_seo_details.Content_balise_title);
         this.metaService.updateTag({ 
           name: 'description',
@@ -91,7 +107,7 @@ export class AppComponent {
           name: 'robots',
           content: this.page_seo_details.Content_balise_robots
         });
-        if(document){
+        if(typeof document !== 'undefined'){
           const head = document.getElementsByTagName('head')[0];
           var element: HTMLLinkElement|null= document.querySelector(`link[rel='canonical']`) || null
           if (element==null) {
@@ -102,11 +118,7 @@ export class AppComponent {
           element.setAttribute('href',this.page_seo_details.Href_balise_canonical)
         }
         
-      },
-      (error) => {
-        console.error('Erreur lors de la recuperation des details seo :', error);
-      }
-    );
+      
   }
     
   
