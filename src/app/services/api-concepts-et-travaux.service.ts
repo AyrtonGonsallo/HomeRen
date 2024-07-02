@@ -71,8 +71,19 @@ export class ApiConceptsEtTravauxService {
     const url = `${environment.apiUrl}/get_piece/${id}`;
     return this.http.get<any>(url);
   }
+  // Read all
+  getFrontPages(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/get_pages`);
+  }
 
+  // Read one
+  getFrontPageById(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/get_page/${id}`);
+  }
 
-
+ // Read one
+ getFrontPageByTitle(title: string): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_page_by_title/${title}`);
+}
 
 }

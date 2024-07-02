@@ -6,7 +6,7 @@ import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-t
 import { Realisation } from '../../../Models/Realisation';
 import { Piece } from '../../../Models/Piece';
 import { environment } from '../../../environments/environment';
-import { Galerie } from '../../../Models/Galerie';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import Splide from '@splidejs/splide';
 @Component({
   selector: 'app-realisations-details',
@@ -15,6 +15,7 @@ import Splide from '@splidejs/splide';
   
 })
 export class RealisationsDetailsComponent {
+  faCheck=faCheck;
   ngOnInit(): void {
     this.loadPieces()
     this.loadRealisations()
@@ -62,7 +63,9 @@ export class RealisationsDetailsComponent {
           (response2) => {
             this.galerie = response2;
             console.log("réponse de la requette get galerie",this.galerie);
-            this.init_splide();
+            if (typeof document !== 'undefined') {
+              this.init_splide();
+            }
           },
           (error) => {
             console.error('Erreur lors de la recuperation de la galerie :', error);
