@@ -15,7 +15,7 @@ import { Meta, Title } from '@angular/platform-browser';
   styleUrl: './pieces-details.component.css'
 })
 export class PiecesDetailsComponent {
-  piece_id:string =  this.route.snapshot.paramMap.get('id')??'0';
+  piece_id:string =  '6';
   galerie:any
   baseurl=environment.apiUrl
   piece:any
@@ -27,21 +27,14 @@ export class PiecesDetailsComponent {
  
 
   ngOnInit(): void {
-    this.userService.getFrontPageByTitle("pieces-details").subscribe(
-            (response) => {
-              this.page_seo_details = response;
-              console.log("réponse de la requette getFrontPageByTitle",this.page_seo_details);
-            },
-            (error) => {
-              console.error('Erreur lors de la recuperation des details seo :', error);
-            }
-          );
-          setTimeout(() => {
-            this.add_meta_for_url()
-          }, 2000);
-    
-    this.loadPiece(parseInt(this.piece_id))
-    this.load_realisations()
+    this.route.data.subscribe(data => {
+      this.piece = data['data'].piece;
+      this.piece_id = data['data'].id;
+      this.page_seo_details = data['data'].seoDetails;
+      this.add_meta_for_url()    
+      this.load_realisations()
+    });
+   
   }
 
   add_meta_for_url(){

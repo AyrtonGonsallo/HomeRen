@@ -1,0 +1,6 @@
+/pieces/pieces-details/6
+/pieces/pieces-details/7
+/pieces/pieces-details/8
+/pieces/pieces-details/9
+/pieces/pieces-details/4
+/pieces/pieces-details/5

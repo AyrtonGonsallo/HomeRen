@@ -64,7 +64,7 @@ add_meta_for_url(){
   this.titleService.setTitle(this.page_seo_details.Content_balise_title.replace('%Question%', this.question.Question));
   this.metaService.updateTag({ 
     name: 'description',
-    content: this.page_seo_details.Content_balise_description.replace('%Question%', this.question.Question)
+    content: this.page_seo_details.Content_balise_description.replace('%Titre%', this.question.Titre)
   });
   this.metaService.updateTag({ 
     name: 'keywords',
