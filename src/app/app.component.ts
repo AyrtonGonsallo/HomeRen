@@ -30,6 +30,7 @@ export class AppComponent implements OnInit{
         if (typeof window !== 'undefined') {
           var urlparts = window.location.href.split('/');
           // Use urlparts in your browser-specific code
+
         } else {
           let eeurl=event.urlAfterRedirects.split('/').pop();
           if(eeurl!=undefined)
@@ -38,25 +39,32 @@ export class AppComponent implements OnInit{
             }
           
             console.log("current url", this.currentUrl);
+            
             // Handle non-browser environment (if needed)
             var urlparts=[this.currentUrl];
             console.warn('Window object is not defined. Running in a non-browser environment.');
         }
+        
         this.currentUrl=urlparts[urlparts.length-1]
+        let is_number=this.isNumber(this.currentUrl)
         console.log("current url",this.currentUrl)
-        let title=(this.currentUrl=="")?"home":this.currentUrl;
-        this.userService.getFrontPageByTitle(title).subscribe(
-          (response) => {
-            this.page_seo_details = response;
-            console.log("réponse de la requette getFrontPageByTitle",this.page_seo_details);
-          },
-          (error) => {
-            console.error('Erreur lors de la recuperation des details seo :', error);
-          }
-        );
-        setTimeout(() => {
-          this.add_meta_for_url()
-        }, 2000);  
+        console.log("current url is number : ",is_number)
+        if(!is_number){
+          let title=(this.currentUrl=="")?"home":this.currentUrl;
+          this.userService.getFrontPageByTitle(title).subscribe(
+            (response) => {
+              this.page_seo_details = response;
+              console.log("réponse de la requette getFrontPageByTitle",this.page_seo_details);
+            },
+            (error) => {
+              console.error('Erreur lors de la recuperation des details seo :', error);
+            }
+          );
+          setTimeout(() => {
+            this.add_meta_for_url()
+          }, 2000);
+        }
+          
 
         
       }
@@ -66,6 +74,14 @@ export class AppComponent implements OnInit{
     this.loadPieces()
 
   }
+
+
+  
+  isNumber(value: string): boolean {
+    const numberRegex = /^-?\d+(\.\d+)?$/;
+    return numberRegex.test(value);
+  }
+
 
   add_meta_for_url(){
     
