@@ -92,6 +92,10 @@ export class AppComponent implements OnInit{
           content: this.page_seo_details.Content_balise_description
         });
         this.metaService.updateTag({ 
+          name: 'keywords',
+          content: this.page_seo_details.Content_balise_keywords
+        });
+        this.metaService.updateTag({ 
           name: 'title',
           content: this.page_seo_details.Content_balise_title
         });

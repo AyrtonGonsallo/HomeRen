@@ -13,7 +13,9 @@ import { environment } from '../../../environments/environment';
 })
 export class QuestionComponent {
   questionId:string =  this.route.snapshot.paramMap.get('id')??'0';
+  
   ngOnInit(): void {
+    this.getQuestionDetails(this.questionId)
     this.userService.getFrontPageByTitle("question").subscribe(
       (response) => {
         this.page_seo_details = response;
@@ -27,7 +29,7 @@ export class QuestionComponent {
       this.add_meta_for_url()
     }, 2000);
 
-    this.getQuestionDetails(this.questionId)
+    
   }
   baseurl=environment.apiUrl
   page_seo_details:any
@@ -59,22 +61,26 @@ getQuestionDetails(id: string): void {
 add_meta_for_url(){
     
         
-  this.titleService.setTitle(this.page_seo_details.Content_balise_title.replace('%Titre%', this.question.Question));
+  this.titleService.setTitle(this.page_seo_details.Content_balise_title.replace('%Question%', this.question.Question));
   this.metaService.updateTag({ 
     name: 'description',
-    content: this.page_seo_details.Content_balise_description.replace('%Présentation%', this.question.Titre)
+    content: this.page_seo_details.Content_balise_description.replace('%Question%', this.question.Question)
+  });
+  this.metaService.updateTag({ 
+    name: 'keywords',
+    content: this.page_seo_details.Content_balise_keywords
   });
   this.metaService.updateTag({ 
     name: 'title',
-    content: this.page_seo_details.Content_balise_title.replace('%Titre%', this.question.Question)
+    content: this.page_seo_details.Content_balise_title.replace('%Question%', this.question.Question)
   });
   this.metaService.updateTag({
     property: 'og:title',
-    content: this.page_seo_details.Content_balise_og_title.replace('%Titre%', this.question.Question)
+    content: this.page_seo_details.Content_balise_og_title.replace('%Question%', this.question.Question)
   });
   this.metaService.updateTag({
     property: 'og:description',
-    content: this.page_seo_details.Content_balise_og_description.replace('%Présentation%', this.question.Titre)
+    content: this.page_seo_details.Content_balise_og_description.replace('%Titre%', this.question.Titre)
   });
   this.metaService.updateTag({
     property: 'og:url',

@@ -72,6 +72,10 @@ export class PiecesDetailsComponent {
       property: 'og:type',
       content: this.page_seo_details.Content_balise_og_type
     });
+    this.metaService.updateTag({ 
+      name: 'keywords',
+      content: this.page_seo_details.Content_balise_keywords
+    });
     this.metaService.updateTag({
       property: 'og:image',
       content: this.baseurl+"/files/"+this.page_seo_details.Content_balise_og_image
