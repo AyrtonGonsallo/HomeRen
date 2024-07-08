@@ -17,7 +17,7 @@ import { environment } from '../../../environments/environment';
 export class IndexComponent {
 
   
-  baseurl=environment.apiUrl
+  baseurl=environment.imagesUrl
   ngOnInit(): void {
     this.loadPieces()
     this.loadRealisations()

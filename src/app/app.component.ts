@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router ,NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { ApiConceptsEtTravauxService } from './services/api-concepts-et-travaux.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { environment } from './environments/environment';
@@ -10,6 +11,7 @@ import { environment } from './environments/environment';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit{
+  faLocationDot=faLocationDot;
   baseurl=environment.apiUrl
   title = 'HomeRen';
   currentUrl: string ='';

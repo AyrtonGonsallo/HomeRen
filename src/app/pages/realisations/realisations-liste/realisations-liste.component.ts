@@ -7,6 +7,7 @@ import { Realisation } from '../../../Models/Realisation';
 import { Piece } from '../../../Models/Piece';
 import Splide from '@splidejs/splide';
 import { Avis } from '../../../Models/Avis';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-realisations-liste',
@@ -15,7 +16,7 @@ import { Avis } from '../../../Models/Avis';
 })
 export class RealisationsListeComponent {
 
-
+  baseurl=environment.imagesUrl
   ngOnInit(): void {
     this.loadPieces()
     this.loadRealisations()

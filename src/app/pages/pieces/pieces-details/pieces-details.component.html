@@ -1,7 +1,7 @@
 <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 <div class="page-realisations">
 
-  <div class="section-t-bar" [ngStyle]="{'background-image': 'url(' + baseurl + '/files/' + piece?.Image_presentation + ')'}">
+  <div class="section-t-bar" [ngStyle]="{'background-image': 'url(' + baseurl+ piece?.Image_presentation + ')'}">
     <h1 class="font-site center">{{piece?.Titre}}</h1>
         <p class="fs-27 center m-w-t-bar"  *ngIf="piece?.['Présentation']">
           {{piece['Présentation']}}
@@ -39,7 +39,7 @@
       
       <div cl-piece *ngFor="let realisation of realisations"> 
    
-      <a [href]="'/realisations/realisations-details/'+realisation.ID"><img class="img-pc" [src]="baseurl + '/files/' + realisation.Image_principale"  alt="">
+      <a [href]="'/realisations/realisations-details/'+realisation.ID"><img class="img-pc" [src]="baseurl  + realisation.Image_principale"  alt="">
       </a><p class="cat-pc font-site2 fs-18">{{realisation?.Piece?.Titre}}</p>
              <a [href]="'/realisations/realisations-details/'+realisation.ID">
              <p class="txt-pc font-site2 fs-18">{{realisation.Titre}}</p></a>

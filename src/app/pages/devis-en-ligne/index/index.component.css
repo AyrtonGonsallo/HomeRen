@@ -82,4 +82,16 @@
 @media only screen and (max-width: 375px) {
     .pcs-devis {width: 100%;}
 }
-
+ul{
+    list-style-type: none;
+}
+.dynamic-form-button{
+    padding: 0;
+    height: 20px;
+    float: right;
+    
+}
+.ant-col{
+    padding: 5px;
+    text-align: start;
+}

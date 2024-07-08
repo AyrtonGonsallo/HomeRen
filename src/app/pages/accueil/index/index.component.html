@@ -40,7 +40,7 @@
 
     <div class="col-md-4 col-piece" *ngFor="let piece of pieces">
         <a [href]="'/pieces/pieces-details/'+piece.ID">
-            <img class="img2-piece" [src]="baseurl + '/files/' +piece.Image_presentation">
+            <img class="img2-piece" [src]="baseurl +piece.Image_presentation">
            <div class="content-piece">
             <h3 class="title-pieces jaune font-site1"> {{piece.Titre}}</h3>
             <p class="blanc fs-18 eq-h-piece"> {{piece["Présentation"]}}</p>
@@ -64,7 +64,7 @@
 
         <div class="col-md-4 col-realis" *ngFor="let realisation of realisations">
             <a [href]="'/realisations/realisations-details/'+realisation.ID">
-                    <img class="img-realis" src="https://homeren.fr/api-concepts-et-travaux/files/{{realisation.Image_principale}}">
+                    <img class="img-realis" src="{{baseurl}}{{realisation.Image_principale}}">
             </a>        
             <div class="content-realis">
                 <p class="cat-pc font-site2 fs-18">

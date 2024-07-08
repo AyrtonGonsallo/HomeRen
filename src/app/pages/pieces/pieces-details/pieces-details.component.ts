@@ -17,7 +17,7 @@ import { Meta, Title } from '@angular/platform-browser';
 export class PiecesDetailsComponent {
   piece_id:string =  '6';
   galerie:any
-  baseurl=environment.apiUrl
+  baseurl=environment.imagesUrl
   piece:any
   realisations:any
   page_seo_details:any

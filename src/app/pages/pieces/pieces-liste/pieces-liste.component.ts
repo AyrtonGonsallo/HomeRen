@@ -15,7 +15,7 @@ import { environment } from '../../../environments/environment';
 export class PiecesListeComponent {
 
   
-  baseurl=environment.apiUrl
+  baseurl=environment.imagesUrl
   ngOnInit(): void {
     this.loadPieces()
     

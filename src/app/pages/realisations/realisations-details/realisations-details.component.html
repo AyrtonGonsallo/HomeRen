@@ -27,7 +27,7 @@
   <div id="main-slider" class="splide">
     <div class="splide__track">
       <ul class="splide__list">
-        <li class="splide__slide" *ngFor="let image of galerie?.images; let i = index"><img [src]="baseurl + '/files/' + image.Url" alt="Image 1"></li>
+        <li class="splide__slide" *ngFor="let image of galerie?.images; let i = index"><img [src]="baseurl  + image.Url" alt="Image 1"></li>
       
       </ul>
     </div>
@@ -36,7 +36,7 @@
   <div id="thumbnail-slider" class="splide">
     <div class="splide__track">
       <ul class="splide__list">
-        <li class="splide__slide" *ngFor="let image of galerie?.images; let i = index"><img [src]="baseurl + '/files/' + image.Url" alt="Thumbnail 1"></li>
+        <li class="splide__slide" *ngFor="let image of galerie?.images; let i = index"><img [src]="baseurl  + image.Url" alt="Thumbnail 1"></li>
     
       </ul>
     </div>
@@ -68,7 +68,7 @@
       <h2 class="center">Nos dernières réalisations</h2>
  <div class="liste-filtre">
   <div cl-piece *ngFor="let realisation of realisations"> 
-         <a [href]="'/realisations/realisations-details/'+realisation.ID"><img class="img-pc" src="https://homeren.fr/api-concepts-et-travaux/files/{{realisation.Image_principale}}" alt="">
+         <a [href]="'/realisations/realisations-details/'+realisation.ID"><img class="img-pc" src="{{baseurl}}{{realisation.Image_principale}}" alt="">
          </a><p class="cat-pc font-site2 fs-18">{{realisation?.Piece?.Titre}}</p>
          <a [href]="'/realisations/realisations-details/'+realisation.ID"><p class="txt-pc font-site2 fs-18">{{realisation.Titre}}</p></a>
   </div>

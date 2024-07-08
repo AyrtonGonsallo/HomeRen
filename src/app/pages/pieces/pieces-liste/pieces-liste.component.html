@@ -7,7 +7,7 @@
        <div class="col2-pieces">
    
        <div class="col-md-4 col-piece" *ngFor="let piece of pieces">
-           <img class="img2-piece" [src]="baseurl + '/files/' +piece.Image_presentation">
+           <img class="img2-piece" [src]="baseurl  +piece.Image_presentation">
               <div class="content-piece">
                <h3 class="title-pieces jaune font-site1"> {{piece.Titre}}</h3>
                <p class=" fs-18 eq-h-piece"> {{piece["Présentation"]}}</p>

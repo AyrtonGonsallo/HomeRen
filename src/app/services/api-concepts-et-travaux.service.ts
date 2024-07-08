@@ -85,5 +85,9 @@ export class ApiConceptsEtTravauxService {
  getFrontPageByTitle(title: string): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_page_by_title/${title}`);
 }
+// Méthode pour récupérer un travail par son ID avec les détails de la pièce associée
+getTravauxByPieceId(pid: number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_travaux_by_piece/${pid}`);
+}
 
 }

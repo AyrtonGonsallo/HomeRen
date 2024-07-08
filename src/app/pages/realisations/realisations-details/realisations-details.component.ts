@@ -16,6 +16,7 @@ import { Meta, Title } from '@angular/platform-browser';
   
 })
 export class RealisationsDetailsComponent {
+  
   faCheck=faCheck;
   ngOnInit(): void {
     this.userService.getFrontPageByTitle("realisations-details").subscribe(
@@ -37,7 +38,7 @@ export class RealisationsDetailsComponent {
   }
   res_id:string =  this.route.snapshot.paramMap.get('id')??'0';
   galerie:any
-  baseurl=environment.apiUrl
+  baseurl=environment.imagesUrl
   page_seo_details:any
   constructor(private metaService: Meta,private titleService: Title,private route: ActivatedRoute,private fb: NonNullableFormBuilder,private router: Router,private message: NzMessageService,private userService: ApiConceptsEtTravauxService) {
 
@@ -165,7 +166,7 @@ export class RealisationsDetailsComponent {
     });
     this.metaService.updateTag({
       property: 'og:image',
-      content: this.baseurl+"/files/"+this.page_seo_details.Content_balise_og_image
+      content: this.baseurl+this.page_seo_details.Content_balise_og_image
     });
     this.metaService.updateTag({
       property: 'og:site_name',
