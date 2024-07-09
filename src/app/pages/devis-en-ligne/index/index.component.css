@@ -95,3 +95,6 @@ ul{
     padding: 5px;
     text-align: start;
 }
+.error{
+    color: red;
+}
