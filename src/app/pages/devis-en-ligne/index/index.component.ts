@@ -176,6 +176,7 @@ export class IndexComponent {
       const json = {
         utilisateur: this.browserInfo,
         ip: this.userIp,
+        piece:this.selectedPiece,
         liste_des_travaux: formulaires
       };
       console.log('Formulaires soumis :', json);

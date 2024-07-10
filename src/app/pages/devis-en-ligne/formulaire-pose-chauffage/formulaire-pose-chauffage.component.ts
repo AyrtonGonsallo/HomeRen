@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-travaux.service';
+import { GestionDesDevisService } from '../../../services/gestion-des-devis.service';
 
 @Component({
   selector: 'app-formulaire-pose-chauffage',
@@ -26,10 +27,11 @@ export class FormulairePoseChauffageComponent {
     if (this.poseChauffageForm.valid) {
       console.log(this.poseChauffageForm.value);
       // Envoyer les données au backend ou traiter comme nécessaire
+      this.gestiondesdevisService.addFormulaire("pose-chauffage",12,this.poseChauffageForm.value)
     }
   }
   
-  constructor(private fb: FormBuilder,private userService: ApiConceptsEtTravauxService) {
+  constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
     
     this.poseChauffageForm = this.createPoseChauffageGroup();
   }

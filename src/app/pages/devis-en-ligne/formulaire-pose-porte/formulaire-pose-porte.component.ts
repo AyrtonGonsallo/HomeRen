@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-travaux.service';
+import { GestionDesDevisService } from '../../../services/gestion-des-devis.service';
 
 @Component({
   selector: 'app-formulaire-pose-porte',
@@ -32,6 +33,7 @@ export class FormulairePosePorteComponent {
    if (this.posePortesForm.valid) {
      console.log(this.posePortesForm.value);
      // Envoyer les données au backend ou traiter comme nécessaire
+     this.gestiondesdevisService.addFormulaire("pose-portes",10,this.posePortesForm.value)
    }
  }
  createposePortesGroup(): FormGroup {
@@ -44,7 +46,7 @@ export class FormulairePosePorteComponent {
      infos_comp_finition: ['', ],//text area
    });
  }
- constructor(private fb: FormBuilder,private userService: ApiConceptsEtTravauxService) {
+ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
    this.posePortesForm = this.fb.group({
      portes: this.fb.array([this.createposePortesGroup()])
    });

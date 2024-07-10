@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-travaux.service';
+import { GestionDesDevisService } from '../../../services/gestion-des-devis.service';
 
 
 @Component({
@@ -44,7 +45,7 @@ createposeMurNonPorteurroup(): FormGroup {
     autre_type_cloison: ['', ],
   });
 }
-constructor(private fb: FormBuilder,private userService: ApiConceptsEtTravauxService) {
+constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
   this.poseMursNonPorteursForm = this.fb.group({
     murs_non_porteurs: this.fb.array([this.createposeMurNonPorteurroup()])
   });
@@ -92,6 +93,8 @@ onPosePortesSubmit(): void {
   if (this.posePortesForm.valid) {
     console.log(this.posePortesForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire
+    this.gestiondesdevisService.addFormulaire("creation-murs-non-porteurs--murs",4,this.poseMursNonPorteursForm.value)
+    this.gestiondesdevisService.addFormulaire("creation-murs-non-porteurs--portes",4,this.posePortesForm.value)
   }
 }
 createposePortesGroup(): FormGroup {

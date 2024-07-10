@@ -16,9 +16,9 @@ export class GestionDesDevisService {
   private formulairesSubject = new BehaviorSubject<any[]>([]);
   formulaires$ = this.formulairesSubject.asObservable();
 
-  addFormulaire(nom: string, formulaire: any) {
+  addFormulaire(nomtache: string,idtache: number, formulaire: any) {
     const formulaires = this.formulairesSubject.value;
-    formulaires.push({ nom, formulaire });
+    formulaires.push({ nomtache,idtache, formulaire });
     this.formulairesSubject.next(formulaires);
   }
 

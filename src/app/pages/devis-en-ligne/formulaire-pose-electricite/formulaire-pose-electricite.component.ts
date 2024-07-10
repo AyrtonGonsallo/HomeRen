@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-travaux.service';
 import { Equipement } from '../../../Models/Equipement';
+import { GestionDesDevisService } from '../../../services/gestion-des-devis.service';
 
 @Component({
   selector: 'app-formulaire-pose-electricite',
@@ -24,11 +25,12 @@ export class FormulairePoseElectriciteComponent {
     if (this.poseInstallationElectriqueForm.valid) {
       console.log(this.poseInstallationElectriqueForm.value);
       // Envoyer les données au backend ou traiter comme nécessaire
+      this.gestiondesdevisService.addFormulaire("pose-electricite",13,this.poseInstallationElectriqueForm.value)
     }
   }
 
   
-  constructor(private fb: FormBuilder,private userService: ApiConceptsEtTravauxService) {
+  constructor(private fb: FormBuilder,private userService: ApiConceptsEtTravauxService,private gestiondesdevisService: GestionDesDevisService) {
     
     this.poseInstallationElectriqueForm = this.createPoseInstallationElectriqueGroup();
   }

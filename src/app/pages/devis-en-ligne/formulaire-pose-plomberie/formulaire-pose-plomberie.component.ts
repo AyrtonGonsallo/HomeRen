@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-travaux.service';
 import { Equipement } from '../../../Models/Equipement';
+import { GestionDesDevisService } from '../../../services/gestion-des-devis.service';
 
 @Component({
   selector: 'app-formulaire-pose-plomberie',
@@ -27,6 +28,7 @@ export class FormulairePosePlomberieComponent {
     if (this.poseCuisineForm.valid) {
       console.log(this.poseCuisineForm.value);
       // Envoyer les données au backend ou traiter comme nécessaire
+      this.gestiondesdevisService.addFormulaire("pose-plomberie",11,this.poseCuisineForm.value)
     }
   }
 
@@ -46,7 +48,7 @@ export class FormulairePosePlomberieComponent {
     }
   }
   
-  constructor(private fb: FormBuilder,private userService: ApiConceptsEtTravauxService) {
+  constructor(private fb: FormBuilder,private userService: ApiConceptsEtTravauxService,private gestiondesdevisService: GestionDesDevisService) {
     
     this.poseCuisineForm = this.createPoseCuisineGroup();
     this.poseSalleDeBainForm = this.createPoseSalleDeBainGroup();

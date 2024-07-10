@@ -32,7 +32,7 @@ removeMurGroup(index: number): void {
 onPoseMursSubmit(): void {
   if (this.poseMursForm.valid) {
     console.log(this.poseMursForm.value);
-    this.gestiondesdevisService.addFormulaire('pose-murs', this.poseMursForm.value);
+    this.gestiondesdevisService.addFormulaire('pose-murs',5, this.poseMursForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire
   }
 }

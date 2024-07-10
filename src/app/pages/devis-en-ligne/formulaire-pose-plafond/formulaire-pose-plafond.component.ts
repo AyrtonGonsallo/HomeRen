@@ -34,7 +34,7 @@ onPosePlafondSubmit(): void {
   if (this.posePlafondForm.valid) {
     console.log(this.posePlafondForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire
-    this.gestiondesdevisService.addFormulaire('pose-plafond', this.posePlafondForm.value);
+    this.gestiondesdevisService.addFormulaire('pose-plafond',8, this.posePlafondForm.value);
 
   }
 }

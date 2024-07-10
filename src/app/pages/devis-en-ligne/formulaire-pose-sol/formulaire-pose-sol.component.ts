@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GestionDesDevisService } from '../../../services/gestion-des-devis.service';
 
 @Component({
   selector: 'app-formulaire-pose-sol',
@@ -34,10 +35,11 @@ onPoseSolSubmit(): void {
   if (this.poseSolForm.valid) {
     console.log(this.poseSolForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire
+    this.gestiondesdevisService.addFormulaire("pose-sol",9,this.poseSolForm.value)
   }
 }
 
-constructor(private fb: FormBuilder,) {
+constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
 
   this.poseSolForm = this.createPoseSolGroup();
 }
