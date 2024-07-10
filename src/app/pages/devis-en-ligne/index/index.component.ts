@@ -1,12 +1,10 @@
 import { Component, Renderer2 } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-travaux.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Piece } from '../../../Models/Piece';
 import { environment } from '../../../environments/environment';
-import { IconService } from '@ant-design/icons-angular';
 import { Travail } from '../../../Models/Travail';
+import { GestionDesDevisService } from '../../../services/gestion-des-devis.service';
 interface ItemData {
   ID: number;
   Titre: string;
@@ -23,7 +21,7 @@ interface ItemData {
 export class IndexComponent {
   baseurl=environment.imagesUrl
 
-//chargement des pieces
+  //chargement des pieces
   pieces_par_categories: any
   loadPieces(): void {
     this.userService.get_pieces_par_categories().subscribe(
@@ -39,117 +37,15 @@ export class IndexComponent {
   }
   ngOnInit(): void {
     this.loadPieces()
+    this.getIpAddress();
+    this.getBrowserInfo();
   }
 
-
-  //formulaires des poses et deposes
-  poseMursForm: FormGroup;
-  posePlafondForm: FormGroup;
-  poseSolForm: FormGroup;
-  
-// les murs dynamiques du formulaire de pose murs
-get murs(): FormArray {
-  return this.poseMursForm.get('murs') as FormArray;
-}
-
-addMurGroup(): void {
-  if (this.murs.length < 4) {
-    this.murs.push(this.createposeMurGroup());
-  }
-}
-
-removeMurGroup(index: number): void {
-  if (this.murs.length > 1) {
-    this.murs.removeAt(index);
-  }
-}
-
-onPoseMursSubmit(): void {
-  if (this.poseMursForm.valid) {
-    console.log(this.poseMursForm.value);
-    // Envoyer les données au backend ou traiter comme nécessaire
-  }
-}
-createposeMurGroup(): FormGroup {
-  return this.fb.group({
-    hauteur: ['', Validators.required],
-    surface: ['', Validators.required],
-    longueur: ['', Validators.required],
-    etat: ['', Validators.required],
-    carrelage: ['', ],
-    papier: ['', ],
-    enduit: ['', ],
-    peinture: ['', ],
-    image: [null]
-  });
-}
-
-// le formulaire de pose plafond
-createPosePlafondGroup(): FormGroup {
-  return this.fb.group({
-    hauteur: ['', Validators.required],
-    surface: ['', Validators.required],
-    longueur: ['', Validators.required],
-    largeur: ['', Validators.required],
-    etat: ['', Validators.required],
-    carrelage: ['', ],
-    papier: ['', ],
-    enduit: ['', ],
-    peinture: ['', ],
-    image: [null]
-  });
-}
-onPosePlafondSubmit(): void {
-  if (this.posePlafondForm.invalid) {
-    this.markFormGroupTouched(this.posePlafondForm);
-    return;
-  }
-  if (this.posePlafondForm.valid) {
-    console.log(this.posePlafondForm.value);
-    // Envoyer les données au backend ou traiter comme nécessaire
-  }
-}
-
-//le formulaire de pose sol
-createPoseSolGroup(): FormGroup {
-  return this.fb.group({
-    surface: ['', Validators.required],
-    longueur_piece: ['', Validators.required],
-    largeur_piece: ['', Validators.required],
-    etat: ['', Validators.required],
-    parquet_massif: ['', ],
-    paquet_flottant_finition_bois: ['', ],
-    parquet_flottant_finition_stratifiee: ['', ],
-    sol_pvc: ['', ],
-    moquette: ['', ],
-    carrelage: ['', ],
-    plinthes: ['', ],
-    image: [null]
-  });
-}
-onPoseSolSubmit(): void {
-  if (this.poseSolForm.invalid) {
-    this.markFormGroupTouched(this.poseSolForm);
-    return;
-  }
-  if (this.poseSolForm.valid) {
-    console.log(this.poseSolForm.value);
-    // Envoyer les données au backend ou traiter comme nécessaire
-  }
-}
-
-
-
-
-  constructor(private _iconService: IconService,private renderer: Renderer2,private fb: FormBuilder,private router: Router,private message: NzMessageService,private userService: ApiConceptsEtTravauxService) {
-    this.poseMursForm = this.fb.group({
-      murs: this.fb.array([this.createposeMurGroup()])
-    });
-    this.posePlafondForm = this.createPosePlafondGroup();
-    this.poseSolForm = this.createPoseSolGroup();
-  }
 
  
+  constructor(private renderer: Renderer2,private message: NzMessageService,private userService: ApiConceptsEtTravauxService,private gestiondesdevisService: GestionDesDevisService) {
+ 
+  }
 
 
   //etape 1 choix de la piece
@@ -276,7 +172,13 @@ onPoseSolSubmit(): void {
     this.changeContent();
   }
   done(): void {
-    console.log('done');
+    const formulaires = this.gestiondesdevisService.getFormulaires();
+      const json = {
+        utilisateur: this.browserInfo,
+        ip: this.userIp,
+        liste_des_travaux: formulaires
+      };
+      console.log('Formulaires soumis :', json);
   }
   changeContent(): void {
     switch (this.current) {
@@ -300,50 +202,20 @@ onPoseSolSubmit(): void {
     }
   }
   
-
-
-
-
-
-  //upload des images sur tous les formulaires
-  maxFileSize = 10 * 1024 * 1024; // 10 MB en octets
-  onMursFileChange(event: Event, index: number): void {
-    const inputElement = event.target as HTMLInputElement;
-    const file: File = (inputElement.files as FileList)[0];
-    if (file.size <= this.maxFileSize && file.type.startsWith('image/')) {
-      this.murs.at(index).patchValue({
-        image: file
-      });
-    } else {
-      console.log('Please upload an image file less than 10 MB.');
-      inputElement.value = ''; // Reset the input if the file is invalid
-    }
-    
-  }
-  onFileChange(event: Event,form:FormGroup): void {
-    const inputElement = event.target as HTMLInputElement;
-    const file: File = (inputElement.files as FileList)[0];
-    if (file.size <= this.maxFileSize && file.type.startsWith('image/')) {
-      form.patchValue({
-        image: file
-      });
-    } else {
-      console.log('Please upload an image file less than 10 MB.');
-      inputElement.value = ''; // Reset the input if the file is invalid
-    }
-  }
-  
-//code de validation des formulaires
-  markFormGroupTouched(formGroup: FormGroup) {
-    Object.values(formGroup.controls).forEach(control => {
-      const abstractControl = control as AbstractControl;
-      abstractControl.markAsTouched();
-      if (abstractControl instanceof FormGroup) {
-        this.markFormGroupTouched(abstractControl);
+  userIp: string = '';
+  browserInfo: string = '';
+  getIpAddress() {
+    this.gestiondesdevisService.getIp().subscribe(
+      (response) => {
+        this.userIp = response.ip;
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération de l\'adresse IP :', error);
       }
-    });
+    );
   }
- 
-
+  getBrowserInfo() {
+    this.browserInfo = navigator.userAgent;
+  }
   
 }

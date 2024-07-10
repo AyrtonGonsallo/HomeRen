@@ -1,0 +1,30 @@
+.dynamic-form-button{
+    padding: 0;
+    height: 20px;
+    float: right;
+    
+}
+.ant-col{
+    padding: 5px;
+    text-align: start;
+}
+.error{
+    color: red;
+}
+.ant-btn, button {
+    line-height: 0.5715;
+    position: relative;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    border:none !important;
+    box-shadow: none;
+    padding: 11px 32px;
+    height: 46px;
+    color: #fff;
+    border-radius: 0px;
+    background: #ffc736;
+  }
+  button:hover{
+    background: var(--color2);
+    color: var(--color-white);
+  }

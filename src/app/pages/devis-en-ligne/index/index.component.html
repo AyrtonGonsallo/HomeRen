@@ -59,281 +59,35 @@
       </div>
       <div class="devis-content" *ngIf="current == 2">
          <p class="ttl-dv-pc"><strong>Quels sont les paramètres des travaux que vous souhaitez faire dans votre {{selectedPiece?.Titre}} (<b *ngFor="let filteredtravail of filteredTravaux">{{filteredtravail.Titre}}, </b>) ?</strong></p>
-        
+        <!-- Formulaire pose murs  -->
           <div *ngIf="travailExists(5)">
-            <h3>POSE DE NOUVEAUX REVETEMENTS MURAUX</h3>
-            <form [formGroup]="poseMursForm" (ngSubmit)="onPoseMursSubmit()">
-
-               <div formArrayName="murs">
-                 <div nz-row nzJustify="start" *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="hauteur">Hauteur: </label>
-                     <input type="number" id="hauteur" formControlName="hauteur">
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="longueur">Longueur: </label>
-                     <input type="number" id="longueur" formControlName="longueur">
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="surface">Surface: </label>
-                     <input type="number" id="surface" formControlName="surface">
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">État: </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="etat du mur" formControlName="etat">
-                        <nz-option nzLabel="tres abimé" nzValue="tres abimé"></nz-option>
-                        <nz-option nzLabel="abimé" nzValue="abimé"></nz-option>
-                        <nz-option nzLabel="reprises partielles" nzValue="reprises partielles"></nz-option>
-                      </nz-select>
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="Peinture">Peinture: </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="peinture du mur" formControlName="peinture">
-                        <nz-option nzLabel="aucune" nzValue="aucune"></nz-option>
-                        <nz-option nzLabel="mate" nzValue="mate"></nz-option>
-                        <nz-option nzLabel="satinée" nzValue="satinée"></nz-option>
-                      </nz-select>
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">Enduit decoratif : </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="enduit du mur" formControlName="enduit">
-                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
-                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
-                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
-                      </nz-select>
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">Papier peint: </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Papier peint du mur" formControlName="papier">
-                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
-                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
-                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
-                      </nz-select>
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">Carrelage mural: </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="carrelage du mur" formControlName="carrelage">
-                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
-                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
-                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
-                      </nz-select>
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col"> 
-                     <label for="image">Image:</label>
-                     <input type="file" id="image" (change)="onMursFileChange($event, i)" accept="image/*">
-                   </div>
-                   <button type="button" class="dynamic-form-button" (click)="removeMurGroup(i)" *ngIf="murs.length > 1">Retirer le mur</button>
-                 </div>
-               </div>
-               <button type="button"  class="dynamic-form-button" (click)="addMurGroup()" *ngIf="murs.length < 4">Ajouter un mur</button>
-               <button type="submit">Valider</button>
-             </form>
-            
+            <app-formulaire-pose-murs></app-formulaire-pose-murs>
+          </div>
+          <div *ngIf="travailExists(4)">
+            <app-formulaire-creation-murs-non-porteurs></app-formulaire-creation-murs-non-porteurs>
           </div>
           
-          <!-- Formulaire Plafond -->
+          <!-- Formulaire pose Plafond -->
           <div *ngIf="travailExists(8)">
-            <h3>Pose de Plafond</h3>
-            <form [formGroup]="posePlafondForm" (ngSubmit)="onPosePlafondSubmit()">
-
-               <div >
-                 <div nz-row nzJustify="start" >
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="hauteur">Hauteur: </label>
-                     <input type="number" id="hauteur" formControlName="hauteur">
-                     <div *ngIf="posePlafondForm.get('hauteur')?.invalid && (posePlafondForm.get('hauteur')?.dirty || posePlafondForm.get('hauteur')?.touched)">
-                        <div *ngIf="posePlafondForm.get('hauteur')?.errors?.['required']" class="error">
-                          Hauteur est requise.
-                        </div>
-                      </div>
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="longueur">Longueur: </label>
-                     <input type="number" id="longueur" formControlName="longueur">
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="largeur">Largeur: </label>
-                     <input type="number" id="largeur" formControlName="largeur">
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="surface">Surface: </label>
-                     <input type="number" id="surface" formControlName="surface">
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">État: </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="etat du plafond" formControlName="etat">
-                        <nz-option nzLabel="tres abimé" nzValue="tres abimé"></nz-option>
-                        <nz-option nzLabel="abimé" nzValue="abimé"></nz-option>
-                        <nz-option nzLabel="reprises partielles" nzValue="reprises partielles"></nz-option>
-                      </nz-select>
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="Peinture">Peinture: </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="peinture du plafond" formControlName="peinture">
-                        <nz-option nzLabel="aucune" nzValue="aucune"></nz-option>
-                        <nz-option nzLabel="mate" nzValue="mate"></nz-option>
-                        <nz-option nzLabel="satinée" nzValue="satinée"></nz-option>
-                      </nz-select>
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">Enduit decoratif : </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="enduit du plafond" formControlName="enduit">
-                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
-                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
-                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
-                      </nz-select>
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">Papier peint: </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Papier peint du plafond" formControlName="papier">
-                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
-                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
-                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
-                      </nz-select>
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">Carrelage plafond: </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="carrelage du plafond" formControlName="carrelage">
-                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
-                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
-                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
-                      </nz-select>
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col"> 
-                     <label for="image">Image:</label>
-                     <input type="file" id="image" (change)="onFileChange($event,posePlafondForm)" accept="image/*">
-                   </div>
-                 </div>
-               </div>
-               <button type="submit">Valider</button>
-             </form>
+            <app-formulaire-pose-plafond></app-formulaire-pose-plafond>
           </div>
           
-          <!-- Formulaire Revetement de Sol -->
+          <!-- Formulaire pose Revetement de Sol -->
           <div *ngIf="travailExists(9)">
-            <h3>Pose de Revetements de Sol</h3>
-            <form [formGroup]="poseSolForm" (ngSubmit)="onPoseSolSubmit()">
-               <div nz-row nzJustify="start" >
-                  <div nz-col nzSpan="6" class="ant-col">
-                     <label for="surface">Surface:</label>
-                     <input type="number" id="surface" formControlName="surface" required>
-                     <div *ngIf="poseSolForm.get('surface')?.invalid && (poseSolForm.get('surface')?.dirty || poseSolForm.get('surface')?.touched)">
-                        <div *ngIf="poseSolForm.get('surface')?.errors?.['required']">Surface est requise.</div>
-                     </div>
-                  </div>
-               
-                  <div nz-col nzSpan="6" class="ant-col">
-                     <label for="longueur_piece">Longueur de la pièce:</label>
-                     <input type="number" id="longueur_piece" formControlName="longueur_piece" required>
-                     <div *ngIf="poseSolForm.get('longueur_piece')?.invalid && (poseSolForm.get('longueur_piece')?.dirty || poseSolForm.get('longueur_piece')?.touched)">
-                        <div *ngIf="poseSolForm.get('longueur_piece')?.errors?.['required']">Longueur est requise.</div>
-                     </div>
-                  </div>
-               
-                  <div nz-col nzSpan="6" class="ant-col">
-                     <label for="largeur_piece">Largeur de la pièce:</label>
-                     <input type="number" id="largeur_piece" formControlName="largeur_piece" required>
-                     <div *ngIf="poseSolForm.get('largeur_piece')?.invalid && (poseSolForm.get('largeur_piece')?.dirty || poseSolForm.get('largeur_piece')?.touched)">
-                        <div *ngIf="poseSolForm.get('largeur_piece')?.errors?.['required']">Largeur est requise.</div>
-                     </div>
-                  </div>
-               
-                  <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">État:</label>
-                    
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="etat du sol" formControlName="etat">
-                        <nz-option nzLabel="sol en bon etat" nzValue="sol en bon etat"></nz-option>
-                        <nz-option nzLabel="sol avec quelques bosses ou creux" nzValue="sol avec quelques bosses ou creux"></nz-option>
-                        <nz-option nzLabel="sol en mauvais etat" nzValue="sol en mauvais etat"></nz-option>
-                      </nz-select>
-                     <div *ngIf="poseSolForm.get('etat')?.invalid && (poseSolForm.get('etat')?.dirty || poseSolForm.get('etat')?.touched)">
-                        <div *ngIf="poseSolForm.get('etat')?.errors?.['required']">État est requis.</div>
-                     </div>
-                  </div>
-               
-                  <div nz-col nzSpan="6" class="ant-col">
-                     <label for="parquet_massif">Parquet Massif:</label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="parquet_massif du sol" formControlName="parquet_massif">
-                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
-                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
-                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
-                      </nz-select>
-                  </div>
-               
-                  <div nz-col nzSpan="6" class="ant-col">
-                     <label for="paquet_flottant_finition_bois">Parquet Flottant Finition Bois:</label>
-                    
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="paquet_flottant_finition_bois du sol" formControlName="paquet_flottant_finition_bois">
-                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
-                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
-                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
-                      </nz-select>
-                  </div>
-               
-                  <div nz-col nzSpan="6" class="ant-col">
-                     <label for="parquet_flottant_finition_stratifiee">Parquet Flottant Finition Stratifiée:</label>
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="parquet_flottant_finition_stratifiee du sol" formControlName="parquet_flottant_finition_stratifiee">
-                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
-                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
-                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
-                      </nz-select>
-                  </div>
-               
-                  <div nz-col nzSpan="6" class="ant-col">
-                     <label for="sol_pvc">Sol PVC:</label>
-                     <input type="radio" id="sol_pvc_oui" formControlName="sol_pvc" value="oui">
-                     <label for="sol_pvc_oui">Oui</label>
-                     <input type="radio" id="sol_pvc_non" formControlName="sol_pvc" value="non">
-                     <label for="sol_pvc_non">Non</label>
-                  </div>
-               
-                  <div nz-col nzSpan="6" class="ant-col">
-                     <label for="moquette">Moquette:</label>
-                     <input type="radio" id="moquette_oui" formControlName="moquette" value="oui">
-                     <label for="moquette_oui">Oui</label>
-                     <input type="radio" id="moquette_non" formControlName="moquette" value="non">
-                     <label for="moquette_non">Non</label>
-                  </div>
-               
-                  <div nz-col nzSpan="6" class="ant-col">
-                     <label for="carrelage">Carrelage:</label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="carrelage du sol" formControlName="carrelage">
-                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
-                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
-                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
-                      </nz-select>
-                  </div>
-               
-                  <div nz-col nzSpan="6" class="ant-col">
-                     <label for="plinthes">Plinthes:</label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="plinthes du sol" formControlName="plinthes">
-                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
-                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
-                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
-                      </nz-select>
-                  </div>
-               
-                  <div nz-col nzSpan="6" class="ant-col">
-                     <label for="image">Image:</label>
-                     <input type="file" id="image" (change)="onFileChange($event,poseSolForm)" accept="image/*">
-                  </div>
-               </div>
-               <button type="submit">Valider</button>
-             </form>
-             
+            <app-formulaire-pose-sol></app-formulaire-pose-sol>
+          </div>
+           <!-- Formulaire pose porte -->
+           <div *ngIf="travailExists(10)">
+            <app-formulaire-pose-porte></app-formulaire-pose-porte>
+          </div>
+          <div *ngIf="travailExists(11)">
+            <app-formulaire-pose-plomberie [selectedPiece]="selectedPiece"></app-formulaire-pose-plomberie>
+          </div>
+          <div *ngIf="travailExists(12)">
+            <app-formulaire-pose-chauffage></app-formulaire-pose-chauffage>
+          </div>
+          <div *ngIf="travailExists(13)">
+            <app-formulaire-pose-electricite></app-formulaire-pose-electricite>
           </div>
       </div>
     </div>
