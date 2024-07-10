@@ -44,6 +44,7 @@ export class FormulairePosePlomberieComponent {
     }
     if (this.poseSalleDeBainForm.valid) {
       console.log(this.poseSalleDeBainForm.value);
+      this.gestiondesdevisService.addFormulaire("pose-plomberie",11,this.poseSalleDeBainForm.value)
       // Envoyer les données au backend ou traiter comme nécessaire
     }
   }
@@ -73,23 +74,27 @@ export class FormulairePosePlomberieComponent {
   }
   loadAppareils(){
     this.userService.getEquipementsByPiece(7).subscribe(
-      (response) => {
-        this.appareils_cuisine = response;
+      (response: Equipement[]) => {
+        this.appareils_cuisine = response.filter(equipement => equipement.ModeleEquipements && equipement.ModeleEquipements.length > 0);
         console.log("réponse de la requette getEquipementsByPiece:cuisine ",this.appareils_cuisine);
         this.appareils_cuisine.forEach(appareil => {
           const modeleEquipements = appareil.ModeleEquipements;
+          
+            
     
-          // Créer un FormGroup pour chaque appareil
-          const appareilGroup = this.fb.group({});
-    
-          // Ajouter dynamiquement les contrôles pour chaque modèle d'équipement
-          modeleEquipements.forEach((modele, index) => {
-            appareilGroup.addControl(appareil.Titre+" "+modele.Titre, this.fb.control(false, ));
-            // Ajoutez d'autres contrôles selon vos besoins pour chaque modèle
-          });
-    
-          // Ajouter le FormGroup de l'appareil au FormArray
-          (this.poseCuisineForm.get('appareils_cuisine') as FormArray).push(appareilGroup);
+            // Créer un FormGroup pour chaque appareil
+            const appareilGroup = this.fb.group({});
+      
+            // Ajouter dynamiquement les contrôles pour chaque modèle d'équipement
+            modeleEquipements.forEach((modele, index) => {
+              appareilGroup.addControl(appareil.Titre+" "+modele.Titre, this.fb.control(false, ));
+              // Ajoutez d'autres contrôles selon vos besoins pour chaque modèle
+            });
+      
+            // Ajouter le FormGroup de l'appareil au FormArray
+            (this.poseCuisineForm.get('appareils_cuisine') as FormArray).push(appareilGroup);
+          
+          
         });
       },
       (error) => {
@@ -97,23 +102,25 @@ export class FormulairePosePlomberieComponent {
       }
     );
     this.userService.getEquipementsByPiece(5).subscribe(
-      (response) => {
-        this.appareils_salle_de_bain = response;
+      (response: Equipement[]) => {
+        this.appareils_salle_de_bain = response.filter(equipement => equipement.ModeleEquipements && equipement.ModeleEquipements.length > 0);
         console.log("réponse de la requette  getEquipementsByPiece:salledebain",this.appareils_salle_de_bain);
         this.appareils_salle_de_bain.forEach(appareil => {
-          const modeleEquipements = appareil.ModeleEquipements;
-    
+        const modeleEquipements = appareil.ModeleEquipements;
+        
           // Créer un FormGroup pour chaque appareil
           const appareilGroup = this.fb.group({});
-    
+              
           // Ajouter dynamiquement les contrôles pour chaque modèle d'équipement
           modeleEquipements.forEach((modele, index) => {
             appareilGroup.addControl(appareil.Titre+" "+modele.Titre, this.fb.control(false, ));
             // Ajoutez d'autres contrôles selon vos besoins pour chaque modèle
           });
-    
+
           // Ajouter le FormGroup de l'appareil au FormArray
           (this.poseSalleDeBainForm.get('appareils_salle_de_bain') as FormArray).push(appareilGroup);
+        
+          
         });
        
       },

@@ -97,5 +97,9 @@ getEquipementsByPiece(pieceID: number): Observable<any> {
 getEquipementsByType(type: string): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_equipements_by_type/${type}`);
 }
+// Ajouter un nouveau modèle d'équipement
+addDevisPiece(devis: any): Observable<any> {
+  return this.http.post<any>(`${environment.apiUrl}/add_devis_piece`, devis);
+}
 
 }

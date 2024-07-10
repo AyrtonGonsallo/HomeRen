@@ -174,12 +174,20 @@ export class IndexComponent {
   done(): void {
     const formulaires = this.gestiondesdevisService.getFormulaires();
       const json = {
-        utilisateur: this.browserInfo,
+        username: this.browserInfo,
         ip: this.userIp,
         piece:this.selectedPiece,
         liste_des_travaux: formulaires
       };
       console.log('Formulaires soumis :', json);
+      this.userService.addDevisPiece(json).subscribe(
+        (response) => {
+          console.log('reponse de l\'api :', response);
+        },
+        (error) => {
+          console.error('Erreur lors de la récupération de l\'ajout du devis :', error);
+        }
+      );
   }
   changeContent(): void {
     switch (this.current) {
