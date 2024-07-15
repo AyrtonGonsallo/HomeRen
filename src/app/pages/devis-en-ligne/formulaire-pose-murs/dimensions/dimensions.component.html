@@ -1,0 +1,28 @@
+
+            <form [formGroup]="poseMursForm" (ngSubmit)="onPoseMursSubmit()">
+
+               <div formArrayName="murs">
+                 <div nz-row nzJustify="start" *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="hauteur">Hauteur: </label>
+                     <input type="number" id="hauteur" formControlName="hauteur">
+                   </div>
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="longueur">Longueur: </label>
+                     <input type="number" id="longueur" formControlName="longueur">
+                   </div>
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="surface">Surface: </label>
+                     <input type="number" id="surface" formControlName="surface">
+                   </div>
+                   
+                   <div nz-col nzSpan="6" class="ant-col"> 
+                     <label for="image">Image:</label>
+                     <input type="file" id="image" (change)="onMursFileChange($event, i)" accept="image/*">
+                   </div>
+                   <button type="button" class="dynamic-form-button" (click)="removeMurGroup(i)" *ngIf="murs.length > 1">Retirer le mur</button>
+                 </div>
+               </div>
+               <button type="button"  class="dynamic-form-button" (click)="addMurGroup()" *ngIf="murs.length < 4">Ajouter un mur</button>
+               <button type="submit">Valider</button>
+             </form>

@@ -1,0 +1,20 @@
+<h3>Pose de Plafond</h3>
+            <form [formGroup]="posePlafondForm" (ngSubmit)="onPosePlafondSubmit()">
+
+               <div >
+                 <div nz-row nzJustify="start" >
+                   
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="etat">État: </label>
+                     
+                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="etat du plafond" formControlName="etat">
+                        <nz-option nzLabel="tres abimé" nzValue="tres abimé"></nz-option>
+                        <nz-option nzLabel="abimé" nzValue="abimé"></nz-option>
+                        <nz-option nzLabel="reprises partielles" nzValue="reprises partielles"></nz-option>
+                      </nz-select>
+                   </div>
+                   
+                 </div>
+               </div>
+               <button type="submit">Valider</button>
+             </form>

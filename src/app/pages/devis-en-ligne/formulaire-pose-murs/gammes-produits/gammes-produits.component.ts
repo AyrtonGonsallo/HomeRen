@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-travaux.service';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GestionDesDevisService } from '../../../services/gestion-des-devis.service';
+import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 
 @Component({
-  selector: 'app-formulaire-pose-murs',
-  templateUrl: './formulaire-pose-murs.component.html',
-  styleUrl: './formulaire-pose-murs.component.css'
+  selector: 'app-gammes-produits-pose-murs',
+  templateUrl: './gammes-produits.component.html',
+  styleUrl: '../formulaire-pose-murs.component.css'
 })
-export class FormulairePoseMursComponent {
- //formulaires des poses et deposes
- poseMursForm: FormGroup;
- 
+export class GammesProduitsComponent {
+//formulaires des poses et deposes
+poseMursForm: FormGroup;
+formulaire_dimensions:any
+formulaire_dimensions_length:number=0
 // les murs dynamiques du formulaire de pose murs
 get murs(): FormArray {
   return this.poseMursForm.get('murs') as FormArray;
@@ -31,28 +31,32 @@ removeMurGroup(index: number): void {
 
 onPoseMursSubmit(): void {
   if (this.poseMursForm.valid) {
-    console.log(this.poseMursForm.value);
-    this.gestiondesdevisService.addFormulaire('pose-murs',5, this.poseMursForm.value);
+    //console.log(this.poseMursForm.value);
+    this.gestiondesdevisService.addFormulaire('gammes-produits-pose-murs',5, this.poseMursForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire
+    this.gestiondesdevisService.groupform('pose-murs',5, 'dimensions-pose-murs','etat-surfaces-pose-murs','gammes-produits-pose-murs')
+    console.log(this.gestiondesdevisService.getFormulaireByName("pose-murs"));
   }
 }
 createposeMurGroup(): FormGroup {
   return this.fb.group({
-    hauteur: ['', Validators.required],
-    surface: ['', Validators.required],
-    longueur: ['', Validators.required],
-    etat: ['', Validators.required],
+   
     carrelage: ['', ],
     papier: ['', ],
     enduit: ['', ],
-    peinture: ['', ],
-    image: [null]
+    peinture: ['', ]
   });
 }
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
   this.poseMursForm = this.fb.group({
     murs: this.fb.array([this.createposeMurGroup()])
   });
+  this.formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-pose-murs")
+  this.formulaire_dimensions_length=this.formulaire_dimensions.formulaire.murs.length
+  for(let i=0;i<(this.formulaire_dimensions_length-1);i++){
+    this.addMurGroup()
+  }
+  console.log(this.formulaire_dimensions)
  
  
 }

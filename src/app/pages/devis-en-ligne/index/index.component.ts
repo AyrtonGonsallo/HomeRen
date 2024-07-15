@@ -90,14 +90,20 @@ export class IndexComponent {
     }
   }
 
-// chargement des travaux a faire dans la piece
-  travaux:Travail[]=[]
- 
-  filteredTravaux: Travail[] = [];
-  filterTravaux() {
-    this.filteredTravaux = this.travaux.filter(travail => this.setOfCheckedId.has(travail.ID));
+  selectTravail(travailID: number){
+    this.filteredTravail = this.travaux.filter(travail => travail.ID === travailID)[0];
+    const selectedElement = document.getElementById(`tache-${travailID}`);
+    if (selectedElement) {
+      this.renderer.setStyle(selectedElement, 'border', '2px solid #FFC736');
+      this.renderer.setStyle(selectedElement, 'filter', 'brightness(0.8)');
+    }
+    //console.log(this.filteredTravail)
   }
 
+// chargement des travaux a faire dans la piece
+  travaux:Travail[]=[]
+  filteredTravail: any ;
+  
   listOfSelection = [
     {
       text: 'Select All Row',
@@ -155,8 +161,8 @@ export class IndexComponent {
   }
 
    // New function to check if a travail exists in filteredTravaux by ID
-   travailExists(id: number): boolean {
-    return this.filteredTravaux.some(travail => travail.ID === id);
+   is_travail_selected(id: number): boolean {
+    return this.filteredTravail.ID == id
   }
 
 
@@ -165,6 +171,10 @@ export class IndexComponent {
   index = 'First-content';
   pre(): void {
     this.current -= 1;
+    this.changeContent();
+  }
+  addtask(): void {
+    this.current = 1;
     this.changeContent();
   }
   next(): void {
@@ -201,8 +211,6 @@ export class IndexComponent {
       }
       case 2: {
         this.index = 'third-content';
-        this.filterTravaux()
-        console.log("travaux choisis",this.filteredTravaux)
         break;
       }
       default: {

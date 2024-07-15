@@ -34,6 +34,7 @@ onPoseMursNonPorteursSubmit(): void {
   if (this.poseMursNonPorteursForm.valid) {
     console.log(this.poseMursNonPorteursForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire
+    this.gestiondesdevisService.addFormulaire("creation-murs-non-porteurs--murs",4,this.poseMursNonPorteursForm.value)
   }
 }
 createposeMurNonPorteurroup(): FormGroup {
@@ -93,7 +94,7 @@ onPosePortesSubmit(): void {
   if (this.posePortesForm.valid) {
     console.log(this.posePortesForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire
-    this.gestiondesdevisService.addFormulaire("creation-murs-non-porteurs--murs",4,this.poseMursNonPorteursForm.value)
+    
     this.gestiondesdevisService.addFormulaire("creation-murs-non-porteurs--portes",4,this.posePortesForm.value)
   }
 }

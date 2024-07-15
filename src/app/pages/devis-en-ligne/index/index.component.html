@@ -6,9 +6,13 @@
    <nz-steps [nzCurrent]="current">
       <nz-step nzIcon="home" nzTitle="Choix de la piece">
       </nz-step>
-      <nz-step nzIcon="tool" nzTitle="Type de travail">
+      <nz-step nzIcon="tool" nzTitle="Travaux">
       </nz-step>
-      <nz-step nzIcon="setting" nzTitle="Paramètres du travail">
+      <nz-step nzIcon="setting" nzTitle="Dimensions">
+      </nz-step>
+      <nz-step nzIcon="setting" nzTitle="Etat de surfaces">
+      </nz-step>
+      <nz-step nzIcon="setting" nzTitle="Gamme de produits">
       </nz-step>
       <nz-step nzIcon="check-circle" nzTitle="Finalisation">
       </nz-step>
@@ -36,21 +40,11 @@
             [nzPageSize]="20"
             [nzShowPagination]="false"
          >
-            <thead>
-            <tr>
-               <th
-                  [nzSelections]="listOfSelection"
-                  [(nzChecked)]="checked"
-                  [nzIndeterminate]="indeterminate"
-                  (nzCheckedChange)="onAllChecked($event)"
-               ></th>
-               <th></th>
-            </tr>
-            </thead>
+            
             <tbody>
-            <tr *ngFor="let data of rowSelectionTable.data">
-               <td [nzChecked]="setOfCheckedId.has(data.ID)" (nzCheckedChange)="onItemChecked(data.ID, $event)"></td>
-               <td>{{ data.Titre }}</td>
+            <tr *ngFor="let data of rowSelectionTable.data"  >
+               
+               <td id="tache-{{data.ID}}" (click)="selectTravail(data.ID)">{{ data.Titre }}</td>
                
             </tr>
             </tbody>
@@ -58,47 +52,72 @@
         
       </div>
       <div class="devis-content" *ngIf="current == 2">
-         <p class="ttl-dv-pc"><strong>Quels sont les paramètres des travaux que vous souhaitez faire dans votre {{selectedPiece?.Titre}} (<b *ngFor="let filteredtravail of filteredTravaux">{{filteredtravail.Titre}}, </b>) ?</strong></p>
+         <p class="ttl-dv-pc"><strong><b >{{filteredTravail.Titre}} </b>: Quelles sont les dimensions de votre {{selectedPiece?.Titre}} ?</strong></p>
         <!-- Formulaire pose murs  -->
-          <div *ngIf="travailExists(5)">
-            <app-formulaire-pose-murs></app-formulaire-pose-murs>
+          <div *ngIf="is_travail_selected(5)">
+            <app-dimensions-pose-murs></app-dimensions-pose-murs>
           </div>
-          <div *ngIf="travailExists(4)">
+          <div *ngIf="is_travail_selected(4)">
             <app-formulaire-creation-murs-non-porteurs></app-formulaire-creation-murs-non-porteurs>
           </div>
           
           <!-- Formulaire pose Plafond -->
-          <div *ngIf="travailExists(8)">
-            <app-formulaire-pose-plafond></app-formulaire-pose-plafond>
+          <div *ngIf="is_travail_selected(8)">
+            <app-dimensions-pose-plafond></app-dimensions-pose-plafond>
           </div>
           
           <!-- Formulaire pose Revetement de Sol -->
-          <div *ngIf="travailExists(9)">
+          <div *ngIf="is_travail_selected(9)">
             <app-formulaire-pose-sol></app-formulaire-pose-sol>
           </div>
            <!-- Formulaire pose porte -->
-           <div *ngIf="travailExists(10)">
+           <div *ngIf="is_travail_selected(10)">
             <app-formulaire-pose-porte></app-formulaire-pose-porte>
           </div>
-          <div *ngIf="travailExists(11)">
+          <div *ngIf="is_travail_selected(11)">
             <app-formulaire-pose-plomberie [selectedPiece]="selectedPiece"></app-formulaire-pose-plomberie>
           </div>
-          <div *ngIf="travailExists(12)">
+          <div *ngIf="is_travail_selected(12)">
             <app-formulaire-pose-chauffage></app-formulaire-pose-chauffage>
           </div>
-          <div *ngIf="travailExists(13)">
+          <div *ngIf="is_travail_selected(13)">
             <app-formulaire-pose-electricite></app-formulaire-pose-electricite>
           </div>
+      </div>
+      <div class="devis-content" *ngIf="current == 3">
+        <p class="ttl-dv-pc"><strong><b >{{filteredTravail.Titre}} </b>: Quel est l'état des surfaces dans votre {{selectedPiece?.Titre}} ?</strong></p>
+          <!-- Formulaire pose murs  -->
+         <div *ngIf="is_travail_selected(5)">
+           <app-etat-surfaces-pose-murs></app-etat-surfaces-pose-murs>
+         </div>
+         <div *ngIf="is_travail_selected(8)">
+          <app-etat-surfaces-pose-plafond></app-etat-surfaces-pose-plafond>
+        </div>
+      </div>
+      <div class="devis-content" *ngIf="current == 4">
+        <p class="ttl-dv-pc"><strong><b >{{filteredTravail.Titre}} </b>: Quelles sont les gammes de produits que vous souhaitez dans votre {{selectedPiece?.Titre}} ?</strong></p>
+       <!-- Formulaire pose murs  -->
+          <div *ngIf="is_travail_selected(5)">
+            <app-gammes-produits-pose-murs></app-gammes-produits-pose-murs>
+          </div>
+          <div *ngIf="is_travail_selected(8)">
+            <app-gammes-produits-pose-plafond></app-gammes-produits-pose-plafond>
+          </div>
+           
+           <button nz-button nzType="default" (click)="addtask()" *ngIf="current ==4">
+            <span>Retour à la liste des travaux</span>
+          </button>
+         
       </div>
     </div>
     <div class="steps-action">
       <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
         <span>Précédent</span>
       </button>
-      <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
+      <button nz-button nzType="default" (click)="next()" *ngIf="current<5">
         <span>Suivant</span>
       </button>
-      <button nz-button nzType="primary" class="btn-etps" (click)="done()" *ngIf="current === 2">
+      <button nz-button nzType="primary" class="btn-etps" (click)="done()" *ngIf="current === 5">
         <span>Fin</span>
       </button>
     </div>

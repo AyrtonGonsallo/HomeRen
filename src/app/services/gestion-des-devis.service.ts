@@ -29,4 +29,38 @@ export class GestionDesDevisService {
   clearFormulaires() {
     this.formulairesSubject.next([]);
   }
+
+   // Method to retrieve a form by its name
+   getFormulaireByName(nomtache: string): any {
+    return this.formulairesSubject.value.find(formulaire => formulaire.nomtache === nomtache);
+  }
+
+  // Method to get the length of forms by their name
+  getFormulaireLengthByName(nomtache: string): number {
+    return this.formulairesSubject.value.filter(formulaire => formulaire.nomtache === nomtache).length;
+  }
+  groupform(nomtache: string,idtache: number,nom_dimensions:string,nom_etat:string,nom_gamme:string){
+    const dimensionForm = this.getFormulaireByName(nom_dimensions);
+    const etatForm = this.getFormulaireByName(nom_etat);
+    const gammeForm = this.getFormulaireByName(nom_gamme);
+
+    if (dimensionForm && etatForm && gammeForm) {
+      const groupedForm = {
+        nomtache,
+        idtache,
+        [nom_dimensions]: dimensionForm.formulaire,
+        [nom_etat]: etatForm.formulaire,
+        [nom_gamme]: gammeForm.formulaire
+      };
+
+      this.addFormulaire(nomtache, idtache, groupedForm);
+      this.clearFormulaire(nom_dimensions)
+      this.clearFormulaire(nom_etat)
+      this.clearFormulaire(nom_gamme)
+  }
+}
+clearFormulaire(nomtache: string) {
+  const formulaires = this.formulairesSubject.value.filter(formulaire => formulaire.nomtache !== nomtache);
+  this.formulairesSubject.next(formulaires);
+}
 }
