@@ -78,7 +78,7 @@
             <app-formulaire-pose-plomberie [selectedPiece]="selectedPiece"></app-formulaire-pose-plomberie>
           </div>
           <div *ngIf="is_travail_selected(12)">
-            <app-formulaire-pose-chauffage></app-formulaire-pose-chauffage>
+            <app-dimensions-pose-chauffage></app-dimensions-pose-chauffage>
           </div>
           <div *ngIf="is_travail_selected(13)">
             <app-formulaire-pose-electricite></app-formulaire-pose-electricite>
@@ -99,6 +99,9 @@
         <div *ngIf="is_travail_selected(9)">
           <app-etat-surfaces-pose-sol></app-etat-surfaces-pose-sol>
         </div>
+        <div *ngIf="is_travail_selected(12)">
+          <app-etat-surfaces-pose-chauffage></app-etat-surfaces-pose-chauffage>
+        </div>
       </div>
       <div class="devis-content" *ngIf="current == 4">
         <p class="ttl-dv-pc"><strong><b >{{filteredTravail.Titre}} </b>: Quelles sont les gammes de produits que vous souhaitez dans votre {{selectedPiece?.Titre}} ?</strong></p>
@@ -114,6 +117,9 @@
           </div>
           <div *ngIf="is_travail_selected(9)">
             <app-gammes-produits-pose-sol></app-gammes-produits-pose-sol>
+          </div>
+          <div *ngIf="is_travail_selected(12)">
+            <app-gammes-produits-pose-chauffage></app-gammes-produits-pose-chauffage>
           </div>
            <button nz-button nzType="default" (click)="addtask()" *ngIf="current ==4">
             <span>Retour à la liste des travaux</span>

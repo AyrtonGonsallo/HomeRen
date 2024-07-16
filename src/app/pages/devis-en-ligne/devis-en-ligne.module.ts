@@ -21,6 +21,9 @@ import { PoseSolGammesProduitsComponent } from './formulaire-pose-sol/gammes-pro
 import { MursNonPorteursDimensionsComponent } from './formulaire-creation-murs-non-porteurs/dimensions/dimensions.component';
 import { MursNonPorteursEtatSurfacesComponent } from './formulaire-creation-murs-non-porteurs/etat-surfaces/etat-surfaces.component';
 import { MursNonPorteursGammesProduitsComponent } from './formulaire-creation-murs-non-porteurs/gammes-produits/gammes-produits.component';
+import { PoseChauffageDimensionsComponent } from './formulaire-pose-chauffage/dimensions/dimensions.component';
+import { PoseChauffageEtatSurfacesComponent } from './formulaire-pose-chauffage/etat-surfaces/etat-surfaces.component';
+import { PoseChauffageGammesProduitsComponent } from './formulaire-pose-chauffage/gammes-produits/gammes-produits.component';
 
 
 @NgModule({
@@ -35,6 +38,9 @@ import { MursNonPorteursGammesProduitsComponent } from './formulaire-creation-mu
     MursNonPorteursEtatSurfacesComponent,
     MursNonPorteursDimensionsComponent,
     DimensionsComponent,
+    PoseChauffageDimensionsComponent,
+    PoseChauffageEtatSurfacesComponent,
+    PoseChauffageGammesProduitsComponent,
     EtatSurfacesComponent,
     GammesProduitsComponent,
     DimensionsPosePlafondComponent,
