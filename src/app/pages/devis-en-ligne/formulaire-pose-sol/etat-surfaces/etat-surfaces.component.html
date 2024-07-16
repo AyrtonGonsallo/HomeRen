@@ -1,0 +1,22 @@
+
+            <form [formGroup]="poseSolForm" (ngSubmit)="onPoseSolSubmit()">
+               <div nz-row nzJustify="start" >
+                  
+               
+                  <div nz-col nzSpan="6" class="ant-col">
+                     <label for="etat">État:</label>
+                    
+                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="etat du sol" formControlName="etat">
+                        <nz-option nzLabel="sol en bon etat" nzValue="sol en bon etat"></nz-option>
+                        <nz-option nzLabel="sol avec quelques bosses ou creux" nzValue="sol avec quelques bosses ou creux"></nz-option>
+                        <nz-option nzLabel="sol en mauvais etat" nzValue="sol en mauvais etat"></nz-option>
+                      </nz-select>
+                     <div *ngIf="poseSolForm.get('etat')?.invalid && (poseSolForm.get('etat')?.dirty || poseSolForm.get('etat')?.touched)">
+                        <div *ngIf="poseSolForm.get('etat')?.errors?.['required']">État est requis.</div>
+                     </div>
+                  </div>
+               
+                  
+               </div>
+               <button type="submit">Valider</button>
+             </form>

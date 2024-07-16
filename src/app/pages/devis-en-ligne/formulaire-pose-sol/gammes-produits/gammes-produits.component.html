@@ -1,0 +1,74 @@
+
+            <form [formGroup]="poseSolForm" (ngSubmit)="onPoseSolSubmit()">
+               <div nz-row nzJustify="start" >
+                  
+               
+                  <div nz-col nzSpan="6" class="ant-col">
+                     <label for="parquet_massif">Parquet Massif:</label>
+                     
+                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="parquet_massif du sol" formControlName="parquet_massif">
+                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
+                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
+                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
+                      </nz-select>
+                  </div>
+               
+                  <div nz-col nzSpan="6" class="ant-col">
+                     <label for="paquet_flottant_finition_bois">Parquet Flottant Finition Bois:</label>
+                    
+                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="paquet_flottant_finition_bois du sol" formControlName="paquet_flottant_finition_bois">
+                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
+                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
+                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
+                      </nz-select>
+                  </div>
+               
+                  <div nz-col nzSpan="6" class="ant-col">
+                     <label for="parquet_flottant_finition_stratifiee">Parquet Flottant Finition Stratifiée:</label>
+                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="parquet_flottant_finition_stratifiee du sol" formControlName="parquet_flottant_finition_stratifiee">
+                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
+                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
+                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
+                      </nz-select>
+                  </div>
+               
+                  <div nz-col nzSpan="6" class="ant-col">
+                     <label for="sol_pvc">Sol PVC:</label>
+                     <input type="radio" id="sol_pvc_oui" formControlName="sol_pvc" value="oui">
+                     <label for="sol_pvc_oui">Oui</label>
+                     <input type="radio" id="sol_pvc_non" formControlName="sol_pvc" value="non">
+                     <label for="sol_pvc_non">Non</label>
+                  </div>
+               
+                  <div nz-col nzSpan="6" class="ant-col">
+                     <label for="moquette">Moquette:</label>
+                     <input type="radio" id="moquette_oui" formControlName="moquette" value="oui">
+                     <label for="moquette_oui">Oui</label>
+                     <input type="radio" id="moquette_non" formControlName="moquette" value="non">
+                     <label for="moquette_non">Non</label>
+                  </div>
+               
+                  <div nz-col nzSpan="6" class="ant-col">
+                     <label for="carrelage">Carrelage:</label>
+                     
+                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="carrelage du sol" formControlName="carrelage">
+                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
+                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
+                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
+                      </nz-select>
+                  </div>
+               
+                  <div nz-col nzSpan="6" class="ant-col">
+                     <label for="plinthes">Plinthes:</label>
+                     
+                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="plinthes du sol" formControlName="plinthes">
+                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
+                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
+                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
+                      </nz-select>
+                  </div>
+               
+                  
+               </div>
+               <button type="submit">Valider</button>
+             </form>

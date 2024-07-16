@@ -1,0 +1,29 @@
+
+            <form [formGroup]="poseMursNonPorteursForm" (ngSubmit)="onPoseMursNonPorteursSubmit()">
+
+               <div formArrayName="murs_non_porteurs">
+                 <div nz-row nzJustify="start" *ngFor="let mur of murs_non_porteurs.controls; let i = index" [formGroupName]="i">
+                   
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="type_cloison">Type de cloison  </label>
+                     
+                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="type de cloison du mur" formControlName="type_cloison">
+                        <nz-option nzLabel="98/48+I" nzValue="98/48+I"></nz-option>
+                        <nz-option nzLabel="72/48" nzValue="72/48"></nz-option>
+                        <nz-option nzLabel="50" nzValue="50"></nz-option>
+                        <nz-option nzLabel="CP" nzValue="CP"></nz-option>
+                        <nz-option nzLabel="Autre type de cloison" nzValue="Autre"></nz-option>
+                        
+                      </nz-select>
+                   </div>
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="autre_type_cloison">Autre type de cloison (préciser): </label>
+                     <input type="text" id="autre_type_cloison" formControlName="autre_type_cloison">
+                    
+                   </div>
+                   
+                 </div>
+               </div>
+               <button type="submit">Valider</button>
+             </form>
+

@@ -1,0 +1,28 @@
+
+            <form [formGroup]="poseMursNonPorteursForm" (ngSubmit)="onPoseMursNonPorteursSubmit()">
+
+               <div formArrayName="murs_non_porteurs">
+                 <div nz-row nzJustify="start" *ngFor="let mur of murs_non_porteurs.controls; let i = index" [formGroupName]="i">
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="hauteur">Hauteur: </label>
+                     <input type="number" id="hauteur" formControlName="hauteur">
+                   </div>
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="longueur">Longueur: </label>
+                     <input type="number" id="longueur" formControlName="longueur">
+                   </div>
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="surface">Surface: </label>
+                     <input type="number" id="surface" formControlName="surface">
+                   </div>
+                   
+                   
+                   <button type="button" class="dynamic-form-button" (click)="removeMurNonPorteurroup(i)" *ngIf="murs_non_porteurs.length > 1">Retirer le mur</button>
+                 </div>
+               </div>
+               <button type="button"  class="dynamic-form-button" (click)="addMurNonPorteurroup()" *ngIf="murs_non_porteurs.length < 4">Ajouter un mur</button>
+               <button type="submit">Valider</button>
+             </form>
+
+
+             

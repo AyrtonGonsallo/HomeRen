@@ -1,0 +1,23 @@
+
+<form [formGroup]="posePortesForm" (ngSubmit)="onPosePortesSubmit()">
+    <div formArrayName="portes">
+      <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i" class="form-group" nz-row nzJustify="start">
+        <div nz-col nzSpan="6" class="ant-col">
+            <label>Type de porte <span>*</span></label>
+            <select formControlName="type">
+            
+            <option value="Porte alveolaire simple">Porte alvéolaire simple</option>
+            <option value="Porte alveolaire double">Porte alvéolaire double</option>
+            <option value="Porte pleine double">Porte pleine double</option>
+            <option value="Porte pleine simple">Porte pleine simple</option>
+            <option value="Porte vitrée simple">Porte vitrée simple</option>
+            <option value="Porte vitrée double">Porte vitrée double</option>
+            </select> 
+        </div>
+       
+        <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button" *ngIf="portes.length > 1">Supprimer</button>
+      </div>
+    </div>
+    <button type="button" class="dynamic-form-button" (click)="addPortesGroup()" *ngIf="portes.length < 8">Ajouter une porte</button>
+    <button type="submit" >Valider</button>
+  </form>

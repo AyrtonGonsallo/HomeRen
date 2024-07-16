@@ -58,7 +58,7 @@
             <app-dimensions-pose-murs></app-dimensions-pose-murs>
           </div>
           <div *ngIf="is_travail_selected(4)">
-            <app-formulaire-creation-murs-non-porteurs></app-formulaire-creation-murs-non-porteurs>
+            <app-dimensions-creation-murs-non-porteurs></app-dimensions-creation-murs-non-porteurs>
           </div>
           
           <!-- Formulaire pose Plafond -->
@@ -68,7 +68,7 @@
           
           <!-- Formulaire pose Revetement de Sol -->
           <div *ngIf="is_travail_selected(9)">
-            <app-formulaire-pose-sol></app-formulaire-pose-sol>
+            <app-dimensions-pose-sol></app-dimensions-pose-sol>
           </div>
            <!-- Formulaire pose porte -->
            <div *ngIf="is_travail_selected(10)">
@@ -86,24 +86,35 @@
       </div>
       <div class="devis-content" *ngIf="current == 3">
         <p class="ttl-dv-pc"><strong><b >{{filteredTravail.Titre}} </b>: Quel est l'état des surfaces dans votre {{selectedPiece?.Titre}} ?</strong></p>
-          <!-- Formulaire pose murs  -->
+        <div *ngIf="is_travail_selected(4)">
+          <app-etat-surfaces-creation-murs-non-porteurs></app-etat-surfaces-creation-murs-non-porteurs>
+        </div>  
+        <!-- Formulaire pose murs  -->
          <div *ngIf="is_travail_selected(5)">
            <app-etat-surfaces-pose-murs></app-etat-surfaces-pose-murs>
          </div>
          <div *ngIf="is_travail_selected(8)">
           <app-etat-surfaces-pose-plafond></app-etat-surfaces-pose-plafond>
         </div>
+        <div *ngIf="is_travail_selected(9)">
+          <app-etat-surfaces-pose-sol></app-etat-surfaces-pose-sol>
+        </div>
       </div>
       <div class="devis-content" *ngIf="current == 4">
         <p class="ttl-dv-pc"><strong><b >{{filteredTravail.Titre}} </b>: Quelles sont les gammes de produits que vous souhaitez dans votre {{selectedPiece?.Titre}} ?</strong></p>
-       <!-- Formulaire pose murs  -->
+          <div *ngIf="is_travail_selected(4)">
+            <app-gammes-produits-creation-murs-non-porteurs></app-gammes-produits-creation-murs-non-porteurs>
+          </div>
+          <!-- Formulaire pose murs  -->
           <div *ngIf="is_travail_selected(5)">
             <app-gammes-produits-pose-murs></app-gammes-produits-pose-murs>
           </div>
           <div *ngIf="is_travail_selected(8)">
             <app-gammes-produits-pose-plafond></app-gammes-produits-pose-plafond>
           </div>
-           
+          <div *ngIf="is_travail_selected(9)">
+            <app-gammes-produits-pose-sol></app-gammes-produits-pose-sol>
+          </div>
            <button nz-button nzType="default" (click)="addtask()" *ngIf="current ==4">
             <span>Retour à la liste des travaux</span>
           </button>
