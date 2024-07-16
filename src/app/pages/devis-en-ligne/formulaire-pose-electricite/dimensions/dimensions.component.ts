@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: '../formulaire-pose-electricite.component.css'
 })
 export class PoseElectriciteDimensionsComponent {
-
+  
 }
+
