@@ -24,7 +24,15 @@ import { MursNonPorteursGammesProduitsComponent } from './formulaire-creation-mu
 import { PoseChauffageDimensionsComponent } from './formulaire-pose-chauffage/dimensions/dimensions.component';
 import { PoseChauffageEtatSurfacesComponent } from './formulaire-pose-chauffage/etat-surfaces/etat-surfaces.component';
 import { PoseChauffageGammesProduitsComponent } from './formulaire-pose-chauffage/gammes-produits/gammes-produits.component';
-
+import { PoseElectriciteDimensionsComponent } from './formulaire-pose-electricite/dimensions/dimensions.component';
+import { PoseElectriciteEtatSurfacesComponent } from './formulaire-pose-electricite/etat-surfaces/etat-surfaces.component';
+import { PoseElectriciteGammesProduitsComponent } from './formulaire-pose-electricite/gammes-produits/gammes-produits.component';
+import { PosePorteDimensionsComponent } from './formulaire-pose-porte/dimensions/dimensions.component';
+import { PosePorteEtatSurfacesComponent } from './formulaire-pose-porte/etat-surfaces/etat-surfaces.component';
+import { PosePorteGammesProduitsComponent } from './formulaire-pose-porte/gammes-produits/gammes-produits.component';
+import { PosePlomberieDimensionsComponent } from './formulaire-pose-plomberie/dimensions/dimensions.component';
+import { PosePlomberieEtatSurfacesComponent } from './formulaire-pose-plomberie/etat-surfaces/etat-surfaces.component';
+import { PosePlomberieGammesProduitsComponent } from './formulaire-pose-plomberie/gammes-produits/gammes-produits.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +56,16 @@ import { PoseChauffageGammesProduitsComponent } from './formulaire-pose-chauffag
     GammesProduitsPosePlafondComponent,
     PoseSolDimensionsComponent,
     PoseSolEtatSurfacesComponent,
-    PoseSolGammesProduitsComponent
+    PoseSolGammesProduitsComponent,
+    PoseElectriciteDimensionsComponent,
+    PoseElectriciteEtatSurfacesComponent,
+    PoseElectriciteGammesProduitsComponent,
+    PosePorteDimensionsComponent,
+    PosePorteEtatSurfacesComponent,
+    PosePorteGammesProduitsComponent,
+    PosePlomberieDimensionsComponent,
+    PosePlomberieEtatSurfacesComponent,
+    PosePlomberieGammesProduitsComponent
   ],
   imports: [
     CommonModule,SharedModule,

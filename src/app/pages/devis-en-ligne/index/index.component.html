@@ -72,16 +72,16 @@
           </div>
            <!-- Formulaire pose porte -->
            <div *ngIf="is_travail_selected(10)">
-            <app-formulaire-pose-porte></app-formulaire-pose-porte>
+            <app-dimensions-pose-porte></app-dimensions-pose-porte>
           </div>
           <div *ngIf="is_travail_selected(11)">
-            <app-formulaire-pose-plomberie [selectedPiece]="selectedPiece"></app-formulaire-pose-plomberie>
+            <app-dimensions-pose-plomberie [selectedPiece]="selectedPiece"></app-dimensions-pose-plomberie>
           </div>
           <div *ngIf="is_travail_selected(12)">
             <app-dimensions-pose-chauffage></app-dimensions-pose-chauffage>
           </div>
           <div *ngIf="is_travail_selected(13)">
-            <app-formulaire-pose-electricite></app-formulaire-pose-electricite>
+            <app-dimensions-pose-electricite></app-dimensions-pose-electricite>
           </div>
       </div>
       <div class="devis-content" *ngIf="current == 3">
@@ -102,6 +102,15 @@
         <div *ngIf="is_travail_selected(12)">
           <app-etat-surfaces-pose-chauffage></app-etat-surfaces-pose-chauffage>
         </div>
+        <div *ngIf="is_travail_selected(10)">
+          <app-etat-surfaces-pose-porte></app-etat-surfaces-pose-porte>
+        </div>
+        <div *ngIf="is_travail_selected(13)">
+          <app-etat-surfaces-pose-electricite></app-etat-surfaces-pose-electricite>
+        </div>
+        <div *ngIf="is_travail_selected(11)">
+          <app-etat-surfaces-pose-plomberie [selectedPiece]="selectedPiece"></app-etat-surfaces-pose-plomberie>
+        </div>
       </div>
       <div class="devis-content" *ngIf="current == 4">
         <p class="ttl-dv-pc"><strong><b >{{filteredTravail.Titre}} </b>: Quelles sont les gammes de produits que vous souhaitez dans votre {{selectedPiece?.Titre}} ?</strong></p>
@@ -120,6 +129,15 @@
           </div>
           <div *ngIf="is_travail_selected(12)">
             <app-gammes-produits-pose-chauffage></app-gammes-produits-pose-chauffage>
+          </div>
+          <div *ngIf="is_travail_selected(10)">
+            <app-gammes-produits-pose-porte></app-gammes-produits-pose-porte>
+          </div>
+          <div *ngIf="is_travail_selected(13)">
+            <app-gammes-produits-pose-electricite></app-gammes-produits-pose-electricite>
+          </div>
+          <div *ngIf="is_travail_selected(11)">
+            <app-gammes-produits-pose-plomberie [selectedPiece]="selectedPiece"></app-gammes-produits-pose-plomberie>
           </div>
            <button nz-button nzType="default" (click)="addtask()" *ngIf="current ==4">
             <span>Retour à la liste des travaux</span>
