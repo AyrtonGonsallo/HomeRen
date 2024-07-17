@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
+import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
 
 @Component({
   selector: 'app-gammes-produits-pose-murs',
@@ -41,13 +42,13 @@ onPoseMursSubmit(): void {
 createposeMurGroup(): FormGroup {
   return this.fb.group({
    
-    carrelage: ['', ],
-    papier: ['', ],
-    enduit: ['', ],
-    peinture: ['', ]
+    carrelage: [0, ],
+    papier: [0, ],
+    enduit: [0, ],
+    peinture: [0, ]
   });
 }
-constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
+constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
   this.poseMursForm = this.fb.group({
     murs: this.fb.array([this.createposeMurGroup()])
   });
@@ -57,7 +58,7 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
     this.addMurGroup()
   }
   console.log(this.formulaire_dimensions)
- 
+  this.load_gammes()
  
 }
 //upload des images sur tous les formulaires
@@ -85,6 +86,48 @@ markFormGroupTouched(formGroup: FormGroup) {
       this.markFormGroupTouched(abstractControl);
     }
   });
+}
+gammes_peinture:any
+gammes_enduit:any
+gammes_papier:any
+gammes_carrelage:any
+load_gammes(){
+  this.userService.getGammesByTravailAndType(5,"peinture").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes peinture:', response);
+      this.gammes_peinture=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes peinture :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(5,"enduit-decoratif").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes enduit-decoratif:', response);
+      this.gammes_enduit=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes enduit-decoratif :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(5,"papier-peint").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes papier-peint:', response);
+      this.gammes_papier=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes papier-peint :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(5,"carrelage").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes carrelage:', response);
+      this.gammes_carrelage=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes carrelage :', error);
+    }
+  );
 }
 
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../services/gestion-des-devis.service';
 
+
 @Component({
   selector: 'app-formulaire-pose-sol',
   templateUrl: './formulaire-pose-sol.component.html',
@@ -39,8 +40,8 @@ onPoseSolSubmit(): void {
   }
 }
 
-constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-
+constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,) {
+  
   this.poseSolForm = this.createPoseSolGroup();
 }
 
@@ -73,4 +74,6 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
       }
     });
   }
+
+  
 }

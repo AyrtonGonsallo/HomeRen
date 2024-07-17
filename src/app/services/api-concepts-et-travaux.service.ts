@@ -102,4 +102,7 @@ addDevisPiece(devis: any): Observable<any> {
   return this.http.post<any>(`${environment.apiUrl}/add_devis_piece`, devis);
 }
 
+getGammesByTravailAndType(travailID:number,type: string): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_gammes_by_type_and_travailID/${travailID}/${type}`);
+}
 }

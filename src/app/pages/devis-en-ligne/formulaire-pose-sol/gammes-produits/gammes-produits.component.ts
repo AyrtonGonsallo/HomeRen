@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
+import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
 
 @Component({
   selector: 'app-gammes-produits-pose-sol',
@@ -14,13 +15,15 @@ export class PoseSolGammesProduitsComponent {
   createPoseSolGroup(): FormGroup {
     return this.fb.group({
       
-      parquet_massif: ['', ],
-      paquet_flottant_finition_bois: ['', ],
-      parquet_flottant_finition_stratifiee: ['', ],
-      sol_pvc: ['', ],
-      moquette: ['', ],
-      carrelage: ['', ],
-      plinthes: ['', ],
+      parquet_massif: [0, ],
+      paquet_flottant_finition_bois: [0, ],
+      parquet_flottant_finition_stratifiee: [0, ],
+      sol_pvc: [false, ],
+      moquette: [false, ],
+      sol_pvc_prix: [0, ],
+      moquette_prix: [0, ],
+      carrelage: [0, ],
+      plinthes: [0, ],
     });
   }
   onPoseSolSubmit(): void {
@@ -37,8 +40,8 @@ export class PoseSolGammesProduitsComponent {
     }
   }
   
-  constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-  
+  constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
+    this.load_gammes()
     this.poseSolForm = this.createPoseSolGroup();
   }
   
@@ -71,5 +74,83 @@ export class PoseSolGammesProduitsComponent {
         }
       });
     }
+    
+gammes_parquet_m:any
+gammes_parquet_b:any
+gammes_parquet_pffs:any
+gammes_carrelage:any
+gammes_plithes:any
+gamme_pvc:any
+gamme_moquette:any
+load_gammes(){
+  this.userService.getGammesByTravailAndType(9,"parquet-massif").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes parquet-massif:', response);
+      this.gammes_parquet_m=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes parquet-massif :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(9,"parquet-flottant-finition-bois").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes parquet-flottant-finition-bois:', response);
+      this.gammes_parquet_b=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes parquet-flottant-finition-bois :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(9,"parquet-flottant-finition-stratifiee").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes parquet-flottant-finition-stratifiee:', response);
+      this.gammes_parquet_pffs=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes parquet-flottant-finition-stratifiee :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(9,"carrelage").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes carrelage:', response);
+      this.gammes_carrelage=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes carrelage :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(9,"plinthes").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes plinthes:', response);
+      this.gammes_plithes=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes plinthes :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(9,"sol-pvc").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes sol-pvc:', response[0]);
+      this.gamme_pvc=response[0]
+      this.poseSolForm.patchValue({
+        sol_pvc_prix: response[0].Prix
+      })
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes sol-pvc :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(9,"moquette").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes moquette:', response[0]);
+      this.poseSolForm.patchValue({
+        moquette_prix: response[0].Prix
+      })
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes moquette :', error);
+    }
+  );
+}
   }
   

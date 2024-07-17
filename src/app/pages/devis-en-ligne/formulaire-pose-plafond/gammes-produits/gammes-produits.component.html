@@ -7,37 +7,34 @@
                    <div nz-col nzSpan="6" class="ant-col">
                      <label for="Peinture">Peinture: </label>
                      
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="peinture du plafond" formControlName="peinture">
-                        <nz-option nzLabel="aucune" nzValue="aucune"></nz-option>
-                        <nz-option nzLabel="mate" nzValue="mate"></nz-option>
-                        <nz-option nzLabel="satinée" nzValue="satinée"></nz-option>
-                      </nz-select>
+                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="peinture du mur" formControlName="peinture">
+                      <nz-option nzLabel="aucune" [nzValue]="0"></nz-option>
+                      <nz-option *ngFor="let option of gammes_peinture" [nzValue]="option.Prix" [nzLabel]="option.Label"></nz-option>
+                      
+                    </nz-select>
                    </div>
                    <div nz-col nzSpan="6" class="ant-col">
                      <label for="etat">Enduit decoratif : </label>
                      
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="enduit du plafond" formControlName="enduit">
-                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
-                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
-                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
+                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="enduit du mur" formControlName="enduit">
+                      <nz-option nzLabel="aucune" [nzValue]="0"></nz-option>
+                      <nz-option *ngFor="let option of gammes_enduit" [nzValue]="option.Prix" [nzLabel]="option.Label"></nz-option>
                       </nz-select>
                    </div>
                    <div nz-col nzSpan="6" class="ant-col">
                      <label for="etat">Papier peint: </label>
                      
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Papier peint du plafond" formControlName="papier">
-                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
-                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
-                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
+                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Papier peint du mur" formControlName="papier">
+                      <nz-option nzLabel="aucune" [nzValue]="0"></nz-option>
+                      <nz-option *ngFor="let option of gammes_papier" [nzValue]="option.Prix" [nzLabel]="option.Label"></nz-option>
                       </nz-select>
                    </div>
                    <div nz-col nzSpan="6" class="ant-col">
                      <label for="etat">Carrelage plafond: </label>
                      
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="carrelage du plafond" formControlName="carrelage">
-                        <nz-option nzLabel="aucun" nzValue="aucun"></nz-option>
-                        <nz-option nzLabel="gamme 1" nzValue="gamme 1"></nz-option>
-                        <nz-option nzLabel="gamme 2" nzValue="gamme 2"></nz-option>
+                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="carrelage du mur" formControlName="carrelage">
+                      <nz-option nzLabel="aucune" [nzValue]="0"></nz-option>
+                      <nz-option *ngFor="let option of gammes_carrelage" [nzValue]="option.Prix" [nzLabel]="option.Label"></nz-option>
                       </nz-select>
                    </div>
                    
