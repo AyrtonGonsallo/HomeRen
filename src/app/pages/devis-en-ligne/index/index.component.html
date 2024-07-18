@@ -54,6 +54,9 @@
       <div class="devis-content" *ngIf="current == 2">
          <p class="ttl-dv-pc"><strong><b >{{filteredTravail.Titre}} </b>: Quelles sont les dimensions de votre {{selectedPiece?.Titre}} ?</strong></p>
         <!-- Formulaire pose murs  -->
+          <div *ngIf="is_travail_selected(14)">
+            <app-dimensions-depose-murs></app-dimensions-depose-murs>
+          </div>
           <div *ngIf="is_travail_selected(5)">
             <app-dimensions-pose-murs></app-dimensions-pose-murs>
           </div>
@@ -93,6 +96,9 @@
          <div *ngIf="is_travail_selected(5)">
            <app-etat-surfaces-pose-murs></app-etat-surfaces-pose-murs>
          </div>
+         <div *ngIf="is_travail_selected(14)">
+          <app-etat-surfaces-depose-murs></app-etat-surfaces-depose-murs>
+        </div>
          <div *ngIf="is_travail_selected(8)">
           <app-etat-surfaces-pose-plafond></app-etat-surfaces-pose-plafond>
         </div>
@@ -120,6 +126,9 @@
           <!-- Formulaire pose murs  -->
           <div *ngIf="is_travail_selected(5)">
             <app-gammes-produits-pose-murs></app-gammes-produits-pose-murs>
+          </div>
+          <div *ngIf="is_travail_selected(14)">
+            <app-gammes-produits-depose-murs></app-gammes-produits-depose-murs>
           </div>
           <div *ngIf="is_travail_selected(8)">
             <app-gammes-produits-pose-plafond></app-gammes-produits-pose-plafond>

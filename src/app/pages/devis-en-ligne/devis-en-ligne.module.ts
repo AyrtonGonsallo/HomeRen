@@ -33,7 +33,9 @@ import { PosePorteGammesProduitsComponent } from './formulaire-pose-porte/gammes
 import { PosePlomberieDimensionsComponent } from './formulaire-pose-plomberie/dimensions/dimensions.component';
 import { PosePlomberieEtatSurfacesComponent } from './formulaire-pose-plomberie/etat-surfaces/etat-surfaces.component';
 import { PosePlomberieGammesProduitsComponent } from './formulaire-pose-plomberie/gammes-produits/gammes-produits.component';
-
+import { DeposeMursDimensionsComponent } from './formulaire-depose-murs/dimensions/dimensions.component';
+import { DeposeMursEtatSurfacesComponent } from './formulaire-depose-murs/etat-surfaces/etat-surfaces.component';
+import { DeposeMursGammesProduitsComponent } from './formulaire-depose-murs/gammes-produits/gammes-produits.component';
 @NgModule({
   declarations: [
     IndexComponent,
@@ -65,7 +67,10 @@ import { PosePlomberieGammesProduitsComponent } from './formulaire-pose-plomberi
     PosePorteGammesProduitsComponent,
     PosePlomberieDimensionsComponent,
     PosePlomberieEtatSurfacesComponent,
-    PosePlomberieGammesProduitsComponent
+    PosePlomberieGammesProduitsComponent,
+    DeposeMursDimensionsComponent,
+    DeposeMursEtatSurfacesComponent,
+    DeposeMursGammesProduitsComponent
   ],
   imports: [
     CommonModule,SharedModule,
