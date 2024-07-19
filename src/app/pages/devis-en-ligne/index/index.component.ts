@@ -5,6 +5,7 @@ import { Piece } from '../../../Models/Piece';
 import { environment } from '../../../environments/environment';
 import { Travail } from '../../../Models/Travail';
 import { GestionDesDevisService } from '../../../services/gestion-des-devis.service';
+import { ShoppingCartService } from '../../../services/shopping-cart.service';
 interface ItemData {
   ID: number;
   Titre: string;
@@ -43,7 +44,7 @@ export class IndexComponent {
 
 
  
-  constructor(private renderer: Renderer2,private message: NzMessageService,private userService: ApiConceptsEtTravauxService,private gestiondesdevisService: GestionDesDevisService) {
+  constructor(private renderer: Renderer2,private message: NzMessageService,private userService: ApiConceptsEtTravauxService,private gestiondesdevisService: GestionDesDevisService,private panier:ShoppingCartService) {
  
   }
 
@@ -193,6 +194,8 @@ export class IndexComponent {
       this.userService.addDevisPiece(json).subscribe(
         (response) => {
           console.log('reponse de l\'api :', response);
+          let devis=response.devis
+          this.panier.addItem(devis)
         },
         (error) => {
           console.error('Erreur lors de la récupération de l\'ajout du devis :', error);

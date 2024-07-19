@@ -20,6 +20,12 @@
     <li><a routerLink="/faq" routerLinkActive="active">FAQ</a></li>
     <li><a routerLink="/form-artisan" routerLinkActive="active">Devenir partenaire</a></li>
     <li><a routerLink="/connexion" class="btn-hdr">Connexion</a></li>
+    <li>
+      <nz-badge [nzCount]="get_total_panier()">
+        <a class="head-example"><fa-icon [icon]="faCartShopping" class="mr-10"></fa-icon></a>
+      </nz-badge>
+    </li>
+    
   </ul>
 </nav>
 <router-outlet></router-outlet>

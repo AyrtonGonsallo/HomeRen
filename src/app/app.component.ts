@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router ,NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot,faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { ApiConceptsEtTravauxService } from './services/api-concepts-et-travaux.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { environment } from './environments/environment';
+import { ShoppingCartService } from './services/shopping-cart.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,11 +13,12 @@ import { environment } from './environments/environment';
 })
 export class AppComponent implements OnInit{
   faLocationDot=faLocationDot;
+  faCartShopping=faCartShopping;
   baseurl=environment.apiUrl
   title = 'HomeRen';
   currentUrl: string ='';
   page_seo_details:any
-  constructor(   private metaService: Meta,private titleService: Title,private route: ActivatedRoute,private router: Router,private userService: ApiConceptsEtTravauxService) {
+  constructor(private panier:ShoppingCartService,   private metaService: Meta,private titleService: Title,private route: ActivatedRoute,private router: Router,private userService: ApiConceptsEtTravauxService) {
   }
 
   ngOnInit() {
@@ -77,7 +79,9 @@ export class AppComponent implements OnInit{
 
   }
 
-
+  get_total_panier(){
+    return this.panier.getItemCount()
+  }
   
   isNumber(value: string): boolean {
     const numberRegex = /^-?\d+(\.\d+)?$/;

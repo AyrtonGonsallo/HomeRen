@@ -105,4 +105,8 @@ addDevisPiece(devis: any): Observable<any> {
 getGammesByTravailAndType(travailID:number,type: string): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_gammes_by_type_and_travailID/${travailID}/${type}`);
 }
+// Ajouter un nouveau modèle d'équipement
+getAllDevisPiecebyUsernameAndIp(data: any): Observable<any> {
+  return this.http.post<any>(`${environment.apiUrl}/get_devis_piece_by_username_and_ip`, data);
+}
 }
