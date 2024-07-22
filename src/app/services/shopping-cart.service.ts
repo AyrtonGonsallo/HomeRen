@@ -74,7 +74,7 @@ export class ShoppingCartService {
         ip: this.userIp,
       };
       console.log(json)
-      this.userService.getAllDevisPiecebyUsernameAndIp(json).subscribe(
+      this.userService.getAllPayedDevisPiecebyUsernameAndIp(json).subscribe(
         (response) => {
           this.items=  response;
         },

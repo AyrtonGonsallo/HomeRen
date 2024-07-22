@@ -109,4 +109,8 @@ getGammesByTravailAndType(travailID:number,type: string): Observable<any> {
 getAllDevisPiecebyUsernameAndIp(data: any): Observable<any> {
   return this.http.post<any>(`${environment.apiUrl}/get_devis_piece_by_username_and_ip`, data);
 }
+getAllPayedDevisPiecebyUsernameAndIp(data: any): Observable<any> {
+  return this.http.post<any>(`${environment.apiUrl}/get_no_payed_devis_piece`, data);
+}
+
 }
