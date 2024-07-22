@@ -1,0 +1,27 @@
+<div class="center">
+    <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Piece</th>
+            <th>Prix par tâches</th>
+            <th>Prix</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listOfData">
+            <td>{{ data.ID }}</td>
+            <td>{{ data.Date | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td>{{ data.Piece?.Titre }}</td>
+            <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }} : {{ tache?.Prix }}€<br></span></td>
+            <td>{{ data.Prix }}€</td>
+            <td>
+                <fa-icon [icon]="faTrash" class="mr-10"></fa-icon>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+
+</div>

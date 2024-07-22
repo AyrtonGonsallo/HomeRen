@@ -12,6 +12,7 @@ const routes: Routes = [
     {path:'devis-en-ligne',loadChildren:()=>import('./pages/devis-en-ligne/devis-en-ligne.module').then(m=>m.DevisEnLigneModule)},
     {path:'qui-somme-nous',loadChildren:()=>import('./pages/qui-somme-nous/qui-somme-nous.module').then(m=>m.QuiSommeNousModule)},
     {path:'faq',loadChildren:()=>import('./pages/faq/faq.module').then(m=>m.FaqModule)},
+    {path:'panier',loadChildren:()=>import('./pages/panier/panier.module').then(m=>m.PanierModule)},
     {path:'connexion',loadChildren:()=>import('./pages/connexion/connexion.module').then(m=>m.ConnexioModule)},
 
   ];
