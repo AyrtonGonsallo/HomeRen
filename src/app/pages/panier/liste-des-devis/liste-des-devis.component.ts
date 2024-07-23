@@ -13,12 +13,19 @@ import { ShoppingCartService } from '../../../services/shopping-cart.service';
 export class ListeDesDevisComponent {
   listOfData: any 
   faTrash=faTrash;
+  total:number=0
   baseurl=environment.imagesUrl
   ngOnInit(): void {
+    this.get_devis_datas()
+    
+    
+  }
+  get_devis_datas(){
     this.panierService.getItems().subscribe(
       (items) => {
         this.listOfData = items;
         console.log('Devis du panier: ', this.listOfData);
+        this.total=this.panierService.getTotal()
       },
       (error) => {
         console.error('Erreur lors de la récupération des devis :', error);
@@ -28,6 +35,9 @@ export class ListeDesDevisComponent {
   constructor(private router: Router,private panierService:ShoppingCartService,private userService: ApiConceptsEtTravauxService) {
    
   }
-
+  supprimer_devis(id:number){
+    this.panierService.valider_devis(id)
+   
+  }
 
 }

@@ -18,10 +18,17 @@
             <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }} : {{ tache?.Prix }}€<br></span></td>
             <td>{{ data.Prix }}€</td>
             <td>
-                <fa-icon [icon]="faTrash" class="mr-10"></fa-icon>
+              <a (click)="supprimer_devis(data.ID)"><fa-icon [icon]="faTrash" class="mr-10"></fa-icon></a>
             </td>
           </tr>
         </tbody>
     </table>
-
+    <div class="total-panier-container">
+      <div>
+        Total ttc: {{total}}€
+      </div>
+      <div>
+        <a class="btn-site" href="/">Valider mon panier</a>
+      </div>
+    </div>
 </div>

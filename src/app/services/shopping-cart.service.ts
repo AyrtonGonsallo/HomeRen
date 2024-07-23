@@ -66,6 +66,18 @@ export class ShoppingCartService {
   getTotal(): number {
     return this.items.reduce((total, item) => total + (item.Prix ?? 0), 0);
   }
+  valider_devis(id:number){
+    this.userService.validerDevisPiece(id,{"id":id}).subscribe(
+      (response) => {
+        console.log("devis validé")
+        this.initializeCart()
+      },
+      (error) => {
+        console.error('Erreur lors de la validation du devis :', error);
+      })
+  }
+
+
 
   private initializeCart(): void {
     if (typeof window !== 'undefined') {

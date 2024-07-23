@@ -112,5 +112,8 @@ getAllDevisPiecebyUsernameAndIp(data: any): Observable<any> {
 getAllPayedDevisPiecebyUsernameAndIp(data: any): Observable<any> {
   return this.http.post<any>(`${environment.apiUrl}/get_no_payed_devis_piece`, data);
 }
+validerDevisPiece(id:number,body: any): Observable<any> {
+  return this.http.put<any>(`${environment.apiUrl}/valider_devis_piece/${id}`,body);
+}
 
 }
