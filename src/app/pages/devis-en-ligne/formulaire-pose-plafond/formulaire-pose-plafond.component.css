@@ -28,3 +28,94 @@
     background: var(--color2);
     color: var(--color-white);
   }
+  .ant-col[_ngcontent-ng-c3282933449] {
+    text-align: center !important;
+}
+form label {
+    margin-right: 5px !important;
+}
+.add-btn, .del-btn{padding: 0px 10px; background-color: #000;height: 37px;cursor: pointer;margin-block: 8px;}
+input {
+    border: 1px solid #555;
+}
+.vald-btn{margin-top:30px;cursor: pointer;}
+.vald-btn, .add-btn{    
+    width: 18%;
+    margin-inline: auto;}
+input:focus{
+    border: 2px solid #ffc736;
+}
+.ant-col-6 {
+    max-width: 30%;
+    flex: 0% !important;
+    margin: auto;
+    text-align: center;
+}
+form{
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+}
+input#longueur, input#surface, input#largeur, input#hauteur{width:55%;}
+.ant-col.ant-col-6 {
+    display: flex !important;
+    align-items: center !important;
+}
+.ant-col[_ngcontent-ng-c3282933449] {
+    text-align: center !important;
+}
+form label {
+    margin-right: 30px !important;
+}
+.add-btn, .del-btn{padding: 0px 10px; background-color: #000;height: 37px;cursor: pointer;margin-block: 8px;}
+input {
+    border: 1px solid #555;
+}
+.vald-btn{margin-top:30px;cursor: pointer;}
+.vald-btn, .add-btn{    
+    width: 18%;
+    margin-inline: auto;}
+input:focus{
+    border: 2px solid #ffc736;
+}
+.ant-col-6 {
+    align-items: center;
+    justify-content: center;
+    max-width: 40%;
+    flex: 0% !important;
+    margin: auto;
+    text-align: center;
+}
+form{
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+}
+@media only screen and (max-width: 800px) {
+    .ant-col-6[_ngcontent-ng-c4243379430] {max-width: 100%;}
+    .ant-row{
+        display: flex;
+        flex-wrap: wrap !important;
+        flex-direction: row !important;
+        align-content: center;
+    }
+
+
+
+}
+@media only screen and (max-width: 600px) {
+    .vald-btn, .add-btn{ width: fit-content;}
+
+    .ant-row {
+        flex-wrap: wrap !important;
+        flex-direction: column !important;
+        align-content: flex-start !important;
+    }
+    .ant-col.ant-col-6[_ngcontent-ng-c4243379430] {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start;
+        margin: 0;
+    }
+    form label{ width: 15%;}
+}

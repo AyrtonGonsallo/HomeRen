@@ -6,7 +6,7 @@ import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-e
 @Component({
   selector: 'app-gammes-produits-depose-murs',
   templateUrl: './gammes-produits.component.html',
-  styleUrl: './gammes-produits.component.css'
+  styleUrl: '../form-depose-mur.css'
 })
 export class DeposeMursGammesProduitsComponent {
 //formulaires des deposes et dedeposes

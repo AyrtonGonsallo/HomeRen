@@ -1,4 +1,5 @@
 
+<div class="dimsn-portes">
 <form [formGroup]="posePortesForm" (ngSubmit)="onPosePortesSubmit()">
     <div formArrayName="portes">
       <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i" class="form-group" nz-row nzJustify="start">
@@ -51,10 +52,10 @@
             <label>Informations complémentaires sur la finition</label>
             <textarea formControlName="infos_comp_finition"></textarea>
         </div>
-        <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button" *ngIf="portes.length > 1">Supprimer</button>
+        <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">Supprimer</button>
       </div>
     </div>
-    <button type="button" class="dynamic-form-button" (click)="addPortesGroup()" *ngIf="portes.length < 8">Ajouter une porte</button>
-    <button type="submit" >Valider</button>
+    <button type="button" class="dynamic-form-button add-btn" (click)="addPortesGroup()" *ngIf="portes.length < 8">Ajouter une porte</button>
+    <button class="vald-btn" type="submit" >Valider</button>
   </form>
-  
+</div>

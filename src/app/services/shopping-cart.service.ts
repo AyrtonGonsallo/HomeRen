@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiConceptsEtTravauxService } from './api-concepts-et-travaux.service';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 interface CartItem {
      ID: number;
     Username: string;
@@ -81,6 +82,8 @@ export class ShoppingCartService {
 
   private initializeCart(): void {
     if (typeof window !== 'undefined') {
+      let device_id=this.getUniqueDeviceId()
+      console.log("id appareil:",device_id)
       this.getBrowserInfo();
       this.getIp().subscribe(
         (response) => {
@@ -89,7 +92,7 @@ export class ShoppingCartService {
             username: this.browserInfo,
             ip: this.userIp,
           };
-          this.userService.getAllPayedDevisPiecebyUsernameAndIp(json).subscribe(
+          this.userService.getAllPayedDevisPiecebyDeviceID(this.getUniqueDeviceId()).subscribe(
             (response) => {
               this.items = response;
               this.itemsSubject.next(this.items);
@@ -106,7 +109,20 @@ export class ShoppingCartService {
     }
   }
 
+  private readonly storageKey = 'unique-device-id';
+
   
+
+  getUniqueDeviceId(): string {
+    let deviceId = localStorage.getItem(this.storageKey);
+
+    if (!deviceId) {
+      deviceId = uuidv4();
+      localStorage.setItem(this.storageKey, deviceId);
+    }
+
+    return deviceId;
+  }
 
 
   getBrowserInfo(): void {

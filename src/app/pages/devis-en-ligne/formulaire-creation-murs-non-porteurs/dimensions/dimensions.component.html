@@ -17,11 +17,11 @@
                    </div>
                    
                    
-                   <button type="button" class="dynamic-form-button" (click)="removeMurNonPorteurroup(i)" *ngIf="murs_non_porteurs.length > 1">Retirer le mur</button>
+                   <button type="button" class="dynamic-form-button del-btn" (click)="removeMurNonPorteurroup(i)" *ngIf="murs_non_porteurs.length > 1">Retirer le mur</button>
                  </div>
                </div>
-               <button type="button"  class="dynamic-form-button" (click)="addMurNonPorteurroup()" *ngIf="murs_non_porteurs.length < 4">Ajouter un mur</button>
-               <button type="submit">Valider</button>
+               <button type="button"  class="dynamic-form-button add-btn" (click)="addMurNonPorteurroup()" *ngIf="murs_non_porteurs.length < 4">Ajouter un mur</button>
+               <button class="vald-btn" type="submit">Valider</button>
              </form>
 
 

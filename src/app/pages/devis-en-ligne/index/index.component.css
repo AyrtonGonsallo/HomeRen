@@ -98,3 +98,6 @@ ul{
 .error{
     color: red;
 }
+.ant-row.ng-pristine.ng-invalid.ant-row-start.ng-star-inserted.ng-touched {
+    justify-content: space-between !important;
+}

@@ -5,7 +5,7 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
 @Component({
   selector: 'app-dimensions-depose-murs',
   templateUrl: './dimensions.component.html',
-  styleUrl: './dimensions.component.css'
+  styleUrl: '../form-depose-mur.css'
 })
 export class DeposeMursDimensionsComponent {
 //formulaires des deposes et dedeposes

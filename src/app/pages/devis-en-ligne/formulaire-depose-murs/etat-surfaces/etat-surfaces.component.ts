@@ -5,7 +5,7 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
 @Component({
   selector: 'app-etat-surfaces-depose-murs',
   templateUrl: './etat-surfaces.component.html',
-  styleUrl: './etat-surfaces.component.css'
+  styleUrl: '../form-depose-mur.css'
 })
 export class DeposeMursEtatSurfacesComponent {
 //formulaires des deposes et dedeposes

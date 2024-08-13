@@ -1,4 +1,5 @@
-<div *ngIf="selectedPiece.ID==7">
+<div class="form-flx-dms">
+<div *ngIf="selectedPiece.ID==7" class="form-flx-dms">
     <p>formulaire-pose-plomberie {{selectedPiece.Titre}}</p>
     <form [formGroup]="poseCuisineForm" (ngSubmit)="onPoseCuisineSubmit()">
         <div formArrayName="appareils_cuisine">
@@ -63,7 +64,7 @@
             
             
         </div>
-        <button type="submit">valider</button>
+        <button class="vald-btn" type="submit">valider</button>
       </form>
-    
+    </div>   
 </div>

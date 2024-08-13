@@ -188,7 +188,9 @@ export class IndexComponent {
         username: this.browserInfo,
         ip: this.userIp,
         piece:this.selectedPiece,
-        liste_des_travaux: formulaires
+        liste_des_travaux: formulaires,
+        deviceID:this.panier
+        .getUniqueDeviceId()
       };
       console.log('Formulaires soumis :', json);
       this.userService.addDevisPiece(json).subscribe(

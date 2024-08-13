@@ -1,9 +1,9 @@
 
-<form [formGroup]="deposeMursForm" (ngSubmit)="onPoseMursSubmit()">
+<form [formGroup]="deposeMursForm" (ngSubmit)="onPoseMursSubmit()" class="mur-form">
 
     <div formArrayName="murs">
       <div nz-row nzJustify="start" *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
-        <div nz-col nzSpan="2" class="ant-col">
+        <div nz-col nzSpan="2" class="ant-col mur-ttl">
           Mur {{i+1}}      
           
         </div>
@@ -45,5 +45,5 @@
         
       </div>
     </div>
-    <button type="submit">Valider</button>
+    <button class="vald-btn" type="submit">Valider</button>
   </form>

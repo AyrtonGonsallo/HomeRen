@@ -316,6 +316,13 @@ nav ul{
   .footer-bg{padding: 3% 5%;} 
   .m-w-ftr{width: auto;}
   }
+  @media only screen and (max-width: 1312px) {
+  nav ul[_ngcontent-ng-c1130723742] li a, .drop-dwn, .title-drop-dwn{
+    font-size: 15px;
+    padding: 10px 8px !important;}
+}
+
+
   @media only screen and (max-width: 1024px){
     .footer-bg {  padding: 2% 2%; }
     img.logo-ftr{width: 68%;}
@@ -339,3 +346,4 @@ nav ul{
     .marg-r{margin-right: 0px;}
 
  }
+

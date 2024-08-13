@@ -28,3 +28,47 @@
     background: var(--color2);
     color: var(--color-white);
   }
+.ant-col[_ngcontent-ng-c3282933449] {
+    text-align: center !important;
+}
+form label {
+    margin-right: 30px !important;
+}
+.add-btn, .del-btn{padding: 0px 10px; background-color: #000;height: 37px;cursor: pointer;margin-block: 8px;}
+input {
+    border: 1px solid #555;
+}
+.vald-btn{margin-top:30px;cursor: pointer;}
+.vald-btn, .add-btn{    
+    width: 18%;
+    margin-inline: auto;}
+input:focus{
+    border: 2px solid #ffc736;
+}
+.ant-col-6 {
+    max-width: 40%;
+    display: flex;
+    flex: 0% !important;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+form{
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+}
+.form-flx-dms h3{    
+    font-weight: 600;
+    font-size: 19px;
+    color: #ffc736;
+    text-align: left !important;}
+.form-flx-dms .ant-col.ant-col-12 {
+        display: flex;
+        gap: 58px;
+    }
+.form-flx-dms form[_ngcontent-ng-c2414870382] label[_ngcontent-ng-c2414870382] {
+        margin-right: 0px !important;
+        width: 40%;
+    }

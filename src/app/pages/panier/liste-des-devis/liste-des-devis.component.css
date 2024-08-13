@@ -1,5 +1,6 @@
+.section-panier{}
 table, th, td,tr{
-    border: solid 1px black;
+    border: solid 1px rgba(85, 85, 85, 0.298);
     
 }
 table{
@@ -22,6 +23,12 @@ table{
     justify-content: flex-end;
     display: flex;
 }
-th, td{
-    padding: 20px 40px;
+th{
+background-color: #ffc736;
 }
+th, td{
+    padding: 10px 30px !important;
+}
+.tot-pan{
+    font-weight: 900;
+    font-size: 18px;}
