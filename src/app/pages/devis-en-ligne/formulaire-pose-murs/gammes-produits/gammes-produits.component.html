@@ -1,44 +1,27 @@
 
-            <form [formGroup]="poseMursForm" (ngSubmit)="onPoseMursSubmit()">
+<form [formGroup]="poseMursForm" (ngSubmit)="onPoseMursSubmit()">
 
-               <div formArrayName="murs">
-                 <div nz-row nzJustify="start" *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
-                   
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="Peinture">Peinture: </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="peinture du mur" formControlName="peinture">
-                        <nz-option nzLabel="aucune" [nzValue]="0"></nz-option>
-                        <nz-option *ngFor="let option of gammes_peinture" [nzValue]="option.Prix" [nzLabel]="option.Label"></nz-option>
-                        
-                      </nz-select>
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">Enduit decoratif : </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="enduit du mur" formControlName="enduit">
-                      <nz-option nzLabel="aucune" [nzValue]="0"></nz-option>
-                      <nz-option *ngFor="let option of gammes_enduit" [nzValue]="option.Prix" [nzLabel]="option.Label"></nz-option>
-                      </nz-select>
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">Papier peint: </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Papier peint du mur" formControlName="papier">
-                      <nz-option nzLabel="aucune" [nzValue]="0"></nz-option>
-                      <nz-option *ngFor="let option of gammes_papier" [nzValue]="option.Prix" [nzLabel]="option.Label"></nz-option>
-                      </nz-select>
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">Carrelage mural: </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="carrelage du mur" formControlName="carrelage">
-                      <nz-option nzLabel="aucune" [nzValue]="0"></nz-option>
-                      <nz-option *ngFor="let option of gammes_carrelage" [nzValue]="option.Prix" [nzLabel]="option.Label"></nz-option>
-                      </nz-select>
-                   </div>
-                   
-                 </div>
-               </div>
-               <button class="vald-btn" type="submit">Valider</button>
-             </form>
+  <div formArrayName="murs">
+      <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
+        Mur {{i+1}}
+        <div nz-row nzJustify="start">
+          <div nz-col nzSpan="6" class="ant-col">
+            <label for="gamme">Gamme: </label>
+            <nz-radio-group formControlName="gamme">
+             <label nz-radio *ngFor="let option of gammes_peinture" [nzValue]="option.ID+':'+option.Prix">Peinture {{option.Label}}</label>
+             <label nz-radio *ngFor="let option of gammes_enduit" [nzValue]="option.ID+':'+option.Prix">Enduit {{option.Label}}</label>
+             <label nz-radio *ngFor="let option of gammes_papier" [nzValue]="option.ID+':'+option.Prix">Papier {{option.Label}}</label>
+             <label nz-radio *ngFor="let option of gammes_carrelage" [nzValue]="option.ID+':'+option.Prix">Carrelage {{option.Label}}</label>
+
+           </nz-radio-group>
+            
+          </div> 
+          
+          
+        </div>
+
+      </div>
+      
+  </div>
+  <button class="vald-btn" type="submit">Valider</button>
+  </form>

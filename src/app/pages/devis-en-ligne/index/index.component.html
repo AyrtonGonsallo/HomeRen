@@ -10,13 +10,22 @@
      </nz-step>
      <nz-step nzIcon="setting" nzTitle="Dimensions">
      </nz-step>
-     <nz-step nzIcon="setting" nzTitle="Etat de surfaces">
+     <nz-step nzIcon="area-chart" nzTitle="Etat de surfaces">
      </nz-step>
-     <nz-step nzIcon="setting" nzTitle="Gamme de produits">
+     <nz-step nzIcon="table" nzTitle="Gamme de produits">
+     </nz-step>
+     <nz-step nzIcon="file-done" nzTitle="Recapitulatif">
+      <span>recap</span>
      </nz-step>
      <nz-step nzIcon="check-circle" nzTitle="Finalisation">
+      <span>ici la partie finale</span>
      </nz-step>
    </nz-steps>
+   <div class="div-btn-prect">
+    <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+     <span> <span nz-icon nzType="arrow-left" nzTheme="outline"></span> Question précédente</span>
+    </button>
+   </div>
    <div class="steps-content" >
      <div class="devis-content" *ngIf="current == 0">
         <p class="ttl-dv-pc"><strong>Je rénove une pièce</strong></p>
@@ -31,7 +40,7 @@
         </div>
      </div>
      <div class="devis-content" *ngIf="current == 1">
-        <p class="ttl-dv-pc"><strong>Quels travaux souhaitez-vous faire dans votre {{selectedPiece?.Titre}} ?</strong></p>
+        <!--<p class="ttl-dv-pc"><strong>Quels travaux souhaitez-vous faire dans votre {{selectedPiece?.Titre}} ?</strong></p>
         <nz-table
            #rowSelectionTable
            [nzData]="listOfData"
@@ -40,11 +49,18 @@
         >
            <tbody>
            <tr *ngFor="let data of rowSelectionTable.data"  >
-              <td id="tache-{{data.ID}}" (click)="selectTravail(data.ID)">{{ data.Titre }}</td>
+              <td id="tache-{{data.ID}}" >{{ data.Titre }} <label id="radio-{{data.ID}}" nz-radio ngModel (click)="selectTravail(data.ID)"></label> </td>
            </tr>
            </tbody>
-        </nz-table>
+        </nz-table>-->
+    <div class="radio-travaux">
+        <p class="ttl-dv-pc"><strong>Quels travaux souhaitez-vous faire dans votre {{selectedPiece?.Titre}} ?</strong></p>
+        <nz-radio-group [(ngModel)]="radioValue" class="flx-radio-travaux">
+          <label *ngFor="let data of travaux" id="tache-{{data.ID}}" (click)="selectTravail(data.ID)" nz-radio [nzValue]="data.Titre"><span class="radio-trav-ttl">{{ data.Titre }} </span></label>
+          
+        </nz-radio-group>
      </div>
+    </div>
      <div class="devis-content" *ngIf="current == 2">
         <p class="ttl-dv-pc"><strong><b >{{filteredTravail.Titre}} </b>: Quelles sont les dimensions de votre {{selectedPiece?.Titre}} ?</strong></p>
        <!-- Formulaire pose murs  -->
@@ -140,20 +156,48 @@
          <div *ngIf="is_travail_selected(11)">
            <app-gammes-produits-pose-plomberie [selectedPiece]="selectedPiece"></app-gammes-produits-pose-plomberie>
          </div>
-          <button nz-button nzType="default" (click)="addtask()" *ngIf="current ==4">
+          <!--<button nz-button nzType="default" (click)="addtask()" *ngIf="current ==4">
            <span>Retour à la liste des travaux</span>
-         </button>
+         </button>-->
      </div>
+     <div class="devis-content" *ngIf="current == 5">
+      <div *ngIf="is_travail_selected(4)">
+        <app-recap-creation-murs-non-porteurs [selectedPiece]="selectedPiece"></app-recap-creation-murs-non-porteurs>
+      </div>
+      <!-- Formulaire pose murs  -->
+      <div *ngIf="is_travail_selected(5)">
+        <app-recap-pose-murs [selectedPiece]="selectedPiece"></app-recap-pose-murs>
+      </div>
+      <div *ngIf="is_travail_selected(14)">
+        <app-recap-depose-murs [selectedPiece]="selectedPiece"></app-recap-depose-murs>
+      </div>
+      <div *ngIf="is_travail_selected(8)">
+        <app-recap-pose-plafond [selectedPiece]="selectedPiece"></app-recap-pose-plafond>
+      </div>
+      <div *ngIf="is_travail_selected(9)">
+        <app-recap-pose-sol [selectedPiece]="selectedPiece"></app-recap-pose-sol>
+      </div>
+
+    </div>
    </div>
    <div class="steps-action">
-     <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
-       <span>Précédent</span>
-     </button>
-     <button nz-button nzType="default" (click)="next()" *ngIf="current<5">
+     
+     <button nz-button nzType="default" (click)="next()" *ngIf="current<6" class="btn-suiv">
        <span>Suivant</span>
      </button>
-     <button nz-button nzType="primary" class="btn-etps" (click)="done()" *ngIf="current === 5">
-       <span>Fin</span>
+     <button nz-button nzType="primary" class="btn-etps" (click)="done()" *ngIf="current === 6">
+       <span>Je valide</span>
      </button>
    </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+

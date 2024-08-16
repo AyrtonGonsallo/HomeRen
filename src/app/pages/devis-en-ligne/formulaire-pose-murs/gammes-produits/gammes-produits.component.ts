@@ -41,7 +41,7 @@ onPoseMursSubmit(): void {
 }
 createposeMurGroup(): FormGroup {
   return this.fb.group({
-   
+    gamme: [0, ],
     carrelage: [0, ],
     papier: [0, ],
     enduit: [0, ],

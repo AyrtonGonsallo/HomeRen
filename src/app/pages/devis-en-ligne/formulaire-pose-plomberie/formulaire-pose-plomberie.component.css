@@ -72,3 +72,11 @@ form{
         margin-right: 0px !important;
         width: 40%;
     }
+@media only screen and (max-width: 800px) {
+    .vald-btn, .add-btn{ width: fit-content;}
+    .form-flx-dms form label{  width: 57%; }
+
+}   
+
+
+

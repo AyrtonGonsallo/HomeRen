@@ -8,36 +8,19 @@
           
         </div>
         <div nz-col nzSpan="6" class="ant-col">
-          <label for="Peinture">Peinture: </label>
-          <input type="checkbox" id="peinture" formControlName="peinture">      
+          <label for="gamme">Gamme: </label>
+          <nz-radio-group formControlName="gamme" (ngModelChange)="onTypeChange($event, i)">
+           <label nz-radio  nzValue="Peinture">Peinture</label>
+           <label nz-radio  nzValue="Enduit decoratif">Enduit decoratif</label>
+           <label nz-radio  nzValue="Papier peint">Papier peint</label>
+           <label nz-radio  nzValue="Carrelage mural">Carrelage mural</label>
+           <label nz-radio  nzValue="tissus">tissus</label>
+           <label nz-radio  nzValue="lambris mural">lambris mural</label>
+           <label nz-radio  nzValue="autre" >autre</label>
+         </nz-radio-group>
           
-        </div>
-        <div nz-col nzSpan="6" class="ant-col">
-          <label for="etat">Enduit decoratif : </label>
-          <input type="checkbox" id="enduit" formControlName="enduit"> 
-          
-        </div>
-        <div nz-col nzSpan="6" class="ant-col">
-          <label for="etat">Papier peint: </label>
-          <input type="checkbox" id="papier" formControlName="papier"> 
-          
-        </div>
-        <div nz-col nzSpan="6" class="ant-col">
-          <label for="etat">Carrelage mural: </label>
-          <input type="checkbox" id="carrelage" formControlName="carrelage"> 
-          
-        </div>
-        <div nz-col nzSpan="6" class="ant-col">
-          <label for="tissus">tissus : </label>
-          <input type="checkbox" id="tissus" formControlName="tissus"> 
-          
-        </div>
-        <div nz-col nzSpan="6" class="ant-col">
-          <label for="lambris">lambris mural: </label>
-          <input type="checkbox" id="lambris" formControlName="lambris"> 
-          
-        </div>
-        <div nz-col nzSpan="6" class="ant-col">
+        </div> 
+        <div nz-col nzSpan="6" class="ant-col" *ngIf="mur.get('isAutreType')?.value">
           <label for="autre">autre(préciser): </label>
           <input type="text" id="autre" formControlName="autre"> 
           

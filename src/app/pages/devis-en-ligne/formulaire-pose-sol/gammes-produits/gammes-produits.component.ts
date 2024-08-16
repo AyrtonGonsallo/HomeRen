@@ -23,9 +23,11 @@ export class PoseSolGammesProduitsComponent {
       sol_pvc_prix: [0, ],
       moquette_prix: [0, ],
       carrelage: [0, ],
+      gamme: [0, ],
       plinthes: [0, ],
     });
   }
+
   onPoseSolSubmit(): void {
     if (this.poseSolForm.invalid) {
       this.markFormGroupTouched(this.poseSolForm);
@@ -143,6 +145,7 @@ load_gammes(){
   this.userService.getGammesByTravailAndType(9,"moquette").subscribe(
     (response: any) => {
       console.log('recuperation des gammes moquette:', response[0]);
+      this.gamme_pvc=response[0]
       this.poseSolForm.patchValue({
         moquette_prix: response[0].Prix
       })

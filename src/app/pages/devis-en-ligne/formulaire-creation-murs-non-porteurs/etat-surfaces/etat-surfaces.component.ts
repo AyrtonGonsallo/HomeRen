@@ -16,7 +16,10 @@ formulaire_dimensions_length:number=0
 get murs_non_porteurs(): FormArray {
   return this.poseMursNonPorteursForm.get('murs_non_porteurs') as FormArray;
 }
-
+isAutreType: boolean = false;
+onTypeChange(value: string) {
+  this.isAutreType = (value === 'Autre type de cloison');
+}
 addMurNonPorteurroup(): void {
   if (this.murs_non_porteurs.length < 5) {
     this.murs_non_porteurs.push(this.createposeMurNonPorteurroup());

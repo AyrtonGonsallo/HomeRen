@@ -8,6 +8,8 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-pose-murs.component.css'
 })
 export class DimensionsComponent {
+  disabled = true;
+  radioValue = 'A';
 //formulaires des poses et deposes
 poseMursForm: FormGroup;
  

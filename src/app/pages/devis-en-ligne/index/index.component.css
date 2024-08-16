@@ -17,16 +17,18 @@
     justify-content: center;
 }
 .pcs-devis {
-    width: 20%;
+    width: 31%;
     cursor: pointer;
+    overflow: hidden;
 }
+.pcs-devis:hover img{transform: scale(1.2);transition: all 0.3s ease-in-out, background-position 1ms;}
 .ttl-dv-pc{
     font-weight: 600;
     font-size: 22px;
 }
 .pcs-devis-ttle{
     padding:10px;
-    background-color: var(--color1);   
+    background-color: var(--color1);
      width: fit-content;
     margin-top: -65px;
     margin-bottom: 20px;
@@ -35,28 +37,57 @@
  .mr-b-2{margin-bottom:20px;}
  /********************************************************/
  .steps-content {
-    margin-top: 0px;
+    margin-top: 15px;
     min-height: 200px;
     text-align: center;
-    padding-top: 10px;
+    width: 60%;
+    box-shadow: 1px 1px 8px 0px #9f9f9fcf;
+    margin-inline: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
   }
   .steps-action {
     margin-top: 24px;
     display: flex;
     justify-content: center;
   }
-  .ant-btn, button {
+  button.ant-btn.ant-btn-default.ng-star-inserted {
+    padding: 11px 10px !important;
+    width: fit-content;
+    height: 36px;
+    line-height: 0.5715;
+}
+button.ant-btn.ant-btn-default.ng-star-inserted span{font-size: 14px;}
+.div-btn-prect{width: 61%; margin-inline: auto; margin-top: 25px;}
+.div-btn-prect button span{font-size: 13px !important;}
+.btn-suiv{background: black !important;
     line-height: 0.5715;
     position: relative;
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-weight: 500;
-    border:none !important;
+    border: none !important;
     box-shadow: none;
-    padding: 11px 32px;
-    height: 46px;
+    padding: 11px 130px !important;
+    height: 42px;
+    color: #fff;
+    border-radius: 0px;}
+.btn-suiv:hover{
+        background: var(--color2)!important;
+        color: var(--color-white) !important;
+      }
+.ant-btn, button {
+    line-height: 0.5715;
+    position: relative;
+    font-family: "Montserrat";
+    font-weight: 500;
+    border: none !important;
+    box-shadow: none;
+    padding: 11px 90px;
+    height: 42px;
     color: #fff;
     border-radius: 0px;
-    background: #ffc736;
+    background: #FFC736;
   }
   button:hover{
     background: var(--color2);
@@ -64,6 +95,39 @@
   }
 .ant-steps-item-icon {
     display: none !important;
+}
+.recup-fin {
+    display: grid !important;
+    justify-content: center !important;
+    gap: 0px !important;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.recup-fin p:nth-child(1){float:right;text-align: right;}
+.recup-fin p:nth-child(3){float:left;text-align: left;}
+.radio-travaux, .flx-radio-travaux {
+    display: flex;
+    gap: 0px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+.flx-radio-travaux .ant-radio-wrapper {
+    float: unset;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    border-bottom: 1px solid #55555538; padding: 15px 10px;
+}
+.flx-radio-travaux .ant-radio-wrapper:last-child {border-bottom: 0px solid #55555538; padding: 12px 10px;}
+.flx-radio-travaux .radio-trav-ttl{
+    width: 100% !important;
+    max-width: 100%!important;
+    text-align: left !important;
+    font-size: 15px !important;
 }
 /************************* Respo *************************/
 @media only screen and (max-width: 1440px) {
@@ -89,7 +153,6 @@ ul{
     padding: 0;
     height: 20px;
     float: right;
-    
 }
 .ant-col{
     padding: 5px;

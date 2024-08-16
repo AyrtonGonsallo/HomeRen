@@ -9,6 +9,8 @@ import { GestionDesDevisService } from '../../../services/gestion-des-devis.serv
   styleUrl: './formulaire-pose-sol.component.css'
 })
 export class FormulairePoseSolComponent {
+  disabled = true;
+  radioValue = 'A';
   poseSolForm: FormGroup;
   
 //le formulaire de pose sol

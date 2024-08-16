@@ -90,8 +90,25 @@ export class IndexComponent {
       this.renderer.setStyle(selectedElement, 'filter', 'brightness(0.8)');
     }
   }
-
+  radioValue = 'A';
   selectTravail(travailID: number){
+    if(this.filteredTravail){
+      const prevElement = document.getElementById(`tache-${this.filteredTravail.ID}`);
+      const prevElementRadio = document.getElementById(`radio-${this.filteredTravail.ID}`);
+      if (prevElement) {
+        this.renderer.setStyle(prevElement, 'border-bottom', '1px solid #55555538');
+        this.renderer.setStyle(prevElement, 'border-top', 'none');
+        this.renderer.setStyle(prevElement, 'border-left', 'none');
+        this.renderer.setStyle(prevElement, 'border-right', 'none');
+        this.renderer.setStyle(prevElement, 'filter', 'brightness(1)');
+
+      }
+      if (prevElementRadio) {
+        //prevElementRadio.prop('checked', false);  // Décoche le radio bouton du précédent
+      }
+      console.log("precedent",this.filteredTravail.ID)
+    }
+    
     this.filteredTravail = this.travaux.filter(travail => travail.ID === travailID)[0];
     const selectedElement = document.getElementById(`tache-${travailID}`);
     if (selectedElement) {

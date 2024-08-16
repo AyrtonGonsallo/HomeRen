@@ -1,0 +1,9 @@
+<span class="recup-fin"><p >Pièce</p><p>:</p><p>{{selectedPiece.Titre}}</p></span>
+<div *ngFor="let dimmur of cmnpForm.formulaire['dimensions-creation-murs-non-porteurs--murs'].murs_non_porteurs; let i = index">
+    Mur {{i+1}}
+    <span class="recup-fin"><p>Surface</p><p>:</p><p>{{dimmur.surface}} m²</p></span>
+</div>
+<div *ngFor="let surfacemur of cmnpForm.formulaire['etat-surfaces-creation-murs-non-porteurs--murs'].murs_non_porteurs; let i = index">
+    Mur {{i+1}}
+    <span class="recup-fin"><p>Type de cloison</p><p>:</p><p>{{surfacemur.type_cloison}} </p></span>
+</div>

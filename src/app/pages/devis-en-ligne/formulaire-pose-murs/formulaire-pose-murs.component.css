@@ -31,28 +31,74 @@
   .ant-col[_ngcontent-ng-c3282933449] {
     text-align: center !important;
 }
-form label {
-    margin-right: 30px !important;
-}
-.add-btn, .del-btn{padding: 0px 10px; background-color: #000;height: 37px;cursor: pointer;margin-block: 8px;}
+.add-btn, .del-btn{padding: 0px 10px; background-color: #555;height: 37px;cursor: pointer;margin-block: 8px;}
+.add-btn:hover, .del-btn:hover{background-color: #000;}
 input {
     border: 1px solid #555;
 }
 .vald-btn{margin-top:30px;cursor: pointer;}
 .vald-btn, .add-btn{    
-    width: 18%;
+    width: fit-content;
     margin-inline: auto;}
 input:focus{
     border: 2px solid #ffc736;
 }
+.pose-murs {
+    display: flex ;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.ant-col {
+    max-width: 60% !important;
+    display: flex;
+    justify-content: space-between;
+}
+[nz-radio] {
+    display: block;
+    height: 32px;
+    line-height: 24px;
+}
+.radio-flx-spc div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    min-height: 0px;
+    justify-items: stretch;}
+.radio-flx-spc div span{  text-align: left;  }
+.radio-flx-spc label{text-align: unset;}
+.radio-flx-spc, .radio-flx-spc .ant-col-6 {
+    width: 100% !important;
+}
+.pose-murs .ant-col-6, .pose-murs .ant-col{
+    max-width: 60% !important;
+    width: 100% !important;
+    display: flex !important;
+    flex: 0% !important;
+    margin: auto;
+    gap: 20px !important;
+    text-align: center !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+input{
+    width: 66% !important;
+}
 .ant-col-6 {
-    max-width: 40%;
+    max-width: 100%;
+    width: 100%;
     display: flex;
     flex: 0% !important;
     margin: auto;
+    gap: 20px;
     text-align: center;
     justify-content: center;
     align-items: center;
+}
+.ant-row {
+    align-content: center;
+    flex-direction: column;
 }
 form{
     display: flex !important;

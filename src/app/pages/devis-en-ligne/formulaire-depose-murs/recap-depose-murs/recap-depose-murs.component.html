@@ -1,0 +1,15 @@
+<span class="recup-fin"><p >Pièce</p><p>:</p><p>{{selectedPiece.Titre}}</p></span>
+<div *ngFor="let dimmur of deposeMursForm.formulaire['dimensions-depose-murs'].murs; let i = index">
+    Mur {{i+1}}
+    <span class="recup-fin"><p>Hauteur</p><p>:</p><p>{{dimmur.hauteur}} m</p></span>
+    <span class="recup-fin"><p>Longueur</p><p>:</p><p>{{dimmur.longueur}} m</p></span>
+    <span class="recup-fin"><p>Surface</p><p>:</p><p>{{dimmur.surface}} m²</p></span>
+</div>
+<div *ngFor="let surfacemur of deposeMursForm.formulaire['etat-surfaces-depose-murs'].murs; let i = index">
+    Mur {{i+1}}
+    <span class="recup-fin"><p>État des surfaces</p><p>:</p><p>{{surfacemur.etat}} </p></span>
+</div>
+<div *ngFor="let gamme of deposeMursForm.formulaire['gammes-produits-depose-murs'].murs; let i = index">
+    Mur {{i+1}}
+    <span class="recup-fin"><p>Gamme</p><p>:</p><p>{{gamme.gamme}} </p></span>
+</div>

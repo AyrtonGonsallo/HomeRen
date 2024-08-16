@@ -10,11 +10,11 @@
         <div nz-col nzSpan="6" class="ant-col">
           <label for="etat">État: </label>
           
-          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="etat du mur" formControlName="etat">
-             <nz-option nzLabel="tres abimé" nzValue="tres abimé"></nz-option>
-             <nz-option nzLabel="abimé" nzValue="abimé"></nz-option>
-             <nz-option nzLabel="reprises partielles" nzValue="reprises partielles"></nz-option>
-           </nz-select>
+          <nz-radio-group formControlName="etat">
+            <label nz-radio nzValue="tres abimé">tres abimé</label>
+            <label nz-radio nzValue="abimé">abimé</label>
+            <label nz-radio nzValue="reprises partielles">reprises partielles</label>
+          </nz-radio-group>
         </div>
         
       </div>

@@ -88,7 +88,8 @@ img{width: fit-content;max-width: 100%;}
     .section-phrase-dacc{padding: 20px 15px;}
 }
 /***********************************************************/
-@media only screen and (max-width: 800px) { 
+@media only screen and (max-width: 800px) {
+.ant-steps-item-content {display: none !important;} 
 .col-md-6{width:100%;padding: 0px !important;}
 h1{font-size: 34px !important;}
 h2{font-size: 30px;}
@@ -108,6 +109,17 @@ p.fs-30 { font-size: 22px !important;}
     .section-phrase-dacc{padding: 20px 15px;}
     h1{font-size: 32px !important;}
 }
+@media only screen and (max-width: 320px) {
+   .ttl-dv-pc { font-size: 18px !important; }
+    h2 { font-size: 23px;}
+}
+.flx-radio-travaux .ant-radio-wrapper span:nth-child(2){
+    width: 100% !important;
+    max-width: 100%!important;
+    text-align: left !important;
+    font-size: 15px !important;
+}
+.flx-radio-travaux .ant-radio {width: 3%;}
 /*********************** splide-gallerie-realisations-details ******************************/
 .splide__arrows.splide__arrows--ltr {
     position: absolute !important;
@@ -151,6 +163,17 @@ p.fs-30 { font-size: 22px !important;}
     height: 100%;width: 100%;background-color: #00000070;
     left: 0;right: 0;bottom:0;top:0;z-index: 1;}
 
-    .ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title::after, .ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-tail::after {
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title::after, .ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-tail::after {
         background-color: #FFC736 !important;
 }
+.ant-radio-inner{
+    border-color: var(--color1) !important;
+    border-width: 3px!important;
+}
+.ant-radio-wrapper:hover  .ant-radio-inner{border-color: var(--color2) !important;}
+.ant-radio-inner::after{background-color: var(--color1)!important;}
+.ant-radio-wrapper:hover .ant-radio-inner::after{background-color: var(--color2)!important;}
+.ant-radio-wrapper {float: right;}
+.section-devis .ant-steps-icon {color: var(--color1) !important;}
+
+

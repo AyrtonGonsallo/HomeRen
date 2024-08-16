@@ -35,22 +35,34 @@
 .ant-col[_ngcontent-ng-c3282933449] {
     text-align: center !important;
 }
-form label {
-    margin-right: 30px !important;
+[nz-radio] {
+    display: block;
+    height: 32px;
+    line-height: 24px;
+  }
+.radio-flx-spc span{
+    display: flex; align-items: center; justify-content: space-between;min-height: 0px;
 }
-.add-btn, .del-btn{padding: 0px 10px; background-color: #000;height: 37px;cursor: pointer;margin-block: 8px;}
+.radio-flx-spc {
+    width: 100% !important;
+}
+img.img-surface {
+    margin-bottom: 30px;
+}
+.add-btn, .del-btn{padding: 0px 10px; background-color: #555;height: 37px;cursor: pointer;margin-block: 8px;}
+.add-btn:hover, .del-btn:hover{background-color: #000;}
 input {
     border: 1px solid #555;
 }
 .vald-btn{margin-top:30px;cursor: pointer;}
 .vald-btn, .add-btn{    
-    width: 18%;
+    width: fit-content;
     margin-inline: auto;}
 input:focus{
     border: 2px solid #ffc736;
 }
 .ant-col-6 {
-    max-width: 40%;
+    max-width: 90%;
     flex: 0% !important;
     margin: auto;
     text-align: center;
@@ -61,12 +73,21 @@ form{
     flex-wrap: wrap !important;
 }
 @media only screen and (max-width: 800px) {
+    .vald-btn, .add-btn{ width: fit-content;}
+    .ant-col-6 {max-width: 100%;}
     .ant-steps-item-title {font-size: 11px !important;}
+    .etat-mr-n-p .ant-row { flex-direction: column;}
+    .etat-mr-n-p .ant-col-6 { max-width: 100%;width: 100%; text-align: left; display: flex;}
+    .etat-mr-n-p .ant-select, .etat-mr-n-p input#autre_type_cloison, .etat-mr-n-p label{ width: 50% !important; }
+    .gam-prdct select{ width: 50% !important; max-width: 50% !important;}
 }
 @media only screen and (max-width: 600px) {
-    .vald-btn, .add-btn{ width: fit-content;}
 }
 @media only screen and (max-width: 497px) {
+    .gam-prdct select{ width: 100% !important; max-width: 100% !important;}
+
+    .etat-mr-n-p .ant-select, .etat-mr-n-p input#autre_type_cloison, .etat-mr-n-p label{ width: 100% !important; }
+    .etat-mr-n-p .ant-col-6, .gam-prdct .ant-col-6{ flex-direction: column; }
 .ant-row-start {
     justify-content: space-between !important;
     align-items: start;

@@ -62,4 +62,3 @@ formulaire_dimensions_length:number=0
   }
   
   }
-  

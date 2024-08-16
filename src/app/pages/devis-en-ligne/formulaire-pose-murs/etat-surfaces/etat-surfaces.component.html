@@ -2,18 +2,21 @@
             <form [formGroup]="poseMursForm" (ngSubmit)="onPoseMursSubmit()">
 
                <div formArrayName="murs">
-                <div nz-row nzJustify="start" *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">État: </label>
-                     
-                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="etat du mur" formControlName="etat">
-                        <nz-option nzLabel="tres abimé" nzValue="tres abimé"></nz-option>
-                        <nz-option nzLabel="abimé" nzValue="abimé"></nz-option>
-                        <nz-option nzLabel="reprises partielles" nzValue="reprises partielles"></nz-option>
-                      </nz-select>
-                   </div>
+                <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
+                  Mur {{i+1}}
+                  <div nz-row nzJustify="start" >
                    
-                 </div>
+                    <div nz-col nzSpan="6" class="ant-col">
+                      <label for="etat">État: </label>
+                      <nz-radio-group formControlName="etat">
+                        <label nz-radio nzValue="tres abimé">tres abimé</label>
+                        <label nz-radio nzValue="abimé">abimé</label>
+                        <label nz-radio nzValue="reprises partielles">reprises partielles</label>
+                      </nz-radio-group>
+                    </div>
+                  </div>
+                </div>
+                
                </div>
                <button class="vald-btn" type="submit">Valider</button>
              </form>

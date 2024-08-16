@@ -8,13 +8,15 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-creation-murs-non-porteurs.component.css'
 })
 export class MursNonPorteursGammesProduitsComponent {
+  disabled = true;
+  radioValue = 'A';
+
 
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
  
   this.posePortesForm = this.fb.group({
     portes: this.fb.array([this.createposePortesGroup()])
   });
- 
  
 }
 

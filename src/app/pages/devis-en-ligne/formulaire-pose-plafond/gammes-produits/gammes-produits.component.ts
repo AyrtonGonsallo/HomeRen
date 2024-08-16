@@ -17,7 +17,8 @@ export class GammesProduitsPosePlafondComponent {
       carrelage: [0, ],
       papier: [0, ],
       enduit: [0, ],
-      peinture: [0, ]
+      peinture: [0, ],
+      gamme: [0, ]
     });
   }
   onPosePlafondSubmit(): void {

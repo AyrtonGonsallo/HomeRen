@@ -44,12 +44,24 @@ createdeposeMurGroup(): FormGroup {
    
     carrelage: [false, ],
     papier: [false, ],
+    gamme: [false, ],
     enduit: [false, ],
     peinture: [false, ],
     lambris: [false, ],
     tissus: [false, ],
-    autre: ["", ]
+    autre: ["", ],
+    isAutreType: [false]
   });
+}
+isAutreType: boolean = false;
+onTypeChange(value: string, index: number) {
+  const murForm = this.murs.at(index);
+  if (murForm) {
+    const autreTypeControl = murForm.get('isAutreType');
+    if (autreTypeControl) {
+      autreTypeControl.setValue(value === 'autre');
+    }
+  }
 }
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
   this.deposeMursForm = this.fb.group({

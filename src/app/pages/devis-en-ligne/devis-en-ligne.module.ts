@@ -36,6 +36,11 @@ import { PosePlomberieGammesProduitsComponent } from './formulaire-pose-plomberi
 import { DeposeMursDimensionsComponent } from './formulaire-depose-murs/dimensions/dimensions.component';
 import { DeposeMursEtatSurfacesComponent } from './formulaire-depose-murs/etat-surfaces/etat-surfaces.component';
 import { DeposeMursGammesProduitsComponent } from './formulaire-depose-murs/gammes-produits/gammes-produits.component';
+import { RecapPosePlafondComponent } from './formulaire-pose-plafond/recap-pose-plafond/recap-pose-plafond.component';
+import { RecapPoseMursComponent } from './formulaire-pose-murs/recap-pose-murs/recap-pose-murs.component';
+import { RecapPoseSolComponent } from './formulaire-pose-sol/recap-pose-sol/recap-pose-sol.component';
+import { RecapPoseCreationMursNonPorteursComponent } from './formulaire-creation-murs-non-porteurs/recap-pose-creation-murs-non-porteurs/recap-pose-creation-murs-non-porteurs.component';
+import { RecapDeposeMursComponent } from './formulaire-depose-murs/recap-depose-murs/recap-depose-murs.component';
 @NgModule({
   declarations: [
     IndexComponent,
@@ -70,7 +75,12 @@ import { DeposeMursGammesProduitsComponent } from './formulaire-depose-murs/gamm
     PosePlomberieGammesProduitsComponent,
     DeposeMursDimensionsComponent,
     DeposeMursEtatSurfacesComponent,
-    DeposeMursGammesProduitsComponent
+    DeposeMursGammesProduitsComponent,
+    RecapPosePlafondComponent,
+    RecapPoseMursComponent,
+    RecapPoseSolComponent,
+    RecapPoseCreationMursNonPorteursComponent,
+    RecapDeposeMursComponent
   ],
   imports: [
     CommonModule,SharedModule,

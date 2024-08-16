@@ -2,58 +2,65 @@
 <div class="dimsn-portes">
 <form [formGroup]="posePortesForm" (ngSubmit)="onPosePortesSubmit()">
     <div formArrayName="portes">
-      <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i" class="form-group" nz-row nzJustify="start">
-        <div nz-col nzSpan="6" class="ant-col">
-            <label>Type de porte <span>*</span></label>
-            <select formControlName="type">
-            
-            <option value="Porte alveolaire simple">Porte alvéolaire simple</option>
-            <option value="Porte alveolaire double">Porte alvéolaire double</option>
-            <option value="Porte pleine double">Porte pleine double</option>
-            <option value="Porte pleine simple">Porte pleine simple</option>
-            <option value="Porte vitrée simple">Porte vitrée simple</option>
-            <option value="Porte vitrée double">Porte vitrée double</option>
-            </select> 
+        <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i">
+            Porte {{i+1}}
+            <div  class="form-group" nz-row nzJustify="start">
+                <div nz-col nzSpan="6" class="ant-col">
+                    <label>Type de porte <span>*</span></label>
+                    <nz-radio-group formControlName="type">
+                        <label nz-radio nzValue="Porte alvéolaire simple">Porte alvéolaire simple</label>
+                        <label nz-radio nzValue="Porte alveolaire double">Porte alveolaire double</label>
+                        <label nz-radio nzValue="Porte pleine double">Porte pleine double</label>
+                        <label nz-radio nzValue="Porte pleine simple">Porte pleine simple</label>
+                        <label nz-radio nzValue="Porte vitrée simple">Porte vitrée simple</label>
+                        <label nz-radio nzValue="Porte vitrée double">Porte vitrée double</label>
+                    </nz-radio-group>
+                   
+                </div>
+               
+                <div nz-col nzSpan="6" class="ant-col">
+                    <label>Type de matériau <span>*</span></label>
+                    <nz-radio-group formControlName="type2">
+                        <label nz-radio nzValue="A peindre">A peindre</label>
+                        <label nz-radio nzValue="Stratifiée">Stratifiée</label>
+                        <label nz-radio nzValue="Bois">Bois</label>
+                        <label nz-radio nzValue="Autre">Autre</label>
+                    </nz-radio-group>
+                    
+                </div>
+                <div nz-col nzSpan="6" class="ant-col">
+                    <label>Type de porte <span>*</span></label>
+                    
+                        <nz-radio-group formControlName="type3">
+                            <label nz-radio nzValue="Porte simple">Porte simple</label>
+                            <label nz-radio nzValue="Porte double">Porte double</label>
+                        </nz-radio-group>
+                    
+                </div>
+                <div nz-col nzSpan="6" class="ant-col">
+                    <label>Finition <span>*</span></label>
+                   
+                        <nz-radio-group formControlName="finition">
+                            <label nz-radio nzValue="Finition à peindre">Finition à peindre</label>
+                            <label nz-radio nzValue="Finition stratifiée">Finition stratifiée</label>
+                            <label nz-radio nzValue="Finition bois">Finition bois</label>
+                            <label nz-radio nzValue="Autre">Autre</label>
+                        </nz-radio-group>
+                   
+                    
+                </div>
+                <div nz-col nzSpan="12" class="ant-col">
+                    <label>Informations complémentaires sur le type</label>
+                    <textarea formControlName="infos_comp_type"></textarea>
+                </div>
+                <div nz-col nzSpan="12" class="ant-col">
+                    <label>Informations complémentaires sur la finition</label>
+                    <textarea formControlName="infos_comp_finition"></textarea>
+                </div>
+                <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">Supprimer</button>
+              </div>
         </div>
-       
-        <div nz-col nzSpan="6" class="ant-col">
-            <label>Type de matériau <span>*</span></label>
-            <select formControlName="type2">
-            
-            <option value="A peindre">A peindre</option>
-            <option value="Stratifiée">Stratifiée</option>
-            <option value="Bois">Bois</option>
-            <option value="Autre">Autre</option>
-            </select>
-        </div>
-        <div nz-col nzSpan="6" class="ant-col">
-            <label>Type de porte <span>*</span></label>
-            <select formControlName="type3">
-            
-            <option value="Porte simple">Porte simple</option>
-            <option value="Porte double">Porte double</option>
-            </select>
-        </div>
-        <div nz-col nzSpan="6" class="ant-col">
-            <label>Finition <span>*</span></label>
-            <select formControlName="finition">
-            
-            <option value="Finition à peindre">Finition à peindre</option>
-            <option value="Finition stratifiée">Finition stratifiée</option>
-            <option value="Finition bois">Finition bois</option>
-            <option value="Autre">Autre</option>
-            </select>
-        </div>
-        <div nz-col nzSpan="12" class="ant-col">
-            <label>Informations complémentaires sur le type</label>
-            <textarea formControlName="infos_comp_type"></textarea>
-        </div>
-        <div nz-col nzSpan="12" class="ant-col">
-            <label>Informations complémentaires sur la finition</label>
-            <textarea formControlName="infos_comp_finition"></textarea>
-        </div>
-        <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">Supprimer</button>
-      </div>
+      
     </div>
     <button type="button" class="dynamic-form-button add-btn" (click)="addPortesGroup()" *ngIf="portes.length < 8">Ajouter une porte</button>
     <button class="vald-btn" type="submit" >Valider</button>
