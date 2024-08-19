@@ -33,7 +33,16 @@ formulaire_dimensions_length:number=0
   
   constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
     
-    this.posePlafondForm = this.createPosePlafondGroup();
+    const prev_form = this.gestiondesdevisService.getFormulaireByName('etat-surfaces-pose-plafond');
+    if (prev_form) {
+      console.log("formulaire existant",prev_form)
+      this.posePlafondForm = this.createPosePlafondGroup();
+      this.posePlafondForm.patchValue(prev_form.formulaire);
+
+    } else {
+      console.log("formulaire non existant")
+      this.posePlafondForm = this.createPosePlafondGroup();
+    }
   }
    //upload des images sur tous les formulaires
    maxFileSize = 10 * 1024 * 1024; // 10 MB en octets

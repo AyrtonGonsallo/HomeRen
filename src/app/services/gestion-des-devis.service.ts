@@ -17,6 +17,7 @@ export class GestionDesDevisService {
   formulaires$ = this.formulairesSubject.asObservable();
 
   addFormulaire(nomtache: string,idtache: number, formulaire: any) {
+    this.clearFormulaire(nomtache)
     const formulaires = this.formulairesSubject.value;
     formulaires.push({ nomtache,idtache, formulaire });
     this.formulairesSubject.next(formulaires);
@@ -28,6 +29,16 @@ export class GestionDesDevisService {
 
   clearFormulaires() {
     this.formulairesSubject.next([]);
+  }
+  clearDEGFormulaires() {
+    const filteredFormulaires = this.formulairesSubject.value.filter(formulaire => {
+      return !(
+        formulaire.nomtache.startsWith('dimensions-') ||
+        formulaire.nomtache.startsWith('etat-surfaces-') ||
+        formulaire.nomtache.startsWith('gammes-produits-')
+      );
+    });  
+    this.formulairesSubject.next(filteredFormulaires);
   }
 
    // Method to retrieve a form by its name
@@ -54,9 +65,6 @@ export class GestionDesDevisService {
       };
 
       this.addFormulaire(nomtache, idtache, groupedForm);
-      this.clearFormulaire(nom_dimensions)
-      this.clearFormulaire(nom_etat)
-      this.clearFormulaire(nom_gamme)
   }
 }
 clearFormulaire(nomtache: string) {

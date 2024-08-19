@@ -16,7 +16,7 @@ export class RecapDeposeMursComponent {
   constructor(private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
     this.deposeMursForm=this.gestiondesdevisService.getFormulaireByName("depose-murs")
     console.log("recap: ",this.deposeMursForm);
-    this.deposeMursForm.formulaire["gammes-produits-depose-murs"].murs.forEach((element: any) => {
+    /* this.deposeMursForm.formulaire["gammes-produits-depose-murs"].murs.forEach((element: any) => {
       let gamme_id=element.gamme.split(":")[0] 
       this.userService.getGammeByID(gamme_id).subscribe(
       (response: any) => {
@@ -27,7 +27,7 @@ export class RecapDeposeMursComponent {
         console.error('Erreur lors de la recuperation de la gamme:', error);
       }
     );
-    });
+    }); */
    
   }
 }

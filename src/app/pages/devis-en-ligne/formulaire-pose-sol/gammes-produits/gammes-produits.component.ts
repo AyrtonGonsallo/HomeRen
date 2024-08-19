@@ -44,7 +44,16 @@ export class PoseSolGammesProduitsComponent {
   
   constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
     this.load_gammes()
-    this.poseSolForm = this.createPoseSolGroup();
+    const prev_form = this.gestiondesdevisService.getFormulaireByName('gammes-produits-pose-sol');
+    if (prev_form) {
+      console.log("formulaire existant",prev_form)
+      this.poseSolForm = this.createPoseSolGroup();
+      this.poseSolForm.patchValue(prev_form.formulaire);
+
+    } else {
+      console.log("formulaire non existant")
+      this.poseSolForm = this.createPoseSolGroup();
+    }
   }
   
   
@@ -145,7 +154,7 @@ load_gammes(){
   this.userService.getGammesByTravailAndType(9,"moquette").subscribe(
     (response: any) => {
       console.log('recuperation des gammes moquette:', response[0]);
-      this.gamme_pvc=response[0]
+      this.gamme_moquette=response[0]
       this.poseSolForm.patchValue({
         moquette_prix: response[0].Prix
       })

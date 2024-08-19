@@ -64,15 +64,34 @@ onTypeChange(value: string, index: number) {
   }
 }
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
-  this.deposeMursForm = this.fb.group({
-    murs: this.fb.array([this.createdeposeMurGroup()])
-  });
-  this.formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-depose-murs")
-  this.formulaire_dimensions_length=this.formulaire_dimensions.formulaire.murs.length
-  for(let i=0;i<(this.formulaire_dimensions_length-1);i++){
-    this.addMurGroup()
+ 
+  const prev_form = this.gestiondesdevisService.getFormulaireByName('gammes-produits-depose-murs');
+  if (prev_form) {
+    console.log("formulaire existant",prev_form)
+    this.deposeMursForm = this.fb.group({
+      murs: this.fb.array([this.createdeposeMurGroup()])
+    });
+    let formulaire_dimensions_length=prev_form.formulaire.murs.length
+    for(let i=0;i<(formulaire_dimensions_length-1);i++){
+      this.addMurGroup()
+    }
+    
+    this.deposeMursForm.patchValue(prev_form.formulaire);
+
+  } else {
+    console.log("formulaire non existant")
+    this.deposeMursForm = this.fb.group({
+      murs: this.fb.array([this.createdeposeMurGroup()])
+    });
+    this.formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-depose-murs")
+    this.formulaire_dimensions_length=this.formulaire_dimensions.formulaire.murs.length
+    for(let i=0;i<(this.formulaire_dimensions_length-1);i++){
+      this.addMurGroup()
+    }
+    console.log("longueur: ",this.formulaire_dimensions_length)
+    console.log("formulaire: ",this.formulaire_dimensions)
   }
-  console.log(this.formulaire_dimensions)
+  
   
  
 }

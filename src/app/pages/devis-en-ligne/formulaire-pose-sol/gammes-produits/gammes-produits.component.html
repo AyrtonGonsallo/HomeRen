@@ -8,8 +8,8 @@
                       <label nz-radio *ngFor="let option of gammes_parquet_b" [nzValue]="option.ID+':'+option.Prix">Parquet Flottant Finition Bois {{option.Label}}</label>
                       <label nz-radio *ngFor="let option of gammes_parquet_pffs" [nzValue]="option.ID+':'+option.Prix">Parquet Flottant Finition Stratifiée {{option.Label}}</label>
                       <label nz-radio *ngFor="let option of gammes_carrelage" [nzValue]="option.ID+':'+option.Prix">Carrelage {{option.Label}}</label>
-                      <label nz-radio  [nzValue]="gamme_pvc?.Prix">Sol pvc</label>
-                      <label nz-radio  [nzValue]="gamme_moquette?.Prix">Moquette</label>
+                      <label nz-radio  [nzValue]="gamme_pvc?.ID+':'+gamme_pvc?.Prix">Sol pvc</label>
+                      <label nz-radio  [nzValue]="gamme_moquette?.ID+':'+gamme_moquette?.Prix">Moquette</label>
 
                     </nz-radio-group>
                      

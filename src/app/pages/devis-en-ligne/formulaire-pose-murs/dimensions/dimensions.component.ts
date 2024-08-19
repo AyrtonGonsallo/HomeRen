@@ -46,9 +46,26 @@ createposeMurGroup(): FormGroup {
   });
 }
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-  this.poseMursForm = this.fb.group({
+  
+  const prev_form = this.gestiondesdevisService.getFormulaireByName('dimensions-pose-murs');
+  if (prev_form) {
+    console.log("formulaire existant",prev_form)
+    this.poseMursForm = this.fb.group({
+      murs: this.fb.array([this.createposeMurGroup()])
+    });
+    let formulaire_dimensions_length=prev_form.formulaire.murs.length
+    for(let i=0;i<(formulaire_dimensions_length-1);i++){
+      this.addMurGroup()
+    }
+    
+    this.poseMursForm.patchValue(prev_form.formulaire);
+
+  } else {
+    console.log("formulaire non existant")
+    this.poseMursForm = this.fb.group({
     murs: this.fb.array([this.createposeMurGroup()])
   });
+  }
  
  
 }

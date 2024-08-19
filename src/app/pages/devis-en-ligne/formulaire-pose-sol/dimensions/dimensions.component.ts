@@ -33,7 +33,16 @@ export class PoseSolDimensionsComponent {
   
   constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
   
-    this.poseSolForm = this.createPoseSolGroup();
+    const prev_form = this.gestiondesdevisService.getFormulaireByName('dimensions-pose-sol');
+    if (prev_form) {
+      console.log("formulaire existant",prev_form)
+      this.poseSolForm = this.createPoseSolGroup();
+      this.poseSolForm.patchValue(prev_form.formulaire);
+
+    } else {
+      console.log("formulaire non existant")
+      this.poseSolForm = this.createPoseSolGroup();
+    }
   }
   
   

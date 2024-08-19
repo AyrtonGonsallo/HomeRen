@@ -14,6 +14,7 @@ export class RecapPosePlafondComponent {
   gamme:any
   constructor(private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
     this.posePlafondForm=this.gestiondesdevisService.getFormulaireByName("pose-plafond");
+  
     console.log("recap: ",this.posePlafondForm);
     this.gamme_id=this.posePlafondForm.formulaire["gammes-produits-pose-plafond"].gamme.split(":")[0]
     this.userService.getGammeByID(this.gamme_id).subscribe(

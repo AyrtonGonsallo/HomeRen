@@ -39,7 +39,16 @@ export class GammesProduitsPosePlafondComponent {
   
   constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
     this.load_gammes()
-    this.posePlafondForm = this.createPosePlafondGroup();
+    const prev_form = this.gestiondesdevisService.getFormulaireByName('gammes-produits-pose-plafond');
+    if (prev_form) {
+      console.log("formulaire existant",prev_form)
+      this.posePlafondForm = this.createPosePlafondGroup();
+      this.posePlafondForm.patchValue(prev_form.formulaire);
+
+    } else {
+      console.log("formulaire non existant")
+      this.posePlafondForm = this.createPosePlafondGroup();
+    }
   }
    //upload des images sur tous les formulaires
    maxFileSize = 10 * 1024 * 1024; // 10 MB en octets

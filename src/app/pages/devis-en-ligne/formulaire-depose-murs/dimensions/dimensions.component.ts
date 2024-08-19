@@ -44,10 +44,26 @@ createdeposeMurGroup(): FormGroup {
   });
 }
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-  this.deposeMursForm = this.fb.group({
+  
+  const prev_form = this.gestiondesdevisService.getFormulaireByName('dimensions-depose-murs');
+  if (prev_form) {
+    console.log("formulaire existant",prev_form)
+    this.deposeMursForm = this.fb.group({
+      murs: this.fb.array([this.createdeposeMurGroup()])
+    });
+    let formulaire_dimensions_length=prev_form.formulaire.murs.length
+    for(let i=0;i<(formulaire_dimensions_length-1);i++){
+      this.addMurGroup()
+    }
+    
+    this.deposeMursForm.patchValue(prev_form.formulaire);
+
+  } else {
+    console.log("formulaire non existant")
+    this.deposeMursForm = this.fb.group({
     murs: this.fb.array([this.createdeposeMurGroup()])
   });
- 
+  }
  
 }
 //upload des images sur tous les formulaires

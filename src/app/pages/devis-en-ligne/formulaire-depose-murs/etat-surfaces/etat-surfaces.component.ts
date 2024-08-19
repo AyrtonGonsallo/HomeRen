@@ -42,17 +42,35 @@ createdeposeMurGroup(): FormGroup {
   });
 }
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-  this.deposeMursForm = this.fb.group({
-    murs: this.fb.array([this.createdeposeMurGroup()])
-  });
-  this.formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-depose-murs")
-  this.formulaire_dimensions_length=this.formulaire_dimensions.formulaire.murs.length
-  for(let i=0;i<(this.formulaire_dimensions_length-1);i++){
-    this.addMurGroup()
-  }
-  console.log("longueur: ",this.formulaire_dimensions_length)
-  console.log("formulaire: ",this.formulaire_dimensions)
+  
  
+
+  const prev_form = this.gestiondesdevisService.getFormulaireByName('etat-surfaces-depose-murs');
+    if (prev_form) {
+      console.log("formulaire existant",prev_form)
+      this.deposeMursForm = this.fb.group({
+        murs: this.fb.array([this.createdeposeMurGroup()])
+      });
+      let formulaire_dimensions_length=prev_form.formulaire.murs.length
+      for(let i=0;i<(formulaire_dimensions_length-1);i++){
+        this.addMurGroup()
+      }
+      
+      this.deposeMursForm.patchValue(prev_form.formulaire);
+
+    } else {
+      console.log("formulaire non existant")
+      this.deposeMursForm = this.fb.group({
+        murs: this.fb.array([this.createdeposeMurGroup()])
+      });
+      this.formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-depose-murs")
+      this.formulaire_dimensions_length=this.formulaire_dimensions.formulaire.murs.length
+      for(let i=0;i<(this.formulaire_dimensions_length-1);i++){
+        this.addMurGroup()
+      }
+      console.log("longueur: ",this.formulaire_dimensions_length)
+      console.log("formulaire: ",this.formulaire_dimensions)
+    }
 }
 //upload des images sur tous les formulaires
 maxFileSize = 10 * 1024 * 1024; // 10 MB en octets

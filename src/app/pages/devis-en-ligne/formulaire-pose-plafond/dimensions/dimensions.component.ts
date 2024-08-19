@@ -29,13 +29,20 @@ export class DimensionsPosePlafondComponent {
       console.log(this.posePlafondForm.value);
       // Envoyer les données au backend ou traiter comme nécessaire
       this.gestiondesdevisService.addFormulaire('dimensions-pose-plafond',8, this.posePlafondForm.value);
-  
     }
   }
   
   constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-    
-    this.posePlafondForm = this.createPosePlafondGroup();
+    const prev_form = this.gestiondesdevisService.getFormulaireByName('dimensions-pose-plafond');
+    if (prev_form) {
+      console.log("formulaire existant",prev_form)
+      this.posePlafondForm = this.createPosePlafondGroup();
+      this.posePlafondForm.patchValue(prev_form.formulaire);
+
+    } else {
+      console.log("formulaire non existant")
+      this.posePlafondForm = this.createPosePlafondGroup();
+    }
   }
    //upload des images sur tous les formulaires
    maxFileSize = 10 * 1024 * 1024; // 10 MB en octets

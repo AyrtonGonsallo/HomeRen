@@ -200,6 +200,7 @@ export class IndexComponent {
     this.changeContent();
   }
   done(): void {
+    this.gestiondesdevisService.clearDEGFormulaires()
     const formulaires = this.gestiondesdevisService.getFormulaires();
       const json = {
         username: this.browserInfo,

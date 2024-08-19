@@ -160,25 +160,31 @@
            <span>Retour à la liste des travaux</span>
          </button>-->
      </div>
-     <div class="devis-content" *ngIf="current == 5">
-      <div *ngIf="is_travail_selected(4)">
-        <app-recap-creation-murs-non-porteurs [selectedPiece]="selectedPiece"></app-recap-creation-murs-non-porteurs>
-      </div>
-      <!-- Formulaire pose murs  -->
-      <div *ngIf="is_travail_selected(5)">
-        <app-recap-pose-murs [selectedPiece]="selectedPiece"></app-recap-pose-murs>
-      </div>
-      <div *ngIf="is_travail_selected(14)">
-        <app-recap-depose-murs [selectedPiece]="selectedPiece"></app-recap-depose-murs>
-      </div>
-      <div *ngIf="is_travail_selected(8)">
-        <app-recap-pose-plafond [selectedPiece]="selectedPiece"></app-recap-pose-plafond>
-      </div>
-      <div *ngIf="is_travail_selected(9)">
-        <app-recap-pose-sol [selectedPiece]="selectedPiece"></app-recap-pose-sol>
-      </div>
+      
+      <div class="devis-content" *ngIf="current == 5">
+        <div *ngIf="is_travail_selected(4)">
+          <app-recap-creation-murs-non-porteurs [selectedPiece]="selectedPiece"></app-recap-creation-murs-non-porteurs>
+        </div>
+        <!-- Formulaire pose murs  -->
+        <div *ngIf="is_travail_selected(5)">
+          <app-recap-pose-murs [selectedPiece]="selectedPiece"></app-recap-pose-murs>
+        </div>
+        <div *ngIf="is_travail_selected(14)">
+          <app-recap-depose-murs [selectedPiece]="selectedPiece"></app-recap-depose-murs>
+        </div>
+        <div *ngIf="is_travail_selected(8)">
+          <app-recap-pose-plafond [selectedPiece]="selectedPiece"></app-recap-pose-plafond>
+        </div>
+        <div *ngIf="is_travail_selected(9)">
+          <app-recap-pose-sol [selectedPiece]="selectedPiece"></app-recap-pose-sol>
+        </div>
 
-    </div>
+      </div>
+      <div class="devis-content" *ngIf="current == 6">
+        <button nz-button nzType="default" (click)="addtask()" *ngIf="current ==6">
+          <span>Retour à la liste des travaux</span>
+        </button>
+      </div>
    </div>
    <div class="steps-action">
      
