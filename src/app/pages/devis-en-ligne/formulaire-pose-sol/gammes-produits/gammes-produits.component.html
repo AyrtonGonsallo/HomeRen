@@ -1,25 +1,24 @@
 
             <form [formGroup]="poseSolForm" (ngSubmit)="onPoseSolSubmit()">
                <div nz-row nzJustify="start" class="flx-pr" >
-                  <div nz-col nzSpan="24" class="ant-col">
-                     <label for="gamme">Gamme: </label>
-                     <nz-radio-group formControlName="gamme">
-                      <label nz-radio *ngFor="let option of gammes_parquet_m" [nzValue]="option.ID+':'+option.Prix">Parquet massif {{option.Label}}</label>
-                      <label nz-radio *ngFor="let option of gammes_parquet_b" [nzValue]="option.ID+':'+option.Prix">Parquet Flottant Finition Bois {{option.Label}}</label>
-                      <label nz-radio *ngFor="let option of gammes_parquet_pffs" [nzValue]="option.ID+':'+option.Prix">Parquet Flottant Finition Stratifiée {{option.Label}}</label>
-                      <label nz-radio *ngFor="let option of gammes_carrelage" [nzValue]="option.ID+':'+option.Prix">Carrelage {{option.Label}}</label>
-                      <label nz-radio  [nzValue]="gamme_pvc?.ID+':'+gamme_pvc?.Prix">Sol pvc</label>
-                      <label nz-radio  [nzValue]="gamme_moquette?.ID+':'+gamme_moquette?.Prix">Moquette</label>
-
+                  <div nz-col nzSpan="24" class="ant-col etat-srf">
+                     <label for="gamme" class="etat-srf-lab">Gamme : </label>
+                     <nz-radio-group formControlName="gamme" class="radio-flx-spc">
+                      <div><label nz-radio *ngFor="let option of gammes_parquet_m" [nzValue]="option.ID+':'+option.Prix"><span>Parquet massif {{option.Label}}</span></label></div>
+                      <div><label nz-radio *ngFor="let option of gammes_parquet_b" [nzValue]="option.ID+':'+option.Prix"><span>Parquet Flottant Finition Bois {{option.Label}}</span></label></div>
+                      <div><label nz-radio *ngFor="let option of gammes_parquet_pffs" [nzValue]="option.ID+':'+option.Prix"><span>Parquet Flottant Finition Stratifiée {{option.Label}}</span></label></div>
+                      <div><label nz-radio *ngFor="let option of gammes_carrelage" [nzValue]="option.ID+':'+option.Prix"><span>Carrelage {{option.Label}}</span></label></div>
+                      <div><label nz-radio  [nzValue]="gamme_pvc?.ID+':'+gamme_pvc?.Prix"><span>Sol pvc</span></label></div>
+                      <div><label nz-radio  [nzValue]="gamme_moquette?.ID+':'+gamme_moquette?.Prix"><span>Moquette</span></label></div>
                     </nz-radio-group>
                      
                    </div>
                
                  
-                  <div nz-col nzSpan="24" class="ant-col">
-                     <label for="plinthes">Plinthes:</label>
-                     <nz-radio-group formControlName="plinthes">
-                        <label nz-radio *ngFor="let option of gammes_plithes" [nzValue]="option.ID+':'+option.Prix">Plithes {{option.Label}}</label>
+                  <div nz-col nzSpan="24" class="ant-col etat-srf">
+                     <label class="etat-srf-lab" for="plinthes">Plinthes :</label>
+                     <nz-radio-group formControlName="plinthes" class="radio-flx-spc">
+                        <div><label nz-radio *ngFor="let option of gammes_plithes" [nzValue]="option.ID+':'+option.Prix"><span>Plithes {{option.Label}}</span></label></div>
                       </nz-radio-group>
                     
                   </div>

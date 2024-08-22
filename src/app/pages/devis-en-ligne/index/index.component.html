@@ -4,19 +4,19 @@
       <h1 class="center gris font-site">Demandez votre devis gratuit</h1>    
     </div>
     <div *ngIf="current == 2">
-      <h1 class="center gris font-site">{{filteredTravail.Titre}} : Quelles sont les dimensions de votre {{selectedPiece?.Titre}} ?</h1>
+      <h1 class="center gris font-site">{{filteredTravail.Titre}}</h1>
     </div>
     <div *ngIf="current == 3">
-      <h1 class="center gris font-site">{{filteredTravail.Titre}} : Quel est l'état des surfaces dans votre {{selectedPiece?.Titre}} ?</h1>
+      <h1 class="center gris font-site">{{filteredTravail.Titre}}</h1>
     </div>
     <div *ngIf="current == 4">
-      <h1 class="center gris font-site">{{filteredTravail.Titre}} : Quelles sont les gammes de produits que vous souhaitez dans votre {{selectedPiece?.Titre}} ?</h1>
+      <h1 class="center gris font-site">{{filteredTravail.Titre}}</h1>
     </div>
     <div *ngIf="current == 5">
-      <h1 class="center gris font-site">{{filteredTravail.Titre}} : Récapitulatif des élements que vous souhaitez dans votre {{selectedPiece?.Titre}} </h1>
+      <h1 class="center gris font-site">{{filteredTravail.Titre}}</h1>
     </div>
     <div *ngIf="current == 6">
-      <h1 class="center gris font-site">{{filteredTravail.Titre}} : Finalisation </h1>
+      <h1 class="center gris font-site">{{filteredTravail.Titre}}</h1>
     </div>
    <!-- <p class="center f-w-4 fs-30 m-w-p"><strong> Vous avez un projet de rénovation en tête ?</strong>Remplissez notre formulaire en ligne pour une estimation personnalisée et sans engagement.</p> -->
   </div>
@@ -79,7 +79,7 @@
      </div>
     </div>
      <div class="devis-content" *ngIf="current == 2">
-        <p class="ttl-dv-pc"><strong><b >{{filteredTravail.Titre}} </b>: Quelles sont les dimensions de votre {{selectedPiece?.Titre}} ?</strong></p>
+        <p class="ttl-dv-pc"><strong>Quelles sont les dimensions de votre {{selectedPiece?.Titre}} ?</strong></p>
        <!-- Formulaire pose murs  -->
          <div *ngIf="is_travail_selected(14)">
            <app-dimensions-depose-murs [triggerSubmitDimensionForm]="triggerSubmitDimensionForm"></app-dimensions-depose-murs>
@@ -113,7 +113,7 @@
          </div>
      </div>
      <div class="devis-content" *ngIf="current == 3">
-       <p class="ttl-dv-pc"><strong><b >{{filteredTravail.Titre}} </b>: Quel est l'état des surfaces dans votre {{selectedPiece?.Titre}} ?</strong></p>
+       <p class="ttl-dv-pc"><strong>Quel est l'état des surfaces dans votre {{selectedPiece?.Titre}} ?</strong></p>
        <div *ngIf="is_travail_selected(4)">
          <app-etat-surfaces-creation-murs-non-porteurs></app-etat-surfaces-creation-murs-non-porteurs>
        </div>
@@ -144,7 +144,7 @@
        </div>
      </div>
      <div class="devis-content" *ngIf="current == 4">
-       <p class="ttl-dv-pc"><strong><b >{{filteredTravail.Titre}} </b>: Quelles sont les gammes de produits que vous souhaitez dans votre {{selectedPiece?.Titre}} ?</strong></p>
+       <p class="ttl-dv-pc"><strong>Quelles sont les gammes de produits que vous souhaitez dans votre {{selectedPiece?.Titre}} ?</strong></p>
          <div *ngIf="is_travail_selected(4)">
            <app-gammes-produits-creation-murs-non-porteurs></app-gammes-produits-creation-murs-non-porteurs>
          </div>
@@ -198,18 +198,31 @@
 
       </div>
       <div class="devis-content" *ngIf="current == 6">
-        <button nz-button nzType="default" (click)="addtask()" *ngIf="current ==6">
-          <span>Retour à la liste des travaux</span>
-        </button>
+        <div class="msg-validation">
+          <img src="/assets/Frame.svg" alt="">
+          <p> Votre devis en ligne est prêt !<br>
+            Vous le recevrez bientôt par email.</p>
+</div>
+<p class="ttl-dv-pc"><strong>Je rénove une pièce</strong></p>
+<div *ngFor="let ppc of pieces_par_categories">
+ <p class="fs-20 mr-b-2 jaune"><strong>{{ppc?.Titre}}</strong></p>
+ <div class="col-pcs-devis" >
+    <div class="pcs-devis" id="piece-{{piece.ID}}" *ngFor="let piece of ppc.Pieces" (click)="selectPieceAndRedirect(piece.ID)">
+       <img src="{{baseurl}}{{piece.Image_presentation}}" alt="">
+       <p class="blanc pcs-devis-ttle"><strong>{{piece.Titre}}</strong></p>
+    </div>
+ </div>
+</div>
       </div>
    </div>
    <div class="steps-action">
-     
+      <button *ngIf="current == 5" nz-button nzType="default" (click)="addtask()" >
+        <span>Retour à la liste des travaux</span>
+      </button>
+   
      <button nz-button nzType="default" (click)="next()" *ngIf="current<6" class="btn-suiv">
-       <span>Suivant</span>
-     </button>
-     <button nz-button nzType="primary" class="btn-etps" (click)="done()" *ngIf="current === 6">
-       <span>Je valide</span>
+       <span>{{ current === 5 ? 'Valider' : 'Suivant' }}</span>
+       
      </button>
    </div>
 </div>

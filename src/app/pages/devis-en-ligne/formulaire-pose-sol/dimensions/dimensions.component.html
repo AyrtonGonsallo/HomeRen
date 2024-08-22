@@ -13,7 +13,7 @@
                      <label for="longueur_piece">Longueur de la pièce :</label>
                      <input type="number" id="longueur_piece" formControlName="longueur_piece" required>
                      <div *ngIf="poseSolForm.get('longueur_piece')?.invalid && (poseSolForm.get('longueur_piece')?.dirty || poseSolForm.get('longueur_piece')?.touched)">
-                        <div *ngIf="poseSolForm.get('longueur_piece')?.errors?.['required']" class="ant-form-item-explain-error">Longueur est requise.</div>
+                        <div  class="ant-form-item-explain-error">Longueur est requise.</div>
                      </div>
                   </div>
                

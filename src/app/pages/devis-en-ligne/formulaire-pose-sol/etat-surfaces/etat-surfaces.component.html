@@ -2,12 +2,12 @@
             <form [formGroup]="poseSolForm" (ngSubmit)="onPoseSolSubmit()">
                <div nz-row nzJustify="start" >
                   
-                  <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">État: </label>
-                     <nz-radio-group formControlName="etat">
-                      <label nz-radio nzValue="Sol en bon état">Sol en bon état</label>
-                      <label nz-radio nzValue="Sol avec quelques bosses ou creux">Sol avec quelques bosses ou creux</label>
-                      <label nz-radio nzValue="Sol en mauvais état">Sol en mauvais état</label>
+                  <div nz-col nzSpan="6" class="ant-col etat-srf">
+                     <!-- <label for="etat">État du sol: </label> -->
+                     <nz-radio-group formControlName="etat" class="radio-flx-spc">
+                      <div><label nz-radio nzValue="Sol en bon état"><span>Sol en bon état</span></label></div>
+                      <div><label nz-radio nzValue="Sol avec quelques bosses ou creux"><span>Sol avec quelques bosses ou creux</span></label></div>
+                      <div><label nz-radio nzValue="Sol en mauvais état"><span>Sol en mauvais état</span></label></div>
                      
                     </nz-radio-group>
                      

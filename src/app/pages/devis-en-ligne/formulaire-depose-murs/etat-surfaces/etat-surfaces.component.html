@@ -4,16 +4,16 @@
     <div formArrayName="murs">
      <div nz-row nzJustify="start" *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
         <div nz-col nzSpan="4" class="ant-col mur-ttl">
-          Mur {{i+1}}      
+          <span class="mur-ttl">Mur {{i+1}}</span>
           
         </div>
-        <div nz-col nzSpan="6" class="ant-col">
-          <label for="etat">État: </label>
+        <div nz-col nzSpan="6" class="ant-col etat-srf">
+          <!-- <label for="etat">État: </label> -->
           
-          <nz-radio-group formControlName="etat">
-            <label nz-radio nzValue="tres abimé">tres abimé</label>
-            <label nz-radio nzValue="abimé">abimé</label>
-            <label nz-radio nzValue="reprises partielles">reprises partielles</label>
+          <nz-radio-group formControlName="etat" class="radio-flx-spc">
+            <div><label nz-radio nzValue="tres abimé" class="radio-span"><span>Très abimé</span> </label></div>
+            <div><label nz-radio nzValue="abimé"><span>Abimé</span> </label></div>
+            <div><label nz-radio nzValue="reprises partielles"><span>Reprises partielles</span></label></div>
           </nz-radio-group>
         </div>
         

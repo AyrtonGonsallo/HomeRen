@@ -9,7 +9,7 @@
     flex-direction: column;
     gap: 0px;
 }
-.devis-content{gap: 20px;display: flex;flex-direction: column;}
+.devis-content .recup-fin{gap: 20px;display: flex;flex-direction: column;}
 .col-pcs-devis {
     display: flex;
     gap: 20px;
@@ -34,7 +34,7 @@
     margin-bottom: 20px;
     margin-left: 20px;
     position: relative;}
- .mr-b-2{margin-bottom:20px;}
+ .mr-b-2{margin-block:20px;}
  /********************************************************/
  .steps-content {
     margin-top: 15px;
@@ -96,15 +96,6 @@ button.ant-btn.ant-btn-default.ng-star-inserted span{font-size: 14px;}
 .ant-steps-item-icon {
     display: none !important;
 }
-.recup-fin {
-    display: grid !important;
-    justify-content: center !important;
-    gap: 0px !important;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-.recup-fin p:nth-child(1){float:right;text-align: right;}
-.recup-fin p:nth-child(3){float:left;text-align: left;}
 .radio-travaux, .flx-radio-travaux {
     display: flex;
     gap: 0px;
@@ -129,9 +120,15 @@ button.ant-btn.ant-btn-default.ng-star-inserted span{font-size: 14px;}
     text-align: left !important;
     font-size: 15px !important;
 }
+.msg-validation img { width: 39px;margin-bottom:10px;}
+.msg-validation p {
+    color: #1aa648;
+    font-size: 18px;
+    font-weight: 600;
+}
+.msg-validation{margin-bottom:30px;}
 /************************* Respo *************************/
 @media only screen and (max-width: 1440px) {
-.steps-content{padding-top: 0px !important;}
 }
 @media only screen and (max-width: 1024px) {
 .pcs-devis {width: 31%;}

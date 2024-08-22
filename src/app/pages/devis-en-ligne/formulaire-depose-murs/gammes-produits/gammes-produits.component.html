@@ -3,20 +3,19 @@
 
     <div formArrayName="murs">
       <div nz-row nzJustify="start" *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
-        <div nz-col nzSpan="2" class="ant-col mur-ttl">
-          Mur {{i+1}}      
-          
+        <div nz-col nzSpan="2" class="ant-col div-mur-ttl">
+          <span class="mur-ttl">Mur {{i+1}}</span>     
         </div>
-        <div nz-col nzSpan="6" class="ant-col">
-          <label for="gamme">Gamme: </label>
-          <nz-radio-group formControlName="gamme" (ngModelChange)="onTypeChange($event, i)">
-           <label nz-radio  nzValue="Peinture">Peinture</label>
-           <label nz-radio  nzValue="Enduit decoratif">Enduit decoratif</label>
-           <label nz-radio  nzValue="Papier peint">Papier peint</label>
-           <label nz-radio  nzValue="Carrelage mural">Carrelage mural</label>
-           <label nz-radio  nzValue="tissus">tissus</label>
-           <label nz-radio  nzValue="lambris mural">lambris mural</label>
-           <label nz-radio  nzValue="autre" >autre</label>
+        <div nz-col nzSpan="6" class="ant-col col-gm">
+          <label for="gamme" class="etat-srf-lab">Gamme: </label>
+          <nz-radio-group formControlName="gamme" (ngModelChange)="onTypeChange($event, i)" class="radio-flx-spc">
+           <div><label nz-radio  nzValue="Peinture"><span>Peinture</span></label></div>
+           <div><label nz-radio  nzValue="Enduit decoratif"><span>Enduit decoratif</span></label></div>
+           <div><label nz-radio  nzValue="Papier peint"><span>Papier peint</span></label></div>
+           <div><label nz-radio  nzValue="Carrelage mural"><span>Carrelage mural</span></label></div>
+           <div><label nz-radio  nzValue="tissus"><span>tissus</span></label></div>
+           <div><label nz-radio  nzValue="lambris mural"><span>lambris mural</span></label></div>
+           <div><label nz-radio  nzValue="autre" ><span>autre</span></label></div>
          </nz-radio-group>
           
         </div> 

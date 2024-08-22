@@ -36,6 +36,51 @@
 input {
     border: 1px solid #555;
 }
+form label {
+    text-align: left;
+    width: 50%;
+}
+.radio-flx-spc div{
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-content: center;
+    min-height: 0px;
+    justify-items: stretch;}
+
+.radio-flx-spc label{
+    display: flex;
+    width: 100%;
+    height: 54px;
+    border-bottom: 1px solid #e9e9e9;
+    max-width: 100%;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+}
+.radio-flx-spc label span:nth-child(1){width: 100%;max-width: 100%;order: 2;display: flex;
+    justify-content: flex-start;}
+.radio-flx-spc label span:nth-child(2){width: 100%;max-width: 100%;order: 1;display: flex;
+    justify-content: flex-end;}
+.etat-srf-ttl{font-weight: 600;font-size:20px;margin-bottom: 20px;}
+.radio-flx-spc, .radio-flx-spc .ant-col-6 {
+    width: 100% !important;
+}
+.etat-srf{
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    width: 60%;
+    display: flex !important;
+    align-items: center !important;
+    flex: 0% !important;
+    margin: auto;
+    text-align: center;
+    flex-direction: column;
+}
+.etat-srf .ant-radio-group {
+    display: grid;
+}
 .vald-btn{margin-top:30px;cursor: pointer;}
 .vald-btn, .add-btn{    
     width: fit-content;
@@ -59,9 +104,17 @@ input:focus{
     height: 32px;
     line-height: 24px;
 }
+.mur-ttl{
+    text-align: center !important;
+    width: 50% !important;
+    font-size: 18px !important;
+    font-family: 'Montserrat' !important;
+    color: #555 !important;
+    font-weight: 900 !important;
+}
 .radio-flx-spc div{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     align-items: center;
     justify-content: center;
     min-height: 0px;
@@ -85,9 +138,17 @@ input:focus{
 input{
     width: 66% !important;
 }
+.etat-srf-lab{
+    text-align: center !important;
+    width: 50% !important;
+    font-size: 18px !important;
+    font-family: 'Montserrat' !important;
+    color: #555 !important;
+    font-weight: 900 !important;
+}
 .ant-col-6 {
     max-width: 100%;
-    width: 100%;
+    width: 60%;
     display: flex;
     flex: 0% !important;
     margin: auto;
@@ -95,7 +156,9 @@ input{
     text-align: center;
     justify-content: center;
     align-items: center;
+
 }
+.col-gm{flex-direction: column;}
 .ant-row {
     align-content: center;
     flex-direction: column;

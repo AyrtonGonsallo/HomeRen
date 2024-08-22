@@ -119,7 +119,22 @@ p.fs-30 { font-size: 22px !important;}
     text-align: left !important;
     font-size: 15px !important;
 }
-.flx-radio-travaux .ant-radio {width: 3%;}
+.flx-radio-travaux .ant-radio {width: 17px;}
+.radio-flx-spc label span:nth-child(1){width: 17px;}
+.radio-flx-spc label span:nth-child(2){width:100%;}
+.devis-content{width: 100%;}
+.recup-fin {
+    display: grid !important;
+    justify-content: center !important;
+    gap: 41px !important;
+    margin-bottom: 16px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.recup-fin p:nth-child(1){float:right;text-align: right;}
+.recup-fin p:nth-child(3){float:left;text-align: left;}
+.del-btn{
+    width: fit-content;
+}
 /*********************** splide-gallerie-realisations-details ******************************/
 .splide__arrows.splide__arrows--ltr {
     position: absolute !important;
@@ -175,5 +190,23 @@ p.fs-30 { font-size: 22px !important;}
 .ant-radio-wrapper:hover .ant-radio-inner::after{background-color: var(--color2)!important;}
 .ant-radio-wrapper {float: right;}
 .section-devis .ant-steps-icon {color: var(--color1) !important;}
+/*devis en ligne respo*/
+.btn-suiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+@media screen and (max-width: 800px) {
+    .steps-content, div-btn-prect { width: 95% !important;}
 
+}
+@media screen and (max-width: 600px) {
+.ant-col-6{width: 100% !important;}
+}
 
+@media screen and (max-width: 375px) {
+.ant-col-6{flex-direction: column;}
+.plaf-dim form label, .plaf-dim input#image{ width: 100%;}
+
+}

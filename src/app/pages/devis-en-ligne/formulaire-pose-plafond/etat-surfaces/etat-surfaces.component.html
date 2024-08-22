@@ -1,15 +1,14 @@
-<h3>Pose de Plafond</h3>
-            <form [formGroup]="posePlafondForm" (ngSubmit)="onPosePlafondSubmit()">
+           <form [formGroup]="posePlafondForm" (ngSubmit)="onPosePlafondSubmit()">
 
                <div >
                  <div nz-row nzJustify="start" >
                    
-                   <div nz-col nzSpan="6" class="ant-col">
-                     <label for="etat">État: </label>
-                     <nz-radio-group formControlName="etat">
-                      <label nz-radio nzValue="tres abimé">tres abimé</label>
-                      <label nz-radio nzValue="abimé">abimé</label>
-                      <label nz-radio nzValue="reprises partielles">reprises partielles</label>
+                   <div nz-col nzSpan="6" class="ant-col etat-srf">
+                     <!-- <label for="etat" class="etat-srf-ttl">État du surface: </label> -->
+                     <nz-radio-group formControlName="etat" class="radio-flx-spc">
+                      <div><label nz-radio nzValue="tres abimé" class="radio-span"><span>Très abimé</span> </label></div>
+                      <div><label nz-radio nzValue="abimé"><span>Abimé</span> </label></div>
+                      <div><label nz-radio nzValue="reprises partielles"><span>Reprises partielles</span></label></div>
                      
                     </nz-radio-group>
                      

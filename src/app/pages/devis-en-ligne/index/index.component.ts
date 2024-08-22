@@ -90,6 +90,50 @@ export class IndexComponent {
       this.renderer.setStyle(selectedElement, 'filter', 'brightness(0.8)');
     }
   }
+
+  selectPieceAndRedirect(pieceID: number): void {
+    if (this.selectedPieceId !== null) {
+      const previousElement = document.getElementById(`piece-${this.selectedPieceId}`);
+      if (previousElement) {
+        this.renderer.setStyle(previousElement, 'border', 'none');
+        this.renderer.setStyle(previousElement, 'filter', 'brightness(1');
+
+      }
+    }
+    this.selectedPieceId = pieceID;
+    this.userService.getPiece(this.selectedPieceId).subscribe(
+      (response) => {
+        this.selectedPiece = response;
+        console.log("réponse de la requette getPiece",this.travaux);
+       
+      },
+      (error) => {
+        console.error('Erreur lors de la recuperation des details de la piece choisie :', error);
+      }
+    );
+    this.userService.getTravauxByPieceId(this.selectedPieceId).subscribe(
+      (response) => {
+        this.travaux = response;
+        this.listOfData =response;
+        this.listOfCurrentPageData=response
+        console.log("réponse de la requette getTravauxByPieceId",this.travaux);
+       
+      },
+      (error) => {
+        console.error('Erreur lors de la recuperation des travaux par pieces :', error);
+      }
+    );
+    const selectedElement = document.getElementById(`piece-${pieceID}`);
+    if (selectedElement) {
+      this.renderer.setStyle(selectedElement, 'border', '2px solid #FFC736');
+      this.renderer.setStyle(selectedElement, 'filter', 'brightness(0.8)');
+    }
+    this.current=1
+    this.triggerSubmitDimensionForm= false;
+    this.triggerSubmitEtatSurfacesForm= false;
+    this.triggerSubmitGammesProduitsForm= false;
+    this.gestiondesdevisService.clearFormulaires()
+  }
   radioValue = 'A';
   selectTravail(travailID: number){
     if(this.filteredTravail){
@@ -216,6 +260,9 @@ export class IndexComponent {
   }
   addtask(): void {
     this.current = 1;
+    this.triggerSubmitDimensionForm= false;
+    this.triggerSubmitEtatSurfacesForm= false;
+    this.triggerSubmitGammesProduitsForm= false;
     this.changeContent();
   }
   public triggerSubmitDimensionForm: boolean = false;
@@ -234,6 +281,9 @@ export class IndexComponent {
   
       case 4:
         this.triggerSubmitGammesProduitsForm = !this.triggerSubmitGammesProduitsForm;
+        break;
+      case 5:
+        this.done()
         break;
   
       default:

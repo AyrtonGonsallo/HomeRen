@@ -67,7 +67,7 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
       this.poseMursForm = this.fb.group({
         murs: this.fb.array([this.createposeMurGroup()])
       });
-      let formulaire_dimensions_length=this.gestiondesdevisService.getFormulaireByName("dimensions-pose-murs").formulaire.murs.length
+      let formulaire_dimensions_length=prev_form.formulaire.murs.length
       for(let i=0;i<(formulaire_dimensions_length-1);i++){
         this.addMurGroup()
       }

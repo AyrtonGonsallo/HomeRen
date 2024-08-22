@@ -7,12 +7,12 @@
                    
 
                    <div nz-col nzSpan="6" class="ant-col">
-                    <label for="gamme">Gamme: </label>
-                    <nz-radio-group formControlName="gamme">
-                     <label nz-radio *ngFor="let option of gammes_peinture" [nzValue]="option.ID+':'+option.Prix">Peinture {{option.Label}}</label>
-                     <label nz-radio *ngFor="let option of gammes_enduit" [nzValue]="option.ID+':'+option.Prix">Enduit {{option.Label}}</label>
-                     <label nz-radio *ngFor="let option of gammes_papier" [nzValue]="option.ID+':'+option.Prix">Papier {{option.Label}}</label>
-                     <label nz-radio *ngFor="let option of gammes_carrelage" [nzValue]="option.ID+':'+option.Prix">Carrelage {{option.Label}}</label>
+                    <!-- <label for="gamme">Gamme: </label> -->
+                    <nz-radio-group formControlName="gamme" class="radio-flx-spc">
+                      <div><label nz-radio *ngFor="let option of gammes_peinture" [nzValue]="option.ID+':'+option.Prix"><span>Peinture {{option.Label}}</span></label></div>
+                      <div><label nz-radio *ngFor="let option of gammes_enduit" [nzValue]="option.ID+':'+option.Prix"><span>Enduit {{option.Label}}</span></label></div>
+                      <div><label nz-radio *ngFor="let option of gammes_papier" [nzValue]="option.ID+':'+option.Prix"><span>Papier {{option.Label}}</span></label></div>
+                      <div><label nz-radio *ngFor="let option of gammes_carrelage" [nzValue]="option.ID+':'+option.Prix"><span>Carrelage {{option.Label}}</span></label></div>
 
                    </nz-radio-group>
                     
