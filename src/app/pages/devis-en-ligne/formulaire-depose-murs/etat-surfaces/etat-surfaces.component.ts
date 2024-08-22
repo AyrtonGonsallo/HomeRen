@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 
@@ -8,6 +8,16 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../form-depose-mur.css'
 })
 export class DeposeMursEtatSurfacesComponent {
+  @Input() triggerSubmitEtatSurfacesForm!: boolean;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitEtatSurfacesForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitEtatSurfacesForm)
+      if(this.triggerSubmitEtatSurfacesForm==true){
+        this.onPoseMursSubmit();
+      }
+      
+    }
+  }
 //formulaires des deposes et dedeposes
 deposeMursForm: FormGroup;
 formulaire_dimensions:any
@@ -46,12 +56,12 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
  
 
   const prev_form = this.gestiondesdevisService.getFormulaireByName('etat-surfaces-depose-murs');
-    if (prev_form) {
+    if (prev_form ) {
       console.log("formulaire existant",prev_form)
       this.deposeMursForm = this.fb.group({
         murs: this.fb.array([this.createdeposeMurGroup()])
       });
-      let formulaire_dimensions_length=prev_form.formulaire.murs.length
+      let formulaire_dimensions_length=this.gestiondesdevisService.getFormulaireByName("dimensions-depose-murs").formulaire.murs.length
       for(let i=0;i<(formulaire_dimensions_length-1);i++){
         this.addMurGroup()
       }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 
@@ -9,7 +9,16 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
 })
 export class PoseSolDimensionsComponent {
   poseSolForm: FormGroup;
-  
+  @Input() triggerSubmitDimensionForm!: boolean;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitDimensionForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitDimensionForm)
+      if(this.triggerSubmitDimensionForm==true){
+        this.onPoseSolSubmit();
+      }
+      
+    }
+  }
   //le formulaire de pose sol
   createPoseSolGroup(): FormGroup {
     return this.fb.group({

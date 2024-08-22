@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 
@@ -8,6 +8,16 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
    styleUrl: '../formulaire-pose-plafond.component.css'
 })
 export class EtatSurfacesPosePlafondComponent {
+  @Input() triggerSubmitEtatSurfacesForm!: boolean;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitEtatSurfacesForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitEtatSurfacesForm)
+      if(this.triggerSubmitEtatSurfacesForm==true){
+        this.onPosePlafondSubmit();
+      }
+      
+    }
+  }
   posePlafondForm: FormGroup;
   formulaire_dimensions:any
 formulaire_dimensions_length:number=0

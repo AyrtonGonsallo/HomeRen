@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
@@ -9,6 +9,16 @@ import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-e
   styleUrl: '../form-depose-mur.css'
 })
 export class DeposeMursGammesProduitsComponent {
+  @Input() triggerSubmitGammesProduitsForm!: boolean;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitGammesProduitsForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitGammesProduitsForm)
+      if(this.triggerSubmitGammesProduitsForm==true){
+        this.onPoseMursSubmit();
+      }
+      
+    }
+  }
 //formulaires des deposes et dedeposes
 deposeMursForm: FormGroup;
 formulaire_dimensions:any
@@ -66,12 +76,13 @@ onTypeChange(value: string, index: number) {
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
  
   const prev_form = this.gestiondesdevisService.getFormulaireByName('gammes-produits-depose-murs');
-  if (prev_form) {
+
+  if (prev_form ) {
     console.log("formulaire existant",prev_form)
     this.deposeMursForm = this.fb.group({
       murs: this.fb.array([this.createdeposeMurGroup()])
     });
-    let formulaire_dimensions_length=prev_form.formulaire.murs.length
+    let formulaire_dimensions_length=this.gestiondesdevisService.getFormulaireByName("dimensions-depose-murs").formulaire.murs.length
     for(let i=0;i<(formulaire_dimensions_length-1);i++){
       this.addMurGroup()
     }

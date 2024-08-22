@@ -1,6 +1,23 @@
 <div class="section-devis">
   <div class="devis-title">
-   <h1 class="center gris font-site">Demandez votre devis gratuit</h1>
+    <div *ngIf="current < 2">
+      <h1 class="center gris font-site">Demandez votre devis gratuit</h1>    
+    </div>
+    <div *ngIf="current == 2">
+      <h1 class="center gris font-site">{{filteredTravail.Titre}} : Quelles sont les dimensions de votre {{selectedPiece?.Titre}} ?</h1>
+    </div>
+    <div *ngIf="current == 3">
+      <h1 class="center gris font-site">{{filteredTravail.Titre}} : Quel est l'état des surfaces dans votre {{selectedPiece?.Titre}} ?</h1>
+    </div>
+    <div *ngIf="current == 4">
+      <h1 class="center gris font-site">{{filteredTravail.Titre}} : Quelles sont les gammes de produits que vous souhaitez dans votre {{selectedPiece?.Titre}} ?</h1>
+    </div>
+    <div *ngIf="current == 5">
+      <h1 class="center gris font-site">{{filteredTravail.Titre}} : Récapitulatif des élements que vous souhaitez dans votre {{selectedPiece?.Titre}} </h1>
+    </div>
+    <div *ngIf="current == 6">
+      <h1 class="center gris font-site">{{filteredTravail.Titre}} : Finalisation </h1>
+    </div>
    <!-- <p class="center f-w-4 fs-30 m-w-p"><strong> Vous avez un projet de rénovation en tête ?</strong>Remplissez notre formulaire en ligne pour une estimation personnalisée et sans engagement.</p> -->
   </div>
   <nz-steps [nzCurrent]="current">
@@ -65,21 +82,21 @@
         <p class="ttl-dv-pc"><strong><b >{{filteredTravail.Titre}} </b>: Quelles sont les dimensions de votre {{selectedPiece?.Titre}} ?</strong></p>
        <!-- Formulaire pose murs  -->
          <div *ngIf="is_travail_selected(14)">
-           <app-dimensions-depose-murs></app-dimensions-depose-murs>
+           <app-dimensions-depose-murs [triggerSubmitDimensionForm]="triggerSubmitDimensionForm"></app-dimensions-depose-murs>
          </div>
          <div *ngIf="is_travail_selected(5)">
-           <app-dimensions-pose-murs></app-dimensions-pose-murs>
+           <app-dimensions-pose-murs [triggerSubmitDimensionForm]="triggerSubmitDimensionForm"></app-dimensions-pose-murs>
          </div>
          <div *ngIf="is_travail_selected(4)">
            <app-dimensions-creation-murs-non-porteurs></app-dimensions-creation-murs-non-porteurs>
          </div>
          <!-- Formulaire pose Plafond -->
          <div *ngIf="is_travail_selected(8)">
-           <app-dimensions-pose-plafond></app-dimensions-pose-plafond>
+           <app-dimensions-pose-plafond [triggerSubmitDimensionForm]="triggerSubmitDimensionForm"></app-dimensions-pose-plafond>
          </div>
          <!-- Formulaire pose Revetement de Sol -->
          <div *ngIf="is_travail_selected(9)">
-           <app-dimensions-pose-sol></app-dimensions-pose-sol>
+           <app-dimensions-pose-sol [triggerSubmitDimensionForm]="triggerSubmitDimensionForm"></app-dimensions-pose-sol>
          </div>
           <!-- Formulaire pose porte -->
           <div *ngIf="is_travail_selected(10)">
@@ -102,16 +119,16 @@
        </div>
        <!-- Formulaire pose murs  -->
         <div *ngIf="is_travail_selected(5)">
-          <app-etat-surfaces-pose-murs></app-etat-surfaces-pose-murs>
+          <app-etat-surfaces-pose-murs [triggerSubmitEtatSurfacesForm]="triggerSubmitEtatSurfacesForm"></app-etat-surfaces-pose-murs>
         </div>
         <div *ngIf="is_travail_selected(14)">
-         <app-etat-surfaces-depose-murs></app-etat-surfaces-depose-murs>
+         <app-etat-surfaces-depose-murs [triggerSubmitEtatSurfacesForm]="triggerSubmitEtatSurfacesForm"></app-etat-surfaces-depose-murs>
        </div>
         <div *ngIf="is_travail_selected(8)">
-         <app-etat-surfaces-pose-plafond></app-etat-surfaces-pose-plafond>
+         <app-etat-surfaces-pose-plafond [triggerSubmitEtatSurfacesForm]="triggerSubmitEtatSurfacesForm"></app-etat-surfaces-pose-plafond>
        </div>
        <div *ngIf="is_travail_selected(9)">
-         <app-etat-surfaces-pose-sol></app-etat-surfaces-pose-sol>
+         <app-etat-surfaces-pose-sol [triggerSubmitEtatSurfacesForm]="triggerSubmitEtatSurfacesForm"></app-etat-surfaces-pose-sol>
        </div>
        <div *ngIf="is_travail_selected(12)">
          <app-etat-surfaces-pose-chauffage></app-etat-surfaces-pose-chauffage>
@@ -132,17 +149,17 @@
            <app-gammes-produits-creation-murs-non-porteurs></app-gammes-produits-creation-murs-non-porteurs>
          </div>
          <!-- Formulaire pose murs  -->
-         <div *ngIf="is_travail_selected(5)">
-           <app-gammes-produits-pose-murs></app-gammes-produits-pose-murs>
+         <div *ngIf="is_travail_selected(5)" >
+           <app-gammes-produits-pose-murs [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm"></app-gammes-produits-pose-murs>
          </div>
          <div *ngIf="is_travail_selected(14)">
-           <app-gammes-produits-depose-murs></app-gammes-produits-depose-murs>
+           <app-gammes-produits-depose-murs [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm"></app-gammes-produits-depose-murs>
          </div>
          <div *ngIf="is_travail_selected(8)">
-           <app-gammes-produits-pose-plafond></app-gammes-produits-pose-plafond>
+           <app-gammes-produits-pose-plafond [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm"></app-gammes-produits-pose-plafond>
          </div>
          <div *ngIf="is_travail_selected(9)">
-           <app-gammes-produits-pose-sol></app-gammes-produits-pose-sol>
+           <app-gammes-produits-pose-sol [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm"></app-gammes-produits-pose-sol>
          </div>
          <div *ngIf="is_travail_selected(12)">
            <app-gammes-produits-pose-chauffage></app-gammes-produits-pose-chauffage>

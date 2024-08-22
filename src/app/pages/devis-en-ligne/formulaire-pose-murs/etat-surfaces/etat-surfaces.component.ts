@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 
@@ -8,6 +8,16 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-pose-murs.component.css'
 })
 export class EtatSurfacesComponent {
+  @Input() triggerSubmitEtatSurfacesForm!: boolean;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitEtatSurfacesForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitEtatSurfacesForm)
+      if(this.triggerSubmitEtatSurfacesForm==true){
+        this.onPoseMursSubmit();
+      }
+      
+    }
+  }
   disabled = true;
   radioValue = 'A';
 //formulaires des poses et deposes
@@ -51,7 +61,7 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
       this.poseMursForm = this.fb.group({
         murs: this.fb.array([this.createposeMurGroup()])
       });
-      let formulaire_dimensions_length=prev_form.formulaire.murs.length
+      let formulaire_dimensions_length=this.gestiondesdevisService.getFormulaireByName("dimensions-pose-murs").formulaire.murs.length
       for(let i=0;i<(formulaire_dimensions_length-1);i++){
         this.addMurGroup()
       }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
@@ -9,6 +9,16 @@ import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-e
    styleUrl: '../formulaire-pose-plafond.component.css'
 })
 export class GammesProduitsPosePlafondComponent {
+  @Input() triggerSubmitGammesProduitsForm!: boolean;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitGammesProduitsForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitGammesProduitsForm)
+      if(this.triggerSubmitGammesProduitsForm==true){
+        this.onPosePlafondSubmit();
+      }
+      
+    }
+  }
   posePlafondForm: FormGroup;
   
   // le formulaire de pose plafond

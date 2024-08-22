@@ -188,16 +188,68 @@ export class IndexComponent {
   current = 0;
   index = 'First-content';
   pre(): void {
-    this.current -= 1;
-    this.changeContent();
+    switch (this.current) {
+      case 3:
+        this.triggerSubmitDimensionForm = !this.triggerSubmitDimensionForm;
+        break;
+  
+      case 4:
+        this.triggerSubmitEtatSurfacesForm = !this.triggerSubmitEtatSurfacesForm;
+        break;
+  
+      case 5:
+        this.triggerSubmitGammesProduitsForm = !this.triggerSubmitGammesProduitsForm;
+        break;
+  
+      default:
+        this.current -= 1;
+        this.changeContent();
+        return; // Exit the function if no form submission is triggered
+    }
+  
+    // If we reach here, it means a form submission was triggered.
+    // Wait for 2 seconds, then proceed to the next step.
+    setTimeout(() => {
+      this.current -= 1;
+      this.changeContent();
+    }, 2000);
   }
   addtask(): void {
     this.current = 1;
     this.changeContent();
   }
+  public triggerSubmitDimensionForm: boolean = false;
+  public triggerSubmitEtatSurfacesForm: boolean = false;
+  public triggerSubmitGammesProduitsForm: boolean = false;
   next(): void {
-    this.current += 1;
-    this.changeContent();
+   
+    switch (this.current) {
+      case 2:
+        this.triggerSubmitDimensionForm = !this.triggerSubmitDimensionForm;
+        break;
+  
+      case 3:
+        this.triggerSubmitEtatSurfacesForm = !this.triggerSubmitEtatSurfacesForm;
+        break;
+  
+      case 4:
+        this.triggerSubmitGammesProduitsForm = !this.triggerSubmitGammesProduitsForm;
+        break;
+  
+      default:
+        this.current += 1;
+        this.changeContent();
+        return; // Exit the function if no form submission is triggered
+    }
+  
+    // If we reach here, it means a form submission was triggered.
+    // Wait for 2 seconds, then proceed to the next step.
+    setTimeout(() => {
+      this.current += 1;
+      this.changeContent();
+    }, 2000);
+    
+    
   }
   done(): void {
     this.gestiondesdevisService.clearDEGFormulaires()

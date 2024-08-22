@@ -14,6 +14,7 @@ export class RecapPoseSolComponent {
   gamme:any
   plinthe_id:any
   plinthe:any
+  avec_des_plinthes:Boolean=true
   constructor(private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
     this.poseSolForm=this.gestiondesdevisService.getFormulaireByName("pose-sol");
     console.log("recap: ",this.poseSolForm);
@@ -27,15 +28,22 @@ export class RecapPoseSolComponent {
         console.error('Erreur lors de la recuperation de la gamme:', error);
       }
     );
-    this.plinthe_id=this.poseSolForm.formulaire["gammes-produits-pose-sol"].plinthes.split(":")[0]
-    this.userService.getGammeByID(this.plinthe_id).subscribe(
-      (response: any) => {
-        console.log('recuperation de la gamme:', response);
-        this.plinthe=response
-      },
-      (error: any) => {
-        console.error('Erreur lors de la recuperation de la gamme:', error);
-      }
-    );
+    
+    if(this.poseSolForm.formulaire["gammes-produits-pose-sol"].plinthes){
+      this.avec_des_plinthes=true
+      this.plinthe_id=this.poseSolForm.formulaire["gammes-produits-pose-sol"].plinthes.split(":")[0]
+      this.userService.getGammeByID(this.plinthe_id).subscribe(
+        (response: any) => {
+          console.log('recuperation de la gamme:', response);
+          this.plinthe=response
+        },
+        (error: any) => {
+          console.error('Erreur lors de la recuperation de la gamme:', error);
+        }
+      );
+    }else{
+      this.avec_des_plinthes=false
+    }
+    
   }
 }

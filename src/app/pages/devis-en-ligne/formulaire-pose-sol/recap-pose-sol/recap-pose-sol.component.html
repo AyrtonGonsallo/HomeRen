@@ -2,4 +2,5 @@
 <span class="recup-fin"><p>Surface</p><p>:</p><p>{{poseSolForm.formulaire["dimensions-pose-sol"].surface}} m²</p></span>
 <span class="recup-fin"><p>État du sol</p><p>:</p><p>{{poseSolForm.formulaire["etat-surfaces-pose-sol"].etat}}</p></span>
 <span class="recup-fin"><p>Gamme</p><p>:</p><p>{{gamme?.Label}}</p></span>
-<span class="recup-fin"><p>Plithes</p><p>:</p><p>{{plinthe?.Label}}</p></span>
+
+<span class="recup-fin" *ngIf="avec_des_plinthes"><p>Plithes</p><p>:</p><p>{{plinthe?.Label}}</p></span>

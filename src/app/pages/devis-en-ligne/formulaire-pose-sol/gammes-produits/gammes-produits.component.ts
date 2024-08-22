@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
@@ -9,6 +9,16 @@ import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-e
   styleUrl: '../formulaire-pose-sol.component.css'
 })
 export class PoseSolGammesProduitsComponent {
+  @Input() triggerSubmitGammesProduitsForm!: boolean;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitGammesProduitsForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitGammesProduitsForm)
+      if(this.triggerSubmitGammesProduitsForm==true){
+        this.onPoseSolSubmit();
+      }
+      
+    }
+  }
   poseSolForm: FormGroup;
   
   //le formulaire de pose sol
