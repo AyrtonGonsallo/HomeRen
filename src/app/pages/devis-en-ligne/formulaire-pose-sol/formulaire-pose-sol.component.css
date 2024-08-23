@@ -173,6 +173,7 @@ form{
 .etat-srf .ant-radio-group {
     display: grid;
 }
+.srf-img{margin-block: 20px;margin-inline: auto;}
 @media only screen and (max-width: 1212px) {
     .vald-btn, .add-btn{ width: fit-content;}
 

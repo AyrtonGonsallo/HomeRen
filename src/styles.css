@@ -197,16 +197,59 @@ p.fs-30 { font-size: 22px !important;}
     align-items: center;
     align-content: center;
 }
-@media screen and (max-width: 800px) {
-    .steps-content, div-btn-prect { width: 95% !important;}
-
+.plaf-dim .ant-col-6{
+    padding: 12px 0px !important;
+    border-bottom: 1px solid #E9E9E9;
 }
-@media screen and (max-width: 600px) {
-.ant-col-6{width: 100% !important;}
+.recup-fin {
+    display: grid !important;
+    justify-content: center !important;
+    gap: 0px !important;
+    margin-bottom: 16px;
+    grid-template-columns: 3fr 1fr 3fr;
 }
-
-@media screen and (max-width: 375px) {
-.ant-col-6{flex-direction: column;}
-.plaf-dim form label, .plaf-dim input#image{ width: 100%;}
-
+.steps-action{
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
 }
+.recup-fin p:nth-child(1) {
+    font-weight: 900;
+}
+.plaf-dim input{ border: 3px solid #ffc736!important;border-radius:2px !important;}
+.plaf-dim label{font-size: 13px !important;font-weight: 600;font-family: "Montserrat";}
+@media only screen and (max-width: 1100px) {
+    .steps-content, .div-btn-prect { width: 95% !important;}
+    
+    }
+    
+    @media screen and (max-width: 800px) {
+        
+    
+    }
+    @media screen and (max-width: 600px) {
+    .ant-col-6{width: 100% !important;}
+    }
+    @media screen and (max-width: 497px) {
+    .recup-fin {text-align: center; grid-template-columns: 3fr 1fr 3fr;}
+    .recup-fin p:nth-child(1) { float: left; text-align: left;}
+    
+    
+    }
+    
+    
+    @media screen and (max-width: 375px) {
+    .ant-col-6{flex-direction: column;}
+    .plaf-dim form label, .plaf-dim input#image{ width: 100%;}
+    .recup-fin {
+        text-align: left;
+        float: left;
+        gap: 17px !important;
+        display: flex !important;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+    }
+    }

@@ -25,8 +25,6 @@ export class DimensionsPosePlafondComponent {
     return this.fb.group({
       hauteur: ['', Validators.required],
       surface: ['', Validators.required],
-      longueur: ['', Validators.required],
-      largeur: ['', Validators.required],
       image: [null]
     });
   }

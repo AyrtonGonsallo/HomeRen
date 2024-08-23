@@ -1,24 +1,24 @@
 <div class="plaf-dim">
             <form [formGroup]="posePlafondForm" (ngSubmit)="onPosePlafondSubmit()">
-
                <div >
+                <img class="srf-img" src="/assets/Rectangle.svg">
                  <div nz-row nzJustify="start" >
                    <div nz-col nzSpan="6" class="ant-col">
-                     <label for="hauteur">Hauteur : </label>
+                     <label for="hauteur">Hauteur m: </label>
                      <input type="number" id="hauteur" formControlName="hauteur">
                      <div *ngIf="posePlafondForm.get('hauteur')?.invalid && (posePlafondForm.get('hauteur')?.dirty || posePlafondForm.get('hauteur')?.touched)">
                       </div>
                    </div>
-                   <div nz-col nzSpan="6" class="ant-col">
+                   <!-- <div nz-col nzSpan="6" class="ant-col">
                      <label for="longueur">Longueur : </label>
                      <input type="number" id="longueur" formControlName="longueur">
                    </div>
                    <div nz-col nzSpan="6" class="ant-col">
                      <label for="largeur">Largeur : </label>
                      <input type="number" id="largeur" formControlName="largeur">
-                   </div>
+                   </div> -->
                    <div nz-col nzSpan="6" class="ant-col">
-                     <label for="surface">Surface : </label>
+                     <label for="surface">Surface m²: </label>
                      <input type="number" id="surface" formControlName="surface">
                    </div>
                   

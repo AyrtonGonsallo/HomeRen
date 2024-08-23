@@ -1,4 +1,4 @@
-
+<div class="plaf-dim">
             <form [formGroup]="poseMursForm" (ngSubmit)="onPoseMursSubmit()">
 
                <div formArrayName="murs">
@@ -7,15 +7,15 @@
                   <div nz-row nzJustify="start" >
                    
                     <div nz-col nzSpan="6" class="ant-col">
-                       <label for="hauteur">Hauteur : </label>
+                       <label for="hauteur">Hauteur m : </label>
                        <input type="number" id="hauteur" formControlName="hauteur">
                      </div>
-                     <div nz-col nzSpan="6" class="ant-col">
+                     <!-- <div nz-col nzSpan="6" class="ant-col">
                        <label for="longueur">Longueur : </label>
                        <input type="number" id="longueur" formControlName="longueur">
-                     </div>
+                     </div> -->
                      <div nz-col nzSpan="6" class="ant-col">
-                       <label for="surface">Surface : </label>
+                       <label for="surface">Surface m² : </label>
                        <input type="number" id="surface" formControlName="surface">
                      </div>
                      
@@ -30,3 +30,4 @@
                  
                <button type="button"  class="dynamic-form-button add-btn" (click)="addMurGroup()" *ngIf="murs.length < 4">Ajouter un mur</button>
              </form>
+</div>

@@ -23,8 +23,6 @@ export class PoseSolDimensionsComponent {
   createPoseSolGroup(): FormGroup {
     return this.fb.group({
       surface: ['', Validators.required],
-      longueur_piece: ['', Validators.required],
-      largeur_piece: ['', Validators.required],
       image: [null]
     });
   }

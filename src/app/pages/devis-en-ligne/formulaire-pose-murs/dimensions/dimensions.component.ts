@@ -51,7 +51,6 @@ createposeMurGroup(): FormGroup {
   return this.fb.group({
     hauteur: ['', Validators.required],
     surface: ['', Validators.required],
-    longueur: ['', Validators.required],
     image: [null]
   });
 }

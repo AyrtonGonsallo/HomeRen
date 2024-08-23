@@ -179,6 +179,7 @@
      </div>
       
       <div class="devis-content" *ngIf="current == 5">
+        <p class="ttl-dv-pc"><strong>Récapitulatif : {{filteredTravail.Titre}} - {{selectedPiece?.Titre}}</strong></p>
         <div *ngIf="is_travail_selected(4)">
           <app-recap-creation-murs-non-porteurs [selectedPiece]="selectedPiece"></app-recap-creation-murs-non-porteurs>
         </div>
@@ -216,12 +217,14 @@
       </div>
    </div>
    <div class="steps-action">
-      <button *ngIf="current == 5" nz-button nzType="default" (click)="addtask()" >
-        <span>Retour à la liste des travaux</span>
+      <button *ngIf="current == 5" nz-button nzType="default" (click)="addtask()" class="btn-retour" >
+        <span>Ajouter une prestation - {{selectedPiece?.Titre}}</span>
       </button>
-   
+      <div *ngIf="current == 5">
+        <p class="ttl-dv-pc"><strong>ou</strong></p>
+      </div>
      <button nz-button nzType="default" (click)="next()" *ngIf="current<6" class="btn-suiv">
-       <span>{{ current === 5 ? 'Valider' : 'Suivant' }}</span>
+       <span>{{ current === 5 ? 'Finaliser mon devis - '+selectedPiece?.Titre : 'Suivant' }}</span>
        
      </button>
    </div>
