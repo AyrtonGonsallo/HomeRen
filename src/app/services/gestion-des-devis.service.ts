@@ -10,6 +10,8 @@ export class GestionDesDevisService {
 
   constructor(private http: HttpClient) { }
 
+
+
   getIp(): Observable<any> {
     return this.http.get(this.apiUrl);
   }

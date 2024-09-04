@@ -9,10 +9,13 @@
                     <div nz-col nzSpan="6" class="ant-col etat-srf">
                       <!-- <label for="etat">État de mur: </label> -->
                       <nz-radio-group formControlName="etat" class="radio-flx-spc">
-                        <div><label nz-radio nzValue="tres abimé" class="radio-span"><span>Très abimé</span> </label></div>
+                        <div><label nz-radio nzValue="Très abimé" class="radio-span"><span>Très abimé</span> </label></div>
                       <div><label nz-radio nzValue="abimé"><span>Abimé</span> </label></div>
                       <div><label nz-radio nzValue="reprises partielles"><span>Reprises partielles</span></label></div>
                     </nz-radio-group>
+                    </div>
+                    <div *ngIf="murs.controls[i].get('etat')?.invalid " class="error-message">
+                      état des surfaces requis.
                     </div>
                   </div>
                 </div>

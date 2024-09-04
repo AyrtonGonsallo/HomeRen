@@ -140,15 +140,7 @@ form{
 .plaf-dim input#image {width: 54%;} */
 }
 @media only screen and (max-width: 800px) {
-    .ant-col-6[_ngcontent-ng-c4243379430] {max-width: 100%;}
-    .ant-row{
-        display: flex;
-        flex-wrap: wrap !important;
-        flex-direction: row !important;
-        align-content: center;
-    }
-
-
+    
 
 }
 @media only screen and (max-width: 600px) {
@@ -159,11 +151,5 @@ form{
         flex-direction: column !important;
         align-content: flex-start !important;
     }
-    .ant-col.ant-col-6[_ngcontent-ng-c4243379430] {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-start;
-        margin: 0;
-    }
-    form label{ width: 15%;}
+    
 }

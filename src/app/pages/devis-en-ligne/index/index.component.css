@@ -137,10 +137,11 @@ button.ant-btn.ant-btn-default.ng-star-inserted span{font-size: 14px;}
     .section-devis{padding: 20px;}
     .devis-content{ gap: 15px;}
 }
-@media only screen and (max-width: 497px) {
+@media only screen and (max-width: 600px) {
     .pcs-devis {width: 47%;}
+    .btn-resp{ padding: 11px 10px !important; }
 }
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 497px) {
     .pcs-devis {width: 100%;}
 }
 ul{

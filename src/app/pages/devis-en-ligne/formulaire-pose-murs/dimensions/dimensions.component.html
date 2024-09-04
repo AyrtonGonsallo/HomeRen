@@ -7,18 +7,23 @@
                   <div nz-row nzJustify="start" >
                    
                     <div nz-col nzSpan="6" class="ant-col">
-                       <label for="hauteur">Hauteur m : </label>
+                       <label for="hauteur">Hauteur m <span class="error-message">*</span> : </label>
                        <input type="number" id="hauteur" formControlName="hauteur">
                      </div>
+                     <div *ngIf="murs.controls[i].get('hauteur')?.invalid " class="error-message">
+                      Hauteur requise.
+                    </div>
                      <!-- <div nz-col nzSpan="6" class="ant-col">
                        <label for="longueur">Longueur : </label>
                        <input type="number" id="longueur" formControlName="longueur">
                      </div> -->
                      <div nz-col nzSpan="6" class="ant-col">
-                       <label for="surface">Surface m² : </label>
+                       <label for="surface">Surface m² <span class="error-message">*</span> : </label>
                        <input type="number" id="surface" formControlName="surface">
                      </div>
-                     
+                     <div *ngIf="murs.controls[i].get('surface')?.invalid " class="error-message">
+                      Surface requise.
+                    </div>
                      <div nz-col nzSpan="6" class="ant-col"> 
                        <label for="image">Image :</label>
                        <input type="file" id="image" (change)="onMursFileChange($event, i)" accept="image/*">
@@ -28,6 +33,6 @@
                  </div>
                 </div>
                  
-               <button type="button"  class="dynamic-form-button add-btn" (click)="addMurGroup()" *ngIf="murs.length < 4">Ajouter un mur</button>
+               <button type="button"  class="dynamic-form-button add-btn" (click)="addMurGroup()" *ngIf="murs.length < 4" >Ajouter un mur</button>
              </form>
 </div>

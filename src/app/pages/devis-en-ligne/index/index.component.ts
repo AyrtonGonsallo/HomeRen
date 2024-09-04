@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { Travail } from '../../../Models/Travail';
 import { GestionDesDevisService } from '../../../services/gestion-des-devis.service';
 import { ShoppingCartService } from '../../../services/shopping-cart.service';
+import { exit } from 'process';
 interface ItemData {
   ID: number;
   Titre: string;
@@ -62,6 +63,7 @@ export class IndexComponent {
       }
     }
     this.selectedPieceId = pieceID;
+    this.is_one_piece_selected=true
     this.userService.getPiece(this.selectedPieceId).subscribe(
       (response) => {
         this.selectedPiece = response;
@@ -101,6 +103,8 @@ export class IndexComponent {
       }
     }
     this.selectedPieceId = pieceID;
+    this.is_one_piece_selected=true
+
     this.userService.getPiece(this.selectedPieceId).subscribe(
       (response) => {
         this.selectedPiece = response;
@@ -152,7 +156,7 @@ export class IndexComponent {
       }
       console.log("precedent",this.filteredTravail.ID)
     }
-    
+    this.is_one_travail_selected=true
     this.filteredTravail = this.travaux.filter(travail => travail.ID === travailID)[0];
     const selectedElement = document.getElementById(`tache-${travailID}`);
     if (selectedElement) {
@@ -226,8 +230,26 @@ export class IndexComponent {
    is_travail_selected(id: number): boolean {
     return this.filteredTravail.ID == id
   }
+  is_one_piece_selected=false
+  is_one_travail_selected=false
+  is_formulaire_dimensions_valid=false
+  is_formulaire_surfaces_valid=false
+  is_formulaire_gammes_valid=false
 
+  disable_next():boolean{
+    let value=true;
+    if(this.current==0 ){
+      value= !this.is_one_piece_selected
+    }
+    if(this.current==1){
+      value= !this.is_one_travail_selected
+    }else if (this.current>=2){
+      value=false
+    }
 
+    return value
+    
+  }
   // gestion des etapes du formulaire
   current = 0;
   index = 'First-content';
@@ -291,12 +313,43 @@ export class IndexComponent {
         this.changeContent();
         return; // Exit the function if no form submission is triggered
     }
-  
+    
     // If we reach here, it means a form submission was triggered.
-    // Wait for 2 seconds, then proceed to the next step.
+    // Wait for 2 seconds, pour que le formulaire soit soumit et enregistré
     setTimeout(() => {
-      this.current += 1;
-      this.changeContent();
+      if(this.current==2 ){
+        console.log("formulaire dim valide ? ",this.is_formulaire_dimensions_valid)
+        if(this.is_formulaire_dimensions_valid){
+          this.current += 1;
+          this.changeContent();
+        }else{
+          this.triggerSubmitDimensionForm=!this.triggerSubmitDimensionForm
+        }
+        
+      }else if(this.current==3){
+        if(this.is_formulaire_surfaces_valid){
+          this.current += 1;
+          this.changeContent();
+        }else{
+          this.triggerSubmitEtatSurfacesForm=!this.triggerSubmitEtatSurfacesForm
+        }
+        
+      }
+      else if(this.current==4){
+        if(this.is_formulaire_gammes_valid){
+          this.current += 1;
+          this.changeContent();
+        }else{
+          this.triggerSubmitGammesProduitsForm=!this.triggerSubmitGammesProduitsForm
+        }
+        
+      }
+      else{
+        this.current += 1;
+        this.changeContent();
+      }
+    
+      
     }, 2000);
     
     

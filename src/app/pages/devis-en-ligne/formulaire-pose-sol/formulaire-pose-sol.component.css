@@ -177,20 +177,8 @@ form{
 @media only screen and (max-width: 1212px) {
     .vald-btn, .add-btn{ width: fit-content;}
 
-    .ant-row {
-        align-content: flex-start !important;
-    }
-    .ant-col.ant-col-6{
-        display: flex !important;
-        align-items: flex-start!important;
-        margin: 0;
-        flex-direction: column!important;
-        justify-content: flex-start!important;
-    }
-    form label{ width: 70%;}
-    input#surface[_ngcontent-ng-c904728309], input#largeur_piece[_ngcontent-ng-c904728309], input#longueur_piece[_ngcontent-ng-c904728309] {
-        width: 71%;
-    }
+   
+  
 }
 
 @media only screen and (max-width:1196px) {
@@ -224,17 +212,19 @@ form{
         justify-content: flex-start;
         margin: 0;
     }
+    .ant-col[_ngcontent-ng-c182946846], .ant-col-6, .ant-col {max-width: 100% !important;}
 
 }
 @media only screen and (max-width: 497px) {
 .ant-row{grid-template-columns: 1fr !important;}
 .ant-col.ant-col-6[_ngcontent-ng-c904728309] {
-    flex-direction: row !important;
+    flex-direction: row !important;}
 }
-}
-
+@media screen and (max-width: 375px) {
+    .plaf-dim input{ width: 90% !important;}
+    form label { text-align: left !important;}
+    }
 @media only screen and (max-width: 320px) {
 .ant-col.ant-col-6[_ngcontent-ng-c904728309][_ngcontent-ng-c904728309]{flex-direction: column !important;}
-input#surface, input#largeur_piece, input#longueur_piece{
-    width: 96% !important;}
+.recap-div p{font-size:13px !important;}
 }

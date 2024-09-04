@@ -28,7 +28,7 @@
     background: var(--color2);
     color: var(--color-white);
   }
-  .ant-col[_ngcontent-ng-c3282933449] {
+  .ant-col{
     text-align: center !important;
 }
 .add-btn, .del-btn{padding: 0px 10px; background-color: #555;height: 37px;cursor: pointer;margin-block: 8px;}
@@ -168,3 +168,10 @@ form{
     flex-direction: column !important;
     flex-wrap: wrap !important;
 }
+
+@media screen and (max-width: 600px) {
+    .ant-col[_ngcontent-ng-c182946846], .ant-col-6, .ant-col {max-width: 100% !important;}
+    }
+    @media screen and (max-width: 375px) {
+    .plaf-dim input{ width: 90% !important;}
+    }

@@ -152,6 +152,12 @@ form{
 .etat-srf .ant-radio-group {
     display: grid;
 }
+input{
+    width: 100%;
+    border: 3px solid #ffc736;
+    border-radius: 2px;
+}
+label{font-family: 'Montserrat';font-weight: 600;}
 @media only screen and (max-width: 1458px) {
 .section-devis form label{
     text-align: left !important;
@@ -191,4 +197,6 @@ form{
     .ant-col-6 {align-items: flex-start; flex-direction: column;}
         
     }
-    
+    @media only screen and (max-width: 320px) {
+    .recap-div p{font-size:13px !important;}
+    }

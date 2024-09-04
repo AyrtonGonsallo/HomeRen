@@ -98,7 +98,7 @@ export class ShoppingCartService {
               this.itemsSubject.next(this.items);
             },
             (error) => {
-              console.error('Erreur lors de la récupération des devis :', error);
+              console.error('Erreur lors de la récupération des devis :', error.error.message);
             }
           );
         },

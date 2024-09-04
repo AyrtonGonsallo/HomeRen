@@ -1,7 +1,8 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-gammes-produits-pose-murs',
@@ -19,6 +20,8 @@ export class GammesProduitsComponent {
       
     }
   }
+  @Output() formValidityChange = new EventEmitter<boolean>();
+  baseurl=environment.imagesUrl
 //formulaires des poses et deposes
 poseMursForm: FormGroup;
 formulaire_dimensions:any
@@ -41,6 +44,7 @@ removeMurGroup(index: number): void {
 }
 
 onPoseMursSubmit(): void {
+  this.formValidityChange.emit(this.poseMursForm.valid);
   if (this.poseMursForm.valid) {
     //console.log(this.poseMursForm.value);
     this.gestiondesdevisService.addFormulaire('gammes-produits-pose-murs',5, this.poseMursForm.value);
@@ -51,7 +55,7 @@ onPoseMursSubmit(): void {
 }
 createposeMurGroup(): FormGroup {
   return this.fb.group({
-    gamme: [0, ],
+    gamme: ["", Validators.required],
     carrelage: [0, ],
     papier: [0, ],
     enduit: [0, ],

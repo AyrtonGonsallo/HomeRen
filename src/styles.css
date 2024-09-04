@@ -191,6 +191,21 @@ p.fs-30 { font-size: 22px !important;}
 .ant-radio-wrapper {float: right;}
 .section-devis .ant-steps-icon {color: var(--color1) !important;}
 /*devis en ligne respo*/
+.mur-ttl{
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: 18px !important;
+    font-family: 'Montserrat' !important;
+    color: #555 !important;
+    font-weight: 900 !important;
+}
+input{
+    width: 100%;
+    border: 3px solid #ffc736;
+    border-radius: 2px;
+}
+label{font-family: 'Montserrat';font-weight: 600;}
 .btn-suiv{
     display: flex;
     justify-content: center;
@@ -219,6 +234,9 @@ p.fs-30 { font-size: 22px !important;}
 .recup-fin p:nth-child(1) {
     font-weight: 900;
 }
+.devis-content p.ttl-dv-pc {
+    margin-bottom: 20px;
+}
 .plaf-dim input{ border: 3px solid #ffc736!important;border-radius:2px !important;}
 .plaf-dim label{font-size: 13px !important;font-weight: 600;font-family: "Montserrat";}
 @media only screen and (max-width: 1100px) {
@@ -231,12 +249,13 @@ p.fs-30 { font-size: 22px !important;}
     
     }
     @media screen and (max-width: 600px) {
-    .ant-col-6{width: 100% !important;}
+        .plaf-dim .ant-col-6, .plaf-dim .ant-col, .etat-srf, .col-gm{width: 100% !important;max-width: 100% !important;}
+        .ant-col[_ngcontent-ng-c182946846] {max-width: 100% !important;}
     }
     @media screen and (max-width: 497px) {
     .recup-fin {text-align: center; grid-template-columns: 3fr 1fr 3fr;}
     .recup-fin p:nth-child(1) { float: left; text-align: left;}
-    
+
     
     }
     
@@ -252,4 +271,15 @@ p.fs-30 { font-size: 22px !important;}
         justify-content: flex-start;
         flex-wrap: nowrap;
     }
-    }
+    .plaf-dim input{ width: 90% !important;}
+    .del-btn{float: none; margin: auto;}
+    form label{text-align: center !important;}
+}
+@media screen and (max-width: 320px) {
+    .btn-suiv{  padding: 11px 104px !important;}
+    .recap-div p{font-size:13px !important;}
+}
+.error-message{
+    color: red;
+}
+    

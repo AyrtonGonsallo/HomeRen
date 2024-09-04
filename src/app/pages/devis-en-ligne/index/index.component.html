@@ -85,7 +85,7 @@
            <app-dimensions-depose-murs [triggerSubmitDimensionForm]="triggerSubmitDimensionForm"></app-dimensions-depose-murs>
          </div>
          <div *ngIf="is_travail_selected(5)">
-           <app-dimensions-pose-murs [triggerSubmitDimensionForm]="triggerSubmitDimensionForm"></app-dimensions-pose-murs>
+           <app-dimensions-pose-murs [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-murs>
          </div>
          <div *ngIf="is_travail_selected(4)">
            <app-dimensions-creation-murs-non-porteurs></app-dimensions-creation-murs-non-porteurs>
@@ -119,7 +119,7 @@
        </div>
        <!-- Formulaire pose murs  -->
         <div *ngIf="is_travail_selected(5)">
-          <app-etat-surfaces-pose-murs [triggerSubmitEtatSurfacesForm]="triggerSubmitEtatSurfacesForm"></app-etat-surfaces-pose-murs>
+          <app-etat-surfaces-pose-murs [triggerSubmitEtatSurfacesForm]="triggerSubmitEtatSurfacesForm" (formValidityChange)="is_formulaire_surfaces_valid = $event"></app-etat-surfaces-pose-murs>
         </div>
         <div *ngIf="is_travail_selected(14)">
          <app-etat-surfaces-depose-murs [triggerSubmitEtatSurfacesForm]="triggerSubmitEtatSurfacesForm"></app-etat-surfaces-depose-murs>
@@ -150,7 +150,7 @@
          </div>
          <!-- Formulaire pose murs  -->
          <div *ngIf="is_travail_selected(5)" >
-           <app-gammes-produits-pose-murs [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm"></app-gammes-produits-pose-murs>
+           <app-gammes-produits-pose-murs [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-pose-murs>
          </div>
          <div *ngIf="is_travail_selected(14)">
            <app-gammes-produits-depose-murs [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm"></app-gammes-produits-depose-murs>
@@ -223,7 +223,7 @@
       <div *ngIf="current == 5">
         <p class="ttl-dv-pc"><strong>ou</strong></p>
       </div>
-     <button nz-button nzType="default" (click)="next()" *ngIf="current<6" class="btn-suiv">
+     <button nz-button nzType="default" (click)="next()" *ngIf="current<6" [disabled]="disable_next()" class="btn-suiv btn-resp">
        <span>{{ current === 5 ? 'Finaliser mon devis - '+selectedPiece?.Titre : 'Suivant' }}</span>
        
      </button>

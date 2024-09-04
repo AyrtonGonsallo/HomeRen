@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 
@@ -18,6 +18,7 @@ export class EtatSurfacesComponent {
       
     }
   }
+  @Output() formValidityChange = new EventEmitter<boolean>();
   disabled = true;
   radioValue = 'A';
 //formulaires des poses et deposes
@@ -42,6 +43,7 @@ removeMurGroup(index: number): void {
 }
 
 onPoseMursSubmit(): void {
+  this.formValidityChange.emit(this.poseMursForm.valid);
   if (this.poseMursForm.valid) {
     console.log(this.poseMursForm.value);
     this.gestiondesdevisService.addFormulaire('etat-surfaces-pose-murs',5, this.poseMursForm.value);
