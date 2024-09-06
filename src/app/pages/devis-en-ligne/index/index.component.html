@@ -81,9 +81,7 @@
      <div class="devis-content" *ngIf="current == 2">
         <p class="ttl-dv-pc"><strong>Quelles sont les dimensions de votre {{selectedPiece?.Titre}} ?</strong></p>
        <!-- Formulaire pose murs  -->
-         <div *ngIf="is_travail_selected(14)">
-           <app-dimensions-depose-murs [triggerSubmitDimensionForm]="triggerSubmitDimensionForm"></app-dimensions-depose-murs>
-         </div>
+         
          <div *ngIf="is_travail_selected(5)">
            <app-dimensions-pose-murs [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-murs>
          </div>
@@ -92,11 +90,11 @@
          </div>
          <!-- Formulaire pose Plafond -->
          <div *ngIf="is_travail_selected(8)">
-           <app-dimensions-pose-plafond [triggerSubmitDimensionForm]="triggerSubmitDimensionForm"></app-dimensions-pose-plafond>
+           <app-dimensions-pose-plafond [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-plafond>
          </div>
          <!-- Formulaire pose Revetement de Sol -->
          <div *ngIf="is_travail_selected(9)">
-           <app-dimensions-pose-sol [triggerSubmitDimensionForm]="triggerSubmitDimensionForm"></app-dimensions-pose-sol>
+           <app-dimensions-pose-sol [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-sol>
          </div>
           <!-- Formulaire pose porte -->
           <div *ngIf="is_travail_selected(10)">
@@ -121,14 +119,11 @@
         <div *ngIf="is_travail_selected(5)">
           <app-etat-surfaces-pose-murs [triggerSubmitEtatSurfacesForm]="triggerSubmitEtatSurfacesForm" (formValidityChange)="is_formulaire_surfaces_valid = $event"></app-etat-surfaces-pose-murs>
         </div>
-        <div *ngIf="is_travail_selected(14)">
-         <app-etat-surfaces-depose-murs [triggerSubmitEtatSurfacesForm]="triggerSubmitEtatSurfacesForm"></app-etat-surfaces-depose-murs>
-       </div>
         <div *ngIf="is_travail_selected(8)">
-         <app-etat-surfaces-pose-plafond [triggerSubmitEtatSurfacesForm]="triggerSubmitEtatSurfacesForm"></app-etat-surfaces-pose-plafond>
+         <app-etat-surfaces-pose-plafond [triggerSubmitEtatSurfacesForm]="triggerSubmitEtatSurfacesForm" (formValidityChange)="is_formulaire_surfaces_valid = $event"></app-etat-surfaces-pose-plafond>
        </div>
        <div *ngIf="is_travail_selected(9)">
-         <app-etat-surfaces-pose-sol [triggerSubmitEtatSurfacesForm]="triggerSubmitEtatSurfacesForm"></app-etat-surfaces-pose-sol>
+         <app-etat-surfaces-pose-sol [triggerSubmitEtatSurfacesForm]="triggerSubmitEtatSurfacesForm" (formValidityChange)="is_formulaire_surfaces_valid = $event"></app-etat-surfaces-pose-sol>
        </div>
        <div *ngIf="is_travail_selected(12)">
          <app-etat-surfaces-pose-chauffage></app-etat-surfaces-pose-chauffage>
@@ -152,14 +147,11 @@
          <div *ngIf="is_travail_selected(5)" >
            <app-gammes-produits-pose-murs [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-pose-murs>
          </div>
-         <div *ngIf="is_travail_selected(14)">
-           <app-gammes-produits-depose-murs [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm"></app-gammes-produits-depose-murs>
-         </div>
          <div *ngIf="is_travail_selected(8)">
-           <app-gammes-produits-pose-plafond [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm"></app-gammes-produits-pose-plafond>
+           <app-gammes-produits-pose-plafond [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-pose-plafond>
          </div>
          <div *ngIf="is_travail_selected(9)">
-           <app-gammes-produits-pose-sol [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm"></app-gammes-produits-pose-sol>
+           <app-gammes-produits-pose-sol [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-pose-sol>
          </div>
          <div *ngIf="is_travail_selected(12)">
            <app-gammes-produits-pose-chauffage></app-gammes-produits-pose-chauffage>

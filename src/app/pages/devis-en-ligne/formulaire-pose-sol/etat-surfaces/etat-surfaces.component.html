@@ -8,9 +8,11 @@
                       <div><label nz-radio nzValue="Sol en bon état"><span>Sol en bon état</span></label></div>
                       <div><label nz-radio nzValue="Sol avec quelques bosses ou creux"><span>Sol avec quelques bosses ou creux</span></label></div>
                       <div><label nz-radio nzValue="Sol en mauvais état"><span>Sol en mauvais état</span></label></div>
-                     
+                      
                     </nz-radio-group>
-                     
+                     <div *ngIf="isclicked && poseSolForm.get('etat')?.invalid " class="error-message">
+                        état des surfaces requis.
+                      </div>
                    </div>
                  
                

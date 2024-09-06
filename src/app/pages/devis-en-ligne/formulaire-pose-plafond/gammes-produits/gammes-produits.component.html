@@ -9,13 +9,16 @@
                    <div nz-col nzSpan="6" class="ant-col">
                     <!-- <label for="gamme">Gamme: </label> -->
                     <nz-radio-group formControlName="gamme" class="radio-flx-spc">
-                      <div><label nz-radio *ngFor="let option of gammes_peinture" [nzValue]="option.ID+':'+option.Prix"><span>{{option.Label}}</span></label></div>
-                      <div><label nz-radio *ngFor="let option of gammes_enduit" [nzValue]="option.ID+':'+option.Prix"><span>{{option.Label}}</span></label></div>
-                      <div><label nz-radio *ngFor="let option of gammes_papier" [nzValue]="option.ID+':'+option.Prix"><span>{{option.Label}}</span></label></div>
-                      <div><label nz-radio *ngFor="let option of gammes_carrelage" [nzValue]="option.ID+':'+option.Prix"><span>{{option.Label}}</span></label></div>
+                      <div *ngFor="let option of gammes_peinture"><label nz-radio  [nzValue]="option.ID+':'+option.Prix"><span>{{option.Label}}</span></label><a *ngIf="option.Pdf" [href]="baseurl+option.Pdf" target="_blank">pdf</a></div>
+                      <div *ngFor="let option of gammes_enduit"><label nz-radio  [nzValue]="option.ID+':'+option.Prix"><span>{{option.Label}}</span></label><a *ngIf="option.Pdf" [href]="baseurl+option.Pdf" target="_blank">pdf</a></div>
+                      <div *ngFor="let option of gammes_papier"><label nz-radio  [nzValue]="option.ID+':'+option.Prix"><span>{{option.Label}}</span></label><a *ngIf="option.Pdf" [href]="baseurl+option.Pdf" target="_blank">pdf</a></div>
+                      <div *ngFor="let option of gammes_carrelage"><label nz-radio  [nzValue]="option.ID+':'+option.Prix"><span>{{option.Label}}</span></label><a *ngIf="option.Pdf" [href]="baseurl+option.Pdf" target="_blank">pdf</a></div>
 
                    </nz-radio-group>
                     
+                  </div>
+                  <div *ngIf="isclicked && posePlafondForm.get('gamme')?.invalid " class="error-message">
+                    les gammes sont requises.
                   </div>
                  </div>
                </div>

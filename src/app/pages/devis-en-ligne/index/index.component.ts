@@ -74,7 +74,7 @@ export class IndexComponent {
         console.error('Erreur lors de la recuperation des details de la piece choisie :', error);
       }
     );
-    this.userService.getTravauxByPieceId(this.selectedPieceId).subscribe(
+    this.userService.getValidatedTravauxByPieceId(this.selectedPieceId).subscribe(
       (response) => {
         this.travaux = response;
         this.listOfData =response;
@@ -115,7 +115,7 @@ export class IndexComponent {
         console.error('Erreur lors de la recuperation des details de la piece choisie :', error);
       }
     );
-    this.userService.getTravauxByPieceId(this.selectedPieceId).subscribe(
+    this.userService.getValidatedTravauxByPieceId(this.selectedPieceId).subscribe(
       (response) => {
         this.travaux = response;
         this.listOfData =response;

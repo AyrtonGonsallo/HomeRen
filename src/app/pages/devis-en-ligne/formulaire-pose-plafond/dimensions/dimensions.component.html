@@ -6,9 +6,11 @@
                    <div nz-col nzSpan="6" class="ant-col">
                      <label for="hauteur">Hauteur m: </label>
                      <input type="number" id="hauteur" formControlName="hauteur">
-                     <div *ngIf="posePlafondForm.get('hauteur')?.invalid && (posePlafondForm.get('hauteur')?.dirty || posePlafondForm.get('hauteur')?.touched)">
-                      </div>
+                     
                    </div>
+                   <div *ngIf="isclicked && posePlafondForm.get('hauteur')?.invalid " class="error-message">
+                    Hauteur requise.
+                  </div>
                    <!-- <div nz-col nzSpan="6" class="ant-col">
                      <label for="longueur">Longueur : </label>
                      <input type="number" id="longueur" formControlName="longueur">
@@ -21,7 +23,9 @@
                      <label for="surface">Surface m²: </label>
                      <input type="number" id="surface" formControlName="surface">
                    </div>
-                  
+                   <div *ngIf="isclicked && posePlafondForm.get('surface')?.invalid " class="error-message">
+                    Surface requise.
+                  </div>
                    <div nz-col nzSpan="6" class="ant-col"> 
                      <label for="image">Image :</label>
                      <input type="file" id="image" (change)="onFileChange($event,posePlafondForm)" accept="image/*">

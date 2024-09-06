@@ -9,9 +9,11 @@
                       <div><label nz-radio nzValue="Très abimé" class="radio-span"><span>Très abimé</span> </label></div>
                       <div><label nz-radio nzValue="abimé"><span>Abimé</span> </label></div>
                       <div><label nz-radio nzValue="reprises partielles"><span>Reprises partielles</span></label></div>
-                     
+                      
                     </nz-radio-group>
-                     
+                     <div *ngIf="isclicked && posePlafondForm.get('etat')?.invalid " class="error-message">
+                        état des surfaces requis.
+                      </div>
                    </div>
                    
                  </div>

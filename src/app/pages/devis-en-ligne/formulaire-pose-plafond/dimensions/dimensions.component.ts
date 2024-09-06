@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 
@@ -8,16 +8,19 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
    styleUrl: '../formulaire-pose-plafond.component.css'
 })
 export class DimensionsPosePlafondComponent {
+  isclicked=false
   @Input() triggerSubmitDimensionForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['triggerSubmitDimensionForm']) {
       console.log("trigger de soumission: ",this.triggerSubmitDimensionForm)
       if(this.triggerSubmitDimensionForm==true){
+        this.isclicked=true
         this.onPosePlafondSubmit();
       }
       
     }
   }
+  @Output() formValidityChange = new EventEmitter<boolean>();
   posePlafondForm: FormGroup;
   
   // le formulaire de pose plafond
@@ -29,6 +32,7 @@ export class DimensionsPosePlafondComponent {
     });
   }
   onPosePlafondSubmit(): void {
+    this.formValidityChange.emit(this.posePlafondForm.valid);
     if (this.posePlafondForm.invalid) {
       this.markFormGroupTouched(this.posePlafondForm);
       return;

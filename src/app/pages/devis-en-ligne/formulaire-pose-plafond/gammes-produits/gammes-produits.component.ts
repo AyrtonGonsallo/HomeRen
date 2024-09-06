@@ -1,7 +1,8 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-gammes-produits-pose-plafond',
@@ -9,16 +10,20 @@ import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-e
    styleUrl: '../formulaire-pose-plafond.component.css'
 })
 export class GammesProduitsPosePlafondComponent {
+  isclicked=false
+  baseurl=environment.imagesUrl
   @Input() triggerSubmitGammesProduitsForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['triggerSubmitGammesProduitsForm']) {
       console.log("trigger de soumission: ",this.triggerSubmitGammesProduitsForm)
       if(this.triggerSubmitGammesProduitsForm==true){
+        this.isclicked=true
         this.onPosePlafondSubmit();
       }
       
     }
   }
+  @Output() formValidityChange = new EventEmitter<boolean>();
   posePlafondForm: FormGroup;
   
   // le formulaire de pose plafond
@@ -28,10 +33,11 @@ export class GammesProduitsPosePlafondComponent {
       papier: [0, ],
       enduit: [0, ],
       peinture: [0, ],
-      gamme: [0, ]
+      gamme: ["",Validators.required ]
     });
   }
   onPosePlafondSubmit(): void {
+    this.formValidityChange.emit(this.posePlafondForm.valid);
     if (this.posePlafondForm.invalid) {
       this.markFormGroupTouched(this.posePlafondForm);
       return;

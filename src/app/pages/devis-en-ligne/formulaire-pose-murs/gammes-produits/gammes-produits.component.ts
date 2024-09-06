@@ -15,6 +15,7 @@ export class GammesProduitsComponent {
     if (changes['triggerSubmitGammesProduitsForm']) {
       console.log("trigger de soumission: ",this.triggerSubmitGammesProduitsForm)
       if(this.triggerSubmitGammesProduitsForm==true){
+        this.isclicked=true
         this.onPoseMursSubmit();
       }
       
@@ -22,6 +23,7 @@ export class GammesProduitsComponent {
   }
   @Output() formValidityChange = new EventEmitter<boolean>();
   baseurl=environment.imagesUrl
+  isclicked=false
 //formulaires des poses et deposes
 poseMursForm: FormGroup;
 formulaire_dimensions:any

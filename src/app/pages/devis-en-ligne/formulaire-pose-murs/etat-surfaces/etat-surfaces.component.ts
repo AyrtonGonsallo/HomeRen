@@ -13,6 +13,7 @@ export class EtatSurfacesComponent {
     if (changes['triggerSubmitEtatSurfacesForm']) {
       console.log("trigger de soumission: ",this.triggerSubmitEtatSurfacesForm)
       if(this.triggerSubmitEtatSurfacesForm==true){
+        this.isclicked=true
         this.onPoseMursSubmit();
       }
       
@@ -21,6 +22,7 @@ export class EtatSurfacesComponent {
   @Output() formValidityChange = new EventEmitter<boolean>();
   disabled = true;
   radioValue = 'A';
+  isclicked =false
 //formulaires des poses et deposes
 poseMursForm: FormGroup;
 formulaire_dimensions:any

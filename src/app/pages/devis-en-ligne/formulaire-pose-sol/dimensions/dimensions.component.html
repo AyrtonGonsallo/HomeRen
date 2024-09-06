@@ -5,9 +5,9 @@
                   <div nz-col nzSpan="6" class="ant-col" [nzXs]="24" [nzSm]="6">
                      <label for="surface">Surface m² :</label>
                      <input type="number" id="surface" formControlName="surface" required>
-                     <div *ngIf="poseSolForm.get('surface')?.invalid && (poseSolForm.get('surface')?.dirty || poseSolForm.get('surface')?.touched)">
-                        <div *ngIf="poseSolForm.get('surface')?.errors?.['required']" class="ant-form-item-explain-error">Surface est requise.</div>
-                     </div>
+                     <div *ngIf="isclicked && poseSolForm.get('surface')?.invalid " class="error-message">
+                        Surface requise.
+                      </div>
                   </div>
                
                   <!-- <div nz-col nzSpan="6" class="ant-col" [nzXs]="24" [nzSm]="6">

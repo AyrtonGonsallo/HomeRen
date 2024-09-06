@@ -8,12 +8,14 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-pose-murs.component.css'
 })
 export class DimensionsComponent {
+  isclicked=false
   @Input() triggerSubmitDimensionForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['triggerSubmitDimensionForm']) {
       console.log("trigger de soumission: ",this.triggerSubmitDimensionForm)
       if(this.triggerSubmitDimensionForm==true){
         this.onPoseMursSubmit();
+        this.isclicked=true
       }
       
     }

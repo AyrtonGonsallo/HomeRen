@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 
@@ -8,16 +8,19 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-pose-sol.component.css'
 })
 export class PoseSolEtatSurfacesComponent {
+  isclicked=false
   @Input() triggerSubmitEtatSurfacesForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['triggerSubmitEtatSurfacesForm']) {
       console.log("trigger de soumission: ",this.triggerSubmitEtatSurfacesForm)
       if(this.triggerSubmitEtatSurfacesForm==true){
+        this.isclicked=true
         this.onPoseSolSubmit();
       }
       
     }
   }
+  @Output() formValidityChange = new EventEmitter<boolean>();
   disabled = true;
   radioValue = 'A';
   poseSolForm: FormGroup;
@@ -31,6 +34,7 @@ export class PoseSolEtatSurfacesComponent {
     });
   }
   onPoseSolSubmit(): void {
+    this.formValidityChange.emit(this.poseSolForm.valid);
     if (this.poseSolForm.invalid) {
       this.markFormGroupTouched(this.poseSolForm);
       return;

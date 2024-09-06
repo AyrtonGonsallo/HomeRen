@@ -1,7 +1,8 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-gammes-produits-pose-sol',
@@ -9,16 +10,20 @@ import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-e
   styleUrl: '../formulaire-pose-sol.component.css'
 })
 export class PoseSolGammesProduitsComponent {
+  baseurl=environment.imagesUrl
+  isclicked=false
   @Input() triggerSubmitGammesProduitsForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['triggerSubmitGammesProduitsForm']) {
       console.log("trigger de soumission: ",this.triggerSubmitGammesProduitsForm)
       if(this.triggerSubmitGammesProduitsForm==true){
+        this.isclicked=true
         this.onPoseSolSubmit();
       }
       
     }
   }
+  @Output() formValidityChange = new EventEmitter<boolean>();
   poseSolForm: FormGroup;
   
   //le formulaire de pose sol
@@ -33,12 +38,13 @@ export class PoseSolGammesProduitsComponent {
       sol_pvc_prix: [0, ],
       moquette_prix: [0, ],
       carrelage: [0, ],
-      gamme: [0, ],
-      plinthes: [0, ],
+      gamme: ["", Validators.required],
+      plinthes: [0,],
     });
   }
 
   onPoseSolSubmit(): void {
+    this.formValidityChange.emit(this.poseSolForm.valid);
     if (this.poseSolForm.invalid) {
       this.markFormGroupTouched(this.poseSolForm);
       return;

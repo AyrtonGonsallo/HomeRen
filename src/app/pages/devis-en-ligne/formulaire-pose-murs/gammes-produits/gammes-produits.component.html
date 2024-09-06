@@ -16,7 +16,7 @@
            </nz-radio-group>
             
           </div> 
-          <div *ngIf="murs.controls[i].get('gamme')?.invalid " class="error-message">
+          <div *ngIf="isclicked && murs.controls[i].get('gamme')?.invalid " class="error-message">
             les gammes sont requises.
           </div>
           
