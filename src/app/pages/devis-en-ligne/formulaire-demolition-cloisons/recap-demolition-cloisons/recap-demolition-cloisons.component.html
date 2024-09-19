@@ -1,0 +1,34 @@
+<div  class="recap-div devis-content">
+    <span class="recup-fin"><p >Pièce</p><p>:</p><p>{{selectedPiece.Titre}}</p></span>
+    murs non porteurs
+    <div *ngFor="let dim of dimensions_murs_non_porteurs; let i = index">
+        mur {{i+1}}
+        <span class="recup-fin" ><p>hauteur </p><p>:</p><p>{{dim?.hauteur}}</p></span>
+        <span class="recup-fin" ><p>longueur </p><p>:</p><p>{{dim?.longueur}}</p></span>
+        <span class="recup-fin" ><p>epaisseur </p><p>:</p><p>{{dim?.epaisseur}}</p></span>
+        <span class="recup-fin" ><p>volume </p><p>:</p><p>{{dim?.volume}}</p></span>
+        <span class="recup-fin" *ngIf="gammes_materiaux[i]"><p>matériel </p><p>:</p><p>{{get_title(gammes_materiaux[i]?.materiaux)}}</p></span>
+    </div>
+
+    pose de portes
+    <div>
+        <span class="recup-fin" ><p>quantite portes simples creuse </p><p>:</p><p>{{quantite_portes_simples_creuse}}</p></span>
+        <span class="recup-fin" ><p>quantite portes doubles creuses </p><p>:</p><p>{{quantite_portes_doubles_creuses}}</p></span>
+        <span class="recup-fin" ><p>quantite porte simple plein </p><p>:</p><p>{{quantite_porte_simple_plein}}</p></span>
+        <span class="recup-fin" ><p>quantite porte double pleine </p><p>:</p><p>{{quantite_porte_double_pleine}}</p></span>
+    </div>
+
+    ouverturePartielle
+    <div *ngFor="let dim of dimensions_ouverture; let i = index">
+        ouverture {{i+1}}
+        <span class="recup-fin" ><p>hauteur </p><p>:</p><p>{{dim?.hauteur}}</p></span>
+        <span class="recup-fin" ><p>longueur </p><p>:</p><p>{{dim?.longueur}}</p></span>
+        <span class="recup-fin" ><p>longueur du mur </p><p>:</p><p>{{dim?.longueur_du_mur}}</p></span>
+        <span class="recup-fin" ><p>epaisseur </p><p>:</p><p>{{dim?.epaisseur}}</p></span>
+        <span class="recup-fin" ><p>volume </p><p>:</p><p>{{dim?.volume}}</p></span>
+        <span class="recup-fin" *ngIf="gammes_cloison[i]"><p>cloison </p><p>:</p><p>{{get_title(gammes_cloison[i]?.cloison)}}</p></span>
+
+    </div>
+
+    
+</div>

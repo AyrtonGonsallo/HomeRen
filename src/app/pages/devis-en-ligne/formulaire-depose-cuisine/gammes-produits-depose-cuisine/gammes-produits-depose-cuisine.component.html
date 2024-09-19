@@ -1,0 +1,37 @@
+<form [formGroup]="deposeElementCuisinesForm" (ngSubmit)="ondeposeElementCuisinesSubmit()">
+    <!-- Section pour ajouter des gammes -->
+    <div formArrayName="gammes">
+      <div *ngFor="let gamme of gammes.controls; let i = index" [formGroupName]="i">
+        <div nz-row nzJustify="start" >
+            <!-- Champ Quantité -->
+            <div nz-col nzSpan="20" class="ant-col">
+                <label >{{gammes_depose[i].Label}}</label>
+            </div>
+            <div nz-col nzSpan="10" class="ant-col">
+                <label for="quantite-{{i}}">Quantité</label>
+                <input id="quantite-{{i}}" type="number" formControlName="quantite" />
+                <div *ngIf="gamme.get('quantite')?.invalid && isclicked" class="error-message">
+                Quantité requise
+                </div>
+            </div>
+
+            <!-- Champ Image -->
+            <div nz-col nzSpan="10" class="ant-col">
+                <label for="image-{{i}}">Image</label>
+                <input id="image-{{i}}" type="file" (change)="onGammeFileChange($event, i)" />
+                <div *ngIf="gamme.get('image')?.invalid && isclicked" class="error-message">
+                Veuillez télécharger une image valide
+                </div>
+            </div>
+        </div>
+        
+  
+      </div>
+    </div>
+  
+    
+    
+  </form>
+  
+
+  

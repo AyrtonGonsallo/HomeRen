@@ -1,7 +1,10 @@
 <div class="section-devis">
   <div class="devis-title">
     <div *ngIf="current < 2">
-      <h1 class="center gris font-site">Demandez votre devis gratuit</h1>    
+      <h1 class="center gris font-site">Demandez votre devis gratuit</h1> 
+      <p class="center f-w-4 fs-18 m-w-tt">Vous souhaitez rénover une ou plusieurs pièces de votre habitation ? Obtenez un devis gratuit sur <a class="fs-18 txt-dec gris" href="/">Homeren.fr</a> 
+        <br>
+        Pour commencer : sélectionnez une première pièce à rénover et laissez-vous guider !</p>   
     </div>
     <div *ngIf="current == 2">
       <h1 class="center gris font-site">{{filteredTravail.Titre}}</h1>
@@ -20,7 +23,7 @@
     </div>
    <!-- <p class="center f-w-4 fs-30 m-w-p"><strong> Vous avez un projet de rénovation en tête ?</strong>Remplissez notre formulaire en ligne pour une estimation personnalisée et sans engagement.</p> -->
   </div>
-  <nz-steps [nzCurrent]="current">
+  <nz-steps [nzCurrent]="current" *ngIf="current!=0">
      <nz-step nzIcon="home" nzTitle="Choix de la piece">
      </nz-step>
      <nz-step nzIcon="tool" nzTitle="Travaux">
@@ -45,13 +48,14 @@
    </div>
    <div class="steps-content" >
      <div class="devis-content" *ngIf="current == 0">
-        <p class="ttl-dv-pc"><strong>Je rénove une pièce</strong></p>
+        <p class="ttl-dv-pc"><strong>Choisir une pièce à rénover</strong></p>
         <div *ngFor="let ppc of pieces_par_categories">
            <p class="fs-20 mr-b-2 jaune"><strong>{{ppc?.Titre}}</strong></p>
            <div class="col-pcs-devis" >
               <div class="pcs-devis" id="piece-{{piece.ID}}" *ngFor="let piece of ppc.Pieces" (click)="selectPiece(piece.ID)">
                  <img src="{{baseurl}}{{piece.Image_presentation}}" alt="">
                  <p class="blanc pcs-devis-ttle"><strong>{{piece.Titre}}</strong></p>
+                 <div *ngIf="selectedPieceId === piece.ID" class="checkmark-overlay"> <i class="fas fa-check"></i></div>
               </div>
            </div>
         </div>
@@ -80,8 +84,13 @@
     </div>
      <div class="devis-content" *ngIf="current == 2">
         <p class="ttl-dv-pc"><strong>Quelles sont les dimensions de votre {{selectedPiece?.Titre}} ?</strong></p>
-       <!-- Formulaire pose murs  -->
-         
+        <div *ngIf="is_travail_selected(2)">
+          <app-dimensions-depose-cuisine [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-depose-cuisine>
+        </div>
+        <div *ngIf="is_travail_selected(3)">
+          <app-dimensions-demolition-cloisons [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-demolition-cloisons>
+        </div>
+        <!-- Formulaire pose murs  -->
          <div *ngIf="is_travail_selected(5)">
            <app-dimensions-pose-murs [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-murs>
          </div>
@@ -139,8 +148,17 @@
        </div>
      </div>
      <div class="devis-content" *ngIf="current == 4">
-       <p class="ttl-dv-pc"><strong>Quelles sont les gammes de produits que vous souhaitez dans votre {{selectedPiece?.Titre}} ?</strong></p>
-         <div *ngIf="is_travail_selected(4)">
+       <p class="ttl-dv-pc" *ngIf="filteredTravail.ID != 2"><strong>Quelles sont les gammes de produits que vous souhaitez dans votre {{selectedPiece?.Titre}} ?</strong></p>
+       <p class="ttl-dv-pc" *ngIf="filteredTravail.ID == 2"><strong>Quelles sont les gammes de produits que vous souhaitez deposer dans votre {{selectedPiece?.Titre}} ?</strong></p>
+
+       <div *ngIf="is_travail_selected(2)">
+          <app-gammes-produits-depose-cuisine [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-depose-cuisine>
+        </div>
+        <div *ngIf="is_travail_selected(3)">
+          <app-gammes-produits-demolition-cloisons [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-demolition-cloisons>
+        </div>
+        
+        <div *ngIf="is_travail_selected(4)">
            <app-gammes-produits-creation-murs-non-porteurs></app-gammes-produits-creation-murs-non-porteurs>
          </div>
          <!-- Formulaire pose murs  -->
@@ -163,7 +181,7 @@
            <app-gammes-produits-pose-electricite></app-gammes-produits-pose-electricite>
          </div>
          <div *ngIf="is_travail_selected(11)">
-           <app-gammes-produits-pose-plomberie [selectedPiece]="selectedPiece"></app-gammes-produits-pose-plomberie>
+           <app-gammes-produits-pose-plomberie [selectedPiece]="selectedPiece" [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-pose-plomberie>
          </div>
           <!--<button nz-button nzType="default" (click)="addtask()" *ngIf="current ==4">
            <span>Retour à la liste des travaux</span>
@@ -172,6 +190,12 @@
       
       <div class="devis-content" *ngIf="current == 5">
         <p class="ttl-dv-pc"><strong>Récapitulatif : {{filteredTravail.Titre}} - {{selectedPiece?.Titre}}</strong></p>
+        <div *ngIf="is_travail_selected(2)">
+          <app-recap-depose-cuisine [selectedPiece]="selectedPiece"></app-recap-depose-cuisine>
+        </div>
+        <div *ngIf="is_travail_selected(3)">
+          <app-recap-demolition-cloisons [selectedPiece]="selectedPiece"></app-recap-demolition-cloisons>
+        </div>
         <div *ngIf="is_travail_selected(4)">
           <app-recap-creation-murs-non-porteurs [selectedPiece]="selectedPiece"></app-recap-creation-murs-non-porteurs>
         </div>
@@ -188,37 +212,50 @@
         <div *ngIf="is_travail_selected(9)">
           <app-recap-pose-sol [selectedPiece]="selectedPiece"></app-recap-pose-sol>
         </div>
-
+        <div *ngIf="is_travail_selected(11)">
+          <app-recap-pose-plomberie [selectedPiece]="selectedPiece"></app-recap-pose-plomberie>
+        </div>
       </div>
       <div class="devis-content" *ngIf="current == 6">
-        <div class="msg-validation">
+        <div class="msg-validation" *ngIf="!hide_finalisation_message">
           <img src="/assets/Frame.svg" alt="">
           <p> Votre devis en ligne est prêt !<br>
-            Vous le recevrez bientôt par email.</p>
-</div>
-<p class="ttl-dv-pc"><strong>Je rénove une pièce</strong></p>
-<div *ngFor="let ppc of pieces_par_categories">
- <p class="fs-20 mr-b-2 jaune"><strong>{{ppc?.Titre}}</strong></p>
- <div class="col-pcs-devis" >
-    <div class="pcs-devis" id="piece-{{piece.ID}}" *ngFor="let piece of ppc.Pieces" (click)="selectPieceAndRedirect(piece.ID)">
-       <img src="{{baseurl}}{{piece.Image_presentation}}" alt="">
-       <p class="blanc pcs-devis-ttle"><strong>{{piece.Titre}}</strong></p>
-    </div>
- </div>
-</div>
+            Vous le recevrez bientôt par email.
+          </p>
+        </div>
+        <p class="ttl-dv-pc"><strong>Je rénove une pièce</strong></p>
+        <div *ngFor="let ppc of pieces_par_categories">
+        <p class="fs-20 mr-b-2 jaune"><strong>{{ppc?.Titre}}</strong></p>
+        <div class="col-pcs-devis" >
+            <div class="pcs-devis" id="piece-{{piece.ID}}" *ngFor="let piece of ppc.Pieces" (click)="selectPieceAndRedirect(piece.ID)">
+              <img src="{{baseurl}}{{piece.Image_presentation}}" alt="">
+              <p class="blanc pcs-devis-ttle"><strong>{{piece.Titre}}</strong></p>
+            </div>
+        </div>
+        </div>
       </div>
    </div>
    <div class="steps-action">
-      <button *ngIf="current == 5" nz-button nzType="default" (click)="addtask()" class="btn-retour" >
-        <span>Ajouter une prestation - {{selectedPiece?.Titre}}</span>
-      </button>
-      <div *ngIf="current == 5">
-        <p class="ttl-dv-pc"><strong>ou</strong></p>
+    <div nz-row class="div-btn-flx-frm">
+      <div nz-col nzXs="20" nzSm="20" nzMd="20" nzLg="10" nzXl="10">
+        <button *ngIf="current == 5" nz-button nzType="default" (click)="addtask()" class="btn-suiv btn-add-pre" >
+          <span>Ajouter une prestation - {{selectedPiece?.Titre}}</span>
+        </button>
       </div>
-     <button nz-button nzType="default" (click)="next()" *ngIf="current<6" [disabled]="disable_next()" class="btn-suiv btn-resp">
-       <span>{{ current === 5 ? 'Finaliser mon devis - '+selectedPiece?.Titre : 'Suivant' }}</span>
-       
-     </button>
+      <div nz-col nzXs="20" nzSm="20" nzMd="20" nzLg="10" nzXl="10" class="div-btn-frm">
+        <button nz-button nzType="default" (click)="next()" *ngIf="current<6" [disabled]="disable_next()" class="btn-suiv btn-add-pre">
+          <span>{{ current === 5 ? 'Finaliser mon devis - '+selectedPiece?.Titre : 'Suivant' }}</span>
+          
+        </button>
+      </div>
+    </div>
+     
+     <div *ngIf="current == 5">
+      <p class="dv-pc-ou"><strong>- ou -</strong></p>
+    </div>
+     <button *ngIf="current == 5" nz-button nzType="default" (click)="submit_devis_and_choose_piece()" class=" btn-suiv btn-resp btn-retour" >
+      <span>Choisir une autre pièce</span>
+    </button>
    </div>
 </div>
 

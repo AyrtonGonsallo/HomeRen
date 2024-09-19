@@ -39,28 +39,37 @@
           <div *ngFor="let appareilGroup of appareils_salle_de_bain; let i = index" [formGroupName]="i">
             
               <h3>{{appareils_salle_de_bain && appareils_salle_de_bain[i] ? appareils_salle_de_bain[i].Titre :""}}</h3>
-              <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
-                <div nz-col nzSpan="12" class="ant-col">
-                    <label for="{{appareilGroup.Titre}} {{modele.Titre}}">{{modele.Titre}}</label>
-                    <input type="checkbox" id="{{appareilGroup.Titre}} {{modele.Titre}}" formControlName="{{appareilGroup.Titre}} {{modele.Titre}}">      
+              <nz-radio-group formControlName="{{appareilGroup.Titre}}" class="radio-flx-spc">
+                <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
+                  <div nz-col nzSpan="12" class="ant-col">
+                    
+                    <div> 
+                      <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre">
+                        <span>
+                          <!-- Dynamically display the label based on the type -->
+                          {{ modele.Titre }}
+                        </span>
+                      </label>
+                      
+                    </div>
+                    
+                  </div>
+                  <div nz-col nzSpan="4" class="ant-col fs-15">
+                      <label >Longueur</label>
+                      {{modele.Longeur}}      
+                  </div>
+                  <div nz-col nzSpan="4" class="ant-col fs-15">
+                      <label>Largeur</label>
+                      {{modele.Largeur}}      
+                  </div>
+                  <div nz-col nzSpan="4" class="ant-col fs-15">
+                      <label>Hauteur</label>
+                      {{modele.Hauteur}}      
+                  </div>
                 </div>
-                <div nz-col nzSpan="4" class="ant-col">
-                    <label>Longueur</label>
-                    {{modele.Longeur}}      
-                </div>
-                <div nz-col nzSpan="4" class="ant-col">
-                    <label>Largeur</label>
-                    {{modele.Largeur}}      
-                </div>
-                <div nz-col nzSpan="4" class="ant-col">
-                    <label>Hauteur</label>
-                    {{modele.Hauteur}}      
-                </div>
-                <!-- Ajoutez d'autres champs ici pour chaque modèle -->
-              </div>
-                
+              </nz-radio-group> 
                 <!-- Ajoutez d'autres champs selon vos besoins -->
-              </div>
+          </div>
             
             
         </div>

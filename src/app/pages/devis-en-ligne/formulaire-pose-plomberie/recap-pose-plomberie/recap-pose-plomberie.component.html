@@ -1,0 +1,9 @@
+<div *ngIf="appareilschoisis" class="recap-div devis-content">
+    <span class="recup-fin"><p >Pièce</p><p>:</p><p>{{selectedPiece.Titre}}</p></span>
+    <div *ngFor="let appareil of appareilschoisis">
+        <span class="recup-fin" ><p>appareil</p><p>:</p><p>{{appareil?.titre}}</p></span>
+        <span class="recup-fin" ><p>prix</p><p>:</p><p>{{appareil?.prix}}</p></span>
+        <span class="recup-fin" ><p>depose</p><p>:</p><p>{{appareil?.depose}}</p></span>
+
+    </div>
+</div>

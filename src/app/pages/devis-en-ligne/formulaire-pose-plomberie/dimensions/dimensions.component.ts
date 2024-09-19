@@ -87,7 +87,7 @@ export class PosePlomberieDimensionsComponent {
       
             // Ajouter dynamiquement les contrôles pour chaque modèle d'équipement
             modeleEquipements.forEach((modele, index) => {
-              appareilGroup.addControl(appareil.Titre+" "+modele.Titre, this.fb.control(false, ));
+              appareilGroup.addControl(appareil.Titre, this.fb.control(false, ));
               // Ajoutez d'autres contrôles selon vos besoins pour chaque modèle
             });
       
@@ -113,7 +113,7 @@ export class PosePlomberieDimensionsComponent {
               
           // Ajouter dynamiquement les contrôles pour chaque modèle d'équipement
           modeleEquipements.forEach((modele, index) => {
-            appareilGroup.addControl(appareil.Titre+" "+modele.Titre, this.fb.control(false, ));
+            appareilGroup.addControl(appareil.Titre, this.fb.control(false, ));
             // Ajoutez d'autres contrôles selon vos besoins pour chaque modèle
           });
 

@@ -1,33 +1,30 @@
 <div class="plaf-dim">
             <form [formGroup]="poseSolForm" (ngSubmit)="onPoseSolSubmit()">
                <img class="srf-img" src="/assets/Rectangle.svg">
-               <div nz-row nzJustify="start" >
+               <div nz-row nzJustify="start" class="tooltip-srf">
                   <div nz-col nzSpan="6" class="ant-col" [nzXs]="24" [nzSm]="6">
-                     <label for="surface">Surface m² :</label>
+                     <label for="surface">
+                       Surface m²
+                       <span class="error-message">*</span> :
+                       <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                         <i class="far fa-question-circle"></i>
+                       </a>
+                     </label>
                      <input type="number" id="surface" formControlName="surface" required>
-                     <div *ngIf="isclicked && poseSolForm.get('surface')?.invalid " class="error-message">
+                   
+                     <ng-template #tooltipSurface>
+                       <div class="tooltip-content">
+                         <strong>Calcul de la surface :</strong><br>
+                         <p>La surface est calculée en multipliant la longueur par la largeur de la pièce. Mesurez chaque côté avec précision pour obtenir la surface totale en m².</p>
+                         <p><strong>Exemple :</strong> Si la pièce fait 4m de long et 3m de large, la surface totale est de 12 m².</p>
+                       </div>
+                     </ng-template>
+                   </div>
+                   
+                <div *ngIf="isclicked && poseSolForm.get('surface')?.invalid " class="error-message">
                         Surface requise.
                       </div>
-                  </div>
-               
-                  <!-- <div nz-col nzSpan="6" class="ant-col" [nzXs]="24" [nzSm]="6">
-                     <label for="longueur_piece">Longueur de la pièce :</label>
-                     <input type="number" id="longueur_piece" formControlName="longueur_piece" required>
-                     <div *ngIf="poseSolForm.get('longueur_piece')?.invalid && (poseSolForm.get('longueur_piece')?.dirty || poseSolForm.get('longueur_piece')?.touched)">
-                        <div  class="ant-form-item-explain-error">Longueur est requise.</div>
-                     </div>
-                  </div> -->
-               
-                  <!-- <div nz-col nzSpan="6" class="ant-col" [nzXs]="24" [nzSm]="6">
-                     <label for="largeur_piece">Largeur de la pièce :</label>
-                     <input type="number" id="largeur_piece" formControlName="largeur_piece" required>
-                     <div *ngIf="poseSolForm.get('largeur_piece')?.invalid && (poseSolForm.get('largeur_piece')?.dirty || poseSolForm.get('largeur_piece')?.touched)">
-                        <div *ngIf="poseSolForm.get('largeur_piece')?.errors?.['required']" class="ant-form-item-explain-error">Largeur est requise.</div>
-                     </div>
-                  </div> -->
-               
-                 
-               
+
                   <div nz-col nzSpan="6" [nzXs]="24" [nzSm]="6" class="ant-col image">
                      <label for="image">Image :</label>
                      <input type="file" id="image" (change)="onFileChange($event,poseSolForm)" accept="image/*">

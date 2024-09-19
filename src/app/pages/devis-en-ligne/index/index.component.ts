@@ -136,6 +136,7 @@ export class IndexComponent {
     this.triggerSubmitDimensionForm= false;
     this.triggerSubmitEtatSurfacesForm= false;
     this.triggerSubmitGammesProduitsForm= false;
+    this.hide_finalisation_message=false
     this.gestiondesdevisService.clearFormulaires()
   }
   radioValue = 'A';
@@ -291,7 +292,11 @@ export class IndexComponent {
   public triggerSubmitEtatSurfacesForm: boolean = false;
   public triggerSubmitGammesProduitsForm: boolean = false;
   next(): void {
-   
+    
+   if(this.jump()){
+
+   }else{
+
     switch (this.current) {
       case 2:
         this.triggerSubmitDimensionForm = !this.triggerSubmitDimensionForm;
@@ -320,7 +325,11 @@ export class IndexComponent {
       if(this.current==2 ){
         console.log("formulaire dim valide ? ",this.is_formulaire_dimensions_valid)
         if(this.is_formulaire_dimensions_valid){
-          this.current += 1;
+          if(this.filteredTravail.ID==2 || this.filteredTravail.ID==3){
+            this.current=4
+          }else{
+            this.current += 1;
+          }
           this.changeContent();
         }else{
           this.triggerSubmitDimensionForm=!this.triggerSubmitDimensionForm
@@ -336,6 +345,7 @@ export class IndexComponent {
         
       }
       else if(this.current==4){
+        console.log("formulaire gammes valide ? ",this.is_formulaire_gammes_valid)
         if(this.is_formulaire_gammes_valid){
           this.current += 1;
           this.changeContent();
@@ -351,7 +361,18 @@ export class IndexComponent {
     
       
     }, 2000);
+   }
+  
     
+    
+  }
+  jump(): boolean {//pour les cas ou on doit sauter des etapes
+    if(this.is_one_travail_selected && this.filteredTravail.ID==11 && this.current<=2){
+      this.current=4
+      return true
+    }
+    
+   return false
     
   }
   done(): void {
@@ -412,5 +433,10 @@ export class IndexComponent {
   getBrowserInfo() {
     this.browserInfo = navigator.userAgent;
   }
-  
+  hide_finalisation_message=false;
+  submit_devis_and_choose_piece(){
+    this.done()
+    this.current+=1
+    this.hide_finalisation_message=true
+  }
 }

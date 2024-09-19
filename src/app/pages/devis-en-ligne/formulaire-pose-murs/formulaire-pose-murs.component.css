@@ -175,3 +175,11 @@ form{
     @media screen and (max-width: 375px) {
     .plaf-dim input{ width: 90% !important;}
     }
+    .tooltip-srf .radio-flx-spc div { grid-template-columns: 6fr 1fr;}
+    .tooltip-srf i.far.fa-question-circle {
+    color: var(--color1);
+    font-size: 20px;
+    margin-top: 9px;
+    }
+    .link-tooltip{color:var(--color1);}
+    .link-tooltip:hover{color:var(--color-white);text-decoration: underline;}

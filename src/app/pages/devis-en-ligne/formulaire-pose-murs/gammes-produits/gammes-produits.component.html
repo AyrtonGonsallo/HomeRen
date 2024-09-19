@@ -2,22 +2,34 @@
 <form [formGroup]="poseMursForm" (ngSubmit)="onPoseMursSubmit()">
 
   <div formArrayName="murs">
-      <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
-        <span class="mur-ttl">Mur {{i+1}}</span>
-        <div nz-row nzJustify="start">
-          <div nz-col nzSpan="6" class="ant-col col-gm">
-            <label for="gamme" class="etat-srf-lab">Gamme: </label>
-            <nz-radio-group formControlName="gamme"class="radio-flx-spc">
-             <div *ngFor="let option of gammes_peinture"><label nz-radio  [nzValue]="option.ID+':'+option.Prix"><span>Peinture {{option.Label}}</span></label> <a *ngIf="option.Pdf" [href]="baseurl+option.Pdf" target="_blank">pdf</a></div>
-             <div *ngFor="let option of gammes_enduit"><label nz-radio  [nzValue]="option.ID+':'+option.Prix"><span>Enduit {{option.Label}}</span></label> <a *ngIf="option.Pdf" [href]="baseurl+option.Pdf" target="_blank">pdf</a></div>
-             <div *ngFor="let option of gammes_papier"><label nz-radio  [nzValue]="option.ID+':'+option.Prix"><span>Papier {{option.Label}}</span></label> <a *ngIf="option.Pdf" [href]="baseurl+option.Pdf" target="_blank">pdf</a></div>
-             <div *ngFor="let option of gammes_carrelage"><label nz-radio  [nzValue]="option.ID+':'+option.Prix"><span>Carrelage {{option.Label}}</span></label> <a *ngIf="option.Pdf" [href]="baseurl+option.Pdf" target="_blank">pdf</a></div>
-
-           </nz-radio-group>
-            
-          </div> 
+    <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
+      <span class="mur-ttl">Mur {{i+1}}</span>
+      <div nz-row nzJustify="start">
+        <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf">
+          <label for="gamme" class="etat-srf-lab">Gamme: </label>
+          <nz-radio-group formControlName="gamme" class="radio-flx-spc">
+            <!-- Reusable template for displaying options with PDFs -->
+            <ng-container *ngFor="let gamme of [gammes_peinture, gammes_enduit, gammes_papier, gammes_carrelage]">
+              <div *ngFor="let option of gamme" class="parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+                  <span>
+                    <!-- Dynamically display the label based on the type -->
+                    {{ option.Label }}
+                  </span>
+                </label>
+                <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
+                <ng-template #tooltipTemplate>
+                  Pour plus d'informations, veuillez consulter :
+                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                </ng-template>
+              </div>
+            </ng-container>
+          </nz-radio-group>
+        </div>
           <div *ngIf="isclicked && murs.controls[i].get('gamme')?.invalid " class="error-message">
-            les gammes sont requises.
+            Les gammes sont requises.
           </div>
           
         </div>

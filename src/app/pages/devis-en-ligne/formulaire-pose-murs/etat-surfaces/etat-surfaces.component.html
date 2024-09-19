@@ -6,17 +6,61 @@
                   <span class="mur-ttl">Mur {{i+1}}</span>
                   <div nz-row nzJustify="start" >
                    
-                    <div nz-col nzSpan="6" class="ant-col etat-srf">
+                    <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
                       <!-- <label for="etat">État de mur: </label> -->
                       <nz-radio-group formControlName="etat" class="radio-flx-spc">
-                        <div><label nz-radio nzValue="Très abimé" class="radio-span"><span>Très abimé</span> </label></div>
-                      <div><label nz-radio nzValue="abimé"><span>Abimé</span> </label></div>
-                      <div><label nz-radio nzValue="reprises partielles"><span>Reprises partielles</span></label></div>
-                      <div><label nz-radio nzValue="depose"><span>Dépose</span></label></div>
-                    </nz-radio-group>
+                        <div>
+                          <label nz-radio nzValue="Très abimé" class="radio-span">
+                            <span>Très abimé</span>
+                          </label>
+                          <a nz-tooltip [nzTooltipTitle]="tooltipTresAbime" href="javascript:void(0)" class="info-icon">
+                            <i class="far fa-question-circle"></i>
+                          </a>
+                          <ng-template #tooltipTresAbime>
+                            Le mur est très abimé, une réparation complète est indispensable.
+                          </ng-template>
+                        </div>
+                        
+                        <div>
+                          <label nz-radio nzValue="abimé">
+                            <span>Abimé</span>
+                          </label>
+                          <a nz-tooltip [nzTooltipTitle]="tooltipAbime" href="javascript:void(0)" class="info-icon">
+                            <i class="far fa-question-circle"></i>
+                          </a>
+                          <ng-template #tooltipAbime>
+                            Le mur présente des signes d'usure, envisagez des réparations mineures.
+                          </ng-template>
+                        </div>
+                        
+                        <div>
+                          <label nz-radio nzValue="reprises partielles">
+                            <span>Reprises partielles</span>
+                          </label>
+                          <a nz-tooltip [nzTooltipTitle]="tooltipReprisesPartielles" href="javascript:void(0)" class="info-icon">
+                            <i class="far fa-question-circle"></i>
+                          </a>
+                          <ng-template #tooltipReprisesPartielles>
+                            Des réparations partielles sont nécessaires pour maintenir le mur en bon état.
+                          </ng-template>
+                        </div>
+                      
+                        <div>
+                          <label nz-radio nzValue="depose">
+                            <span>Dépose</span>
+                          </label>
+                          <a nz-tooltip [nzTooltipTitle]="tooltipDepose" href="javascript:void(0)" class="info-icon">
+                            <i class="far fa-question-circle"></i>
+                          </a>
+                          <ng-template #tooltipDepose>
+                            La dépose du mur existant est recommandée avant l'installation d'un nouveau revêtement.
+                          </ng-template>
+                        </div>
+                      </nz-radio-group>
+                      
                     </div>
                     <div *ngIf="isclicked && murs.controls[i].get('etat')?.invalid " class="error-message">
-                      état des surfaces requis.
+                      État des surfaces requis.
                     </div>
                   </div>
                 </div>

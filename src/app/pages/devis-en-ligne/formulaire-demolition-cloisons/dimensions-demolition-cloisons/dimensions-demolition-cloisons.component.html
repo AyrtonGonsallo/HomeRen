@@ -1,0 +1,144 @@
+<div class="plaf-dim">
+    <h3>MURS NON PORTEURS</h3>
+    <form [formGroup]="mursNonporteursForm" (ngSubmit)="onSubmitform1()">
+
+       <div formArrayName="mursNonporteurs">
+        <div *ngFor="let mur of mursNonporteurs.controls; let i = index" [formGroupName]="i" >
+          <span class="mur-ttl">mur {{i+1}}</span>
+          <div nz-row nzJustify="start" >
+           
+            <div nz-col nzSpan="6" class="ant-col">
+               <label for="longueur">longueur <span class="error-message">*</span> : </label>
+               <input type="number" id="longueur" formControlName="longueur">
+             </div>
+             <div *ngIf="isclicked && mursNonporteurs.controls[i].get('longueur')?.invalid " class="error-message">
+                longueur requise.
+            </div>
+             <div nz-col nzSpan="6" class="ant-col">
+               <label for="hauteur">hauteur <span class="error-message">*</span>: </label>
+               <input type="number" id="hauteur" formControlName="hauteur">
+             </div>
+             <div *ngIf="isclicked && mursNonporteurs.controls[i].get('hauteur')?.invalid " class="error-message">
+                Hauteur requise.
+              </div>
+             <div nz-col nzSpan="6" class="ant-col">
+                <label for="epaisseur">epaisseur <span class="error-message">*</span>: </label>
+                <input type="number" id="epaisseur" formControlName="epaisseur">
+              </div>
+              <div *ngIf="isclicked && mursNonporteurs.controls[i].get('epaisseur')?.invalid " class="error-message">
+                epaisseur requise.
+              </div>
+              <div nz-col nzSpan="6" class="ant-col">
+                <label for="volume">volume <span class="error-message">*</span>: </label>
+                <input type="number" id="volume" formControlName="volume">
+              </div>
+              <div *ngIf="isclicked && mursNonporteurs.controls[i].get('volume')?.invalid " class="error-message">
+                volume requis.
+              </div>
+             
+             <div nz-col nzSpan="6" class="ant-col"> 
+               <label for="image">Image : </label>
+               <input type="file" id="image" (change)="onmursNonporteursFileChange($event, i)" accept="image/*">
+             </div>
+             <button type="button" class="dynamic-form-button del-btn" (click)="removemursNonporteursGroup(i)" *ngIf="mursNonporteurs.length > 1">Retirer le mur</button>
+           </div>
+         </div>
+        </div>
+         
+       <button type="button"  class="dynamic-form-button add-btn" (click)="addmursNonporteursGroup()" *ngIf="mursNonporteurs.length < 5" >Ajouter un mur</button>
+     </form>
+
+     <h3>DEPOSE DE PORTES </h3>
+     <form [formGroup]="deposePorteForm" (ngSubmit)="onSubmitform2()">
+        <div>
+            <div nz-row nzJustify="start">
+                <div nz-col nzSpan="12" class="ant-col">
+                    <label for="quantite_portes_simples_creuse">Nombre de portes simples creuse <span class="error-message">*</span> : </label>
+                    <input type="number" id="quantite_portes_simples_creuse" formControlName="quantite_portes_simples_creuse">
+                    
+                </div>
+                <div *ngIf="isclicked && deposePorteForm.get('quantite_portes_simples_creuse')?.invalid " class="error-message">
+                    quantité requise.
+                </div>
+                <div nz-col nzSpan="12" class="ant-col">
+                    <label for="quantite_portes_doubles_creuses">Nombre de portes doubles creuses <span class="error-message">*</span> : </label>
+                    <input type="number" id="quantite_portes_doubles_creuses" formControlName="quantite_portes_doubles_creuses">
+                </div>
+                <div *ngIf="isclicked && deposePorteForm.get('quantite_portes_doubles_creuses')?.invalid " class="error-message">
+                    quantité requise.
+                </div>
+                <div nz-col nzSpan="12" class="ant-col">
+                    <label for="quantite_porte_simple_plein">Nombre de porte simple plein <span class="error-message">*</span> : </label>
+                    <input type="number" id="quantite_porte_simple_plein" formControlName="quantite_porte_simple_plein">
+                </div>
+                <div *ngIf="isclicked && deposePorteForm.get('quantite_porte_simple_plein')?.invalid " class="error-message">
+                    quantité requise.
+                </div>
+                <div nz-col nzSpan="12" class="ant-col">
+                    <label for="quantite_porte_double_pleine">Nombre de porte double pleine <span class="error-message">*</span> : </label>
+                    <input type="number" id="quantite_porte_double_pleine" formControlName="quantite_porte_double_pleine">
+                </div>
+                <div *ngIf="isclicked && deposePorteForm.get('quantite_porte_double_pleine')?.invalid " class="error-message">
+                    quantité requise.
+                </div>
+            </div>
+        </div>
+    </form>
+
+    
+    <h3>OUVERTURE PARTIELLE</h3>
+    <form [formGroup]="ouverturePartielleForm" (ngSubmit)="onSubmitform3()">
+
+       <div formArrayName="ouverturePartielle">
+        <div *ngFor="let mur of ouverturePartielle.controls; let i = index" [formGroupName]="i" >
+          <span class="mur-ttl">ouverture {{i+1}}</span>
+          <div nz-row nzJustify="start" >
+           
+            <div nz-col nzSpan="6" class="ant-col">
+               <label for="longueur">longueur <span class="error-message">*</span> : </label>
+               <input type="number" id="longueur" formControlName="longueur">
+             </div>
+             <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur')?.invalid " class="error-message">
+                longueur requise.
+            </div>
+             <div nz-col nzSpan="6" class="ant-col">
+               <label for="hauteur">hauteur <span class="error-message">*</span>: </label>
+               <input type="number" id="hauteur" formControlName="hauteur">
+             </div>
+             <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur')?.invalid " class="error-message">
+                Hauteur requise.
+              </div>
+             <div nz-col nzSpan="6" class="ant-col">
+                <label for="epaisseur">epaisseur <span class="error-message">*</span>: </label>
+                <input type="number" id="epaisseur" formControlName="epaisseur">
+              </div>
+              <div *ngIf="isclicked && ouverturePartielle.controls[i].get('epaisseur')?.invalid " class="error-message">
+                epaisseur requise.
+              </div>
+              <div nz-col nzSpan="6" class="ant-col">
+                <label for="volume">volume <span class="error-message">*</span>: </label>
+                <input type="number" id="volume" formControlName="volume">
+              </div>
+              <div *ngIf="isclicked && ouverturePartielle.controls[i].get('volume')?.invalid " class="error-message">
+                volume requis.
+              </div>
+              <div nz-col nzSpan="6" class="ant-col">
+                <label for="longueur_du_mur">longueur du mur <span class="error-message">*</span>: </label>
+                <input type="number" id="longueur_du_mur" formControlName="longueur_du_mur">
+              </div>
+              <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur_du_mur')?.invalid " class="error-message">
+                longueur_du_mur requis.
+              </div>
+
+             <div nz-col nzSpan="6" class="ant-col"> 
+               <label for="image">Image : </label>
+               <input type="file" id="image" (change)="onouverturePartielleFileChange($event, i)" accept="image/*">
+             </div>
+             <button type="button" class="dynamic-form-button del-btn" (click)="removeouverturePartielleGroup(i)" *ngIf="ouverturePartielle.length > 1">Retirer l'ouverture'</button>
+           </div>
+         </div>
+        </div>
+         
+       <button type="button"  class="dynamic-form-button add-btn" (click)="addouverturePartielleGroup()" *ngIf="ouverturePartielle.length < 5" >Ajouter une ouverture</button>
+     </form>
+</div>

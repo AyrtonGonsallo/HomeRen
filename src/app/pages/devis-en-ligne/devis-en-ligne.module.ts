@@ -41,6 +41,15 @@ import { RecapPoseMursComponent } from './formulaire-pose-murs/recap-pose-murs/r
 import { RecapPoseSolComponent } from './formulaire-pose-sol/recap-pose-sol/recap-pose-sol.component';
 import { RecapPoseCreationMursNonPorteursComponent } from './formulaire-creation-murs-non-porteurs/recap-pose-creation-murs-non-porteurs/recap-pose-creation-murs-non-porteurs.component';
 import { RecapDeposeMursComponent } from './formulaire-depose-murs/recap-depose-murs/recap-depose-murs.component';
+import { RecapPosePlomberieComponent } from './formulaire-pose-plomberie/recap-pose-plomberie/recap-pose-plomberie.component';
+import { DimensionsDeposeCuisineComponent } from './formulaire-depose-cuisine/dimensions-depose-cuisine/dimensions-depose-cuisine.component';
+import { EtatSurfacesDeposeCuisineComponent } from './formulaire-depose-cuisine/etat-surfaces-depose-cuisine/etat-surfaces-depose-cuisine.component';
+import { GammesProduitsDeposeCuisineComponent } from './formulaire-depose-cuisine/gammes-produits-depose-cuisine/gammes-produits-depose-cuisine.component';
+import { RecapDeposeCuisineComponent } from './formulaire-depose-cuisine/recap-depose-cuisine/recap-depose-cuisine.component';
+import { RecapDemolitionCloisonsComponent } from './formulaire-demolition-cloisons/recap-demolition-cloisons/recap-demolition-cloisons.component';
+import { DimensionsDemolitionCloisonsComponent } from './formulaire-demolition-cloisons/dimensions-demolition-cloisons/dimensions-demolition-cloisons.component';
+import { EtatSurfacesDemolitionCloisonsComponent } from './formulaire-demolition-cloisons/etat-surfaces-demolition-cloisons/etat-surfaces-demolition-cloisons.component';
+import { GammesProduitsDemolitionCloisonsComponent } from './formulaire-demolition-cloisons/gammes-produits-demolition-cloisons/gammes-produits-demolition-cloisons.component';
 @NgModule({
   declarations: [
     IndexComponent,
@@ -80,7 +89,16 @@ import { RecapDeposeMursComponent } from './formulaire-depose-murs/recap-depose-
     RecapPoseMursComponent,
     RecapPoseSolComponent,
     RecapPoseCreationMursNonPorteursComponent,
-    RecapDeposeMursComponent
+    RecapDeposeMursComponent,
+    RecapPosePlomberieComponent,
+    DimensionsDeposeCuisineComponent,
+    EtatSurfacesDeposeCuisineComponent,
+    GammesProduitsDeposeCuisineComponent,
+    RecapDeposeCuisineComponent,
+    RecapDemolitionCloisonsComponent,
+    DimensionsDemolitionCloisonsComponent,
+    EtatSurfacesDemolitionCloisonsComponent,
+    GammesProduitsDemolitionCloisonsComponent
   ],
   imports: [
     CommonModule,SharedModule,

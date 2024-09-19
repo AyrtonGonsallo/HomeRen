@@ -16,7 +16,9 @@
 --fnt-fam-1: "redriver";
 --fnt-fam-2: "Montserrat";
 }
+.txt-dec{text-decoration:underline;}
 .fs-18{font-size: 18px;}
+.fs-15{font-size: 15px;}
 .fs-13{font-size: 13px;}
 .fs-25{font-size: 20px;font-weight: 500;margin-block: 30px;}
 .fs-34{font-size: 43px;}
@@ -102,12 +104,17 @@ h4{font-size: 21px;}
 .eq-h-piece{height: auto !important;}
 p.fs-30 { font-size: 22px !important;}
 .m-w, .m-w-p{max-width: 100%;}
+.div-btn-flx-frm{display: grid !important;grid-template-columns: 1fr 1fr !important;}
 
 }
 @media only screen and (max-width: 497px) {
     .fs-34 {font-size: 28px;}
     .section-phrase-dacc{padding: 20px 15px;}
     h1{font-size: 32px !important;}
+    .tooltip-srf.ant-col.ant-col-6 { width: 100%;}
+    .tooltip-srf.ant-col.ant-col-6 span {text-align: left;}
+    .div-btn-flx-frm{grid-template-columns: 1fr !important;}
+
 }
 @media only screen and (max-width: 320px) {
    .ttl-dv-pc { font-size: 18px !important; }
