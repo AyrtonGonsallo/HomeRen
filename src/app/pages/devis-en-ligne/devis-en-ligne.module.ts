@@ -30,6 +30,7 @@ import { PoseElectriciteGammesProduitsComponent } from './formulaire-pose-electr
 import { PosePorteDimensionsComponent } from './formulaire-pose-porte/dimensions/dimensions.component';
 import { PosePorteEtatSurfacesComponent } from './formulaire-pose-porte/etat-surfaces/etat-surfaces.component';
 import { PosePorteGammesProduitsComponent } from './formulaire-pose-porte/gammes-produits/gammes-produits.component';
+import { RecapPosePortesComponent } from './formulaire-pose-porte/recap-pose-portes/recap-pose-portes.component';
 import { PosePlomberieDimensionsComponent } from './formulaire-pose-plomberie/dimensions/dimensions.component';
 import { PosePlomberieEtatSurfacesComponent } from './formulaire-pose-plomberie/etat-surfaces/etat-surfaces.component';
 import { PosePlomberieGammesProduitsComponent } from './formulaire-pose-plomberie/gammes-produits/gammes-produits.component';
@@ -98,7 +99,8 @@ import { GammesProduitsDemolitionCloisonsComponent } from './formulaire-demoliti
     RecapDemolitionCloisonsComponent,
     DimensionsDemolitionCloisonsComponent,
     EtatSurfacesDemolitionCloisonsComponent,
-    GammesProduitsDemolitionCloisonsComponent
+    GammesProduitsDemolitionCloisonsComponent,
+    RecapPosePortesComponent
   ],
   imports: [
     CommonModule,SharedModule,

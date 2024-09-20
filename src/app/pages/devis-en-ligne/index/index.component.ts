@@ -255,31 +255,37 @@ export class IndexComponent {
   current = 0;
   index = 'First-content';
   pre(): void {
-    switch (this.current) {
-      case 3:
-        this.triggerSubmitDimensionForm = !this.triggerSubmitDimensionForm;
-        break;
-  
-      case 4:
-        this.triggerSubmitEtatSurfacesForm = !this.triggerSubmitEtatSurfacesForm;
-        break;
-  
-      case 5:
-        this.triggerSubmitGammesProduitsForm = !this.triggerSubmitGammesProduitsForm;
-        break;
-  
-      default:
+    if(this.jump_back()){
+
+    }else{
+      switch (this.current) {
+        case 3:
+          this.triggerSubmitDimensionForm = !this.triggerSubmitDimensionForm;
+          break;
+    
+        case 4:
+          this.triggerSubmitEtatSurfacesForm = !this.triggerSubmitEtatSurfacesForm;
+          break;
+    
+        case 5:
+          this.triggerSubmitGammesProduitsForm = !this.triggerSubmitGammesProduitsForm;
+          break;
+    
+        default:
+          this.current -= 1;
+          this.changeContent();
+          return; // Exit the function if no form submission is triggered
+      }
+    
+      // If we reach here, it means a form submission was triggered.
+      // Wait for 2 seconds, then proceed to the next step.
+      setTimeout(() => {
         this.current -= 1;
         this.changeContent();
-        return; // Exit the function if no form submission is triggered
-    }
-  
-    // If we reach here, it means a form submission was triggered.
-    // Wait for 2 seconds, then proceed to the next step.
-    setTimeout(() => {
-      this.current -= 1;
-      this.changeContent();
-    }, 2000);
+      }, 2000);
+    
+  }
+    
   }
   addtask(): void {
     this.current = 1;
@@ -369,6 +375,23 @@ export class IndexComponent {
   jump(): boolean {//pour les cas ou on doit sauter des etapes
     if(this.is_one_travail_selected && this.filteredTravail.ID==11 && this.current<=2){
       this.current=4
+      return true
+    }
+    if(this.is_one_travail_selected && this.filteredTravail.ID==10 && this.current<=2){
+      this.current=4
+      return true
+    }
+    
+   return false
+    
+  }
+  jump_back(): boolean {//pour les cas ou on doit sauter des etapes
+    if(this.is_one_travail_selected && this.filteredTravail.ID==11 && this.current>=4){
+      this.current=1
+      return true
+    }
+    if(this.is_one_travail_selected && this.filteredTravail.ID==10 && this.current>=4){
+      this.current=1
       return true
     }
     

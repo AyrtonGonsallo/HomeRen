@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-dimensions-pose-porte',
@@ -8,6 +9,21 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-pose-porte.component.css'
 })
 export class PosePorteDimensionsComponent {
+  baseurl=environment.imagesUrl
+  isclicked=false
+  @Input() triggerSubmitDimensionForm!: boolean;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitDimensionForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitDimensionForm)
+      if(this.triggerSubmitDimensionForm==true){
+        this.onPosePortesSubmit();
+        this.isclicked=true
+      }
+      
+    }
+  }
+  @Output() formValidityChange = new EventEmitter<boolean>();
+
 //formulaires des poses et deposes
 posePortesForm: FormGroup;
  
@@ -29,6 +45,7 @@ removePortesGroup(index: number): void {
 }
 
 onPosePortesSubmit(): void {
+  this.formValidityChange.emit(this.posePortesForm.valid);
   if (this.posePortesForm.valid) {
     console.log(this.posePortesForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire

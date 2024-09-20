@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 
@@ -8,6 +8,24 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-creation-murs-non-porteurs.component.css'
 })
 export class MursNonPorteursEtatSurfacesComponent {
+  @Input() triggerSubmitEtatSurfacesForm!: boolean;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitEtatSurfacesForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitEtatSurfacesForm)
+      if(this.triggerSubmitEtatSurfacesForm==true){
+        this.isclicked=true
+        this.onPoseMursNonPorteursSubmit();
+      }
+      
+    }
+  }
+  @Output() formValidityChange = new EventEmitter<boolean>();
+  disabled = true;
+  isclicked =false
+
+
+
+
 //formulaires des poses et deposes
 poseMursNonPorteursForm: FormGroup;
 formulaire_dimensions:any
@@ -33,6 +51,7 @@ removeMurNonPorteurroup(index: number): void {
 }
 
 onPoseMursNonPorteursSubmit(): void {
+  this.formValidityChange.emit(this.poseMursNonPorteursForm.valid);
   if (this.poseMursNonPorteursForm.valid) {
     console.log(this.poseMursNonPorteursForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 
@@ -8,6 +8,20 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-pose-porte.component.css'
 })
 export class PosePorteEtatSurfacesComponent {
+  @Input() triggerSubmitEtatSurfacesForm!: boolean;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitEtatSurfacesForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitEtatSurfacesForm)
+      if(this.triggerSubmitEtatSurfacesForm==true){
+        this.isclicked=true
+        this.onPosePortesSubmit();
+      }
+      
+    }
+  }
+  @Output() formValidityChange = new EventEmitter<boolean>();
+  disabled = true;
+  isclicked =false
 //formulaires des poses et deposes
 posePortesForm: FormGroup;
 formulaire_dimensions:any
@@ -30,6 +44,7 @@ removePortesGroup(index: number): void {
 }
 
 onPosePortesSubmit(): void {
+  this.formValidityChange.emit(this.posePortesForm.valid);
   if (this.posePortesForm.valid) {
     console.log(this.posePortesForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire

@@ -14,6 +14,9 @@
                 <label nz-radio nzValue="Porte vitrée simple">Porte vitrée simple</label>
                 <label nz-radio nzValue="Porte vitrée double">Porte vitrée double</label>
               </nz-radio-group>
+              <div *ngIf="isclicked && portes.controls[i].get('type')?.invalid " class="error-message">
+                type de porte requis.
+              </div>
           </div>
         
           <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">Supprimer</button>
@@ -22,6 +25,5 @@
       
     </div>
     <button type="button" class="dynamic-form-button add-btn" (click)="addPortesGroup()" *ngIf="portes.length < 8">Ajouter une porte</button>
-    <button class="vald-btn" type="submit" >Valider</button>
   </form>
 </div>

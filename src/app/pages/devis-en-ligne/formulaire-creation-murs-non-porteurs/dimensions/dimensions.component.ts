@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-dimensions-creation-murs-non-porteurs',
@@ -8,6 +9,23 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-creation-murs-non-porteurs.component.css'
 })
 export class MursNonPorteursDimensionsComponent {
+  baseurl=environment.imagesUrl
+  isclicked=false
+  @Input() triggerSubmitDimensionForm!: boolean;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitDimensionForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitDimensionForm)
+      if(this.triggerSubmitDimensionForm==true){
+        this.onPoseMursNonPorteursSubmit();
+        this.isclicked=true
+      }
+      
+    }
+  }
+  @Output() formValidityChange = new EventEmitter<boolean>();
+
+
+
 //formulaires des poses et deposes
 poseMursNonPorteursForm: FormGroup;
  
@@ -29,6 +47,7 @@ removeMurNonPorteurroup(index: number): void {
 }
 
 onPoseMursNonPorteursSubmit(): void {
+  this.formValidityChange.emit(this.poseMursNonPorteursForm.valid);
   if (this.poseMursNonPorteursForm.valid) {
     console.log(this.poseMursNonPorteursForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire
@@ -37,9 +56,7 @@ onPoseMursNonPorteursSubmit(): void {
 }
 createposeMurNonPorteurroup(): FormGroup {
   return this.fb.group({
-    hauteur: ['', ],
     surface: ['', Validators.required],
-    longueur: ['', ]
   });
 }
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {

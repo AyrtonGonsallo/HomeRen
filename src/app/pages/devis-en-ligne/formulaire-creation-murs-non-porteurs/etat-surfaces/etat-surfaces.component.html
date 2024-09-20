@@ -17,7 +17,9 @@
                         <label nz-radio nzValue="Autre type de cloison">Autre type de cloison</label>
                       
                       </nz-radio-group>
-                      
+                      <div *ngIf="isclicked && murs_non_porteurs.controls[i].get('type_cloison')?.invalid " class="error-message">
+                        type de cloison requis.
+                      </div>
                     </div>
                     <div nz-col nzSpan="6" class="ant-col" id="autre_type_cloison" *ngIf="isAutreType">
                       <label for="autre_type_cloison">Autre type de cloison (préciser): </label>
@@ -29,7 +31,7 @@
                 </div>
                 
                </div>
-               <button class="vald-btn" type="submit">Valider</button>
+               
              </form>
 </div>
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 
@@ -8,9 +8,21 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-creation-murs-non-porteurs.component.css'
 })
 export class MursNonPorteursGammesProduitsComponent {
+  @Input() triggerSubmitGammesProduitsForm!: boolean;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitGammesProduitsForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitGammesProduitsForm)
+      if(this.triggerSubmitGammesProduitsForm==true){
+        this.isclicked=true
+        this.onPosePortesSubmit();
+      }
+      
+    }
+  }
+  @Output() formValidityChange = new EventEmitter<boolean>();
   disabled = true;
   radioValue = 'A';
-
+  isclicked=false
 
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
  
@@ -54,6 +66,7 @@ removePortesGroup(index: number): void {
 }
 
 onPosePortesSubmit(): void {
+  this.formValidityChange.emit(this.posePortesForm.valid);
   if (this.posePortesForm.valid) {
     console.log(this.posePortesForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire

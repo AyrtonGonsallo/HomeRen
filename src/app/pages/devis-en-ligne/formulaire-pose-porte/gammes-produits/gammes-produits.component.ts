@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
+import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
 
 @Component({
   selector: 'app-gammes-produits-pose-porte',
@@ -8,6 +9,22 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-pose-porte.component.css'
 })
 export class PosePorteGammesProduitsComponent {
+  @Input() triggerSubmitGammesProduitsForm!: boolean;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitGammesProduitsForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitGammesProduitsForm)
+      if(this.triggerSubmitGammesProduitsForm==true){
+        this.isclicked=true
+        this.onPosePortesSubmit();
+      }
+      
+    }
+  }
+  @Output() formValidityChange = new EventEmitter<boolean>();
+  disabled = true;
+  radioValue = 'A';
+  isclicked=false
+
 //formulaires des poses et deposes
 posePortesForm: FormGroup;
 formulaire_dimensions:any
@@ -30,9 +47,12 @@ removePortesGroup(index: number): void {
 }
 
 onPosePortesSubmit(): void {
+  this.formValidityChange.emit(this.posePortesForm.valid);
   if (this.posePortesForm.valid) {
     //console.log(this.posePortesForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire
+    this.gestiondesdevisService.addFormulaire("dimensions-pose-portes",10,this.posePortesForm.value)
+    this.gestiondesdevisService.addFormulaire("etat-surfaces-pose-portes",10,this.posePortesForm.value)
     this.gestiondesdevisService.addFormulaire("gammes-produits-pose-portes",10,this.posePortesForm.value)
      // Envoyer les données au backend ou traiter comme nécessaire
      this.gestiondesdevisService.groupform('pose-portes',10, 'dimensions-pose-portes','etat-surfaces-pose-portes','gammes-produits-pose-portes')
@@ -49,16 +69,11 @@ createposePortesGroup(): FormGroup {
     infos_comp_finition: ['', ],//text area
   });
 }
-constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
+constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
   this.posePortesForm = this.fb.group({
     portes: this.fb.array([this.createposePortesGroup()])
   });
-  this.formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-pose-portes")
-  this.formulaire_dimensions_length=this.formulaire_dimensions.formulaire.portes.length
-  for(let i=0;i<(this.formulaire_dimensions_length-1);i++){
-    this.addPortesGroup()
-  }
-  console.log(this.formulaire_dimensions)
+  this.load_gammes()
  
 }
 
@@ -74,6 +89,51 @@ markFormGroupTouched(formGroup: FormGroup) {
   });
 }
 
+
+
+  
+types_de_portes:any
+types_de_materiau:any
+types_de_porte_finition:any
+types_de_finitions:any
+load_gammes(){
+  this.userService.getGammesByTravailAndType(10,"type-de-porte").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes type-de-porte:', response);
+      this.types_de_portes=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes type-de-porte :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(10,"type-de-materiau-porte").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes type-de-materiau-porte:', response);
+      this.types_de_materiau=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes type-de-materiau-porte :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(10,"type-de-porte-finition").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes type-de-porte-finition:', response);
+      this.types_de_porte_finition=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes type-de-porte-finition :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(10,"finition-de-porte").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes finition-de-porte:', response);
+      this.types_de_finitions=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes finition-de-porte :', error);
+    }
+  );
+}
 }
 
  
