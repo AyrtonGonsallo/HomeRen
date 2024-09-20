@@ -5,14 +5,19 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
 import { Equipement } from '../../../../Models/Equipement';
 import { environment } from '../../../../environments/environment';
 
+
 @Component({
   selector: 'app-gammes-produits-pose-plomberie',
   templateUrl: './gammes-produits.component.html',
   styleUrl: '../formulaire-pose-plomberie.component.css'
 })
+
 export class PosePlomberieGammesProduitsComponent {
   isclicked=false
+
   @Input() triggerSubmitGammesProduitsForm!: boolean;
+modele: any;
+appareilGroup: any;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['triggerSubmitGammesProduitsForm']) {
       console.log("trigger de soumission: ",this.triggerSubmitGammesProduitsForm)
@@ -157,5 +162,7 @@ export class PosePlomberieGammesProduitsComponent {
     );
   }
   
+
+
   }
   

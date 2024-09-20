@@ -1,125 +1,114 @@
 <div class="form-flx-dms">
   <div *ngIf="selectedPiece.ID==7" class="form-flx-dms">
-      <p>formulaire-pose-plomberie {{selectedPiece.Titre}}</p>
+      <!-- <p>formulaire-pose-plomberie {{selectedPiece.Titre}}</p> -->
       <form [formGroup]="poseCuisineForm" (ngSubmit)="onPoseCuisineSubmit()">
           <div formArrayName="appareils_cuisine">
             <div *ngFor="let appareilGroup of appareils_cuisine; let i = index" [formGroupName]="i">
               <h3>{{appareils_cuisine && appareils_cuisine[i] ? appareils_cuisine[i].Titre :""}}</h3>
-                  
-
-                <div>
-                  <label for="depose">dépose</label>
-                  <input type="checkbox" id="depose" formControlName="depose">      
-                </div>
-                <nz-radio-group formControlName="modele" class="radio-flx-spc">
-                  <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
-                    <div nz-col nzSpan="12" class="ant-col">
-                      <div> 
-                        <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">
-                          <span>
-                            <!-- Dynamically display the label based on the type -->
-                            {{ modele.Titre }}
-                          </span>
-                          <img *ngIf="modele.Image" [src]="baseurl+modele.Image" [alt]="baseurl+modele.Image" class="" width="200px"/>
-                        </label>
-                      </div>
-                    </div>
-                    <div nz-col nzSpan="4" class="ant-col fs-15">
-                        <label >Longueur</label>
-                        {{modele.Longeur}}      
-                    </div>
-                    <div nz-col nzSpan="4" class="ant-col fs-15">
-                        <label>Largeur</label>
-                        {{modele.Largeur}}      
-                    </div>
-                    <div nz-col nzSpan="4" class="ant-col fs-15">
-                        <label>Hauteur</label>
-                        {{modele.Hauteur}}      
-                    </div>
-                  </div>
-                  <div  nz-row nzJustify="start">
-                    <div nz-col nzSpan="12" class="ant-col">
-                      <div> 
-                        <label nz-radio nzValue="0">
-                          <span>
-                            <!-- Dynamically display the label based on the type -->
-                            aucun
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </nz-radio-group> 
-                
-                
-             
               
+              <nz-radio-group formControlName="modele" class="radio-flx-spc ">
+                <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
+                  <div nz-col nzSpan="12" class="ant-col">
+                    <div> 
+                      <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">
+                        <span>
+                          <!-- Dynamically display the label based on the type -->
+                          {{ modele.Titre }}
+                        </span>
+                        <!-- <img *ngIf="modele.Image" [src]="baseurl+modele.Image" [alt]="baseurl+modele.Image" class="" width="200px"/> -->
+                      </label>
+                    </div>
+                  </div>
+                  <!-- Tooltip with image and dimensions -->
+                  <a nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="info-icon">
+                    <i class="far fa-question-circle"></i>
+                  </a>
+                  <ng-template #tooltipTemplate >
+                    <div >
+                      <div><strong>Longueur:</strong> {{modele.Longeur}}</div>
+                      <div><strong>Largeur:</strong> {{modele.Largeur}}</div>
+                      <div><strong>Hauteur:</strong> {{modele.Hauteur}}</div>
+                      <div *ngIf="modele.Image">
+                        <img [src]="baseurl + modele.Image" [alt]="modele.Image" width="200px"/>
+                      </div>
+                    </div>
+                  </ng-template>
+                </div>
+              </nz-radio-group>
+              <div>
+                <label for="depose">Souhaitez-vous déposer votre salle de bain actuelle ?</label>
+                <input type="checkbox" id="depose" formControlName="depose">      
+              </div>  
               <!-- Ajoutez d'autres champs selon vos besoins -->
             </div>
           </div>
-         
+        
         </form>
   </div>
-  
-  <div *ngIf="selectedPiece.ID==5 || selectedPiece.ID==8">
-      <p>formulaire-pose-plomberie {{selectedPiece.Titre}}</p>
-      <form [formGroup]="poseSalleDeBainForm" (ngSubmit)="onPoseSalleDeBainSubmit()">
-          <div formArrayName="appareils_salle_de_bain">
-            <div *ngFor="let appareilGroup of appareils_salle_de_bain; let i = index" [formGroupName]="i">
-              <div *ngIf="isclicked && getposeSalleDeBainForm.controls[i].get(appareilGroup.Titre + ' modele')?.invalid" class="error-message">
-                Vous devez faire un choix.
-              </div>
-                <h3>{{appareils_salle_de_bain && appareils_salle_de_bain[i] ? appareils_salle_de_bain[i].Titre :""}}</h3>
-                  <div>
-                    <label for="depose">dépose</label>
-                    <input type="checkbox" id="depose" formControlName="depose">      
-                  </div>
-                  <nz-radio-group formControlName="modele" class="radio-flx-spc">
-                    <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
-                      <div nz-col nzSpan="12" class="ant-col">
-                        <div> 
-                          <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">
-                            <span>
-                              <!-- Dynamically display the label based on the type -->
-                              {{ modele.Titre }}
-                            </span>
-                            <img *ngIf="modele.Image" [src]="baseurl+modele.Image" [alt]="baseurl+modele.Image" class="" width="200px"/>
-                          </label>
-                        </div>
-                      </div>
-                      <div nz-col nzSpan="4" class="ant-col fs-15">
-                          <label >Longueur</label>
-                          {{modele.Longeur}}      
-                      </div>
-                      <div nz-col nzSpan="4" class="ant-col fs-15">
-                          <label>Largeur</label>
-                          {{modele.Largeur}}      
-                      </div>
-                      <div nz-col nzSpan="4" class="ant-col fs-15">
-                          <label>Hauteur</label>
-                          {{modele.Hauteur}}      
-                      </div>
-                    </div>
-                    <div  nz-row nzJustify="start">
-                      <div nz-col nzSpan="12" class="ant-col">
-                        <div> 
-                          <label nz-radio nzValue="0">
-                            <span>
-                              <!-- Dynamically display the label based on the type -->
-                              aucun
-                            </span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </nz-radio-group> 
-                  <!-- Ajoutez d'autres champs selon vos besoins -->
-            </div>
-              
-              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div *ngIf="selectedPiece.ID==5 || selectedPiece.ID==8" class="div-s-b">
+    <form [formGroup]="poseSalleDeBainForm" (ngSubmit)="onPoseSalleDeBainSubmit()">
+      <div formArrayName="appareils_salle_de_bain" class="flx-pr">
+        <div *ngFor="let appareilGroup of appareils_salle_de_bain; let i = index" [formGroupName]="i">
+          <div class="tooltip-srf" *ngIf="isclicked && getposeSalleDeBainForm.controls[i].get(appareilGroup.Titre + ' modele')?.invalid" class="error-message">
+            Vous devez faire un choix.
           </div>
+          <h3 class="ttl-type">{{appareils_salle_de_bain && appareils_salle_de_bain[i] ? appareils_salle_de_bain[i].Titre : ""}}</h3>
           
-        </form>
-      </div>   
+          <nz-radio-group formControlName="modele" class="radio-flx-spc">
+            <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
+              <div nz-col nzSpan="12" class="ant-col">
+                
+                  <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">
+                  <span>
+                      {{modele.Titre}}
+                    </span>
+                  </label>
+                
+              </div>
+              <!-- Tooltip with image and dimensions -->
+              <a nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="info-icon">
+                <i class="far fa-question-circle"></i>
+              </a>
+              <ng-template #tooltipTemplate >
+                <div>
+                  <div class="img-tltip" *ngIf="modele.Image">
+                    <img [src]="baseurl + modele.Image" [alt]="modele.Image" width="150px"/>
+                  </div>
+                  <div><strong>Longueur:</strong> {{modele.Longeur}}</div>
+                  <div><strong>Largeur:</strong> {{modele.Largeur}}</div>
+                  <div><strong>Hauteur:</strong> {{modele.Hauteur}}</div>
+                  
+                </div>
+              </ng-template>
+            </div>
+          </nz-radio-group>
+          <div>
+            <label for="depose">Souhaitez-vous déposer votre salle de bain actuelle ?</label>
+            <input type="checkbox" id="depose" formControlName="depose">      
+          </div>  
+          <!-- Ajoutez d'autres champs selon vos besoins -->
+        </div>
+      </div>
+    </form>
   </div>
-  
+
+  <!-- Tooltip Template -->
+
+
+</div>
+

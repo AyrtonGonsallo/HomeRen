@@ -246,6 +246,27 @@ label{font-family: 'Montserrat';font-weight: 600;}
 }
 .plaf-dim input{ border: 3px solid #ffc736!important;border-radius:2px !important;}
 .plaf-dim label{font-size: 13px !important;font-weight: 600;font-family: "Montserrat";}
+.flx-radio-travaux{
+    width: 90% !important;
+}
+.flx-radio-travaux .ant-radio-wrapper{
+    float: unset;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    border-bottom: 1px solid #55555538;
+    padding: 15px 10px;
+}
+.tooltip-srf .radio-flx-spc div { grid-template-columns: 6fr 1fr;}
+.tooltip-srf i.far.fa-question-circle {
+    color: var(--color1);
+    font-size: 20px;
+    margin-top: 9px;
+}
+.link-tooltip{color:var(--color1);}
+.link-tooltip:hover{color:var(--color-white);text-decoration: underline;}
+.ant-col.ant-col-6{max-width: 100%;}
 @media only screen and (max-width: 1100px) {
     .steps-content, .div-btn-prect { width: 95% !important;}
     

@@ -4,11 +4,14 @@ import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-t
 import { Equipement } from '../../../Models/Equipement';
 import { GestionDesDevisService } from '../../../services/gestion-des-devis.service';
 
+
 @Component({
   selector: 'app-formulaire-pose-plomberie',
   templateUrl: './formulaire-pose-plomberie.component.html',
   styleUrl: './formulaire-pose-plomberie.component.css'
 })
+
+
 export class FormulairePosePlomberieComponent {
 
   @Input() selectedPiece: any; // Déclaration de l'entrée selectedPiece

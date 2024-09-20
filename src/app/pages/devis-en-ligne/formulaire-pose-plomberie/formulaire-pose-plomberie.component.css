@@ -76,7 +76,39 @@ form{
     .vald-btn, .add-btn{ width: fit-content;}
     .form-flx-dms form label{  width: 57%; }
 
-}   
-
-
-
+}  
+h3.ttl-type {
+    text-align: center !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.radio-flx-spc .ant-row{ display:grid !important;grid-template-columns: 12fr 1fr !important; width: 80%;margin: auto;}
+.tooltip-srf i.far.fa-question-circle {
+    color: var(--color1);
+    font-size: 20px;
+    margin-top: 9px;
+}
+.link-tooltip{color:var(--color1);}
+.link-tooltip:hover{color:var(--color-white);text-decoration: underline;}
+.ant-col.ant-col-6{max-width: 100%;}
+nz-radio-group.ant-radio-group.radio-flx-spc {
+    width: 90% !important;
+}
+a.info-icon {display: flex; align-items: center;}
+.form-flx-dms .ant-col.ant-col-12{
+    display: grid;
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: 1fr;
+    justify-items: start;
+    align-items: center;
+}
+form label { margin-right: 0px !important;}
+label.ant-radio-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: inline-flex;
+    flex-direction: row-reverse;
+}
+.img-tltip img{width:150px;height:150px;}
