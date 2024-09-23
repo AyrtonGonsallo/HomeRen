@@ -51,6 +51,8 @@ import { RecapDemolitionCloisonsComponent } from './formulaire-demolition-cloiso
 import { DimensionsDemolitionCloisonsComponent } from './formulaire-demolition-cloisons/dimensions-demolition-cloisons/dimensions-demolition-cloisons.component';
 import { EtatSurfacesDemolitionCloisonsComponent } from './formulaire-demolition-cloisons/etat-surfaces-demolition-cloisons/etat-surfaces-demolition-cloisons.component';
 import { GammesProduitsDemolitionCloisonsComponent } from './formulaire-demolition-cloisons/gammes-produits-demolition-cloisons/gammes-produits-demolition-cloisons.component';
+import { RecapPoseChauffageComponent } from './formulaire-pose-chauffage/recap-pose-chauffage/recap-pose-chauffage.component';
+import { RecapPoseElectriciteComponent } from './formulaire-pose-electricite/recap-pose-electricite/recap-pose-electricite.component';
 @NgModule({
   declarations: [
     IndexComponent,
@@ -100,7 +102,9 @@ import { GammesProduitsDemolitionCloisonsComponent } from './formulaire-demoliti
     DimensionsDemolitionCloisonsComponent,
     EtatSurfacesDemolitionCloisonsComponent,
     GammesProduitsDemolitionCloisonsComponent,
-    RecapPosePortesComponent
+    RecapPosePortesComponent,
+    RecapPoseChauffageComponent,
+    RecapPoseElectriciteComponent
   ],
   imports: [
     CommonModule,SharedModule,

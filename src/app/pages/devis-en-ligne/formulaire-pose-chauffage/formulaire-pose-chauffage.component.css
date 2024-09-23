@@ -76,3 +76,17 @@ input#surface, input#largeur_piece, input#longueur_piece{width:30%;}
     flex-direction: column;}
     input, form label { width: 100%; }
 }
+input[type="number"]{
+    width: 60%;
+    border: 1px solid #555;
+}
+input[type="checkbox"]{
+    width: 10%;
+    border: 1px solid #555;
+}
+.form-flx-dms h3 {
+    font-weight: 600;
+    font-size: 19px;
+    color: #ffc736;
+    text-align: left !important;
+}

@@ -172,7 +172,7 @@
            <app-gammes-produits-pose-sol [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-pose-sol>
          </div>
          <div *ngIf="is_travail_selected(12)">
-           <app-gammes-produits-pose-chauffage></app-gammes-produits-pose-chauffage>
+           <app-gammes-produits-pose-chauffage [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-pose-chauffage>
          </div>
          <div *ngIf="is_travail_selected(10)">
            <app-gammes-produits-pose-porte [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-pose-porte>
@@ -217,6 +217,9 @@
         </div>
         <div *ngIf="is_travail_selected(11)">
           <app-recap-pose-plomberie [selectedPiece]="selectedPiece"></app-recap-pose-plomberie>
+        </div>
+        <div *ngIf="is_travail_selected(12)">
+          <app-recap-pose-chauffage [selectedPiece]="selectedPiece"></app-recap-pose-chauffage>
         </div>
       </div>
       <div class="devis-content" *ngIf="current == 6">
