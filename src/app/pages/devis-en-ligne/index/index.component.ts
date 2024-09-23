@@ -385,6 +385,14 @@ export class IndexComponent {
       this.current=4
       return true
     }
+    if(this.is_one_travail_selected && this.filteredTravail.ID==13 && this.current<=2){
+      this.current=4
+      return true
+    }
+    if(this.is_one_travail_selected && this.filteredTravail.ID==15 && this.current<=2){
+      this.current=4
+      return true
+    }
     
    return false
     
@@ -399,6 +407,14 @@ export class IndexComponent {
       return true
     }
     if(this.is_one_travail_selected && this.filteredTravail.ID==12 && this.current>=4){
+      this.current=1
+      return true
+    }
+    if(this.is_one_travail_selected && this.filteredTravail.ID==13 && this.current>=4){
+      this.current=1
+      return true
+    }
+    if(this.is_one_travail_selected && this.filteredTravail.ID==15 && this.current>=4){
       this.current=1
       return true
     }

@@ -53,6 +53,10 @@ import { EtatSurfacesDemolitionCloisonsComponent } from './formulaire-demolition
 import { GammesProduitsDemolitionCloisonsComponent } from './formulaire-demolition-cloisons/gammes-produits-demolition-cloisons/gammes-produits-demolition-cloisons.component';
 import { RecapPoseChauffageComponent } from './formulaire-pose-chauffage/recap-pose-chauffage/recap-pose-chauffage.component';
 import { RecapPoseElectriciteComponent } from './formulaire-pose-electricite/recap-pose-electricite/recap-pose-electricite.component';
+import { RecapRenovationElectriqueComponent } from './formulaire-renovation-electrique/recap-renovation-electrique/recap-renovation-electrique.component';
+import { GammesProduitsRenovationElectriqueComponent } from './formulaire-renovation-electrique/gammes-produits-renovation-electrique/gammes-produits-renovation-electrique.component';
+import { EtatSurfacesRenovationElectriqueComponent } from './formulaire-renovation-electrique/etat-surfaces-renovation-electrique/etat-surfaces-renovation-electrique.component';
+import { DimensionsRenovationElectriqueComponent } from './formulaire-renovation-electrique/dimensions-renovation-electrique/dimensions-renovation-electrique.component';
 @NgModule({
   declarations: [
     IndexComponent,
@@ -104,7 +108,11 @@ import { RecapPoseElectriciteComponent } from './formulaire-pose-electricite/rec
     GammesProduitsDemolitionCloisonsComponent,
     RecapPosePortesComponent,
     RecapPoseChauffageComponent,
-    RecapPoseElectriciteComponent
+    RecapPoseElectriciteComponent,
+    RecapRenovationElectriqueComponent,
+    GammesProduitsRenovationElectriqueComponent,
+    EtatSurfacesRenovationElectriqueComponent,
+    DimensionsRenovationElectriqueComponent
   ],
   imports: [
     CommonModule,SharedModule,

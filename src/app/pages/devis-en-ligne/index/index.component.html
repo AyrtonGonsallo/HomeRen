@@ -178,11 +178,14 @@
            <app-gammes-produits-pose-porte [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-pose-porte>
          </div>
          <div *ngIf="is_travail_selected(13)">
-           <app-gammes-produits-pose-electricite></app-gammes-produits-pose-electricite>
+           <app-gammes-produits-pose-electricite [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-pose-electricite>
          </div>
          <div *ngIf="is_travail_selected(11)">
            <app-gammes-produits-pose-plomberie [selectedPiece]="selectedPiece" [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-pose-plomberie>
          </div>
+         <div *ngIf="is_travail_selected(15)">
+          <app-gammes-produits-renovation-electrique  [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-renovation-electrique>
+        </div>
           <!--<button nz-button nzType="default" (click)="addtask()" *ngIf="current ==4">
            <span>Retour à la liste des travaux</span>
          </button>-->
@@ -221,6 +224,13 @@
         <div *ngIf="is_travail_selected(12)">
           <app-recap-pose-chauffage [selectedPiece]="selectedPiece"></app-recap-pose-chauffage>
         </div>
+        <div *ngIf="is_travail_selected(13)">
+          <app-recap-pose-electricite [selectedPiece]="selectedPiece"></app-recap-pose-electricite>
+        </div>
+        <div *ngIf="is_travail_selected(15)">
+          <app-recap-renovation-electrique [selectedPiece]="selectedPiece"></app-recap-renovation-electrique>
+        </div>
+        
       </div>
       <div class="devis-content" *ngIf="current == 6">
         <div class="msg-validation" *ngIf="!hide_finalisation_message">

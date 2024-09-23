@@ -1,0 +1,43 @@
+
+<form [formGroup]="renovationElectriqueForm" (ngSubmit)="onRenovationElectriqueSubmit()">
+
+    <div >
+      <div nz-row nzJustify="start" >
+        
+        
+       <div nz-col nzSpan="24" class="ant-col tooltip-srf">
+         <!-- Gamme Peinture, Enduit, Papier, Carrelage -->
+         <nz-radio-group formControlName="gamme" class="radio-flx-spc">
+           <!-- Common template for multiple option lists -->
+           <ng-container >
+             <div *ngFor="let option of gammes" class="parquet-option">
+               <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
+                 <span>{{ option.Label }}</span>
+               </label>
+               <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                 <i class="far fa-question-circle"></i>
+               </a>
+               <ng-template #tooltipTemplate>
+                 Pour plus d'informations, veuillez consulter :
+                 <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+               </ng-template>
+             </div>
+             
+           </ng-container>
+         </nz-radio-group>
+       </div>
+       
+       <div *ngIf="isclicked && renovationElectriqueForm.get('gamme')?.invalid " class="error-message">
+         Les gammes sont requises.
+       </div>
+       <div nz-col nzSpan="12" class="ant-col">
+        <label for="remplacer_tab">Souhaitez-vous remplacer votre tableau electrique  ?</label>
+        <input type="checkbox" id="remplacer_tab" formControlName="remplacer_tab">      
+      </div> 
+      <div nz-col nzSpan="12" class="ant-col" *ngIf="renovationElectriqueForm.get('remplacer_tab')?.value==true"> 
+        <label for="image_tableau_elec">ETAT DE VOTRE TABLEAU ELECTRIQUE(photo) :</label>
+        <input type="file" id="image_tableau_elec" (change)="onFileChange($event)" accept="image/*">
+      </div>
+      </div>
+    </div>
+  </form>

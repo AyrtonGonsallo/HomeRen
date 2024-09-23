@@ -1,1 +1,17 @@
-<p>recap-pose-electricite works!</p>
+
+<div class="recap-div devis-content">
+    <span class="recup-fin"><p >Pièce</p><p>:</p><p>{{selectedPiece.Titre}}</p></span>
+    <div *ngFor="let appareil of appareils">
+        <div *ngIf="appareil.checked">
+            <span class="recup-fin"><p>titre</p><p>:</p><p>{{appareil.titre}}</p></span>
+            <span class="recup-fin"><p>appareillage</p><p>:</p><p>{{appareil.appareillage}}</p></span>
+            <span class="recup-fin"><p>cables</p><p>:</p><p>{{appareil.cables}}</p></span>
+            <span class="recup-fin"><p>encastré cloison legere</p><p>:</p><p>{{appareil.encastre_cloison_legere}}</p></span>
+            <span class="recup-fin"><p>encastré beton</p><p>:</p><p>{{appareil.encastre_beton}}</p></span>
+            <span class="recup-fin"><p>goulotte</p><p>:</p><p>{{appareil.goulotte}}</p></span>
+            <span class="recup-fin"><p>protection<p>:</p><p>{{appareil.protection}}</p></span>
+        </div>
+        
+    </div>
+
+</div>

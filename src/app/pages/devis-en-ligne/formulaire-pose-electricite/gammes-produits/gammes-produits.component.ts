@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 import { Equipement } from '../../../../Models/Equipement';
+import { app } from '../../../../../../server';
 
 @Component({
   selector: 'app-gammes-produits-pose-electricite',
@@ -10,6 +11,24 @@ import { Equipement } from '../../../../Models/Equipement';
   styleUrl: '../formulaire-pose-electricite.component.css'
 })
 export class PoseElectriciteGammesProduitsComponent {
+  isclicked=false
+
+  @Input() triggerSubmitGammesProduitsForm!: boolean;
+  modele: any;
+  appareilGroup: any;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitGammesProduitsForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitGammesProduitsForm)
+      if(this.triggerSubmitGammesProduitsForm==true){
+        
+          this.onPoseInstallationElectriqueSubmit()
+        
+        this.isclicked=true
+      }
+      
+    }
+  }
+  @Output() formValidityChange = new EventEmitter<boolean>();
   poseInstallationElectriqueForm: FormGroup;
   
   createPoseInstallationElectriqueGroup(): FormGroup {
@@ -18,6 +37,7 @@ export class PoseElectriciteGammesProduitsComponent {
     });
   }
   onPoseInstallationElectriqueSubmit(): void {
+    this.formValidityChange.emit(this.poseInstallationElectriqueForm.valid);
     if (this.poseInstallationElectriqueForm.invalid) {
       this.markFormGroupTouched(this.poseInstallationElectriqueForm);
       return;
@@ -69,12 +89,15 @@ export class PoseElectriciteGammesProduitsComponent {
     
           // Créer un FormGroup pour chaque appareil
           const appareilGroup = this.fb.group({});
-          appareilGroup.addControl("appareillage_"+appareil.Titre, this.fb.control(false, ));
-          appareilGroup.addControl("cables_"+appareil.Titre, this.fb.control(false, ));
-          appareilGroup.addControl("goulotte_"+appareil.Titre, this.fb.control(false, ));
-          appareilGroup.addControl("encastre_cloison_legere_"+appareil.Titre, this.fb.control(false, ));
-          appareilGroup.addControl("encastre_beton_"+appareil.Titre, this.fb.control(false, ));
-          appareilGroup.addControl("protection_"+appareil.Titre, this.fb.control(false, ));
+          appareilGroup.addControl("checked", this.fb.control(false, ));
+          appareilGroup.addControl("id", this.fb.control(appareil.ID,));
+          appareilGroup.addControl("titre", this.fb.control(appareil.Titre,));
+          appareilGroup.addControl("appareillage", this.fb.control('', ));
+          appareilGroup.addControl("cables", this.fb.control('', ));
+          appareilGroup.addControl("goulotte", this.fb.control('', ));
+          appareilGroup.addControl("encastre_cloison_legere", this.fb.control('', ));
+          appareilGroup.addControl("encastre_beton", this.fb.control('', ));
+          appareilGroup.addControl("protection", this.fb.control('', ));
           
     
           // Ajouter le FormGroup de l'appareil au FormArray
@@ -86,5 +109,9 @@ export class PoseElectriciteGammesProduitsComponent {
       }
     );
     
+  }
+
+  get appareils(): FormArray {
+    return this.poseInstallationElectriqueForm.get('appareils_electrique') as FormArray;
   }
 }
