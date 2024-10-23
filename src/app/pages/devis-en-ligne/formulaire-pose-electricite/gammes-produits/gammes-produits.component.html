@@ -3,11 +3,11 @@
     <form [formGroup]="poseInstallationElectriqueForm" (ngSubmit)="onPoseInstallationElectriqueSubmit()">
         <div formArrayName="appareils_electrique">
           <div *ngFor="let appareilGroup of appareils_electrique; let i = index" [formGroupName]="i">
-            <h3>{{appareils_electrique && appareils_electrique[i] ? appareils_electrique[i].Titre :""}}</h3>
-            <input type="checkbox" id="checked" formControlName="checked">      
-
+            <div class="div-elec">
+              <span>{{appareils_electrique && appareils_electrique[i] ? appareils_electrique[i].Titre :""}}</span>
+               <input type="checkbox" id="checked" formControlName="checked">  
+            </div>    
             <div  nz-row nzJustify="start" *ngIf="appareils.controls[i].get('checked')?.value==true">
-               
                 <div nz-col nzSpan="4" class="ant-col">
                     <label>appareillage</label>
                     <input type="number" id="appareillage" formControlName="appareillage" required>

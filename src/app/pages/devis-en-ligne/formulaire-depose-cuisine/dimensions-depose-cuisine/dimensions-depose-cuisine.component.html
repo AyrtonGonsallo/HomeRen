@@ -4,34 +4,74 @@
         <div formArrayName="elementcuisines_haut">
           <div *ngFor="let elementcuisine of elementcuisines_haut.controls; let i = index" [formGroupName]="i">
             <span class="elementcuisine-ttl">Élement de cuisine haut {{i+1}}</span>
-            <div nz-row nzJustify="start" >
+            <div nz-row nzJustify="start" class="cuisine-flx" >
               <div nz-col nzSpan="10" class="ant-col">
-                <label for="hauteur">Hauteur : </label>
+                <label for="hauteur">Hauteur 
+                  <span class="error-message">*</span> :
+                       <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                         <i class="far fa-question-circle"></i>
+                       </a>
+                </label>
                 <input type="number" id="hauteur" formControlName="hauteur">
+                <ng-template #tooltipSurface>
+                  <div class="tooltip-content">
+                    <strong>Calcul de la hauteur :</strong><br>
+                  </div>
+                </ng-template>
                 <div *ngIf="isclicked && elementcuisines_haut.controls[i].get('hauteur')?.invalid " class="error-message">
-                    hauteur requise.
+                    Hauteur requise.
                 </div>
               </div>
               
                <div nz-col nzSpan="10" class="ant-col">
-                <label for="longueur">Longueur : </label>
+                <label for="longueur">Longueur 
+                  <span class="error-message">*</span> :
+                       <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                         <i class="far fa-question-circle"></i>
+                       </a>
+                </label>
                 <input type="number" id="longueur" formControlName="longueur">
+                <ng-template #tooltipSurface>
+                  <div class="tooltip-content">
+                    <strong>Calcul de la longueur :</strong><br>
+                  </div>
+                </ng-template>
                 <div *ngIf="isclicked && elementcuisines_haut.controls[i].get('longueur')?.invalid " class="error-message">
-                    longueur requise.
+                    Longueur requise.
                 </div>
               </div>
               <div nz-col nzSpan="10" class="ant-col">
-                <label for="profondeur">Profondeur : </label>
+                <label for="profondeur">Profondeur 
+                  <span class="error-message">*</span> :
+                       <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                         <i class="far fa-question-circle"></i>
+                       </a>
+                </label>
                 <input type="number" id="profondeur" formControlName="profondeur">
+                <ng-template #tooltipSurface>
+                  <div class="tooltip-content">
+                    <strong>Calcul de la profondeur :</strong><br>
+                  </div>
+                </ng-template>
                 <div *ngIf="isclicked && elementcuisines_haut.controls[i].get('profondeur')?.invalid " class="error-message">
-                    profondeur requise.
+                    Profondeur requise.
                 </div>
               </div>
               <div nz-col nzSpan="10" class="ant-col">
-                <label for="quantite">Quantité : </label>
+                <label for="quantite">Quantité 
+                  <span class="error-message">*</span> :
+                       <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                         <i class="far fa-question-circle"></i>
+                       </a>
+                </label>
                 <input type="number" id="quantite" formControlName="quantite">
+                <ng-template #tooltipSurface>
+                  <div class="tooltip-content">
+                    <strong>Calcul de la quantité :</strong><br>
+                  </div>
+                </ng-template>
                 <div *ngIf="isclicked && elementcuisines_haut.controls[i].get('quantite')?.invalid " class="error-message">
-                    quantite requise.
+                    Quantite requise.
                 </div>
               </div>
               
@@ -52,33 +92,73 @@
         <div formArrayName="elementcuisines_bas">
           <div *ngFor="let elementcuisine of elementcuisines_bas.controls; let i = index" [formGroupName]="i">
             <span class="elementcuisine-ttl">Élement de cuisine bas {{i+1}}</span>
-            <div nz-row nzJustify="start" >
+            <div nz-row nzJustify="start" class="cuisine-flx" >
               <div nz-col nzSpan="10" class="ant-col">
-                <label for="hauteur">Hauteur m : </label>
+                <label for="hauteur">Hauteur m 
+                  <span class="error-message">*</span> :
+                       <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                         <i class="far fa-question-circle"></i>
+                       </a>
+                </label>
                 <input type="number" id="hauteur" formControlName="hauteur">
+                <ng-template #tooltipSurface>
+                  <div class="tooltip-content">
+                    <strong>Calcul de la hauteur :</strong><br>
+                  </div>
+                </ng-template>
                 <div *ngIf="isclicked && elementcuisines_bas.controls[i].get('hauteur')?.invalid " class="error-message">
-                    hauteur requise.
+                    Hauteur requise.
                 </div>
               </div>
                <div nz-col nzSpan="10" class="ant-col">
-                <label for="longueur">Longueur : </label>
+                <label for="longueur">Longueur 
+                  <span class="error-message">*</span> :
+                       <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                         <i class="far fa-question-circle"></i>
+                       </a>
+                </label>
                 <input type="number" id="longueur" formControlName="longueur">
+                <ng-template #tooltipSurface>
+                  <div class="tooltip-content">
+                    <strong>Calcul de la longueur :</strong><br>
+                  </div>
+                </ng-template>
                 <div *ngIf="isclicked && elementcuisines_bas.controls[i].get('longueur')?.invalid " class="error-message">
-                    longueur requise.
+                    Longueur requise.
                 </div>
               </div>
               <div nz-col nzSpan="10" class="ant-col">
-                <label for="profondeur">Profondeur : </label>
+                <label for="profondeur">profondeur
+                  <span class="error-message">*</span> :
+                       <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                         <i class="far fa-question-circle"></i>
+                       </a>
+                </label>
                 <input type="number" id="profondeur" formControlName="profondeur">
+                <ng-template #tooltipSurface>
+                  <div class="tooltip-content">
+                    <strong>Calcul de la profondeur :</strong><br>
+                  </div>
+                </ng-template>
                 <div *ngIf="isclicked && elementcuisines_bas.controls[i].get('profondeur')?.invalid " class="error-message">
-                    profondeur requise.
+                    Profondeur requise.
                 </div>
               </div>
               <div nz-col nzSpan="10" class="ant-col">
-                <label for="quantite">Quantité : </label>
+                <label for="quantite">Quantité 
+                  <span class="error-message">*</span> :
+                       <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                         <i class="far fa-question-circle"></i>
+                       </a>
+                </label>
                 <input type="number" id="quantite" formControlName="quantite">
+                <ng-template #tooltipSurface>
+                  <div class="tooltip-content">
+                    <strong>Calcul de la quantité :</strong><br>
+                  </div>
+                </ng-template>
                 <div *ngIf="isclicked && elementcuisines_bas.controls[i].get('quantite')?.invalid " class="error-message">
-                    quantité requise.
+                    Quantité requise.
                 </div>
               </div>
               

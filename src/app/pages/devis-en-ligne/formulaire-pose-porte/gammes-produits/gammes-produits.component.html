@@ -3,88 +3,97 @@
     <form [formGroup]="posePortesForm" (ngSubmit)="onPosePortesSubmit()">
         <div formArrayName="portes">
             <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i">
-                Porte {{i+1}}
+                <span class="gris f-w-6 ttl-type">Porte {{i+1}}</span>
                 <div  class="form-group" nz-row nzJustify="start">
-                    <div nz-col nzSpan="20" class="ant-col">
-                        <label>Type de porte <span>*</span></label>
+                    <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                        <h3 class="ttl-type">Type de porte <span>*</span></h3>
                         <div *ngIf="isclicked && portes.controls[i].get('type')?.invalid " class="error-message">
-                            Type de porte requis.
+                          Type de porte requis.
+                      </div>
+                      <nz-radio-group formControlName="type" class="radio-flx-spc">
+                        <div *ngFor="let option of types_de_portes" >
+                            <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
+                                {{ option.Label }}
+                            </label>
+                            <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
+                              <i class="far fa-question-circle"></i>
+                            </a>
+                            <ng-template #tooltipBonEtat>
+                              Les types de porte
+                            </ng-template>
                         </div>
-                    </div>
-                    <div nz-col nzSpan="20" class="ant-col" class="radio-flx-spc">
-                        <nz-radio-group formControlName="type">
-                            <div *ngFor="let option of types_de_portes" class="parquet-option">
-                                <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
-                                    <span>{{ option.Label }}</span>
-                                </label>
-                            </div>
-                            
                         </nz-radio-group>
-                       
-                    </div>
-                   
-                    <div nz-col nzSpan="20" class="ant-col">
-                        <label>Type de matériau <span>*</span></label>
+                    </div>              
+                    <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                        <h3 class="ttl-type">Type de matériau <span>*</span></h3>
                         <div *ngIf="isclicked && portes.controls[i].get('type2')?.invalid " class="error-message">
-                            Type de matériau requis.
+                          Type de matériau requis.
+                      </div>
+                      <nz-radio-group formControlName="type2" class="radio-flx-spc">
+                        <div *ngFor="let option of types_de_materiau" >
+                            <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
+                                {{ option.Label }}
+                            </label>
+                            <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
+                              <i class="far fa-question-circle"></i>
+                            </a>
+                            <ng-template #tooltipBonEtat>
+                              Les types de porte
+                            </ng-template>
                         </div>
+                    </nz-radio-group>         
                     </div>
-                    <div nz-col nzSpan="20" class="ant-col" class="radio-flx-spc">
-                        <nz-radio-group formControlName="type2">
-                            <div *ngFor="let option of types_de_materiau" class="parquet-option">
-                                <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
-                                    <span>{{ option.Label }}</span>
-                                </label>
-                            </div>
-                        </nz-radio-group>
-                        
-                    </div>
-                    <div nz-col nzSpan="20" class="ant-col">
-                        <label>Type de porte <span>*</span></label>
+                    <div nz-col nzSpan="6" class="ant-col" class="ant-col etat-srf tooltip-srf">
+                        <h3 class="ttl-type">Type de porte <span>*</span></h3>                    
                         <div *ngIf="isclicked && portes.controls[i].get('type3')?.invalid " class="error-message">
-                            Type de porte requis.
-                        </div>
+                          Type de porte requis.
+                      </div>
+                      <nz-radio-group formControlName="type3" class="radio-flx-spc">
+                          <div *ngFor="let option of types_de_porte_finition" >
+                              <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
+                                  {{ option.Label }}
+                              </label>
+                              <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
+                                <i class="far fa-question-circle"></i>
+                              </a>
+                              <ng-template #tooltipBonEtat>
+                                Les types de porte
+                              </ng-template>
+                          </div>  
+                      </nz-radio-group>
+                                                
                     </div>
-                    <div nz-col nzSpan="20" class="ant-col" class="radio-flx-spc">
-                        <nz-radio-group formControlName="type3">
-                            <div *ngFor="let option of types_de_porte_finition" class="parquet-option">
-                                <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
-                                    <span>{{ option.Label }}</span>
-                                </label>
-                            </div>  
-                        </nz-radio-group>
-                        
-                        
-                    </div>
-                    <div nz-col nzSpan="20" class="ant-col">
-                        <label>Finition <span>*</span></label>
+                    <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                        <h3 class="ttl-type">Finition <span>*</span></h3>                   
                         <div *ngIf="isclicked && portes.controls[i].get('finition')?.invalid " class="error-message">
-                            Type de finition requis.
-                        </div>
+                          Type de finition requis.
+                      </div>
+                      <nz-radio-group formControlName="finition" class="radio-flx-spc">
+                          <div *ngFor="let option of types_de_finitions">
+                              <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
+                                  {{ option.Label }}
+                              </label>
+                              <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
+                                <i class="far fa-question-circle"></i>
+                              </a>
+                              <ng-template #tooltipBonEtat>
+                                Les types de porte
+                              </ng-template>
+                          </div>
+                      </nz-radio-group>
+                                                     
                     </div>
-                    <div nz-col nzSpan="20" class="ant-col" class="radio-flx-spc">
-                            <nz-radio-group formControlName="finition">
-                                <div *ngFor="let option of types_de_finitions" class="parquet-option">
-                                    <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
-                                        <span>{{ option.Label }}</span>
-                                    </label>
-                                </div>
-                            </nz-radio-group>
-                       
-                        
-                    </div>
-                    <div nz-col nzSpan="20" class="ant-col">
+                    <div nz-col nzSpan="12" class="ant-col">
                         <label>Informations complémentaires sur le type</label>
                         <textarea formControlName="infos_comp_type"></textarea>
                     </div>
-                    <div nz-col nzSpan="20" class="ant-col">
+                    <div nz-col nzSpan="12" class="ant-col">
                         <label>Informations complémentaires sur la finition</label>
                         <textarea formControlName="infos_comp_finition"></textarea>
                     </div>
                     <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">Supprimer</button>
                   </div>
-            </div>
-          
+            </div>      
         </div>
         <button type="button" class="dynamic-form-button add-btn" (click)="addPortesGroup()" *ngIf="portes.length < 8">Ajouter une porte</button>
       </form>

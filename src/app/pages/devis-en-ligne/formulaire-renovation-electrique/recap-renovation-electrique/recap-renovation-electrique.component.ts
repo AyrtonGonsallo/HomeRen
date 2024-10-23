@@ -21,7 +21,9 @@ export class RecapRenovationElectriqueComponent {
    
    
   }
-
+  get_label(slug:boolean){
+    return (slug)?'oui':'non';
+  }
   get_title(slug:string){
     return slug.split(":")[1];
   }

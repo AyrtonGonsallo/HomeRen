@@ -1,22 +1,22 @@
 <div *ngIf="gammes" class="recap-div devis-content">
     <span class="recup-fin"><p >Pièce</p><p>:</p><p>{{selectedPiece.Titre}}</p></span>
-    Dépose d'élements hauts
+    <span class="recup-spn" >Dépose d'élements hauts</span>
     <div *ngFor="let eh of elements_hauts; let i = index">
-        élements haut {{i+1}}
+        <span class="recup-spn gris" >Élements haut {{i+1}}</span>
         <span class="recup-fin" ><p>hauteur </p><p>:</p><p>{{eh?.hauteur}}</p></span>
         <span class="recup-fin" ><p>longueur </p><p>:</p><p>{{eh?.longueur}}</p></span>
         <span class="recup-fin" ><p>quantite </p><p>:</p><p>{{eh?.quantite}}</p></span>
         <span class="recup-fin" ><p>profondeur </p><p>:</p><p>{{eh?.profondeur}}</p></span>
     </div>
-    Dépose d'élements bas
+    <span class="recup-spn" >Dépose d'élements bas</span>
     <div *ngFor="let eb of elements_bas; let i = index">
-        élements bas {{i+1}}
+        <span class="recup-spn gris" >Élements bas {{i+1}}</span>
         <span class="recup-fin" ><p>hauteur </p><p>:</p><p>{{eb?.hauteur}}</p></span>
         <span class="recup-fin" ><p>longueur </p><p>:</p><p>{{eb?.longueur}}</p></span>
         <span class="recup-fin" ><p>quantite </p><p>:</p><p>{{eb?.quantite}}</p></span>
         <span class="recup-fin" ><p>profondeur </p><p>:</p><p>{{eb?.profondeur}}</p></span>
     </div>
-    Dépose d'électromenager
+    <span class="recup-spn" >Dépose d'électromenager</span>
     <div *ngFor="let gamme of gammes">
         <span class="recup-fin" ><p>appareil</p><p>:</p><p>{{gamme?.titre}}</p></span>
 

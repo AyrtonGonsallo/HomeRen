@@ -13,6 +13,15 @@ export class ApiConceptsEtTravauxService {
   addUserWithRole(userData: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/add_utilisateur_with_role`, userData);
   }
+  restaurepassword(email:string): Observable<any> {
+    const url = `${environment.apiUrl}/restore_user_password/${email}`;
+    return this.http.get<any>(url);
+  }  loginFrontUtilisateur(userData: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/login_user`, userData);
+  }
+  addFrontUtilisateur(userData: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/add_front_utilisateur`, userData);
+  }
   addParticulier(userData: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/add_particulier`, userData);
   }

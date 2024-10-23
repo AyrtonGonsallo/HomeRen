@@ -55,6 +55,11 @@ appareilGroup: any;
       console.log(this.poseCuisineForm.value);
       // Envoyer les données au backend ou traiter comme nécessaire
       this.gestiondesdevisService.addFormulaire("dimensions-pose-plomberie",11,this.poseCuisineForm.value)
+      this.gestiondesdevisService.addFormulaire("etat-surfaces-pose-plomberie",11,this.poseCuisineForm.value)
+      this.gestiondesdevisService.addFormulaire("gammes-produits-pose-plomberie",11,this.poseCuisineForm.value)
+    // Envoyer les données au backend ou traiter comme nécessaire
+    this.gestiondesdevisService.groupform('pose-plomberie-c',11, 'dimensions-pose-plomberie','etat-surfaces-pose-plomberie','gammes-produits-pose-plomberie')
+    
     }
   }
 
@@ -77,7 +82,7 @@ appareilGroup: any;
       this.gestiondesdevisService.addFormulaire("etat-surfaces-pose-plomberie",11,this.poseSalleDeBainForm.value)
       this.gestiondesdevisService.addFormulaire("gammes-produits-pose-plomberie",11,this.poseSalleDeBainForm.value)
     // Envoyer les données au backend ou traiter comme nécessaire
-    this.gestiondesdevisService.groupform('pose-plomberie',11, 'dimensions-pose-plomberie','etat-surfaces-pose-plomberie','gammes-produits-pose-plomberie')
+    this.gestiondesdevisService.groupform('pose-plomberie-s',11, 'dimensions-pose-plomberie','etat-surfaces-pose-plomberie','gammes-produits-pose-plomberie')
     console.log(this.gestiondesdevisService.getFormulaireByName("pose-plomberie"));
       // Envoyer les données au backend ou traiter comme nécessaire
     }

@@ -28,27 +28,29 @@
     background: var(--color2);
     color: var(--color-white);
   }
-  textarea{
-    width: 100%;
-  }
   .ant-col[_ngcontent-ng-c3282933449] {
     text-align: center !important;
 }
-form label {
-    margin-right: 30px !important;text-align: left !important;
+.etat-srf-lab{
+    text-align: center !important;
+    width: 50% !important;
+    font-size: 18px !important;
+    font-family: 'Montserrat' !important;
+    color: #555 !important;
+    font-weight: 900 !important;
 }
 .add-btn, .del-btn{padding: 0px 10px; background-color: #555;height: 37px;cursor: pointer;margin-block: 8px;}
 .add-btn:hover, .del-btn:hover{background-color: #000;}
 input {
-    border: 1px solid #555;
+    border: 3px solid #ffc736 !important;
+}
+input:focus{
+    border: 3px solid #ffc736;
 }
 .vald-btn{margin-top:30px;cursor: pointer;}
 .vald-btn, .add-btn{    
     width: fit-content;
     margin-inline: auto;}
-input:focus{
-    border: 2px solid #ffc736;
-}
 .pose-murs {
     display: flex ;
     flex-wrap: nowrap !important;
@@ -56,25 +58,13 @@ input:focus{
     align-items: center !important;
 }
 .ant-col {
-    max-width: 60% !important;
+    display: flex;
     justify-content: space-between;
 }
 [nz-radio] {
     display: block;
     height: 32px;
     line-height: 24px;
-}
-.radio-flx-spc div{
-    display: grid;
-    grid-template-columns: 1fr;
-    align-items: center;
-    justify-content: center;
-    min-height: 0px;
-    justify-items: stretch;}
-.radio-flx-spc div span{  text-align: left;  }
-.radio-flx-spc label{text-align: unset;}
-.radio-flx-spc, .radio-flx-spc .ant-col-6 {
-    width: 100% !important;
 }
 .pose-murs .ant-col-6, .pose-murs .ant-col{
     max-width: 60% !important;
@@ -104,12 +94,8 @@ input{
 .ant-row {
     align-content: center;
     flex-direction: column;
-}input {
-    border: 1px solid #555;
 }
-input:focus{
-    border: 2px solid #ffc736;
-}
+.vald-btn{margin-top:30px;cursor: pointer;}
 .image {
     display: flex;
     flex: 0% !important;
@@ -122,88 +108,20 @@ form{
     flex-direction: column !important;
     flex-wrap: wrap !important;
 }
-.flx-pr.ant-row.ant-row-start {
+.ant-col-6{
     display: grid;
-    align-items: center;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-content: center;
-    flex-direction: row!important;
-    flex-wrap: wrap!important;
-    justify-items: center!important;
-}
-
-.flx-pr .ant-col-6 {
-    max-width: 100%!important;
-    width: 100%!important;
-    display: flex !important;
-    flex: 0% !important;
-    margin: auto!important;
-    text-align: center!important;
-    align-items: center!important;
-    flex-direction: row!important;
-    align-content: center!important;
-    justify-content: flex-start!important;
-}input {
-    border: 1px solid #555;
-}
-.vald-btn{margin-top:30px;cursor: pointer;}
-.vald-btn, .add-btn{    
-    width: fit-content;
-    margin-inline: auto;}
-input:focus{
-    border: 2px solid #ffc736;
-}
-.ant-col-6 {
+    grid-template-columns: 1fr;
     max-width: 100%;
-    display: flex;
-    flex: 0% !important;
-    margin: auto;
-    text-align: center;
-    justify-content: center;
+    width: 100%; 
+}
+.radio-flx-spc div{
+    display: grid;
+    grid-template-columns: 1fr;
     align-items: center;
-}
-form{
-    display: flex !important;
-    flex-direction: column !important;
-    flex-wrap: wrap !important;
-}
-@media only screen and (max-width: 1226px) {
-    .vald-btn, .add-btn{ width: fit-content;}
-    .dimsn-portes .ant-row.form-group.ng-untouched.ng-pristine.ng-invalid.ant-row-start.ng-star-inserted {
-        display: grid !important;
-        justify-content: start !important;
-        align-content: center;
-        justify-items: center;
-    }
-    .dimsn-portes .ant-col.ant-col-6, .dimsn-portes .ant-col.ant-col-12 {
-        width: 100%;
-        max-width: 100%;
-        justify-content: space-between;
-    }
-    .dimsn-portes .ant-col-6,  .dimsn-portes .ant-col-12[_ngcontent-ng-c2223103634] {
-        max-width: 100%;}
-
-
-}
-@media only screen and (max-width: 600px) {
-.dimsn-portes .ant-row.form-group.ng-untouched.ng-pristine.ng-invalid.ant-row-start.ng-star-inserted {
-grid-template-columns: 1fr !important;}
-
-
-}
-@media only screen and (max-width: 497px) {
-    .dimsn-portes[_ngcontent-ng-c2223103634] .ant-col.ant-col-6[_ngcontent-ng-c2223103634], .dimsn-portes[_ngcontent-ng-c2223103634] .ant-col.ant-col-12[_ngcontent-ng-c2223103634] {
-        width: 100%;
-        flex-direction: column;
-        max-width: 100%;}
-   .dimsn-portes select.ng-untouched.ng-pristine.ng-invalid {width: 100%;}
-   form[_ngcontent-ng-c2223103634] label[_ngcontent-ng-c2223103634] {
-    margin-right: 0px !important;
-    text-align: left !important;
-    width: 100%;}
-}
-
-.radio-flx-spc label {
+    justify-content: center;
+    min-height: 0px;
+    justify-items: stretch;}
+.radio-flx-spc label{
     display: flex;
     width: 100%;
     height: 54px;
@@ -212,4 +130,58 @@ grid-template-columns: 1fr !important;}
     flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
+}
+.radio-flx-spc label span:nth-child(1){width: 100%;max-width: 100%;order: 2;display: flex;
+    justify-content: flex-start;}
+.radio-flx-spc label span:nth-child(2){width: 100%;max-width: 100%;order: 1;display: flex;
+    justify-content: flex-end;}
+.etat-srf-ttl{font-weight: 600;font-size:20px;margin-bottom: 20px;}
+.radio-flx-spc, .radio-flx-spc .ant-col-6 {
+    width: 100% !important;
+}
+.etat-srf{
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    width:90%;
+    display: flex !important;
+    align-items: center !important;
+    flex: 0% !important;
+    margin: auto;
+    text-align: center;
+    flex-direction: column;
+}
+.etat-srf .ant-radio-group {
+    display: grid;
+}
+.srf-img{margin-block: 20px;margin-inline: auto;}
+.tooltip-srf .radio-flx-spc div { grid-template-columns: 6fr 1fr;}
+.tooltip-srf i.far.fa-question-circle {
+    color: var(--color1);
+    font-size: 20px;
+    margin-top: 9px;
+}
+.link-tooltip{color:var(--color1);}
+.link-tooltip:hover{color:var(--color-white);text-decoration: underline;}
+h3.ttl-type{
+    border-bottom: 1px solid #55555566;
+    font-size: 18px;
+    color: var(--color1);
+    text-align: center;
+    width: 100%;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+form label{
+    text-align: left;
+    width: 95%;
+    margin: auto;
+}
+.ant-col-12 {
+    max-width: 100%;
+    display: grid !important;
+    grid-template-columns: 1fr;
+}
+@media screen and (max-width: 375px) {
+    form label {text-align: left !important; }
 }

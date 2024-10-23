@@ -4,7 +4,7 @@
                <div formArrayName="murs_non_porteurs">
                 <img class="img-surface" src="/assets/Rectangle.png"><br>
                 <div *ngFor="let mur of murs_non_porteurs.controls; let i = index" [formGroupName]="i">
-                  Mur {{i+1}}
+                  <span class="mur-ttl">Mur {{i+1}}</span>
                   <div nz-row nzJustify="start" >
                     <!--<div nz-col nzSpan="6" class="ant-col">
                       <label for="hauteur">Hauteur: </label>
@@ -15,25 +15,22 @@
                       <input type="number" id="longueur" formControlName="longueur">
                     </div>-->
                     
-                    <div nz-col nzSpan="6" class="ant-col">
-                      <label for="surface">Surface: <span class="error-message">*</span> :
+                    <div nz-col nzSpan="6" class="ant-col tooltip-srf">
+                      <label for="surface">
+                        Surface m²
+                        <span class="error-message">*</span> :
                         <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
                           <i class="far fa-question-circle"></i>
                         </a>
                       </label>
-                      <br>
                       <input type="number" id="surface" formControlName="surface">
                       <ng-template #tooltipSurface>
                         <div class="tooltip-content">
                           <strong>Calcul de la surface :</strong><br>
-                          Veuillez consulter :
-                          <a [href]="baseurl+'1725455059380-fa00005685-r.pdf'" target="_blank" class="link-tooltip">Calcul surfaces murs</a>
+                          <p>La surface est calculée en multipliant la longueur par la largeur de la pièce. Mesurez chaque côté avec précision pour obtenir la surface totale en m².</p>
+                          <p><strong>Exemple :</strong> Si la pièce fait 4m de long et 3m de large, la surface totale est de 12 m².</p>
                         </div>
                       </ng-template>
-                      
-                      <div *ngIf="isclicked && murs_non_porteurs.controls[i].get('surface')?.invalid " class="error-message">
-                        Surface requise.
-                      </div>
                     </div>
                     
                     

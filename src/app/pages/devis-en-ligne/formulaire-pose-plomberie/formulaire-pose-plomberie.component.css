@@ -35,16 +35,10 @@ form label {
     margin-right: 30px !important;
 }
 .add-btn, .del-btn{padding: 0px 10px; background-color: #000;height: 37px;cursor: pointer;margin-block: 8px;}
-input {
-    border: 1px solid #555;
-}
 .vald-btn{margin-top:30px;cursor: pointer;}
 .vald-btn, .add-btn{    
     width: 18%;
     margin-inline: auto;}
-input:focus{
-    border: 2px solid #ffc736;
-}
 .ant-col-6 {
     max-width: 40%;
     display: flex;
@@ -72,11 +66,7 @@ form{
         margin-right: 0px !important;
         width: 40%;
     }
-@media only screen and (max-width: 800px) {
-    .vald-btn, .add-btn{ width: fit-content;}
-    .form-flx-dms form label{  width: 57%; }
-
-}  
+  
 h3.ttl-type {
     text-align: center !important;
     display: flex;
@@ -104,6 +94,7 @@ a.info-icon {display: flex; align-items: center;}
     justify-items: start;
     align-items: center;
 }
+.form-flx-dms .ant-col.ant-col-12 div { width: 100% !important;}
 form label { margin-right: 0px !important;}
 label.ant-radio-wrapper {
     width: 100% !important;
@@ -112,3 +103,20 @@ label.ant-radio-wrapper {
     flex-direction: row-reverse;
 }
 .img-tltip img{width:150px;height:150px;}
+.flx-depose{
+    display: grid;
+    grid-template-columns: 13fr 2fr;
+    width: 68%;
+    margin: auto;
+    justify-items: start;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+@media only screen and (max-width: 800px) {
+    .vald-btn, .add-btn{ width: fit-content;}
+    .form-flx-dms form label{  width: 57%; }
+    .radio-flx-spc .ant-row { width: 100%; }
+    nz-radio-group.ant-radio-group.radio-flx-spc.ng-untouched.ng-pristine.ng-invalid{width: 100% !important;}
+    .radio-flx-spc label span:nth-child(2) {text-align: left !important; padding-left: 0px !important;}
+} 

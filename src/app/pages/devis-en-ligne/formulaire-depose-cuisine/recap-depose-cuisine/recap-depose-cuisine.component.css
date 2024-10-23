@@ -1,0 +1,5 @@
+.recup-spn{font-size: 16px; color: var(--color1);text-align: center;width: 100%; font-weight: 600;}
+.recup-spn.gris{color: var(--color2);margin-bottom:9px;}
+@media only screen and (max-width: 375px) {
+    .recup-fin { width: 100%;}
+}

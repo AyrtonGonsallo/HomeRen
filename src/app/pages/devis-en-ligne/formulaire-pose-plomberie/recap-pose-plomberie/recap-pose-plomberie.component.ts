@@ -22,10 +22,10 @@ export class RecapPosePlomberieComponent {
     private gestiondesdevisService: GestionDesDevisService,
     private userService: ApiConceptsEtTravauxService
   ) {
-    this.posePlomberieForm = this.gestiondesdevisService.getFormulaireByName("pose-plomberie");
-
+    this.posePlomberieForm = (this.gestiondesdevisService.getFormulaireByName("pose-plomberie-s"))?this.gestiondesdevisService.getFormulaireByName("pose-plomberie-s"):this.gestiondesdevisService.getFormulaireByName("pose-plomberie-c");
+console.log(this.posePlomberieForm)
     // Typage explicite pour appareils_form_data
-    let appareils_form_datas: AppareilFormData[] = this.posePlomberieForm.formulaire["gammes-produits-pose-plomberie"].appareils_salle_de_bain;
+    let appareils_form_datas: AppareilFormData[] = (this.posePlomberieForm.formulaire["gammes-produits-pose-plomberie"].appareils_salle_de_bain)?this.posePlomberieForm.formulaire["gammes-produits-pose-plomberie"].appareils_salle_de_bain:this.posePlomberieForm.formulaire["gammes-produits-pose-plomberie"].appareils_cuisine;
 
     // Utilisation du typage pour le paramètre appareil
     appareils_form_datas.forEach((appareil: AppareilFormData) => {

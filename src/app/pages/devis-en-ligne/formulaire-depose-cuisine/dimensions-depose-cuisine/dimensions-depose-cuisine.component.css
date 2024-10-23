@@ -1,0 +1,27 @@
+.add-btn, .del-btn{padding: 0px 10px !important;
+    background-color: #555 !important;
+    color: #fff !important;
+    height: 37px !important;
+    border: 0px !important;
+    cursor: pointer !important;
+    margin-block: 8px !important;}
+.add-btn:hover, .del-btn:hover{background-color: #000 !important;color:#fff !important;}
+.ant-col{
+    width: 80%;
+    max-width: 100%;
+    display: grid !important;
+    margin: auto;
+    gap: 2px;
+    text-align: center;
+    margin-bottom: 5px;
+    grid-template-columns: 1fr 1fr;
+    justify-items: start;
+}
+.ant-row-start.cuisine-flx{display:grid;grid-template-columns: 1fr;}
+@media only screen and (max-width: 497px) {
+form label { 
+    text-align: left !important;}
+}
+@media only screen and (max-width: 320px) {
+.add-btn, .del-btn { padding: 0px 4px !important;}
+}

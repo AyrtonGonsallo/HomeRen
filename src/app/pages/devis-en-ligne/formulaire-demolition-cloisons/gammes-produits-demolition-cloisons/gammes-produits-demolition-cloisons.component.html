@@ -5,8 +5,8 @@
       <div *ngFor="let mur of mursnonporteurs.controls; let j = index" [formGroupName]="j">
         <span class="mur-ttl">Mur {{j+1}}</span>
         <div nz-row nzJustify="start">
-          <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf">
-            <label for="materiaux" class="etat-srf-lab">matériel: </label>
+          <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
+            <label for="materiaux" class="etat-srf-lab">Matériel: </label>
             <nz-radio-group formControlName="materiaux" class="radio-flx-spc">
               <!-- Reusable template for displaying options with PDFs -->
               <ng-container>
@@ -44,9 +44,9 @@
 
     <div formArrayName="ouverturepartielles">
       <div *ngFor="let mur of ouverturepartielles.controls; let i = index" [formGroupName]="i">
-        <span class="mur-ttl">ouverture {{i+1}}</span>
+        <span class="mur-ttl">Ouverture {{i+1}}</span>
         <div nz-row nzJustify="start">
-          <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf">
+          <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
             <label for="cloison" class="etat-srf-lab">Cloison: </label>
             <nz-radio-group formControlName="cloison" class="radio-flx-spc">
               <!-- Reusable template for displaying options with PDFs -->

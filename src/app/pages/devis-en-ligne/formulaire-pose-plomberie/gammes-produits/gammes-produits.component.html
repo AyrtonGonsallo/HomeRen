@@ -4,7 +4,7 @@
       <form [formGroup]="poseCuisineForm" (ngSubmit)="onPoseCuisineSubmit()">
           <div formArrayName="appareils_cuisine">
             <div *ngFor="let appareilGroup of appareils_cuisine; let i = index" [formGroupName]="i">
-              <h3>{{appareils_cuisine && appareils_cuisine[i] ? appareils_cuisine[i].Titre :""}}</h3>
+              <h3 class="ttl-type">{{appareils_cuisine && appareils_cuisine[i] ? appareils_cuisine[i].Titre :""}}</h3>
               
               <nz-radio-group formControlName="modele" class="radio-flx-spc ">
                 <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
@@ -19,26 +19,27 @@
                       </label>
                     </div>
                   </div>
-                  <!-- Tooltip with image and dimensions -->
-                  <a nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="info-icon">
-                    <i class="far fa-question-circle"></i>
-                  </a>
-                  <ng-template #tooltipTemplate >
-                    <div >
-                      <div><strong>Longueur:</strong> {{modele.Longeur}}</div>
-                      <div><strong>Largeur:</strong> {{modele.Largeur}}</div>
-                      <div><strong>Hauteur:</strong> {{modele.Hauteur}}</div>
-                      <div *ngIf="modele.Image">
-                        <img [src]="baseurl + modele.Image" [alt]="modele.Image" width="200px"/>
-                      </div>
-                    </div>
-                  </ng-template>
+               <!-- Tooltip with image and dimensions -->
+               <a nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="info-icon">
+                <i class="far fa-question-circle"></i>
+              </a>
+              <ng-template #tooltipTemplate >
+                <div>
+                  <div class="img-tltip" *ngIf="modele.Image">
+                    <img [src]="baseurl + modele.Image" [alt]="modele.Image" width="150px"/>
+                  </div>
+                  <div><strong>Longueur:</strong> {{modele.Longeur}}</div>
+                  <div><strong>Largeur:</strong> {{modele.Largeur}}</div>
+                  <div><strong>Hauteur:</strong> {{modele.Hauteur}}</div>
+                  
                 </div>
-              </nz-radio-group>
-              <div>
-                <label for="depose">Souhaitez-vous déposer votre salle de bain actuelle ?</label>
-                <input type="checkbox" id="depose" formControlName="depose">      
-              </div>  
+              </ng-template>
+            </div>
+          </nz-radio-group>
+          <div class="flx-depose">
+            <label for="depose">Souhaitez-vous déposer votre salle de bain actuelle ?</label>
+            <input type="checkbox" id="depose" formControlName="depose">      
+          </div>   
               <!-- Ajoutez d'autres champs selon vos besoins -->
             </div>
           </div>
@@ -97,9 +98,9 @@
               </ng-template>
             </div>
           </nz-radio-group>
-          <div>
+          <div class="flx-depose">
             <label for="depose">Souhaitez-vous déposer votre salle de bain actuelle ?</label>
-            <input type="checkbox" id="depose" formControlName="depose">      
+            <input type="checkbox" id="depose" formControlName="depose" class="custom-checkbox">      
           </div>  
           <!-- Ajoutez d'autres champs selon vos besoins -->
         </div>

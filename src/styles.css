@@ -24,9 +24,11 @@
 .fs-34{font-size: 43px;}
 p.fs-30{font-size: 28px!important;font-weight: 600;}
 .fs-27{font-size: 27px;}
+.f-w-6{font-weight: 600;}
+.f-w-7{font-weight: 700;}
 .font-site{font-family: 'MyFont';}
 .font-site2{font-family: 'Montserrat';}
-.center{text-align: center;}
+.center{text-align: center !important;}
 .blanc{color:var(--color-white) !important;}
 .jaune{color:var(--color1);}
 .gris{color:var(--color2);}
@@ -294,14 +296,15 @@ label{font-family: 'Montserrat';font-weight: 600;}
     .recup-fin {
         text-align: left;
         float: left;
+        width: 100%;
         gap: 17px !important;
         display: flex !important;
         justify-content: flex-start;
         flex-wrap: nowrap;
     }
-    .plaf-dim input{ width: 90% !important;}
+    .plaf-dim input{ width: 100% !important;}
     .del-btn{float: none; margin: auto;}
-    form label{text-align: center !important;}
+    form label{text-align: start !important;}
 }
 @media screen and (max-width: 320px) {
     .btn-suiv{  padding: 11px 104px !important;}

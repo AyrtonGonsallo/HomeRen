@@ -28,3 +28,239 @@
     background: var(--color2);
     color: var(--color-white);
   }
+  .ant-col[_ngcontent-ng-c3282933449] {
+    text-align: center !important;
+}
+form label {
+    text-align: left;
+    width: 50%;
+}
+.etat-srf-lab{
+    text-align: center !important;
+    width: 50% !important;
+    font-size: 18px !important;
+    font-family: 'Montserrat' !important;
+    color: #555 !important;
+    font-weight: 900 !important;
+}
+.add-btn, .del-btn{padding: 0px 10px; background-color: #555;height: 37px;cursor: pointer;margin-block: 8px;}
+.add-btn:hover, .del-btn:hover{background-color: #000;}
+input {
+    border: 1px solid #555;
+}
+.vald-btn{margin-top:30px;cursor: pointer;}
+.vald-btn, .add-btn{    
+    width: fit-content;
+    margin-inline: auto;}
+input:focus{
+    border: 2px solid #ffc736;
+}
+.pose-murs {
+    display: flex ;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.ant-col {
+    display: flex;
+    justify-content: space-between;
+}
+[nz-radio] {
+    display: block;
+    height: 32px;
+    line-height: 24px;
+}
+.pose-murs .ant-col-6, .pose-murs .ant-col{
+    max-width: 60% !important;
+    width: 100% !important;
+    display: flex !important;
+    flex: 0% !important;
+    margin: auto;
+    gap: 20px !important;
+    text-align: center !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+input{
+    width: 66% !important;
+    margin-left: auto;
+}
+.ant-col-6 {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex: 0% !important;
+    margin: auto;
+    gap: 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.ant-row {
+    align-content: center;
+    flex-direction: column;
+}input {
+    border: 1px solid #555;
+}
+input[type="checkbox"] { width: 15px; height: 15px;}
+.div-elec {
+    display: grid;
+    width: 60%;
+    grid-template-columns: 1fr 1fr;
+    margin: auto;
+}
+.vald-btn{margin-top:30px;cursor: pointer;}
+.vald-btn, .add-btn{    
+    width: 18%;
+    margin-inline: auto;}
+input:focus{
+    border: 2px solid #ffc736;
+}
+.image {
+    display: flex;
+    flex: 0% !important;
+    text-align: center;
+    justify-content: start;
+    align-items: start;
+}
+form{
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap;
+}
+.ant-col-6{
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    width: 60%;
+    display: flex !important;
+    align-items: center !important;
+    flex: 0% !important;
+    margin: auto;
+    text-align: center;
+}
+.radio-flx-spc div{
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-content: center;
+    min-height: 0px;
+    justify-items: stretch;}
+
+.radio-flx-spc label{
+    display: flex;
+    width: 100%;
+    height: 54px;
+    border-bottom: 1px solid #e9e9e9;
+    max-width: 100%;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+}
+.radio-flx-spc label span:nth-child(1){width: 100%;max-width: 100%;order: 2;display: flex;
+    justify-content: flex-start;}
+.radio-flx-spc label span:nth-child(2){width: 100%;max-width: 100%;order: 1;display: flex;
+    justify-content: flex-end;}
+.etat-srf-ttl{font-weight: 600;font-size:20px;margin-bottom: 20px;}
+.radio-flx-spc, .radio-flx-spc .ant-col-6 {
+    width: 100% !important;
+}
+.etat-srf{
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    width: 60%;
+    display: flex !important;
+    align-items: center !important;
+    flex: 0% !important;
+    margin: auto;
+    text-align: center;
+    flex-direction: column;
+}
+.etat-srf .ant-radio-group {
+    display: grid;
+}
+.srf-img{margin-block: 20px;margin-inline: auto;}
+form label {
+    width: 90%;
+}
+input{
+    border: 3px solid #ffc736 !important;
+    border-radius: 2px !important;
+}
+.ant-col-4 {
+    display: grid !important;
+    max-width: 100%;
+    width: 61%;
+    grid-template-columns: 1fr 1fr;
+}
+@media only screen and (max-width: 1212px) {
+    .vald-btn, .add-btn{ width: fit-content;}
+
+   
+  
+}
+
+@media only screen and (max-width:1196px) {
+.flx-pr.ant-row.ant-row-start[_ngcontent-ng-c3727393146] {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;}
+}
+@media only screen and (max-width: 800px) {
+    .ant-col-6[_ngcontent-ng-c4243379430] {max-width: 100%;}
+    .ant-row[_ngcontent-ng-c904728309] {
+        display: grid !important;
+        align-content: center !important;
+        grid-template-columns: 1fr 1fr;
+    }
+    .ant-col.ant-col-6{max-width: 100%;}
+    .flx-pr.ant-row.ant-row-start[_ngcontent-ng-c3727393146] {grid-template-columns: 1fr;}
+
+}
+@media only screen and (max-width: 600px) {
+    .ant-col-4{ width: 100%;}
+    .flx-pr.ant-row.ant-row-start{display: grid !important;}
+    .ant-row {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        flex-direction: column !important;
+        align-content: flex-start !important;
+    }
+    .ant-col.ant-col-6[_ngcontent-ng-c4243379430] {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start;
+        margin: 0;
+    }
+    .ant-col[_ngcontent-ng-c182946846], .ant-col-6, .ant-col {max-width: 100% !important;}
+
+}
+@media only screen and (max-width: 497px) {
+.div-elec{width: 100% !important;} 
+.ant-row{grid-template-columns: 1fr !important;}
+.ant-col.ant-col-6[_ngcontent-ng-c904728309] {
+    flex-direction: row !important;}
+}
+@media screen and (max-width: 375px) {
+    .plaf-dim input{ width: 90% !important;}
+    form label { text-align: left !important;}
+    }
+@media only screen and (max-width: 320px) {
+.ant-col.ant-col-6[_ngcontent-ng-c904728309][_ngcontent-ng-c904728309]{flex-direction: column !important;}
+.recap-div p{font-size:13px !important;}
+}
+.tooltip-srf .radio-flx-spc div { grid-template-columns: 6fr 1fr;}
+.tooltip-srf i.far.fa-question-circle {
+    color: var(--color1);
+    font-size: 20px;
+    margin-top: 9px;
+}
+.link-tooltip{color:var(--color1);}
+.link-tooltip:hover{color:var(--color-white);text-decoration: underline;}
+.div-elec span{text-align: left !important;}
+input#checked {width: 20% !important;}
+
+
+
+ 
