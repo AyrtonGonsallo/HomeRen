@@ -28,11 +28,16 @@
       
           <nz-form-item class="cls-mdp col-5" >
               <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Mot de passe</nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="aucun mot de passe entré">
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Aucun mot de passe entré">
                  <input nz-input type="Password" id="password" formControlName="password"/>
               </nz-form-control>
           </nz-form-item>
-          <button nz-button  nzType="text" (click)="showModal()"><span>J’ai oublié mon mot de passe</span></button>
+          <nz-form-item nz-row class="register-area">
+            <nz-form-control [nzSpan]="14" [nzOffset]="6">
+              <button nz-button  nzType="text" class="flx-cnt-btn" (click)="showModal()"><span>J’ai oublié mon mot de passe</span></button>
+
+            </nz-form-control>
+          </nz-form-item>
 
           <nz-modal [(nzVisible)]="isVisible" nzTitle="Récupération de mot de passe" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
             <ng-container *nzModalContent>
@@ -46,32 +51,39 @@
                 </form>
             </ng-container>
           </nz-modal>
-          <nz-form-item nz-row class="register-area col-btn">
-            <nz-form-control [nzSpan]="14" [nzOffset]="4">
+          <nz-form-item nz-row class="register-area">
+            <nz-form-control [nzSpan]="14" [nzOffset]="6">
               <button class="btn-envoyer" nz-button nzType="primary">Se connecter</button>
             </nz-form-control>
-            
-              <button class="btn-envoyer" nz-button nzType="primary" (click)="switch_form()">S'inscrire</button>
-            
           </nz-form-item>
+            <nz-form-item nz-row class="register-area">
+              <nz-form-control [nzSpan]="14" [nzOffset]="6" class="flx-connect">
+                Pas encore inscrit ? Créez votre compte en cliquant sur <button class="flx-cnt-btn" nz-button  (click)="switch_form()">S'inscrire</button>
+              </nz-form-control>
+            </nz-form-item>
+            
+          
         </form>
       </div>
+
+
       <div class="register-form" *ngIf="!se_connecter">
         <form nz-form [formGroup]="registrationForm" (ngSubmit)="registrate()">
           <nz-form-item>
-            <nz-form-label [nzSpan]="5" nzFor="roleId" nzRequired>Role</nz-form-label>
-            <nz-form-control [nzSpan]="12" nzErrorTip="Please select your role!">
+            <nz-form-label [nzSpan]="5" nzFor="roleId" class="role-lab ant-col ant-col-xs-24 ant-col-sm-6" nzRequired>Role</nz-form-label>
+            <nz-form-control [nzSpan]="12" nzErrorTip="Please select your role!" class="role-list ant-col ant-col-12">
               <nz-select
                 id="roleId"
                 formControlName="roleId"
                 nzPlaceHolder="artisan ou particulier ?"
                 (ngModelChange)="roleChange($event)"
               >
-                <nz-option nzValue="2" nzLabel="artisan"></nz-option>
-                <nz-option nzValue="3" nzLabel="particulier"></nz-option>
+                <nz-option nzValue="2" nzLabel="Artisan"></nz-option>
+                <nz-option nzValue="3" nzLabel="Particulier"></nz-option>
               </nz-select>
             </nz-form-control>
           </nz-form-item>
+
           <nz-form-item>
             <nz-form-label
               [nzSm]="6"
@@ -177,8 +189,7 @@
             <nz-form-control [nzSpan]="14" [nzOffset]="6">
               <label nz-checkbox formControlName="agree">
                 <span>
-                  I have read the
-                  <a>agreement</a>
+                  I have read the <a>agreement</a>
                 </span>
               </label>
             </nz-form-control>
@@ -188,9 +199,14 @@
               <button nz-button nzType="primary">S'inscrire</button>
 
             </nz-form-control>
-            <button class="btn-envoyer" nz-button nzType="primary" (click)="switch_form()">Se connecter</button>
-
           </nz-form-item>
+          <nz-form-item nz-row class="register-area">
+            <nz-form-control [nzSpan]="14" [nzOffset]="6" class="flx-connect">
+              Vous êtes déjà inscrit ? Allez directement à <button class="flx-cnt-btn" nz-button  (click)="switch_form()">Se connecter</button>
+            </nz-form-control>
+          </nz-form-item>
+
+
         </form>
       </div>
       

@@ -1,7 +1,7 @@
 <div class="section-devis">
   <div class="devis-title">
     <div *ngIf="current < 2">
-      <h1 class="center gris font-site">Demandez votre devis gratuit</h1> 
+      <h1 class="center black font-site">Demandez votre devis gratuit</h1> 
       <p class="center f-w-4 fs-18 m-w-tt">Vous souhaitez rénover une ou plusieurs pièces de votre habitation ? Obtenez un devis gratuit sur <a class="fs-18 txt-dec gris" href="/">Homeren.fr</a> 
         <br>
         Pour commencer : sélectionnez une première pièce à rénover et laissez-vous guider !</p>   
@@ -24,25 +24,25 @@
    <!-- <p class="center f-w-4 fs-30 m-w-p"><strong> Vous avez un projet de rénovation en tête ?</strong>Remplissez notre formulaire en ligne pour une estimation personnalisée et sans engagement.</p> -->
   </div>
   <nz-steps [nzCurrent]="current" *ngIf="current!=0">
-     <nz-step nzIcon="home" nzTitle="Choix de la piece">
+     <nz-step nzIcon="home" nzTitle="Choix de la piece" nzDescription="This is a description.">
      </nz-step>
-     <nz-step nzIcon="tool" nzTitle="Travaux">
+     <nz-step nzIcon="tool" nzTitle="Travaux" nzDescription="This is a description.">
      </nz-step>
-     <nz-step nzIcon="setting" nzTitle="Dimensions">
+     <nz-step nzIcon="setting" nzTitle="Dimensions" nzDescription="This is a description.">
      </nz-step>
-     <nz-step nzIcon="area-chart" nzTitle="Etat de surfaces">
+     <nz-step nzIcon="area-chart" nzTitle="Etat de surfaces" nzDescription="This is a description.">
      </nz-step>
-     <nz-step nzIcon="table" nzTitle="Gamme de produits">
+     <nz-step nzIcon="table" nzTitle="Gamme de produits" nzDescription="This is a description.">
      </nz-step>
-     <nz-step nzIcon="file-done" nzTitle="Recapitulatif">
+     <nz-step nzIcon="file-done" nzTitle="Recapitulatif" nzDescription="This is a description.">
       <span>recap</span>
      </nz-step>
-     <nz-step nzIcon="check-circle" nzTitle="Finalisation">
+     <nz-step nzIcon="check-circle" nzTitle="Finalisation" nzDescription="This is a description.">
       <span>ici la partie finale</span>
      </nz-step>
    </nz-steps>
    <div class="div-btn-prect">
-    <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+    <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0" class="btn-prect">
      <span> <span nz-icon nzType="arrow-left" nzTheme="outline"></span> Question précédente</span>
     </button>
    </div>
@@ -92,26 +92,27 @@
         </div>
         <!-- Formulaire pose murs  -->
          <div *ngIf="is_travail_selected(5)">
-           <app-dimensions-pose-murs [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-murs>
+           <app-dimensions-pose-murs [surfacemax]="get_max()" [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-murs>
          </div>
          <div *ngIf="is_travail_selected(4)">
            <app-dimensions-creation-murs-non-porteurs [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-creation-murs-non-porteurs>
          </div>
          <!-- Formulaire pose Plafond -->
          <div *ngIf="is_travail_selected(8)">
-           <app-dimensions-pose-plafond [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-plafond>
+           <app-dimensions-pose-plafond [surfacemax]="get_max()" [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-plafond>
          </div>
          <!-- Formulaire pose Revetement de Sol -->
          <div *ngIf="is_travail_selected(9)">
-           <app-dimensions-pose-sol [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-sol>
+           <app-dimensions-pose-sol [surfacemax]="get_max()" [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-sol>
          </div>
           <!-- Formulaire pose porte -->
           <div *ngIf="is_travail_selected(10)">
            <app-dimensions-pose-porte [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-porte>
          </div>
+         
          <div *ngIf="is_travail_selected(11)">
-           <app-dimensions-pose-plomberie [selectedPiece]="selectedPiece"></app-dimensions-pose-plomberie>
-         </div>
+          <app-dimensions-pose-app-san ></app-dimensions-pose-app-san>
+        </div>
          <div *ngIf="is_travail_selected(12)">
            <app-dimensions-pose-chauffage></app-dimensions-pose-chauffage>
          </div>
@@ -183,6 +184,9 @@
          <div *ngIf="is_travail_selected(11)">
            <app-gammes-produits-pose-plomberie [selectedPiece]="selectedPiece" [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-pose-plomberie>
          </div>
+         <div *ngIf="is_travail_selected(16)">
+          <app-gammes-produits-pose-app-san [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-pose-app-san>
+        </div>
          <div *ngIf="is_travail_selected(15)">
           <app-gammes-produits-renovation-electrique  [triggerSubmitGammesProduitsForm]="triggerSubmitGammesProduitsForm" (formValidityChange)="is_formulaire_gammes_valid = $event"></app-gammes-produits-renovation-electrique>
         </div>

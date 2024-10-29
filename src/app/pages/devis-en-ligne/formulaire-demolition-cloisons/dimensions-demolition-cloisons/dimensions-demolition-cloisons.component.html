@@ -1,18 +1,16 @@
 <div class="plaf-dim">
-    <h3>MURS NON PORTEURS</h3>
     <form [formGroup]="mursNonporteursForm" (ngSubmit)="onSubmitform1()">
 
        <div formArrayName="mursNonporteurs">
         <div *ngFor="let mur of mursNonporteurs.controls; let i = index" [formGroupName]="i" >
-          <span class="mur-ttl">mur {{i+1}}</span>
+          <div class="mur-btn-div">
+            <span class="mur-ttl">Mur non porteurs - mur {{i+1}}</span>
+          <button type="button" class="dynamic-form-button del-btn" (click)="removemursNonporteursGroup(i)" *ngIf="mursNonporteurs.length > 1">Retirer</button>
+          </div>
           <div nz-row nzJustify="start" >
            
             <div nz-col nzSpan="6" class="ant-col">
-               <label for="longueur">longueur <span class="error-message">*</span> : 
-                <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-                  <i class="far fa-question-circle"></i>
-                </a>
-              </label>
+               <label for="longueur">longueur <span class="error-message">*</span> : </label>
               <ng-template #tooltipSurface>
                 <div class="tooltip-content">
                   <strong>Calcul de la longueur :</strong><br>
@@ -20,17 +18,19 @@
                 </div>
               </ng-template>
                <input type="number" id="longueur" formControlName="longueur">
+               <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                <i class="far fa-question-circle"></i>
+              </a>
              </div>
              <div *ngIf="isclicked && mursNonporteurs.controls[i].get('longueur')?.invalid " class="error-message">
                 longueur requise.
             </div>
              <div nz-col nzSpan="6" class="ant-col">
-               <label for="hauteur">Hauteur <span class="error-message">*</span> : 
-                <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-                  <i class="far fa-question-circle"></i>
-                </a>
-              </label>
+               <label for="hauteur">Hauteur cm<span class="error-message">*</span> : </label>
                <input type="number" id="hauteur" formControlName="hauteur">
+               <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                <i class="far fa-question-circle"></i>
+              </a>
                <ng-template #tooltipSurface>
                 <div class="tooltip-content">
                   <strong>Calcul de la hauteur :</strong><br>
@@ -42,12 +42,11 @@
                 Hauteur requise.
               </div>
              <div nz-col nzSpan="6" class="ant-col">
-                <label for="epaisseur">Epaisseur <span class="error-message">*</span> : 
-                  <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-                    <i class="far fa-question-circle"></i>
-                  </a>
-                </label>
+                <label for="epaisseur">Epaisseur <span class="error-message">*</span> : </label>
                 <input type="number" id="epaisseur" formControlName="epaisseur">
+                <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
                 <ng-template #tooltipSurface>
                   <div class="tooltip-content">
                     <strong>Calcul de la Epaisseur :</strong><br>
@@ -59,12 +58,11 @@
                 epaisseur requise.
               </div>
               <div nz-col nzSpan="6" class="ant-col">
-                <label for="volume">Volume <span class="error-message">*</span> : 
-                  <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-                    <i class="far fa-question-circle"></i>
-                  </a>
-                </label>
+                <label for="volume">Volume <span class="error-message">*</span> : </label>
                 <input type="number" id="volume" formControlName="volume">
+                <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
                 <ng-template #tooltipSurface>
                   <div class="tooltip-content">
                     <strong>Calcul de la volume :</strong><br>
@@ -80,7 +78,6 @@
                <label for="image">Image : </label>
                <input type="file" id="image" (change)="onmursNonporteursFileChange($event, i)" accept="image/*">
              </div>
-             <button type="button" class="dynamic-form-button del-btn" (click)="removemursNonporteursGroup(i)" *ngIf="mursNonporteurs.length > 1">Retirer le mur</button>
            </div>
          </div>
         </div>
@@ -88,17 +85,20 @@
        <button type="button"  class="dynamic-form-button add-btn" (click)="addmursNonporteursGroup()" *ngIf="mursNonporteurs.length < 5" >Ajouter un mur</button>
      </form>
 
-     <h3>DEPOSE DE PORTES </h3>
+
      <form [formGroup]="deposePorteForm" (ngSubmit)="onSubmitform2()">
-        <div>
+        <div class="col-12-w">
             <div nz-row nzJustify="start">
+              <div class="mur-btn-div">
+                <span class="mur-ttl">Dépose de porte</span>
+            </div>
                 <div nz-col nzSpan="12" class="ant-col">
-                    <label for="quantite_portes_simples_creuse">Nombre de portes simples creuse <span class="error-message">*</span> : 
-                      <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-                        <i class="far fa-question-circle"></i>
-                      </a>
-                    </label>
+                       
+                    <label for="quantite_portes_simples_creuse">Nombre de portes simples creuse <span class="error-message">*</span> : </label>
                     <input type="number" id="quantite_portes_simples_creuse" formControlName="quantite_portes_simples_creuse">
+                    <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                      <i class="far fa-question-circle"></i>
+                    </a>
                     <ng-template #tooltipSurface>
                       <div class="tooltip-content">
                         <strong>Nombre de portes simples creuse</strong><br>
@@ -109,12 +109,11 @@
                     quantité requise.
                 </div>
                 <div nz-col nzSpan="12" class="ant-col">
-                    <label for="quantite_portes_doubles_creuses">Nombre de portes doubles creuses <span class="error-message">*</span> : 
-                      <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-                        <i class="far fa-question-circle"></i>
-                      </a>
-                    </label>
+                    <label for="quantite_portes_doubles_creuses">Nombre de portes doubles creuses <span class="error-message">*</span> : </label>
                     <input type="number" id="quantite_portes_doubles_creuses" formControlName="quantite_portes_doubles_creuses">
+                    <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                      <i class="far fa-question-circle"></i>
+                    </a>
                     <ng-template #tooltipSurface>
                       <div class="tooltip-content">
                         <strong>Nombre de portes doubles creuses :</strong><br>
@@ -125,12 +124,11 @@
                     quantité requise.
                 </div>
                 <div nz-col nzSpan="12" class="ant-col">
-                    <label for="quantite_porte_simple_plein">Nombre de porte simple plein <span class="error-message">*</span> : 
-                      <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-                        <i class="far fa-question-circle"></i>
-                      </a>
-                    </label>
+                    <label for="quantite_porte_simple_plein">Nombre de porte simple plein <span class="error-message">*</span> :  </label>
                     <input type="number" id="quantite_porte_simple_plein" formControlName="quantite_porte_simple_plein">
+                    <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                      <i class="far fa-question-circle"></i>
+                    </a>
                     <ng-template #tooltipSurface>
                       <div class="tooltip-content">
                         <strong>Nombre de porte simple plein</strong>
@@ -141,12 +139,11 @@
                     quantité requise.
                 </div>
                 <div nz-col nzSpan="12" class="ant-col">
-                    <label for="quantite_porte_double_pleine">Nombre de porte double pleine <span class="error-message">*</span> : 
-                      <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-                        <i class="far fa-question-circle"></i>
-                      </a>
-                    </label>
+                    <label for="quantite_porte_double_pleine">Nombre de porte double pleine <span class="error-message">*</span> :  </label>
                     <input type="number" id="quantite_porte_double_pleine" formControlName="quantite_porte_double_pleine">
+                    <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                      <i class="far fa-question-circle"></i>
+                    </a>
                     <ng-template #tooltipSurface>
                       <div class="tooltip-content">
                         <strong>Nombre de porte double pleine</strong>
@@ -161,21 +158,22 @@
     </form>
 
     
-    <h3>OUVERTURE PARTIELLE</h3>
     <form [formGroup]="ouverturePartielleForm" (ngSubmit)="onSubmitform3()">
 
        <div formArrayName="ouverturePartielle">
         <div *ngFor="let mur of ouverturePartielle.controls; let i = index" [formGroupName]="i" >
-          <span class="mur-ttl">ouverture {{i+1}}</span>
+          <div class="mur-btn-div">
+            <span class="mur-ttl">Ouverture partielle - Ouverture {{i+1}}</span>
+            <button type="button" class="dynamic-form-button del-btn" (click)="removeouverturePartielleGroup(i)" *ngIf="ouverturePartielle.length > 1">Retirer</button>
+          </div>
           <div nz-row nzJustify="start" >
            
             <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-               <label for="longueur">longueur <span class="error-message">*</span> : 
-                <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-                  <i class="far fa-question-circle"></i>
-                </a>
-              </label>
+               <label for="longueur">longueur <span class="error-message">*</span> : </label>
                <input type="number" id="longueur" formControlName="longueur">
+               <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                <i class="far fa-question-circle"></i>
+              </a>
                <ng-template #tooltipSurface>
                 <div class="tooltip-content">
                   <strong>Calcul de la longueur :</strong><br>
@@ -187,12 +185,11 @@
                 longueur requise.
             </div>
              <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-               <label for="hauteur">Hauteur <span class="error-message">*</span> : 
-                <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-                  <i class="far fa-question-circle"></i>
-                </a>
-              </label>
+               <label for="hauteur">Hauteur cm<span class="error-message">*</span> : </label>
                <input type="number" id="hauteur" formControlName="hauteur">
+               <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                <i class="far fa-question-circle"></i>
+              </a>
                <ng-template #tooltipSurface>
                 <div class="tooltip-content">
                   <strong>Calcul de la hauteur :</strong><br>
@@ -204,12 +201,11 @@
                 Hauteur requise.
               </div>
              <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-                <label for="epaisseur">Epaisseur <span class="error-message">*</span> : 
-                  <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-                    <i class="far fa-question-circle"></i>
-                  </a>
-                </label>
+                <label for="epaisseur">Epaisseur <span class="error-message">*</span> : </label>
                 <input type="number" id="epaisseur" formControlName="epaisseur">
+                <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
                 <ng-template #tooltipSurface>
                   <div class="tooltip-content">
                     <strong>Calcul de la epaisseur :</strong><br>
@@ -220,12 +216,11 @@
                 epaisseur requise.
               </div>
               <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-                <label for="volume">Volume <span class="error-message">*</span> : 
-                  <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-                    <i class="far fa-question-circle"></i>
-                  </a>
-                </label>
+                <label for="volume">Volume <span class="error-message">*</span> : </label>
                 <input type="number" id="volume" formControlName="volume">
+                <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
                 <ng-template #tooltipSurface>
                   <div class="tooltip-content">
                     <strong>Calcul du volume</strong><br>
@@ -236,12 +231,11 @@
                 volume requis.
               </div>
               <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-                <label for="longueur_du_mur">Longueur du mur <span class="error-message">*</span> : 
-                  <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-                    <i class="far fa-question-circle"></i>
-                  </a>
-                </label>
-                <input type="number" id="longueur_du_mur" formControlName="longueur_du_mur">
+                <label for="longueur_du_mur">Longueur du mur <span class="error-message">*</span> :  </label>
+                <input type="number" id="longueur_du_mur" formControlName="longueur_du_mur"> 
+                <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
                 <ng-template #tooltipSurface>
                   <div class="tooltip-content">
                     <strong>Calcul de la longueur du mur:</strong><br>
@@ -253,11 +247,13 @@
                 longueur_du_mur requis.
               </div>
 
-             <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf"> 
+             <div nz-col nzSpan="6" class="tooltip-srf etat-srf"> 
                <label for="image">Image : </label>
                <input type="file" id="image" (change)="onouverturePartielleFileChange($event, i)" accept="image/*">
+               <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                <i class="far fa-question-circle"></i>
+              </a>
              </div>
-             <button type="button" class="dynamic-form-button del-btn" (click)="removeouverturePartielleGroup(i)" *ngIf="ouverturePartielle.length > 1">Retirer l'ouverture'</button>
            </div>
          </div>
         </div>

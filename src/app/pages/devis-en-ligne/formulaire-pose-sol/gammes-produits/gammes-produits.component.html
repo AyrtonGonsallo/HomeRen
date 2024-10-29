@@ -3,7 +3,9 @@
                <div nz-row nzJustify="start" class="flx-pr" >
                   <!-- Gamme Section -->
 <div nz-col nzSpan="24" class="ant-col etat-srf tooltip-srf">
-   <label for="gamme" class="etat-srf-lab">Gamme :</label>
+  <div class="div-chauf-gm" style="width:100%;">
+   <span for="gamme"class="center jaune fs-16 f-w-6" >Gamme :</span>
+  </div>
    <nz-radio-group formControlName="gamme" class="radio-flx-spc">
      <!-- Common template for multiple option lists -->
      <ng-container *ngFor="let gamme of [gammes_parquet_m, gammes_parquet_b, gammes_parquet_pffs, gammes_carrelage]">
@@ -55,7 +57,9 @@
  
  <!-- Plinthes Section -->
  <div nz-col nzSpan="24" class="ant-col etat-srf tooltip-srf">
-   <label class="etat-srf-lab" for="plinthes">Plinthes :</label>
+  <div class="div-chauf-gm" style="width:100%;">
+    <span for="plinthes" class="center jaune fs-16 f-w-6" >Plinthes :</span>
+   </div>
    <nz-radio-group formControlName="plinthes" class="radio-flx-spc">
      <div *ngFor="let option of gammes_plithes" class="parquet-option">
        <label nz-radio [nzValue]="option.ID + ':' + option.Prix">

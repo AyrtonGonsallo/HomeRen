@@ -2,10 +2,15 @@
 <form [formGroup]="posePortesForm" (ngSubmit)="onPosePortesSubmit()">
     <div formArrayName="portes">
       <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i" >
-        <span class="f-w-7 gris">Mur {{i+1}}</span>
+
+        <div class="mur-btn-div">
+        <div class="ttl-mob" style="margin-right: auto;text-align: left;"><span class="mur-ttl">Mur {{i+1}}</span> - <label class="mur-ttl">Type de porte</label></div>
+        <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">Retirer</button>
+
+        </div>
         <div class="form-group" nz-row nzJustify="start">
           <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-              <label class="center jaune">Type de porte <span>*</span></label>
+              
               <nz-radio-group formControlName="type" class="radio-flx-spc">
                 <div><label nz-radio nzValue="Porte alveolaire simple"><span>Porte alveolaire simple</span></label>
                   <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
@@ -58,7 +63,6 @@
               </nz-radio-group>
           </div>
         
-          <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">Supprimer</button>
         </div>
       </div> 
     </div>

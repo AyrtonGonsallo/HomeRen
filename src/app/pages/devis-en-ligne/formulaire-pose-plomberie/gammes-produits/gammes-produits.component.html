@@ -1,14 +1,14 @@
-<div class="form-flx-dms">
+<div class="form-plmb">
   <div *ngIf="selectedPiece.ID==7" class="form-flx-dms">
       <!-- <p>formulaire-pose-plomberie {{selectedPiece.Titre}}</p> -->
       <form [formGroup]="poseCuisineForm" (ngSubmit)="onPoseCuisineSubmit()">
           <div formArrayName="appareils_cuisine">
             <div *ngFor="let appareilGroup of appareils_cuisine; let i = index" [formGroupName]="i">
-              <h3 class="ttl-type">{{appareils_cuisine && appareils_cuisine[i] ? appareils_cuisine[i].Titre :""}}</h3>
+              <div class="div-chauf-gm"><h3 class="ttl-type jaune">{{appareils_cuisine && appareils_cuisine[i] ? appareils_cuisine[i].Titre :""}}</h3></div>
               
               <nz-radio-group formControlName="modele" class="radio-flx-spc ">
                 <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
-                  <div nz-col nzSpan="12" class="ant-col">
+                  <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf">
                     <div> 
                       <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">
                         <span>
@@ -65,14 +65,14 @@
     <form [formGroup]="poseSalleDeBainForm" (ngSubmit)="onPoseSalleDeBainSubmit()">
       <div formArrayName="appareils_salle_de_bain" class="flx-pr">
         <div *ngFor="let appareilGroup of appareils_salle_de_bain; let i = index" [formGroupName]="i">
-          <div class="tooltip-srf" *ngIf="isclicked && getposeSalleDeBainForm.controls[i].get(appareilGroup.Titre + ' modele')?.invalid" class="error-message">
+          <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getposeSalleDeBainForm.controls[i].get(appareilGroup.Titre + ' modele')?.invalid" class="error-message">
             Vous devez faire un choix.
           </div>
-          <h3 class="ttl-type">{{appareils_salle_de_bain && appareils_salle_de_bain[i] ? appareils_salle_de_bain[i].Titre : ""}}</h3>
+          <div class="div-chauf-gm"><h3 class="ttl-type jaune">{{appareils_salle_de_bain && appareils_salle_de_bain[i] ? appareils_salle_de_bain[i].Titre : ""}}</h3></div>
           
           <nz-radio-group formControlName="modele" class="radio-flx-spc">
             <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
-              <div nz-col nzSpan="12" class="ant-col">
+              <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf">
                 
                   <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">
                   <span>

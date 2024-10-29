@@ -1,36 +1,68 @@
 <div class="form-flx-dms">
     <form [formGroup]="poseChauffageForm" (ngSubmit)="onPoseChauffageSubmit()">
-        <div>
+        
             <div nz-row nzJustify="start">
-                <div class="">
-                    <h3 class="center jaune fs-25 f-w-6">Radiateur :</h3>
-                </div>
-                <div nz-col nzSpan="24" class="ant-col">
+              <div class="col-12-w">
+                    <div class="div-chauf-gm"><span class="center jaune fs-16 f-w-6">Radiateur :</span></div>
+                <div nz-col nzSpan="24" class="ant-col" class="tooltip-srf etat-srf">
                     <label for="quantite_de_radiateur_existant">Quantité :</label>
                     <input type="number" id="quantite_de_radiateur_existant" formControlName="quantite_de_radiateur_existant">
+                    <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                        <i class="far fa-question-circle"></i>
+                      </a>
+                      <ng-template #tooltipSurface>
+                        <div class="tooltip-content">
+                          <strong>Qantité :</strong><br>
+                          </div>
+                      </ng-template>
                 </div>
                 <div *ngIf="isclicked && poseChauffageForm.get('quantite_de_canalisations')?.invalid " class="error-message">
-                    Quantite requise.
+                <br>Quantite requise.
                 </div>
-                <div nz-col nzSpan="24" class="ant-col">
+                <div nz-col nzSpan="24" class="ant-col" class="tooltip-srf etat-srf w-lab-q">
                     <label for="depose_de_radiateur_existant">Souhaitez-vous déposer des radiateurs ?</label>
-                    <input type="checkbox" id="depose_de_radiateur_existant" formControlName="depose_de_radiateur_existant">      
+                    <input type="checkbox" id="depose_de_radiateur_existant" formControlName="depose_de_radiateur_existant"> 
+                    <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                        <i class="far fa-question-circle"></i>
+                      </a>
+                      <ng-template #tooltipSurface>
+                        <div class="tooltip-content">
+                          <strong>Qantité :</strong><br>
+                          </div>
+                      </ng-template>     
                 </div> 
-                <div class="">
-                    <h3 class="center jaune fs-25 f-w-6">Canalisations :</h3>
-                </div>
-                <div nz-col nzSpan="24" class="ant-col">
+              </div> 
+              <div class="col-12-w">
+                <div class="div-chauf-gm"><span class="center jaune fs-16 f-w-6">Canalisations :</span></div>
+
+                <div nz-col nzSpan="24" class="ant-col" class="tooltip-srf etat-srf">
                     <label for="quantite_de_canalisations">Quantité : </label>
-                    <input type="number" id="quantite_de_canalisations" formControlName="quantite_de_canalisations"><br>
+                    <input type="number" id="quantite_de_canalisations" formControlName="quantite_de_canalisations">
+                      <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                        <i class="far fa-question-circle"></i>
+                      </a>
+                      <ng-template #tooltipSurface>
+                        <div class="tooltip-content">
+                          <strong>Qantité :</strong><br>
+                          </div>
+                      </ng-template>
                 </div>
                 <div *ngIf="isclicked && poseChauffageForm.get('quantite_de_canalisations')?.invalid " class="error-message">
-                    Quantite requise.
+                    <br>Quantite requise.
                 </div>
-                <div nz-col nzSpan="24" class="ant-col">
+                <div nz-col nzSpan="24" class="ant-col" class="tooltip-srf etat-srf w-lab-q">
                     <label for="depose_de_canalisations">Souhaitez-vous déposer des canalisations ?</label>
-                    <input type="checkbox" id="depose_de_canalisations" formControlName="depose_de_canalisations">      
+                    <input type="checkbox" id="depose_de_canalisations" formControlName="depose_de_canalisations"> 
+                    <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                        <i class="far fa-question-circle"></i>
+                      </a>
+                      <ng-template #tooltipSurface>
+                        <div class="tooltip-content">
+                          <strong>Qantité :</strong><br>
+                          </div>
+                      </ng-template>     
                 </div> 
             </div>
-        </div>
+          </div>
     </form>
 </div>

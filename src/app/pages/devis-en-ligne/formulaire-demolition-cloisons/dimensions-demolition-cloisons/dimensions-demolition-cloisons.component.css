@@ -1,9 +1,26 @@
-.ant-col-6, .ant-col-12{
+form {
+    display: flex !important;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.ant-col-6{
     justify-content: center;
     max-width: 100%;
     width: 75%;
     display: grid !important;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr 0.5fr !important;
+    align-items: center !important;
+    flex: 0% !important;
+    margin: auto;
+    text-align: center;
+}
+.col-12-w .ant-col-12 {grid-template-columns: 2fr 1fr 0.2fr !important;}
+.ant-col-12{
+    justify-content: center;
+    max-width: 100%;
+    width: 60%;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 0.2fr !important;
     align-items: center !important;
     flex: 0% !important;
     margin: auto;
@@ -24,18 +41,7 @@
     flex-flow: row wrap;
     flex-direction: column;
 }
-.add-btn, .del-btn{
-    padding: 0px 10px;
-    background-color: #555;
-    border:2px solid #555;
-    color:#fff;
-    height: 37px;
-    cursor: pointer;
-    margin-block: 8px;
-}
-.add-btn:hover, .del-btn:hover{background-color: #000;border:2px solid #000;}
-.vald-btn{margin-top:30px;cursor: pointer;}
-.vald-btn, .add-btn{ width: fit-content; margin-inline: auto;}
+
 .tooltip-srf i.far.fa-question-circle {
     color: var(--color1);
     font-size: 20px;
@@ -46,7 +52,7 @@ i.far.fa-question-circle {
     font-size: 20px !important;
     margin-top: 9px !important;
 }
-@media only screen and (max-width: 1212px) {
+/*@media only screen and (max-width: 1212px) {
     .vald-btn, .add-btn{ width: fit-content;}
 }
 @media only screen and (max-width:1196px) {
@@ -60,9 +66,9 @@ i.far.fa-question-circle {
     .ant-row {
         display: grid !important;
         align-content: center !important;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
     }
-    .ant-col.ant-col-6, .ant-col.ant-col-12{max-width: 100%;}
+    .ant-col.ant-col-6, .ant-col.ant-col-12{max-width: 100%;width: 100%;}
     .flx-pr.ant-row.ant-row-start{grid-template-columns: 1fr;}
 
 }
@@ -102,8 +108,4 @@ i.far.fa-question-circle {
     color: var(--color1);
     font-size: 20px;
     margin-top: 9px;
-}
-.link-tooltip{color:var(--color1);}
-.link-tooltip:hover{color:var(--color-white);text-decoration: underline;}
-.div-elec span{text-align: left !important;}
-input#checked {width: 20% !important;}
+}*/

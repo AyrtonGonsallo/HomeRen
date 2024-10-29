@@ -1,92 +1,13 @@
-.dynamic-form-button{
-    padding: 0;
-    height: 20px;
-    float: right;
-    
-}
-.ant-col{
-    padding: 5px;
-    text-align: start;
-}
-.error{
-    color: red;
-}
-.ant-btn, button {
-    line-height: 0.5715;
-    position: relative;
-    font-family: 'Montserrat';
-    font-weight: 500;
-    border:none !important;
-    box-shadow: none;
-    padding: 11px 32px;
-    height: 46px;
-    color: #fff;
-    border-radius: 0px;
-    background: #ffc736;
-  }
-  button:hover{
-    background: var(--color2);
-    color: var(--color-white);
-  }
-  .ant-col[_ngcontent-ng-c3282933449] {
-    text-align: center !important;
-}
 form label {
     text-align: left;
-    width: 50%;
-}
-.etat-srf-lab{
-    text-align: center !important;
-    width: 50% !important;
-    font-size: 18px !important;
-    font-family: 'Montserrat' !important;
-    color: #555 !important;
-    font-weight: 900 !important;
-}
-.add-btn, .del-btn{padding: 0px 10px; background-color: #555;height: 37px;cursor: pointer;margin-block: 8px;}
-.add-btn:hover, .del-btn:hover{background-color: #000;}
-input {
-    border: 1px solid #555;
-}
-.vald-btn{margin-top:30px;cursor: pointer;}
-.vald-btn, .add-btn{    
-    width: fit-content;
-    margin-inline: auto;}
-input:focus{
-    border: 2px solid #ffc736;
-}
-.pose-murs {
-    display: flex ;
-    flex-wrap: nowrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-}
-.ant-col {
-    display: flex;
-    justify-content: space-between;
-}
-[nz-radio] {
-    display: block;
-    height: 32px;
-    line-height: 24px;
-}
-.pose-murs .ant-col-6, .pose-murs .ant-col{
-    max-width: 60% !important;
-    width: 100% !important;
-    display: flex !important;
-    flex: 0% !important;
-    margin: auto;
-    gap: 20px !important;
-    text-align: center !important;
-    justify-content: space-between !important;
-    align-items: center !important;
+    width: 35%;
 }
 input{
     width: 66% !important;
 }
 .ant-col-6 {
-    max-width: 100%;
-    width: 100%;
+    max-width: 50%;
+    width: 50%;
     display: flex;
     flex: 0% !important;
     margin: auto;
@@ -98,15 +19,6 @@ input{
 .ant-row {
     align-content: center;
     flex-direction: column;
-}input {
-    border: 1px solid #555;
-}
-.vald-btn{margin-top:30px;cursor: pointer;}
-.vald-btn, .add-btn{    
-    width: 18%;
-    margin-inline: auto;}
-input:focus{
-    border: 2px solid #ffc736;
 }
 .image {
     display: flex;
@@ -119,17 +31,6 @@ form{
     display: flex !important;
     flex-direction: column !important;
     flex-wrap: wrap !important;
-}
-.ant-col-6{
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
-    width: 60%;
-    display: flex !important;
-    align-items: center !important;
-    flex: 0% !important;
-    margin: auto;
-    text-align: center;
 }
 
 .radio-flx-spc div{
@@ -174,32 +75,53 @@ form{
     display: grid;
 }
 .srf-img{margin-block: 20px;margin-inline: auto;}
-@media only screen and (max-width: 1212px) {
-    .vald-btn, .add-btn{ width: fit-content;}
-
-   
-  
+/*.etat-srf-lab{
+    text-align: center !important;
+    width: 50% !important;
+    font-size: 18px !important;
+    font-family: 'Montserrat' !important;
+    color: #555 !important;
+    font-weight: 900 !important;
 }
-
-@media only screen and (max-width:1196px) {
-.flx-pr.ant-row.ant-row-start[_ngcontent-ng-c3727393146] {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1fr 1fr;}
+.pose-murs {
+    display: flex ;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
-@media only screen and (max-width: 800px) {
-    .ant-col-6[_ngcontent-ng-c4243379430] {max-width: 100%;}
+.ant-col {
+    display: flex;
+    justify-content: space-between;
+}
+[nz-radio] {
+    display: block;
+    height: 32px;
+    line-height: 24px;
+}
+.pose-murs .ant-col-6, .pose-murs .ant-col{
+    max-width: 50% !important;
+    width: 100% !important;
+    display: flex !important;
+    flex: 0% !important;
+    margin: auto;
+    gap: 20px !important;
+    text-align: center !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}*/
+/*@media only screen and (max-width: 800px) {
+    .ant-col-6 {max-width: 100%;}
     .ant-row[_ngcontent-ng-c904728309] {
         display: grid !important;
         align-content: center !important;
         grid-template-columns: 1fr 1fr;
     }
     .ant-col.ant-col-6{max-width: 100%;}
-    .flx-pr.ant-row.ant-row-start[_ngcontent-ng-c3727393146] {grid-template-columns: 1fr;}
+    .flx-pr.ant-row.ant-row-start{grid-template-columns: 1fr;}
 
 }
 @media only screen and (max-width: 600px) {
-    .flx-pr.ant-row.ant-row-start[_ngcontent-ng-c3727393146]{display: grid !important;}
+    .flx-pr.ant-row.ant-row-start{display: grid !important;}
     .ant-row {
         display: flex !important;
         flex-wrap: wrap !important;
@@ -217,8 +139,8 @@ form{
 }
 @media only screen and (max-width: 497px) {
 .ant-row{grid-template-columns: 1fr !important;}
-.ant-col.ant-col-6[_ngcontent-ng-c904728309] {
-    flex-direction: row !important;}
+.ant-col.ant-col-6 {
+    flex-direction: row !important;  gap: 5px;}
 }
 @media screen and (max-width: 375px) {
     .plaf-dim input{ width: 90% !important;}
@@ -227,13 +149,6 @@ form{
 @media only screen and (max-width: 320px) {
 .ant-col.ant-col-6[_ngcontent-ng-c904728309][_ngcontent-ng-c904728309]{flex-direction: column !important;}
 .recap-div p{font-size:13px !important;}
-}
-.tooltip-srf .radio-flx-spc div { grid-template-columns: 6fr 1fr;}
-.tooltip-srf i.far.fa-question-circle {
-    color: var(--color1);
-    font-size: 20px;
-    margin-top: 9px;
-}
-.link-tooltip{color:var(--color1);}
-.link-tooltip:hover{color:var(--color-white);text-decoration: underline;}
+}*/
+
 

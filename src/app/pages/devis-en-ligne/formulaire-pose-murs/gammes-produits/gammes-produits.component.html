@@ -3,10 +3,10 @@
 
   <div formArrayName="murs">
     <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
-      <span class="mur-ttl">Mur {{i+1}}</span>
+      <div class="div-mur-gm"><span class="mur-ttl">Mur {{i+1}}</span> - <label for="gamme" class="etat-srf-lab">Gamme : </label></div>
       <div nz-row nzJustify="start">
         <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf">
-          <label for="gamme" class="etat-srf-lab">Gamme: </label>
+          
           <nz-radio-group formControlName="gamme" class="radio-flx-spc">
             <!-- Reusable template for displaying options with PDFs -->
             <ng-container *ngFor="let gamme of [gammes_peinture, gammes_enduit, gammes_papier, gammes_carrelage]">

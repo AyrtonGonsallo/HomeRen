@@ -56,6 +56,7 @@ onPoseMursNonPorteursSubmit(): void {
 }
 createposeMurNonPorteurroup(): FormGroup {
   return this.fb.group({
+    hauteur: ['', Validators.required],
     surface: ['', Validators.required],
   });
 }

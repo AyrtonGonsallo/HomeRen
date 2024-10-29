@@ -54,7 +54,8 @@ onPoseMursSubmit(): void {
 }
 createposeMurGroup(): FormGroup {
   return this.fb.group({
-    etat: ['', Validators.required]
+    etat: ['', Validators.required],
+    typedepose: ['', ]
   });
 }
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {

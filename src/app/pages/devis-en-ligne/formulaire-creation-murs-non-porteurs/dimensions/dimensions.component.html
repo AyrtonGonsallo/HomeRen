@@ -1,29 +1,39 @@
+<div class="plaf-dim">
 
             <form [formGroup]="poseMursNonPorteursForm" (ngSubmit)="onPoseMursNonPorteursSubmit()">
 
                <div formArrayName="murs_non_porteurs">
                 <img class="img-surface" src="/assets/Rectangle.png"><br>
                 <div *ngFor="let mur of murs_non_porteurs.controls; let i = index" [formGroupName]="i">
+                  <div class="mur-btn-div">
                   <span class="mur-ttl">Mur {{i+1}}</span>
-                  <div nz-row nzJustify="start" >
-                    <!--<div nz-col nzSpan="6" class="ant-col">
-                      <label for="hauteur">Hauteur: </label>
+                  <button type="button" class="dynamic-form-button del-btn" (click)="removeMurNonPorteurroup(i)" *ngIf="murs_non_porteurs.length > 1">Retirer</button>
+                </div>
+                  <div nz-row nzJustify="start" >   
+                    <div nz-col nzSpan="6" class="ant-col tooltip-srf">
+                      <label for="hauteur">
+                        Hauteur cm
+                        <span class="error-message">*</span> :
+                      </label>
                       <input type="number" id="hauteur" formControlName="hauteur">
-                    </div>
-                    <div nz-col nzSpan="6" class="ant-col">
-                      <label for="longueur">Longueur: </label>
-                      <input type="number" id="longueur" formControlName="longueur">
-                    </div>-->
-                    
+                      <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                        <i class="far fa-question-circle"></i>
+                      </a>
+                      <ng-template #tooltipHauteur>
+                        <div class="tooltip-content">
+                          <strong>Calcul de la hauteur en cm :</strong><br>
+                        </div>
+                      </ng-template>
+                    </div>       
                     <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                       <label for="surface">
                         Surface m²
                         <span class="error-message">*</span> :
-                        <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-                          <i class="far fa-question-circle"></i>
-                        </a>
                       </label>
                       <input type="number" id="surface" formControlName="surface">
+                      <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                        <i class="far fa-question-circle"></i>
+                      </a>
                       <ng-template #tooltipSurface>
                         <div class="tooltip-content">
                           <strong>Calcul de la surface :</strong><br>
@@ -32,9 +42,6 @@
                         </div>
                       </ng-template>
                     </div>
-                    
-                    
-                    <button type="button" class="dynamic-form-button del-btn" (click)="removeMurNonPorteurroup(i)" *ngIf="murs_non_porteurs.length > 1">Retirer le mur</button>
                   </div>
 
                 </div>
@@ -43,6 +50,6 @@
                <button type="button"  class="dynamic-form-button add-btn" (click)="addMurNonPorteurroup()" *ngIf="murs_non_porteurs.length < 4">Ajouter un mur</button>
                
              </form>
-
+            </div>
 
              

@@ -1,13 +1,15 @@
 <div class="recap-div devis-content">
-    <span class="recup-fin"><p >Pièce</p><p>:</p><p>{{selectedPiece.Titre}}</p></span>
-    <div *ngFor="let dimmur of forms_portes.formulaire['gammes-produits-pose-portes'].portes; let i = index">
+    <span class="recup-fin recap-piece">{{selectedPiece.Titre}}</span>
+    <div *ngFor="let dimmur of forms_portes.formulaire['gammes-produits-pose-portes'].portes; let i = index" class="recup-mur-flx">
         <span class="mur-ttl">Porte {{i+1}}</span>
+        <div>
         <span class="recup-fin" ><p>Type de porte</p><p>:</p><p>{{get_title(types1[i])}} </p></span>
         <span class="recup-fin" ><p>Type de matériau</p><p>:</p><p>{{get_title(types2[i])}} </p></span>
         <span class="recup-fin" ><p>Type de porte (finition)</p><p>:</p><p>{{get_title(types3[i])}} </p></span>
         <span class="recup-fin" ><p>Finition</p><p>:</p><p>{{get_title(types4[i])}} </p></span>
-        <span class="recup-fin" ><p>Informations complémentaires sur le type</p><p>:</p><p>{{infos_c_types[i]}} </p></span>
-        <span class="recup-fin" ><p>Informations complémentaires sur la finition</p><p>:</p><p>{{infos_c_finition[i]}} </p></span>
+        <span class="recup-fin" ><p>Informations sur le type</p><p>:</p><p>{{infos_c_types[i]}} </p></span>
+        <span class="recup-fin" ><p>Informations sur la finition</p><p>:</p><p>{{infos_c_finition[i]}} </p></span>
+        </div>
     </div>
     </div>
     

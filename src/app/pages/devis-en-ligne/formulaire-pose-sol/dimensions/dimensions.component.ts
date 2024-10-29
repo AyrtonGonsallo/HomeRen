@@ -10,6 +10,8 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
 export class PoseSolDimensionsComponent {
   isclicked=false
   poseSolForm: FormGroup;
+  
+  @Input() surfacemax: number=0; 
   @Input() triggerSubmitDimensionForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['triggerSubmitDimensionForm']) {

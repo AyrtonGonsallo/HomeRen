@@ -90,12 +90,18 @@
 }
 nz-button{margin-bottom: 0px !important;}  
 .col-btn .ant-col-offset-6 { margin-top: 35px;}
+.flx-connect{ display: flex !important;}
+.flx-cnt-btn {padding: 0px;height: 0px;color: var(--color1);}
+.flx-cnt-btn:hover{color: var(--color2);}
+.flx-cnt-btn span{font-size: 15px !important;}
+.flx-connect .ant-form-item-control-input-content{text-align: left;font-family: "Montserrat" !important;}
 /******************************* Respo ************************************/  
 @media only screen and (max-width: 1024px) {
     .ant-col-sm-6{ flex: 0 0 45% !important;  max-width: 33% !important;    }
     .ant-row{  justify-content: start !important;}
     .ant-col-7 {  max-width: 38% !important;    flex: 0 0 33.166667% !important;}
     .col-btn .ant-form-item-control-input { margin-inline: auto;}
+    .ant-col-offset-6 {margin-left: 2%; max-width: 100%;}
   }
   @media only screen and (max-width: 800px) {
     .fs-19{font-size: 16px;}
@@ -119,12 +125,11 @@ nz-button{margin-bottom: 0px !important;}
 }
 
 }
-
-    @media only screen and (max-width: 497px) {
+@media only screen and (max-width: 497px) {
     .ant-col-7{ flex: 0 0 102.166667% !important;  }
     .ant-col-sm-6{  max-width: 100% !important;flex: 0 0 96% !important;}
     .ant-col-12, .ant-col-7 { max-width: 100% !important;}
     .ant-col-offset-6 { margin-left: 0% !important;}
     .a-form{margin-left: 0px; margin: auto;}
 
-    }
+}

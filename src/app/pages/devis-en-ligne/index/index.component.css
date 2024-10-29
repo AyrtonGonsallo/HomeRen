@@ -64,7 +64,7 @@ max-width: 80%; margin: auto;
     display: flex;
     justify-content: center;
   }
-  button.ant-btn.ant-btn-default.ng-star-inserted,.btn-final {
+.btn-final {
     padding: 11px 30px !important;
     width: fit-content;
     height: 42px;
@@ -77,7 +77,8 @@ max-width: 80%; margin: auto;
     justify-content: space-between;
     align-items: center;
 }
-button.ant-btn.ant-btn-default.ng-star-inserted span{font-size: 14px;}
+.btn-prect span{font-size: 14px;}
+button.ant-btn.ant-btn-default.ng-star-inserted[_ngcontent-ng-c1938312052]{padding: 6px 10px !important;width: fit-content;height: 34px!important;}
 .div-btn-prect{width: 61%; margin-inline: auto; margin-top: 25px;}
 .div-btn-prect button span{font-size: 13px !important;}
 
@@ -89,7 +90,7 @@ button.ant-btn.ant-btn-default.ng-star-inserted span{font-size: 14px;}
     border: none !important;
     box-shadow: none;
     padding: 11px 30px !important;
-    height: 42px;
+    height: 42px !important;
     width: fit-content;
     color: #fff;
     margin: auto;

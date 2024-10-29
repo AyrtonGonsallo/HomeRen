@@ -4,11 +4,13 @@
                <div formArrayName="murs_non_porteurs">
               
                 <div *ngFor="let mur of murs_non_porteurs.controls; let i = index" [formGroupName]="i">
-                  <span class="f-w-7 gris">Mur {{i+1}}</span>
+                  <div class="div-mur-gm">
+                  <span class="mur-ttl">Mur {{i+1}}</span> - <label for="type_cloison" class="mur-ttl">Type de cloison  </label>
+                  </div>
                   <div nz-row nzJustify="start" >
                    
                     <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-                      <label for="type_cloison" class="center jaune">Type de cloison  </label>
+                      
                       <nz-radio-group formControlName="type_cloison" (ngModelChange)="onTypeChange($event)" class="radio-flx-spc">
                         <div>
                         <label nz-radio nzValue="98/48+I">98/48+I</label>

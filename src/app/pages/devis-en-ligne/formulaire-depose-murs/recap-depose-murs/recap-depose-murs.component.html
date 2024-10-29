@@ -1,5 +1,5 @@
 <div class="recap-div devis-content">
-<span class="recup-fin"><p >Pièce</p><p>:</p><p>{{selectedPiece.Titre}}</p></span>
+  <span class="recup-fin recap-piece">{{selectedPiece.Titre}}</span>
   <div *ngFor="let dimmur of deposeMursForm.formulaire['dimensions-depose-murs'].murs; let i = index">
     <span class="mur-ttl">Mur {{i+1}}</span>
     <span class="recup-fin"><p>Hauteur</p><p>:</p><p>{{dimmur.hauteur}} m</p></span>

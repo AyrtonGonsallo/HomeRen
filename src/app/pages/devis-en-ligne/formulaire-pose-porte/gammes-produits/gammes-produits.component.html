@@ -3,13 +3,16 @@
     <form [formGroup]="posePortesForm" (ngSubmit)="onPosePortesSubmit()">
         <div formArrayName="portes">
             <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i">
-                <span class="gris f-w-6 ttl-type">Porte {{i+1}}</span>
+            <div class="mur-btn-div">
+              <div class="" style="margin-right:auto;text-align: left;"><span class="mur-ttl">Porte {{i+1}}</span> - <label class="mur-ttl">Type de porte <span class="error-message">*</span></label></div>
+              <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">Retirer</button>
+            </div>
+
+
                 <div  class="form-group" nz-row nzJustify="start">
                     <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-                        <h3 class="ttl-type">Type de porte <span>*</span></h3>
-                        <div *ngIf="isclicked && portes.controls[i].get('type')?.invalid " class="error-message">
-                          Type de porte requis.
-                      </div>
+                        
+
                       <nz-radio-group formControlName="type" class="radio-flx-spc">
                         <div *ngFor="let option of types_de_portes" >
                             <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
@@ -21,14 +24,17 @@
                             <ng-template #tooltipBonEtat>
                               Les types de porte
                             </ng-template>
+    
                         </div>
-                        </nz-radio-group>
-                    </div>              
-                    <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-                        <h3 class="ttl-type">Type de matériau <span>*</span></h3>
-                        <div *ngIf="isclicked && portes.controls[i].get('type2')?.invalid " class="error-message">
-                          Type de matériau requis.
+                        <div *ngIf="isclicked && portes.controls[i].get('type')?.invalid " class="error-message">
+                          Type de porte requis.
                       </div>
+                        </nz-radio-group>
+                    </div>
+                     <div class="mur-btn-div"><label class="mur-ttl">Type de matériau<span class="error-message">*</span></label></div>
+             
+                    <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                      
                       <nz-radio-group formControlName="type2" class="radio-flx-spc">
                         <div *ngFor="let option of types_de_materiau" >
                             <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
@@ -37,17 +43,21 @@
                             <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
                               <i class="far fa-question-circle"></i>
                             </a>
+                            <div *ngIf="isclicked && portes.controls[i].get('type2')?.invalid " class="error-message">
+                              Type de matériau requis.
+                          </div>
                             <ng-template #tooltipBonEtat>
                               Les types de porte
                             </ng-template>
                         </div>
+
                     </nz-radio-group>         
                     </div>
+
+                    <div class="mur-btn-div"><label class="mur-ttl">Type de porte <span class="error-message">*</span></label></div>
                     <div nz-col nzSpan="6" class="ant-col" class="ant-col etat-srf tooltip-srf">
-                        <h3 class="ttl-type">Type de porte <span>*</span></h3>                    
-                        <div *ngIf="isclicked && portes.controls[i].get('type3')?.invalid " class="error-message">
-                          Type de porte requis.
-                      </div>
+                  
+                       
                       <nz-radio-group formControlName="type3" class="radio-flx-spc">
                           <div *ngFor="let option of types_de_porte_finition" >
                               <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
@@ -55,7 +65,10 @@
                               </label>
                               <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
                                 <i class="far fa-question-circle"></i>
-                              </a>
+                              </a> 
+                              <div *ngIf="isclicked && portes.controls[i].get('type3')?.invalid " class="error-message">
+                          Type de porte requis.
+                      </div>
                               <ng-template #tooltipBonEtat>
                                 Les types de porte
                               </ng-template>
@@ -63,11 +76,10 @@
                       </nz-radio-group>
                                                 
                     </div>
+                    <div class="mur-btn-div"><label class="mur-ttl">Finition <span class="error-message">*</span></label></div>
+
                     <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-                        <h3 class="ttl-type">Finition <span>*</span></h3>                   
-                        <div *ngIf="isclicked && portes.controls[i].get('finition')?.invalid " class="error-message">
-                          Type de finition requis.
-                      </div>
+                      
                       <nz-radio-group formControlName="finition" class="radio-flx-spc">
                           <div *ngFor="let option of types_de_finitions">
                               <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
@@ -76,12 +88,15 @@
                               <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
                                 <i class="far fa-question-circle"></i>
                               </a>
+                              <div *ngIf="isclicked && portes.controls[i].get('finition')?.invalid " class="error-message">
+                                Type de finition requis.
+                            </div> 
                               <ng-template #tooltipBonEtat>
                                 Les types de porte
                               </ng-template>
                           </div>
                       </nz-radio-group>
-                                                     
+                      
                     </div>
                     <div nz-col nzSpan="12" class="ant-col">
                         <label>Informations complémentaires sur le type</label>
@@ -91,7 +106,6 @@
                         <label>Informations complémentaires sur la finition</label>
                         <textarea formControlName="infos_comp_finition"></textarea>
                     </div>
-                    <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">Supprimer</button>
                   </div>
             </div>      
         </div>

@@ -1,39 +1,9 @@
-.dynamic-form-button{
-    padding: 0;
-    height: 20px;
-    float: right;
-    
-}
-.ant-col{
-    padding: 5px;
-    text-align: start;
-}
-.error{
-    color: red;
-}
-.ant-btn, button {
-    line-height: 0.5715;
-    position: relative;
-    font-family: 'Montserrat';
-    font-weight: 500;
-    border:none !important;
-    box-shadow: none;
-    padding: 11px 32px;
-    height: 46px;
-    color: #fff;
-    border-radius: 0px;
-    background: #ffc736;
-  }
-  button:hover{
-    background: var(--color2);
-    color: var(--color-white);
-  }
-  .ant-col[_ngcontent-ng-c3282933449] {
+.ant-col[_ngcontent-ng-c3282933449] {
     text-align: center !important;
 }
 form label {
     text-align: left;
-    width: 50%;
+    width: 100%;
 }
 .etat-srf-lab{
     text-align: center !important;
@@ -42,18 +12,6 @@ form label {
     font-family: 'Montserrat' !important;
     color: #555 !important;
     font-weight: 900 !important;
-}
-.add-btn, .del-btn{padding: 0px 10px; background-color: #555;height: 37px;cursor: pointer;margin-block: 8px;}
-.add-btn:hover, .del-btn:hover{background-color: #000;}
-input {
-    border: 1px solid #555;
-}
-.vald-btn{margin-top:30px;cursor: pointer;}
-.vald-btn, .add-btn{    
-    width: fit-content;
-    margin-inline: auto;}
-input:focus{
-    border: 2px solid #ffc736;
 }
 .pose-murs {
     display: flex ;
@@ -98,22 +56,6 @@ input{
 .ant-row {
     align-content: center;
     flex-direction: column;
-}input {
-    border: 1px solid #555;
-}
-.vald-btn{margin-top:30px;cursor: pointer;}
-.vald-btn, .add-btn{    
-    width: 18%;
-    margin-inline: auto;}
-input:focus{
-    border: 2px solid #ffc736;
-}
-.image {
-    display: flex;
-    flex: 0% !important;
-    text-align: center;
-    justify-content: start;
-    align-items: start;
 }
 form{
     display: flex !important;
@@ -134,7 +76,7 @@ form{
 
 .radio-flx-spc div{
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 12fr 1fr;
     align-items: center;
     justify-content: center;
     min-height: 0px;
@@ -175,7 +117,9 @@ form{
 }
 input[type="checkbox"] {
     width: 15px;
-    height: 15px;}
+    height: 15px;
+    margin-left: auto;
+}
 .ant-col.ant-col-12{
         display: grid;
         grid-template-columns: 3fr 1fr;
@@ -184,13 +128,7 @@ input[type="checkbox"] {
         justify-content: center;
         align-items: center;
         align-content: center;
-}
-form label{
-    width: 100%;
-}
-.srf-img{margin-block: 20px;margin-inline: auto;}
-@media only screen and (max-width: 1212px) {
-    .vald-btn, .add-btn{ width: fit-content;}
+        padding:13px 0px;
 }
 
 @media only screen and (max-width:1196px) {
@@ -225,9 +163,7 @@ form label{
         justify-content: flex-start;
         margin: 0;
     }
-    .ant-col, .ant-col-6, .ant-col {max-width: 100% !important;}
-
-      
+    .ant-col, .ant-col-6, .ant-col {max-width: 100% !important;}    
 
 }
 @media only screen and (max-width: 497px) {
@@ -242,14 +178,3 @@ form label{
 .ant-col.ant-col-6{flex-direction: column !important;}
 .recap-div p{font-size:13px !important;}
 }
-.tooltip-srf .radio-flx-spc div { grid-template-columns: 6fr 1fr;}
-.tooltip-srf i.far.fa-question-circle {
-    color: var(--color1);
-    font-size: 20px;
-    margin-top: 9px;
-    width: 100%;
-    text-align: center;
-}
-.link-tooltip{color:var(--color1);}
-.link-tooltip:hover{color:var(--color-white);text-decoration: underline;}
-

@@ -25,7 +25,7 @@ export class DimensionsComponent {
   radioValue = 'A';
 //formulaires des poses et deposes
 poseMursForm: FormGroup;
- 
+@Input() surfacemax: number=0; 
 // les murs dynamiques du formulaire de pose murs
 get murs(): FormArray {
   return this.poseMursForm.get('murs') as FormArray;
@@ -55,6 +55,8 @@ createposeMurGroup(): FormGroup {
   return this.fb.group({
     hauteur: ['', Validators.required],
     surface: ['', Validators.required],
+    longueur: ['', Validators.required],
+    largeur: ['', Validators.required],
     image: [null]
   });
 }

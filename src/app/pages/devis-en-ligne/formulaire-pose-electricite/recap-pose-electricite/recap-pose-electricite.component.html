@@ -1,6 +1,6 @@
 
 <div class="recap-div devis-content">
-    <span class="recup-fin"><p >Pièce</p><p>:</p><p>{{selectedPiece.Titre}}</p></span>
+    <span class="recup-fin recap-piece">{{selectedPiece.Titre}}</span>
     <div *ngFor="let appareil of appareils">
         <div *ngIf="appareil.checked">
             <span class="recup-fin"><p>titre</p><p>:</p><p>{{appareil.titre}}</p></span>

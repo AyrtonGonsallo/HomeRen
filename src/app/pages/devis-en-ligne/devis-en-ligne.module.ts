@@ -57,6 +57,9 @@ import { RecapRenovationElectriqueComponent } from './formulaire-renovation-elec
 import { GammesProduitsRenovationElectriqueComponent } from './formulaire-renovation-electrique/gammes-produits-renovation-electrique/gammes-produits-renovation-electrique.component';
 import { EtatSurfacesRenovationElectriqueComponent } from './formulaire-renovation-electrique/etat-surfaces-renovation-electrique/etat-surfaces-renovation-electrique.component';
 import { DimensionsRenovationElectriqueComponent } from './formulaire-renovation-electrique/dimensions-renovation-electrique/dimensions-renovation-electrique.component';
+import { DimensionsPoseAppSanComponent } from './formulaire-pose-app-sanitaires/dimensions-pose-app-san/dimensions-pose-app-san.component';
+import { EtatsSurfacesPoseAppSanComponent } from './formulaire-pose-app-sanitaires/etats-surfaces-pose-app-san/etats-surfaces-pose-app-san.component';
+import { GammesProduitsPoseAppSanComponent } from './formulaire-pose-app-sanitaires/gammes-produits-pose-app-san/gammes-produits-pose-app-san.component';
 @NgModule({
   declarations: [
     IndexComponent,
@@ -112,7 +115,10 @@ import { DimensionsRenovationElectriqueComponent } from './formulaire-renovation
     RecapRenovationElectriqueComponent,
     GammesProduitsRenovationElectriqueComponent,
     EtatSurfacesRenovationElectriqueComponent,
-    DimensionsRenovationElectriqueComponent
+    DimensionsRenovationElectriqueComponent,
+    DimensionsPoseAppSanComponent,
+    EtatsSurfacesPoseAppSanComponent,
+    GammesProduitsPoseAppSanComponent,
   ],
   imports: [
     CommonModule,SharedModule,

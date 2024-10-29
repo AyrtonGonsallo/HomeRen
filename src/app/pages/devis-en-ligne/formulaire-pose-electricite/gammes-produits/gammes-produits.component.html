@@ -9,42 +9,42 @@
             </div>    
             <div  nz-row nzJustify="start" *ngIf="appareils.controls[i].get('checked')?.value==true">
                 <div nz-col nzSpan="4" class="ant-col">
-                    <label>appareillage</label>
+                    <label>Appareillage</label>
                     <input type="number" id="appareillage" formControlName="appareillage" required>
                     <div *ngIf="isclicked && appareils.controls[i].get('appareillage')?.invalid " class="error-message">
                         quantité de appareillage requise.
                       </div>
                 </div>
                 <div nz-col nzSpan="4" class="ant-col">
-                    <label>cables</label>
+                    <label>Cables</label>
                     <input type="number" id="cables" formControlName="cables" required>
                     <div *ngIf="isclicked && appareils.controls[i].get('cables')?.invalid " class="error-message">
                         quantité de cables requise.
                       </div>
                 </div>
                 <div nz-col nzSpan="4" class="ant-col">
-                    <label>goulotte</label>
+                    <label>Goulotte</label>
                     <input type="number" id="goulotte" formControlName="goulotte" required>
                     <div *ngIf="isclicked && appareils.controls[i].get('goulotte')?.invalid " class="error-message">
                         quantité de goulotte requise.
                       </div>
                 </div>
                 <div nz-col nzSpan="4" class="ant-col">
-                    <label>encastré cloison legere</label>
+                    <label>Encastré cloison legere</label>
                     <input type="number" id="encastre_cloison_legere" formControlName="encastre_cloison_legere" required>
                     <div *ngIf="isclicked && appareils.controls[i].get('encastre_cloison_legere')?.invalid " class="error-message">
                         quantité d'encastré cloison legere requise.
                       </div>
                 </div>
                 <div nz-col nzSpan="4" class="ant-col">
-                    <label>encastré beton</label>
+                    <label>Encastré beton</label>
                     <input type="number" id="encastre_beton" formControlName="encastre_beton" required>
                     <div *ngIf="isclicked && appareils.controls[i].get('encastre_beton')?.invalid " class="error-message">
                         quantité d'encastré beton requise.
                       </div>
                 </div>
                 <div nz-col nzSpan="4" class="ant-col">
-                    <label>protection</label>
+                    <label>Protection</label>
                     <input type="number" id="protection" formControlName="protection" required>
                     <div *ngIf="isclicked && appareils.controls[i].get('protection')?.invalid " class="error-message">
                         quantité de protection requise.

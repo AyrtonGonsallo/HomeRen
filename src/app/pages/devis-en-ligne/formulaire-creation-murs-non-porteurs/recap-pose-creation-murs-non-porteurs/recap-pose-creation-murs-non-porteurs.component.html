@@ -1,11 +1,19 @@
-<span class="recup-fin"><p >Pièce</p><p>:</p><p>{{selectedPiece.Titre}}</p></span>
-<div *ngFor="let dimmur of cmnpForm.formulaire['dimensions-creation-murs-non-porteurs--murs'].murs_non_porteurs; let i = index">
-    <span class="f-w-7 gris">Mur {{i+1}}</span>
+<div class="recap-div devis-content">
+<span class="recup-fin recap-piece">{{selectedPiece.Titre}}</span>
+
+<div *ngFor="let dimmur of cmnpForm.formulaire['dimensions-creation-murs-non-porteurs--murs'].murs_non_porteurs; let i = index" class="recup-mur-flx">
+    <span class="mur-ttl">Mur {{i+1}}</span>
+    <div>
+    <span class="recup-fin"><p>Hauteur</p><p>:</p><p>{{dimmur.hauteur}} cm</p></span>
     <span class="recup-fin"><p>Surface</p><p>:</p><p>{{dimmur.surface}} m²</p></span>
     <span class="recup-fin"><p>Type de cloison</p><p>:</p><p>{{cmnpForm.formulaire['etat-surfaces-creation-murs-non-porteurs--murs'].murs_non_porteurs[i].type_cloison}} </p></span>
+    </div>
 </div>
 
-<div *ngFor="let porte of cmnpForm.formulaire['gammes-produits-creation-murs-non-porteurs--portes'].portes; let i = index">
-    <span class="f-w-7 gris">Porte {{i+1}}</span>
+<div *ngFor="let porte of cmnpForm.formulaire['gammes-produits-creation-murs-non-porteurs--portes'].portes; let i = index" class="recup-mur-flx">
+    <span class="mur-ttl">Porte {{i+1}}</span>
+    <div>
     <span class="recup-fin"><p>Type de porte</p><p>:</p><p>{{porte.type}} </p></span>
+    </div>
+</div>
 </div>

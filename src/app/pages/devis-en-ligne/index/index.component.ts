@@ -393,6 +393,10 @@ export class IndexComponent {
       this.current=4
       return true
     }
+    if(this.is_one_travail_selected && this.filteredTravail.ID==16 && this.current<=2){
+      this.current=4
+      return true
+    }
     
    return false
     
@@ -415,6 +419,10 @@ export class IndexComponent {
       return true
     }
     if(this.is_one_travail_selected && this.filteredTravail.ID==15 && this.current>=4){
+      this.current=1
+      return true
+    }
+    if(this.is_one_travail_selected && this.filteredTravail.ID==16 && this.current>=4){
       this.current=1
       return true
     }
@@ -485,5 +493,14 @@ export class IndexComponent {
     this.done()
     this.current+=1
     this.hide_finalisation_message=true
+  }
+
+  get_max():number{
+    if(this.selectedPieceId==4){
+      return 50;
+    }else if(this.selectedPieceId==6){
+      return 50;
+    }
+    return 100;
   }
 }

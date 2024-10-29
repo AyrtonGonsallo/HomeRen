@@ -1,0 +1,61 @@
+<div class="form-plmb">
+    
+  
+  
+    <div  class="div-s-b">
+      <form [formGroup]="poseSalleDeBainForm" (ngSubmit)="onPoseSalleDeBainSubmit()">
+        <div formArrayName="appareils_salle_de_bain" class="flx-pr">
+          <div *ngFor="let appareilGroup of appareils_salle_de_bain; let i = index" [formGroupName]="i">
+            <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getposeSalleDeBainForm.controls[i].get(appareilGroup.Titre + ' modele')?.invalid" class="error-message">
+              Vous devez faire un choix.
+            </div>
+            <div class="div-chauf-gm"><h3 class="ttl-type jaune">{{appareils_salle_de_bain && appareils_salle_de_bain[i] ? appareils_salle_de_bain[i].Titre : ""}}</h3></div>
+            <nz-collapse nzAccordion>
+                <nz-collapse-panel [nzHeader]="appareils_salle_de_bain[i].Titre" [nzActive]="false">
+                    <nz-radio-group formControlName="modele" class="radio-flx-spc">
+                        <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
+                          <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf">
+                            
+                              <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">
+                              <span>
+                                  {{modele.Titre}}
+                                </span>
+                              </label>
+                            
+                          </div>
+                          <!-- Tooltip with image and dimensions -->
+                          <a nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="info-icon">
+                            <i class="far fa-question-circle"></i>
+                          </a>
+                          <ng-template #tooltipTemplate >
+                            <div>
+                              <div class="img-tltip" *ngIf="modele.Image">
+                                <img [src]="baseurl + modele.Image" [alt]="modele.Image" width="150px"/>
+                              </div>
+                              <div><strong>Longueur:</strong> {{modele.Longeur}}</div>
+                              <div><strong>Largeur:</strong> {{modele.Largeur}}</div>
+                              <div><strong>Hauteur:</strong> {{modele.Hauteur}}</div>
+                              
+                            </div>
+                          </ng-template>
+                        </div>
+                      </nz-radio-group>
+                      <div class="flx-depose">
+                        <label for="depose">Souhaitez-vous déposer votre salle de bain actuelle ?</label>
+                        <input type="checkbox" id="depose" formControlName="depose" class="custom-checkbox">      
+                      </div>  
+                  </nz-collapse-panel>
+            </nz-collapse>
+            
+            <!-- Ajoutez d'autres champs selon vos besoins -->
+          </div>
+        </div>
+      </form>
+    </div>
+  
+    <!-- Tooltip Template -->
+  
+  
+  </div>
+  
+  

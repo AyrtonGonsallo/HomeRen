@@ -1,44 +1,13 @@
-.dynamic-form-button{
-    padding: 0;
-    height: 20px;
-    float: right;
-    
-}
 .ant-col{
     padding: 5px;
     text-align: start;
 }
-.error{
-    color: red;
-}
-.ant-btn, button {
-    line-height: 0.5715;
-    position: relative;
-    font-family: 'Montserrat';
-    font-weight: 500;
-    border:none !important;
-    box-shadow: none;
-    padding: 11px 32px;
-    height: 46px;
-    color: #fff;
-    border-radius: 0px;
-    background: #ffc736;
-  }
-  button:hover{
-    background: var(--color2);
-    color: var(--color-white);
-  }
 .ant-col[_ngcontent-ng-c3282933449] {
     text-align: center !important;
 }
 form label {
     margin-right: 30px !important;
 }
-.add-btn, .del-btn{padding: 0px 10px; background-color: #000;height: 37px;cursor: pointer;margin-block: 8px;}
-.vald-btn{margin-top:30px;cursor: pointer;}
-.vald-btn, .add-btn{    
-    width: 18%;
-    margin-inline: auto;}
 .ant-col-6 {
     max-width: 40%;
     display: flex;
@@ -68,19 +37,13 @@ form{
     }
   
 h3.ttl-type {
+    font-size: 17px !important;
     text-align: center !important;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .radio-flx-spc .ant-row{ display:grid !important;grid-template-columns: 12fr 1fr !important; width: 80%;margin: auto;}
-.tooltip-srf i.far.fa-question-circle {
-    color: var(--color1);
-    font-size: 20px;
-    margin-top: 9px;
-}
-.link-tooltip{color:var(--color1);}
-.link-tooltip:hover{color:var(--color-white);text-decoration: underline;}
 .ant-col.ant-col-6{max-width: 100%;}
 nz-radio-group.ant-radio-group.radio-flx-spc {
     width: 90% !important;
@@ -112,11 +75,37 @@ label.ant-radio-wrapper {
     align-items: center;
     justify-content: center;
     align-content: center;
+    padding: 12px 0px !important;
 }
-@media only screen and (max-width: 800px) {
+.radio-flx-spc label{
+    display: flex;
+    width: 100%;
+    height: 54px;
+    border-bottom: 1px solid #e9e9e9;
+    max-width: 100%;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+}
+.tooltip-srf .radio-flx-spc div { grid-template-columns: 6fr 1fr;}
+i.far.fa-question-circle {
+    color: var(--color1);
+    font-size: 20px;
+    margin-top: 7px;
+}
+.link-tooltip{color:var(--color1);}
+.link-tooltip:hover{color:var(--color-white);text-decoration: underline;}
+.ant-col-12 {
+    max-width: 98%;
+}
+.flx-depose{ grid-template-columns: 13fr 1.59fr;}
+
+.radio-flx-spc div:last-child label{border-bottom: 1px solid #E9E9E9 !important;}
+@media only screen and (max-width: 600px) {
     .vald-btn, .add-btn{ width: fit-content;}
-    .form-flx-dms form label{  width: 57%; }
-    .radio-flx-spc .ant-row { width: 100%; }
+    /*.form-flx-dms form label{  width: 57%; }*/
+    .radio-flx-spc .ant-row, .flx-depose{ width: 100%; }
     nz-radio-group.ant-radio-group.radio-flx-spc.ng-untouched.ng-pristine.ng-invalid{width: 100% !important;}
     .radio-flx-spc label span:nth-child(2) {text-align: left !important; padding-left: 0px !important;}
-} 
+    form label {text-align: left;width:100%;}
+}

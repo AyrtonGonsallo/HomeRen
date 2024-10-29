@@ -1,33 +1,8 @@
-.dynamic-form-button{
-    padding: 0;
-    height: 20px;
-    float: right;
-    
-}
+
 .ant-col{
     padding: 5px;
     text-align: start;
 }
-.error{
-    color: red;
-}
-.ant-btn, button {
-    line-height: 0.5715;
-    position: relative;
-    font-family: 'Montserrat';
-    font-weight: 500;
-    border:none !important;
-    box-shadow: none;
-    padding: 11px 32px;
-    height: 46px;
-    color: #fff;
-    border-radius: 0px;
-    background: #ffc736;
-  }
-  button:hover{
-    background: var(--color2);
-    color: var(--color-white);
-  }
   .ant-col[_ngcontent-ng-c3282933449] {
     text-align: center !important;
 }
@@ -39,18 +14,9 @@
     color: #555 !important;
     font-weight: 900 !important;
 }
-.add-btn, .del-btn{padding: 0px 10px; background-color: #555;height: 37px;cursor: pointer;margin-block: 8px;}
-.add-btn:hover, .del-btn:hover{background-color: #000;}
 input {
-    border: 3px solid #ffc736 !important;
+    border: 1px solid #ffc736 !important;
 }
-input:focus{
-    border: 3px solid #ffc736;
-}
-.vald-btn{margin-top:30px;cursor: pointer;}
-.vald-btn, .add-btn{    
-    width: fit-content;
-    margin-inline: auto;}
 .pose-murs {
     display: flex ;
     flex-wrap: nowrap !important;
@@ -174,7 +140,7 @@ h3.ttl-type{
 }
 form label{
     text-align: left;
-    width: 95%;
+    width: 100%;
     margin: auto;
 }
 .ant-col-12 {

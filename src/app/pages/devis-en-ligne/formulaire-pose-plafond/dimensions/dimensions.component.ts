@@ -22,7 +22,7 @@ export class DimensionsPosePlafondComponent {
   }
   @Output() formValidityChange = new EventEmitter<boolean>();
   posePlafondForm: FormGroup;
-  
+  @Input() surfacemax: number=0; 
   // le formulaire de pose plafond
   createPosePlafondGroup(): FormGroup {
     return this.fb.group({

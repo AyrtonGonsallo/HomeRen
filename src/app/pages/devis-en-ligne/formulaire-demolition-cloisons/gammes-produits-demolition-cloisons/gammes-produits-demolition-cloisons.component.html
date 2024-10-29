@@ -1,12 +1,12 @@
-<h3>MURS NON PORTEURS</h3>
+<!-- <h4 class="h4-demol">MURS NON PORTEURS</h4> -->
 <form [formGroup]="mursnonporteursForm" (ngSubmit)="onSubmitForm1()">
 
     <div formArrayName="mursnonporteurs">
       <div *ngFor="let mur of mursnonporteurs.controls; let j = index" [formGroupName]="j">
-        <span class="mur-ttl">Mur {{j+1}}</span>
+        <div class="div-mur-gm"><span class="mur-ttl">Mur {{j+1}}</span> - <label for="materiaux" class="etat-srf-lab">Matériel: </label></div>
         <div nz-row nzJustify="start">
           <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
-            <label for="materiaux" class="etat-srf-lab">Matériel: </label>
+            
             <nz-radio-group formControlName="materiaux" class="radio-flx-spc">
               <!-- Reusable template for displaying options with PDFs -->
               <ng-container>
@@ -31,23 +31,20 @@
             <div *ngIf="isclicked && mursnonporteurs.controls[j].get('materiaux')?.invalid " class="error-message">
               Les materiaux sont requis.
             </div>
-            
           </div>
-  
-        </div>
-        
+        </div>  
     </div>
     </form>
 
-    <h3>OUVERTURE PARTIELLE</h3>
+    <!-- <h4 class="h4-demol">OUVERTURE PARTIELLE</h4>-->
 <form [formGroup]="ouverturepartiellesForm" (ngSubmit)="onSubmitForm2()">
 
     <div formArrayName="ouverturepartielles">
       <div *ngFor="let mur of ouverturepartielles.controls; let i = index" [formGroupName]="i">
-        <span class="mur-ttl">Ouverture {{i+1}}</span>
+        <div class="div-mur-gm"><span class="mur-ttl">Ouverture {{i+1}}</span> - <label for="cloison" class="etat-srf-lab">Cloison: </label></div>
         <div nz-row nzJustify="start">
           <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
-            <label for="cloison" class="etat-srf-lab">Cloison: </label>
+            
             <nz-radio-group formControlName="cloison" class="radio-flx-spc">
               <!-- Reusable template for displaying options with PDFs -->
               <ng-container >

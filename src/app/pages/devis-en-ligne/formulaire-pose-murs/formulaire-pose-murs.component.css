@@ -1,52 +1,22 @@
-.dynamic-form-button{
-    padding: 0;
-    height: 20px;
-    float: right;
-    
+form label {
+    text-align: left;
+    width: 35%;
 }
 .ant-col{
     padding: 5px;
     text-align: start;
+    max-width: 50% !important;
+    display: flex;
+    justify-content: space-between;
 }
-.error{
-    color: red;
-}
-.ant-btn, button {
-    line-height: 0.5715;
-    position: relative;
-    font-family: 'Montserrat';
-    font-weight: 500;
-    border:none !important;
-    box-shadow: none;
-    padding: 11px 32px;
-    height: 46px;
-    color: #fff;
-    border-radius: 0px;
-    background: #ffc736;
-  }
-  button:hover{
-    background: var(--color2);
-    color: var(--color-white);
-  }
-  .ant-col{
-    text-align: center !important;
-}
-.add-btn, .del-btn{padding: 0px 10px; background-color: #555;height: 37px;cursor: pointer;margin-block: 8px;}
-.add-btn:hover, .del-btn:hover{background-color: #000;}
-input {
-    border: 1px solid #555;
-}
-form label {
-    text-align: left;
-    width: 50%;
-}
+.srf-img{margin-block: 20px;margin-inline: auto;}
 .radio-flx-spc div{
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 6fr 1fr;
     align-items: center;
     justify-content: center;
     min-height: 0px;
-    justify-items: stretch;}
+    justify-items: center;}
 
 .radio-flx-spc label{
     display: flex;
@@ -76,17 +46,11 @@ form label {
     flex: 0% !important;
     margin: auto;
     text-align: center;
-    flex-direction: column;
+    flex-direction: row;
+
 }
 .etat-srf .ant-radio-group {
     display: grid;
-}
-.vald-btn{margin-top:30px;cursor: pointer;}
-.vald-btn, .add-btn{    
-    width: fit-content;
-    margin-inline: auto;}
-input:focus{
-    border: 2px solid #ffc736;
 }
 .pose-murs {
     display: flex ;
@@ -94,39 +58,20 @@ input:focus{
     justify-content: center !important;
     align-items: center !important;
 }
-.ant-col {
-    max-width: 60% !important;
-    display: flex;
-    justify-content: space-between;
-}
+
 [nz-radio] {
     display: block;
     height: 32px;
     line-height: 24px;
 }
-.mur-ttl{
-    text-align: center !important;
-    width: 50% !important;
-    font-size: 18px !important;
-    font-family: 'Montserrat' !important;
-    color: #555 !important;
-    font-weight: 900 !important;
-}
-.radio-flx-spc div{
-    display: grid;
-    grid-template-columns: 1fr;
-    align-items: center;
-    justify-content: center;
-    min-height: 0px;
-    justify-items: stretch;}
 .radio-flx-spc div span{  text-align: left;  }
 .radio-flx-spc label{text-align: unset;}
 .radio-flx-spc, .radio-flx-spc .ant-col-6 {
     width: 100% !important;
 }
 .pose-murs .ant-col-6, .pose-murs .ant-col{
-    max-width: 60% !important;
-    width: 100% !important;
+    max-width: 50% !important;
+    width: 50% !important;
     display: flex !important;
     flex: 0% !important;
     margin: auto;
@@ -146,18 +91,6 @@ input{
     color: #555 !important;
     font-weight: 900 !important;
 }
-.ant-col-6 {
-    max-width: 100%;
-    width: 60%;
-    display: flex;
-    flex: 0% !important;
-    margin: auto;
-    gap: 20px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-
-}
 .col-gm{flex-direction: column;}
 .ant-row {
     align-content: center;
@@ -168,7 +101,6 @@ form{
     flex-direction: column !important;
     flex-wrap: wrap !important;
 }
-.mur-ttl{font-weight: 600;font-size:20px;margin-bottom: 20px;}
 
 @media screen and (max-width: 600px) {
     .ant-col[_ngcontent-ng-c182946846], .ant-col-6, .ant-col {max-width: 100% !important;}
@@ -176,11 +108,3 @@ form{
     @media screen and (max-width: 375px) {
     .plaf-dim input{ width: 90% !important;}
     }
-    .tooltip-srf .radio-flx-spc div { grid-template-columns: 6fr 1fr;}
-    .tooltip-srf i.far.fa-question-circle {
-    color: var(--color1);
-    font-size: 20px;
-    margin-top: 9px;
-    }
-    .link-tooltip{color:var(--color1);}
-    .link-tooltip:hover{color:var(--color-white);text-decoration: underline;}

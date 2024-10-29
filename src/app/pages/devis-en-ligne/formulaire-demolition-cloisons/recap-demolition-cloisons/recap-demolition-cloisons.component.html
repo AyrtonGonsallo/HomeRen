@@ -1,34 +1,47 @@
 <div  class="recap-div devis-content">
-    <span class="recup-fin"><p >Pièce</p><p>:</p><p>{{selectedPiece.Titre}}</p></span>
-    <span class="mur-ttl">Murs non porteurs</span>
-    <div *ngFor="let dim of dimensions_murs_non_porteurs; let i = index">
+    <span style="font-size: 16px;text-align: left !important;font-weight: 900;color: #555555;height: 40px;" class="recup-fin">{{selectedPiece.Titre}}</span>
+    
+<div class="recap-last">
+    <div class="recap-mur-ttl">Murs non porteurs</div>
+    <div *ngFor="let dim of dimensions_murs_non_porteurs; let i = index" class="recup-mur-flx">
         <span class="mur-ttl">Mur {{i+1}}</span>
-        <span class="recup-fin" ><p>hauteur </p><p>:</p><p>{{dim?.hauteur}}</p></span>
+        <div>
+        <span class="recup-fin" ><p>hauteur </p><p>:</p><p>{{dim?.hauteur}} cm</p></span>
         <span class="recup-fin" ><p>longueur </p><p>:</p><p>{{dim?.longueur}}</p></span>
         <span class="recup-fin" ><p>epaisseur </p><p>:</p><p>{{dim?.epaisseur}}</p></span>
         <span class="recup-fin" ><p>volume </p><p>:</p><p>{{dim?.volume}}</p></span>
         <span class="recup-fin" *ngIf="gammes_materiaux[i]"><p>matériel </p><p>:</p><p>{{get_title(gammes_materiaux[i]?.materiaux)}}</p></span>
+        </div>
     </div>
+</div>
 
-    <span class="mur-ttl">Pose de portes</span>
-    <div>
+<div class="recap-last">
+    <div class="recap-mur-ttl">Pose de portes</div>
+    <div class="recup-mur-flx">
+        <div class="vide"></div>
+        <div>
         <span class="recup-fin" ><p>quantite portes simples creuse </p><p>:</p><p>{{quantite_portes_simples_creuse}}</p></span>
         <span class="recup-fin" ><p>quantite portes doubles creuses </p><p>:</p><p>{{quantite_portes_doubles_creuses}}</p></span>
         <span class="recup-fin" ><p>quantite porte simple plein </p><p>:</p><p>{{quantite_porte_simple_plein}}</p></span>
         <span class="recup-fin" ><p>quantite porte double pleine </p><p>:</p><p>{{quantite_porte_double_pleine}}</p></span>
+        </div>
     </div>
+</div>
 
-    <span class="mur-ttl">OuverturePartielle</span>
-    <div *ngFor="let dim of dimensions_ouverture; let i = index">
+
+<div class="recap-last">
+    <div class="recap-mur-ttl">OuverturePartielle</div>
+    <div *ngFor="let dim of dimensions_ouverture; let i = index" class="recup-mur-flx">
         <span class="mur-ttl">Ouverture {{i+1}}</span>
-        <span class="recup-fin" ><p>hauteur </p><p>:</p><p>{{dim?.hauteur}}</p></span>
+        <div>
+        <span class="recup-fin" ><p>hauteur </p><p>:</p><p>{{dim?.hauteur}} cm</p></span>
         <span class="recup-fin" ><p>longueur </p><p>:</p><p>{{dim?.longueur}}</p></span>
         <span class="recup-fin" ><p>longueur du mur </p><p>:</p><p>{{dim?.longueur_du_mur}}</p></span>
         <span class="recup-fin" ><p>epaisseur </p><p>:</p><p>{{dim?.epaisseur}}</p></span>
         <span class="recup-fin" ><p>volume </p><p>:</p><p>{{dim?.volume}}</p></span>
         <span class="recup-fin" *ngIf="gammes_cloison[i]"><p>cloison </p><p>:</p><p>{{get_title(gammes_cloison[i]?.cloison)}}</p></span>
-
+        </div>
     </div>
-
+</div>
     
 </div>
