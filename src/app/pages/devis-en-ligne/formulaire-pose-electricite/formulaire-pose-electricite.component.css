@@ -210,5 +210,9 @@ input:focus-visible{
 }
 
 
-
- 
+.flx-depose{
+    display: flex;
+    max-width: 310px;
+    margin-left: auto;
+    margin-right: auto;
+ }

@@ -103,3 +103,4 @@ input[type=checkbox] {
 @media screen and (max-width: 375px) {
     form label {text-align: left !important; }
 }
+.srf-img{margin-block: 20px;margin-inline: auto;}

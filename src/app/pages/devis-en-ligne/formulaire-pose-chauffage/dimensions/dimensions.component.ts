@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 
 @Component({
@@ -8,33 +8,52 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-pose-chauffage.component.css'
 })
 export class PoseChauffageDimensionsComponent {
+  isclicked=false
+  @Input() triggerSubmitDimensionForm!: boolean;
+  modele: any;
+  appareilGroup: any;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitDimensionForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitDimensionForm)
+      if(this.triggerSubmitDimensionForm==true){
+        
+          this.onPoseChauffageSubmit()
+        
+        this.isclicked=true
+      }
+      
+    }
+  }
+  @Output() formValidityChange = new EventEmitter<boolean>();
   poseChauffageForm: FormGroup;
   
   // le formulaire de pose plafond
   createPoseChauffageGroup(): FormGroup {
     return this.fb.group({
-      pose_de_radiateur_existant: ['', ],
-      creation_de_canalisations: ['', ],
+      surface: ['',Validators.required ],
      
     });
   }
   onPoseChauffageSubmit(): void {
+    this.formValidityChange.emit(this.poseChauffageForm.valid);
     if (this.poseChauffageForm.invalid) {
       this.markFormGroupTouched(this.poseChauffageForm);
       return;
     }
     if (this.poseChauffageForm.valid) {
-      console.log(this.poseChauffageForm.value);
+     // console.log(this.poseChauffageForm.value);
       // Envoyer les données au backend ou traiter comme nécessaire
       this.gestiondesdevisService.addFormulaire("dimensions-pose-chauffage",12,this.poseChauffageForm.value)
+    console.log(this.poseChauffageForm.value);
     }
   }
   
   constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
     
     this.poseChauffageForm = this.createPoseChauffageGroup();
-  }
    
+  }
+
    //code de validation des formulaires
    markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {

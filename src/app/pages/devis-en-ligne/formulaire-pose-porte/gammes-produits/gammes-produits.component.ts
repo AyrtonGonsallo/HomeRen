@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-gammes-produits-pose-porte',
@@ -9,6 +10,7 @@ import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-e
   styleUrl: '../formulaire-pose-porte.component.css'
 })
 export class PosePorteGammesProduitsComponent {
+  baseurl=environment.imagesUrl
   @Input() triggerSubmitGammesProduitsForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['triggerSubmitGammesProduitsForm']) {
@@ -67,6 +69,8 @@ createposePortesGroup(): FormGroup {
     finition: ['', Validators.required],//select avec valeurs a Finition à peindre, finition stratifiee,finition bois,autre. Preciser
     infos_comp_type: ['', ],//text area
     infos_comp_finition: ['', ],//text area
+    creation: [false, ],//boolean
+    remplacement: [false, ],//boolean
   });
 }
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {

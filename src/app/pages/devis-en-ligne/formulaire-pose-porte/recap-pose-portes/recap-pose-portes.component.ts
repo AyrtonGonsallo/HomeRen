@@ -13,6 +13,7 @@ export class RecapPosePortesComponent {
   types2:any[]=[]
   types3:any[]=[]
   types4:any[]=[]
+  creation_ou_remplacement:any[]=[]
   infos_c_types:any[]=[]
   infos_c_finition:any[]=[]
   @Input() selectedPiece: any; // Déclaration de l'entrée selectedPiece
@@ -28,6 +29,12 @@ export class RecapPosePortesComponent {
       this.types4.push(portes_data[i].finition);
       this.infos_c_types.push(portes_data[i].infos_comp_type);
       this.infos_c_finition.push(portes_data[i].infos_comp_finition);
+      if(portes_data[i].creation){
+        this.creation_ou_remplacement.push("Création");
+      }else if(portes_data[i].remplacement){
+        this.creation_ou_remplacement.push("Remplacement");
+      }
+      
     }
    
 

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-gammes-produits-pose-chauffage',
@@ -8,69 +10,110 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
   styleUrl: '../formulaire-pose-chauffage.component.css'
 })
 export class PoseChauffageGammesProduitsComponent {
-  isclicked=false
-
   @Input() triggerSubmitGammesProduitsForm!: boolean;
-  modele: any;
-  appareilGroup: any;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['triggerSubmitGammesProduitsForm']) {
       console.log("trigger de soumission: ",this.triggerSubmitGammesProduitsForm)
       if(this.triggerSubmitGammesProduitsForm==true){
-        
-          this.onPoseChauffageSubmit()
-        
         this.isclicked=true
+        this.onPoseRadiateursSubmit();
       }
       
     }
   }
   @Output() formValidityChange = new EventEmitter<boolean>();
-  poseChauffageForm: FormGroup;
-  
-  // le formulaire de pose plafond
-  createPoseChauffageGroup(): FormGroup {
-    return this.fb.group({
-      quantite_de_radiateur_existant: ['',Validators.required ],
-      depose_de_radiateur_existant: [false, ],
-      quantite_de_canalisations: ['',Validators.required ],
-      depose_de_canalisations: [false, ],
-     
-    });
+  baseurl=environment.imagesUrl
+  isclicked=false
+//formulaires des poses et deposes
+poseRadiateursForm: FormGroup;
+formulaire_dimensions:any
+formulaire_dimensions_length:number=0
+// les radiateurs dynamiques du formulaire de pose radiateurs
+get radiateurs(): FormArray {
+  return this.poseRadiateursForm.get('radiateurs') as FormArray;
+}
+
+addRadiateurGroup(): void {
+  if (this.radiateurs.length < 4) {
+    this.radiateurs.push(this.createposeRadiateurGroup());
   }
-  onPoseChauffageSubmit(): void {
-    this.formValidityChange.emit(this.poseChauffageForm.valid);
-    if (this.poseChauffageForm.invalid) {
-      this.markFormGroupTouched(this.poseChauffageForm);
-      return;
-    }
-    if (this.poseChauffageForm.valid) {
-     // console.log(this.poseChauffageForm.value);
-      // Envoyer les données au backend ou traiter comme nécessaire
-      this.gestiondesdevisService.addFormulaire("dimensions-pose-chauffage",12,this.poseChauffageForm.value)
-      this.gestiondesdevisService.addFormulaire("etat-surfaces-pose-chauffage",12,this.poseChauffageForm.value)
-      this.gestiondesdevisService.addFormulaire("gammes-produits-pose-chauffage",12,this.poseChauffageForm.value)
+}
+
+removeRadiateurGroup(index: number): void {
+  if (this.radiateurs.length > 1) {
+    this.radiateurs.removeAt(index);
+  }
+}
+
+onPoseRadiateursSubmit(): void {
+  this.formValidityChange.emit(this.poseRadiateursForm.valid);
+  if (this.poseRadiateursForm.valid) {
+    //console.log(this.poseRadiateursForm.value);
+    this.gestiondesdevisService.addFormulaire('gammes-produits-pose-chauffage',12, this.poseRadiateursForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire
     this.gestiondesdevisService.groupform('pose-chauffage',12, 'dimensions-pose-chauffage','etat-surfaces-pose-chauffage','gammes-produits-pose-chauffage')
     console.log(this.gestiondesdevisService.getFormulaireByName("pose-chauffage"));
-    }
   }
+}
+createposeRadiateurGroup(): FormGroup {
+  return this.fb.group({
+    gamme: ["", Validators.required]
+  });
+}
+constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
   
-  constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-    
-    this.poseChauffageForm = this.createPoseChauffageGroup();
-  }
-   
-   //code de validation des formulaires
-   markFormGroupTouched(formGroup: FormGroup) {
-    Object.values(formGroup.controls).forEach(control => {
-      const abstractControl = control as AbstractControl;
-      abstractControl.markAsTouched();
-      if (abstractControl instanceof FormGroup) {
-        this.markFormGroupTouched(abstractControl);
+  
+  const prev_form = this.gestiondesdevisService.getFormulaireByName('gammes-produits-pose-chauffage');
+    if (prev_form) {
+      console.log("formulaire existant",prev_form)
+      this.poseRadiateursForm = this.fb.group({
+        radiateurs: this.fb.array([this.createposeRadiateurGroup()])
+      });
+      let formulaire_dimensions_length=prev_form.formulaire.radiateurs.length
+      for(let i=0;i<(formulaire_dimensions_length-1);i++){
+        this.addRadiateurGroup()
       }
-    });
-  }
-  
-  }
-  
+      
+      this.poseRadiateursForm.patchValue(prev_form.formulaire);
+
+    } else {
+      console.log("formulaire non existant")
+      this.poseRadiateursForm = this.fb.group({
+        radiateurs: this.fb.array([this.createposeRadiateurGroup()])
+      });
+      this.formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("etat-surfaces-pose-chauffage")
+      this.formulaire_dimensions_length=this.formulaire_dimensions.formulaire.radiateurs.length
+      for(let i=0;i<(this.formulaire_dimensions_length-1);i++){
+        this.addRadiateurGroup()
+      }
+      console.log("longueur: ",this.formulaire_dimensions_length)
+      console.log("formulaire: ",this.formulaire_dimensions)
+    }
+  this.load_gammes()
+ 
+}
+
+//code de validation des formulaires
+markFormGroupTouched(formGroup: FormGroup) {
+  Object.values(formGroup.controls).forEach(control => {
+    const abstractControl = control as AbstractControl;
+    abstractControl.markAsTouched();
+    if (abstractControl instanceof FormGroup) {
+      this.markFormGroupTouched(abstractControl);
+    }
+  });
+}
+gammes_radiateurs:any
+load_gammes(){
+  this.userService.getGammesByTravailAndType(12,"radiateur").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes radiateur:', response);
+      this.gammes_radiateurs=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes radiateur :', error);
+    }
+  );
+}
+
+}

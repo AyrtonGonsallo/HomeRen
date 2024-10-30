@@ -9,8 +9,11 @@
                     <!-- Gamme Peinture, Enduit, Papier, Carrelage -->
                     <nz-radio-group formControlName="gamme" class="radio-flx-spc">
                       <!-- Common template for multiple option lists -->
-                      <ng-container *ngFor="let gamme of [gammes_peinture, gammes_enduit, gammes_papier, gammes_carrelage]">
-                        <div *ngFor="let option of gamme" class="parquet-option">
+                       
+                        <div class="div-chauf-gm" style="width:100%;">
+                          <span  class="center jaune fs-16 f-w-6" >Peinture :</span>
+                         </div>
+                        <div *ngFor="let option of gammes_peinture" class="parquet-option">
                           <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
                             <span>{{ option.Label }}</span>
                           </label>
@@ -22,7 +25,57 @@
                             <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
                           </ng-template>
                         </div>
-                      </ng-container>
+
+                        <div class="div-chauf-gm" style="width:100%;">
+                          <span  class="center jaune fs-16 f-w-6" >Enduit :</span>
+                         </div>
+                     
+                        <div *ngFor="let option of gammes_enduit" class="parquet-option">
+                          <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+                            <span>{{ option.Label }}</span>
+                          </label>
+                          <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                            <i class="far fa-question-circle"></i>
+                          </a>
+                          <ng-template #tooltipTemplate>
+                            Pour plus d'informations, veuillez consulter :
+                            <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                          </ng-template>
+                        </div>
+
+                        <div class="div-chauf-gm" style="width:100%;">
+                          <span  class="center jaune fs-16 f-w-6" >Papier :</span>
+                         </div>
+                    
+                        <div *ngFor="let option of gammes_papier" class="parquet-option">
+                          <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+                            <span>{{ option.Label }}</span>
+                          </label>
+                          <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                            <i class="far fa-question-circle"></i>
+                          </a>
+                          <ng-template #tooltipTemplate>
+                            Pour plus d'informations, veuillez consulter :
+                            <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                          </ng-template>
+                        </div>
+                  
+                        <div class="div-chauf-gm" style="width:100%;">
+                          <span  class="center jaune fs-16 f-w-6" >Carrelage :</span>
+                         </div>
+                        <div *ngFor="let option of gammes_carrelage" class="parquet-option">
+                          <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+                            <span>{{ option.Label }}</span>
+                          </label>
+                          <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                            <i class="far fa-question-circle"></i>
+                          </a>
+                          <ng-template #tooltipTemplate>
+                            Pour plus d'informations, veuillez consulter :
+                            <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                          </ng-template>
+                        </div>
+                
                     </nz-radio-group>
                   </div>
                   

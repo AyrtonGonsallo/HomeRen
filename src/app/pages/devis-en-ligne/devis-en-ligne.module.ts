@@ -60,6 +60,7 @@ import { DimensionsRenovationElectriqueComponent } from './formulaire-renovation
 import { DimensionsPoseAppSanComponent } from './formulaire-pose-app-sanitaires/dimensions-pose-app-san/dimensions-pose-app-san.component';
 import { EtatsSurfacesPoseAppSanComponent } from './formulaire-pose-app-sanitaires/etats-surfaces-pose-app-san/etats-surfaces-pose-app-san.component';
 import { GammesProduitsPoseAppSanComponent } from './formulaire-pose-app-sanitaires/gammes-produits-pose-app-san/gammes-produits-pose-app-san.component';
+import { RecapPoseAppSanComponent } from './formulaire-pose-app-sanitaires/recap-pose-app-san/recap-pose-app-san.component';
 @NgModule({
   declarations: [
     IndexComponent,
@@ -119,6 +120,7 @@ import { GammesProduitsPoseAppSanComponent } from './formulaire-pose-app-sanitai
     DimensionsPoseAppSanComponent,
     EtatsSurfacesPoseAppSanComponent,
     GammesProduitsPoseAppSanComponent,
+    RecapPoseAppSanComponent
   ],
   imports: [
     CommonModule,SharedModule,

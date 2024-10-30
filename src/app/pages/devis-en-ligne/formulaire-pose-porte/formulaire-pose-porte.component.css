@@ -43,7 +43,7 @@ input {
     justify-content: space-between !important;
     align-items: center !important;
 }
-input{
+input:not([type="checkbox"]) {
     width: 66% !important;
 }
 .ant-col-6 {
@@ -116,6 +116,18 @@ form{
     margin: auto;
     text-align: center;
     flex-direction: column;
+}
+.etat-srf-row{
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    width:90%;
+    display: flex !important;
+    align-items: center !important;
+    flex: 0% !important;
+    margin: auto;
+    text-align: center;
+    flex-direction: row;
 }
 .etat-srf .ant-radio-group {
     display: grid;

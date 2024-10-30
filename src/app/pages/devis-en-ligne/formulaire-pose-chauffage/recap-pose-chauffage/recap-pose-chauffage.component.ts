@@ -9,15 +9,22 @@ import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-e
 })
 export class RecapPoseChauffageComponent {
   @Input() selectedPiece: any; // Déclaration de l'entrée selectedPiece
-  form: any;
+  form_gammes: any;
+  form_dim: any;
+  form_surfaces: any;
   constructor(
     private gestiondesdevisService: GestionDesDevisService,
     private userService: ApiConceptsEtTravauxService
   ) {
-    this.form = this.gestiondesdevisService.getFormulaireByName("pose-chauffage").formulaire["gammes-produits-pose-chauffage"];
-    console.log("chauffage ",this.form );
-  }
+    this.form_dim = this.gestiondesdevisService.getFormulaireByName("pose-chauffage").formulaire["dimensions-pose-chauffage"];
+    this.form_surfaces = this.gestiondesdevisService.getFormulaireByName("pose-chauffage").formulaire["etat-surfaces-pose-chauffage"];
+    this.form_gammes = this.gestiondesdevisService.getFormulaireByName("pose-chauffage").formulaire["gammes-produits-pose-chauffage"];
 
+    console.log("chauffage ",this.form_gammes );
+  }
+  get_title(slug:string){
+    return slug.split(":")[2];
+  }
   
 }
 

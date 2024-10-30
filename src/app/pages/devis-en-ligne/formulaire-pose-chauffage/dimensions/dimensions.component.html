@@ -1,17 +1,29 @@
-<form [formGroup]="poseChauffageForm" (ngSubmit)="onPoseChauffageSubmit()">
+<div class="form-flx-dms">
+    <form [formGroup]="poseChauffageForm" (ngSubmit)="onPoseChauffageSubmit()">
+        <img class="srf-img" src="/assets/Rectangle.svg">
+            <div nz-row nzJustify="start">
+              <div class="col-12-w">
+                   
+                <div nz-col nzSpan="24" class="ant-col" class="tooltip-srf etat-srf">
+                  <label for="surface">surface (m²): <span class="error-message">*</span></label>
+                  <input type="number" id="surface" formControlName="surface">
+                  <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                      <i class="far fa-question-circle"></i>
+                    </a>
+                    <ng-template #tooltipSurface>
+                      <div class="tooltip-content">
+                        <strong>Surface</strong><br>
+                        </div>
+                    </ng-template>
+              </div>
+              <div *ngIf="isclicked && poseChauffageForm.get('surface')?.invalid " class="error-message">
+                <br>surface requise.
+              </div>
 
-    <div>
-        <div nz-row nzJustify="start">
-            <div nz-col nzSpan="6" class="ant-col">
-                <label for="pose_de_radiateur_existant">Pose de radiateur: </label>
-                <input type="number" id="pose_de_radiateur_existant" formControlName="pose_de_radiateur_existant">
-                
-            </div>
-            <div nz-col nzSpan="6" class="ant-col">
-                <label for="creation_de_canalisations">création de canalisations: </label>
-                <input type="number" id="creation_de_canalisations" formControlName="creation_de_canalisations">
-            </div>
-        </div>
-    </div>
-    <button class="vald-btn" type="submit">Valider</button>
+             
+
+              </div> 
+             
+          </div>
     </form>
+</div>
