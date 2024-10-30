@@ -4,8 +4,9 @@
     <div formArrayName="radiateurs">
      <div *ngFor="let radiateur of radiateurs.controls; let i = index" [formGroupName]="i">
 
-       <div class="radiateur-btn-div">
-         <span class="radiateur-ttl">Radiateur {{i+1}}</span>
+       <div class="mur-btn-div">
+        <div class="ttl-mob" style="margin-right: auto;text-align: left;"><span class="mur-ttl">Radiateur {{i+1}}</span></div>
+
          <button type="button" class="dynamic-form-button del-btn" (click)="removeRadiateurGroup(i)" *ngIf="radiateurs.length > 1">Retirer</button>
 
        </div>
