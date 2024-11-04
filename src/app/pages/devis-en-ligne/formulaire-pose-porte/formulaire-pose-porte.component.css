@@ -14,9 +14,7 @@
     color: #555 !important;
     font-weight: 900 !important;
 }
-input {
-    border: 1px solid #ffc736 !important;
-}
+
 .pose-murs {
     display: flex ;
     flex-wrap: nowrap !important;
@@ -43,9 +41,9 @@ input {
     justify-content: space-between !important;
     align-items: center !important;
 }
-input:not([type="checkbox"]) {
+/* input:not([type="checkbox"]) {
     width: 66% !important;
-}
+} */
 .ant-col-6 {
     max-width: 100%;
     width: 100%;
@@ -61,7 +59,6 @@ input:not([type="checkbox"]) {
     align-content: center;
     flex-direction: column;
 }
-.vald-btn{margin-top:30px;cursor: pointer;}
 .image {
     display: flex;
     flex: 0% !important;
@@ -72,7 +69,7 @@ input:not([type="checkbox"]) {
 form{
     display: flex !important;
     flex-direction: column !important;
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important;
 }
 .ant-col-6{
     display: grid;
@@ -133,14 +130,14 @@ form{
     display: grid;
 }
 .srf-img{margin-block: 20px;margin-inline: auto;}
-.tooltip-srf .radio-flx-spc div { grid-template-columns: 6fr 1fr;}
+/* .tooltip-srf .radio-flx-spc div { grid-template-columns: 6fr 1fr;}
 .tooltip-srf i.far.fa-question-circle {
     color: var(--color1);
     font-size: 20px;
     margin-top: 9px;
 }
 .link-tooltip{color:var(--color1);}
-.link-tooltip:hover{color:var(--color-white);text-decoration: underline;}
+.link-tooltip:hover{color:var(--color-white);text-decoration: underline;} */
 h3.ttl-type{
     border-bottom: 1px solid #55555566;
     font-size: 18px;
@@ -159,6 +156,7 @@ form label{
     max-width: 100%;
     display: grid !important;
     grid-template-columns: 1fr;
+    gap: 8px;
 }
 @media screen and (max-width: 375px) {
     form label {text-align: left !important; }

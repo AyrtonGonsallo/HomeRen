@@ -1,13 +1,5 @@
 form label {
     text-align: left;
-    width: 35%;
-}
-.ant-col{
-    padding: 5px;
-    text-align: start;
-    max-width: 50% !important;
-    display: flex;
-    justify-content: space-between;
 }
 .srf-img{margin-block: 20px;margin-inline: auto;}
 .radio-flx-spc div{
@@ -17,7 +9,6 @@ form label {
     justify-content: center;
     min-height: 0px;
     justify-items: center;}
-
 .radio-flx-spc label{
     display: flex;
     width: 100%;
@@ -46,8 +37,7 @@ form label {
     flex: 0% !important;
     margin: auto;
     text-align: center;
-    flex-direction: row;
-
+    flex-direction: column;
 }
 .etat-srf .ant-radio-group {
     display: grid;
@@ -58,7 +48,6 @@ form label {
     justify-content: center !important;
     align-items: center !important;
 }
-
 [nz-radio] {
     display: block;
     height: 32px;
@@ -80,9 +69,6 @@ form label {
     justify-content: space-between !important;
     align-items: center !important;
 }
-input{
-    width: 66% !important;
-}
 .etat-srf-lab{
     text-align: center !important;
     width: 50% !important;
@@ -101,10 +87,18 @@ form{
     flex-direction: column !important;
     flex-wrap: wrap !important;
 }
-
+.div-chauf-gm {
+    justify-items: left !important;
+    margin-right: auto !important;
+    text-align: left !important;
+}
 @media screen and (max-width: 600px) {
     .ant-col[_ngcontent-ng-c182946846], .ant-col-6, .ant-col {max-width: 100% !important;}
     }
+    @media screen and (max-width: 497px) {
+    .ant-col.ant-col-6 {
+        flex-direction: column !important;}
+    }
     @media screen and (max-width: 375px) {
     .plaf-dim input{ width: 90% !important;}
-    }
+}

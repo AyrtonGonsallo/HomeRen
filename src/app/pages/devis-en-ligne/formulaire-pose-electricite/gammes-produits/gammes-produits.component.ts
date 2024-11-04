@@ -119,7 +119,7 @@ appareilGroup: any;
     
     this.userService.getEquipementsByType ("electrique").subscribe(
       (response: Equipement[]) => {
-        this.appareils_electrique = response.filter(equipement => equipement.ModeleEquipements && equipement.ModeleEquipements.length > 0);
+        this.appareils_electrique = response.filter(equipement => equipement.ModeleEquipements && equipement.ModeleEquipements.length > 0 && equipement.ID != 27);
         console.log("réponse de la requette  getEquipementsByType:electrique",this.appareils_electrique);
         this.appareils_electrique.forEach(appareil => {
         const modeleEquipements = appareil.ModeleEquipements;

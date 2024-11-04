@@ -2,20 +2,6 @@ form label {
     text-align: left;
     width: 35%;
 }
-input{
-    width: 66% !important;
-}
-.ant-col-6 {
-    max-width: 50%;
-    width: 50%;
-    display: flex;
-    flex: 0% !important;
-    margin: auto;
-    gap: 20px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}
 .ant-row {
     align-content: center;
     flex-direction: column;
@@ -32,7 +18,6 @@ form{
     flex-direction: column !important;
     flex-wrap: wrap !important;
 }
-
 .radio-flx-spc div{
     display: grid;
     grid-template-columns: 1fr;

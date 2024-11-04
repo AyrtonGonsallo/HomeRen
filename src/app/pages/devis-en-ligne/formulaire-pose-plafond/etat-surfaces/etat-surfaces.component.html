@@ -43,11 +43,11 @@
                       </div>
                     </nz-radio-group>
                     
-                     <div *ngIf="isclicked && posePlafondForm.get('etat')?.invalid " class="error-message">
-                      État des surfaces requis.
-                      </div>
+
                    </div>
-                   
+                   <div *ngIf="isclicked && posePlafondForm.get('etat')?.invalid " class="error-message">
+                    État des surfaces requis.
+                    </div>
                  </div>
                </div>
              </form>

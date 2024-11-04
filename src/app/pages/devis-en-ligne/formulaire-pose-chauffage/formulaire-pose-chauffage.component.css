@@ -1,54 +1,14 @@
-
-.etat-srf-lab{
-    text-align: center !important;
-    width: 50% !important;
-    font-size: 18px !important;
-    font-family: 'Montserrat' !important;
-    color: #555 !important;
-    font-weight: 900 !important;
-}
-[nz-radio] {
-    display: block;
-    height: 32px;
-    line-height: 24px;
-}
-
-input{
-    width: 96% !important;
-}
-.ant-col-6 {
-    max-width: 100%;
-    width: 100%;
-    display: flex;
-    flex: 0% !important;
-    margin: auto;
-    gap: 20px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}
-.ant-row {
-    align-content: center;
-    flex-direction: column;
-}
-form{
-    display: flex !important;
-    flex-direction: column !important;
-    flex-wrap: wrap !important;
-}
-.ant-col-6{
-    display: grid;
-    grid-template-columns: 1fr;
-    max-width: 100%;
-    width: 100%; 
-}
+.srf-img{margin-block: 20px;margin-inline: auto;}
 .radio-flx-spc div{
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 6fr 1fr;
     align-items: center;
     justify-content: center;
     min-height: 0px;
-    justify-items: stretch;}
+    justify-items: start;
+    gap:5px;
+}
+
 .radio-flx-spc label{
     display: flex;
     width: 100%;
@@ -59,48 +19,82 @@ form{
     justify-content: space-between;
     align-items: center;
 }
-.etat-srf{
+.radio-flx-spc label span:nth-child(1){width: 100%;max-width: 100%;order: 2;display: flex;
+    justify-content: flex-start;}
+.radio-flx-spc label span:nth-child(2){width: 100%;max-width: 100%;order: 1;display: flex;
+    justify-content: flex-end;}
+.etat-srf-ttl{font-weight: 600;font-size:20px;margin-bottom: 20px;}
+.radio-flx-spc, .radio-flx-spc .ant-col-6 {
+    width: 100% !important;
+}
+.ant-col-6 {
     justify-content: center;
-    max-width: 70%;
-    width: 70%;
-    padding: 12px 0px !important;
-    border-bottom: 1px solid #E9E9E9 !important;
+    max-width: 100% !important;
+    width: 60% !important;
     display: grid !important;
+    grid-template-columns: 2fr 2fr 0.5fr !important;
+    gap: 5px;
     align-items: center !important;
-    gap:8px;
+    flex: 0% !important;
     margin: auto;
-    grid-template-columns: 2fr 1fr 0.2fr;
-    justify-items: end;
-}
-.brd-nn-div .etat-srf:last-child{border-bottom: none !important;}
-h3.ttl-type{
-    border-bottom: 1px solid #55555566;
-    font-size: 18px;
-    color: var(--color1);
     text-align: center;
-    width: 100%;
-    font-weight: 600;
-    text-transform: capitalize;
 }
-form label{
-    text-align: left;
-    width: 100%;
-    margin: auto;
-}
-.ant-col-12 {
+.etat-srf{
+    align-items: center;
+    justify-content: center;
     max-width: 100%;
-    width:80% !important;
-    display: grid !important;
-    grid-template-columns: 1fr;
+    width: 60%;
+    display: flex !important;
+    align-items: center !important;
+    flex: 0% !important;
+    margin: auto;
+    text-align: center;
+    flex-direction: column;
 }
-input[type=checkbox] {
-    width: 15px !important;
-    height: 15px !important;
+.etat-srf .ant-radio-group {
+    display: grid;
+}
+.pose-murs {
+    display: flex ;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+[nz-radio] {
+    display: block;
+    height: 32px;
+    line-height: 24px;
+}
+.radio-flx-spc div span{  text-align: left;  }
+.radio-flx-spc label{text-align: unset;}
+.radio-flx-spc, .radio-flx-spc .ant-col-6 {
+    width: 100% !important;
+}
+.etat-srf-lab{
+    text-align: center !important;
+    width: 50% !important;
+    font-size: 18px !important;
+    font-family: 'Montserrat' !important;
+    color: #555 !important;
+    font-weight: 900 !important;
+}
+.col-gm{flex-direction: column;}
+.ant-row {
+    align-content: center;
+    flex-direction: column;
+}
+form{
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
 }
 @media screen and (max-width: 800px) {
-    .ant-col-24 { width: 100% !important; }
+.ant-col-6 { width: 70% !important;}
 }
+@media screen and (max-width: 600px) {
+    .ant-col[_ngcontent-ng-c182946846], .ant-col-6, .ant-col {max-width: 100% !important;}
+    }
 @media screen and (max-width: 375px) {
-    form label {text-align: left !important; }
+    .plaf-dim input{ width: 90% !important;}
 }
-.srf-img{margin-block: 20px;margin-inline: auto;}

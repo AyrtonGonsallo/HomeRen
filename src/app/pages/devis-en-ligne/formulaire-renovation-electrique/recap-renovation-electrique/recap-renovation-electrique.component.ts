@@ -9,7 +9,8 @@ import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-e
 })
 export class RecapRenovationElectriqueComponent {
   @Input() selectedPiece: any; // Déclaration de l'entrée selectedPiece
-  data: any;
+  appareils: any;
+  chauffage_exist:boolean=false
   form:any
   constructor(
     private gestiondesdevisService: GestionDesDevisService,
@@ -17,8 +18,8 @@ export class RecapRenovationElectriqueComponent {
   ) {
     this.form=this.gestiondesdevisService.getFormulaireByName("renovation-electrique").formulaire;
    
-    this.data=this.form["gammes-produits-renovation-electrique"];
-   
+    this.appareils=this.form["gammes-produits-renovation-electrique"].appareils_electrique;
+   this.chauffage_exist=this.form["gammes-produits-renovation-electrique"].chauffage_exist;
    
   }
   get_label(slug:boolean){

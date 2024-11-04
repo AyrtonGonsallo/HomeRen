@@ -325,7 +325,7 @@ nav ul{
 }
 @media only screen and (max-width: 1093px) {
 img.logo-hdr{width: 64px;}
-nav ul li a, .drop-dwn, .title-drop-dwn{font-size: 14px; padding: 10px 3px !important;}
+nav ul li a, .drop-dwn, .title-drop-dwn{font-size: 14px; padding: 10px 11px !important;}
 }
   @media only screen and (max-width: 1024px){
     .footer-bg {  padding: 2% 2%; }

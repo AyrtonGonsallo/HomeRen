@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 import { environment } from '../../../../environments/environment';
+import { Equipement } from '../../../../Models/Equipement';
 
 @Component({
   selector: 'app-gammes-produits-renovation-electrique',
@@ -29,10 +30,12 @@ export class GammesProduitsRenovationElectriqueComponent {
   // le formulaire de pose plafond
   createRenovationElectriqueGroup(): FormGroup {
     return this.fb.group({
-      gamme: ["",Validators.required ],
-      image_tableau_elec: ["",],
-      remplacer_tab: [false,]
+      appareils_electrique: this.fb.array([]),
+      chauffage_exist: [false,]
     });
+  }
+  get getrenovationElectrique_form(): FormArray {
+    return this.renovationElectriqueForm.get('appareils_electrique') as FormArray;
   }
   onRenovationElectriqueSubmit(): void {
     this.formValidityChange.emit(this.renovationElectriqueForm.valid);
@@ -66,35 +69,64 @@ export class GammesProduitsRenovationElectriqueComponent {
     }
   }
   
-  
-  gammes:any
+  appareils_electrique:Equipement[]=[]
   load_gammes(){
-    this.userService.getGammesByTravailAndType(15,"renovation-electrique-complete").subscribe(
-      (response: any) => {
-        console.log('recuperation des gammes rec:', response);
-        this.gammes=response
+    this.userService.getEquipementsByType ("electrique").subscribe(
+      (response: Equipement[]) => {
+        this.appareils_electrique = response.filter(equipement => 
+          equipement.ModeleEquipements && 
+          equipement.ModeleEquipements.length > 0 &&
+          [24, 25, 26, 27].includes(equipement.ID)
+        );        
+        console.log("réponse de la requette  getEquipementsByType:electrique",this.appareils_electrique);
+        this.appareils_electrique.forEach(appareil => {
+          if(appareil.ID==24){//Goulotte 24
+            const modeleEquipements = appareil.ModeleEquipements;
+            // Créer un FormGroup pour chaque appareil
+            const appareilGroup = this.fb.group({});
+            appareilGroup.addControl("nombre", this.fb.control("", Validators.required));
+            appareilGroup.addControl("modele", this.fb.control("", Validators.required));
+            // Ajouter le FormGroup de l'appareil au FormArray
+            (this.renovationElectriqueForm.get('appareils_electrique') as FormArray).push(appareilGroup);
+          }
+          else if(appareil.ID==25){//Encastré béton 25
+            const modeleEquipements = appareil.ModeleEquipements;
+            // Créer un FormGroup pour chaque appareil
+            const appareilGroup = this.fb.group({});
+            appareilGroup.addControl("nombre", this.fb.control("", Validators.required));
+            appareilGroup.addControl("modele", this.fb.control("", Validators.required));
+            // Ajouter le FormGroup de l'appareil au FormArray
+            (this.renovationElectriqueForm.get('appareils_electrique') as FormArray).push(appareilGroup);
+          }
+          else if(appareil.ID==26){//Encastré cloison légere	 26
+            const modeleEquipements = appareil.ModeleEquipements;
+            // Créer un FormGroup pour chaque appareil
+            const appareilGroup = this.fb.group({});
+            appareilGroup.addControl("nombre", this.fb.control("", Validators.required));
+            appareilGroup.addControl("modele", this.fb.control("", Validators.required));
+            // Ajouter le FormGroup de l'appareil au FormArray
+            (this.renovationElectriqueForm.get('appareils_electrique') as FormArray).push(appareilGroup);
+          }
+          else if(appareil.ID==27){//Chauffage électrique	 27
+            const modeleEquipements = appareil.ModeleEquipements;
+            // Créer un FormGroup pour chaque appareil
+            const appareilGroup = this.fb.group({});
+            appareilGroup.addControl("nombre", this.fb.control("", ));
+            appareilGroup.addControl("modele", this.fb.control("", ));
+            // Ajouter le FormGroup de l'appareil au FormArray
+            (this.renovationElectriqueForm.get('appareils_electrique') as FormArray).push(appareilGroup);
+          }
+            
+        });
+       
       },
-      (error: any) => {
-        console.error('Erreur lors de la recuperation des gammes rec :', error);
+      (error) => {
+        console.error('Erreur lors de la recuperation des  getEquipementsByPiece:salledebain :', error);
       }
     );
   
   }
 
-  //upload des images sur tous les formulaires
-maxFileSize = 10 * 1024 * 1024; // 10 MB en octets
-onFileChange(event: Event): void {
-  const inputElement = event.target as HTMLInputElement;
-  const file: File = (inputElement.files as FileList)[0];
-  if (file.size <= this.maxFileSize && file.type.startsWith('image/')) {
-    this.renovationElectriqueForm.patchValue({
-      image_tableau_elec: file
-    });
-  } else {
-    console.log('Please upload an image file less than 10 MB.');
-    inputElement.value = ''; // Reset the input if the file is invalid
-  }
-  
-}
+
   }
   

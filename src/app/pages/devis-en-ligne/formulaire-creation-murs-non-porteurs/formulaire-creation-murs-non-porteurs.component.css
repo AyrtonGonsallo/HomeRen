@@ -1,9 +1,9 @@
-
 .ant-col{
     padding: 5px;
     text-align: start;
 }
-  .ant-col[_ngcontent-ng-c3282933449] {
+.ant-col.col-100-tc{grid-template-columns: 2fr 2fr !important;}
+.ant-col[_ngcontent-ng-c3282933449] {
     text-align: center !important;
 }
 form label {
@@ -24,40 +24,11 @@ form label {
     justify-content: center !important;
     align-items: center !important;
 }
-.ant-col {
-    display: flex;
-    justify-content: space-between;
-}
+
 [nz-radio] {
     display: block;
     height: 32px;
     line-height: 24px;
-}
-.pose-murs .ant-col-6, .pose-murs .ant-col{
-    max-width: 60% !important;
-    width: 100% !important;
-    display: flex !important;
-    flex: 0% !important;
-    margin: auto;
-    gap: 20px !important;
-    text-align: center !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-}
-
-input{
-    width: 66% !important;
-}
-.ant-col-6 {
-    max-width: 100%;
-    width: 100%;
-    display: flex;
-    flex: 0% !important;
-    margin: auto;
-    gap: 20px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
 }
 .ant-row {
     align-content: center;
@@ -75,18 +46,6 @@ form{
     flex-direction: column !important;
     flex-wrap: no-wrap !important;
 }
-.ant-col-6{
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
-    width: 60%;
-    display: flex !important;
-    align-items: center !important;
-    flex: 0% !important;
-    margin: auto;
-    text-align: center;
-}
-
 .radio-flx-spc div{
     display: grid;
     grid-template-columns: 1fr;
@@ -129,7 +88,7 @@ form{
     display: grid;
 }
 .srf-img{margin-block: 20px;margin-inline: auto;}
-@media only screen and (max-width: 800px) {
+/* @media only screen and (max-width: 800px) {
     .vald-btn, .add-btn{ width: fit-content;}
     .ant-col-6 {max-width: 100%;}
     .ant-steps-item-title {font-size: 11px !important;}
@@ -175,4 +134,4 @@ form label{
     width: 100%!important;text-align: center;
 }
 input{width: 100%!important;}
-}
+} */

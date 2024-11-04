@@ -69,8 +69,7 @@ createposePortesGroup(): FormGroup {
     finition: ['', Validators.required],//select avec valeurs a Finition à peindre, finition stratifiee,finition bois,autre. Preciser
     infos_comp_type: ['', ],//text area
     infos_comp_finition: ['', ],//text area
-    creation: [false, ],//boolean
-    remplacement: [false, ],//boolean
+    creation_ou_remplacement: ['',Validators.required ],//boolean
   });
 }
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {

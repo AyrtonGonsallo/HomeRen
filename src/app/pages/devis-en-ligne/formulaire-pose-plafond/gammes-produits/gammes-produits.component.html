@@ -2,18 +2,15 @@
             <form [formGroup]="posePlafondForm" (ngSubmit)="onPosePlafondSubmit()">
 
                <div >
-                 <div nz-row nzJustify="start" >
-                   
-                   
-                  <div nz-col nzSpan="6" class="ant-col tooltip-srf">
+                 <div nz-row nzJustify="start" >  
+                  <div nz-col nzSpan="6" class="ant-col tooltip-srf etat-srf">
                     <!-- Gamme Peinture, Enduit, Papier, Carrelage -->
                     <nz-radio-group formControlName="gamme" class="radio-flx-spc">
-                      <!-- Common template for multiple option lists -->
-                       
-                        <div class="div-chauf-gm" style="width:100%;">
-                          <span  class="center jaune fs-16 f-w-6" >Peinture :</span>
-                         </div>
-                        <div *ngFor="let option of gammes_peinture" class="parquet-option">
+                      <!-- Common template for multiple option lists -->  
+                         <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
+                          Gamme - Peinture </span> 
+                        </div>
+                        <div *ngFor="let option of gammes_peinture" class="parquet-option ant-col tooltip-srf etat-srf">
                           <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
                             <span>{{ option.Label }}</span>
                           </label>
@@ -26,11 +23,11 @@
                           </ng-template>
                         </div>
 
-                        <div class="div-chauf-gm" style="width:100%;">
-                          <span  class="center jaune fs-16 f-w-6" >Enduit :</span>
-                         </div>
-                     
-                        <div *ngFor="let option of gammes_enduit" class="parquet-option">
+                        
+                         <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
+                          Gamme - Enduit </span> 
+                        </div>
+                        <div *ngFor="let option of gammes_enduit" class="parquet-option ant-col tooltip-srf etat-srf">
                           <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
                             <span>{{ option.Label }}</span>
                           </label>
@@ -43,11 +40,12 @@
                           </ng-template>
                         </div>
 
-                        <div class="div-chauf-gm" style="width:100%;">
-                          <span  class="center jaune fs-16 f-w-6" >Papier :</span>
-                         </div>
-                    
-                        <div *ngFor="let option of gammes_papier" class="parquet-option">
+                        
+                        
+                         <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
+                          Gamme - Papier </span> 
+                        </div>
+                        <div *ngFor="let option of gammes_papier" class="parquet-option ant-col tooltip-srf etat-srf">
                           <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
                             <span>{{ option.Label }}</span>
                           </label>
@@ -60,10 +58,13 @@
                           </ng-template>
                         </div>
                   
-                        <div class="div-chauf-gm" style="width:100%;">
-                          <span  class="center jaune fs-16 f-w-6" >Carrelage :</span>
-                         </div>
-                        <div *ngFor="let option of gammes_carrelage" class="parquet-option">
+                       
+                      
+                         <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
+                          Gamme - Carrelage </span> 
+                        </div>
+                        <div *ngFor="let option of gammes_carrelage" class="parquet-option ant-col tooltip-srf etat-srf">
+                          
                           <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
                             <span>{{ option.Label }}</span>
                           </label>

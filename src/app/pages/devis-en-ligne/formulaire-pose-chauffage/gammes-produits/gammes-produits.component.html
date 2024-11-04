@@ -9,13 +9,13 @@
 
        </div>
       <div nz-row nzJustify="start">
-        <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf">
+        <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
           
           <nz-radio-group formControlName="gamme" class="radio-flx-spc">
             <!-- Reusable template for displaying options with PDFs -->
           
              
-              <div *ngFor="let option of gammes_radiateurs" class="parquet-option">
+              <div *ngFor="let option of gammes_radiateurs" class="parquet-option nt-col tooltip-srf ">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                   <span>
                     <!-- Dynamically display the label based on the type -->

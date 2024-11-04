@@ -1,10 +1,45 @@
-.ant-col[_ngcontent-ng-c3282933449] {
-    text-align: center !important;
+.radio-flx-sp, .ant-radio-group { width: 100%;max-width: 100%;}
+.radio-flx-spc div{
+    width: 100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-content: center;
+    min-height: 0px;
+    justify-items: stretch;}
+.radio-flx-spc label{
+    display: flex;
+    width: 100%;
+    height: 54px;
+    border-bottom: 1px solid #e9e9e9 !important;
+    max-width: 100%;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;}
+.ant-row, .flx-pr {
+    width: 70%;
+    max-width: 70%;
+    margin: auto;
+    align-content: center;
+    flex-direction: column;
 }
+
+.ant-col-6 {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+.col-accord-inpt{display: grid; grid-template-columns: 3fr 1fr;height: 54px;align-items: center;}
+.div-chauf-gm { margin-bottom: 15px;}
 form label {
     text-align: left;
-    width: 100%;
+    width: 50%;
 }
+form{
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap;
+} 
 .etat-srf-lab{
     text-align: center !important;
     width: 50% !important;
@@ -13,56 +48,7 @@ form label {
     color: #555 !important;
     font-weight: 900 !important;
 }
-.pose-murs {
-    display: flex ;
-    flex-wrap: nowrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-}
-.ant-col {
-    display: flex;
-    justify-content: space-between;
-}
-[nz-radio] {
-    display: block;
-    height: 32px;
-    line-height: 24px;
-}
-.pose-murs .ant-col-6, .pose-murs .ant-col{
-    max-width: 60% !important;
-    width: 100% !important;
-    display: flex !important;
-    flex: 0% !important;
-    margin: auto;
-    gap: 20px !important;
-    text-align: center !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-}
-input{
-    width: 76% !important;
-}
-.ant-col-6 {
-    max-width: 100%;
-    width: 100%;
-    display: flex;
-    flex: 0% !important;
-    margin: auto;
-    gap: 20px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}
-.ant-row {
-    align-content: center;
-    flex-direction: column;
-}
-form{
-    display: flex !important;
-    flex-direction: column !important;
-    flex-wrap: wrap !important;
-}
-.ant-col-6{
+.etat-srf {
     align-items: center;
     justify-content: center;
     max-width: 100%;
@@ -72,109 +58,19 @@ form{
     flex: 0% !important;
     margin: auto;
     text-align: center;
+    flex-direction: row;
+}
+.etat-srf-accord { grid-template-columns: 4fr 0.2fr 0.2fr !important;padding-bottom: 8px;}
+.etat-srf-accord i.far.fa-question-circle { margin-top: 5px !important;}
+.plaf-dim .ant-col-6 {
+    padding: 12px 0px !important;
+    border-bottom: 1px solid #E9E9E9 !important;
 }
 
-.radio-flx-spc div{
-    display: grid;
-    grid-template-columns: 12fr 1fr;
-    align-items: center;
-    justify-content: center;
-    min-height: 0px;
-    justify-items: stretch;}
 
-.radio-flx-spc label{
-    display: flex;
-    width: 100%;
-    height: 54px;
-    border-bottom: 1px solid #e9e9e9;
-    max-width: 100%;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    align-items: center;
+@media screen and (max-width: 800px) {
+.ant-col-12{max-width: 100% !important; width: 100% !important;}
 }
-.radio-flx-spc label span:nth-child(1){width: 100%;max-width: 100%;order: 2;display: flex;
-    justify-content: flex-start;}
-.radio-flx-spc label span:nth-child(2){width: 100%;max-width: 100%;order: 1;display: flex;
-    justify-content: flex-end;}
-.etat-srf-ttl{font-weight: 600;font-size:20px;margin-bottom: 20px;}
-.radio-flx-spc, .radio-flx-spc .ant-col-6 {
-    width: 100% !important;
-}
-.etat-srf{
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
-    width: 60%;
-    display: flex !important;
-    align-items: center !important;
-    flex: 0% !important;
-    margin: auto;
-    text-align: center;
-    flex-direction: column;
-}
-.etat-srf .ant-radio-group {
-    display: grid;
-}
-input[type="checkbox"] {
-    width: 15px;
-    height: 15px;
-    margin-left: auto;
-}
-.ant-col.ant-col-12{
-        display: grid;
-        grid-template-columns: 3fr 1fr;
-        width: 100%;
-        max-width: 69%;
-        justify-content: center;
-        align-items: center;
-        align-content: center;
-        padding:13px 0px;
-}
-
-@media only screen and (max-width:1196px) {
-.flx-pr.ant-row.ant-row-start{
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1fr 1fr;}
-}
-@media only screen and (max-width: 800px) {
-    .ant-col-6 {max-width: 100%;}
-    .ant-row{
-        display: grid !important;
-        align-content: center !important;
-        grid-template-columns: 1fr;
-    }
-    .ant-col.ant-col-12 { max-width: 100%;}
-    .ant-col.ant-col-6{max-width: 100%;}
-    .flx-pr.ant-row.ant-row-start{grid-template-columns: 1fr;}
-
-}
-@media only screen and (max-width: 600px) {
-    .flx-pr.ant-row.ant-row-start{display: grid !important;}
-    .ant-row {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        flex-direction: column !important;
-        align-content: flex-start !important;
-    }
-    .ant-col.ant-col-6{
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-start;
-        margin: 0;
-    }
-    .ant-col, .ant-col-6, .ant-col {max-width: 100% !important;}    
-
-}
-@media only screen and (max-width: 497px) {
-.ant-row{grid-template-columns: 1fr !important;}
-.ant-col.ant-col-6 { flex-direction: row !important;}
-}
-@media screen and (max-width: 375px) {
-    .plaf-dim input{ width: 90% !important;}
-    form label { text-align: left !important;}
-    }
-@media only screen and (max-width: 320px) {
-.ant-col.ant-col-6{flex-direction: column !important;}
-.recap-div p{font-size:13px !important;}
+@media screen and (max-width: 600px) {
+    .ant-row, .flx-pr{width: 100%; max-width: 100%; }
 }

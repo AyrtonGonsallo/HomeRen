@@ -213,7 +213,10 @@ img{width: fit-content;max-width: 100%;}
 .ant-radio-inner::after{background-color: var(--color1)!important;}
 .ant-radio-wrapper:hover .ant-radio-inner::after{background-color: var(--color2)!important;}
 .ant-radio-wrapper {float: right;}
-.section-devis .ant-steps-icon {color: var(--color1) !important;}
+.section-devis .ant-steps-icon {color: #bfbfbf !important;}
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title {font-weight: 700 !important;}
+.ant-steps-item-finish > .ant-steps-item-container svg{color: #ffc736 !important;}
+
 /*devis en ligne - devis en ligne respo*/
 /*.dynamic-form-button{
     padding: 0;
@@ -238,31 +241,51 @@ img{width: fit-content;max-width: 100%;}
     color: var(--color-white);
   }
   input, textarea{
-    width: 100%;
+    width: 100% !important;
     border: 1px solid var(--color1);
     border-radius: 2px;
 }
-  input:focus-visible, textarea:focus-visible {
+.ant-col.ant-col.col-100-tc {grid-template-columns: 11fr 1fr !important;}
+input:focus-visible, textarea:focus-visible {
     border: 1px solid var(--color2) !important; 
     outline: none; 
 }
-.ant-col-6 {
-    max-width: 50% !important;
-    width: 50% !important;
+/* .ant-col-6 {
+    max-width: 60% !important;
+    width: 60% !important;
     display: flex;
+    padding-inline: 0px !important;
     flex: 0% !important;
     margin: auto;
     gap: 20px;
     text-align: center;
     justify-content: center;
     align-items: center;
+} */
+a.info-icon {
+    text-align: center;
+}
+.ant-steps-item-description {
+    font-size: 11px;
+}
+.ant-col-6{
+    justify-content: center;
+    max-width: 60% !important;
+    width: 60% !important;
+    display: grid !important;
+    grid-template-columns:2fr 2fr 0.5fr !important;
+    gap: 5px;
+    align-items: center !important;
+    flex: 0% !important;
+    margin: auto;
+    text-align: center;
 }
 .mur-btn-div {
     width: 60%;
     margin: auto;
     grid-area: 5px;
     grid-template-columns: 2fr 1fr;
-    display: grid;
+    display: grid; 
     align-items: center;
     justify-items: end;
     margin-bottom: 0px;
@@ -270,6 +293,7 @@ img{width: fit-content;max-width: 100%;}
     border-bottom: 2px solid var(--color1);
 }
 .eltrc-div .ant-col-12{ border-top: 1px solid #e9e9e9;}
+input[type=checkbox] {width: 17px !important;height: 17px !important;}
 .eltrc-div .ant-col-12 input[type=checkbox] {
     width: 17px !important;
     height: 17px !important;
@@ -321,7 +345,10 @@ label{font-family: 'Montserrat';font-weight: 600;}
     align-content: center;
     align-items: center;
 }
-
+form label{
+    text-align: left;
+    width: 100% !important;
+}
 .devis-content p.ttl-dv-pc {
     margin-bottom: 20px;
 }
@@ -340,17 +367,26 @@ label{font-family: 'Montserrat';font-weight: 600;}
     padding: 15px 10px;
 }
 
-.tooltip-srf .radio-flx-spc div { grid-template-columns: 6fr 1fr !important;}
+.tooltip-srf .radio-flx-spc div { grid-template-columns: 6fr 0.5fr !important;}
 .tooltip-srf i.far.fa-question-circle {
-    color: var(--color1);
-    font-size: 20px;
-    margin-top: 9px;
+    color: var(--color1) !important;
+    font-size: 20px !important;
+    margin-top: 9px !important;
 }
 .link-tooltip{color:var(--color1);}
 .link-tooltip:hover{color:var(--color-white);text-decoration: underline;}
 .ant-col.ant-col-6{max-width: 100%;}
 .error-message{color: red; width: 100% !important;}
 .div-btn-flx-frm button.ant-btn.ant-btn-default{height: 42px !important; width: fit-content !important;}
+.ant-collapse-header-text{
+    color: var(--color1) !important; 
+    font-family: 'Montserrat';
+    font-size: 16px;
+    font-weight: 600 !important;
+}
+.ng-untouched.ng-pristine.ng-invalid.ng-star-inserted {margin-bottom: 10px !important;}
+.ng-untouched.ng-pristine.ng-invalid.ng-star-inserted svg{color: #ffc736 !important;}
+.div-elec span {text-align: left !important;}
 h4.h4-demol{
     font-size: 19px !important;
     margin-bottom: 10px;
@@ -380,11 +416,12 @@ input[type="checkbox"]:checked::before {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+span.ant-radio + * {padding-left: 0px !important;}
 /****************** cuisine ***********************/
 .cuisine-flx {flex-direction: column !important;}
 .cuisine-div form label{
     text-align: left;
-    width: 45% !important;
+    width: 100% !important;
 }
 .gam-cuis form label{
     text-align: left;
@@ -399,6 +436,7 @@ input[type="checkbox"]:checked::before {
     display: grid !important;
     align-items: center !important;
     gap: 8px;
+    padding-inline: 0px !important;
     margin: auto;
     grid-template-columns: 2fr 3fr 0.2fr;
     justify-items: end;
@@ -443,8 +481,13 @@ button.ant-btn.ng-star-inserted:hover { background-color: var(--color2);}
 .ant-modal-footer button{padding: 11px 10px !important;}
 
 }
+.col-6-w .etat-srf.tooltip-srf.ant-col.ant-col-6, .col-6-w .ant-col.ant-col-6{grid-template-columns: 2fr 1fr 0.5fr !important;}
 
 /*************************** Responsive ********************************/
+@media only screen and (max-width: 1024px) {
+.ant-steps-item-title { font-size: 12px !important;}
+}
+
 @media only screen and (max-width: 1100px) {
     .steps-content, .div-btn-prect { width: 95% !important;}
     
@@ -452,7 +495,7 @@ button.ant-btn.ng-star-inserted:hover { background-color: var(--color2);}
     
     @media screen and (max-width: 800px) {
         .div-btn-flx-frm .ant-col-md-20 {max-width: 100%;}
-        .ant-col-6, .mur-btn-div {max-width: 70% !important;width: 70% !important;}
+        .ant-col-6, .mur-btn-div, .ant-col-12, .div-mur-gm {max-width: 70% !important;width: 70% !important;}
         .ant-steps-item-content {display: none !important;} 
         .col-md-6{width:100%;padding: 0px !important;}
         h1{font-size: 34px !important;}
@@ -467,6 +510,9 @@ button.ant-btn.ng-star-inserted:hover { background-color: var(--color2);}
         .m-w, .m-w-p{max-width: 100%;}
         .div-btn-flx-frm{display: grid !important;grid-template-columns: 1fr !important;}
         .recap-div.devis-content {width: 87%;}
+
+
+
     }
     @media screen and (max-width: 600px) {
         .plaf-dim .ant-col-6, .plaf-dim .ant-col, .etat-srf, .col-gm, .recap-div.devis-content{width: 100% !important;max-width: 100% !important;gap: 4px !important;}
@@ -475,14 +521,14 @@ button.ant-btn.ng-star-inserted:hover { background-color: var(--color2);}
         .ant-col-6 {max-width: 100% !important;width: 100% !important;}
         .gam-cuis .div-chauf-gm{width: 100%;}
         .w-lab-q {grid-template-columns: 3fr 0.3fr 0.2fr !important;}
-
+        .cl-rp-12{width:100% !important;max-width:100% !important;}
 
 
     }
     @media screen and (max-width: 497px) {
     .recup-fin {text-align: center; grid-template-columns: 3fr 1fr 3fr;}
     .recup-fin p:nth-child(1) { float: left; text-align: left;}
-    .recup-mur-flx {grid-template-columns: 1fr; gap: 24px;}
+    .recup-mur-flx {grid-template-columns: 1fr; gap: 10px;}
     .fs-34 {font-size: 28px;}
     h1{font-size: 32px !important;}
     .tooltip-srf.ant-col.ant-col-6 { width: 100%;}
@@ -492,6 +538,8 @@ button.ant-btn.ng-star-inserted:hover { background-color: var(--color2);}
     .ttl-mob .mur-ttl{font-size: 14px !important;}
     .radio-flx-spc{width: 100% !important;}
     .recup-mur-flx .vide{display: none;}
+    .col-6-w .etat-srf.tooltip-srf.ant-col.ant-col-6, .col-6-w .ant-col.ant-col-6{grid-template-columns: 2fr 1fr 0.5fr !important;}
+
 
     }
     
@@ -508,26 +556,26 @@ button.ant-btn.ng-star-inserted:hover { background-color: var(--color2);}
         justify-content: flex-start;
         flex-wrap: nowrap;
     }
-    .plaf-dim input{ width: 100% !important;}
+    /* .plaf-dim input{ width: 100% !important;} */
     .del-btn{float: none;  margin: 8px 0px !important;}
     form label{text-align: start !important;}
     .recap-div.devis-content { display: flex;flex-direction: column !important;}
     .recup-fin {gap: 1px !important;}
     form label{width: 100% !important;}
-
+    .ant-collapse-header-text { font-size: 13px;}
 
 
 }
 @media screen and (max-width: 320px) {
-    .btn-suiv{  padding: 11px 104px !important;}
+    .btn-suiv{padding: 11px 104px !important;}
     .recap-div p{font-size:13px !important;}
     .ttl-dv-pc { font-size: 18px !important; }
     h2 { font-size: 23px;}
     .cuisine-div .add-btn { padding: 0px 0px; height: 51px;line-height: 1.5;}
-
-
-
-
+    .mur-ttl { font-size: 14px !important;}
+    .radio-flx-spc div{gap: 8px !important;}
+    .ant-col-6 { grid-template-columns: 2fr 1fr 0.5fr !important;}
+    .ant-col.col-100-tc{ grid-template-columns: 1fr !important;}
 }
 /******************************* fin *********************************************/
 

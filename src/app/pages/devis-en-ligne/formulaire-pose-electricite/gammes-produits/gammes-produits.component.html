@@ -1,12 +1,15 @@
-<div class="form-plmb">
+<div class="plaf-dim">
     
   
   
   <div  class="div-s-b">
-    <h3>À ajouter</h3>
+    <div class="div-chauf-gm">
+      <span class="center jaune fs-16 f-w-6">À ajouter</span>   
+    </div>
+    
     <form [formGroup]="appareils_a_ajouter_form" (ngSubmit)="submit()">
       <div  class="form-group" nz-row nzJustify="start">
-        <div nz-col nzSpan="6" class="ant-col etat-srf-row tooltip-srf">
+        <div nz-col nzSpan="6" class="ant-col etat-srf-accord tooltip-srf">
           <label for="passage_fils_electique">Passage des fils électriques</label>
           <input type="checkbox" id="passage_fils_electique" formControlName="passage_fils_electique"> 
           <a nz-tooltip [nzTooltipTitle]="tooltippassage_fils_electique" href="javascript:void(0)" class="info-icon">
@@ -24,9 +27,9 @@
           <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getappareils_a_ajouter_form.controls[i].get(appareilGroup.Titre + ' modele')?.invalid" class="error-message">
             Vous devez faire un choix.
           </div>
-          <div class="div-chauf-gm"><h3 class="ttl-type jaune">{{appareils_electrique && appareils_electrique[i] ? appareils_electrique[i].Titre : ""}}</h3></div>
+
           <nz-collapse nzAccordion>
-              <nz-collapse-panel nzHeader="Modèles" [nzActive]="false">
+              <nz-collapse-panel nzHeader="Modèles - {{appareils_electrique && appareils_electrique[i] ? appareils_electrique[i].Titre : ''}}" [nzActive]="false">
                   <nz-radio-group formControlName="modele" class="radio-flx-spc">
                       <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
                         <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf">
@@ -36,12 +39,12 @@
                                 {{modele.Titre}}
                               </span>
                             </label>
-                          
-                        </div>
-                        <!-- Tooltip with image and dimensions -->
-                        <a nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="info-icon">
+                          <a nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="info-icon">
                           <i class="far fa-question-circle"></i>
                         </a>
+                        </div>
+                        <!-- Tooltip with image and dimensions -->
+                        
                         <ng-template #tooltipTemplate >
                           <div>
                             <div class="img-tltip" *ngIf="modele.Image">
@@ -55,7 +58,7 @@
                         </ng-template>
                       </div>
                     </nz-radio-group>
-                    <div class="flx-depose">
+                    <div nzspan="6" class="col-accord-inpt">
                       <label for="nombre">Quantité</label>
                       <input type="number" id="nombre" formControlName="nombre">      
                     </div>  
@@ -70,7 +73,9 @@
 
 
   <div  class="div-s-b">
-    <h3>À remplacer</h3>
+    <div class="div-chauf-gm">
+      <span class="center jaune fs-16 f-w-6">À remplacer</span>   
+    </div>
     <form [formGroup]="appareils_a_remplacer_form" (ngSubmit)="submit()">
       <div  class="form-group" nz-row nzJustify="start">
         <div nz-col nzSpan="6" class="ant-col etat-srf-row tooltip-srf">

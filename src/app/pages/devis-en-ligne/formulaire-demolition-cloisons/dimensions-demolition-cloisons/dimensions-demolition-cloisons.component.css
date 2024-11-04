@@ -38,7 +38,7 @@ form {
     margin-top: 9px;
 }
 .ant-row {
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     flex-direction: column;
 }
 
