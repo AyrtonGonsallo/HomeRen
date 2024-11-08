@@ -1,9 +1,9 @@
 <!-- <h4 class="h4-demol">MURS NON PORTEURS</h4> -->
-<form [formGroup]="mursnonporteursForm" (ngSubmit)="onSubmitForm1()">
+<form [formGroup]="mursnonporteursForm" (ngSubmit)="onSubmitForm1()" *ngIf="mursnonporteurs_choisis">
 
   <div formArrayName="mursnonporteurs">
     <div *ngFor="let mur of mursnonporteurs.controls; let j = index" [formGroupName]="j">
-      <div class="div-mur-gm"><span class="mur-ttl">Mur {{j+1}}</span> - <label for="materiaux" class="mur-ttl">Matériel </label></div>
+      <div class="div-mur-gm"><span class="mur-ttl">Mur {{j+1}}</span><span class="mur-ttl"> - </span><label for="materiaux" class="mur-ttl">Matériel </label></div>
       <div nz-row nzJustify="start">
         <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
           
@@ -37,11 +37,11 @@
   </form>
 
   <!-- <h4 class="h4-demol">OUVERTURE PARTIELLE</h4>-->
-<form [formGroup]="ouverturepartiellesForm" (ngSubmit)="onSubmitForm2()">
+<form [formGroup]="ouverturepartiellesForm" (ngSubmit)="onSubmitForm2()" *ngIf="ouverturepartielles_choisis">
 
   <div formArrayName="ouverturepartielles">
     <div *ngFor="let mur of ouverturepartielles.controls; let i = index" [formGroupName]="i">
-      <div class="div-mur-gm"><span class="mur-ttl">Ouverture {{i+1}}</span> - <label for="cloison" class="mur-ttl">Cloison</label></div>
+      <div class="div-mur-gm"><span class="mur-ttl">Ouverture {{i+1}}</span><span class="mur-ttl"> - </span><label for="cloison" class="mur-ttl">Cloison</label></div>
       <div nz-row nzJustify="start">
         <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
           

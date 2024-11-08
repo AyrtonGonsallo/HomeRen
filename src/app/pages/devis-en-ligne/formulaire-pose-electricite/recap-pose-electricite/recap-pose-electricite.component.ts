@@ -18,6 +18,7 @@ export class RecapPoseElectriciteComponent {
   constructor(
     private gestiondesdevisService: GestionDesDevisService,
   ) {
+    console.log(this.gestiondesdevisService.getFormulaireByName("pose-electricite"))
     this.appareils_a_ajouter = this.gestiondesdevisService.getFormulaireByName("pose-electricite").formulaire["gammes-produits-pose-electricite"].appareils_electrique;
     this.qte_prises = this.gestiondesdevisService.getFormulaireByName("pose-electricite").formulaire["gammes-produits-pose-electricite"].qte_prises;
     this.qte_eclairage_profond = this.gestiondesdevisService.getFormulaireByName("pose-electricite").formulaire["gammes-produits-pose-electricite"].qte_eclairage_profond;
@@ -28,5 +29,8 @@ export class RecapPoseElectriciteComponent {
   }
   get_title(slug:string){
     return slug.split(":")[1];
+  }
+  get_label(slug:boolean){
+    return (slug)?'oui':'non';
   }
 }

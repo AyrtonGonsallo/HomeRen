@@ -11,7 +11,11 @@
       <div  class="form-group" nz-row nzJustify="start">
         <div nz-col nzSpan="6" class="ant-col etat-srf-accord tooltip-srf">
           <label for="passage_fils_electique">Passage des fils électriques</label>
-          <input type="checkbox" id="passage_fils_electique" formControlName="passage_fils_electique"> 
+          <nz-radio-group formControlName="passage_fils_electique" nzName="radiogroup" class="sidebyside">
+            <label nz-radio nzValue="true">Oui</label>
+            <label nz-radio nzValue="false">Non</label>
+          </nz-radio-group>
+
           <a nz-tooltip [nzTooltipTitle]="tooltippassage_fils_electique" href="javascript:void(0)" class="info-icon">
               <i class="far fa-question-circle"></i>
             </a>
@@ -24,13 +28,18 @@
       </div>
       <div formArrayName="appareils_electrique" class="flx-pr">
         <div *ngFor="let appareilGroup of appareils_electrique; let i = index" [formGroupName]="i">
-          <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getappareils_a_ajouter_form.controls[i].get(appareilGroup.Titre + ' modele')?.invalid" class="error-message">
-            Vous devez faire un choix.
-          </div>
+          
 
           <nz-collapse nzAccordion>
-              <nz-collapse-panel nzHeader="Modèles - {{appareils_electrique && appareils_electrique[i] ? appareils_electrique[i].Titre : ''}}" [nzActive]="false">
-                  <nz-radio-group formControlName="modele" class="radio-flx-spc">
+              <nz-collapse-panel nzHeader="Modèles - {{appareils_electrique && appareils_electrique[i] ? appareils_electrique[i].Titre : ''}}" [nzActive]="getAppareilActiveState(i)" [nzExtra]="activerTp" nzShowArrow="false">
+                <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getAppareilNombreState(i)" class="error-message">
+                  Vous devez faire un choix.
+                </div>
+                <div class="div-mur-gm" style="width:100%;">
+                  <span class="mur-ttl">
+                  Gamme</span> <span class="error-message" *ngIf="getAppareilActiveState(i)">*</span> : 
+                </div>
+                <nz-radio-group formControlName="modele" class="radio-flx-spc">
                       <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
                         <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf">
                           
@@ -59,12 +68,16 @@
                       </div>
                     </nz-radio-group>
                     <div nzspan="6" class="col-accord-inpt">
-                      <label for="nombre">Quantité</label>
-                      <input type="number" id="nombre" formControlName="nombre">      
+                      <label for="nombre">Quantité<span class="error-message" *ngIf="getAppareilActiveState(i)">*</span> : </label>
+                      <input type="number" id="nombre" formControlName="nombre" min="0">      
                     </div>  
                 </nz-collapse-panel>
           </nz-collapse>
-          
+          <ng-template #activerTp>
+            <label nz-checkbox formControlName="active">
+              
+            </label>
+          </ng-template>
           <!-- Ajoutez d'autres champs selon vos besoins -->
         </div>
       </div>
@@ -80,7 +93,7 @@
       <div  class="form-group" nz-row nzJustify="start">
         <div nz-col nzSpan="6" class="ant-col etat-srf-row tooltip-srf">
           <label for="qte_prises">Quantité prises</label>
-          <input type="number" id="qte_prises" formControlName="qte_prises"> 
+          <input type="number" id="qte_prises" formControlName="qte_prises" min="0"> 
           <a nz-tooltip [nzTooltipTitle]="tooltipqte_prises" href="javascript:void(0)" class="info-icon">
               <i class="far fa-question-circle"></i>
             </a>
@@ -94,7 +107,7 @@
       <div  class="form-group" nz-row nzJustify="start">
         <div nz-col nzSpan="6" class="ant-col etat-srf-row tooltip-srf">
           <label for="qte_eclairage_profond">Quantité éclairage profond</label>
-          <input type="number" id="qte_eclairage_profond" formControlName="qte_eclairage_profond"> 
+          <input type="number" id="qte_eclairage_profond" formControlName="qte_eclairage_profond" min="0"> 
           <a nz-tooltip [nzTooltipTitle]="tooltipqte_eclairage_profond" href="javascript:void(0)" class="info-icon">
               <i class="far fa-question-circle"></i>
             </a>
@@ -108,7 +121,7 @@
       <div  class="form-group" nz-row nzJustify="start">
         <div nz-col nzSpan="6" class="ant-col etat-srf-row tooltip-srf">
           <label for="qte_eclairage_applique">Quantité éclairage applique</label>
-          <input type="number" id="qte_eclairage_applique" formControlName="qte_eclairage_applique"> 
+          <input type="number" id="qte_eclairage_applique" formControlName="qte_eclairage_applique" min="0"> 
           <a nz-tooltip [nzTooltipTitle]="tooltipqte_eclairage_applique" href="javascript:void(0)" class="info-icon">
               <i class="far fa-question-circle"></i>
             </a>
@@ -122,7 +135,7 @@
       <div  class="form-group" nz-row nzJustify="start">
         <div nz-col nzSpan="6" class="ant-col etat-srf-row tooltip-srf">
           <label for="qte_convecteur_electrique">Quantité convecteur électrique</label>
-          <input type="number" id="qte_convecteur_electrique" formControlName="qte_convecteur_electrique"> 
+          <input type="number" id="qte_convecteur_electrique" formControlName="qte_convecteur_electrique" min="0">  
           <a nz-tooltip [nzTooltipTitle]="tooltipqte_convecteur_electrique" href="javascript:void(0)" class="info-icon">
               <i class="far fa-question-circle"></i>
             </a>

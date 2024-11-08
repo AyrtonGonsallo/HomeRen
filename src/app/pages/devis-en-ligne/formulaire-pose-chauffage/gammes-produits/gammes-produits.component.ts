@@ -57,8 +57,12 @@ onPoseRadiateursSubmit(): void {
 }
 createposeRadiateurGroup(): FormGroup {
   return this.fb.group({
-    gamme: ["", Validators.required]
+    gamme: ["", Validators.required],
+    visible: [true, ]
   });
+}
+getRadiateurVisibleState(index: number): boolean {
+  return (this.radiateurs as FormArray)?.at(index).get('visible')?.value;
 }
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
   
@@ -82,9 +86,22 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
         radiateurs: this.fb.array([this.createposeRadiateurGroup()])
       });
       this.formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("etat-surfaces-pose-chauffage")
+      
       this.formulaire_dimensions_length=this.formulaire_dimensions.formulaire.radiateurs.length
-      for(let i=0;i<(this.formulaire_dimensions_length-1);i++){
-        this.addRadiateurGroup()
+      this.radiateurs.removeAt(0);
+      for(let i=0;i<this.formulaire_dimensions_length;i++){
+        let a_remplacer=this.formulaire_dimensions.formulaire.radiateurs[i].etat
+        console.log("Radiateur "+(i+1))
+        if(a_remplacer=="radiateur à remplacer"||a_remplacer=="radiateur à déplacer"){
+          console.log("Ignorer le radiateur "+(i+1)+ " à remplacer ou deplacer")
+          this.radiateurs.push(this.fb.group({
+            gamme: ["", ],
+            visible: [false, ]
+          }));
+        }else{
+          this.addRadiateurGroup()
+        }
+        
       }
       console.log("longueur: ",this.formulaire_dimensions_length)
       console.log("formulaire: ",this.formulaire_dimensions)

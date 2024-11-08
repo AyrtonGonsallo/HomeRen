@@ -8,6 +8,9 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: './dimensions-demolition-cloisons.component.css'
 })
 export class DimensionsDemolitionCloisonsComponent {
+  is_active_Tp1=false
+  is_active_Tp2=false
+  is_active_Tp3=false
   isclicked=false
   @Input() triggerSubmitDimensionForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
@@ -27,7 +30,10 @@ export class DimensionsDemolitionCloisonsComponent {
       const fusion = {
         ...this.mursNonporteursForm.value,  // Valeurs du formulaire du haut
         ...this.deposePorteForm.value,   // Valeurs du formulaire du bas
-        ...this.ouverturePartielleForm.value
+        ...this.ouverturePartielleForm.value,
+        "tp1":this.is_active_Tp1,
+        "tp2":this.is_active_Tp2,
+        "tp3":this.is_active_Tp3,
       };
       console.log(fusion);
       this.gestiondesdevisService.addFormulaire('dimensions-murs-non-porteurs',3, fusion);
@@ -64,19 +70,19 @@ export class DimensionsDemolitionCloisonsComponent {
   }
   createdeposePorteGroup(): FormGroup {
     return this.fb.group({
-      quantite_portes_simples_creuse: ['', Validators.required],
-      quantite_portes_doubles_creuses: ['',Validators.required ],
-      quantite_porte_simple_plein: ['', Validators.required],
-      quantite_porte_double_pleine: ['', Validators.required],
+      quantite_portes_simples_creuse: [0, this.is_active_Tp2 ? Validators.required : null],
+      quantite_portes_doubles_creuses: [0, this.is_active_Tp2 ? Validators.required : null],
+      quantite_porte_simple_plein: [0, this.is_active_Tp2 ? Validators.required : null],
+      quantite_porte_double_pleine: [0, this.is_active_Tp2 ? Validators.required : null],
      
     });
   }
   createmursNonporteursGroup(): FormGroup {
     return this.fb.group({
-      longueur: ['', Validators.required],
-      hauteur: ['', Validators.required],
-      epaisseur: ['', Validators.required],
-      volume: ['', Validators.required],
+      longueur: ['', this.is_active_Tp1 ? Validators.required : null],
+      hauteur: ['', this.is_active_Tp1 ? Validators.required : null],
+      epaisseur: ['', this.is_active_Tp1 ? Validators.required : null],
+      volume: ['', this.is_active_Tp1 ? Validators.required : null],
       image: [null]
     });
     
@@ -94,11 +100,11 @@ export class DimensionsDemolitionCloisonsComponent {
   }
   createouverturePartielleGroup(): FormGroup {
     return this.fb.group({
-      longueur: ['', Validators.required],
-      hauteur: ['', Validators.required],
-      epaisseur: ['', Validators.required],
-      volume: ['', Validators.required],
-      longueur_du_mur : ['', Validators.required],
+      longueur: ['', this.is_active_Tp3 ? Validators.required : null],
+      hauteur: ['', this.is_active_Tp3 ? Validators.required : null],
+      epaisseur: ['', this.is_active_Tp3 ? Validators.required : null],
+      volume: ['', this.is_active_Tp3 ? Validators.required : null],
+      longueur_du_mur : ['', this.is_active_Tp3 ? Validators.required : null],
       image: [null]
     });
   }

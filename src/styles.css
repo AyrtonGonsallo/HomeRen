@@ -72,8 +72,8 @@ img{width: fit-content;max-width: 100%;}
   .ant-checkbox:hover span.ant-checkbox-inner{border-color:var(--color1) !important;}
   .m-b-txt{margin-bottom: 30px;}
   label span, nz-form-label label{font-size: 13px !important;font-weight: 600;font-family: 'Montserrat';}
-  .add-btn{padding: 0px 10px; background-color: var(--color2);height: 37px;cursor: pointer;margin-block: 8px;}
-  .del-btn{padding: 0px 7px !important; background-color: var(--color1)!important;height: 31px !important;cursor: pointer;margin-block: 8px;}
+  .add-btn{padding: 0px 10px; background-color: var(--color1);height: 37px;cursor: pointer;margin-block: 8px !important;}
+  .del-btn{padding: 0px 7px !important; background-color: var(--color1)!important;height: 31px !important;cursor: pointer;margin-block: 0px !important;}
 .add-btn:hover, .del-btn:hover{background-color: #000 !important;}
 .vald-btn{margin-top:30px;cursor: pointer;}
 .vald-btn, .add-btn{    
@@ -290,7 +290,8 @@ a.info-icon {
     justify-items: end;
     margin-bottom: 0px;
     margin-top: 15px;
-    border-bottom: 2px solid var(--color1);
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ffc73661;
 }
 .eltrc-div .ant-col-12{ border-top: 1px solid #e9e9e9;}
 input[type=checkbox] {width: 17px !important;height: 17px !important;}
@@ -308,21 +309,21 @@ input[type=checkbox] {width: 17px !important;height: 17px !important;}
     text-align: left;
     margin-bottom: 0px;
     margin-top: 14px;
-    border-bottom: 2px solid var(--color1);}
+    border-bottom: 1px solid #ffc73661;}
 .div-chauf-gm{
         width: 70%;
         margin: auto;
         text-align: center;
         margin-bottom: 0px;
         margin-top: 14px;
-        border-bottom: 2px solid #0000005c;}
+        border-bottom: 1px solid #ffc73661;}
 .mur-ttl{
     text-align: left !important;
     width: 100% !important;
     max-width: 100% !important;
     font-size: 16px !important;
     font-family: 'Montserrat' !important;
-    color: var(--color2) !important;
+    color: var(--color1) !important;
     font-weight: 900 !important;
 }
 label{font-family: 'Montserrat';font-weight: 600;}
@@ -352,7 +353,7 @@ form label{
 .devis-content p.ttl-dv-pc {
     margin-bottom: 20px;
 }
-.plaf-dim input{ border: 1px solid var(--color1)!important;border-radius:2px !important;}
+.plaf-dim input{ border:1px solid #e9e9e9!important;border-radius:2px !important;}
 .plaf-dim label{font-size: 13px !important;font-weight: 600;font-family: "Montserrat";}
 .flx-radio-travaux{
     width: 90% !important;
@@ -384,7 +385,7 @@ form label{
     font-size: 16px;
     font-weight: 600 !important;
 }
-.ng-untouched.ng-pristine.ng-invalid.ng-star-inserted {margin-bottom: 10px !important;}
+nz-collapse.ant-collapse {margin-bottom: 10px !important;}
 .ng-untouched.ng-pristine.ng-invalid.ng-star-inserted svg{color: #ffc736 !important;}
 .div-elec span {text-align: left !important;}
 h4.h4-demol{
@@ -405,7 +406,7 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked {
     background-color: var(--color1) !important;
     border-color: var(--color1) !important;
-    position: relative;
+    
 }
 input[type="checkbox"]:checked::before {
     content: '\2713';
@@ -557,7 +558,7 @@ button.ant-btn.ng-star-inserted:hover { background-color: var(--color2);}
         flex-wrap: nowrap;
     }
     /* .plaf-dim input{ width: 100% !important;} */
-    .del-btn{float: none;  margin: 8px 0px !important;}
+    .del-btn{float: none;  margin: 0px 0px !important;}
     form label{text-align: start !important;}
     .recap-div.devis-content { display: flex;flex-direction: column !important;}
     .recup-fin {gap: 1px !important;}
@@ -579,4 +580,10 @@ button.ant-btn.ng-star-inserted:hover { background-color: var(--color2);}
 }
 /******************************* fin *********************************************/
 
-
+.ant-steps-item.ant-steps-item-active .ant-steps-item-title, .ant-steps-item.ant-steps-item-active svg{
+    color: #ffc736 !important;
+    font-weight: bolder;
+}
+.ant-collapse > .ant-collapse-item > .ant-collapse-header{
+    flex-direction: row-reverse !important;
+}

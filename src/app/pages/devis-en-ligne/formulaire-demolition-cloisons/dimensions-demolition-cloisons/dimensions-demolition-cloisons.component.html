@@ -1,185 +1,214 @@
 <div class="plaf-dim">
-  <form [formGroup]="mursNonporteursForm" (ngSubmit)="onSubmitform1()">
 
-     <div formArrayName="mursNonporteurs">
-      <div *ngFor="let mur of mursNonporteurs.controls; let i = index" [formGroupName]="i" >
-        <div class="mur-btn-div">
-          <span class="mur-ttl">Mur non porteurs - mur {{i+1}}</span>
-        <button type="button" class="dynamic-form-button del-btn" (click)="removemursNonporteursGroup(i)" *ngIf="mursNonporteurs.length > 1">Retirer</button>
-        </div>
-        <div nz-row nzJustify="start" >
-         <div class="col-6-w">
-          <div nz-col nzSpan="6" class="ant-col">
-             <label for="longueur">Longueur (cm)<span class="error-message">*</span> : </label>
-             <input type="number" id="longueur" formControlName="longueur">
-           </div>
-           <div *ngIf="isclicked && mursNonporteurs.controls[i].get('longueur')?.invalid " class="error-message">
-              longueur requise.
-          </div>
-           <div nz-col nzSpan="6" class="ant-col">
-             <label for="hauteur">Hauteur (cm)<span class="error-message">*</span> : </label>
-             <input type="number" id="hauteur" formControlName="hauteur">
-           </div>
-           <div *ngIf="isclicked && mursNonporteurs.controls[i].get('hauteur')?.invalid " class="error-message">
-              Hauteur requise.
-            </div>
-           <div nz-col nzSpan="6" class="ant-col">
-              <label for="epaisseur">Epaisseur (cm)<span class="error-message">*</span> : </label>
-              <input type="number" id="epaisseur" formControlName="epaisseur">
-            </div>
-            <div *ngIf="isclicked && mursNonporteurs.controls[i].get('epaisseur')?.invalid " class="error-message">
-              épaisseur requise.
-            </div>
-            <div nz-col nzSpan="6" class="ant-col">
-              <label for="volume">Volume (cm³)<span class="error-message">*</span> : </label>
-              <input type="number" id="volume" formControlName="volume">
-              <a nz-tooltip [nzTooltipTitle]="tooltipVolume" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltipVolume>
-                <div class="tooltip-content">
-                  <strong>Calcul du volume :</strong><br>
-                  <p>Volume = Hauteur × Epaisseur × Longueur</p>
+  <nz-collapse>
+      <nz-collapse-panel nzHeader="Démolition murs non-porteurs" [nzActive]="is_active_Tp1" [nzExtra]="activerTp1" nzShowArrow="false">
+        
+          <form [formGroup]="mursNonporteursForm" (ngSubmit)="onSubmitform1()">
+
+            <div formArrayName="mursNonporteurs">
+             <div *ngFor="let mur of mursNonporteurs.controls; let i = index" [formGroupName]="i" >
+               <div class="mur-btn-div">
+                 <span class="mur-ttl">Démolition mur non-porteur nº{{i+1}}</span>
+               <button type="button" class="dynamic-form-button del-btn" (click)="removemursNonporteursGroup(i)" *ngIf="mursNonporteurs.length > 1">Retirer</button>
+               </div>
+               <div nz-row nzJustify="start" >
+                <div class="col-6-w">
+                 <div nz-col nzSpan="6" class="ant-col">
+                    <label for="longueur">Longueur (cm)<span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
+                    <input type="number" id="longueur" formControlName="longueur">
+                  </div>
+                  <div *ngIf="isclicked && mursNonporteurs.controls[i].get('longueur')?.invalid " class="error-message">
+                     longueur requise.
+                 </div>
+                  <div nz-col nzSpan="6" class="ant-col">
+                    <label for="hauteur">Hauteur (cm)<span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
+                    <input type="number" id="hauteur" formControlName="hauteur">
+                  </div>
+                  <div *ngIf="isclicked && mursNonporteurs.controls[i].get('hauteur')?.invalid " class="error-message">
+                     Hauteur requise.
+                   </div>
+                  <div nz-col nzSpan="6" class="ant-col">
+                     <label for="epaisseur">Epaisseur (cm)<span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
+                     <input type="number" id="epaisseur" formControlName="epaisseur">
+                   </div>
+                   <div *ngIf="isclicked && mursNonporteurs.controls[i].get('epaisseur')?.invalid " class="error-message">
+                     épaisseur requise.
+                   </div>
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="volume">Volume (cm³)<span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
+                     <input type="number" id="volume" formControlName="volume">
+                     <a nz-tooltip [nzTooltipTitle]="tooltipVolume" href="javascript:void(0)" class="info-icon">
+                       <i class="far fa-question-circle"></i>
+                     </a>
+                     <ng-template #tooltipVolume>
+                       <div class="tooltip-content">
+                         <strong>Calcul du volume :</strong><br>
+                         <p>Volume = Hauteur × Epaisseur × Longueur</p>
+                       </div>
+                     </ng-template>
+                   </div>
+                   <div *ngIf="isclicked && mursNonporteurs.controls[i].get('volume')?.invalid " class="error-message">
+                     volume requis.
+                   </div>
+                  
+                  <div nz-col nzSpan="6" class="ant-col"> 
+                    <label for="image">Image : </label>
+                    <input type="file" id="image" (change)="onmursNonporteursFileChange($event, i)" accept="image/*">
+                    <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
+                     <i class="far fa-question-circle"></i>
+                   </a>
+                   <ng-template #tooltipImage>
+                     <div class="tooltip-content">
+                       <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
+                     </div>
+                   </ng-template> 
+                 </div>
+               </div>
                 </div>
-              </ng-template>
-            </div>
-            <div *ngIf="isclicked && mursNonporteurs.controls[i].get('volume')?.invalid " class="error-message">
-              volume requis.
-            </div>
-           
-           <div nz-col nzSpan="6" class="ant-col"> 
-             <label for="image">Image : </label>
-             <input type="file" id="image" (change)="onmursNonporteursFileChange($event, i)" accept="image/*">
-             <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
-              <i class="far fa-question-circle"></i>
-            </a>
-            <ng-template #tooltipImage>
-              <div class="tooltip-content">
-                <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
               </div>
-            </ng-template> 
+             </div>
+              
+            <button type="button"  class="dynamic-form-button add-btn" (click)="addmursNonporteursGroup()" *ngIf="mursNonporteurs.length < 5" >Ajouter un mur <span nz-icon nzType="plus" nzTheme="outline"></span></button>
+          </form>
+        
+      </nz-collapse-panel>
+      <nz-collapse-panel nzHeader="Dépose de portes" [nzActive]="is_active_Tp2" [nzExtra]="activerTp2" nzShowArrow="false">
+        <form [formGroup]="deposePorteForm" (ngSubmit)="onSubmitform2()">
+          <div class="col-12-w">
+              <div nz-row nzJustify="start">
+                <div class="mur-btn-div">
+                  <span class="mur-ttl">Dépose de portes</span>
+              </div>
+                  <div nz-col nzSpan="12" class="ant-col">
+                         
+                      <label for="quantite_portes_simples_creuse">Nombre de porte(s) simple(s) (creuse) <span class="error-message" *ngIf="is_active_Tp2">*</span> : </label>
+                      <input type="number" id="quantite_portes_simples_creuse" formControlName="quantite_portes_simples_creuse">
+                  </div>
+                  <div *ngIf="isclicked && deposePorteForm.get('quantite_portes_simples_creuse')?.invalid " class="error-message">
+                      quantité requise.
+                  </div>
+                  <div nz-col nzSpan="12" class="ant-col">
+                      <label for="quantite_portes_doubles_creuses">Nombre de porte(s) double(s) (creuse) <span class="error-message" *ngIf="is_active_Tp2">*</span> : </label>
+                      <input type="number" id="quantite_portes_doubles_creuses" formControlName="quantite_portes_doubles_creuses">
+                  </div>
+                  <div *ngIf="isclicked && deposePorteForm.get('quantite_portes_doubles_creuses')?.invalid " class="error-message">
+                      quantité requise.
+                  </div>
+                  <div nz-col nzSpan="12" class="ant-col">
+                      <label for="quantite_porte_simple_plein">Nombre de porte(s) simple(s) (pleine) <span class="error-message" *ngIf="is_active_Tp2">*</span> :  </label>
+                      <input type="number" id="quantite_porte_simple_plein" formControlName="quantite_porte_simple_plein">
+                  </div>
+                  <div *ngIf="isclicked && deposePorteForm.get('quantite_porte_simple_plein')?.invalid " class="error-message">
+                      quantité requise.
+                  </div>
+                  <div nz-col nzSpan="12" class="ant-col">
+                      <label for="quantite_porte_double_pleine">Nombre de porte(s) double(s) (pleine) <span class="error-message" *ngIf="is_active_Tp2">*</span> :  </label>
+                      <input type="number" id="quantite_porte_double_pleine" formControlName="quantite_porte_double_pleine">
+                  </div>
+                  <div *ngIf="isclicked && deposePorteForm.get('quantite_porte_double_pleine')?.invalid " class="error-message">
+                      quantité requise.
+                  </div>
+              </div>
           </div>
-        </div>
-         </div>
-       </div>
-      </div>
-       
-     <button type="button"  class="dynamic-form-button add-btn" (click)="addmursNonporteursGroup()" *ngIf="mursNonporteurs.length < 5" >Ajouter un mur</button>
-   </form>
+        </form>
+      </nz-collapse-panel>
+      <nz-collapse-panel nzHeader="Ouverture partielle murs non-porteurs" [nzActive]="is_active_Tp3" [nzExtra]="activerTp3" nzShowArrow="false">
+        <form [formGroup]="ouverturePartielleForm" (ngSubmit)="onSubmitform3()">
+
+          <div formArrayName="ouverturePartielle">
+           <div *ngFor="let mur of ouverturePartielle.controls; let i = index" [formGroupName]="i" >
+             <div class="mur-btn-div">
+               <span class="mur-ttl">Ouverture partielle mur non-porteur nº{{i+1}}</span>
+               <button type="button" class="dynamic-form-button del-btn" (click)="removeouverturePartielleGroup(i)" *ngIf="ouverturePartielle.length > 1">Retirer</button>
+             </div>
+             <div nz-row nzJustify="start" >
+               <div class="col-6-w">
+               <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                  <label for="longueur">Longueur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
+                  <input type="number" id="longueur" formControlName="longueur">
+                </div>
+                <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur')?.invalid " class="error-message">
+                   longueur requise.
+               </div>
+                <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                  <label for="hauteur">Hauteur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
+                  <input type="number" id="hauteur" formControlName="hauteur">
+                </div>
+                <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur')?.invalid " class="error-message">
+                   Hauteur requise.
+                 </div>
+                <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                   <label for="epaisseur">Epaisseur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
+                   <input type="number" id="epaisseur" formControlName="epaisseur">
+                 </div>
+                 <div *ngIf="isclicked && ouverturePartielle.controls[i].get('epaisseur')?.invalid " class="error-message">
+                   Epaisseur requise.
+                 </div>
+                 <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                   <label for="volume">Volume (cm³)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
+                   <input type="number" id="volume" formControlName="volume">
+                   <a nz-tooltip [nzTooltipTitle]="tooltipVolume" href="javascript:void(0)" class="info-icon">
+                     <i class="far fa-question-circle"></i>
+                   </a>
+                   <ng-template #tooltipVolume>
+                     <div class="tooltip-content">
+                       <strong>Calcul du volume :</strong><br>
+                       <p>Volume = Hauteur × Epaisseur × Longueur</p>
+                     </div>
+                   </ng-template>
+                 </div>
+                 <div *ngIf="isclicked && ouverturePartielle.controls[i].get('volume')?.invalid " class="error-message">
+                   Volume requis.
+                 </div>
+                 <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                   <label for="longueur_du_mur">Longueur du mur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
+                   <input type="number" id="longueur_du_mur" formControlName="longueur_du_mur"> 
+                 </div>
+                 <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur_du_mur')?.invalid " class="error-message">
+                   Longueur du mur requis.
+                 </div>
+     
+                <div nz-col nzSpan="6" class="tooltip-srf etat-srf"> 
+                  <label for="image">Image : </label>
+                  <input type="file" id="image" (change)="onouverturePartielleFileChange($event, i)" accept="image/*">
+                  <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
+                   <i class="far fa-question-circle"></i>
+                 </a>
+                 <ng-template #tooltipImage>
+                   <div class="tooltip-content">
+                     <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
+                   </div>
+                 </ng-template>
+                </div>
+               </div>
+              </div>
+            </div>
+           </div>
+            
+          <button type="button"  class="dynamic-form-button add-btn" (click)="addouverturePartielleGroup()" *ngIf="ouverturePartielle.length < 5" >Ajouter une ouverture <span nz-icon nzType="plus" nzTheme="outline"></span></button>
+        </form>
+      </nz-collapse-panel>
+  </nz-collapse>
+  <ng-template #activerTp1>
+    <label nz-checkbox [(ngModel)]="is_active_Tp1">
+      
+    </label>
+  </ng-template>
+  <ng-template #activerTp2>
+    <label nz-checkbox [(ngModel)]="is_active_Tp2">
+      
+    </label>
+  </ng-template>
+  <ng-template #activerTp3>
+    <label nz-checkbox [(ngModel)]="is_active_Tp3">
+      
+    </label>
+  </ng-template>
+  
 
 
-   <form [formGroup]="deposePorteForm" (ngSubmit)="onSubmitform2()">
-      <div class="col-12-w">
-          <div nz-row nzJustify="start">
-            <div class="mur-btn-div">
-              <span class="mur-ttl">Dépose de porte</span>
-          </div>
-              <div nz-col nzSpan="12" class="ant-col">
-                     
-                  <label for="quantite_portes_simples_creuse">Nombre de porte(s) simple(s) (creuse) <span class="error-message">*</span> : </label>
-                  <input type="number" id="quantite_portes_simples_creuse" formControlName="quantite_portes_simples_creuse">
-              </div>
-              <div *ngIf="isclicked && deposePorteForm.get('quantite_portes_simples_creuse')?.invalid " class="error-message">
-                  quantité requise.
-              </div>
-              <div nz-col nzSpan="12" class="ant-col">
-                  <label for="quantite_portes_doubles_creuses">Nombre de porte(s) double(s) (creuse) <span class="error-message">*</span> : </label>
-                  <input type="number" id="quantite_portes_doubles_creuses" formControlName="quantite_portes_doubles_creuses">
-              </div>
-              <div *ngIf="isclicked && deposePorteForm.get('quantite_portes_doubles_creuses')?.invalid " class="error-message">
-                  quantité requise.
-              </div>
-              <div nz-col nzSpan="12" class="ant-col">
-                  <label for="quantite_porte_simple_plein">Nombre de porte(s) simple(s) (pleine) <span class="error-message">*</span> :  </label>
-                  <input type="number" id="quantite_porte_simple_plein" formControlName="quantite_porte_simple_plein">
-              </div>
-              <div *ngIf="isclicked && deposePorteForm.get('quantite_porte_simple_plein')?.invalid " class="error-message">
-                  quantité requise.
-              </div>
-              <div nz-col nzSpan="12" class="ant-col">
-                  <label for="quantite_porte_double_pleine">Nombre de porte(s) double(s) (pleine) <span class="error-message">*</span> :  </label>
-                  <input type="number" id="quantite_porte_double_pleine" formControlName="quantite_porte_double_pleine">
-              </div>
-              <div *ngIf="isclicked && deposePorteForm.get('quantite_porte_double_pleine')?.invalid " class="error-message">
-                  quantité requise.
-              </div>
-          </div>
-      </div>
-  </form>
+   
 
   
-  <form [formGroup]="ouverturePartielleForm" (ngSubmit)="onSubmitform3()">
-
-     <div formArrayName="ouverturePartielle">
-      <div *ngFor="let mur of ouverturePartielle.controls; let i = index" [formGroupName]="i" >
-        <div class="mur-btn-div">
-          <span class="mur-ttl">Ouverture partielle - Ouverture {{i+1}}</span>
-          <button type="button" class="dynamic-form-button del-btn" (click)="removeouverturePartielleGroup(i)" *ngIf="ouverturePartielle.length > 1">Retirer</button>
-        </div>
-        <div nz-row nzJustify="start" >
-          <div class="col-6-w">
-          <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-             <label for="longueur">Longueur (cm)<span class="error-message">*</span> : </label>
-             <input type="number" id="longueur" formControlName="longueur">
-           </div>
-           <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur')?.invalid " class="error-message">
-              longueur requise.
-          </div>
-           <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-             <label for="hauteur">Hauteur (cm)<span class="error-message">*</span> : </label>
-             <input type="number" id="hauteur" formControlName="hauteur">
-           </div>
-           <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur')?.invalid " class="error-message">
-              Hauteur requise.
-            </div>
-           <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-              <label for="epaisseur">Epaisseur (cm)<span class="error-message">*</span> : </label>
-              <input type="number" id="epaisseur" formControlName="epaisseur">
-            </div>
-            <div *ngIf="isclicked && ouverturePartielle.controls[i].get('epaisseur')?.invalid " class="error-message">
-              Epaisseur requise.
-            </div>
-            <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-              <label for="volume">Volume (cm³)<span class="error-message">*</span> : </label>
-              <input type="number" id="volume" formControlName="volume">
-              <a nz-tooltip [nzTooltipTitle]="tooltipVolume" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltipVolume>
-                <div class="tooltip-content">
-                  <strong>Calcul du volume :</strong><br>
-                  <p>Volume = Hauteur × Epaisseur × Longueur</p>
-                </div>
-              </ng-template>
-            </div>
-            <div *ngIf="isclicked && ouverturePartielle.controls[i].get('volume')?.invalid " class="error-message">
-              Volume requis.
-            </div>
-            <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-              <label for="longueur_du_mur">Longueur du mur (cm)<span class="error-message">*</span> :  </label>
-              <input type="number" id="longueur_du_mur" formControlName="longueur_du_mur"> 
-            </div>
-            <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur_du_mur')?.invalid " class="error-message">
-              Longueur du mur requis.
-            </div>
-
-           <div nz-col nzSpan="6" class="tooltip-srf etat-srf"> 
-             <label for="image">Image : </label>
-             <input type="file" id="image" (change)="onouverturePartielleFileChange($event, i)" accept="image/*">
-             <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
-              <i class="far fa-question-circle"></i>
-            </a>
-            <ng-template #tooltipImage>
-              <div class="tooltip-content">
-                <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
-              </div>
-            </ng-template>
-           </div>
-          </div>
-         </div>
-       </div>
-      </div>
-       
-     <button type="button"  class="dynamic-form-button add-btn" (click)="addouverturePartielleGroup()" *ngIf="ouverturePartielle.length < 5" >Ajouter une ouverture</button>
-   </form>
+  
 </div>

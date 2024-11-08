@@ -7,13 +7,18 @@
         
         <div formArrayName="appareils_electrique" class="">
           <div *ngFor="let appareilGroup of appareils_electrique; let i = index" [formGroupName]="i">
-            <div *ngIf="appareils_electrique[i].ID!=27 || (renovationElectriqueForm.get('chauffage_exist')?.value==true && appareils_electrique[i].ID==27)">
-              <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getrenovationElectrique_form.controls[i].get(appareilGroup.Titre + ' modele')?.invalid" class="error-message">
-                Vous devez faire un choix.
-              </div>
+            <div *ngIf="appareils_electrique[i].ID!=27 || (renovationElectriqueForm.get('chauffage_exist')?.value=='true' && appareils_electrique[i].ID==27)">
+              
               <nz-collapse nzAccordion >
-                  <nz-collapse-panel nzHeader="Modèles - {{appareils_electrique && appareils_electrique[i] ? appareils_electrique[i].Titre : ''}}" [nzActive]="false">
-                      <nz-radio-group formControlName="modele" class="radio-flx-spc">
+                  <nz-collapse-panel nzHeader="Modèles - {{appareils_electrique && appareils_electrique[i] ? appareils_electrique[i].Titre : ''}}" [nzActive]="getAppareilActiveState(i)" [nzExtra]="activerTp" nzShowArrow="false">
+                    <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getAppareilNombreState(i)" class="error-message">
+                      Vous devez faire un choix.
+                    </div>
+                    <div class="div-mur-gm" style="width:100%;">
+                      <span class="mur-ttl">
+                      Gamme</span> <span class="error-message" *ngIf="getAppareilActiveState(i)">*</span> : 
+                    </div>
+                    <nz-radio-group formControlName="modele" class="radio-flx-spc">
                           <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
                             <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf">
                               
@@ -42,12 +47,16 @@
                           </div>
                         </nz-radio-group>
                         <div class="col-accord-inpt">
-                          <label for="nombre">Quantité</label>
-                          <input type="number" id="nombre" formControlName="nombre">      
+                          <label for="nombre">Quantité<span class="error-message" *ngIf="getAppareilActiveState(i)">*</span>: </label>
+                          <input type="number" id="nombre" formControlName="nombre" min="0">      
                         </div>  
                     </nz-collapse-panel>
               </nz-collapse>
-              
+              <ng-template #activerTp>
+                <label nz-checkbox formControlName="active">
+                  
+                </label>
+              </ng-template>
               <!-- Ajoutez d'autres champs selon vos besoins -->
             </div>
 
@@ -58,7 +67,10 @@
       
        <div nz-col nzSpan="6" class="ant-col etat-srf-accord tooltip-srf">
         <label for="chauffage_exist">Y-a-t-il un chauffage électrique ?</label>
-        <input type="checkbox" id="chauffage_exist" formControlName="chauffage_exist">      
+        <nz-radio-group formControlName="chauffage_exist" id="chauffage_exist" nzName="radiogroup" class="sidebyside">
+          <label nz-radio nzValue="true">Oui</label>
+          <label nz-radio nzValue="false">Non</label>
+        </nz-radio-group>
         <a nz-tooltip [nzTooltipTitle]="tooltipchauffelec" href="javascript:void(0)" class="info-icon">
           <i class="far fa-question-circle"></i>
         </a>

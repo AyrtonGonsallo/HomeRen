@@ -74,3 +74,6 @@ form{
 @media screen and (max-width: 600px) {
     .ant-row, .flx-pr{width: 100%; max-width: 100%; }
 }
+.sidebyside{
+    display: flex;
+}

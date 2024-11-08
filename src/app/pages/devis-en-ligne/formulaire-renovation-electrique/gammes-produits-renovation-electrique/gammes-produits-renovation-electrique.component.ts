@@ -68,7 +68,17 @@ export class GammesProduitsRenovationElectriqueComponent {
       this.renovationElectriqueForm = this.createRenovationElectriqueGroup();
     }
   }
-  
+  getAppareilActiveState(index: number): boolean {
+    return (this.renovationElectriqueForm.get('appareils_electrique') as FormArray)?.at(index).get('active')?.value;
+  }
+  getAppareilNombreState(index: number): boolean {
+    const appareilsFormArray = this.renovationElectriqueForm.get('appareils_electrique') as FormArray;
+    const nombreValue = appareilsFormArray.at(index).get('nombre')?.value;
+    const modeleValue = appareilsFormArray.at(index).get('modele')?.value;
+    let res=nombreValue !== null && nombreValue !== 0 && modeleValue !== null && modeleValue !== '';
+    // Vérifie que les valeurs de 'nombre' et 'modele' ne sont pas vides ou nulles
+    return !res;
+  }
   appareils_electrique:Equipement[]=[]
   load_gammes(){
     this.userService.getEquipementsByType ("electrique").subscribe(
@@ -80,42 +90,38 @@ export class GammesProduitsRenovationElectriqueComponent {
         );        
         console.log("réponse de la requette  getEquipementsByType:electrique",this.appareils_electrique);
         this.appareils_electrique.forEach(appareil => {
-          if(appareil.ID==24){//Goulotte 24
+          
             const modeleEquipements = appareil.ModeleEquipements;
             // Créer un FormGroup pour chaque appareil
             const appareilGroup = this.fb.group({});
-            appareilGroup.addControl("nombre", this.fb.control("", Validators.required));
-            appareilGroup.addControl("modele", this.fb.control("", Validators.required));
-            // Ajouter le FormGroup de l'appareil au FormArray
-            (this.renovationElectriqueForm.get('appareils_electrique') as FormArray).push(appareilGroup);
-          }
-          else if(appareil.ID==25){//Encastré béton 25
-            const modeleEquipements = appareil.ModeleEquipements;
-            // Créer un FormGroup pour chaque appareil
-            const appareilGroup = this.fb.group({});
-            appareilGroup.addControl("nombre", this.fb.control("", Validators.required));
-            appareilGroup.addControl("modele", this.fb.control("", Validators.required));
-            // Ajouter le FormGroup de l'appareil au FormArray
-            (this.renovationElectriqueForm.get('appareils_electrique') as FormArray).push(appareilGroup);
-          }
-          else if(appareil.ID==26){//Encastré cloison légere	 26
-            const modeleEquipements = appareil.ModeleEquipements;
-            // Créer un FormGroup pour chaque appareil
-            const appareilGroup = this.fb.group({});
-            appareilGroup.addControl("nombre", this.fb.control("", Validators.required));
-            appareilGroup.addControl("modele", this.fb.control("", Validators.required));
-            // Ajouter le FormGroup de l'appareil au FormArray
-            (this.renovationElectriqueForm.get('appareils_electrique') as FormArray).push(appareilGroup);
-          }
-          else if(appareil.ID==27){//Chauffage électrique	 27
-            const modeleEquipements = appareil.ModeleEquipements;
-            // Créer un FormGroup pour chaque appareil
-            const appareilGroup = this.fb.group({});
-            appareilGroup.addControl("nombre", this.fb.control("", ));
+            appareilGroup.addControl("nombre", this.fb.control(0, ));
             appareilGroup.addControl("modele", this.fb.control("", ));
+            appareilGroup.addControl("active", this.fb.control(false, ));
+           
+
+            // Obtenez les contrôles pour pouvoir les manipuler
+            const nombreControl = appareilGroup.get('nombre');
+            const modeleControl = appareilGroup.get('modele');
+            const activeControl = appareilGroup.get('active');
+
+            // Abonnez-vous aux changements de la valeur de 'active'
+            activeControl?.valueChanges.subscribe((isActive: boolean) => {
+              if (isActive) {
+                // Si 'active' est true, ajouter les validateurs
+                nombreControl?.setValidators(Validators.required);
+                modeleControl?.setValidators(Validators.required);
+              } else {
+                // Sinon, supprimer les validateurs
+                nombreControl?.clearValidators();
+                modeleControl?.clearValidators();
+              }
+              // Mettre à jour la validation pour forcer la vérification des erreurs
+              nombreControl?.updateValueAndValidity();
+              modeleControl?.updateValueAndValidity();
+            });
             // Ajouter le FormGroup de l'appareil au FormArray
             (this.renovationElectriqueForm.get('appareils_electrique') as FormArray).push(appareilGroup);
-          }
+          
             
         });
        

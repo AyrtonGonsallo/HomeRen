@@ -1,144 +1,134 @@
 
-            <form [formGroup]="poseSolForm" (ngSubmit)="onPoseSolSubmit()">
-               <div nz-row nzJustify="start" class="flx-pr" >
-                  <!-- Gamme Section -->
-     <!-- Common template for multiple option lists -->
-     <div nz-col nzSpan="24" class="ant-col etat-srf tooltip-srf">
-     <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
-      Gamme - Parquet massif</span> 
-    </div>
-    <nz-radio-group formControlName="gamme" class="radio-flx-spc">
-       <div *ngFor="let option of gammes_parquet_m" class="parquet-option">
-         <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
-           <span>{{ option.Label }}</span>
-         </label>
-         <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-           <i class="far fa-question-circle"></i>
-         </a>
-         <ng-template #tooltipTemplate>
-           Pour plus d'informations, veuillez consulter :
-           <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-         </ng-template>
-       </div>
-      </nz-radio-group>
-      </div>
-       <div nz-col nzSpan="24" class="ant-col etat-srf tooltip-srf">
-       <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
-        Gamme - Parquet flottant finition bois</span> 
-      </div>
-      <nz-radio-group formControlName="gamme" class="radio-flx-spc">
-      <div *ngFor="let option of gammes_parquet_b" class="parquet-option">
-        <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
-          <span>{{ option.Label }}</span>
-        </label>
-        <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-          <i class="far fa-question-circle"></i>
-        </a>
-        <ng-template #tooltipTemplate>
-          Pour plus d'informations, veuillez consulter :
-          <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-        </ng-template>
-      </div>
-    </nz-radio-group>
-    </div>
-      <!-- Parquet flottant Section -->
+  <form [formGroup]="poseSolForm" (ngSubmit)="onPoseSolSubmit()">
+    <div nz-row nzJustify="start" class="flx-pr" >
+        
       <div nz-col nzSpan="24" class="ant-col etat-srf tooltip-srf">
-      <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
-        Gamme - Parquet flottant finition stratifiée </span> 
+        
+        <nz-radio-group formControlName="gamme" class="radio-flx-spc">
+          <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
+            Gamme - Parquet massif</span> 
+          </div>
+          <div *ngFor="let option of gammes_parquet_m" class="parquet-option">
+            <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+              <span>{{ option.Label }}</span>
+            </label>
+            <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+              <i class="far fa-question-circle"></i>
+            </a>
+            <ng-template #tooltipTemplate>
+              Pour plus d'informations, veuillez consulter :
+              <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+            </ng-template>
+          </div>
+          
+          <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
+            Gamme - Parquet flottant finition bois</span> 
+          </div>
+          <div *ngFor="let option of gammes_parquet_b" class="parquet-option">
+            <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+              <span>{{ option.Label }}</span>
+            </label>
+            <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+              <i class="far fa-question-circle"></i>
+            </a>
+            <ng-template #tooltipTemplate>
+              Pour plus d'informations, veuillez consulter :
+              <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+            </ng-template>
+          </div>
+        
+
+          <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
+            Gamme - Parquet flottant finition stratifiée </span> 
+          </div>
+          <div *ngFor="let option of gammes_parquet_pffs" class="parquet-option">
+            <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+              <span>{{ option.Label }}</span>
+            </label>
+            <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+              <i class="far fa-question-circle"></i>
+            </a>
+            <ng-template #tooltipTemplate>
+              Pour plus d'informations, veuillez consulter :
+              <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+            </ng-template>
+          </div>
+
+          <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
+            Gamme - Carrelage </span> 
+          </div>
+          <div *ngFor="let option of gammes_carrelage" class="parquet-option">
+            <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+              <span>{{ option.Label }}</span>
+            </label>
+            <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+              <i class="far fa-question-circle"></i>
+            </a>
+            <ng-template #tooltipTemplate>
+              Pour plus d'informations, veuillez consulter :
+              <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+            </ng-template>
+          </div>
+
+          
+          <div class="parquet-option radio-flx-spc">
+            <label nz-radio [nzValue]="gamme_pvc?.ID + ':' + gamme_pvc?.Prix">
+              <span>Sol PVC</span>
+            </label>
+            <a *ngIf="gamme_pvc?.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplatePVC" href="javascript:void(0)" class="pdf-icon">
+              <i class="far fa-question-circle"></i>
+            </a>
+            <ng-template #tooltipTemplatePVC>
+              Pour plus d'informations, veuillez consulter :
+              <a [href]="baseurl + gamme_pvc?.Pdf" target="_blank" class="link-tooltip">PDF</a>
+            </ng-template>
+          </div>
+  
+          
+          <div class="parquet-option radio-flx-spc">
+            <label nz-radio [nzValue]="gamme_moquette?.ID + ':' + gamme_moquette?.Prix">
+              <span>Moquette</span>
+            </label>
+            <a *ngIf="gamme_moquette?.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplateMoquette" href="javascript:void(0)" class="pdf-icon">
+              <i class="far fa-question-circle"></i>
+            </a>
+            <ng-template #tooltipTemplateMoquette>
+              Pour plus d'informations, veuillez consulter :
+              <a [href]="baseurl + gamme_moquette?.Pdf" target="_blank" class="link-tooltip">PDF</a>
+            </ng-template>
+          </div> 
+        </nz-radio-group> 
       </div>
-      <nz-radio-group formControlName="gamme" class="radio-flx-spc">
-      <div *ngFor="let option of gammes_parquet_pffs" class="parquet-option">
-        <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
-          <span>{{ option.Label }}</span>
-        </label>
-        <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-          <i class="far fa-question-circle"></i>
-        </a>
-        <ng-template #tooltipTemplate>
-          Pour plus d'informations, veuillez consulter :
-          <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-        </ng-template>
+
+      <div *ngIf="isclicked && poseSolForm.get('gamme')?.invalid" class="error-message">
+        Les gammes sont requises.
       </div>
-    </nz-radio-group>
-    </div>
-      <!-- Carrelage Section -->
+    
+      
+      <!-- Plinthes Section -->
       <div nz-col nzSpan="24" class="ant-col etat-srf tooltip-srf">
-       <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
-        Gamme - Carrelage </span> 
+        
+        <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
+          Gamme - Plinthes </span> 
+        </div>
+        <nz-radio-group formControlName="plinthes" class="radio-flx-spc">
+          <div *ngFor="let option of gammes_plithes" class="parquet-option">
+            <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+              <span>{{ option.Label }}</span>
+            </label>
+            <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+              <i class="far fa-question-circle"></i>
+            </a>
+            <ng-template #tooltipTemplate>
+              Pour plus d'informations, veuillez consulter :
+              <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+            </ng-template>
+          </div>
+        </nz-radio-group>
       </div>
-      <nz-radio-group formControlName="gamme" class="radio-flx-spc">
-      <div *ngFor="let option of gammes_carrelage" class="parquet-option">
-        <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
-          <span>{{ option.Label }}</span>
-        </label>
-        <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-          <i class="far fa-question-circle"></i>
-        </a>
-        <ng-template #tooltipTemplate>
-          Pour plus d'informations, veuillez consulter :
-          <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-        </ng-template>
-      </div>
-     
-     <!-- Special cases for Sol PVC and Moquette -->
-     <div class="parquet-option radio-flx-spc">
-       <label nz-radio [nzValue]="gamme_pvc?.ID + ':' + gamme_pvc?.Prix">
-         <span>Sol PVC</span>
-       </label>
-       <a *ngIf="gamme_pvc?.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplatePVC" href="javascript:void(0)" class="pdf-icon">
-         <i class="far fa-question-circle"></i>
-       </a>
-       <ng-template #tooltipTemplatePVC>
-         Pour plus d'informations, veuillez consulter :
-         <a [href]="baseurl + gamme_pvc?.Pdf" target="_blank" class="link-tooltip">PDF</a>
-       </ng-template>
-     </div>
- 
-     <div class="parquet-option radio-flx-spc">
-       <label nz-radio [nzValue]="gamme_moquette?.ID + ':' + gamme_moquette?.Prix">
-         <span>Moquette</span>
-       </label>
-       <a *ngIf="gamme_moquette?.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplateMoquette" href="javascript:void(0)" class="pdf-icon">
-         <i class="far fa-question-circle"></i>
-       </a>
-       <ng-template #tooltipTemplateMoquette>
-         Pour plus d'informations, veuillez consulter :
-         <a [href]="baseurl + gamme_moquette?.Pdf" target="_blank" class="link-tooltip">PDF</a>
-       </ng-template>
-   </div> 
-  </nz-radio-group> 
-  </div>
 
-  
-   <div *ngIf="isclicked && poseSolForm.get('gamme')?.invalid" class="error-message">
-     Les gammes sont requises.
-   </div>
-
- 
- <!-- Plinthes Section -->
- <div nz-col nzSpan="24" class="ant-col etat-srf tooltip-srf">
-  
-   <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
-    Gamme - Plinthes </span> 
-  </div>
-   <nz-radio-group formControlName="plinthes" class="radio-flx-spc">
-     <div *ngFor="let option of gammes_plithes" class="parquet-option">
-       <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
-         <span>{{ option.Label }}</span>
-       </label>
-       <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-         <i class="far fa-question-circle"></i>
-       </a>
-       <ng-template #tooltipTemplate>
-         Pour plus d'informations, veuillez consulter :
-         <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-       </ng-template>
-     </div>
-   </nz-radio-group>
- </div>
- 
-               
-                  
-               </div>
-              
-             </form>
+      
+        
+    </div>
+    
+  </form>

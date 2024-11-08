@@ -1,9 +1,9 @@
 <div  class="recap-div devis-content">
     <span class="recup-fin"><p>Y-a-t-il un chauffage électrique?</p><p>:</p><p>{{get_label(chauffage_exist)}}</p></span>
     <div *ngFor="let appareil of appareils">
-        <div >
-            <span class="recup-fin"><p>titre</p><p>:</p><p>{{get_title(appareil.modele)}}</p></span>
-            <span class="recup-fin"><p>nombre</p><p>:</p><p>{{appareil.nombre}}</p></span>
+        <div *ngIf="appareil.active">
+            <span class="recup-fin"><p>{{get_title(appareil.modele)}}</p></span>
+            <span class="recup-fin"><p>Nombre</p><p>:</p><p>{{appareil.nombre}}</p></span>
            
         </div>
         

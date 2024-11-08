@@ -8,6 +8,6 @@
         <span class="mur-ttl">Radiateur {{i+1}}</span>
         <div>
         <span class="recup-fin"><p>Etat des surfaces</p><p>:</p><p>{{form_surfaces.radiateurs[i].etat}}</p></span>
-        <span class="recup-fin"><p>Gamme</p><p>:</p><p>{{get_title(form_gammes.radiateurs[i].gamme)}}</p></span>
+        <span class="recup-fin" *ngIf="form_gammes.radiateurs[i].visible"><p>Gamme</p><p>:</p><p>{{get_title(form_gammes.radiateurs[i].gamme)}}</p></span>
         </div>
 </div>

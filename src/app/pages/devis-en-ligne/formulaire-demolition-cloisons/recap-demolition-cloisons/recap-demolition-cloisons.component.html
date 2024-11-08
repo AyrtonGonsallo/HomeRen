@@ -1,7 +1,7 @@
 <div  class="recap-div devis-content">
     <span style="font-size: 16px;text-align: left !important;font-weight: 900;color: #555555;height: 40px;" class="recup-fin">{{selectedPiece.Titre}}</span>
     
-<div class="recap-last">
+<div class="recap-last" *ngIf="demolition_murs_choisie">
     <div class="recap-mur-ttl">Murs non porteurs</div>
     <div *ngFor="let dim of dimensions_murs_non_porteurs; let i = index" class="recup-mur-flx">
         <span class="mur-ttl">Mur {{i+1}}</span>
@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<div class="recap-last">
+<div class="recap-last" *ngIf="portes_choisies">
     <div class="recap-mur-ttl">Pose de portes</div>
     <div class="recup-mur-flx">
         <div class="vide"></div>
@@ -29,7 +29,7 @@
 </div>
 
 
-<div class="recap-last">
+<div class="recap-last" *ngIf="ouverture_choisie">
     <div class="recap-mur-ttl">Ouverture Partielle</div>
     <div *ngFor="let dim of dimensions_ouverture; let i = index" class="recup-mur-flx">
         <span class="mur-ttl">Ouverture {{i+1}}</span>

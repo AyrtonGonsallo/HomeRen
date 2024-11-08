@@ -17,6 +17,9 @@ export class RecapDemolitionCloisonsComponent {
   quantite_portes_doubles_creuses: any;
   quantite_porte_simple_plein: any;
   quantite_porte_double_pleine: any;
+  ouverture_choisie=false
+  portes_choisies=false
+  demolition_murs_choisie=false
   form:any
   constructor(
     private gestiondesdevisService: GestionDesDevisService,
@@ -31,7 +34,9 @@ export class RecapDemolitionCloisonsComponent {
     this.dimensions_ouverture=this.form["dimensions-murs-non-porteurs"]["ouverturePartielle"];
     this.gammes_cloison=this.form["gammes-produits-murs-non-porteurs"]["ouverturepartielles"];
     this.gammes_materiaux=this.form["gammes-produits-murs-non-porteurs"]["mursnonporteurs"];
-   
+   this.ouverture_choisie=this.form["gammes-produits-murs-non-porteurs"]["ouverturepartielles_choisis"];
+   this.demolition_murs_choisie=this.form["gammes-produits-murs-non-porteurs"]["mursnonporteurs_choisis"];
+   this.portes_choisies=this.form["gammes-produits-murs-non-porteurs"]["portes_choisis"];
     /* this.gammes = this.gestiondesdevisService.getFormulaireByName("murs-non-porteurs").formulaire["gammes-produits-murs-non-porteurs"].gammes;
     console.log(this.gammes );
     this.elements_hauts = this.gestiondesdevisService.getFormulaireByName("murs-non-porteurs").formulaire["dimensions-murs-non-porteurs"].elementcuisines_haut;

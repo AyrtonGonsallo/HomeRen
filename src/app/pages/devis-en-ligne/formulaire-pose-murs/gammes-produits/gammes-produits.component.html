@@ -3,7 +3,7 @@
 
   <div formArrayName="murs">
     <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
-      <div class="div-mur-gm"><span class="mur-ttl">Mur {{i+1}}</span> - <label for="gamme" class="mur-ttl">Gamme </label></div>
+      <div class="div-mur-gm"><span class="mur-ttl">Mur {{i+1}}</span><span class="mur-ttl"> - </span><label for="gamme" class="mur-ttl">Gamme </label></div>
       <div nz-row nzJustify="start">
         <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
           
