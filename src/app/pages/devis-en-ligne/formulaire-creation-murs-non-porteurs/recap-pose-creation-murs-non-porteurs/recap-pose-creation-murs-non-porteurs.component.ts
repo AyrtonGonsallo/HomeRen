@@ -13,7 +13,7 @@ export class RecapPoseCreationMursNonPorteursComponent {
   
   constructor(private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
     this.cmnpForm=this.gestiondesdevisService.getFormulaireByName("creation-murs-non-porteurs")
-    console.log("recap: ",this.cmnpForm);
+    console.log("recap creation murs non porteurs : ",this.cmnpForm);
     
     
    

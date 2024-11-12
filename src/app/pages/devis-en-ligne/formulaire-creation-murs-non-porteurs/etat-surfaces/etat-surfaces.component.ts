@@ -34,10 +34,12 @@ formulaire_dimensions_length:number=0
 get murs_non_porteurs(): FormArray {
   return this.poseMursNonPorteursForm.get('murs_non_porteurs') as FormArray;
 }
-isAutreType: boolean = false;
-onTypeChange(value: string) {
-  this.isAutreType = (value === 'Autre type de cloison');
+ // Check if "Autre type de cloison" is selected
+ isAutreType(index: number): boolean {
+  const mur = this.murs_non_porteurs.at(index);
+  return mur.get('type_cloison')?.value === 'Autre type de cloison';
 }
+
 addMurNonPorteurroup(): void {
   if (this.murs_non_porteurs.length < 5) {
     this.murs_non_porteurs.push(this.createposeMurNonPorteurroup());
@@ -65,17 +67,37 @@ createposeMurNonPorteurroup(): FormGroup {
     autre_type_cloison: ['', ],
   });
 }
+prec_formulaire_etat_surfaces:any
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-  this.poseMursNonPorteursForm = this.fb.group({
-    murs_non_porteurs: this.fb.array([this.createposeMurNonPorteurroup()])
-  });
-  this.formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-creation-murs-non-porteurs--murs")
-  this.formulaire_dimensions_length=this.formulaire_dimensions.formulaire.murs_non_porteurs.length
-  for(let i=0;i<(this.formulaire_dimensions_length-1);i++){
-    this.addMurNonPorteurroup()
+
+  this.prec_formulaire_etat_surfaces=this.gestiondesdevisService.getFormulaireByName("etat-surfaces-creation-murs-non-porteurs--murs")
+  if(this.prec_formulaire_etat_surfaces){
+    let form=this.prec_formulaire_etat_surfaces.formulaire
+    this.poseMursNonPorteursForm = this.fb.group({
+      murs_non_porteurs: this.fb.array([])
+    });
+    const mursArray = this.poseMursNonPorteursForm.get('murs_non_porteurs') as FormArray;
+    form.murs_non_porteurs.forEach((mursNonporteur: any) => {
+      mursArray.push(this.fb.group({
+        type_cloison: [mursNonporteur.type_cloison, Validators.required ],
+        autre_type_cloison: [mursNonporteur.autre_type_cloison, ],
+      }));
+    });
+
+
+  }else{
+    this.poseMursNonPorteursForm = this.fb.group({
+      murs_non_porteurs: this.fb.array([this.createposeMurNonPorteurroup()])
+    });
+    this.formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-creation-murs-non-porteurs--murs")
+    this.formulaire_dimensions_length=this.formulaire_dimensions.formulaire.murs_non_porteurs.length
+    for(let i=0;i<(this.formulaire_dimensions_length-1);i++){
+      this.addMurNonPorteurroup()
+    }
+    console.log("longueur: ",this.formulaire_dimensions_length)
+    console.log("formulaire: ",this.formulaire_dimensions)
   }
-  console.log("longueur: ",this.formulaire_dimensions_length)
-  console.log("formulaire: ",this.formulaire_dimensions)
+  
  
  
 }

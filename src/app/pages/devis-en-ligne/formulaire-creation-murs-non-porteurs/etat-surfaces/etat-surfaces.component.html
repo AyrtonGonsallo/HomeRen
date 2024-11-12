@@ -11,7 +11,7 @@
          
           <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
             
-            <nz-radio-group formControlName="type_cloison" (ngModelChange)="onTypeChange($event)" class="radio-flx-spc">
+            <nz-radio-group formControlName="type_cloison" class="radio-flx-spc">
               <div>
               <label nz-radio nzValue="98/48+I">98/48+I</label>
               <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
@@ -58,7 +58,7 @@
             </nz-radio-group>
             
           </div>
-          <div nz-col nzSpan="6" class="ant-col col-100-tc" id="autre_type_cloison" *ngIf="isAutreType">
+          <div nz-col nzSpan="6" class="ant-col col-100-tc" *ngIf="isAutreType(i)">
             <label for="autre_type_cloison">Autre type de cloison (préciser): </label>
             <input type="text"  formControlName="autre_type_cloison">
            

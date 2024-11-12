@@ -60,10 +60,31 @@ createposeMurNonPorteurroup(): FormGroup {
     surface: ['', Validators.required],
   });
 }
+
+prec_formulaire_dimensions:any
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-  this.poseMursNonPorteursForm = this.fb.group({
-    murs_non_porteurs: this.fb.array([this.createposeMurNonPorteurroup()])
-  });
+  this.prec_formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-creation-murs-non-porteurs--murs")
+  if(this.prec_formulaire_dimensions){
+    let form=this.prec_formulaire_dimensions.formulaire
+    this.poseMursNonPorteursForm = this.fb.group({
+      murs_non_porteurs: this.fb.array([])
+    });
+    const mursArray = this.poseMursNonPorteursForm.get('murs_non_porteurs') as FormArray;
+    form.murs_non_porteurs.forEach((mursNonporteur: any) => {
+      mursArray.push(this.fb.group({
+        surface: [mursNonporteur.surface, Validators.required ],
+        hauteur: [mursNonporteur.hauteur, Validators.required],
+      }));
+    });
+
+
+  }else{
+    this.poseMursNonPorteursForm = this.fb.group({
+      murs_non_porteurs: this.fb.array([this.createposeMurNonPorteurroup()])
+    });
+  }
+
+  
  
  
 }

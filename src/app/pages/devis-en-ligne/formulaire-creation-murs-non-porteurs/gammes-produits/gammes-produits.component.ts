@@ -24,11 +24,31 @@ export class MursNonPorteursGammesProduitsComponent {
   radioValue = 'A';
   isclicked=false
 
+  prec_formulaire_gammes:any
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
  
-  this.posePortesForm = this.fb.group({
-    portes: this.fb.array([this.createposePortesGroup()])
-  });
+  this.prec_formulaire_gammes=this.gestiondesdevisService.getFormulaireByName("gammes-produits-creation-murs-non-porteurs--portes")
+  if(this.prec_formulaire_gammes){
+    let form=this.prec_formulaire_gammes.formulaire
+    this.posePortesForm = this.fb.group({
+      portes: this.fb.array([])
+    });
+    const mursArray = this.posePortesForm.get('portes') as FormArray;
+    form.portes.forEach((porte: any) => {
+      mursArray.push(this.fb.group({
+        type: [porte.type, Validators.required ],
+      }));
+    });
+
+
+  }else{
+    this.posePortesForm = this.fb.group({
+      portes: this.fb.array([this.createposePortesGroup()])
+    });
+  }
+
+
+  
  
 }
 
