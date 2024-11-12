@@ -94,12 +94,32 @@ appareilGroup: any;
     }
     this.formValidityChange.emit(boolajouter && boolremplacer);
   }
-  
+  prec_formulaire_gamme:any
   constructor(private fb: FormBuilder,private userService: ApiConceptsEtTravauxService,private gestiondesdevisService: GestionDesDevisService) {
     
- 
-    this.appareils_a_ajouter_form = this.createAppareilsAAjouterGroup();
-    this.appareils_a_remplacer_form = this.createAppareilsARemplacerGroup();
+    this.prec_formulaire_gamme=this.gestiondesdevisService.getFormulaireByName("gammes-produits-pose-electricite")
+    if(this.prec_formulaire_gamme){
+      let form=this.prec_formulaire_gamme.formulaire
+      console.log("formulaire existant",form)
+      this.appareils_a_remplacer_form = this.fb.group({
+        qte_prises: [form.qte_prises,],
+        qte_eclairage_profond: [form.qte_eclairage_profond,],
+        qte_eclairage_applique: [form.qte_eclairage_applique,],
+        qte_convecteur_electrique: [form.qte_convecteur_electrique,],
+      });
+      this.appareils_a_ajouter_form = this.fb.group({
+        passage_fils_electique: [form.passage_fils_electique, ],//boolean
+        appareils_electrique: this.fb.array([])
+      });
+
+
+    }else{
+      console.log("formulaire non existant")
+      this.appareils_a_ajouter_form = this.createAppareilsAAjouterGroup();
+      this.appareils_a_remplacer_form = this.createAppareilsARemplacerGroup();
+    }
+
+    
   }
    
    //code de validation des formulaires
@@ -117,6 +137,15 @@ appareilGroup: any;
   getAppareilActiveState(index: number): boolean {
     return (this.appareils_a_ajouter_form.get('appareils_electrique') as FormArray)?.at(index).get('active')?.value;
   }
+  active_Tp(index: number): void {
+    const formArray = this.appareils_a_ajouter_form.get('appareils_electrique') as FormArray;
+    const control = formArray?.at(index).get('active');
+  
+    if (control) {
+      // Toggle the value between true and false
+      control.setValue(!control.value);
+    }
+  }
   getAppareilNombreState(index: number): boolean {
     const appareilsFormArray = this.appareils_a_ajouter_form.get('appareils_electrique') as FormArray;
     const nombreValue = appareilsFormArray.at(index).get('nombre')?.value;
@@ -130,22 +159,30 @@ appareilGroup: any;
     this.loadAppareils()
   }
   loadAppareils(){
-    
+   
     this.userService.getEquipementsByType ("electrique").subscribe(
       (response: Equipement[]) => {
         this.appareils_electrique = response.filter(equipement => equipement.ModeleEquipements && equipement.ModeleEquipements.length > 0 && equipement.ID != 27);
         console.log("réponse de la requette  getEquipementsByType:electrique",this.appareils_electrique);
         let i=0
         this.appareils_electrique.forEach(appareil => {
-        const modeleEquipements = appareil.ModeleEquipements;
+          let modele=""
+          let active=false
+          let nombre=0
+          if(this.prec_formulaire_gamme){
+            let form=this.prec_formulaire_gamme.formulaire
+            modele=form?.appareils_electrique[i]?.modele
+            active=form?.appareils_electrique[i]?.active
+            nombre=form?.appareils_electrique[i]?.nombre
+          }
         
           // Créer un FormGroup pour chaque appareil
           const appareilGroup = this.fb.group({});
               
          
-            appareilGroup.addControl("nombre", this.fb.control(0, ));
-            appareilGroup.addControl("active", this.fb.control(false, ));
-            appareilGroup.addControl("modele", this.fb.control("", ));
+            appareilGroup.addControl("nombre", this.fb.control(nombre, ));
+            appareilGroup.addControl("active", this.fb.control(active, ));
+            appareilGroup.addControl("modele", this.fb.control(modele, ));
            
 
             // Obtenez les contrôles pour pouvoir les manipuler
