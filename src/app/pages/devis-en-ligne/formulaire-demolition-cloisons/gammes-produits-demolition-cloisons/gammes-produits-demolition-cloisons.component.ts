@@ -104,44 +104,72 @@ createmursnonporteurGroup(): FormGroup {
 mursnonporteurs_choisis = false
 ouverturepartielles_choisis = false
 portes_choisis=false
+prec_formulaire_gammes_produits:any
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
   
+
+
+      this.prec_formulaire_gammes_produits=this.gestiondesdevisService.getFormulaireByName("gammes-produits-murs-non-porteurs")
+        if(this.prec_formulaire_gammes_produits){
+          let form=this.prec_formulaire_gammes_produits.formulaire
+          console.log("formulaire existant",form)
+          this.mursnonporteurs_choisis=form.mursnonporteurs_choisis
+          this.ouverturepartielles_choisis=form.ouverturepartielles_choisis
+          this.portes_choisis=form.portes_choisis
+          // Handling `mursNonporteursForm`
+          this.mursnonporteursForm = this.fb.group({
+            mursnonporteurs: this.fb.array([])
+          });
+          const mursArray = this.mursnonporteursForm.get('mursnonporteurs') as FormArray;
+          form.mursnonporteurs.forEach((mursNonporteur: any) => {
+            mursArray.push(this.fb.group({
+              materiaux: [mursNonporteur.materiaux, this.mursnonporteurs_choisis ? Validators.required : null],
+            }));
+          });
+
+          // Handling `ouverturePartielleForm`
+          this.ouverturepartiellesForm = this.fb.group({
+            ouverturepartielles: this.fb.array([])
+          });
+          const ouvertureArray = this.ouverturepartiellesForm.get('ouverturepartielles') as FormArray;
+          form.ouverturepartielles.forEach((ouverture: any) => {
+            ouvertureArray.push(this.fb.group({
+              cloison: [ouverture.cloison, this.ouverturepartielles_choisis ? Validators.required : null],
+            }));
+          });
+
+        }else{
+          console.log("formulaire non existant")
   
-      console.log("formulaire non existant")
-      
-      this.formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-murs-non-porteurs")
-      this.formulaire_dimensions1_length=this.formulaire_dimensions.formulaire.mursNonporteurs.length
-      this.formulaire_dimensions2_length=this.formulaire_dimensions.formulaire.ouverturePartielle.length
-      this.mursnonporteurs_choisis = this.formulaire_dimensions.formulaire.tp1
-      this.portes_choisis = this.formulaire_dimensions.formulaire.tp2
-      this.ouverturepartielles_choisis = this.formulaire_dimensions.formulaire.tp3
-      console.log("murs non porteurs: ", this.mursnonporteurs_choisis)
-      console.log("ouverture partielle: ", this.ouverturepartielles_choisis)
-     
-        this.mursnonporteursForm = this.fb.group({
-          mursnonporteurs: this.fb.array([this.createmursnonporteurGroup()])
-        });
-      
-      
-        this.ouverturepartiellesForm = this.fb.group({
-          ouverturepartielles: this.fb.array([this.createouverturepartielleGroup()])
-        });
-      
-      
-      
-      
-        for(let i=0;i<(this.formulaire_dimensions1_length-1);i++){
-          this.addmursnonporteurGroup()
+          this.formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-murs-non-porteurs")
+          this.formulaire_dimensions1_length=this.formulaire_dimensions.formulaire.mursNonporteurs.length
+          this.formulaire_dimensions2_length=this.formulaire_dimensions.formulaire.ouverturePartielle.length
+          this.mursnonporteurs_choisis = this.formulaire_dimensions.formulaire.tp1
+          this.portes_choisis = this.formulaire_dimensions.formulaire.tp2
+          this.ouverturepartielles_choisis = this.formulaire_dimensions.formulaire.tp3
+          console.log("murs non porteurs: ", this.mursnonporteurs_choisis)
+          console.log("ouverture partielle: ", this.ouverturepartielles_choisis)
+          this.mursnonporteursForm = this.fb.group({
+            mursnonporteurs: this.fb.array([this.createmursnonporteurGroup()])
+          });
+          this.ouverturepartiellesForm = this.fb.group({
+            ouverturepartielles: this.fb.array([this.createouverturepartielleGroup()])
+          });
+          for(let i=0;i<(this.formulaire_dimensions1_length-1);i++){
+            this.addmursnonporteurGroup()
+          }
+          for(let i=0;i<(this.formulaire_dimensions2_length-1);i++){
+            this.addouverturepartielleGroup()
+          }
+          console.log("longueur murs: ",this.formulaire_dimensions1_length)
+          console.log("longueur ouvertures: ",this.formulaire_dimensions2_length)
         }
+
+
+
+
+  
       
-      
-        for(let i=0;i<(this.formulaire_dimensions2_length-1);i++){
-          this.addouverturepartielleGroup()
-        }
-      
-      
-      console.log("longueur murs: ",this.formulaire_dimensions1_length)
-      console.log("longueur ouvertures: ",this.formulaire_dimensions2_length)
   this.load_gammes()
  
 }

@@ -1,0 +1,30 @@
+<div class="form-flx-dms plaf-dim">
+    <form [formGroup]="poseChauffageForm" (ngSubmit)="onPoseChauffageSubmit()">
+        <img class="srf-img" src="/assets/Rectangle.svg">
+            <div nz-row nzJustify="start">
+                   
+                <div nz-col nzSpan="24" class="tooltip-srf ant-col-6">
+                  <label for="surface">surface (m²): <span class="error-message">*</span></label>
+                  <input type="number" id="surface" formControlName="surface">
+                  <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
+                      <i class="far fa-question-circle"></i>
+                    </a>
+                    <ng-template #tooltipSurface>
+                      <div class="tooltip-content">
+                        <strong>Calcul de la surface :</strong><br>
+                        <p>La surface est calculée en multipliant la longueur par la largeur de la pièce. Mesurez chaque côté avec précision pour obtenir la surface totale en m².</p>
+                        <strong>Exemple :</strong> <br>
+                        <p> Si la pièce fait 4m de long et 3m de large, la surface totale est de 12 m².</p>
+                        </div>
+                    </ng-template>
+              </div>
+              <div *ngIf="isclicked && poseChauffageForm.get('surface')?.invalid " class="error-message">
+                <br>surface requise.
+              </div>
+
+             
+
+              </div> 
+             
+    </form>
+</div>

@@ -1,0 +1,66 @@
+<h3>Création de murs non porteurs</h3>
+            <form [formGroup]="poseMursNonPorteursForm" (ngSubmit)="onPoseMursNonPorteursSubmit()">
+
+               <div formArrayName="murs_non_porteurs">
+                 <div nz-row nzJustify="start" *ngFor="let mur of murs_non_porteurs.controls; let i = index" [formGroupName]="i">
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="hauteur">Hauteur: </label>
+                     <input type="number" id="hauteur" formControlName="hauteur">
+                   </div>
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="longueur">Longueur: </label>
+                     <input type="number" id="longueur" formControlName="longueur">
+                   </div>
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="surface">Surface: </label>
+                     <input type="number" id="surface" formControlName="surface">
+                   </div>
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="type_cloison">Type de cloison  </label>
+                     
+                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="type de cloison du mur" formControlName="type_cloison">
+                        <nz-option nzLabel="98/48+I" nzValue="98/48+I"></nz-option>
+                        <nz-option nzLabel="72/48" nzValue="72/48"></nz-option>
+                        <nz-option nzLabel="50" nzValue="50"></nz-option>
+                        <nz-option nzLabel="CP" nzValue="CP"></nz-option>
+                        <nz-option nzLabel="Autre type de cloison" nzValue="Autre"></nz-option>
+                        
+                      </nz-select>
+                   </div>
+                   <div nz-col nzSpan="6" class="ant-col">
+                     <label for="autre_type_cloison">Autre type de cloison (préciser): </label>
+                     <input type="text" id="autre_type_cloison" formControlName="autre_type_cloison">
+                    
+                   </div>
+                   
+                   <button type="button" class="dynamic-form-button" (click)="removeMurNonPorteurroup(i)" *ngIf="murs_non_porteurs.length > 1">Retirer le mur</button>
+                 </div>
+               </div>
+               <button type="button"  class="dynamic-form-button" (click)="addMurNonPorteurroup()" *ngIf="murs_non_porteurs.length < 4">Ajouter un mur</button>
+               <button type="submit">Valider</button>
+             </form>
+
+
+             <h4>Pose de Portes</h4>
+<form [formGroup]="posePortesForm" (ngSubmit)="onPosePortesSubmit()">
+    <div formArrayName="portes">
+      <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i" class="form-group" nz-row nzJustify="start">
+        <div nz-col nzSpan="6" class="ant-col">
+            <label>Type de porte <span>*</span></label>
+            <select formControlName="type">
+            
+            <option value="Porte alveolaire simple">Porte alvéolaire simple</option>
+            <option value="Porte alveolaire double">Porte alvéolaire double</option>
+            <option value="Porte pleine double">Porte pleine double</option>
+            <option value="Porte pleine simple">Porte pleine simple</option>
+            <option value="Porte vitrée simple">Porte vitrée simple</option>
+            <option value="Porte vitrée double">Porte vitrée double</option>
+            </select> 
+        </div>
+       
+        <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button" *ngIf="portes.length > 1">Supprimer</button>
+      </div>
+    </div>
+    <button type="button" class="dynamic-form-button" (click)="addPortesGroup()" *ngIf="portes.length < 8">Ajouter une porte</button>
+    <button type="submit" >Valider</button>
+  </form>

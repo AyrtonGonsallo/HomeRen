@@ -1,0 +1,86 @@
+<link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+
+<div class="section1">
+  <div>
+  <h1 class="center black font-site">{{realisation?.Titre}}</h1>
+  <p class="center fs-30 m-w-p">{{realisation?.SousTitre}}</p>
+  <a class="btn-site res-det" href="/devis-en-ligne">Devis en ligne</a>
+</div>
+<div class="galerie-piece">
+  
+<!-- <section class="gallery">
+<div class="gallery">
+  <ng-container *ngFor="let image of galerie?.images; let i = index">
+    <div class="gallery__item" >
+      <input type="radio" [id]="'img-' + (i + 1)" [checked]="i === 0" name="gallery" class="gallery__selector"/>
+      <img class="gallery__img" [src]="baseurl + '/files/' + image.Url" [alt]="image.Titre"/>
+      <label [for]="'img-' + (i + 1)" class="gallery__thumb">
+        <img [src]="baseurl + '/files/' + image.Url" [alt]="image.Titre"/>
+      </label>
+    </div>
+  </ng-container>
+</div> 
+</section>-->
+
+
+<div >
+
+  <div id="main-slider" class="splide">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <li class="splide__slide" *ngFor="let image of galerie?.images; let i = index"><img [src]="baseurl  + image.Url" alt="Image 1"></li>
+      
+      </ul>
+    </div>
+  </div>
+
+  <div id="thumbnail-slider" class="splide">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <li class="splide__slide" *ngFor="let image of galerie?.images; let i = index"><img [src]="baseurl  + image.Url" alt="Thumbnail 1"></li>
+    
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="thumbnail-slider" class="splide">
+  <div class="splide__track">
+    <ul class="splide__list">
+      <li class="splide__slide" *ngFor="let image of galerie?.images; let i = index"><img [src]="baseurl + '/files/' + image.Url" alt="Thumbnail 1"></li>
+  
+    </ul>
+  </div>
+</div>
+
+
+
+</div>
+</div>
+<div class="bg-section2">
+<div class="section2">
+  <h2 class="center">Les points clés de la rénovation</h2>
+  <div class="lst-serv">
+      <p class="mb-10" *ngFor="let point of realisation?.Pointcles" ><fa-icon [icon]="faCheck" class=" jaune mr-10"></fa-icon>{{point.Titre}} </p>
+    </div>
+</div>
+</div>
+<div class="section3">
+      <h2 class="center">Nos dernières réalisations</h2>
+ <div class="liste-filtre">
+  <div cl-piece *ngFor="let realisation of realisations"> 
+         <a [href]="'/realisations/realisations-details/'+realisation.ID"><img class="img-pc" src="{{baseurl}}{{realisation.Image_principale}}" alt="">
+         </a><p class="cat-pc font-site2 fs-18">{{realisation?.Piece?.Titre}}</p>
+         <a [href]="'/realisations/realisations-details/'+realisation.ID"><p class="txt-pc font-site2 fs-18">{{realisation.Titre}}</p></a>
+  </div>
+ </div>
+</div>
+<div class="bg-phrase-dacc">
+  <div class="section-phrase-dacc">
+    <span class="txt1-sldr blanc fs-34 center">Des travaux de rénovation ?</span>
+    <span class="txt2-sldr blanc fs-27 center"><strong>Réalisons-les ensemble !</strong> Transformez votre maison avec HOMEREN</span>
+    <a class="btn-site ph-dacc" href="/devis-en-ligne">Devis en ligne</a>
+ </div>
+</div>
+
+<script src="./mon-script.js"></script>

@@ -1,0 +1,84 @@
+
+<nav [class]="getClassForUrl()">
+  <input type="checkbox" id="check">
+  <label for="check" class="checkbtn">
+    <i class="fas fa-bars"></i>
+  </label>
+  <label class="logo">
+    <a href="/"><img class="logo-hdr" src="/assets/logo.svg"></a>
+  </label>
+  <ul>
+    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Accueil</a></li>
+      <li><a routerLink="/qui-somme-nous" routerLinkActive="active">Qui sommes-nous</a></li>
+    <!--<a nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'" class="title-drop-dwn" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Pièces à rénover
+      <span nz-icon nzType="down"></span>
+    </a>-->
+    
+    <li><a  routerLinkActive="active" routerLink="/devis-en-ligne">Devis en ligne</a></li>
+    <li><a routerLink="/realisations" routerLinkActive="active">Réalisations</a></li>
+    <li><a routerLink="/faq" routerLinkActive="active">FAQ</a></li>
+    <li><a routerLink="/form-artisan" routerLinkActive="active">Devenir partenaire</a></li>
+    <li><a routerLink="/connexion" class="btn-hdr">Connexion</a></li>
+    <li>
+      <nz-badge [nzCount]="get_total_panier()">
+        <a class="head-example" routerLink="/panier"><fa-icon [icon]="faCartShopping" class="mr-10"></fa-icon></a>
+      </nz-badge>
+    </li>
+    
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>
+
+<div class="footer-bg">
+  <div class="footer">
+    <div class="div-flx ftr-1">
+      <a href="/"><img class="logo-ftr" src="/assets/logo.svg"></a>
+        <p class="blanc font-site2 fs-18 mt-18 m-w marg-r">HOMEREN est une entreprise de travaux, nous répondons à tous types de projets. Pas d'intermédiaire, un seul interlocuteur du début à la fin de votre projet.</p>
+        <div class="blanc font-site2 fs-18 mt-18"><fa-icon [icon]="faLocationDot" class="mr-10"></fa-icon>21 place de la République<br><span class="mrg-l-20">75003 Paris</span></div>
+        <!-- <div class="blanc font-site2 fs-18 mt-18"><i class="fas fa-phone-alt mr-10"></i><a href="tel:01 64 62 25 70">01 64 62 25 70</a></div> -->
+        <div class="mt-18 s-m-ftr"><a href="/"><i class="fab fa-facebook-f mr-10"></i></a> <a href="/"><i class="fab fa-instagram mr-10"></i></a></div>
+
+    
+    </div>
+    <div class="div-flx ftr-2">
+        <img class="img-ftr" src="/assets/icon-blanc.svg">
+        <h4 class="blanc font-site">Nos services</h4>
+        <a class="blanc font-site2 fs-18 mb-10" href="/">Salon</a>
+        <a class="blanc font-site2 fs-18 mb-10" href="/">Salle à manger</a>
+        <a class="blanc font-site2 fs-18 mb-10" href="/">Cuisine</a>
+        <a class="blanc font-site2 fs-18 mb-10" href="/">Chambre</a>
+        <a class="blanc font-site2 fs-18 mb-10" href="/">Salle de bain</a>
+        <a class="blanc font-site2 fs-18 mb-10" href="/">Salle d’eau / WC</a>
+    </div>
+    <div class="div-flx ftr-3">
+        <img class="img-ftr" src="/assets/icon-blanc.svg">
+        <h4 class="blanc font-site">Découvrir</h4>
+        <a class="blanc font-site2 fs-18 mb-10" href="/qui-somme-nous">Qui somme nous</a>
+        <a class="blanc font-site2 fs-18 mb-10" href="/realisations">Nos réalisations</a>
+        <a class="blanc font-site2 fs-18 mb-10" href="/devis-en-ligne">Demander un devis</a>
+        <a class="blanc font-site2 fs-18 mb-10" href="/faq">FAQ</a>
+        <a class="blanc font-site2 fs-18 mb-10" href="/contact">Contactez-nous</a>
+    </div>
+
+  </div>
+  <p class="blanc m-w-ftr font-site2 fs-13 mt-18">© 2024 | Conception :<a href="https://nash-digital.com/"> Nash, création site web</a> | <a href="/mentions-legales">Mentions légales</a></p>
+
+</div>
+
+<nz-dropdown-menu #menu="nzDropdownMenu"  class="drop-dwn">
+  <ul class="ul-menu" nz-menu nzSelectable >
+    <div  class="flex-menu"  *ngFor="let piece_bc of pieces" >
+      <span class="cat-pcs-menu">{{piece_bc.Titre}}</span>
+      <ul class="piece-menu-element">
+        <li nz-menu-item routerLink="/"  routerLinkActive="active" *ngFor="let piece of piece_bc.Pieces">
+          <a [href]="'/pieces/pieces-details/'+piece.ID">
+            <img src="https://dev.homeren.fr/api-concepts-et-travaux/files/{{piece.Image_principale}}"/>
+            <span class="center">{{piece.Titre}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </ul>
+</nz-dropdown-menu>

@@ -26,6 +26,7 @@ export class RecapDemolitionCloisonsComponent {
     private userService: ApiConceptsEtTravauxService
   ) {
     this.form=this.gestiondesdevisService.getFormulaireByName("murs-non-porteurs").formulaire;
+    console.log("recap demol: ",this.form)
     this.dimensions_murs_non_porteurs=this.form["dimensions-murs-non-porteurs"]["mursNonporteurs"];
     this.quantite_portes_simples_creuse=this.form["dimensions-murs-non-porteurs"]["quantite_portes_simples_creuse"];
     this.quantite_portes_doubles_creuses=this.form["dimensions-murs-non-porteurs"]["quantite_portes_doubles_creuses"];

@@ -1,0 +1,143 @@
+<div class="plaf-dim">
+    
+  
+  
+  <div  class="div-s-b">
+    <div class="div-chauf-gm">
+      <span class="center jaune fs-16 f-w-6">À ajouter</span>   
+    </div>
+    
+    <form [formGroup]="appareils_a_ajouter_form" (ngSubmit)="submit()">
+      <div  class="form-group" nz-row nzJustify="start">
+        <div nz-col nzSpan="6" class="ant-col etat-srf-accord tooltip-srf">
+          <label for="passage_fils_electique">Passage des fils électriques</label>
+          <input type="checkbox" id="passage_fils_electique" formControlName="passage_fils_electique"> 
+          <a nz-tooltip [nzTooltipTitle]="tooltippassage_fils_electique" href="javascript:void(0)" class="info-icon">
+              <i class="far fa-question-circle"></i>
+            </a>
+            <ng-template #tooltippassage_fils_electique>
+              <div class="tooltip-content">
+                <strong>passage de fils electique</strong><br>
+                </div>
+            </ng-template>     
+        </div> 
+      </div>
+      <div formArrayName="appareils_electrique" class="flx-pr">
+        <div *ngFor="let appareilGroup of appareils_electrique; let i = index" [formGroupName]="i">
+          <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getappareils_a_ajouter_form.controls[i].get(appareilGroup.Titre + ' modele')?.invalid" class="error-message">
+            Vous devez faire un choix.
+          </div>
+
+          <nz-collapse nzAccordion>
+              <nz-collapse-panel nzHeader="Modèles - {{appareils_electrique && appareils_electrique[i] ? appareils_electrique[i].Titre : ''}}" [nzActive]="false">
+                  <nz-radio-group formControlName="modele" class="radio-flx-spc">
+                      <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
+                        <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf">
+                          
+                            <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">
+                            <span>
+                                {{modele.Titre}}
+                              </span>
+                            </label>
+                          <a nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="info-icon">
+                          <i class="far fa-question-circle"></i>
+                        </a>
+                        </div>
+                        <!-- Tooltip with image and dimensions -->
+                        
+                        <ng-template #tooltipTemplate >
+                          <div>
+                            <div class="img-tltip" *ngIf="modele.Image">
+                              <img [src]="baseurl + modele.Image" [alt]="modele.Image" width="150px"/>
+                            </div>
+                            <div><strong>Longueur:</strong> {{modele.Longeur}}</div>
+                            <div><strong>Largeur:</strong> {{modele.Largeur}}</div>
+                            <div><strong>Hauteur:</strong> {{modele.Hauteur}}</div>
+                            
+                          </div>
+                        </ng-template>
+                      </div>
+                    </nz-radio-group>
+                    <div nzspan="6" class="col-accord-inpt">
+                      <label for="nombre">Quantité</label>
+                      <input type="number" id="nombre" formControlName="nombre">      
+                    </div>  
+                </nz-collapse-panel>
+          </nz-collapse>
+          
+          <!-- Ajoutez d'autres champs selon vos besoins -->
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <div  class="div-s-b">
+    <div class="div-chauf-gm">
+      <span class="center jaune fs-16 f-w-6">À remplacer</span>   
+    </div>
+    <form [formGroup]="appareils_a_remplacer_form" (ngSubmit)="submit()">
+      <div  class="form-group" nz-row nzJustify="start">
+        <div nz-col nzSpan="6" class="ant-col etat-srf-row tooltip-srf">
+          <label for="qte_prises">Quantité prises</label>
+          <input type="number" id="qte_prises" formControlName="qte_prises"> 
+          <a nz-tooltip [nzTooltipTitle]="tooltipqte_prises" href="javascript:void(0)" class="info-icon">
+              <i class="far fa-question-circle"></i>
+            </a>
+            <ng-template #tooltipqte_prises>
+              <div class="tooltip-content">
+                <strong>Quantité prises</strong><br>
+                </div>
+            </ng-template>     
+        </div> 
+      </div>
+      <div  class="form-group" nz-row nzJustify="start">
+        <div nz-col nzSpan="6" class="ant-col etat-srf-row tooltip-srf">
+          <label for="qte_eclairage_profond">Quantité éclairage profond</label>
+          <input type="number" id="qte_eclairage_profond" formControlName="qte_eclairage_profond"> 
+          <a nz-tooltip [nzTooltipTitle]="tooltipqte_eclairage_profond" href="javascript:void(0)" class="info-icon">
+              <i class="far fa-question-circle"></i>
+            </a>
+            <ng-template #tooltipqte_eclairage_profond>
+              <div class="tooltip-content">
+                <strong>Quantité éclairage profond</strong><br>
+                </div>
+            </ng-template>     
+        </div> 
+      </div>
+      <div  class="form-group" nz-row nzJustify="start">
+        <div nz-col nzSpan="6" class="ant-col etat-srf-row tooltip-srf">
+          <label for="qte_eclairage_applique">Quantité éclairage applique</label>
+          <input type="number" id="qte_eclairage_applique" formControlName="qte_eclairage_applique"> 
+          <a nz-tooltip [nzTooltipTitle]="tooltipqte_eclairage_applique" href="javascript:void(0)" class="info-icon">
+              <i class="far fa-question-circle"></i>
+            </a>
+            <ng-template #tooltipqte_eclairage_applique>
+              <div class="tooltip-content">
+                <strong>Quantité éclairage applique</strong><br>
+                </div>
+            </ng-template>     
+        </div> 
+      </div>
+      <div  class="form-group" nz-row nzJustify="start">
+        <div nz-col nzSpan="6" class="ant-col etat-srf-row tooltip-srf">
+          <label for="qte_convecteur_electrique">Quantité convecteur électrique</label>
+          <input type="number" id="qte_convecteur_electrique" formControlName="qte_convecteur_electrique"> 
+          <a nz-tooltip [nzTooltipTitle]="tooltipqte_convecteur_electrique" href="javascript:void(0)" class="info-icon">
+              <i class="far fa-question-circle"></i>
+            </a>
+            <ng-template #tooltipqte_convecteur_electrique>
+              <div class="tooltip-content">
+                <strong>Quantité convecteur électrique</strong><br>
+                </div>
+            </ng-template>     
+        </div> 
+      </div>
+    </form>
+  </div>
+
+  <!-- Tooltip Template -->
+
+
+</div>
+

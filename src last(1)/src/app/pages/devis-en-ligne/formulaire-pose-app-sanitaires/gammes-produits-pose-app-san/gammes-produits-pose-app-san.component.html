@@ -1,0 +1,49 @@
+<div class="form-plmb plaf-dim">
+    <div  class="div-s-b">
+      <form [formGroup]="poseSalleDeBainForm" (ngSubmit)="onPoseSalleDeBainSubmit()">
+        <div formArrayName="appareils_salle_de_bain" class="flx-pr">
+          <div *ngFor="let appareilGroup of appareils_salle_de_bain; let i = index" [formGroupName]="i">
+            <div class="" *ngIf="isclicked && getposeSalleDeBainForm.controls[i].get(appareilGroup.Titre + ' modele')?.invalid" class="error-message">
+              Vous devez faire un choix.
+            </div>
+            <!-- <div class="div-chauf-gm"><h3 class="ttl-type jaune">{{appareils_salle_de_bain && appareils_salle_de_bain[i] ? appareils_salle_de_bain[i].Titre : ""}}</h3></div> -->
+            <nz-collapse nzAccordion>
+                <nz-collapse-panel [nzHeader]="appareils_salle_de_bain[i].Titre" [nzActive]="false">
+                    <nz-radio-group formControlName="modele" class="radio-flx-spc">
+                        <div nz-row nzJustify="start" *ngFor="let modele of appareilGroup.ModeleEquipements">
+                          <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf">
+                              <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">
+                              <span>
+                                  {{modele.Titre}}
+                                </span>
+                              </label>
+                             <a nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="info-icon">
+                            <i class="far fa-question-circle"></i>
+                          </a>
+                          </div>
+                          <!-- Tooltip with image and dimensions -->
+                          <ng-template #tooltipTemplate >
+                            <div>
+                              <div class="img-tltip" *ngIf="modele.Image">
+                                <img [src]="baseurl + modele.Image" [alt]="modele.Image" width="150px"/>
+                              </div>
+                              <div><strong>Longueur:</strong> {{modele.Longeur}}</div>
+                              <div><strong>Largeur:</strong> {{modele.Largeur}}</div>
+                              <div><strong>Hauteur:</strong> {{modele.Hauteur}}</div>
+                            </div>
+                          </ng-template>
+                        </div>
+                      </nz-radio-group>
+                      <div nzspan="6" class="col-accord-inpt">
+                        <label for="depose">Souhaitez-vous déposer votre salle de bain actuelle ?</label>
+                        <input type="checkbox" id="depose" formControlName="depose" class="custom-checkbox">      
+                      </div>  
+                  </nz-collapse-panel>
+            </nz-collapse>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  

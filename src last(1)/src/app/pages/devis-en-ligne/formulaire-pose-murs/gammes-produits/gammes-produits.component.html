@@ -1,0 +1,100 @@
+
+<form [formGroup]="poseMursForm" (ngSubmit)="onPoseMursSubmit()">
+
+  <div formArrayName="murs">
+    <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
+      <div class="div-mur-gm"><span class="mur-ttl">Mur {{i+1}}</span><span class="mur-ttl"> - </span><label for="gamme" class="mur-ttl">Gamme </label></div>
+      <div nz-row nzJustify="start">
+        <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
+          
+          <nz-radio-group formControlName="gamme" class="radio-flx-spc">
+            <!-- Reusable template for displaying options with PDFs -->
+            <ng-container>
+              <div class="div-chauf-gm" style="width:100%;">
+                <span  class="jaune fs-16 f-w-6" >Peinture</span>
+               </div>
+              <div *ngFor="let option of gammes_peinture" class="parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+                  <span>
+                    <!-- Dynamically display the label based on the type -->
+                    {{ option.Label }}
+                  </span>
+                </label>
+                <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
+                <ng-template #tooltipTemplate>
+                  Pour plus d'informations, veuillez consulter :
+                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                </ng-template>
+              </div>
+
+              <div class="div-chauf-gm" style="width:100%;">
+                <span  class="jaune fs-16 f-w-6" >Enduit</span>
+               </div>
+              <div *ngFor="let option of gammes_enduit" class="parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+                  <span>
+                    <!-- Dynamically display the label based on the type -->
+                    {{ option.Label }}
+                  </span>
+                </label>
+                <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
+                <ng-template #tooltipTemplate>
+                  Pour plus d'informations, veuillez consulter :
+                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                </ng-template>
+              </div>
+
+              <div class="div-chauf-gm" style="width:100%;">
+                <span  class="jaune fs-16 f-w-6" >Papier</span>
+               </div>
+              <div *ngFor="let option of gammes_papier" class="parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+                  <span>
+                    <!-- Dynamically display the label based on the type -->
+                    {{ option.Label }}
+                  </span>
+                </label>
+                <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
+                <ng-template #tooltipTemplate>
+                  Pour plus d'informations, veuillez consulter :
+                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                </ng-template>
+              </div>
+
+              <div class="div-chauf-gm" style="width:100%;">
+                <span  class="jaune fs-16 f-w-6" >Carrelage</span>
+               </div>
+              <div *ngFor="let option of gammes_carrelage" class="parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+                  <span>
+                    <!-- Dynamically display the label based on the type -->
+                    {{ option.Label }}
+                  </span>
+                </label>
+                <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
+                <ng-template #tooltipTemplate>
+                  Pour plus d'informations, veuillez consulter :
+                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                </ng-template>
+              </div>
+            </ng-container>
+          </nz-radio-group>
+        </div>
+          <div *ngIf="isclicked && murs.controls[i].get('gamme')?.invalid " class="error-message">
+            Les gammes sont requises.
+          </div>
+          
+        </div>
+
+      </div>
+      
+  </div>
+  </form>

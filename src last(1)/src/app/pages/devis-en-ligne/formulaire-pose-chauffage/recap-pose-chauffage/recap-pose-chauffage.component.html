@@ -1,0 +1,13 @@
+<div class="recap-div devis-content">
+    <span class="recup-fin recap-piece">Pose de radiateur - {{selectedPiece.Titre}}</span>
+    <div>
+        <span class="recup-fin"><p>Surface de la pièce</p><p>:</p><p>{{form_dim.surface}}</p></span>
+
+     </div>
+     <div *ngFor="let rad of form_surfaces.radiateurs; let i = index" class="recup-mur-flx">
+        <span class="mur-ttl">Radiateur {{i+1}}</span>
+        <div>
+        <span class="recup-fin"><p>Etat des surfaces</p><p>:</p><p>{{form_surfaces.radiateurs[i].etat}}</p></span>
+        <span class="recup-fin"><p>Gamme</p><p>:</p><p>{{get_title(form_gammes.radiateurs[i].gamme)}}</p></span>
+        </div>
+</div>

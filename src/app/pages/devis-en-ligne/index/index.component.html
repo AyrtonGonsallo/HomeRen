@@ -18,12 +18,13 @@
       <!-- <h1 class="center gris font-site">{{filteredTravail.Titre}}</h1> -->
     </div>
     <div *ngIf="current == 4">
-      <h1 class="center black font-site ttl-recap" *ngIf="filteredTravail.ID != 2">Quelles sont les gammes de produits que vous souhaitez dans votre {{selectedPiece?.Titre}} ?</h1>
-      <h1 class="center black font-site ttl-recap" *ngIf="filteredTravail.ID == 2">Quelles sont les gammes de produits que vous souhaitez deposer dans votre {{selectedPiece?.Titre}} ?</h1>
+      <h1 class="center black font-site ttl-recap" *ngIf="filteredTravail.ID != 2">Quelles type de {{selectedPiece?.Titre}} souhaitez vous ?</h1>
+      <h1 class="center black font-site ttl-recap" *ngIf="filteredTravail.ID == 2">Quelles type de {{selectedPiece?.Titre}} souhaitez vous ?</h1>
       <!-- <h1 class="center gris font-site">{{filteredTravail.Titre}}</h1> -->
     </div>
     <div *ngIf="current == 5">
-      <h1 class="center black font-site ttl-recap">Récapitulatif : {{filteredTravail.Titre}} - {{selectedPiece?.Titre}}</h1>
+      <h1 class="center black font-site ttl-recap">Récapitulatif :</h1>
+      <!-- {{filteredTravail.Titre}} - {{selectedPiece?.Titre}} -->
       <!-- <h1 class="center gris font-site">{{filteredTravail.Titre}}</h1> -->
     </div>
     <div *ngIf="current == 6">

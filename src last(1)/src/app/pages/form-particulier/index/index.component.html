@@ -1,0 +1,216 @@
+<div class="div-page-part">
+
+<div class="col-60">
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  
+  <nz-form-item class="cls-nom col-5">
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="Nom"  nzRequired nzTooltipTitle="Comment voulez-vous que les autres vous appellent?" >
+          <span>Nom</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="votre Nom!">
+          <input nz-input id="Nom" formControlName="Nom" />
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="cls-prenom col-5">
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="Prenom"  nzRequired nzTooltipTitle="Comment voulez-vous que les autres vous appellent?" >
+          <span>Prénom</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="votre prenom!">
+          <input nz-input id="Prenom" formControlName="Prenom" />
+      </nz-form-control>
+  </nz-form-item>
+  
+  <nz-form-item class="cls-email col-5">
+  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Email">E-mail</nz-form-label>
+  <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+      <input nz-input formControlName="Email" id="Email" />
+  </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item class="cls-tel col-5">
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Telephone" nzRequired>Téléphone</nz-form-label>
+    <nz-form-control
+        [nzSm]="14"
+        [nzXs]="24"
+        [nzValidateStatus]="validateForm.controls['Telephone']"
+        nzErrorTip="Please input your phone number!"
+    >
+        <nz-input-group>
+        
+        <input formControlName="Telephone" id="'Telephone'" nz-input />
+        </nz-input-group>
+    </nz-form-control>
+    </nz-form-item>
+
+
+
+  <nz-form-item class="cls-mdp col-5">
+  <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Password" nzRequired>Votre mot de passe</nz-form-label>
+  <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your Password!">
+      <input nz-input type="Password" id="Password" formControlName="Password" (ngModelChange)="updateConfirmValidator()" />
+  </nz-form-control>
+  </nz-form-item>
+  <nz-form-item class="cls-confirm-mdp col-5">
+  <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirmez le mot de passe</nz-form-label>
+  <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+      <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
+      <ng-template #errorTpl let-control>
+      @if (control.errors?.['required']) {
+          Please confirm your password!
+      }
+      @if (control.errors?.['confirm']) {
+          Two passwords that you enter is inconsistent!
+      }
+      </ng-template>
+  </nz-form-control>
+  </nz-form-item>
+ 
+
+  <nz-form-item *ngIf="isArtisan()" class="cls-rais-soc col-5">
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="RaisonSociale"  >
+          <span>Raison sociale</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+          <input nz-input id="RaisonSociale" formControlName="RaisonSociale" />
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="isArtisan()" class="cls-num-siret col-5"> 
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="NumeroSIRET"  >
+          <span>Numero SIRET</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+          <input nz-input id="NumeroSIRET" formControlName="NumeroSIRET" />
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="isArtisanorParticulier()" class="cls-add-postal col-5">
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="AdressePostale"  nzRequired>
+          <span>Adresse</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+          <input nz-input id="AdressePostale" formControlName="AdressePostale" />
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="isParticulier()" class="cls-cod-postal col-5">
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="CodePostal"  nzRequired>
+          <span>Code postal</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+          <input nz-input id="CodePostal" formControlName="CodePostal" />
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="isParticulier()" class="cls-com-postal">
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="CommunePostale"  nzRequired>
+          <span>Commune</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+          <input nz-input id="CommunePostale" formControlName="CommunePostale" />
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="isArtisan()" class="cls-activite col-5">
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="Activite"  >
+          <span>Activite</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+          <input nz-input id="Activite" formControlName="Activite" />
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="isArtisan()" class="cls-ca col-5">
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="CA"  >
+          <span>CA</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+          <nz-input-number id="CA" formControlName="CA"  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number> 
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="isArtisan()">
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="Effectif"  >
+          <span>Effectif</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+          <nz-input-number id="Effectif" formControlName="Effectif" [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number> 
+
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="isArtisan()">
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="References"  >
+          <span>References</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+          <textarea rows="4" nz-input id="References" formControlName="References"></textarea> 
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="isArtisan()">
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="QuestionnaireTarif"  >
+          <span>Questionnaire tarif</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+          <input type="text" id="QuestionnaireTarif"  formControlName="QuestionnaireTarif" hidden />
+          <input type="file" nz-upload  (change)="handleFileInput($event)" accept=".png,.jpeg,.jpg,.docx,.xlsx,.pdf"  [attr.maxFileSize]="10 * 1024 * 1024"/>                
+          Formats autorisés: .png, .jpeg, .jpg, .docx, .xlsx, .pdf et taille < 10 MB     
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="isArtisan()">
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="AssuranceRCDecennale"  >
+          <span>Assurance RCDecennale</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+          <input type="text" id="AssuranceRCDecennale" formControlName="AssuranceRCDecennale" hidden />
+          <input type="file" accept=".png,.jpeg,.jpg,.docx,.xlsx,.pdf"  [attr.maxFileSize]="10 * 1024 * 1024" nz-upload  (change)="handleFileInput2($event)" />                
+          Formats autorisés: .png, .jpeg, .jpg, .docx, .xlsx, .pdf et taille < 10 MB     
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="isArtisan()">
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="KBis"  >
+          <span>KBis</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+          <input type="text" id="KBis" formControlName="KBis" hidden />
+          <input type="file" accept=".png,.jpeg,.jpg,.docx,.xlsx,.pdf"  [attr.maxFileSize]="10 * 1024 * 1024" nz-upload  (change)="handleFileInput3($event)" /> 
+          Formats autorisés: .png, .jpeg, .jpg, .docx, .xlsx, .pdf et taille < 10 MB          
+      </nz-form-control>
+  </nz-form-item>
+
+  
+  
+ 
+
+  <nz-form-item nz-row class="register-area">
+  <nz-form-control [nzSpan]="14" [nzOffset]="6" nzErrorTip="cochez cette case">
+      <label nz-checkbox formControlName="Agree">
+      <span>
+        J'ai lu
+          <a>l'accord</a>
+      </span>
+      </label>
+  </nz-form-control>
+  </nz-form-item>
+  <nz-form-item nz-row class="register-area col-btn">
+  <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button class="btn-envoyer" nz-button nzType="primary">Créer</button>
+  </nz-form-control>
+  </nz-form-item>
+</form>
+</div>
+
+<div class="col-40 bg-part">
+    <div>
+       <p class="fs-40">Bienvenue sur notre plateforme de conception et de rénovation ! </p>
+       <p class="fs-30">Pour mieux répondre à vos besoins et vous offrir un service personnalisé, nous vous invitons à remplir ce formulaire d'inscription.</p>
+    </div>
+</div>
+
+
+</div>

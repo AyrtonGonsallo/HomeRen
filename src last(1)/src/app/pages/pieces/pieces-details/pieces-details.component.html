@@ -1,0 +1,62 @@
+<link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+<div class="page-realisations">
+
+  <div class="section-t-bar" [ngStyle]="{'background-image': 'url(' + baseurl+ piece?.Image_presentation + ')'}">
+    <h1 class="font-site center">{{piece?.Titre}}</h1>
+        <p class="fs-27 center m-w-t-bar"  *ngIf="piece?.['Présentation']">
+          {{piece['Présentation']}}
+        </p>
+        <a class="btn-site tl-br"  href="/devis-en-ligne">Devis en ligne</a>
+    </div>
+    <!-- 
+    <div class="sec-gal-piece" *ngIf="galerie">  
+      <div class="section-desc">   
+        <p  [innerHTML]="piece?.Description"></p>
+    </div>
+   
+    <div class="splide" id="carousel">
+        <div class="splide__track">
+          <ul class="splide__list">
+            <li class="splide__slide" *ngFor="let image of galerie.images">
+              <img  [src]="baseurl + '/files/' + image.Url" alt="Image 1" class="splide__img" >
+            </li>
+            
+          </ul>
+
+
+        </div>
+      </div>
+    -->
+      
+    </div>
+ 
+   
+
+     <div class="title-realis">
+      <h2>Nos réalisations sur la rénovation de {{piece?.Titre}}</h2>
+      </div>
+    <div class="liste-filtre ">
+      
+      <div cl-piece *ngFor="let realisation of realisations"> 
+   
+      <a [href]="'/realisations/realisations-details/'+realisation.ID"><img class="img-pc" [src]="baseurl  + realisation.Image_principale"  alt="">
+      </a><p class="cat-pc font-site2 fs-18">{{realisation?.Piece?.Titre}}</p>
+             <a [href]="'/realisations/realisations-details/'+realisation.ID">
+             <p class="txt-pc font-site2 fs-18">{{realisation.Titre}}</p></a>
+      </div>
+      
+   </div>
+   
+   <div class="bg-phrase-dacc">
+    <div class="section-phrase-dacc">
+      <span class="txt1-sldr blanc fs-34 center">Des travaux de rénovation ?</span>
+      <span class="txt2-sldr blanc fs-27 center"><strong>Réalisons-les ensemble !</strong> Transformez votre maison avec HOMEREN</span>
+      <a class="btn-site ph-dacc" href="/devis-en-ligne">Devis en ligne</a>
+   </div>
+  </div>
+
+
+
+
+
+

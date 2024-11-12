@@ -11,6 +11,15 @@ export class DimensionsDemolitionCloisonsComponent {
   is_active_Tp1=false
   is_active_Tp2=false
   is_active_Tp3=false
+  active_Tp1(){
+    this.is_active_Tp1=!this.is_active_Tp1
+  }
+  active_Tp2(){
+    this.is_active_Tp2=!this.is_active_Tp2
+  }
+  active_Tp3(){
+    this.is_active_Tp3=!this.is_active_Tp3
+  }
   isclicked=false
   @Input() triggerSubmitDimensionForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
@@ -119,15 +128,67 @@ export class DimensionsDemolitionCloisonsComponent {
       this.ouverturePartielle.removeAt(index);
     }
   }
+
+
+  prec_formulaire_dimensions:any
   constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
   
-    this.mursNonporteursForm = this.fb.group({
-      mursNonporteurs: this.fb.array([this.createmursNonporteursGroup()])
-    });
-    this.ouverturePartielleForm = this.fb.group({
-      ouverturePartielle: this.fb.array([this.createouverturePartielleGroup()])
-    });
-    this.deposePorteForm = this.createdeposePorteGroup();
+    this.prec_formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-murs-non-porteurs")
+    if(this.prec_formulaire_dimensions){
+      let form=this.prec_formulaire_dimensions.formulaire
+      console.log("formulaire existant",form)
+      this.is_active_Tp1=form.tp1
+      this.is_active_Tp2=form.tp2
+      this.is_active_Tp3=form.tp3
+      this.deposePorteForm=this.fb.group({
+        quantite_portes_simples_creuse: [form.quantite_portes_simples_creuse, this.is_active_Tp2 ? Validators.required : null],
+        quantite_portes_doubles_creuses: [form.quantite_portes_doubles_creuses, this.is_active_Tp2 ? Validators.required : null],
+        quantite_porte_simple_plein: [form.quantite_porte_simple_plein, this.is_active_Tp2 ? Validators.required : null],
+        quantite_porte_double_pleine: [form.quantite_porte_double_pleine, this.is_active_Tp2 ? Validators.required : null],
+       
+      });
+      // Handling `mursNonporteursForm`
+      this.mursNonporteursForm = this.fb.group({
+        mursNonporteurs: this.fb.array([])
+      });
+      const mursArray = this.mursNonporteursForm.get('mursNonporteurs') as FormArray;
+      form.mursNonporteurs.forEach((mursNonporteur: any) => {
+        mursArray.push(this.fb.group({
+          longueur: [mursNonporteur.longueur, this.is_active_Tp1 ? Validators.required : null],
+          hauteur: [mursNonporteur.hauteur, this.is_active_Tp1 ? Validators.required : null],
+          epaisseur: [mursNonporteur.epaisseur, this.is_active_Tp1 ? Validators.required : null],
+          volume: [mursNonporteur.volume, this.is_active_Tp1 ? Validators.required : null],
+          image: [mursNonporteur.image]
+        }));
+      });
+
+      // Handling `ouverturePartielleForm`
+      this.ouverturePartielleForm = this.fb.group({
+        ouverturePartielle: this.fb.array([])
+      });
+      const ouvertureArray = this.ouverturePartielleForm.get('ouverturePartielle') as FormArray;
+      form.ouverturePartielle.forEach((ouverture: any) => {
+        ouvertureArray.push(this.fb.group({
+          longueur: [ouverture.longueur, this.is_active_Tp3 ? Validators.required : null],
+          hauteur: [ouverture.hauteur, this.is_active_Tp3 ? Validators.required : null],
+          epaisseur: [ouverture.epaisseur, this.is_active_Tp3 ? Validators.required : null],
+          volume: [ouverture.volume, this.is_active_Tp3 ? Validators.required : null],
+          longueur_du_mur: [ouverture.longueur_du_mur, this.is_active_Tp3 ? Validators.required : null],
+          image: [ouverture.image]
+        }));
+      });
+
+    }else{
+      console.log("formulaire non existant")
+      this.deposePorteForm = this.createdeposePorteGroup();
+      this.mursNonporteursForm = this.fb.group({
+        mursNonporteurs: this.fb.array([this.createmursNonporteursGroup()])
+      });
+      this.ouverturePartielleForm = this.fb.group({
+        ouverturePartielle: this.fb.array([this.createouverturePartielleGroup()])
+      });
+    }
+    
     
    
    

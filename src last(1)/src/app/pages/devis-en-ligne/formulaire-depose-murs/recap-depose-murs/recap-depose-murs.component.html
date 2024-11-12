@@ -1,0 +1,11 @@
+<div class="recap-div devis-content">
+  <span class="recup-fin recap-piece">{{selectedPiece.Titre}}</span>
+  <div *ngFor="let dimmur of deposeMursForm.formulaire['dimensions-depose-murs'].murs; let i = index">
+    <span class="mur-ttl">Mur {{i+1}}</span>
+    <span class="recup-fin"><p>Hauteur</p><p>:</p><p>{{dimmur.hauteur}} m</p></span>
+    <!-- <span class="recup-fin"><p>Longueur</p><p>:</p><p>{{dimmur.longueur}} m</p></span> -->
+    <span class="recup-fin"><p>Surface</p><p>:</p><p>{{dimmur.surface}} m²</p></span>
+    <span class="recup-fin"><p>État des surfaces</p><p>:</p><p>{{deposeMursForm.formulaire['etat-surfaces-depose-murs'].murs[i].etat}} </p></span>
+    <span class="recup-fin"><p>Gamme</p><p>:</p><p>{{deposeMursForm.formulaire['gammes-produits-depose-murs'].murs[i].gamme}} </p></span>
+  </div>
+</div>

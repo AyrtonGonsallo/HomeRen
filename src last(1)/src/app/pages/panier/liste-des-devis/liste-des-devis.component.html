@@ -1,0 +1,34 @@
+<div class="center section-panier">
+    <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Piece</th>
+            <th>Prix par tâches</th>
+            <th>Prix</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listOfData">
+            <td>{{ data.ID }}</td>
+            <td>{{ data.Date | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td>{{ data.Piece?.Titre }}</td>
+            <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }} : {{ tache?.Prix }}€<br></span></td>
+            <td>{{ data.Prix }}€</td>
+            <td>
+              <a (click)="supprimer_devis(data.ID)"><fa-icon [icon]="faTrash" class="mr-10"></fa-icon></a>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+    <div class="total-panier-container">
+      <div class="tot-pan">
+        Total ttc: {{total}}€
+      </div>
+      <div>
+        <a class="btn-site" href="/">Valider mon panier</a>
+      </div>
+    </div>
+</div>
