@@ -55,17 +55,29 @@ export class GammesProduitsRenovationElectriqueComponent {
     }
   }
   
+  prec_formulaire_gamme:any
   constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
     this.load_gammes()
-    const prev_form = this.gestiondesdevisService.getFormulaireByName('gammes-produits-renovation-electrique');
-    if (prev_form) {
-      console.log("formulaire existant",prev_form)
-      this.renovationElectriqueForm = this.createRenovationElectriqueGroup();
-      this.renovationElectriqueForm.patchValue(prev_form.formulaire);
-
+    this.prec_formulaire_gamme = this.gestiondesdevisService.getFormulaireByName('gammes-produits-renovation-electrique');
+    if (this.prec_formulaire_gamme) {
+      let form=this.prec_formulaire_gamme.formulaire
+      console.log("formulaire existant",form)
+      this.renovationElectriqueForm = this.fb.group({
+        appareils_electrique: this.fb.array([]),
+        chauffage_exist: [form.chauffage_exist,]
+      });
     } else {
       console.log("formulaire non existant")
       this.renovationElectriqueForm = this.createRenovationElectriqueGroup();
+    }
+  }
+  active_Tp(index: number): void {
+    const formArray = this.renovationElectriqueForm.get('appareils_electrique') as FormArray;
+    const control = formArray?.at(index).get('active');
+  
+    if (control) {
+      // Toggle the value between true and false
+      control.setValue(!control.value);
     }
   }
   getAppareilActiveState(index: number): boolean {
@@ -89,14 +101,23 @@ export class GammesProduitsRenovationElectriqueComponent {
           [24, 25, 26, 27].includes(equipement.ID)
         );        
         console.log("réponse de la requette  getEquipementsByType:electrique",this.appareils_electrique);
+        let i=0
         this.appareils_electrique.forEach(appareil => {
           
-            const modeleEquipements = appareil.ModeleEquipements;
+          let modele=""
+          let active=false
+          let nombre=0
+          if(this.prec_formulaire_gamme){
+            let form=this.prec_formulaire_gamme.formulaire
+            modele=form?.appareils_electrique[i]?.modele
+            active=form?.appareils_electrique[i]?.active
+            nombre=form?.appareils_electrique[i]?.nombre
+          }
             // Créer un FormGroup pour chaque appareil
             const appareilGroup = this.fb.group({});
-            appareilGroup.addControl("nombre", this.fb.control(0, ));
-            appareilGroup.addControl("modele", this.fb.control("", ));
-            appareilGroup.addControl("active", this.fb.control(false, ));
+            appareilGroup.addControl("nombre", this.fb.control(nombre, ));
+            appareilGroup.addControl("modele", this.fb.control(modele, ));
+            appareilGroup.addControl("active", this.fb.control(active, ));
            
 
             // Obtenez les contrôles pour pouvoir les manipuler
@@ -121,7 +142,7 @@ export class GammesProduitsRenovationElectriqueComponent {
             });
             // Ajouter le FormGroup de l'appareil au FormArray
             (this.renovationElectriqueForm.get('appareils_electrique') as FormArray).push(appareilGroup);
-          
+          i++
             
         });
        

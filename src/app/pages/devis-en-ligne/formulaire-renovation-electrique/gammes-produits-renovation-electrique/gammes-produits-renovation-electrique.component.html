@@ -10,7 +10,7 @@
             <div *ngIf="appareils_electrique[i].ID!=27 || (renovationElectriqueForm.get('chauffage_exist')?.value=='true' && appareils_electrique[i].ID==27)">
               
               <nz-collapse nzAccordion >
-                  <nz-collapse-panel nzHeader="Modèles - {{appareils_electrique && appareils_electrique[i] ? appareils_electrique[i].Titre : ''}}" [nzActive]="getAppareilActiveState(i)" [nzExtra]="activerTp" nzShowArrow="false">
+                  <nz-collapse-panel nzHeader="Modèles - {{appareils_electrique && appareils_electrique[i] ? appareils_electrique[i].Titre : ''}}" [nzActive]="getAppareilActiveState(i)" [nzExtra]="activerTp" nzShowArrow="false" (nzActiveChange)="active_Tp(i)">
                     <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getAppareilNombreState(i)" class="error-message">
                       Vous devez faire un choix.
                     </div>
