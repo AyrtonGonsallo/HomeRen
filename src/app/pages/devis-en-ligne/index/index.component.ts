@@ -268,7 +268,7 @@ export class IndexComponent {
           break;
     
         case 5:
-          this.triggerSubmitGammesProduitsForm = !this.triggerSubmitGammesProduitsForm;
+          this.triggerSubmitGammesProduitsForm = false;
           break;
     
         default:
@@ -403,7 +403,7 @@ export class IndexComponent {
       this.current=1
       return true
     }
-    if(this.is_one_travail_selected && this.filteredTravail.ID==10 && this.current>=4){
+    if(this.is_one_travail_selected && this.filteredTravail.ID==10 && this.current==4){
       this.current=1
       return true
     }

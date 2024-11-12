@@ -72,10 +72,41 @@ createposePortesGroup(): FormGroup {
     creation_ou_remplacement: ['',Validators.required ],//boolean
   });
 }
+
+prec_formulaire_dimensions:any
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
-  this.posePortesForm = this.fb.group({
-    portes: this.fb.array([this.createposePortesGroup()])
-  });
+  
+  this.prec_formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("gammes-produits-pose-portes")
+    if(this.prec_formulaire_dimensions){
+      let form=this.prec_formulaire_dimensions.formulaire
+      console.log("formulaire existant",form)
+     
+      
+
+      // Handling `portes`
+      this.posePortesForm = this.fb.group({
+        portes: this.fb.array([])
+      });
+      const ouvertureArray = this.posePortesForm.get('portes') as FormArray;
+      form.portes.forEach((porte: any) => {
+        ouvertureArray.push(this.fb.group({
+          type: [porte.type, Validators.required],//select avec valeurs Porte alveolaire simple,Porte alveolaire double,Porte pleine double,Porte pleine simple, Porte vitrée simple,Porte vitrée double
+          type2: [porte.type2, Validators.required],// select avec valeurs a peindre, stratifiee, bois, autre 
+          type3: [porte.type3, Validators.required],//select avec valeurs porte simple, porte double
+          finition: [porte.finition, Validators.required],//select avec valeurs a Finition à peindre, finition stratifiee,finition bois,autre. Preciser
+          infos_comp_type: [porte.infos_comp_type, ],//text area
+          infos_comp_finition: [porte.infos_comp_finition, ],//text area
+          creation_ou_remplacement: [porte.creation_ou_remplacement,Validators.required ],//boolean
+        }));
+      });
+
+    }else{
+      console.log("formulaire non existant")
+      this.posePortesForm = this.fb.group({
+        portes: this.fb.array([this.createposePortesGroup()])
+      });
+     
+    }
   this.load_gammes()
  
 }
