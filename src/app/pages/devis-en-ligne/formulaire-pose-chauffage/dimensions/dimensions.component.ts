@@ -47,10 +47,21 @@ export class PoseChauffageDimensionsComponent {
     console.log(this.poseChauffageForm.value);
     }
   }
-  
+  prec_formulaire_dimensions:any
   constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
     
-    this.poseChauffageForm = this.createPoseChauffageGroup();
+    
+    this.prec_formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-pose-chauffage")
+    if(this.prec_formulaire_dimensions){
+      let form=this.prec_formulaire_dimensions.formulaire
+      console.log("formulaire existant",form)
+      this.poseChauffageForm = this.createPoseChauffageGroup();
+      this.poseChauffageForm.patchValue(form)
+    }
+    else{
+      console.log("formulaire inexistant")
+      this.poseChauffageForm = this.createPoseChauffageGroup();
+    }
    
   }
 

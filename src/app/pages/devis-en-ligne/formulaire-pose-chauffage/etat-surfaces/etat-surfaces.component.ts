@@ -57,20 +57,25 @@ createposeRadiateurGroup(): FormGroup {
     etat: ['', Validators.required],
   });
 }
+prev_form:any
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
   
-   const prev_form = this.gestiondesdevisService.getFormulaireByName('etat-surfaces-pose-radiateurs');
-    if (prev_form) {
-      console.log("formulaire existant",prev_form)
+    this.prev_form = this.gestiondesdevisService.getFormulaireByName('etat-surfaces-pose-chauffage');
+    if (this.prev_form) {
+      let form=this.prev_form.formulaire
+      console.log("formulaire existant",this.prev_form)
       this.poseRadiateursForm = this.fb.group({
-        radiateurs: this.fb.array([this.createposeRadiateurGroup()])
+        radiateurs: this.fb.array([])
       });
-      let formulaire_dimensions_length=prev_form.formulaire.radiateurs.length
-      for(let i=0;i<(formulaire_dimensions_length-1);i++){
-        this.addRadiateurGroup()
-      }
       
-      this.poseRadiateursForm.patchValue(prev_form.formulaire);
+      const mursArray = this.poseRadiateursForm.get('radiateurs') as FormArray;
+      form.radiateurs.forEach((rad: any) => {
+        mursArray.push(this.fb.group({
+          etat: [rad.etat, Validators.required],
+        }));
+      });
+      
+      
 
     } else {
       console.log("formulaire non existant")

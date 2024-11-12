@@ -64,24 +64,35 @@ createposeRadiateurGroup(): FormGroup {
 getRadiateurVisibleState(index: number): boolean {
   return (this.radiateurs as FormArray)?.at(index).get('visible')?.value;
 }
+
+prev_form:any
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
   
-  
-  const prev_form = this.gestiondesdevisService.getFormulaireByName('gammes-produits-pose-chauffage');
-    if (prev_form) {
-      console.log("formulaire existant",prev_form)
+
+  this.prev_form = this.gestiondesdevisService.getFormulaireByName('gammes-produits-pose-chauffage');
+    if (this.prev_form) {
+      let form=this.prev_form.formulaire
+      console.log("formulaire existant",this.prev_form)
       this.poseRadiateursForm = this.fb.group({
-        radiateurs: this.fb.array([this.createposeRadiateurGroup()])
+        radiateurs: this.fb.array([])
       });
-      let formulaire_dimensions_length=prev_form.formulaire.radiateurs.length
-      for(let i=0;i<(formulaire_dimensions_length-1);i++){
-        this.addRadiateurGroup()
-      }
       
-      this.poseRadiateursForm.patchValue(prev_form.formulaire);
+      const mursArray = this.poseRadiateursForm.get('radiateurs') as FormArray;
+      form.radiateurs.forEach((rad: any) => {
+        mursArray.push(this.fb.group({
+          gamme: [rad.gamme, ],
+            visible: [rad.visible, ]
+        }));
+      });
+      
+      
 
     } else {
       console.log("formulaire non existant")
+      this.poseRadiateursForm = this.fb.group({
+        radiateurs: this.fb.array([this.createposeRadiateurGroup()])
+      });
+      
       this.poseRadiateursForm = this.fb.group({
         radiateurs: this.fb.array([this.createposeRadiateurGroup()])
       });
@@ -106,8 +117,9 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
       console.log("longueur: ",this.formulaire_dimensions_length)
       console.log("formulaire: ",this.formulaire_dimensions)
     }
-  this.load_gammes()
- 
+  
+    this.load_gammes()
+  
 }
 
 //code de validation des formulaires
