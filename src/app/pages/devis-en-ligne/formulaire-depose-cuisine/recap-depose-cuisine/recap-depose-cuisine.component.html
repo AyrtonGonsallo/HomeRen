@@ -2,27 +2,27 @@
     <span style="font-size: 16px;text-align: left !important;font-weight: 900;color: #555555;height: 40px;" class="recup-fin">{{selectedPiece.Titre}}</span>
 
     <div class="recap-last" *ngIf="has_haut">
-        <div class="recap-mur-ttl" >Dépose d'élements hauts</div>
+        <div class="recap-mur-ttl" >Dépose d'élements de cuisine hauts</div>
         <div *ngFor="let eh of elements_hauts; let i = index" class="recup-mur-flx">
             <span class="mur-ttl" >Haut {{i+1}}</span>
             <div>
                 <span class="recup-fin" ><p>Hauteur </p><p>:</p><p>{{eh?.hauteur}} cm</p></span>
                 <span class="recup-fin" ><p>Longueur </p><p>:</p><p>{{eh?.longueur}} cm</p></span>
-                <span class="recup-fin" ><p>Quantite </p><p>:</p><p>{{eh?.quantite}}</p></span>
                 <span class="recup-fin" ><p>Profondeur </p><p>:</p><p>{{eh?.profondeur}} cm</p></span>
+                <span class="recup-fin" ><p>Quantité </p><p>:</p><p>{{eh?.quantite}}</p></span>
             </div>
         </div>
     </div>
 
     <div class="recap-last" *ngIf="has_bas">
-        <div class="recap-mur-ttl" >Dépose d'élements bas</div>
+        <div class="recap-mur-ttl" >Dépose d'élements de cuisine bas</div>
         <div *ngFor="let eb of elements_bas; let i = index" class="recup-mur-flx">
             <span class="mur-ttl" >Bas {{i+1}}</span>
             <div>
                 <span class="recup-fin" ><p>Hauteur </p><p>:</p><p>{{eb?.hauteur}} cm</p></span>
                 <span class="recup-fin" ><p>Longueur </p><p>:</p><p>{{eb?.longueur}} cm</p></span>
-                <span class="recup-fin" ><p>Quantite </p><p>:</p><p>{{eb?.quantite}}</p></span>
                 <span class="recup-fin" ><p>Profondeur </p><p>:</p><p>{{eb?.profondeur}} cm</p></span>
+                <span class="recup-fin" ><p>Quantité </p><p>:</p><p>{{eb?.quantite}}</p></span>
             </div>
         </div>
     </div>
