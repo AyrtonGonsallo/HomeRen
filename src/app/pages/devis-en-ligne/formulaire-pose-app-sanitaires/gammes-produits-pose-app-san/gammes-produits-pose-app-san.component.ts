@@ -67,10 +67,21 @@ appareilGroup: any;
     }
   }
   
+  prec_formulaire_gamme:any
   constructor(private fb: FormBuilder,private userService: ApiConceptsEtTravauxService,private gestiondesdevisService: GestionDesDevisService) {
     
     this.poseCuisineForm = this.createPoseCuisineGroup();
-    this.poseSalleDeBainForm = this.createPoseSalleDeBainGroup();
+
+    this.prec_formulaire_gamme=this.gestiondesdevisService.getFormulaireByName("gammes-produits-pose-app-san")
+    if(this.prec_formulaire_gamme){
+      let form=this.prec_formulaire_gamme.formulaire
+      console.log("formulaire existant",form)
+      this.poseSalleDeBainForm = this.createPoseSalleDeBainGroup();
+    }else{
+      console.log("formulaire non existant")
+      this.poseSalleDeBainForm = this.createPoseSalleDeBainGroup();
+    }
+    
   }
    
    //code de validation des formulaires
@@ -86,7 +97,25 @@ appareilGroup: any;
 
   appareils_cuisine:Equipement[]=[]
   appareils_salle_de_bain:Equipement[]=[]
-
+  getAppareilActiveState(index: number): boolean {
+    return (this.poseSalleDeBainForm.get('appareils_salle_de_bain') as FormArray)?.at(index).get('active')?.value;
+  }
+  getAppareilModeleState(index: number): boolean {
+    const appareilsFormArray = this.poseSalleDeBainForm.get('appareils_salle_de_bain') as FormArray;
+    const modeleValue = appareilsFormArray.at(index).get('modele')?.value;
+    let res=modeleValue !== null && modeleValue !== '';
+    // Vérifie que les valeurs de 'nombre' et 'modele' ne sont pas vides ou nulles
+    return !res;
+  }
+  active_Tp(index: number): void {
+    const formArray = this.poseSalleDeBainForm.get('appareils_salle_de_bain') as FormArray;
+    const control = formArray?.at(index).get('active');
+  
+    if (control) {
+      // Toggle the value between true and false
+      control.setValue(!control.value);
+    }
+  }
   ngOnInit(): void {
     this.loadAppareils()
   }
@@ -96,20 +125,54 @@ appareilGroup: any;
       (response: Equipement[]) => {
         this.appareils_salle_de_bain = response.filter(equipement => equipement.ModeleEquipements && equipement.ModeleEquipements.length > 0);
         console.log("réponse de la requette  getEquipementsByPiece:salledebain",this.appareils_salle_de_bain);
+        let i=0
+
         this.appareils_salle_de_bain.forEach(appareil => {
-        const modeleEquipements = appareil.ModeleEquipements;
+
+          let modele=""
+          let active=false
+          let depose=false
+          if(this.prec_formulaire_gamme){
+            let form=this.prec_formulaire_gamme.formulaire
+            modele=form?.appareils_salle_de_bain[i]?.modele
+            active=form?.appareils_salle_de_bain[i]?.active
+            depose=form?.appareils_salle_de_bain[i]?.depose
+          }
         
-          // Créer un FormGroup pour chaque appareil
+             // Créer un FormGroup pour chaque appareil
           const appareilGroup = this.fb.group({});
               
          
-            appareilGroup.addControl("depose", this.fb.control(false, ));
-            appareilGroup.addControl("modele", this.fb.control("", Validators.required));
+          appareilGroup.addControl("depose", this.fb.control(depose, ));
+          appareilGroup.addControl("active", this.fb.control(active, ));
+          appareilGroup.addControl("modele", this.fb.control(modele, ));
+         
+
+          // Obtenez les contrôles pour pouvoir les manipuler
+          const nombreControl = appareilGroup.get('depose');
+          const modeleControl = appareilGroup.get('modele');
+          const activeControl = appareilGroup.get('active');
+
+          // Abonnez-vous aux changements de la valeur de 'active'
+          activeControl?.valueChanges.subscribe((isActive: boolean) => {
+            if (isActive) {
+              // Si 'active' est true, ajouter les validateurs
+              nombreControl?.setValidators(Validators.required);
+              modeleControl?.setValidators(Validators.required);
+            } else {
+              // Sinon, supprimer les validateurs
+              nombreControl?.clearValidators();
+              modeleControl?.clearValidators();
+            }
+            // Mettre à jour la validation pour forcer la vérification des erreurs
+            nombreControl?.updateValueAndValidity();
+            modeleControl?.updateValueAndValidity();
+          });
            
 
           // Ajouter le FormGroup de l'appareil au FormArray
           (this.poseSalleDeBainForm.get('appareils_salle_de_bain') as FormArray).push(appareilGroup);
-        
+          i++
           
         });
        

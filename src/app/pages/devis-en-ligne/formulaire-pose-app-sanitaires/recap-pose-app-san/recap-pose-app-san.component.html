@@ -3,8 +3,8 @@
     <span class="recup-fin recap-piece">{{selectedPiece.Titre}}</span>
    
     <div *ngFor="let appareil of appareils_a_ajouter">
-        <div >
-            <span class="recup-fin"><p>Titre</p><p>:</p><p>{{get_title(appareil.modele)}}</p></span>
+        <div *ngIf="appareil.active">
+            <span class="recup-fin"><p>{{get_title(appareil.modele)}}</p></span>
             <span class="recup-fin"><p>Dépose</p><p>:</p><p>{{appareil.depose}}</p></span>
            
         </div>

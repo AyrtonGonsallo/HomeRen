@@ -17,15 +17,18 @@ export class RecapPosePlomberieComponent {
   @Input() selectedPiece: any;
   posePlomberieForm: any;
   appareilschoisis: any[] = [];
-
+type=""
   constructor(
     private gestiondesdevisService: GestionDesDevisService,
     private userService: ApiConceptsEtTravauxService
   ) {
-    this.posePlomberieForm = (this.gestiondesdevisService.getFormulaireByName("pose-plomberie-s"))?this.gestiondesdevisService.getFormulaireByName("pose-plomberie-s"):this.gestiondesdevisService.getFormulaireByName("pose-plomberie-c");
-console.log(this.posePlomberieForm)
+
+    this.type = (this.gestiondesdevisService.getFormulaireByName("pose-plomberie-cuisine"))?"cuisine":"salle de bain";
+    this.posePlomberieForm = (this.gestiondesdevisService.getFormulaireByName("pose-plomberie-cuisine"))?this.gestiondesdevisService.getFormulaireByName("pose-plomberie-cuisine"):this.gestiondesdevisService.getFormulaireByName("pose-plomberie-salle-de-bain");
+    console.log("type: ",this.type)
+    console.log("formulaire: ",this.posePlomberieForm)
     // Typage explicite pour appareils_form_data
-    let appareils_form_datas: AppareilFormData[] = (this.posePlomberieForm.formulaire["gammes-produits-pose-plomberie"].appareils_salle_de_bain)?this.posePlomberieForm.formulaire["gammes-produits-pose-plomberie"].appareils_salle_de_bain:this.posePlomberieForm.formulaire["gammes-produits-pose-plomberie"].appareils_cuisine;
+    let appareils_form_datas: AppareilFormData[] = (this.type=="cuisine")?this.posePlomberieForm.formulaire["gammes-produits-pose-plomberie-cuisine"].appareils_cuisine:this.posePlomberieForm.formulaire["gammes-produits-pose-plomberie-salle-de-bain"].appareils_salle_de_bain;
 
     // Utilisation du typage pour le paramètre appareil
     appareils_form_datas.forEach((appareil: AppareilFormData) => {
@@ -43,4 +46,14 @@ console.log(this.posePlomberieForm)
 
     console.log("choisis: ", this.appareilschoisis);
   }
+
+
+  get_label(slug: any): string {
+    // Convert the value to a boolean if it is a string
+    const booleanSlug = (slug === 'true' || slug === true) ? true : false;
+  
+    return booleanSlug ? 'oui' : 'non';
+  }
+
+
 }

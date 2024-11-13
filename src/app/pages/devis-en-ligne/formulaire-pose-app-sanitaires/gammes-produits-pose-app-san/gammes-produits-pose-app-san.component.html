@@ -3,13 +3,18 @@
       <form [formGroup]="poseSalleDeBainForm" (ngSubmit)="onPoseSalleDeBainSubmit()">
         <div formArrayName="appareils_salle_de_bain" class="flx-pr">
           <div *ngFor="let appareilGroup of appareils_salle_de_bain; let i = index" [formGroupName]="i">
-            <div class="" *ngIf="isclicked && getposeSalleDeBainForm.controls[i].get(appareilGroup.Titre + ' modele')?.invalid" class="error-message">
-              Vous devez faire un choix.
-            </div>
+            
             <!-- <div class="div-chauf-gm"><h3 class="ttl-type jaune">{{appareils_salle_de_bain && appareils_salle_de_bain[i] ? appareils_salle_de_bain[i].Titre : ""}}</h3></div> -->
             <nz-collapse nzAccordion>
-                <nz-collapse-panel [nzHeader]="appareils_salle_de_bain[i].Titre" [nzActive]="false">
-                    <nz-radio-group formControlName="modele" class="radio-flx-spc">
+                <nz-collapse-panel [nzHeader]="appareils_salle_de_bain[i].Titre" [nzActive]="getAppareilActiveState(i)" [nzExtra]="activerTp" nzShowArrow="false" (nzActiveChange)="active_Tp(i)">
+                  <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getAppareilModeleState(i)" class="error-message">
+                    Vous devez faire un choix.
+                  </div>
+                  <div class="div-mur-gm" style="width:100%;">
+                    <span class="mur-ttl">
+                    Gamme</span> <span class="error-message" *ngIf="getAppareilActiveState(i)">*</span> : 
+                  </div>
+                  <nz-radio-group formControlName="modele" class="radio-flx-spc">
                         <div nz-row nzJustify="start" *ngFor="let modele of appareilGroup.ModeleEquipements">
                           <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf">
                               <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">
@@ -40,6 +45,11 @@
                       </div>  
                   </nz-collapse-panel>
             </nz-collapse>
+            <ng-template #activerTp>
+              <label nz-checkbox formControlName="active">
+                
+              </label>
+            </ng-template>
           </div>
         </div>
       </form>
