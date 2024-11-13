@@ -8,6 +8,44 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: './dimensions-depose-cuisine.component.css'
 })
 export class DimensionsDeposeCuisineComponent {
+  is_active_Ecb=false
+  is_active_Ech=false
+  active_Ech(){
+    this.is_active_Ech=!this.is_active_Ech
+    const elements = this.deposeElementCuisinesHautForm.get('elementcuisines_haut') as FormArray;
+    elements.controls.forEach(formGroup => {
+      if (formGroup instanceof FormGroup) {
+        // Appliquez ou supprimez les validateurs pour chaque contrôle
+        ['hauteur', 'longueur', 'profondeur', 'quantite'].forEach(field => {
+          const control = formGroup.get(field);
+          if (this.is_active_Ech) {
+            control?.setValidators(Validators.required);
+          } else {
+            control?.clearValidators();
+          }
+          control?.updateValueAndValidity();
+        });
+      }
+    });
+  }
+  active_Ecb(){
+    this.is_active_Ecb=!this.is_active_Ecb
+    const elements = this.deposeElementCuisinesBasForm.get('elementcuisines_bas') as FormArray;
+    elements.controls.forEach(formGroup => {
+      if (formGroup instanceof FormGroup) {
+        // Appliquez ou supprimez les validateurs pour chaque contrôle
+        ['hauteur', 'longueur', 'profondeur', 'quantite'].forEach(field => {
+          const control = formGroup.get(field);
+          if (this.is_active_Ecb) {
+            control?.setValidators(Validators.required);
+          } else {
+            control?.clearValidators();
+          }
+          control?.updateValueAndValidity();
+        });
+      }
+    });
+  }
   isclicked=false
   @Input() triggerSubmitDimensionForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
@@ -35,12 +73,12 @@ get elementcuisines_bas(): FormArray {
 
 addElementCuisine_hautGroup(): void {
   if (this.elementcuisines_haut.length < 4) {
-    this.elementcuisines_haut.push(this.createdeposeElementCuisineGroup());
+    this.elementcuisines_haut.push(this.createdeposeElementHautCuisineGroup());
   }
 }
 addElementCuisine_basGroup(): void {
   if (this.elementcuisines_bas.length < 4) {
-    this.elementcuisines_bas.push(this.createdeposeElementCuisineGroup());
+    this.elementcuisines_bas.push(this.createdeposeElementBasCuisineGroup());
   }
 }
 
@@ -60,66 +98,95 @@ onPoseElementCuisinesSubmit(): void {
     // Fusionner les deux formulaires
     const fusion = {
       ...this.deposeElementCuisinesHautForm.value,  // Valeurs du formulaire du haut
-      ...this.deposeElementCuisinesBasForm.value    // Valeurs du formulaire du bas
+      ...this.deposeElementCuisinesBasForm.value,    // Valeurs du formulaire du bas
+      "is_active_Ecb":this.is_active_Ecb,
+      "is_active_Ech":this.is_active_Ech,
     };
     this.formValidityChange.emit(true);
-    console.log('Fusion des formulaires:', fusion);
-
+  
     // Ajouter le formulaire fusionné via le service
-    this.gestiondesdevisService.addFormulaire('dimensions-depose-elementcuisines', 14, fusion);
+    this.gestiondesdevisService.addFormulaire('dimensions-depose-elementcuisines', 2, fusion);
+    console.log('Formulaire soumis: ',this.gestiondesdevisService.getFormulaireByName('dimensions-depose-elementcuisines'));
   }
 }
-createdeposeElementCuisineGroup(): FormGroup {
+createdeposeElementHautCuisineGroup(): FormGroup {
   return this.fb.group({
-    hauteur: ['', Validators.required],
-    longueur: ['', Validators.required],
-    profondeur: ['', Validators.required],
-    quantite: ['', Validators.required],
+    hauteur: ['', this.is_active_Ech ? Validators.required : null],
+    longueur: ['', this.is_active_Ech ? Validators.required : null],
+    profondeur: ['', this.is_active_Ech ? Validators.required : null],
+    quantite: [1, this.is_active_Ech ? Validators.required : null],
     image: [null]
   });
 }
+createdeposeElementBasCuisineGroup(): FormGroup {
+  return this.fb.group({
+    hauteur: ['', this.is_active_Ecb ? Validators.required : null],
+    longueur: ['', this.is_active_Ecb ? Validators.required : null],
+    profondeur: ['', this.is_active_Ecb ? Validators.required : null],
+    quantite: [1, this.is_active_Ecb ? Validators.required : null],
+    image: [null]
+  });
+}
+
+
+prev_form:any
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
   
-  const prev_form_haut = this.gestiondesdevisService.getFormulaireByName('dimensions-depose-elementcuisines_haut');
-  const prev_form_bas = this.gestiondesdevisService.getFormulaireByName('dimensions-depose-elementcuisines_bas');
+
+  this.prev_form = this.gestiondesdevisService.getFormulaireByName('dimensions-depose-elementcuisines');
+  let prev_form_haut = this.prev_form?this.prev_form.formulaire.elementcuisines_haut:null;
+  let prev_form_bas = this.prev_form?this.prev_form.formulaire.elementcuisines_bas:null;
+
+  this.is_active_Ecb=(this.prev_form)?this.prev_form.formulaire.is_active_Ecb:false
+  this.is_active_Ech=(this.prev_form)?this.prev_form.formulaire.is_active_Ech:false
   if (prev_form_haut) {
-    console.log("formulaire existant",prev_form_haut)
+    let elementsHauts=prev_form_haut
+    console.log("formulaire haut existant",elementsHauts)
     this.deposeElementCuisinesHautForm = this.fb.group({
-      elementcuisines: this.fb.array([this.createdeposeElementCuisineGroup()])
+      elementcuisines_haut: this.fb.array([])
     });
-    let formulaire_dimensions_length=prev_form_haut.formulaire.elementcuisines.length
-    for(let i=0;i<(formulaire_dimensions_length-1);i++){
-      this.addElementCuisine_hautGroup()
-    }
-    
-    this.deposeElementCuisinesHautForm.patchValue(prev_form_haut.formulaire);
+    const elementsHaut = this.deposeElementCuisinesHautForm.get('elementcuisines_haut') as FormArray;
+    elementsHauts.forEach((el: any) => {
+      elementsHaut.push(this.fb.group({
+        hauteur: [el.hauteur, this.is_active_Ech ? Validators.required : null],
+        longueur: [el.longueur, this.is_active_Ech ? Validators.required : null],
+        profondeur: [el.profondeur, this.is_active_Ech ? Validators.required : null],
+        quantite: [el.quantite, this.is_active_Ech ? Validators.required : null],
+        image: [el.image]
+      }));
+    });
 
   } 
   else {
     console.log("formulaire non existant")
     this.deposeElementCuisinesHautForm = this.fb.group({
-      elementcuisines_haut: this.fb.array([this.createdeposeElementCuisineGroup()])
+      elementcuisines_haut: this.fb.array([this.createdeposeElementHautCuisineGroup()])
     });
   }
 
   if (prev_form_bas) {
-    console.log("formulaire existant",prev_form_bas)
+    let elementsBas=prev_form_bas
+    console.log("formulaire bas existant",elementsBas)
     this.deposeElementCuisinesBasForm = this.fb.group({
-      elementcuisines: this.fb.array([this.createdeposeElementCuisineGroup()])
+      elementcuisines_bas: this.fb.array([])
     });
-    let formulaire_dimensions_length=prev_form_bas.formulaire.elementcuisines.length
-    for(let i=0;i<(formulaire_dimensions_length-1);i++){
-      this.addElementCuisine_basGroup()
-    }
-    
-    this.deposeElementCuisinesBasForm.patchValue(prev_form_bas.formulaire);
+    const elementsBass = this.deposeElementCuisinesBasForm.get('elementcuisines_bas') as FormArray;
+    elementsBas.forEach((el: any) => {
+      elementsBass.push(this.fb.group({
+        hauteur: [el.hauteur, this.is_active_Ech ? Validators.required : null],
+        longueur: [el.longueur, this.is_active_Ech ? Validators.required : null],
+        profondeur: [el.profondeur, this.is_active_Ech ? Validators.required : null],
+        quantite: [el.quantite, this.is_active_Ech ? Validators.required : null],
+        image: [el.image]
+      }));
+    });
 
   } 
   else {
     console.log("formulaire non existant")
     
     this.deposeElementCuisinesBasForm = this.fb.group({
-      elementcuisines_bas: this.fb.array([this.createdeposeElementCuisineGroup()])
+      elementcuisines_bas: this.fb.array([this.createdeposeElementBasCuisineGroup()])
     });
   }
  
@@ -139,6 +206,8 @@ onElementCuisines_hautFileChange(event: Event, index: number): void {
   }
   
 }
+
+
 
 onElementCuisines_basFileChange(event: Event, index: number): void {
   const inputElement = event.target as HTMLInputElement;
@@ -164,6 +233,10 @@ markFormGroupTouched(formGroup: FormGroup) {
     }
   });
 }
+
+
+
+
 
 }
 

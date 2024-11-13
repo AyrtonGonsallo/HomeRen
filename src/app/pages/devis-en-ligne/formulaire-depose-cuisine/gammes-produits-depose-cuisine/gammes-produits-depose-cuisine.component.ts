@@ -19,19 +19,67 @@ export class GammesProduitsDeposeCuisineComponent implements OnInit {
   @Output() formValidityChange = new EventEmitter<boolean>();
 
   maxFileSize = 10 * 1024 * 1024; // 10 MB en octets
-
+  prec_formulaire_gamme:any
   constructor(
     private fb: FormBuilder,
     private gestiondesdevisService: GestionDesDevisService,
     private userService: ApiConceptsEtTravauxService
   ) {
-    this.deposeElementCuisinesForm = this.fb.group({
-      gammes: this.fb.array([])
-    });
+
+    this.prec_formulaire_gamme=this.gestiondesdevisService.getFormulaireByName("gammes-produits-depose-elementcuisines")
+    if(this.prec_formulaire_gamme){
+      let form=this.prec_formulaire_gamme.formulaire
+      console.log("formulaire existant",form)
+      this.deposeElementCuisinesForm = this.fb.group({
+        gammes: this.fb.array([])
+      });
+      const gammes_array = this.deposeElementCuisinesForm.get('gammes') as FormArray;
+      form.gammes.forEach((gamme: any) => {
+        gammes_array.push(this.fb.group({
+          active: [gamme.active, Validators.required],
+          quantite: [gamme.quantite, Validators.required],
+          titre: [gamme.titre, Validators.required],
+          prix: [gamme.prix, Validators.required],
+          image: [gamme.image]
+        }));
+      });
+     
+
+    }else{
+      console.log("formulaire non existant")
+      this.deposeElementCuisinesForm = this.fb.group({
+        gammes: this.fb.array([])
+      });
+    }
+
+
+    
+  }
+
+
+  getGammeActiveState(index: number): boolean {
+    return (this.deposeElementCuisinesForm.get('gammes') as FormArray)?.at(index).get('active')?.value;
+  }
+  active_Tp(index: number): void {
+    const formArray = this.deposeElementCuisinesForm.get('gammes') as FormArray;
+    const control = formArray?.at(index).get('active');
+  
+    if (control) {
+      // Toggle the value between true and false
+      control.setValue(!control.value);
+    }
+  }
+  getGammeNombreState(index: number): boolean {
+    const appareilsFormArray = this.deposeElementCuisinesForm.get('gammes') as FormArray;
+    const nombreValue = appareilsFormArray.at(index).get('quantite')?.value;
+    let res=nombreValue !== null && nombreValue !== 0;
+    // Vérifie que les valeurs de 'nombre' et 'modele' ne sont pas vides ou nulles
+    return !res;
   }
 
   ngOnInit(): void {
     this.load_gammes();
+    
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -46,7 +94,8 @@ export class GammesProduitsDeposeCuisineComponent implements OnInit {
   // Créer un groupe de champs pour chaque élément cuisine
   createdeposeElementCuisinesGroup(param_prix:number,param_label:string): FormGroup {
     return this.fb.group({
-      quantite: ['', Validators.required],
+      active: [false, Validators.required],
+      quantite: [1, Validators.required],
       titre: [param_label, Validators.required],
       prix: [param_prix, Validators.required],
       image: [null]

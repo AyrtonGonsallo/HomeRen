@@ -331,7 +331,7 @@ export class IndexComponent {
       if(this.current==2 ){
         console.log("formulaire dim valide ? ",this.is_formulaire_dimensions_valid)
         if(this.is_formulaire_dimensions_valid){
-          if(this.filteredTravail.ID==2 || this.filteredTravail.ID==3){
+          if( this.filteredTravail.ID==2 || this.filteredTravail.ID==3){
             this.current=4
           }else{
             this.current += 1;
@@ -377,6 +377,7 @@ export class IndexComponent {
       this.current=4
       return true
     }
+    
     if(this.is_one_travail_selected && this.filteredTravail.ID==10 && this.current<=2){
       this.current=4
       return true
@@ -413,6 +414,10 @@ export class IndexComponent {
       return true
     }
     if(this.is_one_travail_selected && this.filteredTravail.ID==3 && this.current>=4){
+      this.current=2
+      return true
+    }
+    if(this.is_one_travail_selected && this.filteredTravail.ID==2 && this.current==4){
       this.current=2
       return true
     }

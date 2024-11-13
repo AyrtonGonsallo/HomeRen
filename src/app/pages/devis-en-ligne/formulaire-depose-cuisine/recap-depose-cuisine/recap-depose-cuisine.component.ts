@@ -13,6 +13,8 @@ export class RecapDeposeCuisineComponent {
   gammes: any;
   elements_hauts: any;
   elements_bas: any;
+  has_haut=false
+  has_bas=false
   constructor(
     private gestiondesdevisService: GestionDesDevisService,
     private userService: ApiConceptsEtTravauxService
@@ -23,6 +25,9 @@ export class RecapDeposeCuisineComponent {
     console.log(this.elements_hauts );
     this.elements_bas = this.gestiondesdevisService.getFormulaireByName("depose-elementcuisines").formulaire["dimensions-depose-elementcuisines"].elementcuisines_bas;
     console.log(this.elements_bas );
+    this.has_bas = this.gestiondesdevisService.getFormulaireByName("depose-elementcuisines").formulaire["dimensions-depose-elementcuisines"].is_active_Ecb;
+    this.has_haut = this.gestiondesdevisService.getFormulaireByName("depose-elementcuisines").formulaire["dimensions-depose-elementcuisines"].is_active_Ech;
+
   }
 
   

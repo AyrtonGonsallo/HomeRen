@@ -1,36 +1,37 @@
-<div *ngIf="gammes" class="recap-div devis-content">
+<div  class="recap-div devis-content">
     <span style="font-size: 16px;text-align: left !important;font-weight: 900;color: #555555;height: 40px;" class="recup-fin">{{selectedPiece.Titre}}</span>
 
-    <div class="recap-last">
-    <div class="recap-mur-ttl" >Dépose d'élements hauts</div>
-    <div *ngFor="let eh of elements_hauts; let i = index" class="recup-mur-flx">
-        <span class="mur-ttl" >Haut {{i+1}}</span>
-        <div>
-        <span class="recup-fin" ><p>Hauteur </p><p>:</p><p>{{eh?.hauteur}} cm</p></span>
-        <span class="recup-fin" ><p>Longueur </p><p>:</p><p>{{eh?.longueur}} cm</p></span>
-        <span class="recup-fin" ><p>Quantite </p><p>:</p><p>{{eh?.quantite}}</p></span>
-        <span class="recup-fin" ><p>Profondeur </p><p>:</p><p>{{eh?.profondeur}} cm</p></span>
+    <div class="recap-last" *ngIf="has_haut">
+        <div class="recap-mur-ttl" >Dépose d'élements hauts</div>
+        <div *ngFor="let eh of elements_hauts; let i = index" class="recup-mur-flx">
+            <span class="mur-ttl" >Haut {{i+1}}</span>
+            <div>
+                <span class="recup-fin" ><p>Hauteur </p><p>:</p><p>{{eh?.hauteur}} cm</p></span>
+                <span class="recup-fin" ><p>Longueur </p><p>:</p><p>{{eh?.longueur}} cm</p></span>
+                <span class="recup-fin" ><p>Quantite </p><p>:</p><p>{{eh?.quantite}}</p></span>
+                <span class="recup-fin" ><p>Profondeur </p><p>:</p><p>{{eh?.profondeur}} cm</p></span>
+            </div>
         </div>
     </div>
 
-    <div class="recap-last">
-    <div class="recap-mur-ttl" >Dépose d'élements bas</div>
-    <div *ngFor="let eb of elements_bas; let i = index" class="recup-mur-flx">
-        <span class="mur-ttl" >Bas {{i+1}}</span>
-        <div>
-        <span class="recup-fin" ><p>Hauteur </p><p>:</p><p>{{eb?.hauteur}} cm</p></span>
-        <span class="recup-fin" ><p>Longueur </p><p>:</p><p>{{eb?.longueur}} cm</p></span>
-        <span class="recup-fin" ><p>Quantite </p><p>:</p><p>{{eb?.quantite}}</p></span>
-        <span class="recup-fin" ><p>Profondeur </p><p>:</p><p>{{eb?.profondeur}} cm</p></span>
+    <div class="recap-last" *ngIf="has_bas">
+        <div class="recap-mur-ttl" >Dépose d'élements bas</div>
+        <div *ngFor="let eb of elements_bas; let i = index" class="recup-mur-flx">
+            <span class="mur-ttl" >Bas {{i+1}}</span>
+            <div>
+                <span class="recup-fin" ><p>Hauteur </p><p>:</p><p>{{eb?.hauteur}} cm</p></span>
+                <span class="recup-fin" ><p>Longueur </p><p>:</p><p>{{eb?.longueur}} cm</p></span>
+                <span class="recup-fin" ><p>Quantite </p><p>:</p><p>{{eb?.quantite}}</p></span>
+                <span class="recup-fin" ><p>Profondeur </p><p>:</p><p>{{eb?.profondeur}} cm</p></span>
+            </div>
         </div>
     </div>
-</div>
-<div class="recap-last">
+<div class="recap-last" *ngIf="gammes">
     <div class="recap-mur-ttl" >Dépose d'électromenager</div>
     <div *ngFor="let gamme of gammes" >
-    <div> </div>
-    <div>
+    <div *ngIf="gamme.active">
         <span class="recup-fin" ><p>Appareil</p><p>:</p><p>{{gamme?.titre}}</p></span>   
+        <span class="recup-fin" ><p>Quantité </p><p>:</p><p>{{gamme?.quantite}}</p></span>
     </div>
 </div>
 </div>
