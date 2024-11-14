@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
+import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
 
 @Component({
   selector: 'app-gammes-produits-creation-murs-non-porteurs',
@@ -25,7 +26,7 @@ export class MursNonPorteursGammesProduitsComponent {
   isclicked=false
 
   prec_formulaire_gammes:any
-constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
+constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
  
   this.prec_formulaire_gammes=this.gestiondesdevisService.getFormulaireByName("gammes-produits-creation-murs-non-porteurs--portes")
   if(this.prec_formulaire_gammes){
@@ -40,11 +41,12 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
       }));
     });
 
-
+    this.load_types()
   }else{
     this.posePortesForm = this.fb.group({
       portes: this.fb.array([this.createposePortesGroup()])
     });
+    this.load_types()
   }
 
 
@@ -104,7 +106,18 @@ createposePortesGroup(): FormGroup {
   });
 }
 
- 
+types:any[]=[]
+load_types(){
+  this.userService.getGammesByTravailAndType(4,"type-de-porte-creation-murs-non-porteurs").subscribe(
+    (response: any) => {
+      console.log('recuperation des types type-de-porte-creation-murs-non-porteurs:', response);
+      this.types=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des types type-de-porte-creation-murs-non-porteurs :', error);
+    }
+  );
+}
 
 
 }

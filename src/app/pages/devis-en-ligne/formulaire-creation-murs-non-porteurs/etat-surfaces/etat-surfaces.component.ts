@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
+import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
 
 @Component({
   selector: 'app-etat-surfaces-creation-murs-non-porteurs',
@@ -68,7 +69,7 @@ createposeMurNonPorteurroup(): FormGroup {
   });
 }
 prec_formulaire_etat_surfaces:any
-constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
+constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
 
   this.prec_formulaire_etat_surfaces=this.gestiondesdevisService.getFormulaireByName("etat-surfaces-creation-murs-non-porteurs--murs")
   if(this.prec_formulaire_etat_surfaces){
@@ -83,7 +84,7 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
         autre_type_cloison: [mursNonporteur.autre_type_cloison, ],
       }));
     });
-
+    this.load_types()
 
   }else{
     this.poseMursNonPorteursForm = this.fb.group({
@@ -94,6 +95,7 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
     for(let i=0;i<(this.formulaire_dimensions_length-1);i++){
       this.addMurNonPorteurroup()
     }
+    this.load_types()
     console.log("longueur: ",this.formulaire_dimensions_length)
     console.log("formulaire: ",this.formulaire_dimensions)
   }
@@ -114,6 +116,17 @@ markFormGroupTouched(formGroup: FormGroup) {
   });
 }
 
-
+types:any[]=[]
+load_types(){
+  this.userService.getGammesByTravailAndType(4,"type-de-cloison-murs-non-porteurs").subscribe(
+    (response: any) => {
+      console.log('recuperation des types type-de-cloison-murs-non-porteurs:', response);
+      this.types=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des types type-de-cloison-murs-non-porteurs :', error);
+    }
+  );
+}
 
 }

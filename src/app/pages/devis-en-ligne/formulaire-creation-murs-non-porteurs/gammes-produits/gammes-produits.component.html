@@ -12,57 +12,21 @@
             <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
                 
                 <nz-radio-group formControlName="type" class="radio-flx-spc">
-                  <div><label nz-radio nzValue="Porte alveolaire simple"><span>Porte alvéolaire simple</span></label>
+                  <div  *ngFor="let option of types" >
+                    <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label"><span>{{option.Label}}</span></label>
                     <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
                       <i class="far fa-question-circle"></i>
                     </a>
                     <ng-template #tooltipBonEtat>
-                      Porte alveolaire simple
+                      {{option.Label}}
                     </ng-template>
                   </div>
-                  <div><label nz-radio nzValue="Porte alveolaire double"><span>Porte alvéolaire double</span></label>
-                    <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
-                      <i class="far fa-question-circle"></i>
-                    </a>
-                    <ng-template #tooltipBonEtat>
-                      Porte alveolaire double
-                    </ng-template>
-                  </div>
-                  <div><label nz-radio nzValue="Porte pleine double"><span>Porte pleine double</span></label>
-                    <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
-                      <i class="far fa-question-circle"></i>
-                    </a>
-                    <ng-template #tooltipBonEtat>
-                      Porte pleine double
-                    </ng-template>
-                  </div>
-                  <div><label nz-radio nzValue="Porte pleine simple"><span>Porte pleine simple</span></label>
-                    <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
-                      <i class="far fa-question-circle"></i>
-                    </a>
-                    <ng-template #tooltipBonEtat>
-                      Porte pleine simple
-                    </ng-template>
-                  </div>
-                  <div><label nz-radio nzValue="Porte vitrée simple"><span>Porte vitrée simple</span></label>
-                    <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
-                      <i class="far fa-question-circle"></i>
-                    </a>
-                    <ng-template #tooltipBonEtat>
-                      Porte vitrée simple
-                    </ng-template>
-                  </div>
-                  <div><label nz-radio nzValue="Porte vitrée double"><span>Porte vitrée double</span></label>
-                    <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
-                      <i class="far fa-question-circle"></i>
-                    </a>
-                    <ng-template #tooltipBonEtat>
-                      Porte vitrée double
-                    </ng-template>
-                  </div>
+                  
                 </nz-radio-group>
             </div>
-          
+            <div *ngIf="isclicked && portes.controls[i].get('type')?.invalid " class="error-message">
+              Le type de porte est requis.
+            </div>
           </div>
         </div> 
       </div>

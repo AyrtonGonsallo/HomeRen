@@ -18,4 +18,8 @@ export class RecapPoseCreationMursNonPorteursComponent {
     
    
   }
+
+  get_title(slug:string){
+    return slug.split(":")[2];
+  }
 }
