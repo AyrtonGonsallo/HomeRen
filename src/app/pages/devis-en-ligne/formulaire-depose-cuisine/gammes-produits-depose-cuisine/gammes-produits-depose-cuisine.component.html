@@ -11,14 +11,14 @@
             <div nz-row nzJustify="start" class="cuisine-flx">
               <!-- Champ Quantité -->
               <div nz-col nzSpan="24" class="ant-col tooltip-srf etat-srf">
-                  <label for="quantite-{{i}}">Quantité :</label>
+                  <label for="quantite-{{i}}">Quantité <span class="error-message" *ngIf="getGammeActiveState(i)">*</span> :</label>
                   <input id="quantite-{{i}}" type="number" formControlName="quantite" min="1"/>
                   <a nz-tooltip [nzTooltipTitle]="tooltipHauteur" href="javascript:void(0)" class="info-icon">
                     <i class="far fa-question-circle"></i>
                   </a>
               </div>
               <div *ngIf="gamme.get('quantite')?.invalid && isclicked" class="error-message">
-                Quantité requise
+                Quantité invalide
               </div>
               <!-- Champ Image -->
               <div nz-col nzSpan="24" class="ant-col tooltip-srf etat-srf">

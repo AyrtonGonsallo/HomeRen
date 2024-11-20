@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
+import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-etat-surfaces-pose-murs',
@@ -58,8 +60,8 @@ createposeMurGroup(): FormGroup {
     typedepose: ['', ]
   });
 }
-constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-  
+constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
+  this.load_types()
    const prev_form = this.gestiondesdevisService.getFormulaireByName('etat-surfaces-pose-murs');
     if (prev_form) {
       console.log("formulaire existant",prev_form)
@@ -116,4 +118,18 @@ markFormGroupTouched(formGroup: FormGroup) {
   });
 }
 
+baseurl=environment.imagesUrl
+
+type_de_depose:any
+load_types(){
+  this.userService.getGammesByTravailAndType(5,"depose-murs	").subscribe(
+    (response: any) => {
+      console.log('recuperation des types depose-murs	:', response);
+      this.type_de_depose=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des types depose-murs	 :', error);
+    }
+  );
+}
 }

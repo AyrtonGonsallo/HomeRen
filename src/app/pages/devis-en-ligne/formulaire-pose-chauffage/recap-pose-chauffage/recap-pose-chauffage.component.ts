@@ -26,5 +26,6 @@ export class RecapPoseChauffageComponent {
     return slug.split(":")[2];
   }
   
+  
 }
 

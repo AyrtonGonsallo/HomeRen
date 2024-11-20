@@ -37,7 +37,7 @@ export class GammesProduitsDeposeCuisineComponent implements OnInit {
       form.gammes.forEach((gamme: any) => {
         gammes_array.push(this.fb.group({
           active: [gamme.active, Validators.required],
-          quantite: [gamme.quantite, Validators.required],
+          quantite: [gamme.quantite, [Validators.required, Validators.min(1), Validators.max(50)]],
           titre: [gamme.titre, Validators.required],
           prix: [gamme.prix, Validators.required],
           image: [gamme.image]
@@ -63,10 +63,11 @@ export class GammesProduitsDeposeCuisineComponent implements OnInit {
   active_Tp(index: number): void {
     const formArray = this.deposeElementCuisinesForm.get('gammes') as FormArray;
     const control = formArray?.at(index).get('active');
-  
+    const control2 = formArray?.at(index).get('quantite');
     if (control) {
       // Toggle the value between true and false
       control.setValue(!control.value);
+      control2?.setValidators([Validators.required, Validators.min(1), Validators.max(50)]);
     }
   }
   getGammeNombreState(index: number): boolean {
@@ -95,7 +96,7 @@ export class GammesProduitsDeposeCuisineComponent implements OnInit {
   createdeposeElementCuisinesGroup(param_prix:number,param_label:string): FormGroup {
     return this.fb.group({
       active: [false, Validators.required],
-      quantite: [1, Validators.required],
+      quantite: [1, [Validators.required, Validators.min(1), Validators.max(50)]],
       titre: [param_label, Validators.required],
       prix: [param_prix, Validators.required],
       image: [null]

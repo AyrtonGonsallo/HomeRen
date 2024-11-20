@@ -18,4 +18,10 @@ export class RecapPoseAppSanComponent {
   get_title(slug:string){
     return slug.split(":")[1];
   }
+  get_label(slug: any): string {
+    // Convert the value to a boolean if it is a string
+    const booleanSlug = (slug === 'true' || slug === true) ? true : false;
+  
+    return booleanSlug ? 'oui' : 'non';
+  }
 }

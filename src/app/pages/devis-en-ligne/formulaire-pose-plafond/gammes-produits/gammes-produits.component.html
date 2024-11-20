@@ -11,7 +11,7 @@
                           Gamme - Peinture </span> 
                         </div>
                         <div *ngFor="let option of gammes_peinture" class="parquet-option ant-col tooltip-srf etat-srf">
-                          <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+                          <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                             <span>{{ option.Label }}</span>
                           </label>
                           <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
@@ -28,7 +28,7 @@
                           Gamme - Enduit </span> 
                         </div>
                         <div *ngFor="let option of gammes_enduit" class="parquet-option ant-col tooltip-srf etat-srf">
-                          <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+                          <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                             <span>{{ option.Label }}</span>
                           </label>
                           <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
@@ -46,7 +46,7 @@
                           Gamme - Papier </span> 
                         </div>
                         <div *ngFor="let option of gammes_papier" class="parquet-option ant-col tooltip-srf etat-srf">
-                          <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+                          <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                             <span>{{ option.Label }}</span>
                           </label>
                           <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
@@ -65,7 +65,7 @@
                         </div>
                         <div *ngFor="let option of gammes_carrelage" class="parquet-option ant-col tooltip-srf etat-srf">
                           
-                          <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+                          <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                             <span>{{ option.Label }}</span>
                           </label>
                           <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">

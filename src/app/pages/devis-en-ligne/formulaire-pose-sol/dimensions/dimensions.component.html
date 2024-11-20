@@ -8,7 +8,7 @@
                        <span class="error-message">*</span> :
                      </label>
                      
-                     <input type="number" id="surface" formControlName="surface" [attr.max]="surfacemax"  required>
+                     <input type="number" id="surface" formControlName="surface" min="1" [max]="surfacemax"  required>
                    <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
                       <i class="far fa-question-circle"></i>
                     </a>
@@ -23,7 +23,7 @@
                    </div>
                    
                 <div *ngIf="isclicked && poseSolForm.get('surface')?.invalid " class="error-message">
-                        Surface requise.
+                        Surface invalide.
                       </div>
 
                   <div nz-col nzSpan="6" [nzXs]="24" [nzSm]="6" class="ant-col image">

@@ -130,7 +130,7 @@
           <app-dimensions-pose-app-san ></app-dimensions-pose-app-san>
         </div>
          <div *ngIf="is_travail_selected(12)">
-           <app-dimensions-pose-chauffage  [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-chauffage>
+           <app-dimensions-pose-chauffage  [surfacemax]="get_max()" [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-chauffage>
          </div>
          <div *ngIf="is_travail_selected(13)">
            <app-dimensions-pose-electricite></app-dimensions-pose-electricite>

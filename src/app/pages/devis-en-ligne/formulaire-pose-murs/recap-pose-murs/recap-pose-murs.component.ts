@@ -28,4 +28,8 @@ export class RecapPoseMursComponent {
     });
    
   }
+
+  get_title(slug:string){
+    return slug.split(":")[1];
+  }
 }

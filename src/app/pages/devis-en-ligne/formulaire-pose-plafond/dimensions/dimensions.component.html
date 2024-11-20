@@ -6,7 +6,7 @@
         <div nz-col nzSpan="6" class="ant-col tooltip-srf" [nzXs]="24" [nzSm]="6">
           <label for="hauteur">
             Hauteur (cm)<span class="error-message">*</span> : </label>
-          <input type="number" id="hauteur" formControlName="hauteur" required>
+          <input type="number" id="hauteur" formControlName="hauteur" required max="600" min="1">
           
         </div>
          <div *ngIf="isclicked && posePlafondForm.get('hauteur')?.invalid " class="error-message">
@@ -16,7 +16,7 @@
            <label for="surface">Surface (m²) <span class="error-message">*</span> : 
             
           </label>
-           <input type="number" id="surface" formControlName="surface" [attr.max]="surfacemax">
+           <input type="number" id="surface" formControlName="surface" [max]="surfacemax" min="1">
            <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
             <i class="far fa-question-circle"></i>
           </a>

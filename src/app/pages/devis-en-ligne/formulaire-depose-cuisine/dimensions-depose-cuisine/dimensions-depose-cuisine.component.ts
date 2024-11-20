@@ -1,13 +1,24 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
-
+interface MaxValues {
+  hauteur: number;
+  longueur: number;
+  profondeur: number;
+  quantite: number;
+}
 @Component({
   selector: 'app-dimensions-depose-cuisine',
   templateUrl: './dimensions-depose-cuisine.component.html',
   styleUrl: './dimensions-depose-cuisine.component.css'
 })
 export class DimensionsDeposeCuisineComponent {
+  maxValues: MaxValues = {
+    hauteur: 500,
+    longueur: 9000,
+    profondeur: 8000,
+    quantite: 50,
+  };
   is_active_Ecb=false
   is_active_Ech=false
   active_Ech(){
@@ -17,9 +28,10 @@ export class DimensionsDeposeCuisineComponent {
       if (formGroup instanceof FormGroup) {
         // Appliquez ou supprimez les validateurs pour chaque contrôle
         ['hauteur', 'longueur', 'profondeur', 'quantite'].forEach(field => {
+          const max = this.maxValues[field as keyof MaxValues]; // Récupère le maximum spécifique pour le champ
           const control = formGroup.get(field);
           if (this.is_active_Ech) {
-            control?.setValidators(Validators.required);
+            control?.setValidators([Validators.required, Validators.min(1), Validators.max(max)]);
           } else {
             control?.clearValidators();
           }
@@ -35,9 +47,10 @@ export class DimensionsDeposeCuisineComponent {
       if (formGroup instanceof FormGroup) {
         // Appliquez ou supprimez les validateurs pour chaque contrôle
         ['hauteur', 'longueur', 'profondeur', 'quantite'].forEach(field => {
+          const max = this.maxValues[field as keyof MaxValues]; 
           const control = formGroup.get(field);
           if (this.is_active_Ecb) {
-            control?.setValidators(Validators.required);
+            control?.setValidators([Validators.required, Validators.min(1), Validators.max(max)]);
           } else {
             control?.clearValidators();
           }
@@ -111,19 +124,39 @@ onPoseElementCuisinesSubmit(): void {
 }
 createdeposeElementHautCuisineGroup(): FormGroup {
   return this.fb.group({
-    hauteur: ['', this.is_active_Ech ? Validators.required : null],
-    longueur: ['', this.is_active_Ech ? Validators.required : null],
-    profondeur: ['', this.is_active_Ech ? Validators.required : null],
-    quantite: [1, this.is_active_Ech ? Validators.required : null],
+    hauteur: ['', this.is_active_Ech
+      ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["hauteur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["hauteur"])] // Seulement les contraintes min/max si non actif
+  ],
+    longueur: ['', this.is_active_Ech
+      ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["longueur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["longueur"])] // Seulement les contraintes min/max si non actif
+  ],
+    profondeur: ['', this.is_active_Ech
+      ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["profondeur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["profondeur"])] // Seulement les contraintes min/max si non actif
+  ],
+    quantite: [1, this.is_active_Ech
+      ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["profondeur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["profondeur"])] // Seulement les contraintes min/max si non actif
+  ],
     image: [null]
   });
 }
 createdeposeElementBasCuisineGroup(): FormGroup {
   return this.fb.group({
-    hauteur: ['', this.is_active_Ecb ? Validators.required : null],
-    longueur: ['', this.is_active_Ecb ? Validators.required : null],
-    profondeur: ['', this.is_active_Ecb ? Validators.required : null],
-    quantite: [1, this.is_active_Ecb ? Validators.required : null],
+    hauteur: ['', this.is_active_Ecb ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["hauteur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["hauteur"])]
+    ],
+    longueur: ['', this.is_active_Ecb ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["longueur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["longueur"])]
+    ],
+    profondeur: ['', this.is_active_Ecb ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["profondeur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["profondeur"])]
+    ],
+    quantite: [1, this.is_active_Ecb ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["profondeur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["profondeur"])]
+    ],
     image: [null]
   });
 }
@@ -148,10 +181,18 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
     const elementsHaut = this.deposeElementCuisinesHautForm.get('elementcuisines_haut') as FormArray;
     elementsHauts.forEach((el: any) => {
       elementsHaut.push(this.fb.group({
-        hauteur: [el.hauteur, this.is_active_Ech ? Validators.required : null],
-        longueur: [el.longueur, this.is_active_Ech ? Validators.required : null],
-        profondeur: [el.profondeur, this.is_active_Ech ? Validators.required : null],
-        quantite: [el.quantite, this.is_active_Ech ? Validators.required : null],
+        hauteur: [el.hauteur, this.is_active_Ech ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["hauteur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["hauteur"])]
+    ],
+        longueur: [el.longueur, this.is_active_Ech ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["longueur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["longueur"])]
+    ],
+        profondeur: [el.profondeur, this.is_active_Ech ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["profondeur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["profondeur"])]
+    ],
+        quantite: [el.quantite, this.is_active_Ech ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["profondeur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["profondeur"])]
+    ],
         image: [el.image]
       }));
     });
@@ -173,10 +214,18 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
     const elementsBass = this.deposeElementCuisinesBasForm.get('elementcuisines_bas') as FormArray;
     elementsBas.forEach((el: any) => {
       elementsBass.push(this.fb.group({
-        hauteur: [el.hauteur, this.is_active_Ech ? Validators.required : null],
-        longueur: [el.longueur, this.is_active_Ech ? Validators.required : null],
-        profondeur: [el.profondeur, this.is_active_Ech ? Validators.required : null],
-        quantite: [el.quantite, this.is_active_Ech ? Validators.required : null],
+        hauteur: [el.hauteur, this.is_active_Ech ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["hauteur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["hauteur"])]
+    ],
+        longueur: [el.longueur, this.is_active_Ech ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["longueur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["longueur"])]
+    ],
+        profondeur: [el.profondeur, this.is_active_Ech ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["profondeur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["profondeur"])]
+    ],
+        quantite: [el.quantite, this.is_active_Ech ? [Validators.required, Validators.min(1), Validators.max(this.maxValues["profondeur"])]
+      : [Validators.min(1), Validators.max(this.maxValues["profondeur"])]
+    ],
         image: [el.image]
       }));
     });

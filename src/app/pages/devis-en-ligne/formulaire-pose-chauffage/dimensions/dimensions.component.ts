@@ -10,6 +10,7 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
 export class PoseChauffageDimensionsComponent {
   isclicked=false
   @Input() triggerSubmitDimensionForm!: boolean;
+  @Input() surfacemax: number=0; 
   modele: any;
   appareilGroup: any;
   ngOnChanges(changes: SimpleChanges): void {

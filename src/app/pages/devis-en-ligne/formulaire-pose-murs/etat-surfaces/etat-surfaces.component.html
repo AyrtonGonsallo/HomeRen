@@ -64,29 +64,19 @@
 
 
          <nz-radio-group *ngIf="mur.get('etat')?.value === 'depose'"  formControlName="typedepose" class="radio-flx-spc">
-           <div>
-             <label nz-radio nzValue="Type dépose 1" class="radio-span">
-               <span>Type dépose 1</span>
+          <div *ngFor="let option of type_de_depose" class="parquet-option">
+            <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix" class="radio-span">
+               <span>{{ option.Label }}</span>
              </label>
              <a nz-tooltip [nzTooltipTitle]="tooltiptd1" href="javascript:void(0)" class="info-icon">
                <i class="far fa-question-circle"></i>
              </a>
              <ng-template #tooltiptd1>
-               Type dépose 1
+              Pour plus d'informations, veuillez consulter :
+              <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
              </ng-template>
            </div>
            
-           <div>
-             <label nz-radio nzValue="Type dépose 2">
-               <span>Type dépose 2</span>
-             </label>
-             <a nz-tooltip [nzTooltipTitle]="tooltiptd2" href="javascript:void(0)" class="info-icon">
-               <i class="far fa-question-circle"></i>
-             </a>
-             <ng-template #tooltiptd2>
-               Type dépose 2
-             </ng-template>
-           </div>
            
          </nz-radio-group>
          

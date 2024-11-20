@@ -9,7 +9,7 @@
             Gamme - Parquet massif</span> 
           </div>
           <div *ngFor="let option of gammes_parquet_m" class="parquet-option">
-            <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+            <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
               <span>{{ option.Label }}</span>
             </label>
             <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
@@ -25,7 +25,7 @@
             Gamme - Parquet flottant finition bois</span> 
           </div>
           <div *ngFor="let option of gammes_parquet_b" class="parquet-option">
-            <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+            <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
               <span>{{ option.Label }}</span>
             </label>
             <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
@@ -42,7 +42,7 @@
             Gamme - Parquet flottant finition stratifiée </span> 
           </div>
           <div *ngFor="let option of gammes_parquet_pffs" class="parquet-option">
-            <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+            <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
               <span>{{ option.Label }}</span>
             </label>
             <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
@@ -58,7 +58,7 @@
             Gamme - Carrelage </span> 
           </div>
           <div *ngFor="let option of gammes_carrelage" class="parquet-option">
-            <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+            <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
               <span>{{ option.Label }}</span>
             </label>
             <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
@@ -113,7 +113,7 @@
         </div>
         <nz-radio-group formControlName="plinthes" class="radio-flx-spc">
           <div *ngFor="let option of gammes_plithes" class="parquet-option">
-            <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+            <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
               <span>{{ option.Label }}</span>
             </label>
             <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
