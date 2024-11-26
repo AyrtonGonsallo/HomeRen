@@ -25,6 +25,7 @@ export class IndexComponent {
 
   //chargement des pieces
   pieces_par_categories: any
+  etapes:any
   loadPieces(): void {
     this.userService.get_pieces_par_categories().subscribe(
       (response) => {
@@ -37,8 +38,22 @@ export class IndexComponent {
       }
     );
   }
+
+  loadEtapes(): void {
+    this.userService.get_etapes_devis().subscribe(
+      (response) => {
+        this.etapes = response;
+        console.log("réponse de la requette get_etapes_devis",this.etapes);
+       
+      },
+      (error) => {
+        console.error('Erreur lors de la recuperation des etapes :', error);
+      }
+    );
+  }
   ngOnInit(): void {
     this.loadPieces()
+    this.loadEtapes()
     this.getIpAddress();
     this.getBrowserInfo();
   }
@@ -115,6 +130,8 @@ export class IndexComponent {
         console.error('Erreur lors de la recuperation des details de la piece choisie :', error);
       }
     );
+
+
     this.userService.getValidatedTravauxByPieceId(this.selectedPieceId).subscribe(
       (response) => {
         this.travaux = response;

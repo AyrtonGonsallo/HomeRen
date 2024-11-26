@@ -135,5 +135,10 @@ getAllPayedDevisPiecebyDeviceID(deviceid:string): Observable<any> {
 validerDevisPiece(id:number,body: any): Observable<any> {
   return this.http.put<any>(`${environment.apiUrl}/valider_devis_piece/${id}`,body);
 }
+get_etapes_devis(): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_etapes_devis`);
+}
+
+
 
 }

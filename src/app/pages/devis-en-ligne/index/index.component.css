@@ -3,7 +3,7 @@
 max-width: 82%; margin: auto;
 }
 .mt-12{margin-top:12px;}
-.section-devis{
+.section-devis,.step-description{
     padding: 2% 4%;
     max-width: 1440px;
     margin: auto;
