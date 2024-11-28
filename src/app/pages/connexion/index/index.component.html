@@ -11,7 +11,13 @@
 
 
     <div class="col2-cnx"> 
-      
+
+      <nz-result nzStatus="success" nzTitle="Inscription reussie!"  nzSubTitle="Vous pouvez à présent vous connecter." *ngIf="registration_done">
+      </nz-result>
+
+      <nz-result nzTitle="Erreur de connexion"  nzStatus="error" [nzSubTitle]="error_msg" *ngIf="has_error">
+      </nz-result>
+
       <div class="ctct-title">
         <h1 class="txt1-pieces noir font-site center">Plonger dans l'univers HomeRen !</h1>
       </div>
@@ -21,14 +27,14 @@
         <form nz-form [formGroup]="loginForm" (ngSubmit)="submitloginForm()">
           <nz-form-item class="cls-email col-5">
             <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Adresse email incorrecte">
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Adresse email vide ou invalide">
                 <input nz-input formControlName="email" id="email" />
             </nz-form-control>
           </nz-form-item>
       
           <nz-form-item class="cls-mdp col-5" >
               <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Mot de passe</nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Aucun mot de passe entré">
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Aucun mot de passe renseigné">
                  <input nz-input type="Password" id="password" formControlName="password"/>
               </nz-form-control>
           </nz-form-item>
@@ -71,7 +77,7 @@
         <form nz-form [formGroup]="registrationForm" (ngSubmit)="registrate()">
           <nz-form-item>
             <nz-form-label [nzSpan]="5" nzFor="roleId" class="role-lab ant-col ant-col-xs-24 ant-col-sm-6" nzRequired>Role</nz-form-label>
-            <nz-form-control [nzSpan]="12" nzErrorTip="Please select your role!" class="role-list ant-col ant-col-12">
+            <nz-form-control [nzSpan]="12" nzErrorTip="Choisissez un role!" class="role-list ant-col ant-col-12">
               <nz-select
                 id="roleId"
                 formControlName="roleId"
@@ -93,7 +99,7 @@
             >
               <span>Nom</span>
             </nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nom!">
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Renseignez votre nom!">
               <input nz-input id="nom" formControlName="nom" />
             </nz-form-control>
           </nz-form-item>
@@ -106,19 +112,19 @@
             >
               <span>Prénom</span>
             </nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your prenom!">
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Renseignez votre prenom!">
               <input nz-input id="prenom" formControlName="prenom" />
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
             <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Adresse email vide ou invalide">
               <input nz-input formControlName="email" id="email" />
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
-            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Mot de passe</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Renseignez votre mot de passe!">
               <input
                 nz-input
                 type="password"
@@ -129,27 +135,27 @@
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
-            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirmation du mot de passe</nz-form-label>
             <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
               <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
               <ng-template #errorTpl let-control>
                 @if (control.errors?.['required']) {
-                  Please confirm your password!
+                  Confirmez votre mot de passe!
                 }
                 @if (control.errors?.['confirm']) {
-                  Two passwords that you enter is inconsistent!
+                  Les 2 mots de passe ne sont pas identiques!
                 }
               </ng-template>
             </nz-form-control>
           </nz-form-item>
           
           <nz-form-item>
-            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Télephone</nz-form-label>
             <nz-form-control
               [nzSm]="14"
               [nzXs]="24"
               [nzValidateStatus]="registrationForm.controls['phoneNumber']"
-              nzErrorTip="Please input your phone number!"
+              nzErrorTip="Renseignez votre numéro de téléphone!"
             >
               <nz-input-group >
                
@@ -162,7 +168,7 @@
             <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="CodePostal"  nzRequired>
                 <span>Code postal</span>
             </nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Renseignez votre code postal">
                 <input nz-input id="CodePostal" formControlName="CodePostal" />
             </nz-form-control>
         </nz-form-item>
@@ -171,7 +177,7 @@
           <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="AdressePostale"  nzRequired>
               <span>Adresse postale</span>
           </nz-form-label>
-          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Renseignez votre adresse postale">
               <input nz-input id="AdressePostale" formControlName="AdressePostale" />
           </nz-form-control>
       </nz-form-item>
@@ -180,18 +186,19 @@
             <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="CommunePostale"  nzRequired>
                 <span>Commune</span>
             </nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="remplissez ce champ">
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Renseignez votre commune">
                 <input nz-input id="CommunePostale" formControlName="CommunePostale" />
             </nz-form-control>
         </nz-form-item>
 
           <nz-form-item nz-row class="register-area">
-            <nz-form-control [nzSpan]="14" [nzOffset]="6">
-              <label nz-checkbox formControlName="agree">
-                <span>
-                  I have read the <a>agreement</a>
-                </span>
+            <nz-form-control [nzSpan]="14" [nzOffset]="6" nzErrorTip="Acceptez l'accord">
+              <label nz-checkbox formControlName="agree" nzRequired>
+                
               </label>
+              <span>
+                J'ai lu l'<a href="https://homeren.fr/api-concepts-et-travaux/files/homeren.pdf" target="_blank">accord</a>
+              </span>
             </nz-form-control>
           </nz-form-item>
           <nz-form-item nz-row class="register-area">

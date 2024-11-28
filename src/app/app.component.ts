@@ -6,6 +6,7 @@ import { ApiConceptsEtTravauxService } from './services/api-concepts-et-travaux.
 import { Meta, Title } from '@angular/platform-browser';
 import { environment } from './environments/environment';
 import { ShoppingCartService } from './services/shopping-cart.service';
+import { AuthServiceService } from './services/auth-service.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,15 +19,24 @@ export class AppComponent implements OnInit{
   title = 'HomeRen';
   currentUrl: string ='';
   page_seo_details:any
-  constructor(private panier:ShoppingCartService,   private metaService: Meta,private titleService: Title,private route: ActivatedRoute,private router: Router,private userService: ApiConceptsEtTravauxService) {
+  constructor(private panier:ShoppingCartService, private authService:AuthServiceService,  private metaService: Meta,private titleService: Title,private route: ActivatedRoute,private router: Router,private userService: ApiConceptsEtTravauxService) {
   }
 
+  logout(){
+    this.authService.logout()
+  }
+isconnected=false
   ngOnInit() {
+    this.authService.getIsConnected().subscribe((isConnected) => {
+      this.isconnected = isConnected;
+      console.log('L\'utilisateur est connecté :', this.isconnected);
+    });
+    console.log(this.isconnected)
     this.metaService.updateTag({
       name: 'robots',
       content: "noindex, nofollow"
     });
-   
+    
     this.router.events.subscribe((event) => {
      
       if (event instanceof NavigationEnd) {

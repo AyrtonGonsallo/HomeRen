@@ -3,6 +3,8 @@ import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, NonNullableF
 import { Observable, Observer } from 'rxjs';
 import { ShoppingCartService } from '../../../services/shopping-cart.service';
 import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-travaux.service';
+import { Router } from '@angular/router';
+import { AuthServiceService } from '../../../services/auth-service.service';
 
 @Component({
   selector: 'app-index',
@@ -11,6 +13,8 @@ import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-t
 })
 export class IndexComponent {
  se_connecter=true
+ has_error=false
+ error_msg=""
  switch_form(){
     this.se_connecter=!this.se_connecter
  }
@@ -26,9 +30,12 @@ export class IndexComponent {
       this.userService.loginFrontUtilisateur(this.loginForm.value).subscribe(
         (response: any) => {
           console.log('connexion reussie :', response);
+          this.authService.setUser(response)
         },
         (error: any) => {
-          console.error('Erreur lors de la connexion :', error);
+          console.error('Erreur lors de la connexion :', error.error.error);
+          this.error_msg=error.error.error
+          this.has_error=true
         }
       );
     }else{
@@ -63,9 +70,15 @@ export class IndexComponent {
       }, 1000);
     });
 
-  
+    mustBeTrueValidator(control: any) {
+      return control.value === true ? null : { mustBeTrue: true };
+    }
+    differentfromzeroValidator(control: any) {
+      return control.value !== 0 ? null : { mustBeDifferentFromZero: true };
+    }
+    
 
-  constructor(private fb: NonNullableFormBuilder,private shop:ShoppingCartService,private userService:ApiConceptsEtTravauxService) {
+  constructor(private fb: NonNullableFormBuilder,private shop:ShoppingCartService,private userService:ApiConceptsEtTravauxService,private authService:AuthServiceService,private router:Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.minLength(3),Validators.required]],
@@ -76,15 +89,16 @@ export class IndexComponent {
       password: ['', [Validators.required]],
       checkPassword: ['', [Validators.required, this.confirmationValidator]],
       nom: ['', [Validators.required]],
-      roleId:[0, [Validators.required]],
+      roleId:[0, [Validators.required,this.differentfromzeroValidator]],
       CommunePostale:['', []],
       AdressePostale:['', []],
       CodePostal:['', []],
       phoneNumber: ['', [Validators.required]],
       prenom: ['', [Validators.required]],
-      agree: [false],
+      agree: [false, [this.mustBeTrueValidator]],
       deviceID: [this.shop.getUniqueDeviceId()]
     });
+    
     this.passforgotForm= this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       
@@ -92,7 +106,7 @@ export class IndexComponent {
 
     
   }
-role=0
+    role=0
     roleChange(value: number): void {
       this.role=value
     }
@@ -120,13 +134,16 @@ role=0
     deviceID: FormControl<string>;
   }>;
 
-
+  registration_done=false
   registrate(): void {
     if (this.registrationForm.valid) {
       console.log('submit', this.registrationForm.value);
       this.userService.addFrontUtilisateur(this.registrationForm.value).subscribe(
         (response: any) => {
           console.log('inscription reussie:', response);
+          this.registration_done=true
+          this.se_connecter=true
+          
         },
         (error: any) => {
           console.error('Erreur lors de l\'inscription\' :', error);

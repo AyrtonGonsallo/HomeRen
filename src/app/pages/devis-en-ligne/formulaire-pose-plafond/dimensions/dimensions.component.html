@@ -10,7 +10,7 @@
           
         </div>
          <div *ngIf="isclicked && posePlafondForm.get('hauteur')?.invalid " class="error-message">
-          Hauteur requise.
+          Hauteur invalide.
         </div>
          <div nz-col nzSpan="6" class="ant-col tooltip-srf">
            <label for="surface">Surface (m²) <span class="error-message">*</span> : 
@@ -29,7 +29,7 @@
           </ng-template>
          </div>
          <div *ngIf="isclicked && posePlafondForm.get('surface')?.invalid " class="error-message">
-          Surface requise.
+          Surface invalide.
         </div>
          <div nz-col nzSpan="6" class="ant-col tooltip-srf"> 
            <label for="image">Image :</label>
