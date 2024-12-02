@@ -24,7 +24,7 @@
 
 
 <div >
-
+<!-- 
   <div id="main-slider" class="splide">
     <div class="splide__track">
       <ul class="splide__list">
@@ -47,14 +47,38 @@
 <div id="thumbnail-slider" class="splide">
   <div class="splide__track">
     <ul class="splide__list">
-      <li class="splide__slide" *ngFor="let image of galerie?.images; let i = index"><img [src]="baseurl + '/files/' + image.Url" alt="Thumbnail 1"></li>
+      <li class="splide__slide" *ngFor="let image of galerie?.images; let i = index">
+        <img [src]="baseurl + '/files/' + image.Url" alt="Thumbnail 1">
+      </li>
   
     </ul>
   </div>
+</div> -->
+
+<div id="main-carousel" class="splide main-realis">
+  <div class="splide__track">
+    <ul class="splide__list">
+      <li class="splide__slide" *ngFor="let image of galerie?.images; let i = index"><img [src]="baseurl  + image.Url" alt="Image 1"></li>
+    
+    </ul>
+  </div>
 </div>
+<section
+  id="thumbnail-carousel"
+  class="splide realis-carousl"
+  aria-label="The carousel with thumbnails. Selecting a thumbnail will change the Beautiful Gallery carousel."
+>
+  <div class="splide__track">
+		<ul class="splide__list splide-realis">
+			<li class="splide__slide" *ngFor="let image of galerie?.images; let i = index">
+				<img [src]="baseurl  + image.Url" alt="">
+			</li>	
+		</ul>
+  </div>
+</section>
 
 
-
+</div>
 </div>
 </div>
 <div class="bg-section2">

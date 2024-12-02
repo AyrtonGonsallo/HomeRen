@@ -14,7 +14,7 @@ textarea, pre, textarea:focus{
     background-size: cover;
     background-repeat: no-repeat;
 }
-.section1, .faq{
+.section1{
     max-width: 1440px;
     margin: auto;
     padding: 4% 1% 4% 1%;
@@ -22,7 +22,14 @@ textarea, pre, textarea:focus{
     flex-direction: column;
     gap: 20px;
 }
-
+.faq{
+  max-width: 1200px;
+  margin: auto;
+  padding: 4% 1% 4% 1%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 @media only screen and (max-width: 800px) {
 .section1, .section2, .section3{ gap: 15px !important;padding: 20px;}
 }
@@ -80,4 +87,45 @@ textarea, pre, textarea:focus{
         gap: 0px;
         flex-direction: column;
     }
+}
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.breadcrumb ol {
+  list-style: none;
+  display: flex;
+  gap: 0px;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb li {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb li a {
+  text-decoration: none;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.breadcrumb li a.active {
+  color: #555;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+.breadcrumb li a:hover {
+  color: #FFC736;
+}
+
+.breadcrumb li:not(:last-child)::after {
+  content: "|";
+  margin: 0 15px;
+  color: #ccc;
 }

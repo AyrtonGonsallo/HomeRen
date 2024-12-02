@@ -67,8 +67,7 @@
                 Pas encore inscrit ? Créez votre compte en cliquant sur <button class="flx-cnt-btn" nz-button  (click)="switch_form()">S'inscrire</button>
               </nz-form-control>
             </nz-form-item>
-            
-          
+  
         </form>
       </div>
 
@@ -81,7 +80,7 @@
               <nz-select
                 id="roleId"
                 formControlName="roleId"
-                nzPlaceHolder="artisan ou particulier ?"
+                nzPlaceHolder="Artisan ou particulier ?"
                 (ngModelChange)="roleChange($event)"
               >
                 <nz-option nzValue="2" nzLabel="Artisan"></nz-option>
@@ -193,7 +192,7 @@
 
           <nz-form-item nz-row class="register-area">
             <nz-form-control [nzSpan]="14" [nzOffset]="6" nzErrorTip="Acceptez l'accord">
-              <label nz-checkbox formControlName="agree" nzRequired>
+              <label id="ckbox" nz-checkbox formControlName="agree" nzRequired>
                 
               </label>
               <span>

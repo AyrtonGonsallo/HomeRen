@@ -102,6 +102,15 @@ form{
     display: grid;
 }
 .srf-img{margin-block: 20px;margin-inline: auto;}  
+/*********************************************************/
+.ant-collapse-header-text {color: #000000 !important;}
+.plaf-dim label{color: #8c8c8c !important;}
+.mur-ttl {color: var(--color2) !important;}
+.mur-btn-div {  border-bottom: 1px solid #55555578 !important;}
+
+
+/*********************************************************/
+
 @media screen and (max-width: 497px) {
     .ant-col-6 {grid-template-columns: 2fr 1fr 0.5fr !important;}
 

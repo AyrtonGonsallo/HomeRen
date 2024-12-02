@@ -523,4 +523,56 @@ export class IndexComponent {
     }
     return 100;
   }
+
+  getNotaBene(): string {
+    const currentStep = this.etapes.find(
+      (etape:any) =>
+        etape.Etape === this.getStepName(this.current) &&
+        (this.current <= 1 || this.current >= 5 || etape.TravailID === this.filteredTravail.ID)
+    );
+  
+    if (!currentStep) {
+      return 'Pas de description pour cette étape';
+    }
+  
+    // Si current est 0, 1, 5, ou 6, on prend la description générale
+    if (this.current === 0 || this.current === 1 || this.current === 5 || this.current === 6) {
+      return currentStep.Description || 'Pas de description pour cette étape';
+    }
+  
+    // Sinon, on prend la description de la pièce correspondante
+    switch (this.selectedPieceId) {
+      case 4:
+        return currentStep.Description_chambre || currentStep.Description;
+      case 3:
+        return currentStep.Description_sdb || currentStep.Description;
+      case 9:
+        return currentStep.Description_salle_manger || currentStep.Description;
+      case 8:
+        return currentStep.Description_wc || currentStep.Description;
+      case 7:
+        return currentStep.Description_cuisine || currentStep.Description;
+      case 6:
+        return currentStep.Description_salon || currentStep.Description;
+      default:
+        return currentStep.Description || 'Pas de description pour cette étape';
+    }
+  }
+  
+  // Fonction pour récupérer le nom de l'étape en fonction du numéro
+  getStepName(stepNumber: number): string {
+    const steps = [
+      'Choix de la pièce',
+      'Travaux',
+      'Dimensions',
+      'Etat de surfaces',
+      'Gamme de produits',
+      'Recapitulatif',
+      'Finalisation'
+    ];
+    return steps[stepNumber] || '';
+  }
+  
+
+
 }

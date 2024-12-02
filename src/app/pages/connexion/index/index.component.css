@@ -91,11 +91,19 @@
 nz-button{margin-bottom: 0px !important;}  
 .col-btn .ant-col-offset-6 { margin-top: 35px;}
 .flx-connect{ display: flex !important;}
-.flx-cnt-btn {padding: 0px;height: 0px;color: var(--color1);}
+.flx-cnt-btn {padding: 0px !important;height: 0px;color: var(--color1);background-color: transparent!important;}
 .flx-cnt-btn:hover{color: var(--color2);}
 .flx-cnt-btn span{font-size: 15px !important;}
-.flx-connect .ant-form-item-control-input-content{text-align: left;font-family: "Montserrat" !important;}
+.flx-connect .ant-form-item-control-input-content{ display: flex; text-align: left;font-family: "Montserrat" !important;}
+#ckbox{width: auto !important; margin-right: 15px !important;}
+form .ant-row {justify-content: space-around;}
+.ant-form-item-label {overflow: visible !important; font-size: 15px !important;}
+.ant-col-offset-6 {margin-left: 33%;}
 /******************************* Respo ************************************/  
+
+@media only screen and (min-width: 801px) and (max-width: 1440px) {
+.register-form .ant-col-sm-6 { flex: 0% !important;  max-width: 100% !important;}
+}
 @media only screen and (max-width: 1024px) {
     .ant-col-sm-6{ flex: 0 0 45% !important;  max-width: 33% !important;    }
     .ant-row{  justify-content: start !important;}
@@ -104,6 +112,8 @@ nz-button{margin-bottom: 0px !important;}
     .ant-col-offset-6 {margin-left: 2%; max-width: 100%;}
   }
   @media only screen and (max-width: 800px) {
+    .register-form .ant-col-sm-6 {max-width: 33% !important;}
+    .col2-cnx .ant-select.ant-select-in-form-item {width: 87% !important;}
     .fs-19{font-size: 16px;}
     .mt-30 {  margin-top: 20px;}
     .col2-cnx { padding: 3%;}
@@ -126,6 +136,7 @@ nz-button{margin-bottom: 0px !important;}
 
 }
 @media only screen and (max-width: 497px) {
+    .col2-cnx .ant-select.ant-select-in-form-item {width: 100% !important;}
     .ant-col-7{ flex: 0 0 102.166667% !important;  }
     .ant-col-sm-6{  max-width: 100% !important;flex: 0 0 96% !important;}
     .ant-col-12, .ant-col-7 { max-width: 100% !important;}

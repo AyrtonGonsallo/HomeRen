@@ -6,9 +6,17 @@
 <section class="faq">
    <div class="faq-content">
       <div class="faq-column" >
-        <h2 class="cat-faq jaune"  *ngFor="let cat of question?.CategorieQuestionFaqs">{{cat.Titre}}</h2>
+        <!-- <h2 class="cat-faq jaune"  *ngFor="let cat of question?.CategorieQuestionFaqs">{{cat.Titre}}</h2> -->
+        <nav aria-label="breadcrumb" class="breadcrumb">
+          <ol>
+            <li><a routerLink="/">Accueil</a></li>
+            <li><a routerLink="/faq" class="active">FAQ</a></li>
+            <li><a routerLink="/faq" class="active" *ngFor="let cat of question?.CategorieQuestionFaqs">{{cat.Titre}}</a></li>
+          </ol>
+        </nav>
+        
         <div class="faq-item" >
-          <h3 class="faq-question"> {{question?.Question}}</h3>
+          <h1 class="faq-question"> {{question?.Question}}</h1>
           <p [innerHTML]="question?.Reponse"></p>
         </div>
         

@@ -82,7 +82,7 @@ img{width: fit-content;max-width: 100%;}
 .btn-site.res-det{display: flex;width: fit-content;margin-top: 16px !important; margin: auto;background-color: var(--color1);color:var(--color-white);}
 .btn-site.res-det:hover{background-color: var(--color2);}
 /**************** phrase-dacc******************/
-.section-phrase-dacc .fs-34 { font-weight: 600;}
+.section-phrase-dacc .fs-34 { font-weight: 600;line-height: 0.8;}
 .bg-phrase-dacc{background-color: var(--color1);}
 .section-phrase-dacc{display: flex; flex-direction: column; align-items: center;max-width: 1440px; margin: auto; padding: 4% 1%;gap: 30px;}
 .btn-site.ph-dacc{background-color: var(--color-black); color:var(--color-white);}
@@ -160,7 +160,7 @@ img{width: fit-content;max-width: 100%;}
     font-weight: 900 !important;
 }
 /*********************** splide-gallerie-realisations-details ******************************/
-.splide__arrows.splide__arrows--ltr {
+/* .splide__arrows.splide__arrows--ltr {
     position: absolute !important;
     top: unset !important;
     width: 104px;
@@ -169,18 +169,27 @@ img{width: fit-content;max-width: 100%;}
     margin: auto;
     bottom: -20px !important;
     transform: translateY(0%) !important;
-}
+} */
 .splide.splide-avis button.splide__arrow {
     background-color: transparent !important;
     font-size: 22px!important;
     transform: translateY(-30%)!important;
     width: 1em !important;
 }
+.galerie-piece .splide__arrow{background: transparent !important; width: 5em !important;height: 5em !important;} 
+.galerie-piece .splide__arrow svg {fill: #000 !important; height: 4.2em !important; width: 4.2em !important;}
+.galerie-piece .splide__arrow--prev { left: -4em !important;}
+.galerie-piece .splide__arrow--next { right: -4em !important;}
+
 .splide.splide-avis .splide__arrow svg {  fill: #fff !important;}
 .splide.splide-avis { width: 97%;}
 .splide.splide-avis .splide__pagination.splide__pagination--ltr{display: none !important;}
 .splide__arrow:hover {background: var(--color1);}
 #thumbnail-slider{height: 60px !important; min-height: 0px !important;}
+@media screen and (max-width: 1112px) {
+    .galerie-piece .splide__arrow--next { right: -1em !important;}
+    .galerie-piece .splide__arrow--prev { left: -1em !important;}
+}
 @media screen and (max-width: 497px) {
 .splide__arrows.splide__arrows--ltr { bottom: -70px !important;}
 .splide.splide-avis button.splide__arrow {

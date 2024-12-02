@@ -1,7 +1,7 @@
 <div class="plaf-dim">
 
   <nz-collapse>
-      <nz-collapse-panel nzHeader="Démolition murs non-porteurs" [nzActive]="is_active_Tp1" [nzExtra]="activerTp1" nzShowArrow="false" (nzActiveChange)="active_Tp1()">
+      <nz-collapse-panel nzHeader="Démolition complète de murs non-porteurs" [nzActive]="is_active_Tp1" [nzExtra]="activerTp1" nzShowArrow="false" (nzActiveChange)="active_Tp1()">
         
           <form [formGroup]="mursNonporteursForm" (ngSubmit)="onSubmitform1()">
 
@@ -72,6 +72,9 @@
           </form>
         
       </nz-collapse-panel>
+    </nz-collapse>
+      <nz-collapse>
+      <!--
       <nz-collapse-panel nzHeader="Dépose de portes" [nzActive]="is_active_Tp2" [nzExtra]="activerTp2" nzShowArrow="false" (nzActiveChange)="active_Tp2()">
         <form [formGroup]="deposePorteForm" (ngSubmit)="onSubmitform2()">
           <div class="col-12-w">
@@ -110,7 +113,9 @@
           </div>
         </form>
       </nz-collapse-panel>
-      <nz-collapse-panel nzHeader="Ouverture partielle murs non-porteurs" [nzActive]="is_active_Tp3" [nzExtra]="activerTp3" nzShowArrow="false" (nzActiveChange)="active_Tp3()">
+
+      -->
+      <nz-collapse-panel nzHeader="Démolition partielle de murs non-porteurs" [nzActive]="is_active_Tp3" [nzExtra]="activerTp3" nzShowArrow="false" (nzActiveChange)="active_Tp3()">
         <form [formGroup]="ouverturePartielleForm" (ngSubmit)="onSubmitform3()">
 
           <div formArrayName="ouverturePartielle">
