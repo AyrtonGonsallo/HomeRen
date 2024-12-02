@@ -34,11 +34,11 @@ export class DimensionsDemolitionCloisonsComponent {
   }
   @Output() formValidityChange = new EventEmitter<boolean>();
   onSubmit(): void {
-    this.formValidityChange.emit(this.onSubmitform1() && this.onSubmitform2() && this.onSubmitform3());
-    if (this.onSubmitform1() && this.onSubmitform2() && this.onSubmitform3()) {
+    var bool=this.onSubmitform1()  && this.onSubmitform3()
+    this.formValidityChange.emit(bool);
+    if (bool) {
       const fusion = {
         ...this.mursNonporteursForm.value,  // Valeurs du formulaire du haut
-        ...this.deposePorteForm.value,   // Valeurs du formulaire du bas
         ...this.ouverturePartielleForm.value,
         "tp1":this.is_active_Tp1,
         "tp2":this.is_active_Tp2,
@@ -51,25 +51,71 @@ export class DimensionsDemolitionCloisonsComponent {
     }
   }
   onSubmitform1(): boolean {
-    if (this.mursNonporteursForm.valid) {
-      return true
+    const mursNonporteursArray = this.mursNonporteursForm.get('mursNonporteurs') as FormArray;
+  console.log("nombre de murs ",mursNonporteursArray.length)
+  let res=true
+    // Vérifier que chaque groupe du FormArray est correctement rempli
+    for (let i = 0; i < mursNonporteursArray.length; i++) {
+      const group = mursNonporteursArray.at(i) as FormGroup;
+      const controls = group.controls;
+  
+      if (
+        controls['longueur'].value === '' ||
+        controls['hauteur'].value === '' ||
+        controls['epaisseur'].value === '' ||
+        controls['ndp'].value === ''
+      ) {
+        //console.error(`Tous les champs doivent être remplis pour la démolition du mur ${i + 1}`);
+        this.exist_glob_err_form1=true
+        this.glob_err_form1+=`Tous les champs doivent être remplis pour la démolition du mur ${i + 1}. `
+        //group.markAllAsTouched(); // Affiche les erreurs pour ce groupe
+        res=res || false
+      }
     }
-    return false
+  
+   
+  
+    return res;
   }
-  onSubmitform2(): boolean {
-    if (this.deposePorteForm.valid) {
-      return true
-    }
-    return false
-  }
+  glob_err_form1:string=""
+  glob_err_form2:string=""
+  exist_glob_err_form1:boolean=false
+  exist_glob_err_form2:boolean=false
+  
   onSubmitform3(): boolean {
-    if (this.ouverturePartielleForm.valid) {
-      return true
+    const ouverturePartielleArray = this.ouverturePartielleForm.get('ouverturePartielle') as FormArray;
+  
+    for (let i = 0; i < ouverturePartielleArray.length; i++) {
+      const group = ouverturePartielleArray.at(i) as FormGroup;
+      const controls = group.controls;
+  
+      if (
+        controls['longueur'].value === '' ||
+        controls['hauteur'].value === '' ||
+        controls['epaisseur'].value === '' ||
+        controls['longueur_ouverture'].value === '' ||
+        controls['hauteur_ouverture'].value === '' ||
+        controls['hauteur_depuis_le_sol'].value === '' ||
+        controls['hauteur_depuis_le_plafond'].value === ''
+      ) {
+        //console.error(`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}`);
+        //group.markAllAsTouched();
+        this.exist_glob_err_form2=true
+        this.glob_err_form2+=`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}. `
+        return false;
+      }
     }
-    return false
+  
+    if (this.ouverturePartielleForm.valid) {
+      console.log('Formulaire valide', this.ouverturePartielleForm.value);
+      return true;
+    }
+  
+    return false;
   }
+  
+  
   mursNonporteursForm: FormGroup;
-  deposePorteForm: FormGroup;
   ouverturePartielleForm: FormGroup;
   get mursNonporteurs(): FormArray {
     return this.mursNonporteursForm.get('mursNonporteurs') as FormArray;
@@ -77,21 +123,13 @@ export class DimensionsDemolitionCloisonsComponent {
   get ouverturePartielle(): FormArray {
     return this.ouverturePartielleForm.get('ouverturePartielle') as FormArray;
   }
-  createdeposePorteGroup(): FormGroup {
-    return this.fb.group({
-      quantite_portes_simples_creuse: [0, this.is_active_Tp2 ? Validators.required : null],
-      quantite_portes_doubles_creuses: [0, this.is_active_Tp2 ? Validators.required : null],
-      quantite_porte_simple_plein: [0, this.is_active_Tp2 ? Validators.required : null],
-      quantite_porte_double_pleine: [0, this.is_active_Tp2 ? Validators.required : null],
-     
-    });
-  }
+  
   createmursNonporteursGroup(): FormGroup {
     return this.fb.group({
       longueur: ['', this.is_active_Tp1 ? Validators.required : null],
       hauteur: ['', this.is_active_Tp1 ? Validators.required : null],
       epaisseur: ['', this.is_active_Tp1 ? Validators.required : null],
-      volume: ['', this.is_active_Tp1 ? Validators.required : null],
+      ndp: [0, this.is_active_Tp1 ? Validators.required : null],
       image: [null]
     });
     
@@ -112,8 +150,10 @@ export class DimensionsDemolitionCloisonsComponent {
       longueur: ['', this.is_active_Tp3 ? Validators.required : null],
       hauteur: ['', this.is_active_Tp3 ? Validators.required : null],
       epaisseur: ['', this.is_active_Tp3 ? Validators.required : null],
-      volume: ['', this.is_active_Tp3 ? Validators.required : null],
-      longueur_du_mur : ['', this.is_active_Tp3 ? Validators.required : null],
+      longueur_ouverture: ['', this.is_active_Tp3 ? Validators.required : null],
+      hauteur_ouverture : ['', this.is_active_Tp3 ? Validators.required : null],
+      hauteur_depuis_le_sol: ['', this.is_active_Tp3 ? Validators.required : null],
+      hauteur_depuis_le_plafond : ['', this.is_active_Tp3 ? Validators.required : null],
       image: [null]
     });
   }
@@ -140,13 +180,7 @@ export class DimensionsDemolitionCloisonsComponent {
       this.is_active_Tp1=form.tp1
       this.is_active_Tp2=form.tp2
       this.is_active_Tp3=form.tp3
-      this.deposePorteForm=this.fb.group({
-        quantite_portes_simples_creuse: [form.quantite_portes_simples_creuse, this.is_active_Tp2 ? Validators.required : null],
-        quantite_portes_doubles_creuses: [form.quantite_portes_doubles_creuses, this.is_active_Tp2 ? Validators.required : null],
-        quantite_porte_simple_plein: [form.quantite_porte_simple_plein, this.is_active_Tp2 ? Validators.required : null],
-        quantite_porte_double_pleine: [form.quantite_porte_double_pleine, this.is_active_Tp2 ? Validators.required : null],
-       
-      });
+      
       // Handling `mursNonporteursForm`
       this.mursNonporteursForm = this.fb.group({
         mursNonporteurs: this.fb.array([])
@@ -157,7 +191,7 @@ export class DimensionsDemolitionCloisonsComponent {
           longueur: [mursNonporteur.longueur, this.is_active_Tp1 ? Validators.required : null],
           hauteur: [mursNonporteur.hauteur, this.is_active_Tp1 ? Validators.required : null],
           epaisseur: [mursNonporteur.epaisseur, this.is_active_Tp1 ? Validators.required : null],
-          volume: [mursNonporteur.volume, this.is_active_Tp1 ? Validators.required : null],
+          ndp: [mursNonporteur.ndp, this.is_active_Tp1 ? Validators.required : null],
           image: [mursNonporteur.image]
         }));
       });
@@ -172,15 +206,17 @@ export class DimensionsDemolitionCloisonsComponent {
           longueur: [ouverture.longueur, this.is_active_Tp3 ? Validators.required : null],
           hauteur: [ouverture.hauteur, this.is_active_Tp3 ? Validators.required : null],
           epaisseur: [ouverture.epaisseur, this.is_active_Tp3 ? Validators.required : null],
-          volume: [ouverture.volume, this.is_active_Tp3 ? Validators.required : null],
-          longueur_du_mur: [ouverture.longueur_du_mur, this.is_active_Tp3 ? Validators.required : null],
+          longueur_ouverture: [ouverture.longueur_ouverture, this.is_active_Tp3 ? Validators.required : null],
+          hauteur_ouverture : [ouverture.hauteur_ouverture, this.is_active_Tp3 ? Validators.required : null],
+          hauteur_depuis_le_sol: [ouverture.hauteur_depuis_le_sol, this.is_active_Tp3 ? Validators.required : null],
+          hauteur_depuis_le_plafond : [ouverture.hauteur_depuis_le_plafond, this.is_active_Tp3 ? Validators.required : null],
           image: [ouverture.image]
         }));
       });
 
     }else{
       console.log("formulaire non existant")
-      this.deposePorteForm = this.createdeposePorteGroup();
+      
       this.mursNonporteursForm = this.fb.group({
         mursNonporteurs: this.fb.array([this.createmursNonporteursGroup()])
       });

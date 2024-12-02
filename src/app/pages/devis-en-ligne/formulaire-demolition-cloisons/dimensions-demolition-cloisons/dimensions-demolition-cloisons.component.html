@@ -4,7 +4,9 @@
       <nz-collapse-panel nzHeader="Démolition complète de murs non-porteurs" [nzActive]="is_active_Tp1" [nzExtra]="activerTp1" nzShowArrow="false" (nzActiveChange)="active_Tp1()">
         
           <form [formGroup]="mursNonporteursForm" (ngSubmit)="onSubmitform1()">
-
+            <div *ngIf="exist_glob_err_form1" class="error-message">
+              {{glob_err_form1}}
+            </div>
             <div formArrayName="mursNonporteurs">
              <div *ngFor="let mur of mursNonporteurs.controls; let i = index" [formGroupName]="i" >
                <div class="mur-btn-div">
@@ -35,20 +37,13 @@
                      L'épaisseur est invalide.
                    </div>
                    <div nz-col nzSpan="6" class="ant-col">
-                     <label for="volume">Volume (cm³)<span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
-                     <input type="number" id="volume" formControlName="volume" min="1" max="20000000000">
-                     <a nz-tooltip [nzTooltipTitle]="tooltipVolume" href="javascript:void(0)" class="info-icon">
-                       <i class="far fa-question-circle"></i>
-                     </a>
-                     <ng-template #tooltipVolume>
-                       <div class="tooltip-content">
-                         <strong>Calcul du volume :</strong><br>
-                         <p>Volume = Hauteur × Epaisseur × Longueur</p>
-                       </div>
-                     </ng-template>
+                     <label for="ndp">Nombre de portes <span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
+                     <input type="number" id="ndp" formControlName="ndp" min="0" max="20">
+                    
+                    
                    </div>
-                   <div *ngIf="isclicked && mursNonporteurs.controls[i].get('volume')?.invalid " class="error-message">
-                     Le volume est invalide.
+                   <div *ngIf="isclicked && mursNonporteurs.controls[i].get('ndp')?.invalid " class="error-message">
+                     Le nombre de portes est invalide.
                    </div>
                   
                   <div nz-col nzSpan="6" class="ant-col"> 
@@ -74,50 +69,12 @@
       </nz-collapse-panel>
     </nz-collapse>
       <nz-collapse>
-      <!--
-      <nz-collapse-panel nzHeader="Dépose de portes" [nzActive]="is_active_Tp2" [nzExtra]="activerTp2" nzShowArrow="false" (nzActiveChange)="active_Tp2()">
-        <form [formGroup]="deposePorteForm" (ngSubmit)="onSubmitform2()">
-          <div class="col-12-w">
-              <div nz-row nzJustify="start">
-                
-                  <div nz-col nzSpan="12" class="ant-col">
-                         
-                      <label for="quantite_portes_simples_creuse">Nombre de porte(s) simple(s) creuse(s) <span class="error-message" *ngIf="is_active_Tp2">*</span> : </label>
-                      <input type="number" id="quantite_portes_simples_creuse" formControlName="quantite_portes_simples_creuse" min="0" max="30">
-                  </div>
-                  <div *ngIf="isclicked && deposePorteForm.get('quantite_portes_simples_creuse')?.invalid " class="error-message">
-                      La quantité est invalide.
-                  </div>
-                  <div nz-col nzSpan="12" class="ant-col">
-                      <label for="quantite_portes_doubles_creuses">Nombre de porte(s) double(s) creuse(s) <span class="error-message" *ngIf="is_active_Tp2">*</span> : </label>
-                      <input type="number" id="quantite_portes_doubles_creuses" formControlName="quantite_portes_doubles_creuses" min="0" max="30">
-                  </div>
-                  <div *ngIf="isclicked && deposePorteForm.get('quantite_portes_doubles_creuses')?.invalid " class="error-message">
-                      La quantité est invalide.
-                  </div>
-                  <div nz-col nzSpan="12" class="ant-col">
-                      <label for="quantite_porte_simple_plein">Nombre de porte(s) simple(s) pleine(s) <span class="error-message" *ngIf="is_active_Tp2">*</span> :  </label>
-                      <input type="number" id="quantite_porte_simple_plein" formControlName="quantite_porte_simple_plein" min="0" max="30">
-                  </div>
-                  <div *ngIf="isclicked && deposePorteForm.get('quantite_porte_simple_plein')?.invalid " class="error-message">
-                      La quantité est invalide.
-                  </div>
-                  <div nz-col nzSpan="12" class="ant-col">
-                      <label for="quantite_porte_double_pleine">Nombre de porte(s) double(s) pleine(s) <span class="error-message" *ngIf="is_active_Tp2">*</span> :  </label>
-                      <input type="number" id="quantite_porte_double_pleine" formControlName="quantite_porte_double_pleine" min="0" max="30">
-                  </div>
-                  <div *ngIf="isclicked && deposePorteForm.get('quantite_porte_double_pleine')?.invalid " class="error-message">
-                      La quantité est invalide.
-                  </div>
-              </div>
-          </div>
-        </form>
-      </nz-collapse-panel>
-
-      -->
+      
       <nz-collapse-panel nzHeader="Démolition partielle de murs non-porteurs" [nzActive]="is_active_Tp3" [nzExtra]="activerTp3" nzShowArrow="false" (nzActiveChange)="active_Tp3()">
         <form [formGroup]="ouverturePartielleForm" (ngSubmit)="onSubmitform3()">
-
+          <div *ngIf="exist_glob_err_form2" class="error-message">
+            {{glob_err_form2}}
+          </div>
           <div formArrayName="ouverturePartielle">
            <div *ngFor="let mur of ouverturePartielle.controls; let i = index" [formGroupName]="i" >
              <div class="mur-btn-div">
@@ -147,29 +104,38 @@
                  <div *ngIf="isclicked && ouverturePartielle.controls[i].get('epaisseur')?.invalid " class="error-message">
                    L'épaisseur est invalide.
                  </div>
+                 
                  <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-                   <label for="volume">Volume (cm³)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
-                   <input type="number" id="volume" formControlName="volume"  min="1" max="30000000000">
-                   <a nz-tooltip [nzTooltipTitle]="tooltipVolume" href="javascript:void(0)" class="info-icon">
-                     <i class="far fa-question-circle"></i>
-                   </a>
-                   <ng-template #tooltipVolume>
-                     <div class="tooltip-content">
-                       <strong>Calcul du volume :</strong><br>
-                       <p>Volume = Hauteur × Epaisseur × Longueur</p>
-                     </div>
-                   </ng-template>
+                   <label for="longueur_ouverture">Longueur de l'ouverture (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
+                   <input type="number" id="longueur_ouverture" formControlName="longueur_ouverture"  min="1" max="30000"> 
                  </div>
-                 <div *ngIf="isclicked && ouverturePartielle.controls[i].get('volume')?.invalid " class="error-message">
-                   Le volume est invalide.
+                 <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur_ouverture')?.invalid " class="error-message">
+                   La longueur de l'ouverture est invalide.
                  </div>
+
                  <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-                   <label for="longueur_du_mur">Longueur du mur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
-                   <input type="number" id="longueur_du_mur" formControlName="longueur_du_mur"  min="1" max="30000"> 
-                 </div>
-                 <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur_du_mur')?.invalid " class="error-message">
-                   La longueur du mur est invalide.
-                 </div>
+                  <label for="hauteur_ouverture">hauteur de l'ouverture (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
+                  <input type="number" id="hauteur_ouverture" formControlName="hauteur_ouverture"  min="1" max="30000"> 
+                </div>
+                <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_ouverture')?.invalid " class="error-message">
+                  La hauteur de l'ouverture est invalide.
+                </div>
+
+                <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                  <label for="hauteur_depuis_le_sol">hauteur depuis le sol (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
+                  <input type="number" id="hauteur_depuis_le_sol" formControlName="hauteur_depuis_le_sol"  min="1" max="30000"> 
+                </div>
+                <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_depuis_le_sol')?.invalid " class="error-message">
+                  La hauteur depuis le sol est invalide.
+                </div>
+
+                <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                  <label for="hauteur_depuis_le_plafond">hauteur depuis le plafond (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
+                  <input type="number" id="hauteur_depuis_le_plafond" formControlName="hauteur_depuis_le_plafond"  min="1" max="30000"> 
+                </div>
+                <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_depuis_le_plafond')?.invalid " class="error-message">
+                  La hauteur depuis le plafond est invalide.
+                </div>
      
                 <div nz-col nzSpan="6" class="tooltip-srf etat-srf"> 
                   <label for="image">Image : </label>

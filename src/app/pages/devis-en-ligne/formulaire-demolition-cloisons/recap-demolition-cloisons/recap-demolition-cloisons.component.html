@@ -9,24 +9,13 @@
         <span class="recup-fin" ><p>Hauteur </p><p>:</p><p>{{dim?.hauteur}} cm</p></span>
         <span class="recup-fin" ><p>Longueur </p><p>:</p><p>{{dim?.longueur}} cm</p></span>
         <span class="recup-fin" ><p>Epaisseur </p><p>:</p><p>{{dim?.epaisseur}} cm</p></span>
-        <span class="recup-fin" ><p>Volume </p><p>:</p><p>{{dim?.volume}} cm³</p></span>
-        <span class="recup-fin" *ngIf="gammes_materiaux[i]"><p>Matériau </p><p>:</p><p>{{get_title(gammes_materiaux[i]?.materiaux)}}</p></span>
+        <span class="recup-fin" ><p>Nombre de portes </p><p>:</p><p>{{dim?.ndp}} </p></span>
+        <span class="recup-fin" *ngIf="gammes_cloison[i]"><p>Vloison </p><p>:</p><p>{{get_title(gammes_cloison[i]?.cloison)}}</p></span>
         </div>
     </div>
 </div>
 
-<div class="recap-last" *ngIf="portes_choisies">
-    <div class="recap-mur-ttl">Pose de portes</div>
-    <div class="recup-mur-flx">
-        <div class="vide"></div>
-        <div>
-        <span class="recup-fin" ><p>Quantite portes simples creuse </p><p>:</p><p>{{quantite_portes_simples_creuse}}</p></span>
-        <span class="recup-fin" ><p>Quantite portes doubles creuses </p><p>:</p><p>{{quantite_portes_doubles_creuses}}</p></span>
-        <span class="recup-fin" ><p>Quantite porte simple plein </p><p>:</p><p>{{quantite_porte_simple_plein}}</p></span>
-        <span class="recup-fin" ><p>Quantite porte double pleine </p><p>:</p><p>{{quantite_porte_double_pleine}}</p></span>
-        </div>
-    </div>
-</div>
+
 
 
 <div class="recap-last" *ngIf="ouverture_choisie">
@@ -38,7 +27,10 @@
         <span class="recup-fin" ><p>Longueur </p><p>:</p><p>{{dim?.longueur}} cm</p></span>
         <span class="recup-fin" ><p>Longueur du mur </p><p>:</p><p>{{dim?.longueur_du_mur}} cm</p></span>
         <span class="recup-fin" ><p>Epaisseur </p><p>:</p><p>{{dim?.epaisseur}} cm</p></span>
-        <span class="recup-fin" ><p>Volume </p><p>:</p><p>{{dim?.volume}} cm³</p></span>
+        <span class="recup-fin" ><p>longueur de l'ouverture </p><p>:</p><p>{{dim?.longueur_ouverture}} cm</p></span>
+        <span class="recup-fin" ><p>hauteur de l'ouverture </p><p>:</p><p>{{dim?.hauteur_ouverture}} cm</p></span>
+        <span class="recup-fin" ><p>hauteur depuis le sol </p><p>:</p><p>{{dim?.hauteur_depuis_le_sol}} cm</p></span>
+        <span class="recup-fin" ><p>hauteur depuis le plafond </p><p>:</p><p>{{dim?.hauteur_depuis_le_plafond}} cm</p></span>
         <span class="recup-fin" *ngIf="gammes_cloison[i]"><p>Cloison </p><p>:</p><p>{{get_title(gammes_cloison[i]?.cloison)}}</p></span>
         </div>
     </div>

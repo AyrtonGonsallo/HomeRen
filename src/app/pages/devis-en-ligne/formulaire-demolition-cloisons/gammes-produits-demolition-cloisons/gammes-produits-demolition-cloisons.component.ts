@@ -82,7 +82,6 @@ onPoseMursSubmit(): void {
       ...this.ouverturepartiellesForm.value, 
       "mursnonporteurs_choisis":this.mursnonporteurs_choisis,
       "ouverturepartielles_choisis":this.ouverturepartielles_choisis,
-      "portes_choisis":this.portes_choisis
     };
    // console.log(fusion);
     this.gestiondesdevisService.addFormulaire('gammes-produits-murs-non-porteurs',3, fusion);
@@ -98,12 +97,11 @@ createouverturepartielleGroup(): FormGroup {
 }
 createmursnonporteurGroup(): FormGroup {
   return this.fb.group({
-    materiaux: ["", this.mursnonporteurs_choisis ? Validators.required : null],
+    cloison: ["", this.mursnonporteurs_choisis ? Validators.required : null],
   });
 }
 mursnonporteurs_choisis = false
 ouverturepartielles_choisis = false
-portes_choisis=false
 prec_formulaire_gammes_produits:any
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
   
@@ -115,7 +113,6 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
           console.log("formulaire existant",form)
           this.mursnonporteurs_choisis=form.mursnonporteurs_choisis
           this.ouverturepartielles_choisis=form.ouverturepartielles_choisis
-          this.portes_choisis=form.portes_choisis
           // Handling `mursNonporteursForm`
           this.mursnonporteursForm = this.fb.group({
             mursnonporteurs: this.fb.array([])
@@ -123,7 +120,7 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
           const mursArray = this.mursnonporteursForm.get('mursnonporteurs') as FormArray;
           form.mursnonporteurs.forEach((mursNonporteur: any) => {
             mursArray.push(this.fb.group({
-              materiaux: [mursNonporteur.materiaux, this.mursnonporteurs_choisis ? Validators.required : null],
+              cloison: [mursNonporteur.cloison, this.mursnonporteurs_choisis ? Validators.required : null],
             }));
           });
 
@@ -145,7 +142,6 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
           this.formulaire_dimensions1_length=this.formulaire_dimensions.formulaire.mursNonporteurs.length
           this.formulaire_dimensions2_length=this.formulaire_dimensions.formulaire.ouverturePartielle.length
           this.mursnonporteurs_choisis = this.formulaire_dimensions.formulaire.tp1
-          this.portes_choisis = this.formulaire_dimensions.formulaire.tp2
           this.ouverturepartielles_choisis = this.formulaire_dimensions.formulaire.tp3
           console.log("murs non porteurs: ", this.mursnonporteurs_choisis)
           console.log("ouverture partielle: ", this.ouverturepartielles_choisis)
@@ -188,7 +184,6 @@ markFormGroupTouched(formGroup: FormGroup) {
 
 
 gammes_cloison:any
-gammes_materiaux:any
 
 load_gammes(){
   this.userService.getGammesByTravailAndType(3,"cloison").subscribe(
@@ -200,14 +195,6 @@ load_gammes(){
       console.error('Erreur lors de la recuperation des gammes cloison :', error);
     }
   );
-  this.userService.getGammesByTravailAndType(3,"materiaux").subscribe(
-    (response: any) => {
-      console.log('recuperation des gammes materiaux:', response);
-      this.gammes_materiaux=response
-    },
-    (error: any) => {
-      console.error('Erreur lors de la recuperation des gammes materiaux:', error);
-    }
-  );
+ 
 }
 }

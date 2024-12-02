@@ -3,14 +3,14 @@
 
   <div formArrayName="mursnonporteurs">
     <div *ngFor="let mur of mursnonporteurs.controls; let j = index" [formGroupName]="j">
-      <div class="div-mur-gm"><span class="mur-ttl">Mur {{j+1}}</span><span class="mur-ttl"> - </span><label for="materiaux" class="mur-ttl">Matériel </label></div>
+      <div class="div-mur-gm"><span class="mur-ttl">Mur {{j+1}}</span><span class="mur-ttl"> - </span><label for="cloison" class="mur-ttl">Matériel </label></div>
       <div nz-row nzJustify="start">
         <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
           
-          <nz-radio-group formControlName="materiaux" class="radio-flx-spc">
+          <nz-radio-group formControlName="cloison" class="radio-flx-spc">
             <!-- Reusable template for displaying options with PDFs -->
             <ng-container>
-              <div *ngFor="let option of gammes_materiaux" class="parquet-option">
+              <div *ngFor="let option of gammes_cloison" class="parquet-option">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
                   <span>
                     <!-- Dynamically display the label based on the type -->
@@ -28,8 +28,8 @@
             </ng-container>
           </nz-radio-group>
         </div>
-          <div *ngIf="isclicked && mursnonporteurs.controls[j].get('materiaux')?.invalid " class="error-message">
-            Les materiaux sont requis.
+          <div *ngIf="isclicked && mursnonporteurs.controls[j].get('cloison')?.invalid " class="error-message">
+            Les cloisons sont requises.
           </div>
         </div>
       </div>  
