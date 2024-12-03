@@ -30,17 +30,15 @@ export class PoseSolGammesProduitsComponent {
   //le formulaire de pose sol
   createPoseSolGroup(): FormGroup {
     return this.fb.group({
-      
-      parquet_massif: [0, ],
-      paquet_flottant_finition_bois: [0, ],
-      parquet_flottant_finition_stratifiee: [0, ],
       sol_pvc: [false, ],
       moquette: [false, ],
       sol_pvc_prix: [0, ],
       moquette_prix: [0, ],
-      carrelage: [0, ],
       gamme: ["", Validators.required],
-      plinthes: [0,],
+      autre_gamme: ["", ],
+      depose: ["", Validators.required],
+      plinthes: ["",],
+      has_plinthes: [false,],
     });
   }
 
@@ -107,9 +105,11 @@ gammes_parquet_m:any
 gammes_parquet_b:any
 gammes_parquet_pffs:any
 gammes_carrelage:any
-gammes_plithes:any
+gammes_plithes_carrelage:any
+gammes_plithes_bois:any
 gamme_pvc:any
 gamme_moquette:any
+gammes_depose:any
 load_gammes(){
   this.userService.getGammesByTravailAndType(9,"parquet-massif").subscribe(
     (response: any) => {
@@ -118,6 +118,15 @@ load_gammes(){
     },
     (error: any) => {
       console.error('Erreur lors de la recuperation des gammes parquet-massif :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(9,"depose-revetement-sol").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes gamme_depose:', response);
+      this.gammes_depose=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes gamme_depose :', error);
     }
   );
   this.userService.getGammesByTravailAndType(9,"parquet-flottant-finition-bois").subscribe(
@@ -147,10 +156,19 @@ load_gammes(){
       console.error('Erreur lors de la recuperation des gammes carrelage :', error);
     }
   );
-  this.userService.getGammesByTravailAndType(9,"plinthes").subscribe(
+  this.userService.getGammesByTravailAndType(9,"plinthes-carrelage").subscribe(
     (response: any) => {
-      console.log('recuperation des gammes plinthes:', response);
-      this.gammes_plithes=response
+      console.log('recuperation des gammes plinthes-carrelage:', response);
+      this.gammes_plithes_carrelage=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes plinthes :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(9,"plinthes-bois").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes plinthes-bois:', response);
+      this.gammes_plithes_bois=response
     },
     (error: any) => {
       console.error('Erreur lors de la recuperation des gammes plinthes :', error);

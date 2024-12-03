@@ -27,7 +27,8 @@ export class PoseSolDimensionsComponent {
   //le formulaire de pose sol
   createPoseSolGroup(): FormGroup {
     return this.fb.group({
-      surface: ['', Validators.required],
+      longueur: ['', Validators.required],
+      largeur: ['', Validators.required],
       image: [null]
     });
   }
