@@ -7,14 +7,14 @@
                      <!-- <label for="etat" class="etat-srf-ttl">État du surface: </label> -->
                      <nz-radio-group formControlName="etat" class="radio-flx-spc">
                       <div>
-                        <label nz-radio nzValue="Très abimé" class="radio-span">
-                          <span>Très abimé</span>
+                        <label nz-radio nzValue="Bon" class="radio-span">
+                          <span>Bon</span>
                         </label>
-                        <a nz-tooltip [nzTooltipTitle]="tooltipTresAbime" href="javascript:void(0)" class="info-icon">
+                        <a nz-tooltip [nzTooltipTitle]="tooltipBon" href="javascript:void(0)" class="info-icon">
                           <i class="far fa-question-circle"></i>
                         </a>
-                        <ng-template #tooltipTresAbime>
-                          Le plafond est très abimé, une réparation complète est indispensable.
+                        <ng-template #tooltipBon>
+                          Reprise légère d'enduit
                         </ng-template>
                       </div>
                       
@@ -26,19 +26,19 @@
                           <i class="far fa-question-circle"></i>
                         </a>
                         <ng-template #tooltipAbime>
-                          Le plafond présente des signes d'usure, envisagez des réparations mineures.
+                          Rebouchage, réparation de fissures
                         </ng-template>
                       </div>
                       
                       <div>
-                        <label nz-radio nzValue="reprises partielles">
-                          <span>Reprises partielles</span>
+                        <label nz-radio nzValue="très abimé">
+                          <span>Très abimé</span>
                         </label>
-                        <a nz-tooltip [nzTooltipTitle]="tooltipReprisesPartielles" href="javascript:void(0)" class="info-icon">
+                        <a nz-tooltip [nzTooltipTitle]="tooltiptresabime" href="javascript:void(0)" class="info-icon">
                           <i class="far fa-question-circle"></i>
                         </a>
-                        <ng-template #tooltipReprisesPartielles>
-                          Des réparations partielles sont nécessaires pour maintenir le plafond en bon état.
+                        <ng-template #tooltiptresabime>
+                          Nécéssite la pose de plaques de plâtre
                         </ng-template>
                       </div>
                     </nz-radio-group>
