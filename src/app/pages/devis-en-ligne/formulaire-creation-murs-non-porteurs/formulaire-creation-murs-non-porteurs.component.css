@@ -135,3 +135,7 @@ form label{
 }
 input{width: 100%!important;}
 } */
+
+.col-6-w{
+    width: 100%;
+}

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DimensionsComponent } from './dimensions.component';
+import { MursNonPorteursDimensionsComponent } from './dimensions.component';
 
-describe('DimensionsComponent', () => {
-  let component: DimensionsComponent;
-  let fixture: ComponentFixture<DimensionsComponent>;
+describe('MursNonPorteursDimensionsComponent', () => {
+  let component: MursNonPorteursDimensionsComponent;
+  let fixture: ComponentFixture<MursNonPorteursDimensionsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DimensionsComponent]
+      declarations: [MursNonPorteursDimensionsComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(DimensionsComponent);
+    fixture = TestBed.createComponent(MursNonPorteursDimensionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -69,7 +69,7 @@ export class DimensionsDemolitionCloisonsComponent {
         this.exist_glob_err_form1=true
         this.glob_err_form1+=`Tous les champs doivent être remplis pour la démolition du mur ${i + 1}. `
         //group.markAllAsTouched(); // Affiche les erreurs pour ce groupe
-        res=res || false
+        res=res && false
       }
     }
   
@@ -84,7 +84,7 @@ export class DimensionsDemolitionCloisonsComponent {
   
   onSubmitform3(): boolean {
     const ouverturePartielleArray = this.ouverturePartielleForm.get('ouverturePartielle') as FormArray;
-  
+    let res=true
     for (let i = 0; i < ouverturePartielleArray.length; i++) {
       const group = ouverturePartielleArray.at(i) as FormGroup;
       const controls = group.controls;
@@ -102,16 +102,13 @@ export class DimensionsDemolitionCloisonsComponent {
         //group.markAllAsTouched();
         this.exist_glob_err_form2=true
         this.glob_err_form2+=`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}. `
-        return false;
+        res=res && false
       }
     }
   
-    if (this.ouverturePartielleForm.valid) {
-      console.log('Formulaire valide', this.ouverturePartielleForm.value);
-      return true;
-    }
+    
   
-    return false;
+    return res;
   }
   
   

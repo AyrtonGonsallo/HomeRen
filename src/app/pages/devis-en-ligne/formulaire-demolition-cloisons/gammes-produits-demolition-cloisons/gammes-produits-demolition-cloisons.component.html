@@ -3,7 +3,7 @@
 
   <div formArrayName="mursnonporteurs">
     <div *ngFor="let mur of mursnonporteurs.controls; let j = index" [formGroupName]="j">
-      <div class="div-mur-gm"><span class="mur-ttl">Mur {{j+1}}</span><span class="mur-ttl"> - </span><label for="cloison" class="mur-ttl">Matériel </label></div>
+      <div class="div-mur-gm"><span class="mur-ttl">Mur {{j+1}}</span><span class="mur-ttl"> - </span><label for="cloison" class="mur-ttl">Cloison </label></div>
       <div nz-row nzJustify="start">
         <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
           

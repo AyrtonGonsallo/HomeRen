@@ -24,7 +24,8 @@ export class MursNonPorteursGammesProduitsComponent {
   disabled = true;
   radioValue = 'A';
   isclicked=false
-
+  formulaire_dimensions:any
+  formulaire_dimensions_length:number=0
   prec_formulaire_gammes:any
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
  
@@ -42,10 +43,16 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
     });
 
     this.load_types()
-  }else{
+  }else{ 
     this.posePortesForm = this.fb.group({
       portes: this.fb.array([this.createposePortesGroup()])
     });
+    this.formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-creation-murs-non-porteurs--murs")
+    this.formulaire_dimensions_length=this.formulaire_dimensions.formulaire.portes.length
+    for(let i=0;i<(this.formulaire_dimensions_length-1);i++){
+      this.addPortesGroup()
+    }
+   
     this.load_types()
   }
 

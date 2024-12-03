@@ -1,14 +1,16 @@
 <div class="plaf-dim">
 
   <form [formGroup]="poseMursNonPorteursForm" (ngSubmit)="onPoseMursNonPorteursSubmit()">
-
-     <div formArrayName="murs_non_porteurs">
+    <div *ngIf="exist_glob_err_form1" class="error-message">
+      {{glob_err_form1}}
+    </div>
+    <div formArrayName="murs_non_porteurs">
       <img class="img-surface" src="/assets/Rectangle.png"><br>
       <div *ngFor="let mur of murs_non_porteurs.controls; let i = index" [formGroupName]="i">
         <div class="mur-btn-div">
-        <span class="mur-ttl">Mur {{i+1}}</span>
-        <button type="button" class="dynamic-form-button del-btn" (click)="removeMurNonPorteurroup(i)" *ngIf="murs_non_porteurs.length > 1">Retirer</button>
-      </div>
+          <span class="mur-ttl">Mur {{i+1}}</span>
+          <button type="button" class="dynamic-form-button del-btn" (click)="removeMurNonPorteurroup(i)" *ngIf="murs_non_porteurs.length > 1">Retirer</button>
+        </div>
         <div nz-row nzJustify="start" >   
           <div nz-col nzSpan="6" class="ant-col tooltip-srf">
             <label for="hauteur">
@@ -20,32 +22,98 @@
             La hauteur du mur est invalide.
           </div>    
           <div nz-col nzSpan="6" class="ant-col tooltip-srf">
-            <label for="surface">
-              Surface (m²)<span class="error-message">*</span> :
+            <label for="longueur">
+              Longueur (cm)<span class="error-message">*</span> :
             </label>
-            <input type="number" id="surface" formControlName="surface"  min="1" max="900">
-            <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-              <i class="far fa-question-circle"></i>
-            </a>
-            <ng-template #tooltipSurface>
-              <div class="tooltip-content">
-                <strong>Calcul de la surface :</strong><br>
-                <p>La surface est calculée en multipliant la longueur par la largeur de la pièce. Mesurez chaque côté avec précision pour obtenir la surface totale en m².</p>
-                <p><strong>Exemple :</strong> Si la pièce fait 4m de long et 3m de large, la surface totale est de 12 m².</p>
-              </div>
-            </ng-template>
+            <input type="number" id="longueur" formControlName="longueur"  min="1" max="10000">
+            
           </div>
-          <div *ngIf="isclicked && murs_non_porteurs.controls[i].get('surface')?.invalid " class="error-message">
-            La surface du mur est invalide.
+          <div *ngIf="isclicked && murs_non_porteurs.controls[i].get('longueur')?.invalid " class="error-message">
+            La longueur du mur est invalide.
           </div>   
         </div>
 
+        <div nz-col nzSpan="6" class="ant-col tooltip-srf">
+          <label for="epaisseur">
+            Épaisseur (cm)<span class="error-message">*</span> :
+          </label>
+          <input type="number" id="epaisseur" formControlName="epaisseur"  min="1" max="10">
+          
+        </div>
+        <div *ngIf="isclicked && murs_non_porteurs.controls[i].get('epaisseur')?.invalid " class="error-message">
+          L'épaisseur du mur est invalide.
+        </div>   
       </div>
+
+      
        
      </div>
      <button type="button"  class="dynamic-form-button add-btn" (click)="addMurNonPorteurroup()" *ngIf="murs_non_porteurs.length < 4">Ajouter un mur <span nz-icon nzType="plus" nzTheme="outline"></span></button>
      
    </form>
+
+
+
+   <nz-collapse>
+      
+    <nz-collapse-panel nzHeader="Présence de portes" [nzActive]="is_active_Tp3" [nzExtra]="activerTp3" nzShowArrow="false" (nzActiveChange)="active_Tp3()">
+      <form [formGroup]="portesForm" (ngSubmit)="onPosePortesSubmit()">
+        <div *ngIf="exist_glob_err_form2" class="error-message">
+          {{glob_err_form2}}
+        </div>
+        <div formArrayName="portes">
+         <div *ngFor="let mur of portes.controls; let i = index" [formGroupName]="i" >
+           <div class="mur-btn-div">
+             <span class="mur-ttl">Porte nº{{i+1}}</span>
+             <button type="button" class="dynamic-form-button del-btn" (click)="removeportesGroup(i)" *ngIf="portes.length > 1">Retirer</button>
+           </div>
+           <div nz-row nzJustify="start" >
+             <div class="col-6-w">
+              <div nz-col nzSpan="6" class="ant-col-6  tooltip-srf">
+                <label for="longueur">Longueur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
+                <input type="number" id="longueur" formControlName="longueur" min="1" max="30000">
+              </div>
+              <div *ngIf="isclicked && portes.controls[i].get('longueur')?.invalid " class="error-message">
+                 La longueur est invalide.
+             </div>
+
+             <div nz-col nzSpan="6" class="ant-col-6  tooltip-srf">
+              <label for="largeur">Largeur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
+              <input type="number" id="largeur" formControlName="largeur"  min="1" max="30000"> 
+            </div>
+            <div *ngIf="isclicked && portes.controls[i].get('largeur')?.invalid " class="error-message">
+              La largeur est invalide.
+            </div>
+              <div nz-col nzSpan="6" class="ant-col-6  tooltip-srf">
+                <label for="hauteur">Hauteur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
+                <input type="number" id="hauteur" formControlName="hauteur" min="1" max="300">
+              </div>
+              <div *ngIf="isclicked && portes.controls[i].get('hauteur')?.invalid " class="error-message">
+                 La hauteur est invalide.
+               </div>
+              <div nz-col nzSpan="6" class="ant-col-6  tooltip-srf">
+                 <label for="epaisseur">Epaisseur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
+                 <input type="number" id="epaisseur" formControlName="epaisseur"  min="1" max="10">
+               </div>
+               <div *ngIf="isclicked && portes.controls[i].get('epaisseur')?.invalid " class="error-message">
+                 L'épaisseur est invalide.
+               </div>
+               
+               
+              
+             </div>
+            </div>
+          </div>
+         </div>
+          
+        <button type="button"  class="dynamic-form-button add-btn" (click)="addportesGroup()" *ngIf="portes.length < 5" >Ajouter une porte<span nz-icon nzType="plus" nzTheme="outline"></span></button>
+      </form>
+    </nz-collapse-panel>
+</nz-collapse>
   </div>
 
-   
+  <ng-template #activerTp3>
+    <label nz-checkbox [(ngModel)]="is_active_Tp3">
+      
+    </label>
+  </ng-template>

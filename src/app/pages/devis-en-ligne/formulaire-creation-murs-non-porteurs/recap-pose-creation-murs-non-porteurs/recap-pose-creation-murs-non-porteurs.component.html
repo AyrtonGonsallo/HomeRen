@@ -14,6 +14,11 @@
     <div *ngFor="let porte of cmnpForm.formulaire['gammes-produits-creation-murs-non-porteurs--portes'].portes; let i = index" class="recup-mur-flx">
         <span class="mur-ttl">Porte {{i+1}}</span>
         <div>
+          
+            <span class="recup-fin"><p>Longueur</p><p>:</p><p>{{(cmnpForm.formulaire['dimensions-creation-murs-non-porteurs--murs'].portes[i].longueur)}} cm</p></span>
+            <span class="recup-fin"><p>Largeur</p><p>:</p><p>{{(cmnpForm.formulaire['dimensions-creation-murs-non-porteurs--murs'].portes[i].largeur)}} cm</p></span>
+            <span class="recup-fin"><p>Hauteur</p><p>:</p><p>{{(cmnpForm.formulaire['dimensions-creation-murs-non-porteurs--murs'].portes[i].hauteur)}} cm</p></span>
+            <span class="recup-fin"><p>Épaisseur</p><p>:</p><p>{{(cmnpForm.formulaire['dimensions-creation-murs-non-porteurs--murs'].portes[i].epaisseur)}} cm</p></span>
         <span class="recup-fin"><p>Type de porte</p><p>:</p><p>{{get_title(porte.type)}} </p></span>
         </div>
     </div>
