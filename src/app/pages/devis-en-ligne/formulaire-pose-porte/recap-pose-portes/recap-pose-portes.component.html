@@ -3,13 +3,11 @@
     <div *ngFor="let dimmur of forms_portes.formulaire['gammes-produits-pose-portes'].portes; let i = index" class="recup-mur-flx">
         <span class="mur-ttl">Porte {{i+1}}</span>
         <div>
-        <span class="recup-fin" ><p>Création ou remplacement</p><p>:</p><p>{{creation_ou_remplacement[i]}} </p></span>
-        <span class="recup-fin" ><p>Type de porte</p><p>:</p><p>{{get_title(types1[i])}} </p></span>
-        <span class="recup-fin" ><p>Type de matériau</p><p>:</p><p>{{get_title(types2[i])}} </p></span>
-        <span class="recup-fin" ><p>Type de porte (finition)</p><p>:</p><p>{{get_title(types3[i])}} </p></span>
-        <span class="recup-fin" ><p>Finition</p><p>:</p><p>{{get_title(types4[i])}} </p></span>
-        <span class="recup-fin" ><p>Informations sur le type</p><p>:</p><p>{{infos_c_types[i]}} </p></span>
-        <span class="recup-fin" ><p>Informations sur la finition</p><p>:</p><p>{{infos_c_finition[i]}} </p></span>
+        <span class="recup-fin" ><p>Type de porte</p><p>:</p><p>{{get_title(types_portes[i])}} </p></span>
+        <span class="recup-fin" ><p>Nature de la porte</p><p>:</p><p>{{get_title(natures_portes[i])}} </p></span>
+        <span class="recup-fin" ><p>Nature du mur</p><p>:</p><p>{{(natures_murs[i])}} </p></span>
+        <span class="recup-fin" ><p>Épaisseur du mur</p><p>:</p><p>{{epaisseurs[i]}} cm </p></span>
+        <span class="recup-fin" ><p>Gamme</p><p>:</p><p>{{get_title(gammes[i])}} </p></span>
         </div>
     </div>
     </div>

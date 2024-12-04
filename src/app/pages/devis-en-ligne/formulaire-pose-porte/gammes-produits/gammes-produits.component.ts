@@ -63,13 +63,11 @@ onPosePortesSubmit(): void {
 }
 createposePortesGroup(): FormGroup {
   return this.fb.group({
-    type: ['', Validators.required],//select avec valeurs Porte alveolaire simple,Porte alveolaire double,Porte pleine double,Porte pleine simple, Porte vitrée simple,Porte vitrée double
-    type2: ['', Validators.required],// select avec valeurs a peindre, stratifiee, bois, autre 
-    type3: ['', Validators.required],//select avec valeurs porte simple, porte double
-    finition: ['', Validators.required],//select avec valeurs a Finition à peindre, finition stratifiee,finition bois,autre. Preciser
-    infos_comp_type: ['', ],//text area
-    infos_comp_finition: ['', ],//text area
-    creation_ou_remplacement: ['',Validators.required ],//boolean
+    gamme: ['', Validators.required],//select avec valeurs Porte alveolaire simple,Porte alveolaire double,Porte pleine double,Porte pleine simple, Porte vitrée simple,Porte vitrée double
+    nature_porte: ['', Validators.required],// select avec valeurs a peindre, stratifiee, bois, autre 
+    type_porte: ['', Validators.required],//select avec valeurs porte simple, porte double
+    nature_mur: ['', Validators.required],//select avec valeurs a Finition à peindre, finition stratifiee,finition bois,autre. Preciser
+    epaisseur_mur: ['', Validators.required],
   });
 }
 
@@ -90,13 +88,11 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
       const ouvertureArray = this.posePortesForm.get('portes') as FormArray;
       form.portes.forEach((porte: any) => {
         ouvertureArray.push(this.fb.group({
-          type: [porte.type, Validators.required],//select avec valeurs Porte alveolaire simple,Porte alveolaire double,Porte pleine double,Porte pleine simple, Porte vitrée simple,Porte vitrée double
-          type2: [porte.type2, Validators.required],// select avec valeurs a peindre, stratifiee, bois, autre 
-          type3: [porte.type3, Validators.required],//select avec valeurs porte simple, porte double
-          finition: [porte.finition, Validators.required],//select avec valeurs a Finition à peindre, finition stratifiee,finition bois,autre. Preciser
-          infos_comp_type: [porte.infos_comp_type, ],//text area
-          infos_comp_finition: [porte.infos_comp_finition, ],//text area
-          creation_ou_remplacement: [porte.creation_ou_remplacement,Validators.required ],//boolean
+          gamme: [porte.gamme, Validators.required],//select avec valeurs Porte alveolaire simple,Porte alveolaire double,Porte pleine double,Porte pleine simple, Porte vitrée simple,Porte vitrée double
+          nature_porte: [porte.nature_porte, Validators.required],// select avec valeurs a peindre, stratifiee, bois, autre 
+          type_porte: [porte.type_porte, Validators.required],//select avec valeurs porte simple, porte double
+          nature_mur: [porte.nature_mur, Validators.required],//select avec valeurs a Finition à peindre, finition stratifiee,finition bois,autre. Preciser
+          epaisseur_mur: [porte.epaisseur_mur, ],//text area
         }));
       });
 
@@ -127,9 +123,8 @@ markFormGroupTouched(formGroup: FormGroup) {
 
   
 types_de_portes:any
-types_de_materiau:any
-types_de_porte_finition:any
-types_de_finitions:any
+natures_porte:any
+gammes:any
 load_gammes(){
   this.userService.getGammesByTravailAndType(10,"type-de-porte").subscribe(
     (response: any) => {
@@ -140,33 +135,26 @@ load_gammes(){
       console.error('Erreur lors de la recuperation des gammes type-de-porte :', error);
     }
   );
-  this.userService.getGammesByTravailAndType(10,"type-de-materiau-porte").subscribe(
+  this.userService.getGammesByTravailAndType(10,"nature-porte").subscribe(
     (response: any) => {
-      console.log('recuperation des gammes type-de-materiau-porte:', response);
-      this.types_de_materiau=response
+      console.log('recuperation des gammes nature-porte:', response);
+      this.natures_porte=response
     },
     (error: any) => {
-      console.error('Erreur lors de la recuperation des gammes type-de-materiau-porte :', error);
+      console.error('Erreur lors de la recuperation des gammes nature-porte :', error);
     }
   );
-  this.userService.getGammesByTravailAndType(10,"type-de-porte-finition").subscribe(
+
+  this.userService.getGammesByTravailAndType(10,"gamme-de-porte").subscribe(
     (response: any) => {
-      console.log('recuperation des gammes type-de-porte-finition:', response);
-      this.types_de_porte_finition=response
+      console.log('recuperation des gammes :', response);
+      this.gammes=response
     },
     (error: any) => {
-      console.error('Erreur lors de la recuperation des gammes type-de-porte-finition :', error);
+      console.error('Erreur lors de la recuperation des gammes  :', error);
     }
   );
-  this.userService.getGammesByTravailAndType(10,"finition-de-porte").subscribe(
-    (response: any) => {
-      console.log('recuperation des gammes finition-de-porte:', response);
-      this.types_de_finitions=response
-    },
-    (error: any) => {
-      console.error('Erreur lors de la recuperation des gammes finition-de-porte :', error);
-    }
-  );
+  
 }
 }
 
