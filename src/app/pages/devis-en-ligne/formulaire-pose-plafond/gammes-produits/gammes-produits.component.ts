@@ -31,7 +31,7 @@ export class GammesProduitsPosePlafondComponent {
     return this.fb.group({
       gamme: ["",Validators.required ],
       autre_gamme: ["", ],
-      depose: ["", ]
+     
     });
   }
   onPosePlafondSubmit(): void {
@@ -90,7 +90,7 @@ export class GammesProduitsPosePlafondComponent {
     });
   }
   
-  gammes_depose:any
+  
 gammes_peinture:any
 gammes_enduit:any
 gammes_papier:any
@@ -105,15 +105,7 @@ load_gammes(){
       console.error('Erreur lors de la recuperation des gammes peinture :', error);
     }
   );
-  this.userService.getGammesByTravailAndType(8,"depose-revetement-plafond").subscribe(
-    (response: any) => {
-      console.log('recuperation des gammes gammes_depose:', response);
-      this.gammes_depose=response
-    },
-    (error: any) => {
-      console.error('Erreur lors de la recuperation des gammes gammes_depose :', error);
-    }
-  );
+ 
   this.userService.getGammesByTravailAndType(8,"enduit-decoratif").subscribe(
     (response: any) => {
       console.log('recuperation des gammes enduit-decoratif:', response);

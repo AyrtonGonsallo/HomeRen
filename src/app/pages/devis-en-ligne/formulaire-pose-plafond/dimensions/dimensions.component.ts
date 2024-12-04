@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
+import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-dimensions-pose-plafond',
@@ -8,6 +10,7 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
    styleUrl: '../formulaire-pose-plafond.component.css'
 })
 export class DimensionsPosePlafondComponent {
+  baseurl=environment.imagesUrl
   isclicked=false
   @Input() triggerSubmitDimensionForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
@@ -29,6 +32,7 @@ export class DimensionsPosePlafondComponent {
       hauteur: ['', Validators.required],
       longueur: ['', Validators.required],
       largeur: ['', Validators.required],
+      depose: ["", ],
       image: [null]
     });
   }
@@ -45,7 +49,8 @@ export class DimensionsPosePlafondComponent {
     }
   }
   
-  constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
+  constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
+    this.load_gamme()
     const prev_form = this.gestiondesdevisService.getFormulaireByName('dimensions-pose-plafond');
     if (prev_form) {
       console.log("formulaire existant",prev_form)
@@ -82,6 +87,17 @@ export class DimensionsPosePlafondComponent {
       }
     });
   }
-  
+  gammes_depose:any
+  load_gamme(){
+    this.userService.getGammesByTravailAndType(8,"depose-revetement-plafond").subscribe(
+      (response: any) => {
+        console.log('recuperation des gammes gammes_depose:', response);
+        this.gammes_depose=response
+      },
+      (error: any) => {
+        console.error('Erreur lors de la recuperation des gammes gammes_depose :', error);
+      }
+    );
+  }
   }
   

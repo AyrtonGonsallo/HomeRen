@@ -27,7 +27,27 @@
         <div *ngIf="isclicked && posePlafondForm.get('largeur')?.invalid " class="error-message">
          La largeur est invalide.
         </div>
+        <div nz-col nzSpan="6" class="ant-col tooltip-srf etat-srf">
+          <nz-radio-group formControlName="depose" class="radio-flx-spc">
+               <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
+                Revêtement à déposer  </span> 
+              </div>
+              <div *ngFor="let option of gammes_depose" class="parquet-option ant-col tooltip-srf etat-srf">
+                <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
+                  <span>{{ option.Label }}</span>
+                </label>
+                <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
+                <ng-template #tooltipTemplate>
+                  Pour plus d'informations, veuillez consulter :
+                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                </ng-template>
+              </div>
 
+              
+          </nz-radio-group>
+        </div>
 
 
          <div nz-col nzSpan="6" class="ant-col tooltip-srf"> 

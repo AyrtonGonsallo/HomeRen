@@ -25,32 +25,7 @@
             longueur invalide.
          </div>
 
-         <div nz-col nzSpan="6" class="tooltip-srf ">
-          <label for="largeur">Largeur (cm) <span class="error-message">*</span> : </label>
-          <input type="number" id="largeur" formControlName="largeur" max="70000" min="1">
-        </div>
-        <div *ngIf="isclicked && murs.controls[i].get('largeur')?.invalid " class="error-message">
-          largeur invalide.
-       </div>
-
-           <div nz-col nzSpan="6" class="ant-col" [nzXs]="24" [nzSm]="6" class="tooltip-srf">
-            <label for="surface">Surface (m²) <span class="error-message">*</span> :
-            </label>
-            <input type="number" id="surface" formControlName="surface" required [max]="surfacemax" min="1">
-            <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
-              <i class="far fa-question-circle"></i>
-            </a>
-            <ng-template #tooltipSurface>
-              <div class="tooltip-content">
-                <strong>Calcul de la surface :</strong><br>
-                Veuillez consulter :
-                  <a href="" target="_blank" class="link-tooltip">Calcul surfaces murs</a>
-                </div>
-            </ng-template>
-          </div>
-           <div *ngIf="isclicked && murs.controls[i].get('surface')?.invalid " class="error-message">
-            Surface invalide.
-          </div>
+        
            <div nz-col nzSpan="6" class="tooltip-srf"> 
              <label for="image">Image :</label>
              <input type="file" id="image" (change)="onMursFileChange($event, i)" accept="image/*">
