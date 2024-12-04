@@ -2,12 +2,14 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 
+
 @Component({
   selector: 'app-dimensions-pose-chauffage',
   templateUrl: './dimensions.component.html',
   styleUrl: '../formulaire-pose-chauffage.component.css'
 })
 export class PoseChauffageDimensionsComponent {
+ 
   isclicked=false
   @Input() triggerSubmitDimensionForm!: boolean;
   @Input() surfacemax: number=0; 
@@ -32,7 +34,7 @@ export class PoseChauffageDimensionsComponent {
   createPoseChauffageGroup(): FormGroup {
     return this.fb.group({
       surface: ['',Validators.required ],
-     
+      hauteur: ['',Validators.required ],
     });
   }
   onPoseChauffageSubmit(): void {
@@ -51,6 +53,7 @@ export class PoseChauffageDimensionsComponent {
   prec_formulaire_dimensions:any
   constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
     
+ 
     
     this.prec_formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-pose-chauffage")
     if(this.prec_formulaire_dimensions){
@@ -76,6 +79,7 @@ export class PoseChauffageDimensionsComponent {
       }
     });
   }
-  
+
+ 
   }
   

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
+import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-etat-surfaces-pose-chauffage',
@@ -8,6 +10,7 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-pose-chauffage.component.css'
 })
 export class PoseChauffageEtatSurfacesComponent {
+  baseurl=environment.imagesUrl
   @Input() triggerSubmitEtatSurfacesForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['triggerSubmitEtatSurfacesForm']) {
@@ -55,11 +58,13 @@ onPoseRadiateursSubmit(): void {
 createposeRadiateurGroup(): FormGroup {
   return this.fb.group({
     etat: ['', Validators.required],
+    type: ['',Validators.required ],
+
   });
 }
 prev_form:any
-constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-  
+constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
+  this.load_types()
     this.prev_form = this.gestiondesdevisService.getFormulaireByName('etat-surfaces-pose-chauffage');
     if (this.prev_form) {
       let form=this.prev_form.formulaire
@@ -72,6 +77,7 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
       form.radiateurs.forEach((rad: any) => {
         mursArray.push(this.fb.group({
           etat: [rad.etat, Validators.required],
+          type: [rad.type, Validators.required],
         }));
       });
       
@@ -115,4 +121,17 @@ markFormGroupTouched(formGroup: FormGroup) {
   });
 }
 
+
+types:any
+load_types(){
+  this.userService.getGammesByTravailAndType(12,"type-de-radiateur").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes type-de-radiateur:', response);
+      this.types=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes type-de-radiateur :', error);
+    }
+  );
+}
 }
