@@ -39,7 +39,7 @@ get murs_non_porteurs(): FormArray {
  // Check if "Autre type de cloison" is selected
  isAutreType(index: number): boolean {
   const mur = this.murs_non_porteurs.at(index);
-  return mur.get('type_cloison')?.value === 'Autre type de cloison';
+  return mur.get('type_cloison')?.value === '0:0:autre';
 }
 
 addMurNonPorteurroup(): void {
