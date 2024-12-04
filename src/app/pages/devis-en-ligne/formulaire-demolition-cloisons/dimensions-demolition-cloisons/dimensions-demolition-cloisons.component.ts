@@ -9,14 +9,12 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
 })
 export class DimensionsDemolitionCloisonsComponent {
   is_active_Tp1=false
-  is_active_Tp2=false
+ 
   is_active_Tp3=false
   active_Tp1(){
     this.is_active_Tp1=!this.is_active_Tp1
   }
-  active_Tp2(){
-    this.is_active_Tp2=!this.is_active_Tp2
-  }
+
   active_Tp3(){
     this.is_active_Tp3=!this.is_active_Tp3
   }
@@ -34,14 +32,20 @@ export class DimensionsDemolitionCloisonsComponent {
   }
   @Output() formValidityChange = new EventEmitter<boolean>();
   onSubmit(): void {
-    var bool=this.onSubmitform1()  && this.onSubmitform3()
+    var bool=false
+    if(this.is_active_Tp1){
+      bool=this.onSubmitform1()
+    }
+    if(this.is_active_Tp3){
+      bool=bool && this.onSubmitform3()
+    }
     this.formValidityChange.emit(bool);
     if (bool) {
       const fusion = {
         ...this.mursNonporteursForm.value,  // Valeurs du formulaire du haut
         ...this.ouverturePartielleForm.value,
         "tp1":this.is_active_Tp1,
-        "tp2":this.is_active_Tp2,
+        
         "tp3":this.is_active_Tp3,
       };
       console.log(fusion);
@@ -63,6 +67,7 @@ export class DimensionsDemolitionCloisonsComponent {
         controls['longueur'].value === '' ||
         controls['hauteur'].value === '' ||
         controls['epaisseur'].value === '' ||
+        controls['epaisseur'].invalid  ||
         controls['ndp'].value === ''
       ) {
         //console.error(`Tous les champs doivent être remplis pour la démolition du mur ${i + 1}`);
@@ -93,6 +98,7 @@ export class DimensionsDemolitionCloisonsComponent {
         controls['longueur'].value === '' ||
         controls['hauteur'].value === '' ||
         controls['epaisseur'].value === '' ||
+        controls['epaisseur'].invalid ||
         controls['longueur_ouverture'].value === '' ||
         controls['hauteur_ouverture'].value === '' ||
         controls['hauteur_depuis_le_sol'].value === '' ||
@@ -175,7 +181,6 @@ export class DimensionsDemolitionCloisonsComponent {
       let form=this.prec_formulaire_dimensions.formulaire
       console.log("formulaire existant",form)
       this.is_active_Tp1=form.tp1
-      this.is_active_Tp2=form.tp2
       this.is_active_Tp3=form.tp3
       
       // Handling `mursNonporteursForm`

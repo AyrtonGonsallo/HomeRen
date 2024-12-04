@@ -14,20 +14,21 @@
             <nz-radio-group formControlName="type_cloison" class="radio-flx-spc">
               <div *ngFor="let option of types" >
               <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">{{option.Label}}</label>
-              <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
+              <a nz-tooltip [nzTooltipTitle]="tooltip_type_cloison" href="javascript:void(0)" class="info-icon">
                 <i class="far fa-question-circle"></i>
               </a>
-              <ng-template #tooltipBonEtat>
-                {{option.Label}}
+              <ng-template #tooltip_type_cloison>
+                Pour plus d'informations, veuillez consulter :
+                <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
               </ng-template>
               </div>
               
               <div>
                 <label nz-radio nzValue="Autre type de cloison">Autre type de cloison</label>
-                <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
+                <a nz-tooltip [nzTooltipTitle]="tooltip_autre" href="javascript:void(0)" class="info-icon">
                   <i class="far fa-question-circle"></i>
                 </a>
-                <ng-template #tooltipBonEtat>
+                <ng-template #tooltip_autre>
                   Autre type de cloison.
                 </ng-template>
               </div>

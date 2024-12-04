@@ -26,7 +26,13 @@ export class MursNonPorteursDimensionsComponent {
 
 
   onSubmit(): void {
-    var bool=this.onPoseMursNonPorteursSubmit()  && this.onPosePortesSubmit()
+    var bool=this.onPoseMursNonPorteursSubmit()  
+
+    if(this.is_active_Tp3){
+      bool=this.onPoseMursNonPorteursSubmit()  && this.onPosePortesSubmit() 
+
+    }
+
     this.formValidityChange.emit(bool);
     if (bool) {
       const fusion = {

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-etat-surfaces-creation-murs-non-porteurs',
@@ -24,7 +25,7 @@ export class MursNonPorteursEtatSurfacesComponent {
   disabled = true;
   isclicked =false
 
-
+  baseurl=environment.imagesUrl
 
 
 //formulaires des poses et deposes
