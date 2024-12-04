@@ -24,8 +24,28 @@
           <div *ngIf="isclicked && murs.controls[i].get('longueur')?.invalid " class="error-message">
             longueur invalide.
          </div>
-
-        
+          <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+            <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
+              Revêtement à déposer <span class="error-message">*</span></span> 
+            </div>
+            <nz-radio-group   formControlName="depose" class="radio-flx-spc">
+              <div *ngFor="let option of type_de_depose" class="parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix" class="radio-span">
+                  <span>{{ option.Label }}</span>
+                </label>
+                <a nz-tooltip [nzTooltipTitle]="tooltiptd1" href="javascript:void(0)" class="info-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
+                <ng-template #tooltiptd1>
+                  Pour plus d'informations, veuillez consulter :
+                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                </ng-template>
+              </div>
+            </nz-radio-group>
+          </div>
+          <div *ngIf="isclicked && murs.controls[i].get('depose')?.invalid " class="error-message">
+            Le revêtement à déposer est requis.
+          </div>
            <div nz-col nzSpan="6" class="tooltip-srf"> 
              <label for="image">Image :</label>
              <input type="file" id="image" (change)="onMursFileChange($event, i)" accept="image/*">

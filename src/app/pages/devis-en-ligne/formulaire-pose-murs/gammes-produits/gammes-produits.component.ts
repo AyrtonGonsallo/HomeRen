@@ -126,6 +126,8 @@ gammes_peinture:any
 gammes_enduit:any
 gammes_papier:any
 gammes_carrelage:any
+gammes_bois:any
+gammes_tissus:any
 load_gammes(){
   this.userService.getGammesByTravailAndType(5,"peinture").subscribe(
     (response: any) => {
@@ -134,6 +136,24 @@ load_gammes(){
     },
     (error: any) => {
       console.error('Erreur lors de la recuperation des gammes peinture :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(5,"bois").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes bois:', response);
+      this.gammes_bois=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes bois :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(5,"tissus").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes tissus:', response);
+      this.gammes_tissus=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes tissus :', error);
     }
   );
   this.userService.getGammesByTravailAndType(5,"enduit-decoratif").subscribe(

@@ -85,6 +85,46 @@
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
                 </ng-template>
               </div>
+
+
+              <div class="div-chauf-gm" style="width:100%;">
+                <span  class="jaune fs-16 f-w-6" >Bois</span>
+               </div>
+              <div *ngFor="let option of gammes_bois" class="parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+                  <span>
+                    <!-- Dynamically display the label based on the type -->
+                    {{ option.Label }}
+                  </span>
+                </label>
+                <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
+                <ng-template #tooltipTemplate>
+                  Pour plus d'informations, veuillez consulter :
+                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                </ng-template>
+              </div>
+
+
+              <div class="div-chauf-gm" style="width:100%;">
+                <span  class="jaune fs-16 f-w-6" >Tissus</span>
+               </div>
+              <div *ngFor="let option of gammes_tissus" class="parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Prix">
+                  <span>
+                    <!-- Dynamically display the label based on the type -->
+                    {{ option.Label }}
+                  </span>
+                </label>
+                <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
+                <ng-template #tooltipTemplate>
+                  Pour plus d'informations, veuillez consulter :
+                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                </ng-template>
+              </div>
             </ng-container>
           </nz-radio-group>
         </div>

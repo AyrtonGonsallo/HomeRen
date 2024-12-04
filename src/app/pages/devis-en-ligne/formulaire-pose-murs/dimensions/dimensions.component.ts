@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
+import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-dimensions-pose-murs',
@@ -8,6 +10,7 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-pose-murs.component.css'
 })
 export class DimensionsComponent {
+  baseurl=environment.imagesUrl
   isclicked=false
   @Input() triggerSubmitDimensionForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
@@ -55,11 +58,12 @@ createposeMurGroup(): FormGroup {
   return this.fb.group({
     hauteur: ['', Validators.required],
     longueur: ['', Validators.required],
+    depose: ['', Validators.required],
     image: [null]
   });
 }
-constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-  
+constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
+  this.load_types()
   const prev_form = this.gestiondesdevisService.getFormulaireByName('dimensions-pose-murs');
   if (prev_form) {
     console.log("formulaire existant",prev_form)
@@ -107,6 +111,19 @@ markFormGroupTouched(formGroup: FormGroup) {
       this.markFormGroupTouched(abstractControl);
     }
   });
+}
+
+type_de_depose:any
+load_types(){
+  this.userService.getGammesByTravailAndType(5,"depose-murs	").subscribe(
+    (response: any) => {
+      console.log('recuperation des types depose-murs	:', response);
+      this.type_de_depose=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des types depose-murs	 :', error);
+    }
+  );
 }
 
 }

@@ -57,11 +57,10 @@ onPoseMursSubmit(): void {
 createposeMurGroup(): FormGroup {
   return this.fb.group({
     etat: ['', Validators.required],
-    typedepose: ['', ]
   });
 }
-constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
-  this.load_types()
+constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
+  
    const prev_form = this.gestiondesdevisService.getFormulaireByName('etat-surfaces-pose-murs');
     if (prev_form) {
       console.log("formulaire existant",prev_form)
@@ -118,18 +117,7 @@ markFormGroupTouched(formGroup: FormGroup) {
   });
 }
 
-baseurl=environment.imagesUrl
 
-type_de_depose:any
-load_types(){
-  this.userService.getGammesByTravailAndType(5,"depose-murs	").subscribe(
-    (response: any) => {
-      console.log('recuperation des types depose-murs	:', response);
-      this.type_de_depose=response
-    },
-    (error: any) => {
-      console.error('Erreur lors de la recuperation des types depose-murs	 :', error);
-    }
-  );
-}
+
+
 }

@@ -32,7 +32,7 @@ export class DimensionsPosePlafondComponent {
       hauteur: ['', Validators.required],
       longueur: ['', Validators.required],
       largeur: ['', Validators.required],
-      depose: ["", ],
+      depose: ["", Validators.required],
       image: [null]
     });
   }
