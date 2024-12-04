@@ -24,6 +24,27 @@
                    La largeur est invalide.
                  </div>
 
+                 <div nz-col nzSpan="24" class="ant-col etat-srf tooltip-srf">
+                  <nz-radio-group formControlName="depose" class="radio-flx-spc">
+                    <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
+                      Revêtement à déposer</span> 
+                    </div>
+                    <div *ngFor="let option of gammes_depose" class="parquet-option">
+                      <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
+                        <span>{{ option.Label }}</span>
+                      </label>
+                      <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                        <i class="far fa-question-circle"></i>
+                      </a>
+                      <ng-template #tooltipTemplate>
+                        Pour plus d'informations, veuillez consulter :
+                        <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                      </ng-template>
+                    </div>
+                  </nz-radio-group> 
+                </div>
+
+
                   <div nz-col nzSpan="6" [nzXs]="24" [nzSm]="6" class="ant-col image">
                      <label for="image">Image :</label>
                      <input type="file" id="image" (change)="onFileChange($event,poseSolForm)" accept="image/*">

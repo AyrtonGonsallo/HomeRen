@@ -36,7 +36,7 @@ export class PoseSolGammesProduitsComponent {
       moquette_prix: [0, ],
       gamme: ["", Validators.required],
       autre_gamme: ["", ],
-      depose: ["", Validators.required],
+      
       plinthes: ["",],
       has_plinthes: [false,],
     });
@@ -109,7 +109,7 @@ gammes_plithes_carrelage:any
 gammes_plithes_bois:any
 gamme_pvc:any
 gamme_moquette:any
-gammes_depose:any
+
 load_gammes(){
   this.userService.getGammesByTravailAndType(9,"parquet-massif").subscribe(
     (response: any) => {
@@ -118,15 +118,6 @@ load_gammes(){
     },
     (error: any) => {
       console.error('Erreur lors de la recuperation des gammes parquet-massif :', error);
-    }
-  );
-  this.userService.getGammesByTravailAndType(9,"depose-revetement-sol").subscribe(
-    (response: any) => {
-      console.log('recuperation des gammes gamme_depose:', response);
-      this.gammes_depose=response
-    },
-    (error: any) => {
-      console.error('Erreur lors de la recuperation des gammes gamme_depose :', error);
     }
   );
   this.userService.getGammesByTravailAndType(9,"parquet-flottant-finition-bois").subscribe(
