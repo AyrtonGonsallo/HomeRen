@@ -70,7 +70,7 @@
           <nz-radio-group formControlName="type" class="radio-flx-spc">
             <div *ngFor="let option of types">
               <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
-                {{ option.Label }}
+                <span>{{ option.Label }}</span>
               </label>
               <a nz-tooltip [nzTooltipTitle]="tooltip_Gamme" href="javascript:void(0)" class="info-icon">
                 <i class="far fa-question-circle"></i>
