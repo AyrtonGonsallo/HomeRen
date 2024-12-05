@@ -12,12 +12,13 @@ export class RecapRenovationElectriqueComponent {
   appareils: any;
   chauffage_exist:boolean=false
   form:any
+  gamme:any
   constructor(
     private gestiondesdevisService: GestionDesDevisService,
     private userService: ApiConceptsEtTravauxService
   ) {
     this.form=this.gestiondesdevisService.getFormulaireByName("renovation-electrique").formulaire;
-   
+   this.gamme=this.form["gammes-produits-renovation-electrique"]
     this.appareils=this.form["gammes-produits-renovation-electrique"].appareils_electrique;
    this.chauffage_exist=this.form["gammes-produits-renovation-electrique"].chauffage_exist;
    

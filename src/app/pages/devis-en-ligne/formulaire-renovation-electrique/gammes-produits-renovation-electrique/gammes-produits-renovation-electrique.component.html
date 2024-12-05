@@ -1,17 +1,25 @@
 <div class="eltrc-div plaf-dim">
-<form [formGroup]="renovationElectriqueForm" (ngSubmit)="onRenovationElectriqueSubmit()">
+  <form [formGroup]="renovationElectriqueForm" (ngSubmit)="onRenovationElectriqueSubmit()">
 
     <div >
       <div nz-row nzJustify="start" >
-        
+
+        <div nz-col nzSpan="6" class="tooltip-srf">
+          <label for="surface">Surface de la pièce (m²) <span class="error-message">*</span> : </label>
+          <input type="number" id="surface" formControlName="surface" max="100" min="1">
+        </div>
+        <div *ngIf="isclicked && renovationElectriqueForm.get('surface')?.invalid " class="error-message">
+          La surface est invalide.
+       </div>
         
         <div formArrayName="appareils_electrique" class="">
+
           <div *ngFor="let appareilGroup of appareils_electrique; let i = index" [formGroupName]="i">
-            <div *ngIf="appareils_electrique[i].ID!=27 || (renovationElectriqueForm.get('chauffage_exist')?.value=='true' && appareils_electrique[i].ID==27)">
+            <div >
               
               <nz-collapse nzAccordion >
                   <nz-collapse-panel nzHeader="Modèles - {{appareils_electrique && appareils_electrique[i] ? appareils_electrique[i].Titre : ''}}" [nzActive]="getAppareilActiveState(i)" [nzExtra]="activerTp" nzShowArrow="false" (nzActiveChange)="active_Tp(i)">
-                    <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getAppareilNombreState(i)" class="error-message">
+                    <div class="ant-col etat-srf etat-srf1 tooltip-srf" *ngIf="isclicked && getAppareilNombreState(i)" class="error-message">
                       Vous devez faire un choix.
                     </div>
                     <div class="div-mur-gm" style="width:100%;">
@@ -20,7 +28,7 @@
                     </div>
                     <nz-radio-group formControlName="modele" class="radio-flx-spc">
                           <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
-                            <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf">
+                            <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf etat-srf1">
                               
                                 <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">
                                 <span>
@@ -66,10 +74,10 @@
        
       
        <div nz-col nzSpan="6" class="ant-col etat-srf-accord tooltip-srf">
-        <label for="chauffage_exist">Y-a-t-il un chauffage électrique ?</label>
-        <nz-radio-group formControlName="chauffage_exist" id="chauffage_exist" nzName="radiogroup" class="sidebyside">
-          <label nz-radio nzValue="true">Oui</label>
-          <label nz-radio nzValue="false">Non</label>
+        <label for="chauffage_exist">Y-a-t-il un chauffage électrique ? </label>
+        <nz-radio-group formControlName="chauffage_exist" id="chauffage_exist" nzName="radiogroup" class="sidebyside" >
+          <label nz-radio [nzValue]="true">Oui</label>
+          <label nz-radio [nzValue]="false">Non</label>
         </nz-radio-group>
         <a nz-tooltip [nzTooltipTitle]="tooltipchauffelec" href="javascript:void(0)" class="info-icon">
           <i class="far fa-question-circle"></i>
@@ -81,8 +89,87 @@
         </ng-template>  
       </div> 
     
+
+
+      <div nz-col nzSpan="6" class="tooltip-srf" *ngIf="renovationElectriqueForm.get('chauffage_exist')?.value==true">
+        <label for="quantite_chauffage">Quantité de chauffage <span class="error-message">*</span> : </label>
+        <input type="number" id="quantite_chauffage" formControlName="quantite_chauffage" max="10" min="1">
+      </div>
+      <div *ngIf="isclicked && renovationElectriqueForm.get('quantite_chauffage')?.invalid " class="error-message">
+        La quantité de chauffage est invalide.
+     </div>
+
+
+
+      <div nz-col nzSpan="6" class="ant-col etat-srf-accord tooltip-srf">
+        <label for="encastrer_cables">Souhaitez-vous encastrer les cables ? </label>
+        <nz-radio-group (ngModelChange)="onEncastreChange($event)" formControlName="encastrer_cables" id="encastrer_cables" nzName="radiogroup" class="sidebyside">
+          <label nz-radio [nzValue]="true">Oui</label>
+          <label nz-radio [nzValue]="false">Non</label>
+        </nz-radio-group>
+        <a nz-tooltip [nzTooltipTitle]="tooltipchauffelec" href="javascript:void(0)" class="info-icon">
+          <i class="far fa-question-circle"></i>
+        </a>
+        <ng-template #tooltipchauffelec>
+          <div class="tooltip-content">
+            <strong>Encastrement de câbles</strong><br>
+            </div>
+        </ng-template>  
+      </div> 
+     
      
       </div>
     </div>
   </form>
+  <div *ngIf="renovationElectriqueForm.get('encastrer_cables')?.value==false" class="text-indic">
+    Les câbles seront mis sous goulottes pvc blanches
+  </div>
+  <form [formGroup]="mursForm" *ngIf="renovationElectriqueForm.get('encastrer_cables')?.value==true">
+    
+     <div formArrayName="murs">
+      <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i" >
+        <div class="mur-btn-div">
+          <span class="mur-ttl">Mur {{i+1}}</span>
+          <button type="button" class="dynamic-form-button del-btn" (click)="removeMurGroup(i)" *ngIf="murs.length > 1">Retirer</button>
+        </div>
+          <div nz-row nzJustify="start" >
+         
+          
+
+          <div nz-col nzSpan="6" class="tooltip-srf">
+            <label for="longueur">Longueur (cm) <span class="error-message" *ngIf="encastre_cables">*</span> : </label>
+            <input type="number" id="longueur" formControlName="longueur" max="50000" min="1">
+          </div>
+          <div *ngIf="isclicked && murs.controls[i].get('longueur')?.invalid " class="error-message">
+            longueur invalide.
+         </div>
+          <div nz-col nzSpan="6" class="ant-col etat-srf etat-srf2 tooltip-srf">
+            <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
+              Matériau <span class="error-message" *ngIf="encastre_cables">*</span></span> 
+            </div>
+            <nz-radio-group   formControlName="materiau" class="radio-flx-spc">
+              <div *ngFor="let option of gammes_materiaux" class="parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix" class="radio-span">
+                  <span>{{ option.Label }}</span>
+                </label>
+                <a nz-tooltip [nzTooltipTitle]="tooltiptd1" href="javascript:void(0)" class="info-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
+                <ng-template #tooltiptd1>
+                  Pour plus d'informations, veuillez consulter :
+                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                </ng-template>
+              </div>
+            </nz-radio-group>
+          </div>
+          <div *ngIf="isclicked && murs.controls[i].get('materiau')?.invalid" class="error-message">
+            Le matériau est requis.
+          </div>
+           
+         </div>
+       </div>
+      </div>
+       
+     <button type="button"  class="dynamic-form-button add-btn" (click)="addMurGroup()" *ngIf="murs.length < 4" >Ajouter un mur <span nz-icon nzType="plus" nzTheme="outline"></span></button>
+   </form>
 </div>

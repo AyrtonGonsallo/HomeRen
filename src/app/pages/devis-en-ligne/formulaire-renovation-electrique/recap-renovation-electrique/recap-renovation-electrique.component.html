@@ -1,11 +1,27 @@
 <div  class="recap-div devis-content">
-    <span class="recup-fin"><p>Y-a-t-il un chauffage électrique?</p><p>:</p><p>{{get_label(chauffage_exist)}}</p></span>
-    <div *ngFor="let appareil of appareils">
+    <span class="recup-fin"><p>Surface de la pièce</p><p>:</p><p>{{gamme.surface}} m²</p></span>
+
+    <span class="recup-fin"><p>Y-a-t-il un chauffage électrique ?</p><p>:</p><p>{{get_label(chauffage_exist)}}</p></span>
+    <span class="recup-fin" *ngIf="chauffage_exist"><p>Quantité de chauffage</p><p>:</p><p>{{gamme.quantite_chauffage}}</p></span>
+    
+
+    <span class="recup-fin"><p>Encastrer les câbles ?</p><p>:</p><p>{{get_label(gamme.encastre_cables)}}</p></span>
+    <div *ngIf="gamme.encastre_cables">
+        <div *ngFor="let mur of gamme.murs;let i=index">
+            Encastrement du mur {{i+1}}
+            <div>
+                <span class="recup-fin"><p>Matériau</p><p>:</p><p>{{get_title(mur.materiau)}}</p></span>
+                <span class="recup-fin"><p>Longueur</p><p>:</p><p>{{mur.longueur}}</p></span>
+            </div>
+        </div>
+    </div>
+    
+
+    <div *ngFor="let appareil of appareils;let j=index">
         <div *ngIf="appareil.active">
+            Appareil {{j+1}}
             <span class="recup-fin"><p>{{get_title(appareil.modele)}}</p></span>
             <span class="recup-fin"><p>Nombre</p><p>:</p><p>{{appareil.nombre}}</p></span>
-           
         </div>
-        
     </div>
 </div>

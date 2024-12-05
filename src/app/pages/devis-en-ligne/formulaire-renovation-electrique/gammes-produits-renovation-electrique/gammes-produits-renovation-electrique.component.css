@@ -18,8 +18,8 @@
     justify-content: space-between;
     align-items: center;}
 .ant-row, .flx-pr {
-    width: 70%;
-    max-width: 70%;
+    width: 60%;
+    max-width: 60%;
     margin: auto;
     align-content: center;
     flex-direction: column;
@@ -58,7 +58,12 @@ form{
     flex: 0% !important;
     margin: auto;
     text-align: center;
+}
+.etat-srf1 {
     flex-direction: row;
+}
+.etat-srf2 {
+    flex-direction: column;
 }
 .etat-srf-accord { grid-template-columns: 4fr 0.2fr 0.2fr !important;padding-bottom: 8px;}
 .etat-srf-accord i.far.fa-question-circle { margin-top: 5px !important;}
@@ -76,4 +81,18 @@ form{
 }
 .sidebyside{
     display: flex;
+}
+.text-indic{
+    font-size: 13px !important;
+    font-weight: 600;
+    font-family: "Montserrat";
+    text-align: left;
+    display: flex;
+    width: 60%;
+    align-items: center;
+    justify-content: start;
+    max-width: 60%;
+    margin: auto;
+    height: 54px;
+    flex-direction: row;
 }

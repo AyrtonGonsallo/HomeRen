@@ -31,9 +31,62 @@ export class GammesProduitsRenovationElectriqueComponent {
   createRenovationElectriqueGroup(): FormGroup {
     return this.fb.group({
       appareils_electrique: this.fb.array([]),
-      chauffage_exist: [false,]
+      chauffage_exist: [false,Validators.required],
+      surface: ["",Validators.required],
+      quantite_chauffage: [1,],
+      encastrer_cables: [false,Validators.required],
+
     });
   }
+
+  encastre_cables: boolean | null = null;
+
+  onEncastreChange(value: boolean): void {
+    this.encastre_cables = value;
+    console.log("encastre ?",this.encastre_cables)
+    this.updateValidators()
+  }
+  mursForm: FormGroup;
+  get murs(): FormArray {
+    return this.mursForm.get('murs') as FormArray;
+  }
+  addMurGroup(): void {
+    if (this.murs.length < 4) {
+      this.murs.push(this.createMurGroup());
+    }
+  }
+  
+  removeMurGroup(index: number): void {
+    if (this.murs.length > 1) {
+      this.murs.removeAt(index);
+    }
+  }
+  createMurGroup(): FormGroup {
+    return this.fb.group({
+      materiau: ['', this.encastre_cables ? Validators.required : null],
+      longueur: ['', this.encastre_cables ? Validators.required : null]
+    });
+  }
+  
+  updateValidators(): void {
+    const elements = this.mursForm.get('murs') as FormArray;
+    elements.controls.forEach(formGroup => {
+      if (formGroup instanceof FormGroup) {
+        // Appliquez ou supprimez les validateurs pour chaque contrôle
+        ['materiau', 'longueur'].forEach(field => {
+          const control = formGroup.get(field);
+          if (this.encastre_cables) {
+            control?.setValidators([Validators.required,]);
+          } else {
+            control?.clearValidators();
+          }
+          control?.updateValueAndValidity();
+        });
+      }
+    });
+  }
+
+
   get getrenovationElectrique_form(): FormArray {
     return this.renovationElectriqueForm.get('appareils_electrique') as FormArray;
   }
@@ -43,11 +96,16 @@ export class GammesProduitsRenovationElectriqueComponent {
       return;
     }
     if (this.renovationElectriqueForm.valid) {
-      //console.log(this.renovationElectriqueForm.value);
+      const fusion = {
+        ...this.renovationElectriqueForm.value,  // Valeurs du formulaire du haut
+        ...this.mursForm.value,
+        "encastre_cables":this.encastre_cables,
+      };
+      console.log(fusion);
       // Envoyer les données au backend ou traiter comme nécessaire
-      this.gestiondesdevisService.addFormulaire('dimensions-renovation-electrique',15, this.renovationElectriqueForm.value);
-      this.gestiondesdevisService.addFormulaire('etat-surfaces-renovation-electrique',15, this.renovationElectriqueForm.value);
-      this.gestiondesdevisService.addFormulaire('gammes-produits-renovation-electrique',15, this.renovationElectriqueForm.value);
+      this.gestiondesdevisService.addFormulaire('dimensions-renovation-electrique',15, fusion);
+      this.gestiondesdevisService.addFormulaire('etat-surfaces-renovation-electrique',15, fusion);
+      this.gestiondesdevisService.addFormulaire('gammes-produits-renovation-electrique',15, fusion);
     // Envoyer les données au backend ou traiter comme nécessaire
     this.gestiondesdevisService.groupform('renovation-electrique',15, 'dimensions-renovation-electrique','etat-surfaces-renovation-electrique','gammes-produits-renovation-electrique')
     console.log(this.gestiondesdevisService.getFormulaireByName("renovation-electrique"));
@@ -58,17 +116,38 @@ export class GammesProduitsRenovationElectriqueComponent {
   prec_formulaire_gamme:any
   constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
     this.load_gammes()
+    
     this.prec_formulaire_gamme = this.gestiondesdevisService.getFormulaireByName('gammes-produits-renovation-electrique');
     if (this.prec_formulaire_gamme) {
+      
       let form=this.prec_formulaire_gamme.formulaire
+      this.encastre_cables=form.encastrer_cables
       console.log("formulaire existant",form)
       this.renovationElectriqueForm = this.fb.group({
         appareils_electrique: this.fb.array([]),
-        chauffage_exist: [form.chauffage_exist,]
+        chauffage_exist: [form.chauffage_exist,],
+        surface: [form.surface,],
+        quantite_chauffage: [form.quantite_chauffage,],
+        encastrer_cables: [form.encastrer_cables,Validators.required],
+      });
+
+      this.mursForm = this.fb.group({
+        murs: this.fb.array([])
+      });
+
+      const mursArray = this.mursForm.get('murs') as FormArray;
+      form.murs.forEach((mur: any) => {
+        mursArray.push(this.fb.group({
+          materiau: [mur.materiau, this.encastre_cables ? Validators.required : null],
+          longueur: [mur.longueur, this.encastre_cables ? Validators.required : null]
+        }));
       });
     } else {
       console.log("formulaire non existant")
       this.renovationElectriqueForm = this.createRenovationElectriqueGroup();
+      this.mursForm = this.fb.group({
+        murs: this.fb.array([this.createMurGroup()])
+      });
     }
   }
   active_Tp(index: number): void {
@@ -92,7 +171,18 @@ export class GammesProduitsRenovationElectriqueComponent {
     return !res;
   }
   appareils_electrique:Equipement[]=[]
+  gammes_materiaux:any
   load_gammes(){
+
+    this.userService.getGammesByTravailAndType(15,"materiaux").subscribe(
+      (response: any) => {
+        console.log('recuperation des gammes materiaux:', response);
+        this.gammes_materiaux=response
+      },
+      (error: any) => {
+        console.error('Erreur lors de la recuperation des  gammes_materiaux :', error);
+      }
+    );
     this.userService.getEquipementsByType ("electrique").subscribe(
       (response: Equipement[]) => {
         this.appareils_electrique = response.filter(equipement => 
