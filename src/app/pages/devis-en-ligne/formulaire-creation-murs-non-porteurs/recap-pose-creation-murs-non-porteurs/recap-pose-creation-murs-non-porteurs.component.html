@@ -5,7 +5,7 @@
         <span class="mur-ttl">Mur {{i+1}}</span>
         <div>
         <span class="recup-fin"><p>Hauteur</p><p>:</p><p>{{dimmur.hauteur}} cm</p></span>
-        <span class="recup-fin"><p>Surface</p><p>:</p><p>{{dimmur.surface}} m²</p></span>
+        <span class="recup-fin"><p>Longueur</p><p>:</p><p>{{dimmur.longueur}} cm</p></span>
         <span class="recup-fin"><p>Type de cloison</p><p>:</p><p>{{get_title(cmnpForm.formulaire['etat-surfaces-creation-murs-non-porteurs--murs'].murs_non_porteurs[i].type_cloison)}} </p></span>
         <span class="recup-fin" *ngIf="cmnpForm.formulaire['etat-surfaces-creation-murs-non-porteurs--murs'].murs_non_porteurs[i].autre_type_cloison"><p>Autre type de cloison</p><p>:</p><p>{{cmnpForm.formulaire['etat-surfaces-creation-murs-non-porteurs--murs'].murs_non_porteurs[i].autre_type_cloison}} </p></span>
         </div>

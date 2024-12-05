@@ -1,25 +1,29 @@
 
 <div class="recap-div devis-content">
     <span class="recup-fin recap-piece">{{selectedPiece.Titre}}</span>
-    À ajouter
-    <span class="recup-fin"><p>Passage de fils électrique</p><p>:</p><p>{{get_label(passage_fils_electrique)}}</p></span>
-    <div *ngFor="let appareil of appareils_a_ajouter">
-        <div *ngIf="appareil.active">
-            <span class="recup-fin"><p>{{get_title(appareil.modele)}}</p></span>
-            <span class="recup-fin"><p>Nombre</p><p>:</p><p>{{appareil.nombre}}</p></span>
-           
+    <div *ngIf="appareils_a_ajouter">
+        À ajouter
+        <div *ngFor="let appareil of appareils_a_ajouter">
+            <div *ngIf="appareil.active">
+                <span class="recup-fin"><p>{{get_title(appareil.modele)}}</p></span>
+                <span class="recup-fin"><p>Nombre</p><p>:</p><p>{{appareil.nombre}}</p></span>
+            
+            </div>
+            
         </div>
-        
     </div>
-    À remplacer
-   
-        <div>
-            <span class="recup-fin"><p>Quantité de prises</p><p>:</p><p>{{qte_prises}}</p></span>
-            <span class="recup-fin"><p>Quantité d'éclairage profond</p><p>:</p><p>{{qte_eclairage_profond}}</p></span>
-            <span class="recup-fin"><p>Quantité d'éclairage applique</p><p>:</p><p>{{qte_eclairage_applique}}</p></span>
-            <span class="recup-fin"><p>Quantité de convecteur electrique</p><p>:</p><p>{{qte_convecteur_electrique}}</p></span>
-           
+    <div *ngIf="appareils_a_ajouter">
+        À remplacer
+
+        <div *ngFor="let appareil of appareils_a_remplacer">
+            <div *ngIf="appareil.active">
+                <span class="recup-fin"><p>{{(appareil.titre)}}</p></span>
+                <span class="recup-fin"><p>Nombre</p><p>:</p><p>{{appareil.nombre}}</p></span>
+                <span class="recup-fin"><p>Création ou remplacement</p><p>:</p><p>{{appareil.creation_ou_remplacement}}</p></span>
+            </div>
+            
         </div>
-        
- 
+    </div>    
+    <span class="recup-fin"><p>Disjoncteur à remplacer</p><p>:</p><p>{{get_label(disjoncteur_a_remplacer)}}</p></span>
+
 </div>

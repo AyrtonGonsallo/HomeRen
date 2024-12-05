@@ -13,7 +13,10 @@ import { environment } from '../../../../environments/environment';
 })
 export class PoseElectriciteGammesProduitsComponent {
   isclicked=false
-
+  glob_err_form1:string=""
+  glob_err_form2:string=""
+  exist_glob_err_form1:boolean=false
+  exist_glob_err_form2:boolean=false
   @Input() triggerSubmitGammesProduitsForm!: boolean;
 modele: any;
 appareilGroup: any;
@@ -39,38 +42,78 @@ appareilGroup: any;
 
   createAppareilsAAjouterGroup(): FormGroup {
     return this.fb.group({
-      passage_fils_electique: [false, ],//boolean
+      
       appareils_electrique: this.fb.array([])
     });
   }
   createAppareilsARemplacerGroup(): FormGroup {
     return this.fb.group({
-      qte_prises: [0,],
-      qte_eclairage_profond: [0,],
-      qte_eclairage_applique: [0,],
-      qte_convecteur_electrique: [0,],
+      appareils_electrique_a_remplacer: this.fb.array([]),
+      remplacement_disjoncteur: [false, ],//boolean
     });
   }
   get getappareils_a_ajouter_form(): FormArray {
     return this.appareils_a_ajouter_form.get('appareils_electrique') as FormArray;
   }
+  get getappareils_a_remplacer_form(): FormArray {
+    return this.appareils_a_remplacer_form.get('appareils_electrique_a_remplacer') as FormArray;
+  }
   onAppareilsAAjouterSubmit(): boolean {
     
-    if (this.appareils_a_ajouter_form.invalid) {
-      this.markFormGroupTouched(this.appareils_a_ajouter_form);
-      return false;
+    this.glob_err_form1=""
+    const appareils_electrique_a_ajouterArray = this.appareils_a_ajouter_form.get('appareils_electrique') as FormArray;
+    let res=true
+    for (let i = 0; i < appareils_electrique_a_ajouterArray.length; i++) {
+      const group = appareils_electrique_a_ajouterArray.at(i) as FormGroup;
+      const controls = group.controls;
+  
+      if (
+        controls['active'].value === true && (
+        controls['modele'].value === '' ||
+        controls['nombre'].value === '' ||
+        controls['nombre'].value === 1 ||
+        controls['nombre'].invalid )
+      ) {
+        //console.error(`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}`);
+        //group.markAllAsTouched();
+        this.exist_glob_err_form1=true
+        this.glob_err_form1+=`Tous les champs doivent être remplis pour l'ajout de l'appareil en position ${i+1}. `
+        res=res && false
+      }
     }
-    return this.appareils_a_ajouter_form.valid
+  
+    
+  
+    return res;
    
   }
 
   onAppareilsARemplacerSubmit(): boolean {
-    if (this.appareils_a_remplacer_form.invalid) {
-      this.markFormGroupTouched(this.appareils_a_remplacer_form);
-      return false;
+    this.glob_err_form2=""
+    const appareils_electrique_a_remplacerArray = this.appareils_a_remplacer_form.get('appareils_electrique_a_remplacer') as FormArray;
+    let res=true
+    for (let i = 0; i < appareils_electrique_a_remplacerArray.length; i++) {
+      const group = appareils_electrique_a_remplacerArray.at(i) as FormGroup;
+      const controls = group.controls;
+  
+      if (
+        controls['active'].value === true && (
+        controls['creation_ou_remplacement'].value === '' ||
+        controls['nombre'].value === '' ||
+        controls['nombre'].value === 1 ||
+        controls['nombre'].invalid )
+      ) {
+        //console.error(`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}`);
+        //group.markAllAsTouched();
+        this.exist_glob_err_form2=true
+        this.glob_err_form2+=`Tous les champs doivent être remplis pour le remplacement de l'appareil intitulé ${controls['titre'].value}. `
+        res=res && false
+      }
     }
-    return this.appareils_a_remplacer_form.valid;
+  
     
+  
+    return res;
   }
 
   submit(): void {
@@ -102,13 +145,11 @@ appareilGroup: any;
       let form=this.prec_formulaire_gamme.formulaire
       console.log("formulaire existant",form)
       this.appareils_a_remplacer_form = this.fb.group({
-        qte_prises: [form.qte_prises,],
-        qte_eclairage_profond: [form.qte_eclairage_profond,],
-        qte_eclairage_applique: [form.qte_eclairage_applique,],
-        qte_convecteur_electrique: [form.qte_convecteur_electrique,],
+        appareils_electrique_a_remplacer: this.fb.array([]),
+        remplacement_disjoncteur: [form.remplacement_disjoncteur, ],//boolean
       });
       this.appareils_a_ajouter_form = this.fb.group({
-        passage_fils_electique: [form.passage_fils_electique, ],//boolean
+        
         appareils_electrique: this.fb.array([])
       });
 
@@ -134,11 +175,26 @@ appareilGroup: any;
   }
 
   appareils_electrique:Equipement[]=[]
+  appareils_electrique_a_remplacer:Equipement[]=[]
   getAppareilActiveState(index: number): boolean {
     return (this.appareils_a_ajouter_form.get('appareils_electrique') as FormArray)?.at(index).get('active')?.value;
   }
+
+  getAppareilRemplActiveState(index: number): boolean {
+    return (this.appareils_a_remplacer_form.get('appareils_electrique_a_remplacer') as FormArray)?.at(index).get('active')?.value;
+  }
   active_Tp(index: number): void {
     const formArray = this.appareils_a_ajouter_form.get('appareils_electrique') as FormArray;
+    const control = formArray?.at(index).get('active');
+  
+    if (control) {
+      // Toggle the value between true and false
+      control.setValue(!control.value);
+    }
+  }
+
+  active_Tp2(index: number): void {
+    const formArray = this.appareils_a_remplacer_form.get('appareils_electrique_a_remplacer') as FormArray;
     const control = formArray?.at(index).get('active');
   
     if (control) {
@@ -169,11 +225,13 @@ appareilGroup: any;
           let modele=""
           let active=false
           let nombre=0
+          
           if(this.prec_formulaire_gamme){
             let form=this.prec_formulaire_gamme.formulaire
             modele=form?.appareils_electrique[i]?.modele
             active=form?.appareils_electrique[i]?.active
             nombre=form?.appareils_electrique[i]?.nombre
+           
           }
         
           // Créer un FormGroup pour chaque appareil
@@ -214,7 +272,71 @@ appareilGroup: any;
        
       },
       (error) => {
-        console.error('Erreur lors de la recuperation des  getEquipementsByPiece:salledebain :', error);
+        console.error('Erreur lors de la recuperation des  appareils a ajouter :', error);
+      }
+    );
+
+
+    this.userService.getEquipementsByType ("electrique-a-remplacer").subscribe(
+      (response: Equipement[]) => {
+        this.appareils_electrique_a_remplacer = response;
+
+        console.log("réponse de la requette  getEquipementsByType:electrique-a-remplacer",this.appareils_electrique_a_remplacer);
+        let i=0
+        this.appareils_electrique_a_remplacer.forEach(appareil => {
+          let creation_ou_remplacement=""
+          let titre=appareil.Titre
+          let active=false
+          let nombre=0
+          let id=appareil.ID
+          if(this.prec_formulaire_gamme){
+            let form=this.prec_formulaire_gamme.formulaire
+            creation_ou_remplacement=form?.appareils_electrique_a_remplacer[i]?.creation_ou_remplacement
+            active=form?.appareils_electrique_a_remplacer[i]?.active
+            nombre=form?.appareils_electrique_a_remplacer[i]?.nombre
+            titre=form?.appareils_electrique_a_remplacer[i]?.titre
+            id=form?.appareils_electrique_a_remplacer[i]?.id
+          }
+        
+          // Créer un FormGroup pour chaque appareil
+          const appareilGroup2 = this.fb.group({});
+          appareilGroup2.addControl("id", this.fb.control(id, ));
+          appareilGroup2.addControl("titre", this.fb.control(titre, ));
+            appareilGroup2.addControl("nombre", this.fb.control(nombre, ));
+            appareilGroup2.addControl("active", this.fb.control(active, ));
+            appareilGroup2.addControl("creation_ou_remplacement", this.fb.control(creation_ou_remplacement, ));
+           
+
+            // Obtenez les contrôles pour pouvoir les manipuler
+            const nombreControl = appareilGroup2.get('nombre');
+            const creation_ou_remplacementControl = appareilGroup2.get('creation_ou_remplacement');
+            const activeControl = appareilGroup2.get('active');
+
+            // Abonnez-vous aux changements de la valeur de 'active'
+            activeControl?.valueChanges.subscribe((isActive: boolean) => {
+              if (isActive) {
+                // Si 'active' est true, ajouter les validateurs
+                nombreControl?.setValidators(Validators.required);
+                creation_ou_remplacementControl?.setValidators(Validators.required);
+              } else {
+                // Sinon, supprimer les validateurs
+                nombreControl?.clearValidators();
+                creation_ou_remplacementControl?.clearValidators();
+              }
+              // Mettre à jour la validation pour forcer la vérification des erreurs
+              nombreControl?.updateValueAndValidity();
+              creation_ou_remplacementControl?.updateValueAndValidity();
+            });
+
+          // Ajouter le FormGroup de l'appareil au FormArray
+          (this.appareils_a_remplacer_form.get('appareils_electrique_a_remplacer') as FormArray).push(appareilGroup2);
+        
+          i++
+        });
+       
+      },
+      (error) => {
+        console.error('Erreur lors de la recuperation des  appareils_electrique_a_remplacer :', error);
       }
     );
   }

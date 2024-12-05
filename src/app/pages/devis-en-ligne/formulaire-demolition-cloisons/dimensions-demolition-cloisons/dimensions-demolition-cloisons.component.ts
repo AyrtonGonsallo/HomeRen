@@ -37,7 +37,7 @@ export class DimensionsDemolitionCloisonsComponent {
       bool=this.onSubmitform1()
     }
     if(this.is_active_Tp3){
-      bool=bool && this.onSubmitform3()
+      bool= this.onSubmitform3() && bool
     }
     this.formValidityChange.emit(bool);
     if (bool) {
@@ -55,6 +55,7 @@ export class DimensionsDemolitionCloisonsComponent {
     }
   }
   onSubmitform1(): boolean {
+    this.glob_err_form1=""
     const mursNonporteursArray = this.mursNonporteursForm.get('mursNonporteurs') as FormArray;
   console.log("nombre de murs ",mursNonporteursArray.length)
   let res=true
@@ -88,6 +89,7 @@ export class DimensionsDemolitionCloisonsComponent {
   exist_glob_err_form2:boolean=false
   
   onSubmitform3(): boolean {
+    this.glob_err_form2=""
     const ouverturePartielleArray = this.ouverturePartielleForm.get('ouverturePartielle') as FormArray;
     let res=true
     for (let i = 0; i < ouverturePartielleArray.length; i++) {

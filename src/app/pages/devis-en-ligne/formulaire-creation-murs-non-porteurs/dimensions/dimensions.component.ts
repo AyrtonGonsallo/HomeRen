@@ -105,7 +105,7 @@ removeMurNonPorteurroup(index: number): void {
 
 onPoseMursNonPorteursSubmit(): boolean {
  
-
+  this.glob_err_form1=""
   const murs_non_porteursArray = this.poseMursNonPorteursForm.get('murs_non_porteurs') as FormArray;
   let res=true
   for (let i = 0; i < murs_non_porteursArray.length; i++) {
@@ -131,6 +131,7 @@ onPoseMursNonPorteursSubmit(): boolean {
   return res;
 }
 onPosePortesSubmit(): boolean {
+   this.glob_err_form2=""
   const portesArray = this.portesForm.get('portes') as FormArray;
   let res=true
   for (let i = 0; i < portesArray.length; i++) {

@@ -33,7 +33,7 @@ export class RecapDemolitionCloisonsComponent {
     this.quantite_porte_simple_plein=this.form["dimensions-murs-non-porteurs"]["quantite_porte_simple_plein"];
     this.quantite_porte_double_pleine=this.form["dimensions-murs-non-porteurs"]["quantite_porte_double_pleine"];
     this.dimensions_ouverture=this.form["dimensions-murs-non-porteurs"]["ouverturePartielle"];
-    this.gammes_cloison=this.form["gammes-produits-murs-non-porteurs"]["ouverturepartielles"];
+    this.gammes_cloison=this.form["gammes-produits-murs-non-porteurs"]["mursnonporteurs"];
     this.gammes_materiaux=this.form["gammes-produits-murs-non-porteurs"]["mursnonporteurs"];
    this.ouverture_choisie=this.form["gammes-produits-murs-non-porteurs"]["ouverturepartielles_choisis"];
    this.demolition_murs_choisie=this.form["gammes-produits-murs-non-porteurs"]["mursnonporteurs_choisis"];
