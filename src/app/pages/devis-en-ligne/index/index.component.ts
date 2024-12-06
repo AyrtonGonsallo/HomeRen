@@ -444,7 +444,7 @@ export class IndexComponent {
       return true
     }
     if(this.is_one_travail_selected && this.filteredTravail.ID==16 && this.current==4){
-      this.current=2
+      this.current=1
       return true
     }
     

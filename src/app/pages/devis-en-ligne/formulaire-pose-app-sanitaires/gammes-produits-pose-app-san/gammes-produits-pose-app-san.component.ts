@@ -44,7 +44,8 @@ appareilGroup: any;
 
   createPoseSalleDeBainGroup(): FormGroup {
     return this.fb.group({
-      appareils_salle_de_bain: this.fb.array([])
+      appareils_salle_de_bain: this.fb.array([]),
+      gammes_depose_form: this.fb.array([])
     });
   }
   get getposeSalleDeBainForm(): FormArray {
@@ -76,12 +77,10 @@ appareilGroup: any;
     if(this.prec_formulaire_gamme){
       let form=this.prec_formulaire_gamme.formulaire
       console.log("formulaire existant",form)
-      this.poseSalleDeBainForm = this.createPoseSalleDeBainGroup();
     }else{
       console.log("formulaire non existant")
-      this.poseSalleDeBainForm = this.createPoseSalleDeBainGroup();
     }
-    
+    this.poseSalleDeBainForm = this.createPoseSalleDeBainGroup();
   }
    
    //code de validation des formulaires
@@ -119,6 +118,14 @@ appareilGroup: any;
   ngOnInit(): void {
     this.loadAppareils()
   }
+
+  gammes_depose: any[] = [];
+   // Getter pour accéder à la FormArray "gammes"
+   get gammes_depose_form(): FormArray {
+    return this.poseSalleDeBainForm.get('gammes_depose_form') as FormArray;
+  }
+
+
   loadAppareils(){
     
     this.userService.getEquipementsByPiece(5).subscribe(
@@ -131,25 +138,32 @@ appareilGroup: any;
 
           let modele=""
           let active=false
-          let depose=false
+          let longueur=0
+          let largeur=0
+          let nombre_de_vasque=0
           if(this.prec_formulaire_gamme){
             let form=this.prec_formulaire_gamme.formulaire
             modele=form?.appareils_salle_de_bain[i]?.modele
             active=form?.appareils_salle_de_bain[i]?.active
-            depose=form?.appareils_salle_de_bain[i]?.depose
+            longueur=form?.appareils_salle_de_bain[i]?.longueur
+            largeur=form?.appareils_salle_de_bain[i]?.largeur
+            nombre_de_vasque=form?.appareils_salle_de_bain[i]?.nombre_de_vasque
           }
         
              // Créer un FormGroup pour chaque appareil
           const appareilGroup = this.fb.group({});
               
-         
-          appareilGroup.addControl("depose", this.fb.control(depose, ));
+          appareilGroup.addControl("longueur", this.fb.control(longueur, ));
+          appareilGroup.addControl("largeur", this.fb.control(largeur, ));
+          appareilGroup.addControl("nombre_de_vasque", this.fb.control(nombre_de_vasque, ));
           appareilGroup.addControl("active", this.fb.control(active, ));
           appareilGroup.addControl("modele", this.fb.control(modele, ));
          
 
           // Obtenez les contrôles pour pouvoir les manipuler
-          const nombreControl = appareilGroup.get('depose');
+          const nombre_de_vasqueControl = appareilGroup.get('nombre_de_vasque');
+          const largeurControl = appareilGroup.get('largeur');
+          const longueurControl = appareilGroup.get('longueur');
           const modeleControl = appareilGroup.get('modele');
           const activeControl = appareilGroup.get('active');
 
@@ -157,15 +171,12 @@ appareilGroup: any;
           activeControl?.valueChanges.subscribe((isActive: boolean) => {
             if (isActive) {
               // Si 'active' est true, ajouter les validateurs
-              nombreControl?.setValidators(Validators.required);
               modeleControl?.setValidators(Validators.required);
             } else {
               // Sinon, supprimer les validateurs
-              nombreControl?.clearValidators();
               modeleControl?.clearValidators();
             }
             // Mettre à jour la validation pour forcer la vérification des erreurs
-            nombreControl?.updateValueAndValidity();
             modeleControl?.updateValueAndValidity();
           });
            
@@ -175,15 +186,62 @@ appareilGroup: any;
           i++
           
         });
-       
       },
       (error) => {
         console.error('Erreur lors de la recuperation des  getEquipementsByPiece:salledebain :', error);
       }
     );
+
+
+    this.userService.getGammesByTravailAndType(16, 'depose-salle-de-bain-salle-d-eau').subscribe(
+      (response: any) => {
+        this.gammes_depose = response
+        console.log("réponse de la requette  get depose salle de bain",this.gammes_depose);
+        let i=0
+
+        this.gammes_depose.forEach(gamme => {
+        
+          let quantite=0
+          let titre=gamme.Label
+          let prix=gamme.Prix
+          if(this.prec_formulaire_gamme){
+            let form=this.prec_formulaire_gamme.formulaire
+            quantite=form?.gammes_depose_form[i]?.quantite
+            titre=form?.gammes_depose_form[i]?.titre
+            prix=form?.gammes_depose_form[i]?.prix
+          }
+        
+             // Créer un FormGroup pour chaque appareil
+          const appareilGroup = this.fb.group({});
+              
+         
+          appareilGroup.addControl("quantite", this.fb.control(quantite, ));
+          appareilGroup.addControl("titre", this.fb.control(titre, ));
+          appareilGroup.addControl("prix", this.fb.control(prix, ));
+         
+
+          // Obtenez les contrôles pour pouvoir les manipuler
+          const quantiteControl = appareilGroup.get('quantite');
+          quantiteControl?.setValidators([Validators.required, Validators.min(0), Validators.max(50)]);
+          // Mettre à jour la validation pour forcer la vérification des erreurs
+          quantiteControl?.updateValueAndValidity();
+
+         
+           
+
+          // Ajouter le FormGroup de l'appareil au FormArray
+          (this.poseSalleDeBainForm.get('gammes_depose_form') as FormArray).push(appareilGroup);
+          i++
+          
+        });
+      },
+      (error) => {
+        console.error('Erreur lors de la recuperation des gammes_depose :', error);
+      }
+    );
+
+
   }
   
-
-
   }
   

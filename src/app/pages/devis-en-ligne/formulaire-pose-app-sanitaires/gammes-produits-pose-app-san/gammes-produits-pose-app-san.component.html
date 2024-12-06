@@ -10,11 +10,23 @@
                   <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getAppareilModeleState(i)" class="error-message">
                     Vous devez faire un choix.
                   </div>
+                  <div nzspan="6" class="col-accord-inpt">
+                    <label for="longueur">Longueur</label>
+                    <input id="longueur" type="number" formControlName="longueur" min="0"/>     
+                  </div>  
+                  <div nzspan="6" class="col-accord-inpt">
+                    <label for="largeur">Largeur</label>
+                    <input id="largeur" type="number" formControlName="largeur" min="0"/>     
+                  </div>  
+                  <div nzspan="6" class="col-accord-inpt">
+                    <label for="nombre_de_vasque">Nombre de vasque</label>
+                    <input id="nombre_de_vasque" type="number" formControlName="nombre_de_vasque" min="0"/>     
+                  </div>  
                   <div class="div-mur-gm" style="width:100%;">
                     <span class="mur-ttl">
                     Gamme</span> <span class="error-message" *ngIf="getAppareilActiveState(i)">*</span> : 
                   </div>
-                  <nz-radio-group formControlName="modele" class="radio-flx-spc">
+                    <nz-radio-group formControlName="modele" class="radio-flx-spc">
                         <div nz-row nzJustify="start" *ngFor="let modele of appareilGroup.ModeleEquipements">
                           <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf">
                               <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">
@@ -39,10 +51,7 @@
                           </ng-template>
                         </div>
                       </nz-radio-group>
-                      <div nzspan="6" class="col-accord-inpt">
-                        <label for="depose">Souhaitez-vous déposer votre salle de bain actuelle ?</label>
-                        <input type="checkbox" id="depose" formControlName="depose" class="custom-checkbox">      
-                      </div>  
+                      
                   </nz-collapse-panel>
             </nz-collapse>
             <ng-template #activerTp>
@@ -50,6 +59,39 @@
                 
               </label>
             </ng-template>
+          </div>
+        </div>
+
+        <h3>Dépose d'anciennes installations</h3>
+
+        <div formArrayName="gammes_depose_form">
+          <div *ngFor="let gamme of gammes_depose_form.controls; let i = index" [formGroupName]="i">
+            Dépose de {{gammes_depose && gammes_depose[i] ? gammes_depose[i].Label : ''}}
+               
+                
+                <div nz-row nzJustify="start" class="cuisine-flx">
+                  <!-- Champ Quantité -->
+                  <div nz-col nzSpan="24" class="ant-col tooltip-srf etat-srf">
+                      <label for="quantite">Quantité :</label>
+                      <input id="quantite" type="number" formControlName="quantite" min="0"/>
+                      <a nz-tooltip [nzTooltipTitle]="tooltipHauteur" href="javascript:void(0)" class="info-icon">
+                        <i class="far fa-question-circle"></i>
+                      </a>
+                  </div>
+                  <div *ngIf="gamme.get('quantite')?.invalid && isclicked" class="error-message">
+                    Quantité invalide
+                  </div>
+                 
+                </div>
+                
+                <ng-template #tooltipHauteur>
+                  <div class="tooltip-content">
+                    <strong>Calcul de la surface :</strong><br>
+                    <p>La surface est calculée en multipliant la longueur par la largeur de la pièce. Mesurez chaque côté avec précision pour obtenir la surface totale en m².</p>
+                    <p><strong>Exemple :</strong> Si la pièce fait 4m de long et 3m de large, la surface totale est de 12 m².</p>
+                  </div>
+                </ng-template>
+            
           </div>
         </div>
       </form>
