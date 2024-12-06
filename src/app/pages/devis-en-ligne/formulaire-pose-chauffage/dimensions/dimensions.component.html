@@ -3,7 +3,7 @@
     <img class="srf-img" src="/assets/Rectangle.svg">
       <div nz-row nzJustify="start">
         <div nz-col nzSpan="24" class="tooltip-srf ant-col-6">
-          <label for="surface">surface (m²): <span class="error-message">*</span></label>
+          <label for="surface">surface de la pièce (m²): <span class="error-message">*</span></label>
           <input type="number" id="surface" formControlName="surface" [max]="surfacemax" min="1">
           <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
             <i class="far fa-question-circle"></i>
@@ -23,7 +23,7 @@
 
 
         <div nz-col nzSpan="24" class="tooltip-srf ant-col-6">
-          <label for="hauteur">hauteur (cm): <span class="error-message">*</span></label>
+          <label for="hauteur">hauteur de la pièce (cm): <span class="error-message">*</span></label>
           <input type="number" id="hauteur" formControlName="hauteur" max="700" min="1">
         </div>
         <div *ngIf="isclicked && poseChauffageForm.get('hauteur')?.invalid " class="error-message">

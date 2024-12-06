@@ -13,54 +13,6 @@
 
        <div nz-row nzJustify="start" >
         
-         <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
-           <!-- <label for="etat">État de radiateur: </label> -->
-           <nz-radio-group formControlName="etat" class="radio-flx-spc">
-            <ng-container>
-             <div >
-               <label nz-radio nzValue="radiateur à remplacer" class="radio-span">
-                 <span>Radiateur à remplacer</span>
-               </label>
-               <a nz-tooltip [nzTooltipTitle]="tooltiparemplacer" href="javascript:void(0)" class="info-icon">
-                 <i class="far fa-question-circle"></i>
-               </a>
-               <ng-template #tooltiparemplacer>
-                 Le radiateur est à remplacer
-               </ng-template>
-             </div>
-             </ng-container>
-             <div>
-               <label nz-radio nzValue="radiateur à déplacer">
-                 <span>Radiateur à déplacer</span>
-               </label>
-               <a nz-tooltip [nzTooltipTitle]="tooltipadeplacer" href="javascript:void(0)" class="info-icon">
-                 <i class="far fa-question-circle"></i>
-               </a>
-               <ng-template #tooltipadeplacer>
-                 Le radiateur est à déplacer.
-               </ng-template>
-             </div>
-             
-             <div>
-               <label nz-radio nzValue="radiateur à poser">
-                 <span>Radiateur à poser</span>
-               </label>
-               <a nz-tooltip [nzTooltipTitle]="tooltipaposer" href="javascript:void(0)" class="info-icon">
-                 <i class="far fa-question-circle"></i>
-               </a>
-               <ng-template #tooltipaposer>
-                Le radiateur est à poser
-               </ng-template>
-             </div>
-           
-             
-           </nz-radio-group>
-
-           
-         </div>
-         <div *ngIf="isclicked && radiateurs.controls[i].get('etat')?.invalid " class="error-message">
-           État des surfaces requis.
-         </div>
 
 
          <div class="mur-btn-div">

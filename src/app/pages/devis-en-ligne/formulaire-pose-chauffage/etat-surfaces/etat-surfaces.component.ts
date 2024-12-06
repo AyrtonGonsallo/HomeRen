@@ -57,7 +57,6 @@ onPoseRadiateursSubmit(): void {
 }
 createposeRadiateurGroup(): FormGroup {
   return this.fb.group({
-    etat: ['', Validators.required],
     type: ['',Validators.required ],
 
   });
@@ -76,7 +75,6 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
       const mursArray = this.poseRadiateursForm.get('radiateurs') as FormArray;
       form.radiateurs.forEach((rad: any) => {
         mursArray.push(this.fb.group({
-          etat: [rad.etat, Validators.required],
           type: [rad.type, Validators.required],
         }));
       });

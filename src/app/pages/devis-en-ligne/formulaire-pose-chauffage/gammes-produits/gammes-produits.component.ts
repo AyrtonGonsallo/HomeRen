@@ -58,7 +58,6 @@ onPoseRadiateursSubmit(): void {
 createposeRadiateurGroup(): FormGroup {
   return this.fb.group({
     gamme: ["", Validators.required],
-    visible: [true, ]
   });
 }
 getRadiateurVisibleState(index: number): boolean {
@@ -81,7 +80,6 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
       form.radiateurs.forEach((rad: any) => {
         mursArray.push(this.fb.group({
           gamme: [rad.gamme, ],
-            visible: [rad.visible, ]
         }));
       });
       
@@ -101,17 +99,13 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
       this.formulaire_dimensions_length=this.formulaire_dimensions.formulaire.radiateurs.length
       this.radiateurs.removeAt(0);
       for(let i=0;i<this.formulaire_dimensions_length;i++){
-        let a_remplacer=this.formulaire_dimensions.formulaire.radiateurs[i].etat
         console.log("Radiateur "+(i+1))
-        if(a_remplacer=="radiateur à remplacer"||a_remplacer=="radiateur à déplacer"){
           console.log("Ignorer le radiateur "+(i+1)+ " à remplacer ou deplacer")
           this.radiateurs.push(this.fb.group({
             gamme: ["", ],
             visible: [false, ]
           }));
-        }else{
-          this.addRadiateurGroup()
-        }
+       
         
       }
       console.log("longueur: ",this.formulaire_dimensions_length)

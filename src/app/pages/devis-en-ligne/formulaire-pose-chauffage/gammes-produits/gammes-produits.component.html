@@ -3,12 +3,12 @@
 
   <div formArrayName="radiateurs">
     <div *ngFor="let radiateur of radiateurs.controls; let i = index" [formGroupName]="i">
-      <div class="mur-btn-div" *ngIf="getRadiateurVisibleState(i)">
+      <div class="mur-btn-div" >
         <div class="ttl-mob" style="margin-right: auto;text-align: left;"><span class="mur-ttl">Gamme - Radiateur {{i+1}}</span></div>
 
 
        </div>
-      <div nz-row nzJustify="start" *ngIf="getRadiateurVisibleState(i)">
+      <div nz-row nzJustify="start" >
         <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
           
           <nz-radio-group formControlName="gamme" class="radio-flx-spc">
