@@ -3,6 +3,7 @@ import { environment } from '../../../../environments/environment';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
+import { Equipement } from '../../../../Models/Equipement';
 
 @Component({
   selector: 'app-gammes-produits-depose-cuisine',
@@ -10,184 +11,73 @@ import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-e
   styleUrl: './gammes-produits-depose-cuisine.component.css'
 })
 export class GammesProduitsDeposeCuisineComponent implements OnInit {
-  isclicked = false;
-  baseurl = environment.imagesUrl;
-  deposeElementCuisinesForm: FormGroup;
-  gammes_depose: any[] = [];
+  isclicked=false
 
   @Input() triggerSubmitGammesProduitsForm!: boolean;
+modele: any;
+appareilGroup: any;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['triggerSubmitGammesProduitsForm']) {
+      console.log("trigger de soumission: ",this.triggerSubmitGammesProduitsForm)
+      if(this.triggerSubmitGammesProduitsForm==true){
+        
+          this.onPoseCuisineSubmit()
+        
+        this.isclicked=true
+      }
+      
+    }
+  }
   @Output() formValidityChange = new EventEmitter<boolean>();
+  disabled = true;
+  baseurl=environment.imagesUrl
+  @Input() selectedPiece: any; // Déclaration de l'entrée selectedPiece
+  poseCuisineForm: FormGroup;
+  // le formulaire de pose plafond
+ 
 
-  maxFileSize = 10 * 1024 * 1024; // 10 MB en octets
+  createPoseCuisineGroup(): FormGroup {
+    return this.fb.group({
+      appareils_cuisine: this.fb.array([]),
+      gammes_depose_form: this.fb.array([])
+    });
+  }
+  get getposeCuisineForm(): FormArray {
+    return this.poseCuisineForm.get('appareils_cuisine') as FormArray;
+  }
+  onPoseCuisineSubmit(): void {
+    this.formValidityChange.emit(this.poseCuisineForm.valid);
+    if (this.poseCuisineForm.invalid) {
+      this.markFormGroupTouched(this.poseCuisineForm);
+      return;
+    }
+    if (this.poseCuisineForm.valid) {
+      this.gestiondesdevisService.addFormulaire("dimensions-pose-elementcuisines",2,this.poseCuisineForm.value)
+      this.gestiondesdevisService.addFormulaire("etat-surfaces-pose-elementcuisines",2,this.poseCuisineForm.value)
+      this.gestiondesdevisService.addFormulaire("gammes-produits-pose-elementcuisines",2,this.poseCuisineForm.value)
+    // Envoyer les données au backend ou traiter comme nécessaire
+    this.gestiondesdevisService.groupform('pose-elementcuisines',2, 'dimensions-pose-elementcuisines','etat-surfaces-pose-elementcuisines','gammes-produits-pose-elementcuisines')
+    console.log(this.gestiondesdevisService.getFormulaireByName("pose-elementcuisines"));
+      // Envoyer les données au backend ou traiter comme nécessaire
+    }
+  }
+  
   prec_formulaire_gamme:any
-  constructor(
-    private fb: FormBuilder,
-    private gestiondesdevisService: GestionDesDevisService,
-    private userService: ApiConceptsEtTravauxService
-  ) {
-
-    this.prec_formulaire_gamme=this.gestiondesdevisService.getFormulaireByName("gammes-produits-depose-elementcuisines")
+  constructor(private fb: FormBuilder,private userService: ApiConceptsEtTravauxService,private gestiondesdevisService: GestionDesDevisService) {
+    
+ 
+    this.prec_formulaire_gamme=this.gestiondesdevisService.getFormulaireByName("gammes-produits-pose-elementcuisines")
     if(this.prec_formulaire_gamme){
       let form=this.prec_formulaire_gamme.formulaire
       console.log("formulaire existant",form)
-      this.deposeElementCuisinesForm = this.fb.group({
-        gammes: this.fb.array([])
-      });
-      const gammes_array = this.deposeElementCuisinesForm.get('gammes') as FormArray;
-      form.gammes.forEach((gamme: any) => {
-        gammes_array.push(this.fb.group({
-          active: [gamme.active, Validators.required],
-          quantite: [gamme.quantite, [Validators.required, Validators.min(1), Validators.max(50)]],
-          titre: [gamme.titre, Validators.required],
-          prix: [gamme.prix, Validators.required],
-          image: [gamme.image]
-        }));
-      });
-     
-
     }else{
       console.log("formulaire non existant")
-      this.deposeElementCuisinesForm = this.fb.group({
-        gammes: this.fb.array([])
-      });
     }
-
-
-    
+    this.poseCuisineForm = this.createPoseCuisineGroup();
   }
-
-
-  getGammeActiveState(index: number): boolean {
-    return (this.deposeElementCuisinesForm.get('gammes') as FormArray)?.at(index).get('active')?.value;
-  }
-  active_Tp(index: number): void {
-    const formArray = this.deposeElementCuisinesForm.get('gammes') as FormArray;
-    const control = formArray?.at(index).get('active');
-    const control2 = formArray?.at(index).get('quantite');
-    if (control) {
-      // Toggle the value between true and false
-      control.setValue(!control.value);
-      control2?.setValidators([Validators.required, Validators.min(1), Validators.max(50)]);
-    }
-  }
-  getGammeNombreState(index: number): boolean {
-    const appareilsFormArray = this.deposeElementCuisinesForm.get('gammes') as FormArray;
-    const nombreValue = appareilsFormArray.at(index).get('quantite')?.value;
-    let res=nombreValue !== null && nombreValue !== 0;
-    // Vérifie que les valeurs de 'nombre' et 'modele' ne sont pas vides ou nulles
-    return !res;
-  }
-
-  ngOnInit(): void {
-    this.load_gammes();
-    
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['triggerSubmitGammesProduitsForm']) {
-      if (this.triggerSubmitGammesProduitsForm) {
-        this.isclicked = true;
-        this.ondeposeElementCuisinesSubmit();
-      }
-    }
-  }
-
-  // Créer un groupe de champs pour chaque élément cuisine
-  createdeposeElementCuisinesGroup(param_prix:number,param_label:string): FormGroup {
-    return this.fb.group({
-      active: [false, Validators.required],
-      quantite: [1, [Validators.required, Validators.min(1), Validators.max(50)]],
-      titre: [param_label, Validators.required],
-      prix: [param_prix, Validators.required],
-      image: [null]
-    });
-  }
-
-  // Soumission du formulaire
-  ondeposeElementCuisinesSubmit(): void {
-    this.formValidityChange.emit(this.deposeElementCuisinesForm.valid);
-    if (this.deposeElementCuisinesForm.invalid) {
-      this.markFormGroupTouched(this.deposeElementCuisinesForm);
-      return;
-    }
-
-    if (this.deposeElementCuisinesForm.valid) {
-      // Envoyer le formulaire au backend
-      this.gestiondesdevisService.addFormulaire('etat-surfaces-depose-elementcuisines', 2, this.deposeElementCuisinesForm.value);
-      this.gestiondesdevisService.addFormulaire('gammes-produits-depose-elementcuisines', 2, this.deposeElementCuisinesForm.value);
-      this.gestiondesdevisService.groupform(
-        'depose-elementcuisines',
-        2,
-        'dimensions-depose-elementcuisines',
-        'etat-surfaces-depose-elementcuisines',
-        'gammes-produits-depose-elementcuisines'
-      );
-      console.log(this.gestiondesdevisService.getFormulaireByName('depose-elementcuisines'));
-    }
-  }
-
-  // Getter pour accéder à la FormArray "gammes"
-  get gammes(): FormArray {
-    return this.deposeElementCuisinesForm.get('gammes') as FormArray;
-  }
-
-  // Ajouter un groupe pour un nouvel élément cuisine
-  addElementCuisine_gammeGroup(prix:number,label:string): void {
-    this.gammes.push(this.createdeposeElementCuisinesGroup(prix,label));
-  }
-
-  // Chargement des gammes de dépôt depuis le service
-  load_gammes(): void {
-    this.userService.getGammesByTravailAndType(2, 'depose').subscribe(
-      (response: any) => {
-        this.gammes_depose = response;
-        console.log("gammes depose: ",this.gammes_depose)
-        this.initializeForm();
-      },
-      (error: any) => {
-        console.error('Erreur lors de la récupération des gammes :', error);
-      }
-    );
-  }
-
-  // Initialisation du formulaire après récupération des gammes
-  initializeForm(): void {
-    const prev_form = this.gestiondesdevisService.getFormulaireByName('gammes-produits-depose-elementcuisines');
-    if (prev_form) {
-      this.deposeElementCuisinesForm = this.fb.group({
-        gammes: this.fb.array([])
-      });
-      prev_form.formulaire.gammes.forEach((gamme: any) => {
-        this.gammes.push(this.fb.group(gamme));
-      });
-      this.deposeElementCuisinesForm.patchValue(prev_form.formulaire);
-    } else {
-      this.deposeElementCuisinesForm = this.fb.group({
-        gammes: this.fb.array([])
-      });
-      this.gammes_depose.forEach((gamme) => {
-        this.addElementCuisine_gammeGroup(gamme.Prix,gamme.Label);
-      });
-    }
-  }
-
-  // Gestion de la sélection des fichiers
-  onGammeFileChange(event: Event, index: number): void {
-    const inputElement = event.target as HTMLInputElement;
-    const file: File = (inputElement.files as FileList)[0];
-    if (file.size <= this.maxFileSize && file.type.startsWith('image/')) {
-      this.gammes.at(index).patchValue({
-        image: file
-      });
-    } else {
-      console.log('Please upload an image file less than 10 MB.');
-      inputElement.value = ''; // Reset the input if the file is invalid
-    }
-    
-  }
-
-  // Marquer tout le formulaire comme touché pour déclencher la validation
-  markFormGroupTouched(formGroup: FormGroup): void {
+   
+   //code de validation des formulaires
+   markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {
       const abstractControl = control as AbstractControl;
       abstractControl.markAsTouched();
@@ -196,6 +86,148 @@ export class GammesProduitsDeposeCuisineComponent implements OnInit {
       }
     });
   }
-}
 
+  appareils_cuisine:Equipement[]=[]
+  getAppareilActiveState(index: number): boolean {
+    return (this.poseCuisineForm.get('appareils_cuisine') as FormArray)?.at(index).get('active')?.value;
+  }
+  getAppareilModeleState(index: number): boolean {
+    const appareilsFormArray = this.poseCuisineForm.get('appareils_cuisine') as FormArray;
+    const modeleValue = appareilsFormArray.at(index).get('modele')?.value;
+    let res=modeleValue !== null && modeleValue !== '';
+    // Vérifie que les valeurs de 'nombre' et 'modele' ne sont pas vides ou nulles
+    return !res;
+  }
+  active_Tp(index: number): void {
+    const formArray = this.poseCuisineForm.get('appareils_cuisine') as FormArray;
+    const control = formArray?.at(index).get('active');
+  
+    if (control) {
+      // Toggle the value between true and false
+      control.setValue(!control.value);
+    }
+  }
+  ngOnInit(): void {
+    this.loadAppareils()
+  }
+
+  gammes_depose: any[] = [];
+   // Getter pour accéder à la FormArray "gammes"
+   get gammes_depose_form(): FormArray {
+    return this.poseCuisineForm.get('gammes_depose_form') as FormArray;
+  }
+
+
+  loadAppareils(){
+    
+    this.userService.getEquipementsByPiece(7).subscribe(
+      (response: Equipement[]) => {
+        this.appareils_cuisine = response.filter(equipement => equipement.ModeleEquipements && equipement.ModeleEquipements.length > 0);
+        console.log("réponse de la requette  getEquipementsByPiece:Cuisine",this.appareils_cuisine);
+        let i=0
+
+        this.appareils_cuisine.forEach(appareil => {
+
+          let modele=""
+          let active=false
+          let longueur=0
+          let largeur=0
+          let nombre_de_vasque=0
+          if(this.prec_formulaire_gamme){
+            let form=this.prec_formulaire_gamme.formulaire
+            modele=form?.appareils_cuisine[i]?.modele
+            active=form?.appareils_cuisine[i]?.active
+            longueur=form?.appareils_cuisine[i]?.longueur
+          }
+        
+             // Créer un FormGroup pour chaque appareil
+          const appareilGroup = this.fb.group({});
+              
+          appareilGroup.addControl("longueur", this.fb.control(longueur, ));
+          appareilGroup.addControl("active", this.fb.control(active, ));
+          appareilGroup.addControl("modele", this.fb.control(modele, ));
+         
+
+          // Obtenez les contrôles pour pouvoir les manipuler
+          const modeleControl = appareilGroup.get('modele');
+          const activeControl = appareilGroup.get('active');
+
+          // Abonnez-vous aux changements de la valeur de 'active'
+          activeControl?.valueChanges.subscribe((isActive: boolean) => {
+            if (isActive) {
+              // Si 'active' est true, ajouter les validateurs
+              modeleControl?.setValidators(Validators.required);
+            } else {
+              // Sinon, supprimer les validateurs
+              modeleControl?.clearValidators();
+            }
+            // Mettre à jour la validation pour forcer la vérification des erreurs
+            modeleControl?.updateValueAndValidity();
+          });
+           
+
+          // Ajouter le FormGroup de l'appareil au FormArray
+          (this.poseCuisineForm.get('appareils_cuisine') as FormArray).push(appareilGroup);
+          i++
+          
+        });
+      },
+      (error) => {
+        console.error('Erreur lors de la recuperation des  getEquipementsByPiece:Cuisine :', error);
+      }
+    );
+
+
+    this.userService.getGammesByTravailAndType(2, 'depose-cuisine').subscribe(
+      (response: any) => {
+        this.gammes_depose = response
+        console.log("réponse de la requette  get depose salle de bain",this.gammes_depose);
+        let i=0
+
+        this.gammes_depose.forEach(gamme => {
+        
+          let quantite=0
+          let titre=gamme.Label
+          let prix=gamme.Prix
+          if(this.prec_formulaire_gamme){
+            let form=this.prec_formulaire_gamme.formulaire
+            quantite=form?.gammes_depose_form[i]?.quantite
+            titre=form?.gammes_depose_form[i]?.titre
+            prix=form?.gammes_depose_form[i]?.prix
+          }
+        
+             // Créer un FormGroup pour chaque appareil
+          const appareilGroup = this.fb.group({});
+              
+         
+          appareilGroup.addControl("quantite", this.fb.control(quantite, ));
+          appareilGroup.addControl("titre", this.fb.control(titre, ));
+          appareilGroup.addControl("prix", this.fb.control(prix, ));
+         
+
+          // Obtenez les contrôles pour pouvoir les manipuler
+          const quantiteControl = appareilGroup.get('quantite');
+          quantiteControl?.setValidators([Validators.required, Validators.min(0), Validators.max(50)]);
+          // Mettre à jour la validation pour forcer la vérification des erreurs
+          quantiteControl?.updateValueAndValidity();
+
+         
+           
+
+          // Ajouter le FormGroup de l'appareil au FormArray
+          (this.poseCuisineForm.get('gammes_depose_form') as FormArray).push(appareilGroup);
+          i++
+          
+        });
+      },
+      (error) => {
+        console.error('Erreur lors de la recuperation des gammes_depose :', error);
+      }
+    );
+
+
+  }
+  
+  }
+  
   

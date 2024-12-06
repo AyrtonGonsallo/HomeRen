@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
-import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
-import { FormBuilder } from '@angular/forms';
+
 
 @Component({
   selector: 'app-recap-depose-cuisine',
@@ -10,25 +9,24 @@ import { FormBuilder } from '@angular/forms';
 })
 export class RecapDeposeCuisineComponent {
   @Input() selectedPiece: any; // Déclaration de l'entrée selectedPiece
-  gammes: any;
-  elements_hauts: any;
-  elements_bas: any;
-  has_haut=false
-  has_bas=false
+  appareils_a_ajouter: any;
+  gammes_depose_form: any;
   constructor(
     private gestiondesdevisService: GestionDesDevisService,
-    private userService: ApiConceptsEtTravauxService
   ) {
-    this.gammes = this.gestiondesdevisService.getFormulaireByName("depose-elementcuisines").formulaire["gammes-produits-depose-elementcuisines"].gammes;
-    console.log(this.gammes );
-    this.elements_hauts = this.gestiondesdevisService.getFormulaireByName("depose-elementcuisines").formulaire["dimensions-depose-elementcuisines"].elementcuisines_haut;
-    console.log(this.elements_hauts );
-    this.elements_bas = this.gestiondesdevisService.getFormulaireByName("depose-elementcuisines").formulaire["dimensions-depose-elementcuisines"].elementcuisines_bas;
-    console.log(this.elements_bas );
-    this.has_bas = this.gestiondesdevisService.getFormulaireByName("depose-elementcuisines").formulaire["dimensions-depose-elementcuisines"].is_active_Ecb;
-    this.has_haut = this.gestiondesdevisService.getFormulaireByName("depose-elementcuisines").formulaire["dimensions-depose-elementcuisines"].is_active_Ech;
+    this.appareils_a_ajouter = this.gestiondesdevisService.getFormulaireByName("pose-elementcuisines").formulaire["gammes-produits-pose-elementcuisines"].appareils_cuisine;
+    this.gammes_depose_form = this.gestiondesdevisService.getFormulaireByName("pose-elementcuisines").formulaire["gammes-produits-pose-elementcuisines"].gammes_depose_form;
 
+    console.log("sanitaire ",this.appareils_a_ajouter );
+    console.log("depose ",this.gammes_depose_form );
   }
-
+  get_title(slug:string){
+    return slug.split(":")[1];
+  }
+  get_label(slug: any): string {
+    // Convert the value to a boolean if it is a string
+    const booleanSlug = (slug === 'true' || slug === true) ? true : false;
   
+    return booleanSlug ? 'oui' : 'non';
+  }
 }

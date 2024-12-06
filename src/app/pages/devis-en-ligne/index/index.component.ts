@@ -390,6 +390,10 @@ export class IndexComponent {
     
   }
   jump(): boolean {//pour les cas ou on doit sauter des etapes
+    if(this.is_one_travail_selected && this.filteredTravail.ID==2 && this.current<=2){
+      this.current=4
+      return true
+    }
     if(this.is_one_travail_selected && this.filteredTravail.ID==11 && this.current<=2){
       this.current=4
       return true
@@ -436,7 +440,7 @@ export class IndexComponent {
       return true
     }
     if(this.is_one_travail_selected && this.filteredTravail.ID==2 && this.current==4){
-      this.current=2
+      this.current=1
       return true
     }
     if(this.is_one_travail_selected && this.filteredTravail.ID==15 && this.current==4){
