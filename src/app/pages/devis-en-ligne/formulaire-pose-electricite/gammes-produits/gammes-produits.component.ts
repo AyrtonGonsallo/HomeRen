@@ -210,6 +210,14 @@ appareilGroup: any;
     // Vérifie que les valeurs de 'nombre' et 'modele' ne sont pas vides ou nulles
     return !res;
   }
+  getAppareilNombreState2(index: number): boolean {
+    const appareilsFormArray = this.appareils_a_remplacer_form.get('appareils_electrique_a_remplacer') as FormArray;
+    const nombreValue = appareilsFormArray.at(index).get('nombre')?.value;
+    const creation_ou_remplacementValue = appareilsFormArray.at(index).get('creation_ou_remplacement')?.value;
+    let res=nombreValue !== null && nombreValue !== 0 && creation_ou_remplacementValue !== null && creation_ou_remplacementValue !== '';
+    // Vérifie que les valeurs de 'nombre' et 'creation_ou_remplacement' ne sont pas vides ou nulles
+    return !res;
+  }
   
   ngOnInit(): void {
     this.loadAppareils()

@@ -59,7 +59,7 @@
 
       <div formArrayName="gammes_depose_form">
         <div *ngFor="let gamme of gammes_depose_form.controls; let i = index" [formGroupName]="i">
-          Dépose de {{gammes_depose && gammes_depose[i] ? gammes_depose[i].Label : ''}}
+           {{gammes_depose && gammes_depose[i] ? gammes_depose[i].Label : ''}}
              
               
               <div nz-row nzJustify="start" class="cuisine-flx">
@@ -74,6 +74,17 @@
                 <div *ngIf="gamme.get('quantite')?.invalid && isclicked" class="error-message">
                   Quantité invalide
                 </div>
+
+                <div nz-col nzSpan="24" class="ant-col tooltip-srf etat-srf">
+                  <label for="longueur">Longueur :</label>
+                  <input id="longueur" type="number" formControlName="longueur" min="0"/>
+                  <a nz-tooltip [nzTooltipTitle]="tooltipHauteur" href="javascript:void(0)" class="info-icon">
+                    <i class="far fa-question-circle"></i>
+                  </a>
+              </div>
+              <div *ngIf="gamme.get('longueur')?.invalid && isclicked" class="error-message">
+                Longueur invalide
+              </div>
                
               </div>
               

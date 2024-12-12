@@ -187,10 +187,12 @@ appareilGroup: any;
         this.gammes_depose.forEach(gamme => {
         
           let quantite=0
+          let longueur=0
           let titre=gamme.Label
           let prix=gamme.Prix
           if(this.prec_formulaire_gamme){
             let form=this.prec_formulaire_gamme.formulaire
+            longueur=form?.gammes_depose_form[i]?.longueur
             quantite=form?.gammes_depose_form[i]?.quantite
             titre=form?.gammes_depose_form[i]?.titre
             prix=form?.gammes_depose_form[i]?.prix
@@ -199,7 +201,7 @@ appareilGroup: any;
              // Créer un FormGroup pour chaque appareil
           const appareilGroup = this.fb.group({});
               
-         
+          appareilGroup.addControl("longueur", this.fb.control(longueur, ));
           appareilGroup.addControl("quantite", this.fb.control(quantite, ));
           appareilGroup.addControl("titre", this.fb.control(titre, ));
           appareilGroup.addControl("prix", this.fb.control(prix, ));
@@ -207,10 +209,12 @@ appareilGroup: any;
 
           // Obtenez les contrôles pour pouvoir les manipuler
           const quantiteControl = appareilGroup.get('quantite');
+          const longueurControl = appareilGroup.get('longueur');
+          longueurControl?.setValidators([Validators.required, Validators.min(0), Validators.max(5000)]);
           quantiteControl?.setValidators([Validators.required, Validators.min(0), Validators.max(50)]);
           // Mettre à jour la validation pour forcer la vérification des erreurs
           quantiteControl?.updateValueAndValidity();
-
+          longueurControl?.updateValueAndValidity();
          
            
 
