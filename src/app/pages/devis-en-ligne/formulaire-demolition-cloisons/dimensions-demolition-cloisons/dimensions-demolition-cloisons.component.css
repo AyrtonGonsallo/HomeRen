@@ -15,6 +15,7 @@ form {
     text-align: center;
 }
 .col-12-w .ant-col-12 {grid-template-columns: 2fr 1fr 0.2fr !important;}
+
 .ant-col-12{
     justify-content: center;
     max-width: 100%;
@@ -110,3 +111,23 @@ i.far.fa-question-circle {
     margin-top: 9px;
 }*/
 
+.etat-srf2{
+    justify-content: start;
+    max-width: 60%;
+    width: 60%;
+    display: grid !important;
+    grid-template-columns: 1fr 2fr !important;
+    align-items: center !important;
+    flex: 0% !important;
+    margin: auto;
+    text-align: start;
+}
+.etat-srf2 .parquet-option{
+    display: flex;
+}
+.etat-srf2 nz-radio-group{
+    display: flex;
+}
+.etat-srf2 label{
+    display: flex;
+}

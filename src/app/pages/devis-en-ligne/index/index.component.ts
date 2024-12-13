@@ -348,9 +348,12 @@ export class IndexComponent {
       if(this.current==2 ){
         console.log("formulaire dim valide ? ",this.is_formulaire_dimensions_valid)
         if(this.is_formulaire_dimensions_valid){
-          if( this.filteredTravail.ID==2 || this.filteredTravail.ID==3){
+          if( this.filteredTravail.ID==2 ){
             this.current=4
-          }else{
+          }else if(  this.filteredTravail.ID==3){
+            this.current=5
+          }
+          else{
             this.current += 1;
           }
           this.changeContent();

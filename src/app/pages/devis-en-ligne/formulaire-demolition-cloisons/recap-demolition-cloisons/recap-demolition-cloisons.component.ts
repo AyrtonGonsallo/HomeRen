@@ -28,16 +28,10 @@ export class RecapDemolitionCloisonsComponent {
     this.form=this.gestiondesdevisService.getFormulaireByName("murs-non-porteurs").formulaire;
     console.log("recap demol: ",this.form)
     this.dimensions_murs_non_porteurs=this.form["dimensions-murs-non-porteurs"]["mursNonporteurs"];
-    this.quantite_portes_simples_creuse=this.form["dimensions-murs-non-porteurs"]["quantite_portes_simples_creuse"];
-    this.quantite_portes_doubles_creuses=this.form["dimensions-murs-non-porteurs"]["quantite_portes_doubles_creuses"];
-    this.quantite_porte_simple_plein=this.form["dimensions-murs-non-porteurs"]["quantite_porte_simple_plein"];
-    this.quantite_porte_double_pleine=this.form["dimensions-murs-non-porteurs"]["quantite_porte_double_pleine"];
+  
     this.dimensions_ouverture=this.form["dimensions-murs-non-porteurs"]["ouverturePartielle"];
-    this.gammes_cloison=this.form["gammes-produits-murs-non-porteurs"]["mursnonporteurs"];
-    this.gammes_materiaux=this.form["gammes-produits-murs-non-porteurs"]["mursnonporteurs"];
-   this.ouverture_choisie=this.form["gammes-produits-murs-non-porteurs"]["ouverturepartielles_choisis"];
-   this.demolition_murs_choisie=this.form["gammes-produits-murs-non-porteurs"]["mursnonporteurs_choisis"];
-   this.portes_choisies=this.form["gammes-produits-murs-non-porteurs"]["portes_choisis"];
+   this.ouverture_choisie=this.form["dimensions-murs-non-porteurs"]["tp3"];
+   this.demolition_murs_choisie=this.form["dimensions-murs-non-porteurs"]["tp1"];
     /* this.gammes = this.gestiondesdevisService.getFormulaireByName("murs-non-porteurs").formulaire["gammes-produits-murs-non-porteurs"].gammes;
     console.log(this.gammes );
     this.elements_hauts = this.gestiondesdevisService.getFormulaireByName("murs-non-porteurs").formulaire["dimensions-murs-non-porteurs"].elementcuisines_haut;

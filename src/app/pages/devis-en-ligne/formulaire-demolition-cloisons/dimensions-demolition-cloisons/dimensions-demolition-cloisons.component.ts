@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
+import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-dimensions-demolition-cloisons',
@@ -8,6 +10,8 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: './dimensions-demolition-cloisons.component.css'
 })
 export class DimensionsDemolitionCloisonsComponent {
+
+  baseurl=environment.imagesUrl
   is_active_Tp1=false
  
   is_active_Tp3=false
@@ -51,6 +55,9 @@ export class DimensionsDemolitionCloisonsComponent {
       console.log(fusion);
       this.gestiondesdevisService.addFormulaire('dimensions-murs-non-porteurs',3, fusion);
       this.gestiondesdevisService.addFormulaire('etat-surfaces-murs-non-porteurs',3, fusion);
+      this.gestiondesdevisService.addFormulaire('gammes-produits-murs-non-porteurs',3, fusion);
+      this.gestiondesdevisService.groupform('murs-non-porteurs',3, 'dimensions-murs-non-porteurs','etat-surfaces-murs-non-porteurs','gammes-produits-murs-non-porteurs')
+      console.log(this.gestiondesdevisService.getFormulaireByName("murs-non-porteurs"));
       // Envoyer les données au backend ou traiter comme nécessaire
     }
   }
@@ -63,13 +70,14 @@ export class DimensionsDemolitionCloisonsComponent {
     for (let i = 0; i < mursNonporteursArray.length; i++) {
       const group = mursNonporteursArray.at(i) as FormGroup;
       const controls = group.controls;
-  
+      console.log(controls)
       if (
         controls['longueur'].value === '' ||
         controls['hauteur'].value === '' ||
         controls['epaisseur'].value === '' ||
         controls['epaisseur'].invalid  ||
-        controls['ndp'].value === ''
+        controls['ndp'].value === '' ||
+        controls['cloison'].value === ''
       ) {
         //console.error(`Tous les champs doivent être remplis pour la démolition du mur ${i + 1}`);
         this.exist_glob_err_form1=true
@@ -104,7 +112,8 @@ export class DimensionsDemolitionCloisonsComponent {
         controls['longueur_ouverture'].value === '' ||
         controls['hauteur_ouverture'].value === '' ||
         controls['hauteur_depuis_le_sol'].value === '' ||
-        controls['hauteur_depuis_le_plafond'].value === ''
+        controls['hauteur_depuis_le_plafond'].value === '' ||
+        controls['cloison'].value === ''
       ) {
         //console.error(`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}`);
         //group.markAllAsTouched();
@@ -135,14 +144,58 @@ export class DimensionsDemolitionCloisonsComponent {
       hauteur: ['', this.is_active_Tp1 ? Validators.required : null],
       epaisseur: ['', this.is_active_Tp1 ? Validators.required : null],
       ndp: [0, this.is_active_Tp1 ? Validators.required : null],
+      cloison: ["", this.is_active_Tp1 ? Validators.required : null],
       image: [null]
     });
     
   }
+  updateValidatorsForMursNonporteurs(): void {
+    this.mursNonporteurs.controls.forEach((group: AbstractControl) => {
+      if (group instanceof FormGroup) {
+        Object.keys(group.controls).forEach((key) => {
+          const control = group.get(key);
+          if (control) {
+            // Appliquer les nouveaux validateurs en fonction de is_active_Tp1
+            switch (key) {
+              case 'longueur':
+              case 'hauteur':
+              case 'epaisseur':
+              case 'ndp':
+              case 'cloison':
+                control.setValidators(this.is_active_Tp1 ? Validators.required : null);
+                break;
+              case 'image':
+                control.setValidators(null); // Pas de changement ici
+                break;
+            }
+            // Mettre à jour la validité du champ
+            control.updateValueAndValidity();
+          }
+        });
+      }
+    });
+  }
+  updateValidatorsForOuverturePartielle(): void {
+    this.ouverturePartielle.controls.forEach((group: AbstractControl) => {
+      if (group instanceof FormGroup) {
+        Object.keys(group.controls).forEach((key) => {
+          const control = group.get(key);
+          if (control) {
+            control.setValidators(
+              this.is_active_Tp3 ? Validators.required : null
+            );
+            control.updateValueAndValidity();
+          }
+        });
+      }
+    });
+  }
+
   addmursNonporteursGroup(): void {
     if (this.mursNonporteurs.length < 4) {
       this.mursNonporteurs.push(this.createmursNonporteursGroup());
     }
+    this.updateValidatorsForMursNonporteurs()
   }
   
   removemursNonporteursGroup(index: number): void {
@@ -159,6 +212,7 @@ export class DimensionsDemolitionCloisonsComponent {
       hauteur_ouverture : ['', this.is_active_Tp3 ? Validators.required : null],
       hauteur_depuis_le_sol: ['', this.is_active_Tp3 ? Validators.required : null],
       hauteur_depuis_le_plafond : ['', this.is_active_Tp3 ? Validators.required : null],
+      cloison : ['', this.is_active_Tp3 ? Validators.required : null],
       image: [null]
     });
   }
@@ -166,6 +220,7 @@ export class DimensionsDemolitionCloisonsComponent {
     if (this.ouverturePartielle.length < 4) {
       this.ouverturePartielle.push(this.createouverturePartielleGroup());
     }
+    this.updateValidatorsForOuverturePartielle()
   }
   
   removeouverturePartielleGroup(index: number): void {
@@ -176,8 +231,8 @@ export class DimensionsDemolitionCloisonsComponent {
 
 
   prec_formulaire_dimensions:any
-  constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-  
+  constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
+  this.load_gammes()
     this.prec_formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-murs-non-porteurs")
     if(this.prec_formulaire_dimensions){
       let form=this.prec_formulaire_dimensions.formulaire
@@ -196,6 +251,7 @@ export class DimensionsDemolitionCloisonsComponent {
           hauteur: [mursNonporteur.hauteur, this.is_active_Tp1 ? Validators.required : null],
           epaisseur: [mursNonporteur.epaisseur, this.is_active_Tp1 ? Validators.required : null],
           ndp: [mursNonporteur.ndp, this.is_active_Tp1 ? Validators.required : null],
+          cloison: [mursNonporteur.cloison, this.is_active_Tp1 ? Validators.required : null],
           image: [mursNonporteur.image]
         }));
       });
@@ -214,6 +270,7 @@ export class DimensionsDemolitionCloisonsComponent {
           hauteur_ouverture : [ouverture.hauteur_ouverture, this.is_active_Tp3 ? Validators.required : null],
           hauteur_depuis_le_sol: [ouverture.hauteur_depuis_le_sol, this.is_active_Tp3 ? Validators.required : null],
           hauteur_depuis_le_plafond : [ouverture.hauteur_depuis_le_plafond, this.is_active_Tp3 ? Validators.required : null],
+          cloison: [ouverture.cloison, this.is_active_Tp1 ? Validators.required : null],
           image: [ouverture.image]
         }));
       });
@@ -263,5 +320,21 @@ export class DimensionsDemolitionCloisonsComponent {
       inputElement.value = ''; // Reset the input if the file is invalid
     }
   }
+
+
+  gammes_cloison:any
+
+load_gammes(){
+  this.userService.getGammesByTravailAndType(3,"cloison").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes cloison:', response);
+      this.gammes_cloison=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes cloison :', error);
+    }
+  );
+ 
+}
 
 }
