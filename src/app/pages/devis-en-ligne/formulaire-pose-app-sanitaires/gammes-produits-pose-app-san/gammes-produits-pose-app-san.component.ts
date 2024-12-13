@@ -124,13 +124,22 @@ appareilGroup: any;
    get gammes_depose_form(): FormArray {
     return this.poseSalleDeBainForm.get('gammes_depose_form') as FormArray;
   }
-
+tableauIds = [9, 37, 10, 2,35,38,6,36,34,42,39,40,41,];
 
   loadAppareils(){
     
     this.userService.getEquipementsByPiece(5).subscribe(
       (response: Equipement[]) => {
-        this.appareils_salle_de_bain = response.filter(equipement => equipement.ModeleEquipements && equipement.ModeleEquipements.length > 0);
+        const tableauIds=this.tableauIds
+        this.appareils_salle_de_bain = response.filter(equipement => equipement.ModeleEquipements && equipement.ModeleEquipements.length > 0).sort((a, b) => {
+          // Trier selon l'ordre des IDs dans le tableau
+          const indexA = tableauIds.indexOf(a.ID);
+          const indexB = tableauIds.indexOf(b.ID);
+          
+          // Les éléments non présents dans le tableau seront mis à la fin
+          return (indexA === -1 ? Number.MAX_SAFE_INTEGER : indexA) - 
+                 (indexB === -1 ? Number.MAX_SAFE_INTEGER : indexB);
+        });;
         console.log("réponse de la requette  getEquipementsByPiece:salledebain",this.appareils_salle_de_bain);
         let i=0
 
@@ -141,6 +150,7 @@ appareilGroup: any;
           let longueur=0
           let largeur=0
           let nombre_de_vasque=0
+          let encastre_ou_apparente=false
           if(this.prec_formulaire_gamme){
             let form=this.prec_formulaire_gamme.formulaire
             modele=form?.appareils_salle_de_bain[i]?.modele
@@ -148,6 +158,7 @@ appareilGroup: any;
             longueur=form?.appareils_salle_de_bain[i]?.longueur
             largeur=form?.appareils_salle_de_bain[i]?.largeur
             nombre_de_vasque=form?.appareils_salle_de_bain[i]?.nombre_de_vasque
+            encastre_ou_apparente=form?.appareils_salle_de_bain[i]?.encastre_ou_apparente
           }
         
              // Créer un FormGroup pour chaque appareil
@@ -156,6 +167,7 @@ appareilGroup: any;
           appareilGroup.addControl("longueur", this.fb.control(longueur, ));
           appareilGroup.addControl("largeur", this.fb.control(largeur, ));
           appareilGroup.addControl("nombre_de_vasque", this.fb.control(nombre_de_vasque, ));
+          appareilGroup.addControl("encastre_ou_apparente", this.fb.control(encastre_ou_apparente, ));
           appareilGroup.addControl("active", this.fb.control(active, ));
           appareilGroup.addControl("modele", this.fb.control(modele, ));
          
@@ -193,7 +205,7 @@ appareilGroup: any;
     );
 
 
-    this.userService.getGammesByTravailAndType(16, 'depose-salle-de-bain-salle-d-eau').subscribe(
+    this.userService.getGammesByTravailAndTypeOrdered(16, 'depose-salle-de-bain-salle-d-eau').subscribe(
       (response: any) => {
         this.gammes_depose = response
         console.log("réponse de la requette  get depose salle de bain",this.gammes_depose);

@@ -52,7 +52,7 @@ form{
     align-items: center!important;
     justify-content: center!important;
     max-width: 100%!important;
-    width: 60%!important;
+    width: 100%!important;
     display: flex !important;
     align-items: center !important;
     flex: 0% !important;
@@ -60,6 +60,7 @@ form{
     text-align: center!important;
     flex-direction: row!important;
 }
+
 .etat-srf-accord { grid-template-columns: 4fr 0.2fr 0.2fr !important;padding-bottom: 8px!important;}
 .etat-srf-accord i.far.fa-question-circle { margin-top: 5px !important;}
 .plaf-dim .ant-col-6 {
@@ -75,4 +76,7 @@ form{
 @media screen and (max-width: 600px) {
     .ant-row, .flx-pr{width: 100% !important; max-width: 100%!important; }
     .radio-flx-spc label, .col-accord-inpt{min-height:54px !important; height:auto !important;padding-block: 6px !important;}
+}
+.sidebyside{
+    display: flex;
 }
