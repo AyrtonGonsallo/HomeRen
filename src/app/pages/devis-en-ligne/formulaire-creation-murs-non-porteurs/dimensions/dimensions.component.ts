@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 import { environment } from '../../../../environments/environment';
+import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
 
 @Component({
   selector: 'app-dimensions-creation-murs-non-porteurs',
@@ -43,7 +44,12 @@ export class MursNonPorteursDimensionsComponent {
       console.log("booleen",bool);
       console.log("formulaire",fusion);
       this.gestiondesdevisService.addFormulaire('dimensions-creation-murs-non-porteurs--murs',4, fusion);
-      this.gestiondesdevisService.addFormulaire('dimensions-creation-murs-non-porteurs--murs',4, fusion);
+      this.gestiondesdevisService.addFormulaire('etat-surfaces-creation-murs-non-porteurs--murs',4, fusion);
+
+      this.gestiondesdevisService.addFormulaire("gammes-produits-creation-murs-non-porteurs--portes",4,fusion)
+      // Envoyer les données au backend ou traiter comme nécessaire
+      this.gestiondesdevisService.groupform('creation-murs-non-porteurs',4, 'dimensions-creation-murs-non-porteurs--murs','etat-surfaces-creation-murs-non-porteurs--murs','gammes-produits-creation-murs-non-porteurs--portes')
+      console.log(this.gestiondesdevisService.getFormulaireByName("creation-murs-non-porteurs"));
       // Envoyer les données au backend ou traiter comme nécessaire
     }
   }
@@ -68,9 +74,7 @@ get portes(): FormArray {
 }
 createportesGroup(): FormGroup {
   return this.fb.group({
-    longueur: ['', this.is_active_Tp3 ? Validators.required : null],
-    hauteur: [204, this.is_active_Tp3 ? Validators.required : null],
-    epaisseur: ['', this.is_active_Tp3 ? Validators.required : null],
+    type: ['', this.is_active_Tp3 ? Validators.required : null],
     largeur: ['', this.is_active_Tp3 ? Validators.required : null],
   });
 }
@@ -78,8 +82,23 @@ addportesGroup(): void {
   if (this.portes.length < 4) {
     this.portes.push(this.createportesGroup());
   }
+  this.updateValidatorsForPortes()
 }
-
+updateValidatorsForPortes(): void {
+  this.portes.controls.forEach((group: AbstractControl) => {
+    if (group instanceof FormGroup) {
+      Object.keys(group.controls).forEach((key) => {
+        const control = group.get(key);
+        if (control) {
+          control.setValidators(
+            this.is_active_Tp3 ? Validators.required : null
+          );
+          control.updateValueAndValidity();
+        }
+      });
+    }
+  });
+}
 removeportesGroup(index: number): void {
   if (this.portes.length > 1) {
     this.portes.removeAt(index);
@@ -115,7 +134,6 @@ onPoseMursNonPorteursSubmit(): boolean {
     if (
       controls['longueur'].value === '' ||
       controls['hauteur'].value === '' ||
-      controls['epaisseur'].invalid ||
       controls['epaisseur'].value === '' 
     ) {
       //console.error(`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}`);
@@ -139,10 +157,7 @@ onPosePortesSubmit(): boolean {
     const controls = group.controls;
 
     if (
-      controls['longueur'].value === '' ||
-      controls['hauteur'].value === '' ||
-      controls['epaisseur'].value === '' ||
-      controls['epaisseur'].invalid ||
+      controls['type'].value === '' ||
       controls['largeur'].value === '' 
     ) {
       //console.error(`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}`);
@@ -166,8 +181,8 @@ createposeMurNonPorteurroup(): FormGroup {
 }
 
 prec_formulaire_dimensions:any
-constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-  
+constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
+  this.load_types()
   this.prec_formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-creation-murs-non-porteurs--murs")
   if(this.prec_formulaire_dimensions){
     let form=this.prec_formulaire_dimensions.formulaire
@@ -194,9 +209,8 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
     const porteArray = this.portesForm.get('portes') as FormArray;
     form.portes.forEach((porte: any) => {
         porteArray.push(this.fb.group({
-          longueur: [porte.longueur, this.is_active_Tp3 ? Validators.required : null],
-          hauteur: [porte.hauteur, this.is_active_Tp3 ? Validators.required : null],
-          epaisseur: [porte.epaisseur, this.is_active_Tp3 ? Validators.required : null],
+          type: [porte.type, this.is_active_Tp3 ? Validators.required : null],
+          
           largeur: [porte.largeur, this.is_active_Tp3 ? Validators.required : null],
          
         }));
@@ -229,7 +243,18 @@ markFormGroupTouched(formGroup: FormGroup) {
   });
 }
 
-
+types:any[]=[]
+load_types(){
+  this.userService.getGammesByTravailAndType(4,"type-de-porte-creation-murs-non-porteurs").subscribe(
+    (response: any) => {
+      console.log('recuperation des types type-de-porte-creation-murs-non-porteurs:', response);
+      this.types=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des types type-de-porte-creation-murs-non-porteurs :', error);
+    }
+  );
+}
  
 
 

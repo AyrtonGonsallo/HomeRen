@@ -350,7 +350,7 @@ export class IndexComponent {
         if(this.is_formulaire_dimensions_valid){
           if( this.filteredTravail.ID==2 ){
             this.current=4
-          }else if(  this.filteredTravail.ID==3){
+          }else if(  this.filteredTravail.ID==3 || this.filteredTravail.ID==4){
             this.current=5
           }
           else{
