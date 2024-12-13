@@ -5,17 +5,17 @@
     <div *ngFor="let appareil of appareils_a_ajouter">
         <div *ngIf="appareil.active">
             <span class="recup-fin"><p>{{get_title(appareil.modele)}}</p></span>
-            <span class="recup-fin"><p>Longueur</p><p>:</p><p>{{(appareil.longueur)}} cm</p></span>
+            <span class="recup-fin" *ngIf="appareil.longueur>0"><p>Longueur</p><p>:</p><p>{{(appareil.longueur)}} cm</p></span>
            
         </div>
         
     </div>
     Dépose d'anciennes installations
     <div *ngFor="let gamme of gammes_depose_form">
-        <div *ngIf="gamme.quantite>0">
-            <span class="recup-fin"><p>{{(gamme.titre)}}</p></span>
-            <span class="recup-fin"><p>Nombre</p><p>:</p><p>{{(gamme.quantite)}} </p></span>
-            <span class="recup-fin"><p>Longueur</p><p>:</p><p>{{(gamme.longueur)}} </p></span>
+        <div>
+            <span class="recup-fin" *ngIf="gamme.quantite>0 || gamme.longueur>0"><p>{{(gamme.titre)}}</p></span>
+            <span class="recup-fin" *ngIf="gamme.quantite>0"><p>Nombre</p><p>:</p><p>{{(gamme.quantite)}} </p></span>
+            <span class="recup-fin" *ngIf="gamme.longueur>0"><p>Longueur</p><p>:</p><p>{{(gamme.longueur)}} cm</p></span>
         </div>
         
     </div>

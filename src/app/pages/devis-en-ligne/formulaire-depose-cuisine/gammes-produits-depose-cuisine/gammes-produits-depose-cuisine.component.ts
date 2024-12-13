@@ -117,6 +117,27 @@ appareilGroup: any;
     return this.poseCuisineForm.get('gammes_depose_form') as FormArray;
   }
 
+  need_quantite(id: number): boolean {
+    const validIds = [103, 104, 116, 117, 118]; // Liste des IDs valides
+  
+    // Vérifie si l'ID est dans la liste des IDs valides
+    if (!validIds.includes(id)) {
+      return false;
+    }
+  
+    return true;
+  }
+
+  need_longueur(id: number): boolean {
+    const validIds = [102, 115,]; // Liste des IDs valides
+  
+    // Vérifie si l'ID est dans la liste des IDs valides
+    if (!validIds.includes(id)) {
+      return false;
+    }
+  
+    return true;
+  }
 
   loadAppareils(){
     
