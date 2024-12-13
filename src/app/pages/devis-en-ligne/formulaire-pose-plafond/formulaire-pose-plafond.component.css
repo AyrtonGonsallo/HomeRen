@@ -20,8 +20,7 @@
     justify-content: space-between;
     align-items: center;}
 .ant-row, .flx-pr {
-    width: 70%;
-    max-width: 70%;
+    
     margin: auto;
     align-content: center;
     flex-direction: column;
