@@ -30,13 +30,9 @@ export class PoseSolGammesProduitsComponent {
   //le formulaire de pose sol
   createPoseSolGroup(): FormGroup {
     return this.fb.group({
-      sol_pvc: [false, ],
-      moquette: [false, ],
-      sol_pvc_prix: [0, ],
-      moquette_prix: [0, ],
       gamme: ["", Validators.required],
       autre_gamme: ["", ],
-      
+      lineaire: [0, ],
       plinthes: ["",],
       has_plinthes: [false,],
     });
@@ -100,51 +96,71 @@ export class PoseSolGammesProduitsComponent {
         }
       });
     }
-    
-gammes_parquet_m:any
-gammes_parquet_b:any
-gammes_parquet_pffs:any
-gammes_carrelage:any
+
+gammes_peinture_sol:any
+gammes_parquet_massif:any
+gammes_sol_souple:any
+gammes_parquet_flottant:any
+gammes_carrelage_sol:any
 gammes_plithes_carrelage:any
 gammes_plithes_bois:any
-gamme_pvc:any
-gamme_moquette:any
-
+gamme_resine_decorative:any
+gamme_moquette_sol:any
+/*
+{ slug: 'peinture-de-sol', label: 'Peinture de sol' },
+{ slug: 'moquette-de-sol', label: 'Moquette (sol)' },
+{ slug: 'sol-souple', label: 'Sol souple (sol)' },
+{ slug: 'resine-decorative-de-sol', label: 'Résine décorative (sol)' },
+{ slug: 'carrelage-sol', label: 'Carrelage (sol)' },
+{ slug: 'papier-massif-sol', label: 'Parquet Massif (sol)' },
+{ slug: 'parquet-flottant-sol', label: 'Parquet Flottant (sol)' },
+{ slug: 'plinthes-carrelage-sol', label: 'Plinthes carrelage (sol)' },
+{ slug: 'plinthes-bois-sol', label: 'Plinthes bois (sol)' },
+ */
 load_gammes(){
-  this.userService.getGammesByTravailAndType(9,"parquet-massif").subscribe(
+  this.userService.getGammesByTravailAndType(9,"peinture-de-sol").subscribe(
     (response: any) => {
-      console.log('recuperation des gammes parquet-massif:', response);
-      this.gammes_parquet_m=response
+      console.log('recuperation des gammes peinture-de-sol:', response);
+      this.gammes_peinture_sol=response
     },
     (error: any) => {
-      console.error('Erreur lors de la recuperation des gammes parquet-massif :', error);
+      console.error('Erreur lors de la recuperation des gammes peinture-de-sol :', error);
     }
   );
-  this.userService.getGammesByTravailAndType(9,"parquet-flottant-finition-bois").subscribe(
+  this.userService.getGammesByTravailAndType(9,"papier-massif-sol").subscribe(
     (response: any) => {
-      console.log('recuperation des gammes parquet-flottant-finition-bois:', response);
-      this.gammes_parquet_b=response
+      console.log('recuperation des gammes papier-massif-sol:', response);
+      this.gammes_parquet_massif=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes papier-massif-sol :', error);
+    }
+  );
+  this.userService.getGammesByTravailAndType(9,"parquet-flottant-sol").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes parquet-flottant-sol:', response);
+      this.gammes_parquet_flottant=response
     },
     (error: any) => {
       console.error('Erreur lors de la recuperation des gammes parquet-flottant-finition-bois :', error);
     }
   );
-  this.userService.getGammesByTravailAndType(9,"parquet-flottant-finition-stratifiee").subscribe(
+  this.userService.getGammesByTravailAndType(9,"sol-souple").subscribe(
     (response: any) => {
-      console.log('recuperation des gammes parquet-flottant-finition-stratifiee:', response);
-      this.gammes_parquet_pffs=response
+      console.log('recuperation des gammes sol-souple:', response);
+      this.gammes_sol_souple=response
     },
     (error: any) => {
-      console.error('Erreur lors de la recuperation des gammes parquet-flottant-finition-stratifiee :', error);
+      console.error('Erreur lors de la recuperation des gammes sol-souple :', error);
     }
   );
-  this.userService.getGammesByTravailAndType(9,"carrelage").subscribe(
+  this.userService.getGammesByTravailAndType(9,"carrelage-sol").subscribe(
     (response: any) => {
-      console.log('recuperation des gammes carrelage:', response);
-      this.gammes_carrelage=response
+      console.log('recuperation des gammes carrelage-sol:', response);
+      this.gammes_carrelage_sol=response
     },
     (error: any) => {
-      console.error('Erreur lors de la recuperation des gammes carrelage :', error);
+      console.error('Erreur lors de la recuperation des gammes carrelage-sol :', error);
     }
   );
   this.userService.getGammesByTravailAndType(9,"plinthes-carrelage").subscribe(
@@ -165,28 +181,23 @@ load_gammes(){
       console.error('Erreur lors de la recuperation des gammes plinthes :', error);
     }
   );
-  this.userService.getGammesByTravailAndType(9,"sol-pvc").subscribe(
+  this.userService.getGammesByTravailAndType(9,"resine-decorative-de-sol").subscribe(
     (response: any) => {
-      console.log('recuperation des gammes sol-pvc:', response[0]);
-      this.gamme_pvc=response[0]
-      this.poseSolForm.patchValue({
-        sol_pvc_prix: response[0].Prix
-      })
+      console.log('recuperation des gammes resine-decorative-de-sol:', response[0]);
+      this.gamme_resine_decorative=response
     },
     (error: any) => {
-      console.error('Erreur lors de la recuperation des gammes sol-pvc :', error);
+      console.error('Erreur lors de la recuperation des gammes resine-decorative-de-sol :', error);
     }
   );
-  this.userService.getGammesByTravailAndType(9,"moquette").subscribe(
+  this.userService.getGammesByTravailAndType(9,"moquette-de-sol").subscribe(
     (response: any) => {
-      console.log('recuperation des gammes moquette:', response[0]);
-      this.gamme_moquette=response[0]
-      this.poseSolForm.patchValue({
-        moquette_prix: response[0].Prix
-      })
+      console.log('recuperation des gammes moquette-de-sol:', response[0]);
+      this.gamme_moquette_sol=response
+      
     },
     (error: any) => {
-      console.error('Erreur lors de la recuperation des gammes moquette :', error);
+      console.error('Erreur lors de la recuperation des gammes moquette-de-sol :', error);
     }
   );
 }

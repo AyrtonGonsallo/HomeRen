@@ -111,7 +111,7 @@ i.far.fa-question-circle {
     margin-top: 9px;
 }*/
 
-.etat-srf2{
+.etat-srf-accord{
     justify-content: start;
     max-width: 60%;
     width: 60%;
@@ -122,12 +122,13 @@ i.far.fa-question-circle {
     margin: auto;
     text-align: start;
 }
-.etat-srf2 .parquet-option{
+.sidebyside .parquet-option{
     display: flex;
+    align-items: center;
 }
-.etat-srf2 nz-radio-group{
+
+.sidebyside{
     display: flex;
-}
-.etat-srf2 label{
-    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

@@ -7,51 +7,31 @@
                      <nz-radio-group formControlName="etat" class="radio-flx-spc">
                         <div>
                           <label nz-radio nzValue="Bon">
-                            <span>Bon</span>
+                            <span>Bon : grattage, réagreage</span>
                           </label>
-                          <a nz-tooltip [nzTooltipTitle]="tooltipBon" href="javascript:void(0)" class="info-icon">
-                            <i class="far fa-question-circle"></i>
-                          </a>
-                          <ng-template #tooltipBon>
-                            Le sol est en bon état, il faudra juste faire du grattage et du réagreage.
-                          </ng-template>
+                         
                         </div>
                         
                         <div>
                           <label nz-radio nzValue="abimé">
-                            <span>abimé</span>
+                            <span>Abimé :  rebouchage, réparation de fissures, réagreage</span>
                           </label>
-                          <a nz-tooltip [nzTooltipTitle]="tooltipAbime" href="javascript:void(0)" class="info-icon">
-                            <i class="far fa-question-circle"></i>
-                          </a>
-                          <ng-template #tooltipAbime>
-                            Le sol présente des irrégularités mineures, envisagez un rebouchage, une réparation de fissures et un réagreage.
-                          </ng-template>
+                         
                         </div>
                         
                         <div>
                           <label nz-radio nzValue="Très abimé">
-                            <span>Très abimé</span>
+                            <span>Très abimé :  rebouchage, réparation de fissures, réagreage fibré</span>
                           </label>
-                          <a nz-tooltip [nzTooltipTitle]="tooltiptresabime" href="javascript:void(0)" class="info-icon">
-                            <i class="far fa-question-circle"></i>
-                          </a>
-                          <ng-template #tooltiptresabime>
-                            Le sol est en mauvais état, il faudra faire du rebouchage, de la réparation e fissures et du réagreage fibré.
-                          </ng-template>
+                          
                         </div>
 
 
                         <div>
                           <label nz-radio nzValue="Rattrapage de niveau">
-                            <span>Rattrapage de niveau</span>
+                            <span>Rattrapage de niveau : chape</span>
                           </label>
-                          <a nz-tooltip [nzTooltipTitle]="tooltip_rattrapage" href="javascript:void(0)" class="info-icon">
-                            <i class="far fa-question-circle"></i>
-                          </a>
-                          <ng-template #tooltip_rattrapage>
-                            Une chape est recommandée.
-                          </ng-template>
+                          
                         </div>
                       </nz-radio-group>
 

@@ -17,10 +17,12 @@ export class DimensionsDemolitionCloisonsComponent {
   is_active_Tp3=false
   active_Tp1(){
     this.is_active_Tp1=!this.is_active_Tp1
+    this.updateValidatorsForMursNonporteurs()
   }
 
   active_Tp3(){
     this.is_active_Tp3=!this.is_active_Tp3
+    this.updateValidatorsForOuverturePartielle()
   }
   isclicked=false
   @Input() triggerSubmitDimensionForm!: boolean;
@@ -41,7 +43,8 @@ export class DimensionsDemolitionCloisonsComponent {
       bool=this.onSubmitform1()
     }
     if(this.is_active_Tp3){
-      bool= this.onSubmitform3() && bool
+      
+      bool= this.onSubmitform3()
     }
     this.formValidityChange.emit(bool);
     if (bool) {

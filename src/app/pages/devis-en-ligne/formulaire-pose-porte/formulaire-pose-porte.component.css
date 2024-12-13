@@ -161,3 +161,25 @@ form label{
 @media screen and (max-width: 375px) {
     form label {text-align: left !important; }
 }
+.etat-srf3{
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    width: 90%;
+    grid-template-columns: 1fr !important;
+    display: grid;
+    align-items: center !important;
+    flex: 0% !important;
+    margin: auto;
+    text-align: start;
+
+}
+.etat-srf3 nz-radio-group{
+    display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 15px;
+}
+.etat-srf3 .radio-flx-spc label{
+    border: none;
+    flex-direction: row;
+}

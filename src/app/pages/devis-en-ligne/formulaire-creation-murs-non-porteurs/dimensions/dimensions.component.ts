@@ -64,6 +64,7 @@ export class MursNonPorteursDimensionsComponent {
   is_active_Tp3=false
   active_Tp3(){
     this.is_active_Tp3=!this.is_active_Tp3
+    this.updateValidatorsForPortes()
   }
   
 //formulaires des poses et deposes

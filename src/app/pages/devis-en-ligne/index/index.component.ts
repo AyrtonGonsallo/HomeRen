@@ -56,6 +56,19 @@ export class IndexComponent {
     this.loadEtapes()
     this.getIpAddress();
     this.getBrowserInfo();
+    const savedPieceId = sessionStorage.getItem('selectedPieceId');
+    if (savedPieceId) {
+    
+      setTimeout(() => {
+        this.selectedPieceId = parseInt(savedPieceId) ;
+        this.selectPiece(this.selectedPieceId)
+        this.current = 1; // Restaurer d'autres états si nécessaire
+        console.log('Rechargement: pièce restaurée', savedPieceId);
+        // Supprimer la valeur après récupération
+        sessionStorage.removeItem('selectedPieceId');
+
+      }, 100); 
+    }
   }
 
 
@@ -500,7 +513,16 @@ export class IndexComponent {
       }
     }
   }
-  
+  reloadPage() {
+    const currentPiece = this.selectedPieceId??0;
+
+    // Sauvegarder l'état
+    sessionStorage.setItem('selectedPieceId', currentPiece.toString());
+    window.location.reload();
+   
+  }
+
+
   userIp: string = '';
   browserInfo: string = '';
   getIpAddress() {

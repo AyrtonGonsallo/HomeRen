@@ -46,9 +46,9 @@
                      Le nombre de portes est invalide.
                    </div>
                   
-                   <div nz-col nzSpan="24" class="ant-col col-gm tooltip-srf etat-srf2">
-                    Cloison
-                      <nz-radio-group formControlName="cloison" class="radio-flx-spc">
+                   <div  nz-col nzSpan="8" class="ant-col etat-srf-accord tooltip-srf">
+                    <label for="cloison">Cloison</label>
+                      <nz-radio-group formControlName="cloison" class="sidebyside">
                         <!-- Reusable template for displaying options with PDFs -->
                         <ng-container>
                           <div *ngFor="let option of gammes_cloison" class="parquet-option">
@@ -165,9 +165,10 @@
                   La hauteur depuis le plafond est invalide.
                 </div>
 
-                <div nz-col nzSpan="24" class="ant-col col-gm tooltip-srf etat-srf2">
-                  Cloison
-                  <nz-radio-group formControlName="cloison" class="radio-flx-spc">
+                <div  nz-col nzSpan="8" class="ant-col etat-srf-accord tooltip-srf">
+                  
+                  <label for="cloison">Cloison</label>
+                  <nz-radio-group formControlName="cloison" class="sidebyside">
                     <!-- Reusable template for displaying options with PDFs -->
                     <ng-container>
                       <div *ngFor="let option of gammes_cloison" class="parquet-option">

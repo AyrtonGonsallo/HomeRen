@@ -37,11 +37,11 @@
     </nz-step>
     <nz-step nzIcon="tool" nzTitle="Travaux" [nzDescription]="current >= 2 ? filteredTravail?.Titre : ''">
     </nz-step>
-    <nz-step nzIcon="setting" nzTitle="Dimensions" nzDescription="">
+    <nz-step nzIcon="setting" nzTitle="Étape 1" nzDescription="">
     </nz-step>
-    <nz-step nzIcon="area-chart" nzTitle="Etat de surfaces" nzDescription="">
+    <nz-step nzIcon="area-chart" nzTitle="Étape 2" nzDescription="">
     </nz-step>
-    <nz-step nzIcon="table" nzTitle="Gamme de produits" nzDescription="">
+    <nz-step nzIcon="table" nzTitle="Étape 3" nzDescription="">
     </nz-step>
     <nz-step nzIcon="file-done" nzTitle="Recapitulatif" nzDescription="">
      <span>recap</span>
@@ -50,6 +50,15 @@
      <span>ici la partie finale</span>
     </nz-step>
   </nz-steps>
+  <div class="div-btn-prect">
+    <button nz-button nzType="default"  class="btn-prect">
+      
+     </button>
+     <button nz-button nzType="default" (click)="reloadPage()" *ngIf="current>1"  class="btn-prect">
+      Liste des travaux
+     </button>
+   
+   </div>
    <div class="div-btn-prect">
     <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0 && current < 6" class="btn-prect">
      <span> <span nz-icon nzType="arrow-left" nzTheme="outline"></span> Question précédente</span>
@@ -61,6 +70,7 @@
         <span nz-icon nzType="{{ current === 5 ? 'file-done': 'arrow-right' }}" nzTheme="outline"></span> 
       </span>
      </button>
+     
    
    </div>
   <div class="step-description" [innerHtml]="getNotaBene()">

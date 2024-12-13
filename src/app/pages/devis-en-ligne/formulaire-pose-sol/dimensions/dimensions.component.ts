@@ -97,7 +97,7 @@ export class PoseSolDimensionsComponent {
     gammes_depose:any
     load_gammes(){
      
-      this.userService.getGammesByTravailAndType(9,"depose-revetement-sol").subscribe(
+      this.userService.getGammesByTravailAndTypeOrdered(9,"depose-revetement-sol").subscribe(
         (response: any) => {
           console.log('recuperation des gammes gamme_depose:', response);
           this.gammes_depose=response

@@ -60,6 +60,9 @@ form{
     display: grid;
 }
 .srf-img{margin-block: 20px;margin-inline: auto;}
+.sidebyside{
+    display: flex;
+}
 /*.etat-srf-lab{
     text-align: center !important;
     width: 50% !important;

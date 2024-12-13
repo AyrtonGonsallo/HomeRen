@@ -115,7 +115,7 @@ markFormGroupTouched(formGroup: FormGroup) {
 
 type_de_depose:any
 load_types(){
-  this.userService.getGammesByTravailAndType(5,"depose-murs	").subscribe(
+  this.userService.getGammesByTravailAndTypeOrdered(5,"depose-murs	").subscribe(
     (response: any) => {
       console.log('recuperation des types depose-murs	:', response);
       this.type_de_depose=response

@@ -14,9 +14,15 @@
           <div class="mur-btn-div">
             <label class="mur-ttl">Type de porte <span class="error-message">*</span></label>
           </div>
-          <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+          <div nz-col nzSpan="6" class="ant-col etat-srf3 tooltip-srf">
+            
             <nz-radio-group formControlName="type_porte" class="radio-flx-spc">
-              <div *ngFor="let option of types_de_portes">
+              <div class="div-mur-gm2" style="width:100%;">
+                <span class="mur-ttl2">
+                  Portes simple
+                </span> 
+              </div>
+              <div *ngFor="let option of types_de_porte_simples">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                   {{ option.Label }}
                 </label>
@@ -29,7 +35,49 @@
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
                 </ng-template>
               </div>
+
+              <div class="div-mur-gm2" style="width:100%;">
+                <span class="mur-ttl2">
+                  Portes double
+                </span> 
+              </div>
+              <div *ngFor="let option of types_de_porte_doubles">
+              <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
+                {{ option.Label }}
+              </label>
+              <a nz-tooltip [nzTooltipTitle]="tooltip_type_porte" href="javascript:void(0)" class="info-icon">
+                <i class="far fa-question-circle"></i>
+              </a>
+              <ng-template #tooltip_type_porte>
+                Type: {{ option.Label }}<br>
+                Pour plus d'informations, veuillez consulter :
+                <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+              </ng-template>
+            </div>
+
+              <div class="div-mur-gm2" style="width:100%;">
+                <span class="mur-ttl2">
+                  Portes coulissante
+                </span> 
+              </div>
+              <div *ngFor="let option of types_de_porte_coulissantes">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
+                  {{ option.Label }}
+                </label>
+                <a nz-tooltip [nzTooltipTitle]="tooltip_type_porte" href="javascript:void(0)" class="info-icon">
+                  <i class="far fa-question-circle"></i>
+                </a>
+                <ng-template #tooltip_type_porte>
+                  Type: {{ option.Label }}<br>
+                  Pour plus d'informations, veuillez consulter :
+                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+                </ng-template>
+              </div>
+
             </nz-radio-group>
+            
+            
+            
           </div>
           <div *ngIf="isclicked && portes.controls[i].get('type_porte')?.invalid" class="error-message">
             Type de porte requis.
@@ -60,7 +108,7 @@
             La nature de la porte est requise.
           </div>
 
-
+<!--
           <div class="mur-btn-div">
             <label class="mur-ttl">Nature du mur <span class="error-message">*</span></label>
           </div>
@@ -97,8 +145,8 @@
           <div *ngIf="isclicked && portes.controls[i].get('nature_mur')?.invalid " class="error-message">
               La nature du mur est requise.
           </div>
-
-          <!-- Épaisseur du mur -->
+-->
+          <!-- Épaisseur du mur 
           <div nz-col nzSpan="6" class="tooltip-srf">
             <label for="epaisseur_mur">Épaisseur du mur (cm) <span class="error-message">*</span> :</label>
             <input type="number" id="epaisseur_mur" formControlName="epaisseur_mur" max="2000" min="1">
@@ -106,7 +154,7 @@
           <div *ngIf="isclicked && portes.controls[i].get('epaisseur_mur')?.invalid" class="error-message">
             L'épaisseur du mur est invalide.
           </div>
-
+-->
           <!-- Gamme -->
           <div class="mur-btn-div">
             <label class="mur-ttl">Gamme <span class="error-message">*</span></label>

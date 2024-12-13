@@ -68,6 +68,9 @@ form label {
     justify-content: start;
     align-items: start;
 }
+.sidebyside{
+    display: flex;
+}
 form{
     display: flex !important;
     flex-direction: column !important;

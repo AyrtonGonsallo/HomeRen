@@ -118,6 +118,9 @@ addDevisPiece(devis: any): Observable<any> {
 getGammesByTravailAndType(travailID:number,type: string): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_gammes_by_type_and_travailID/${travailID}/${type}`);
 }
+getGammesByTravailAndTypeOrdered(travailID:number,type: string): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_ordered_gammes_by_type_and_travailID/${travailID}/${type}`);
+}
 getGammeByID(id:number): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_gamme/${id}`);
 }
