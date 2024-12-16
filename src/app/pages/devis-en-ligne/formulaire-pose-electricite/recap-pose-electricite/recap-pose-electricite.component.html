@@ -1,29 +1,19 @@
 
 <div class="recap-div devis-content">
     <span class="recup-fin recap-piece">{{selectedPiece.Titre}}</span>
-    <div *ngIf="appareils_a_ajouter">
-        À ajouter
-        <div *ngFor="let appareil of appareils_a_ajouter">
-            <div *ngIf="appareil.active">
-                <span class="recup-fin"><p>{{get_title(appareil.modele)}}</p></span>
-                <span class="recup-fin"><p>Nombre</p><p>:</p><p>{{appareil.nombre}}</p></span>
-            
-            </div>
-            
-        </div>
-    </div>
-    <div *ngIf="appareils_a_ajouter">
+    
+    <div *ngIf="appareils_a_remplacer">
         À remplacer
 
         <div *ngFor="let appareil of appareils_a_remplacer">
             <div *ngIf="appareil.active">
                 <span class="recup-fin"><p>{{(appareil.titre)}}</p></span>
-                <span class="recup-fin"><p>Nombre</p><p>:</p><p>{{appareil.nombre}}</p></span>
-                <span class="recup-fin"><p>Création ou remplacement</p><p>:</p><p>{{appareil.creation_ou_remplacement}}</p></span>
+                <span class="recup-fin" *ngIf="appareil.nombre_a_remplacer > 0"><p>À remplacer</p><p>:</p><p>{{appareil.nombre_a_remplacer}}</p></span>
+                <span class="recup-fin" *ngIf="appareil.nombre_a_creer > 0"><p>À créer</p><p>:</p><p>{{appareil.nombre_a_creer}}</p></span>
             </div>
             
         </div>
     </div>    
-    <span class="recup-fin"><p>Disjoncteur à remplacer</p><p>:</p><p>{{get_label(disjoncteur_a_remplacer)}}</p></span>
+    <span class="recup-fin"><p>Gamme d'appareillage</p><p>:</p><p>{{get_title(gamme)}}</p></span>
 
 </div>
