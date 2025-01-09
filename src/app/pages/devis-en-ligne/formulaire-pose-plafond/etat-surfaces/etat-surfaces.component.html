@@ -1,27 +1,27 @@
            <form [formGroup]="posePlafondForm" (ngSubmit)="onPosePlafondSubmit()">
 
                <div >
-                 <div nz-row nzJustify="start" >
+                <div nz-row nzJustify="start" style="width: 100% !important;max-width: 100% !important;display: block !important;" >
                    
-                   <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                   <div nz-col nzSpan="12" class="" style="max-width: 100% !important;">
                      <!-- <label for="etat" class="etat-srf-ttl">État du surface: </label> -->
                      <nz-radio-group formControlName="etat" class="radio-flx-spc">
                       <div>
-                        <label nz-radio nzValue="Bon" class="radio-span">
+                        <label nz-radio nzValue="Bon" style="padding-block: 10px;">
                           <span>Bon : reprise légère d'enduit</span>
                         </label>
                         
                       </div>
                       
                       <div>
-                        <label nz-radio nzValue="abimé">
+                        <label nz-radio nzValue="abimé" style="padding-block: 10px;">
                           <span>Abimé : rebouchage, réparation de fissures</span>
                         </label>
                         
                       </div>
                       
                       <div>
-                        <label nz-radio nzValue="très abimé">
+                        <label nz-radio nzValue="très abimé" style="padding-block: 10px;">
                           <span>Très abimé : nécéssite la pose de plaques de plâtre</span>
                         </label>
                         

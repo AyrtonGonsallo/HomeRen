@@ -1,64 +1,71 @@
 <div class="plaf-dim">
-            <form [formGroup]="poseSolForm" (ngSubmit)="onPoseSolSubmit()">
-               <div nz-row nzJustify="start" class="tooltip-srf">
-                  <div nz-col nzSpan="6" class="ant-col" [nzXs]="24" [nzSm]="6">
-                     <label for="longueur">
-                       Longueur (cm)
-                       <span class="error-message">*</span> :
-                     </label>
-                     <input type="number" id="longueur" formControlName="longueur" min="1" max="10000"  required>
-                  </div>
-                  <div *ngIf="isclicked && poseSolForm.get('longueur')?.invalid " class="error-message">
-                    La longueur est invalide.
-                  </div>
+  <form [formGroup]="poseSolForm" (ngSubmit)="onPoseSolSubmit()">
+    <img src="/assets/sol.png" alt="" style="margin-block:25px !important; margin:auto;">
+     <div nz-row nzJustify="start" class="tooltip-srf">
+        <div nz-col class="ant-col-6 flx-radio-row2-w">
+           <label for="longueur">
+             Longueur (cm)
+             <span class="error-message">*</span> :
+           </label>
+           <input type="number" id="longueur" formControlName="longueur" min="1" max="10000"  required>
+           <div *ngIf="isclicked && poseSolForm.get('longueur')?.invalid " class="error-message">
+            La longueur est invalide.
+          </div>
+          </div>
 
-                  <div nz-col nzSpan="6" class="ant-col" [nzXs]="24" [nzSm]="6">
-                    <label for="largeur">
-                      Largeur (cm)
-                      <span class="error-message">*</span> :
-                    </label>
-                    <input type="number" id="largeur" formControlName="largeur" min="1" max="10000"  required>
-                 </div>
-                 <div *ngIf="isclicked && poseSolForm.get('largeur')?.invalid " class="error-message">
-                   La largeur est invalide.
-                 </div>
 
-                 <div nz-col nzSpan="24" class="ant-col etat-srf tooltip-srf">
-                  <nz-radio-group formControlName="depose" class="radio-flx-spc">
-                    <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
-                      Revêtement à déposer <span class="error-message">*</span></span> 
-                    </div>
-                    <div *ngFor="let option of gammes_depose" class="parquet-option">
-                      <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
-                        <span>{{ option.Label }}</span>
-                      </label>
-                      <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                        <i class="far fa-question-circle"></i>
-                      </a>
-                      <ng-template #tooltipTemplate>
-                        Pour plus d'informations, veuillez consulter :
-                        <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                      </ng-template>
-                    </div>
-                  </nz-radio-group> 
-                </div>
-                <div *ngIf="isclicked && poseSolForm.get('depose')?.invalid " class="error-message">
-                  Le revêtement à déposer est requis.
-                </div>
+        <div nz-col class="ant-col-6 flx-radio-row2-w">
+          <label for="largeur">
+            Largeur (cm)
+            <span class="error-message">*</span> :
+          </label>
+          <input type="number" id="largeur" formControlName="largeur" min="1" max="10000"  required>
+          <div *ngIf="isclicked && poseSolForm.get('largeur')?.invalid " class="error-message">
+            La largeur est invalide.
+          </div>
+        </div>
 
-                  <div nz-col nzSpan="6" [nzXs]="24" [nzSm]="6" class="ant-col image">
-                     <label for="image">Image :</label>
-                     <input type="file" id="image" (change)="onFileChange($event,poseSolForm)" accept="image/*">
-                     <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
-                      <i class="far fa-question-circle"></i>
-                    </a>
-                    <ng-template #tooltipImage>
-                      <div class="tooltip-content">
-                        <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
-                      </div>
-                    </ng-template>
-                  </div>
-               </div>
-               
-             </form>
+    </div>
+
+   
+    <div  nz-col class="row-w-grid4">
+      <label class="">
+        Revêtement à déposer <span class="error-message">*</span>:</label> 
+      
+      <nz-radio-group formControlName="depose" class="flx-radio-row2">
+        
+        <div *ngFor="let option of gammes_depose" class="parquet-option">
+          <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
+             <span>  {{ option.Label }}</span>
+          </label>
+          <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+            <i class="fas fa-question-circle"></i>
+          </a>
+          <ng-template #tooltipTemplate>
+            Pour plus d'informations, veuillez consulter :
+            <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+          </ng-template>
+        </div>
+        <div *ngIf="isclicked && poseSolForm.get('depose')?.invalid " class="error-message">
+          Le revêtement à déposer est requis.
+        </div>
+      </nz-radio-group> 
+
+    </div>
+    <div nz-col class="row-w-grid4 tooltip-srf">
+      <label for="image">Image :<a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
+       <i class="fas fa-question-circle"></i>
+     </a></label>
+      <input type="file" id="image" (change)="onFileChange($event,poseSolForm)" accept="image/*">
+      
+     <ng-template #tooltipImage>
+       <div class="tooltip-content">
+         <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
+       </div>
+     </ng-template>
+   </div>
+   
+     
+     
+   </form>
 </div>             

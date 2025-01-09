@@ -1,7 +1,9 @@
 
 <div class="recap-div devis-content">
     <span class="recup-fin recap-piece">{{selectedPiece.Titre}}</span>
-    Pose de nouveaux équipements
+    
+    <div style="width: 100%;" class="left"><span class="mur-ttl">Pose de nouveaux équipements</span></div>
+
     <div *ngFor="let appareil of appareils_a_ajouter">
         <div *ngIf="appareil.active">
             <span class="recup-fin"><p>{{get_title(appareil.modele)}}</p></span>
@@ -10,7 +12,8 @@
         </div>
         
     </div>
-    Dépose d'anciennes installations
+    <div style="width: 100%;" class="left"><span class="mur-ttl">Dépose d'anciennes installations</span></div>
+    
     <div *ngFor="let gamme of gammes_depose_form">
         <div>
             <span class="recup-fin" *ngIf="gamme.quantite>0 || gamme.longueur>0"><p>{{(gamme.titre)}}</p></span>

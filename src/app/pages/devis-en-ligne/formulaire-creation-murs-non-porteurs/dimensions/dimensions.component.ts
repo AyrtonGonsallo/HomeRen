@@ -75,7 +75,7 @@ get portes(): FormArray {
 }
 createportesGroup(): FormGroup {
   return this.fb.group({
-    type: ['', this.is_active_Tp3 ? Validators.required : null],
+    gamme: ['', this.is_active_Tp3 ? Validators.required : null],
     largeur: ['', this.is_active_Tp3 ? Validators.required : null],
   });
 }
@@ -158,7 +158,7 @@ onPosePortesSubmit(): boolean {
     const controls = group.controls;
 
     if (
-      controls['type'].value === '' ||
+      controls['gamme'].value === '' ||
       controls['largeur'].value === '' 
     ) {
       //console.error(`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}`);
@@ -183,7 +183,7 @@ createposeMurNonPorteurroup(): FormGroup {
 
 prec_formulaire_dimensions:any
 constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
-  this.load_types()
+  this.load_gammes()
   this.prec_formulaire_dimensions=this.gestiondesdevisService.getFormulaireByName("dimensions-creation-murs-non-porteurs--murs")
   if(this.prec_formulaire_dimensions){
     let form=this.prec_formulaire_dimensions.formulaire
@@ -210,7 +210,7 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
     const porteArray = this.portesForm.get('portes') as FormArray;
     form.portes.forEach((porte: any) => {
         porteArray.push(this.fb.group({
-          type: [porte.type, this.is_active_Tp3 ? Validators.required : null],
+          gamme: [porte.gamme, this.is_active_Tp3 ? Validators.required : null],
           
           largeur: [porte.largeur, this.is_active_Tp3 ? Validators.required : null],
          
@@ -244,15 +244,15 @@ markFormGroupTouched(formGroup: FormGroup) {
   });
 }
 
-types:any[]=[]
-load_types(){
+gammes:any[]=[]
+load_gammes(){
   this.userService.getGammesByTravailAndType(4,"type-de-porte-creation-murs-non-porteurs").subscribe(
     (response: any) => {
-      console.log('recuperation des types type-de-porte-creation-murs-non-porteurs:', response);
-      this.types=response
+      console.log('recuperation des gammes type-de-porte-creation-murs-non-porteurs:', response);
+      this.gammes=response
     },
     (error: any) => {
-      console.error('Erreur lors de la recuperation des types type-de-porte-creation-murs-non-porteurs :', error);
+      console.error('Erreur lors de la recuperation des gammes type-de-porte-creation-murs-non-porteurs :', error);
     }
   );
 }

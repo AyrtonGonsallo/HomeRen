@@ -1,13 +1,8 @@
-<div class="plaf-dim">
-    
-  
-  
-  
-
+<div class="plaf-dim renov-elec">
 
   <div  class="div-s-b">
-    <div class="div-chauf-gm">
-      <span class="center jaune fs-16 f-w-6">À remplacer sans changement de câble</span>   
+    <div class="renov-elec-div ">
+      <span class="mur-ttl">À remplacer sans changement de câble</span>   
     </div>
     <form [formGroup]="appareils_a_remplacer_form" (ngSubmit)="submit()">
       <div *ngIf="exist_glob_err_form2" class="error-message">
@@ -17,21 +12,23 @@
         <div *ngFor="let appareilGroup of appareils_electrique_a_remplacer; let i = index" [formGroupName]="i">
           
 
-          <nz-collapse nzAccordion>
+          <nz-collapse nzAccordion class="row-w-collapse">
               <nz-collapse-panel nzHeader="{{appareils_electrique_a_remplacer && appareils_electrique_a_remplacer[i] ? appareils_electrique_a_remplacer[i].Titre : ''}}" [nzActive]="getAppareilRemplActiveState(i)" [nzExtra]="activerTp2" nzShowArrow="false" (nzActiveChange)="active_Tp2(i)">
-                <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getAppareilNombreState2(i)" class="error-message">
+                <div class="ant-col" *ngIf="isclicked && getAppareilNombreState2(i)" class="error-message">
                   Vous devez faire un choix.
                 </div>
-                
-                <div nzspan="6" class="col-accord-inpt">
+                <div nz-row nzJustify="start" class="ant-col-flx coll-100" style="padding-block: 14px;" >
+
+                <div nz-col nzspan="6" class="flx-radio-row4">
                   <label for="nombre_a_creer">A remplacer<span class="error-message" *ngIf="getAppareilRemplActiveState(i)">*</span> : </label>
                   <input type="number" id="nombre_a_creer" formControlName="nombre_a_creer" min="0">      
                 </div>  
 
-                <div nzspan="6" class="col-accord-inpt">
+                <div nz-col nzspan="6" class="flx-radio-row4">
                   <label for="nombre_a_remplacer">A créer<span class="error-message" *ngIf="getAppareilRemplActiveState(i)">*</span> : </label>
                   <input type="number" id="nombre_a_remplacer" formControlName="nombre_a_remplacer" min="0">      
-                </div>  
+                </div> 
+              </div>  
               </nz-collapse-panel>
           </nz-collapse>
           <ng-template #activerTp2>
@@ -42,19 +39,20 @@
           <!-- Ajoutez d'autres champs selon vos besoins -->
         </div>
       </div>
-      <div  class="form-group" nz-row nzJustify="start">
-        
-        <div class="mur-btn-div" >
-          <div class="ttl-mob" style="margin-right: auto;text-align: left;"><span class="mur-ttl">Gamme d'appareillage</span></div>
-         </div>
 
-        <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
-          
-          <nz-radio-group formControlName="gamme" class="radio-flx-spc">
+
+
+      <div  class="form-group" nz-col nzJustify="start" class="w-80" style="display:block;">
+
+        <div nz-col class="row-w-grid1">
+          <div class="" >
+          <label>Gamme d'appareillage :</label>
+         </div>
+          <nz-radio-group formControlName="gamme" class="">
             <!-- Reusable template for displaying options with PDFs -->
           
-             
-              <div *ngFor="let option of gammes_appareillage" class="parquet-option nt-col tooltip-srf ">
+            <div nz-col class="flx-radio-row1">
+              <div *ngFor="let option of gammes_appareillage" class="parquet-option ant-col tooltip-srf ">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                   <span>
                     <!-- Dynamically display the label based on the type -->
@@ -62,14 +60,14 @@
                   </span>
                 </label>
                 <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                  <i class="far fa-question-circle"></i>
+                  <i class="fas fa-question-circle"></i>
                 </a>
                 <ng-template #tooltipTemplate>
                   Pour plus d'informations, veuillez consulter :
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
                 </ng-template>
               </div>
-            
+            </div>
           </nz-radio-group>
         </div>
           <div *ngIf="isclicked && appareils_a_remplacer_form.get('gamme')?.invalid " class="error-message">

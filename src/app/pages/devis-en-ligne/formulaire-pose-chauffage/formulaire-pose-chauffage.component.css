@@ -1,4 +1,4 @@
-.srf-img{margin-block: 20px;margin-inline: auto;}
+/*.srf-img{margin-block: 20px;margin-inline: auto;}
 .radio-flx-spc div{
     display: grid;
     grid-template-columns: 6fr 1fr;
@@ -97,4 +97,4 @@ form{
     }
 @media screen and (max-width: 375px) {
     .plaf-dim input{ width: 90% !important;}
-}
+}*/

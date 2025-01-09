@@ -1,6 +1,6 @@
 <div class="plaf-dim">
 
-  <nz-collapse>
+  <nz-collapse class="row-w-collapse">
       <nz-collapse-panel nzHeader="Démolition complète de murs non-porteurs" [nzActive]="is_active_Tp1" [nzExtra]="activerTp1" nzShowArrow="false" (nzActiveChange)="active_Tp1()">
         
           <form [formGroup]="mursNonporteursForm" (ngSubmit)="onSubmitform1()">
@@ -9,94 +9,92 @@
             </div>
             <div formArrayName="mursNonporteurs">
              <div *ngFor="let mur of mursNonporteurs.controls; let i = index" [formGroupName]="i" >
-               <div class="mur-btn-div">
+               <div class="mur-btn-div coll-100">
                  <span class="mur-ttl">Démolition mur nº{{i+1}}</span>
-               <button type="button" class="dynamic-form-button del-btn" (click)="removemursNonporteursGroup(i)" *ngIf="mursNonporteurs.length > 1">Retirer</button>
+               <button type="button" class="dynamic-form-button del-btn" (click)="removemursNonporteursGroup(i)" *ngIf="mursNonporteurs.length > 1"><span class="icon-btn">[-]</span> Retirer</button>
                </div>
-               <div nz-row nzJustify="start" >
-                <div class="col-6-w">
-                 <div nz-col nzSpan="6" class="ant-col">
+               <div nz-row nzJustify="start" class="ant-col-flx coll-100" >
+                  <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                     <label for="longueur">Longueur (cm)<span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
                     <input type="number" id="longueur" formControlName="longueur" min="1" max="20000">
+
                   </div>
-                  <div *ngIf="isclicked && mursNonporteurs.controls[i].get('longueur')?.invalid " class="error-message">
-                     La longueur est invalide.
-                 </div>
-                  <div nz-col nzSpan="6" class="ant-col">
+                  <!-- <div nz-col nzSpan="6" *ngIf="isclicked && mursNonporteurs.controls[i].get('longueur')?.invalid " class="error-message left">
+                    La longueur est invalide.
+                </div> -->
+                  
+                  <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                     <label for="hauteur">Hauteur (cm)<span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
                     <input type="number" id="hauteur" formControlName="hauteur" min="1" max="2000">
+                    <!-- <div *ngIf="isclicked && mursNonporteurs.controls[i].get('hauteur')?.invalid " class="error-message left" style="width: 100%;">
+                      La hauteur est invalide.
+                    </div>-->
                   </div>
-                  <div *ngIf="isclicked && mursNonporteurs.controls[i].get('hauteur')?.invalid " class="error-message">
-                     La hauteur est invalide.
-                   </div>
-                  <div nz-col nzSpan="6" class="ant-col">
+                  
+                  <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                      <label for="epaisseur">Epaisseur (cm)<span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
                      <input type="number" id="epaisseur" formControlName="epaisseur" min="1" max="20">
-                   </div>
-                   <div *ngIf="isclicked && mursNonporteurs.controls[i].get('epaisseur')?.invalid " class="error-message">
-                     L'épaisseur est invalide.
-                   </div>
-                   <div nz-col nzSpan="6" class="ant-col">
+                     <!-- <div *ngIf="isclicked && mursNonporteurs.controls[i].get('epaisseur')?.invalid " class="error-message left">
+                      L'épaisseur est invalide.
+                    </div>-->
+                    </div>
+                   
+                   <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                      <label for="ndp">Nombre de portes <span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
                      <input type="number" id="ndp" formControlName="ndp" min="0" max="20">
-                    
-                    
+                     <!-- <div *ngIf="isclicked && mursNonporteurs.controls[i].get('ndp')?.invalid " class="error-message left">
+                      Le nombre de portes est invalide.
+                    </div>-->
                    </div>
-                   <div *ngIf="isclicked && mursNonporteurs.controls[i].get('ndp')?.invalid " class="error-message">
-                     Le nombre de portes est invalide.
-                   </div>
+                   
                   
-                   <div  nz-col nzSpan="8" class="ant-col etat-srf-accord tooltip-srf">
-                    <label for="cloison">Cloison</label>
-                      <nz-radio-group formControlName="cloison" class="sidebyside">
-                        <!-- Reusable template for displaying options with PDFs -->
-                        <ng-container>
-                          <div *ngFor="let option of gammes_cloison" class="parquet-option">
-                            <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
-                              <span>
-                                <!-- Dynamically display the label based on the type -->
-                                {{ option.Label }}
-                              </span>
-                            </label>
-                            <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                              <i class="far fa-question-circle"></i>
-                            </a>
-                            <ng-template #tooltipTemplate>
-                              Pour plus d'informations, veuillez consulter :
-                              <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                            </ng-template>
-                          </div>
-                        </ng-container>
-                      </nz-radio-group>
-                    </div>
-                    <div *ngIf="isclicked && mursNonporteurs.controls[i].get('cloison')?.invalid " class="error-message">
-                      Les cloisons sont requises.
-                    </div>
-
-
-                  <div nz-col nzSpan="6" class="ant-col"> 
-                    <label for="image">Image : </label>
+                   <div nz-col nzSpan="6" class="ant-col tooltip-srf"> 
+                    <label for="image">Image : <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
+                      <i class="fas fa-question-circle"></i>
+                    </a></label>
+                    
                     <input type="file" id="image" (change)="onmursNonporteursFileChange($event, i)" accept="image/*">
-                    <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
-                     <i class="far fa-question-circle"></i>
-                   </a>
+                    
                    <ng-template #tooltipImage>
                      <div class="tooltip-content">
                        <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
                      </div>
                    </ng-template> 
                  </div>
-               </div>
+
+                   <div  nz-col class="row-w-grid coll-100">
+                    <label for="cloison">Cloison :</label>
+                      <nz-radio-group formControlName="cloison" class="flx-radio-row2">
+                        <!-- Reusable template for displaying options with PDFs -->
+                        <ng-container>
+                          <div *ngFor="let option of gammes_cloison" class="parquet-option">
+                            <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
+                              <span>
+                                <!-- Dynamically display the label based on the type -->
+                                 {{ option.Label }}
+                              </span>
+                            </label>
+                          
+                          </div>
+                        </ng-container>
+                      </nz-radio-group>
+                      <!-- <div *ngIf="isclicked && mursNonporteurs.controls[i].get('cloison')?.invalid " class="error-message left">
+                        Les cloisons sont requises.
+                      </div>-->
+                    </div>
+                  
+              
                 </div>
               </div>
              </div>
-              
-            <button type="button"  class="dynamic-form-button add-btn" (click)="addmursNonporteursGroup()" *ngIf="mursNonporteurs.length < 5" >Ajouter un mur <span nz-icon nzType="plus" nzTheme="outline"></span></button>
+              <div class="col-w-75 coll-100">
+                <button type="button"  class="dynamic-form-button add-btn" (click)="addmursNonporteursGroup()" *ngIf="mursNonporteurs.length < 5" >[+] Ajouter un mur</button>
+              </div>
           </form>
         
       </nz-collapse-panel>
     </nz-collapse>
-      <nz-collapse>
+      <nz-collapse class="row-w-collapse">
       
       <nz-collapse-panel nzHeader="Démolition partielle de murs non-porteurs" [nzActive]="is_active_Tp3" [nzExtra]="activerTp3" nzShowArrow="false" (nzActiveChange)="active_Tp3()">
         <form [formGroup]="ouverturePartielleForm" (ngSubmit)="onSubmitform3()">
@@ -104,113 +102,114 @@
             {{glob_err_form2}}
           </div>
           <div formArrayName="ouverturePartielle">
+            <img src="/assets/dimensions.png" style="margin-top:30px;">
            <div *ngFor="let mur of ouverturePartielle.controls; let i = index" [formGroupName]="i" >
-             <div class="mur-btn-div">
+             <div class="mur-btn-div coll-100">
                <span class="mur-ttl">Ouverture mur nº{{i+1}}</span>
-               <button type="button" class="dynamic-form-button del-btn" (click)="removeouverturePartielleGroup(i)" *ngIf="ouverturePartielle.length > 1">Retirer</button>
+               <button type="button" class="dynamic-form-button del-btn" (click)="removeouverturePartielleGroup(i)" *ngIf="ouverturePartielle.length > 1"><span class="icon-btn">[-]</span> Retirer</button>
              </div>
-             <div nz-row nzJustify="start" >
-               <div class="col-6-w">
-               <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+             <div nz-row nzJustify="start" class="ant-col-flx coll-100">
+               
+               <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                   <label for="longueur">Longueur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
                   <input type="number" id="longueur" formControlName="longueur" min="1" max="30000">
                 </div>
-                <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur')?.invalid " class="error-message">
+                <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur')?.invalid " class="error-message">
                    La longueur est invalide.
-               </div>
-                <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+               </div>-->
+                <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                   <label for="hauteur">Hauteur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
                   <input type="number" id="hauteur" formControlName="hauteur" min="1" max="3000">
                 </div>
-                <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur')?.invalid " class="error-message">
+                <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur')?.invalid " class="error-message">
                    La hauteur est invalide.
-                 </div>
-                <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                 </div>-->
+                <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                    <label for="epaisseur">Epaisseur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
                    <input type="number" id="epaisseur" formControlName="epaisseur"  min="1" max="300">
                  </div>
-                 <div *ngIf="isclicked && ouverturePartielle.controls[i].get('epaisseur')?.invalid " class="error-message">
+                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('epaisseur')?.invalid " class="error-message">
                    L'épaisseur est invalide.
-                 </div>
+                 </div>-->
                  
-                 <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                 <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                    <label for="longueur_ouverture">Longueur de l'ouverture (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
                    <input type="number" id="longueur_ouverture" formControlName="longueur_ouverture"  min="1" max="30000"> 
                  </div>
-                 <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur_ouverture')?.invalid " class="error-message">
+                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur_ouverture')?.invalid " class="error-message">
                    La longueur de l'ouverture est invalide.
-                 </div>
+                 </div>-->
 
-                 <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                 <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                   <label for="hauteur_ouverture">hauteur de l'ouverture (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
                   <input type="number" id="hauteur_ouverture" formControlName="hauteur_ouverture"  min="1" max="30000"> 
                 </div>
-                <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_ouverture')?.invalid " class="error-message">
+                <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_ouverture')?.invalid " class="error-message">
                   La hauteur de l'ouverture est invalide.
-                </div>
+                </div>-->
 
-                <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                   <label for="hauteur_depuis_le_sol">hauteur depuis le sol (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
                   <input type="number" id="hauteur_depuis_le_sol" formControlName="hauteur_depuis_le_sol"  min="1" max="30000"> 
                 </div>
-                <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_depuis_le_sol')?.invalid " class="error-message">
+                <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_depuis_le_sol')?.invalid " class="error-message">
                   La hauteur depuis le sol est invalide.
-                </div>
+                </div>-->
 
-                <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
+                <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                   <label for="hauteur_depuis_le_plafond">hauteur depuis le plafond (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
                   <input type="number" id="hauteur_depuis_le_plafond" formControlName="hauteur_depuis_le_plafond"  min="1" max="30000"> 
                 </div>
-                <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_depuis_le_plafond')?.invalid " class="error-message">
+                <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_depuis_le_plafond')?.invalid " class="error-message">
                   La hauteur depuis le plafond est invalide.
-                </div>
-
-                <div  nz-col nzSpan="8" class="ant-col etat-srf-accord tooltip-srf">
+                </div>-->
+                <div nz-col nzSpan="6" class="ant-col tooltip-srf"> 
+                  <label for="image">Image : <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
+                    <i class="fas fa-question-circle"></i>
+                 </a></label>
                   
-                  <label for="cloison">Cloison</label>
-                  <nz-radio-group formControlName="cloison" class="sidebyside">
-                    <!-- Reusable template for displaying options with PDFs -->
-                    <ng-container>
-                      <div *ngFor="let option of gammes_cloison" class="parquet-option">
-                        <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
-                          <span>
-                            <!-- Dynamically display the label based on the type -->
-                            {{ option.Label }}
-                          </span>
-                        </label>
-                        <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                          <i class="far fa-question-circle"></i>
-                        </a>
-                        <ng-template #tooltipTemplate>
-                          Pour plus d'informations, veuillez consulter :
-                          <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                        </ng-template>
-                      </div>
-                    </ng-container>
-                  </nz-radio-group>
-                </div>
-                  <div *ngIf="isclicked && ouverturePartielle.controls[i].get('cloison')?.invalid " class="error-message">
-                    Les cloisons sont requises.
-                  </div>
-
-                <div nz-col nzSpan="6" class="tooltip-srf etat-srf"> 
-                  <label for="image">Image : </label>
                   <input type="file" id="image" (change)="onouverturePartielleFileChange($event, i)" accept="image/*">
-                  <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
-                   <i class="far fa-question-circle"></i>
-                 </a>
+                  
                  <ng-template #tooltipImage>
                    <div class="tooltip-content">
                      <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
                    </div>
                  </ng-template>
                 </div>
-               </div>
+
+                
+               
+                  <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('cloison')?.invalid " class="error-message">
+                    Les cloisons sont requises.
+                  </div>-->
+
+                
+               
+              </div>
+
+              <div nz-col class="row-w-grid coll-100">
+                  
+                <label for="cloison">Cloison :</label>
+                <nz-radio-group formControlName="cloison" class="flx-radio-row2">
+                  <!-- Reusable template for displaying options with PDFs -->
+                  <ng-container>
+                    <div *ngFor="let option of gammes_cloison" class="parquet-option">
+                      <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
+                        <span>
+                          <!-- Dynamically display the label based on the type -->
+                           {{ option.Label }}
+                        </span>
+                      </label>
+                    
+                    </div>
+                  </ng-container>
+                </nz-radio-group>
               </div>
             </div>
            </div>
-            
-          <button type="button"  class="dynamic-form-button add-btn" (click)="addouverturePartielleGroup()" *ngIf="ouverturePartielle.length < 5" >Ajouter une ouverture <span nz-icon nzType="plus" nzTheme="outline"></span></button>
+           <div class="col-w-75 coll-100">
+          <button type="button"  class="dynamic-form-button add-btn" (click)="addouverturePartielleGroup()" *ngIf="ouverturePartielle.length < 5" >[+] Ajouter une ouverture</button>
+        </div>
         </form>
       </nz-collapse-panel>
   </nz-collapse>

@@ -21,11 +21,11 @@
             <label for="image">Image :</label>
             <input type="file" id="image" (change)="onMursFileChange($event, i)" accept="image/*">
           </div>
-          <button type="button" class="dynamic-form-button del-btn" (click)="removeMurGroup(i)" *ngIf="murs.length > 1">Retirer le mur</button>
+          <button type="button" class="dynamic-form-button del-btn" (click)="removeMurGroup(i)" *ngIf="murs.length > 1"><span class="icon-btn">[-]</span> Retirer</button>
         </div>
       </div>
       
     </div>
-    <button type="button"  class="dynamic-form-button add-btn" (click)="addMurGroup()" *ngIf="murs.length < 4">Ajouter un mur <span nz-icon nzType="plus" nzTheme="outline"></span></button>
+    <button type="button"  class="dynamic-form-button add-btn" (click)="addMurGroup()" *ngIf="murs.length < 4"><span class="icon-btn">[+]</span>Ajouter un mur <span nz-icon nzType="plus" nzTheme="outline"></span></button>
   </form>
 </div>

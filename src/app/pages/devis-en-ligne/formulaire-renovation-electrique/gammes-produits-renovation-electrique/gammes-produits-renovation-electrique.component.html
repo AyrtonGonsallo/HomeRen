@@ -1,76 +1,94 @@
-<div class="eltrc-div plaf-dim">
+<div class="plaf-dim">
   <form [formGroup]="renovationElectriqueForm" (ngSubmit)="onRenovationElectriqueSubmit()">
+    
+    <div *ngIf="isclicked && renovationElectriqueForm" class="error-message">
+      Les champs <span class="error-message">*</span> sont requises.
+    </div>
 
-    <div >
-      <div nz-row nzJustify="start" >
+    <div class="w-80">
+      <div nz-col nzJustify="start" class="tooltip-srf" style="display:block !important;">
 
-        <div nz-col nzSpan="6" class="tooltip-srf">
-          <label for="surface">Surface de la pièce (m²) <span class="error-message">*</span> : </label>
+        <div  nz-col class="row-w-grid1">
+        <div nz-col class="flx-radio-row4">
+          <label for="surface">Surface de la pièce (m²)<span class="error-message">*</span> : </label>
           <input type="number" id="surface" formControlName="surface" max="100" min="1">
         </div>
-        <div *ngIf="isclicked && renovationElectriqueForm.get('surface')?.invalid " class="error-message">
+        <!--<div *ngIf="isclicked && renovationElectriqueForm.get('surface')?.invalid " class="error-message">
           La surface est invalide.
-       </div>
+       </div>-->
 
-       <div nz-col nzSpan="6" class="ant-col etat-srf-accord tooltip-srf">
-        <label for="renovation_conforme">Rénovation conforme à la norme C15100 </label>
-        <nz-radio-group formControlName="renovation_conforme" id="renovation_conforme" nzName="radiogroup" class="sidebyside">
-          <label nz-radio [nzValue]="true">Oui</label>
-          <label nz-radio [nzValue]="false">Non</label>
-        </nz-radio-group>
-        <a nz-tooltip [nzTooltipTitle]="tooltip_ren" href="javascript:void(0)" class="info-icon">
-          <i class="far fa-question-circle"></i>
-        </a>
-        <ng-template #tooltip_ren>
-          <div class="tooltip-content">
-            <strong>Rénovation conforme à la norme C15100 </strong><br>
-            </div>
-        </ng-template>  
-      </div> 
-
-      <div nz-col nzSpan="6" class="ant-col etat-srf-accord tooltip-srf">
-        <label for="mise_en_securite">Mise en sécurité </label>
+       <div nz-col class="flx-radio-row4">
+        <div nz-col  class="">
+        <label for="mise_en_securite">Mise en sécurité : <!--<a nz-tooltip [nzTooltipTitle]="tooltipMise" href="javascript:void(0)" class="info-icon">
+          <i class="fas fa-question-circle"></i></a>--></label>
+        </div>
+        <div nz-col  class="">
         <nz-radio-group  formControlName="mise_en_securite" id="mise_en_securite" nzName="radiogroup" class="sidebyside">
           <label nz-radio [nzValue]="true">Oui</label>
           <label nz-radio [nzValue]="false">Non</label>
         </nz-radio-group>
-        <a nz-tooltip [nzTooltipTitle]="tooltipMise" href="javascript:void(0)" class="info-icon">
-          <i class="far fa-question-circle"></i>
-        </a>
+       </div>
         <ng-template #tooltipMise>
           <div class="tooltip-content">
-            <strong>Mise en sécurité </strong><br>
+            <strong>Mise en sécurité :</strong>
+            <a nz-tooltip [nzTooltipTitle]="tooltip_ren" href="javascript:void(0)" class="info-icon">
+              <i class="fas fa-question-circle"></i>
+            </a>
             </div>
         </ng-template>  
       </div> 
-       
+    </div>
+    <div  nz-col class="row-w-grid6">
+       <div nz-col  class="">
+        <label for="renovation_conforme">Rénovation conforme à la norme C15100 </label>
+        </div> 
+        <div>
+        <nz-radio-group formControlName="renovation_conforme" id="renovation_conforme" nzName="radiogroup" class="sidebyside">
+          <label nz-radio [nzValue]="true">Oui</label>
+          <label nz-radio [nzValue]="false">Non</label>
+        </nz-radio-group>
+       </div>
+        <ng-template #tooltip_ren>
+          <div class="tooltip-content">
+            <strong>Rénovation conforme à la norme C15100 </strong>
+            <a nz-tooltip [nzTooltipTitle]="tooltipchauffelec" href="javascript:void(0)" class="info-icon">
+              <i class="fas fa-question-circle"></i>
+            </a>
+            </div>
+        </ng-template>  
       
-       <div nz-col nzSpan="6" class="ant-col etat-srf-accord tooltip-srf">
+</div>
+
+       
+    <div  nz-col class="row-w-grid6">
+
+       <div nz-col  class="">
         <label for="chauffage_exist">Y-a-t-il un chauffage électrique ? </label>
+      </div>
+      <div> 
         <nz-radio-group formControlName="chauffage_exist" id="chauffage_exist" nzName="radiogroup" class="sidebyside" >
           <label nz-radio [nzValue]="true">Oui</label>
           <label nz-radio [nzValue]="false">Non</label>
         </nz-radio-group>
-        <a nz-tooltip [nzTooltipTitle]="tooltipchauffelec" href="javascript:void(0)" class="info-icon">
-          <i class="far fa-question-circle"></i>
-        </a>
+      </div> 
         <ng-template #tooltipchauffelec>
           <div class="tooltip-content">
             <strong>un chauffage électrique</strong><br>
             </div>
         </ng-template>  
-      </div> 
+       
+    </div> 
+
     
-
-
-      <div nz-col nzSpan="6" class="tooltip-srf" *ngIf="renovationElectriqueForm.get('chauffage_exist')?.value==true">
+      <div nz-col nzSpan="6" class="" *ngIf="renovationElectriqueForm.get('chauffage_exist')?.value==true">
+        <div  nz-col class="flx-radio-row4">
         <label for="quantite_chauffage">Quantité de chauffage <span class="error-message">*</span> : </label>
         <input type="number" id="quantite_chauffage" formControlName="quantite_chauffage" max="10" min="1">
-      </div>
-      <div *ngIf="isclicked && renovationElectriqueForm.get('quantite_chauffage')?.invalid " class="error-message">
+        </div>
+      <!--<div *ngIf="isclicked && renovationElectriqueForm.get('quantite_chauffage')?.invalid " class="error-message">
         La quantité de chauffage est invalide.
-     </div>
-
+     </div>-->
+    </div>
 
 
       

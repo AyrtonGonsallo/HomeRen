@@ -1,66 +1,77 @@
-<div class="plaf-dim">
+<div class="plaf-dim tooltip-srf">
   <form [formGroup]="poseMursForm" (ngSubmit)="onPoseMursSubmit()">
      <div formArrayName="murs">
       <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i" >
         <div class="mur-btn-div">
           <span class="mur-ttl">Mur {{i+1}}</span>
-          <button type="button" class="dynamic-form-button del-btn" (click)="removeMurGroup(i)" *ngIf="murs.length > 1">Retirer</button>
+          <button type="button" class="dynamic-form-button del-btn" (click)="removeMurGroup(i)" *ngIf="murs.length > 1"><span class="icon-btn">[-]</span> Retirer</button>
         </div>
           <div nz-row nzJustify="start" >
          
-          <div nz-col nzSpan="6" class="tooltip-srf">
+          <div nz-col class="flx-radio-row2-w ant-col-6">
              <label for="hauteur">Hauteur (cm) <span class="error-message">*</span> : </label>
              <input type="number" id="hauteur" formControlName="hauteur" max="4000" min="1">
            </div>
-           <div *ngIf="isclicked && murs.controls[i].get('hauteur')?.invalid " class="error-message">
+           <!--<div *ngIf="isclicked && murs.controls[i].get('hauteur')?.invalid " class="error-message">
             Hauteur invalide.
-          </div>
+          </div>-->
 
-          <div nz-col nzSpan="6" class="tooltip-srf">
+          <div nz-col class="flx-radio-row2-w ant-col-6">
             <label for="longueur">Longueur (cm) <span class="error-message">*</span> : </label>
             <input type="number" id="longueur" formControlName="longueur" max="50000" min="1">
           </div>
-          <div *ngIf="isclicked && murs.controls[i].get('longueur')?.invalid " class="error-message">
+           <!--<div *ngIf="isclicked && murs.controls[i].get('longueur')?.invalid " class="error-message">
             longueur invalide.
+         </div>-->
+
+
+
          </div>
-          <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-            <div class="div-mur-gm" style="width:100%;"><span class="mur-ttl">
-              Revêtement à déposer <span class="error-message">*</span></span> 
+         <div nz-col class="row-w-grid4">
+          <label>
+            Revêtement à déposer <span class="error-message">*</span>:</label> 
+          
+          <nz-radio-group   formControlName="depose" class="flx-radio-row3">
+            <div *ngFor="let option of type_de_depose" class="parquet-option">
+              <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix" class="radio-span">
+                <span>{{ option.Label }}</span>
+              </label>
+              <!--<a nz-tooltip [nzTooltipTitle]="tooltiptd1" href="javascript:void(0)" class="info-icon">
+                <i class="far fa-question-circle"></i>
+              </a>-->
+              <ng-template #tooltiptd1>
+                Pour plus d'informations, veuillez consulter :
+                <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
+              </ng-template>
             </div>
-            <nz-radio-group   formControlName="depose" class="radio-flx-spc">
-              <div *ngFor="let option of type_de_depose" class="parquet-option">
-                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix" class="radio-span">
-                  <span>{{ option.Label }}</span>
-                </label>
-                <a nz-tooltip [nzTooltipTitle]="tooltiptd1" href="javascript:void(0)" class="info-icon">
-                  <i class="far fa-question-circle"></i>
-                </a>
-                <ng-template #tooltiptd1>
-                  Pour plus d'informations, veuillez consulter :
-                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                </ng-template>
-              </div>
-            </nz-radio-group>
-          </div>
-          <div *ngIf="isclicked && murs.controls[i].get('depose')?.invalid " class="error-message">
-            Le revêtement à déposer est requis.
-          </div>
-           <div nz-col nzSpan="6" class="tooltip-srf"> 
-             <label for="image">Image :</label>
-             <input type="file" id="image" (change)="onMursFileChange($event, i)" accept="image/*">
-             <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
-              <i class="far fa-question-circle"></i>
-            </a>
-            <ng-template #tooltipImage>
-              <div class="tooltip-content">
-                <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
-                </div>
-            </ng-template>
-           </div>
-         </div>
-       </div>
+          </nz-radio-group>
+        </div>
+         <!--<div *ngIf="isclicked && murs.controls[i].get('depose')?.invalid " class="error-message">
+          Le revêtement à déposer est requis.
+        </div>-->
+        <div nz-col class="row-w-grid4 tooltip-srf">
+          <label for="image">Image : <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
+           <i class="fas fa-question-circle"></i>
+         </a></label>
+          <input type="file" id="image" (change)="onMursFileChange($event, i)" accept="image/*">
+          
+         <ng-template #tooltipImage>
+           <div class="tooltip-content">
+             <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
+             </div>
+         </ng-template>
+        </div>
       </div>
-       
-     <button type="button"  class="dynamic-form-button add-btn" (click)="addMurGroup()" *ngIf="murs.length < 4" >Ajouter un mur <span nz-icon nzType="plus" nzTheme="outline"></span></button>
-   </form>
+
+      <div *ngIf="isclicked && poseMursForm" class="error-message">
+        Les champs <span class="error-message">*</span> sont requises.
+      </div>
+
+       </div>
+
+
+    </form>
+    <div class="col-w-75">
+      <button type="button"  class="dynamic-form-button add-btn" (click)="addMurGroup()" *ngIf="murs.length < 4" >[+] Ajouter un mur</button>
+     </div>
 </div>

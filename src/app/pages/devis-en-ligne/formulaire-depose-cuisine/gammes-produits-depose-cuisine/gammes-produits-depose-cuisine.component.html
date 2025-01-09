@@ -1,35 +1,34 @@
-<div class="form-plmb plaf-dim">
-  <div  class="div-s-b">
+<div class="renov-elec plaf-dim tooltip-srf">
+  <div  class="">
     <form [formGroup]="poseCuisineForm" (ngSubmit)="onPoseCuisineSubmit()">
-      <div formArrayName="appareils_cuisine" class="flx-pr">
+      <div formArrayName="appareils_cuisine" class="">
         <div *ngFor="let appareilGroup of appareils_cuisine; let i = index" [formGroupName]="i">
           
           <!-- <div class="div-chauf-gm"><h3 class="ttl-type jaune">{{appareils_cuisine && appareils_cuisine[i] ? appareils_cuisine[i].Titre : ""}}</h3></div> -->
-          <nz-collapse nzAccordion>
+          <nz-collapse nzAccordion class="row-w-collapse">
               <nz-collapse-panel [nzHeader]="'ajouter '+appareils_cuisine[i].Titre" [nzActive]="getAppareilActiveState(i)" [nzExtra]="activerTp" nzShowArrow="false" (nzActiveChange)="active_Tp(i)">
                 <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getAppareilModeleState(i)" class="error-message">
                   Vous devez faire un choix.
                 </div>
-                <div nzspan="6" class="col-accord-inpt" *ngIf="appareils_cuisine[i].AfficherLongueur">
-                  <label for="longueur">Longueur (cm)</label>
+                <div nzspan="6" class="flx-radio-row3" style="padding-top: 12px;" *ngIf="appareils_cuisine[i].AfficherLongueur">
+                  <label for="longueur">Longueur (cm) :</label>
                   <input id="longueur" type="number" formControlName="longueur" min="0"/>     
                 </div>  
-                
-                <div class="div-mur-gm" style="width:100%;">
-                  <span class="mur-ttl">
-                  Gamme</span> <span class="error-message" *ngIf="getAppareilActiveState(i)">*</span> : 
+
+                <div  nz-col class="row-w-grid3">
+                <div class="">
+                  <label class="">Gamme</label> <span class="error-message" *ngIf="getAppareilActiveState(i)">*</span> : 
                 </div>
-                  <nz-radio-group formControlName="modele" class="radio-flx-spc">
-                      <div nz-row nzJustify="start" *ngFor="let modele of appareilGroup.ModeleEquipements">
-                        <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf">
+                  <nz-radio-group formControlName="modele" class="">
+                      <div nz-col nzJustify="start" *ngFor="let modele of appareilGroup.ModeleEquipements">
+                        <div nz-col class="">
                             <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">
-                            <span>
                                 {{modele.Titre}}
-                              </span>
+                              <a nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="info-icon">
+                                <i class="fas fa-question-circle"></i>
+                              </a>
                             </label>
-                           <a nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="info-icon">
-                          <i class="far fa-question-circle"></i>
-                        </a>
+                          
                         </div>
                         <!-- Tooltip with image and dimensions -->
                         <ng-template #tooltipTemplate >
@@ -44,7 +43,7 @@
                         </ng-template>
                       </div>
                     </nz-radio-group>
-                    
+                    </div>
                 </nz-collapse-panel>
           </nz-collapse>
           <ng-template #activerTp>
@@ -55,16 +54,17 @@
         </div>
       </div>
 
-      <h3>Dépose d'anciennes installations</h3>
+      <div class="renov-elec-div ">
+        <span class="mur-ttl">Dépose d'anciennes installations</span>
+      </div>
 
       <div formArrayName="gammes_depose_form">
-        <div *ngFor="let gamme of gammes_depose_form.controls; let i = index" [formGroupName]="i">
            
-             
-              
-              <div nz-row nzJustify="start" class="cuisine-flx">
+              <div nz-row nzJustify="start" class="row-w-grid" style="width:80% !important;max-width:100% !important;">
+                        <div *ngFor="let gamme of gammes_depose_form.controls; let i = index" [formGroupName]="i">
+
                 <!-- Champ Quantité -->
-                <div nz-col nzSpan="24" class="ant-col tooltip-srf etat-srf" *ngIf="need_quantite(gammes_depose[i].ID)">
+                <div nz-col class="flx-radio-row4" *ngIf="need_quantite(gammes_depose[i].ID)">
                     <label for="quantite">{{gammes_depose && gammes_depose[i] ? gammes_depose[i].Label : ''}} - quantité :</label>
                     <input id="quantite" type="number" formControlName="quantite" min="0"/>
                     
@@ -73,7 +73,7 @@
                   Quantité invalide
                 </div>
 
-                <div nz-col nzSpan="24" class="ant-col tooltip-srf etat-srf" *ngIf="need_longueur(gammes_depose[i].ID)">
+                <div nz-col nzSpan="24" class="flx-radio-row4" *ngIf="need_longueur(gammes_depose[i].ID)">
                   <label for="longueur">{{gammes_depose && gammes_depose[i] ? gammes_depose[i].Label : ''}} - longueur (cm) :</label>
                   <input id="longueur" type="number" formControlName="longueur" min="0"/>
                 

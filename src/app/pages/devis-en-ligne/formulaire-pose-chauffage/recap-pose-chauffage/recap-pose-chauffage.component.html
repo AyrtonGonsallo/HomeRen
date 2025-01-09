@@ -6,7 +6,7 @@
      </div>
      <div *ngFor="let rad of form_surfaces.radiateurs; let i = index">
         <div >
-            <span class="mur-ttl">Radiateur {{i+1}}</span><br>
+            <div style="width: 100%; text-align: left;"><span class="mur-ttl">Radiateur {{i+1}}</span><br></div>
             <div>
                 <span class="recup-fin"><p>Type de radiateur</p><p>:</p><p>{{get_title(form_surfaces.radiateurs[i].type)}}</p></span>
                 <span class="recup-fin" ><p>Gamme</p><p>:</p><p>{{get_title(form_gammes.radiateurs[i].gamme)}}</p></span>

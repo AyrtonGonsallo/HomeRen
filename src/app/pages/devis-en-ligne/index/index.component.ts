@@ -446,7 +446,10 @@ export class IndexComponent {
       this.current=1
       return true
     }
-    
+    if(this.is_one_travail_selected && this.filteredTravail.ID==4 && this.current==5){
+      this.current=2
+      return true
+    }
     if(this.is_one_travail_selected && this.filteredTravail.ID==13 && this.current==4){
       this.current=1
       return true

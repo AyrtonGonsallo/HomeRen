@@ -32,7 +32,7 @@ export class PoseSolGammesProduitsComponent {
     return this.fb.group({
       gamme: ["", Validators.required],
       autre_gamme: ["", ],
-      lineaire: [0, ],
+      lineaire: [0, Validators.required],
       plinthes: ["",],
       has_plinthes: [false,],
     });

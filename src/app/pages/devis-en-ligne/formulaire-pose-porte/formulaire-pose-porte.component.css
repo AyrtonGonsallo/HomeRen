@@ -1,5 +1,5 @@
 
-.ant-col{
+/*.ant-col{
     padding: 5px;
     text-align: start;
 }
@@ -44,7 +44,7 @@
 /* input:not([type="checkbox"]) {
     width: 66% !important;
 } */
-.ant-col-6 {
+/*.ant-col-6 {
     max-width: 100%;
     width: 100%;
     display: flex;
@@ -138,7 +138,7 @@ form{
 }
 .link-tooltip{color:var(--color1);}
 .link-tooltip:hover{color:var(--color-white);text-decoration: underline;} */
-h3.ttl-type{
+/*h3.ttl-type{
     border-bottom: 1px solid #55555566;
     font-size: 18px;
     color: var(--color1);
@@ -182,4 +182,4 @@ form label{
 .etat-srf3 .radio-flx-spc label{
     border: none;
     flex-direction: row;
-}
+}*/

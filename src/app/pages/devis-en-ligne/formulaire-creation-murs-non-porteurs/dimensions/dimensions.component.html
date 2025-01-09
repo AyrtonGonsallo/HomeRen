@@ -12,79 +12,60 @@
             type="button"
             class="dynamic-form-button del-btn"
             (click)="removeMurNonPorteurroup(i)"
-            *ngIf="murs_non_porteurs.length > 1"
-          >
-            Retirer
+            *ngIf="murs_non_porteurs.length > 1">  <span class="icon-btn">[-] </span>Retirer
           </button>
         </div>
-        <div nz-row nzJustify="start">
+        <div nz-row nzJustify="start" class="ant-col-flx">
           <div nz-col nzSpan="6" class="ant-col tooltip-srf">
             <label for="hauteur">Hauteur (cm)<span class="error-message">*</span> :</label>
             <input type="number" id="hauteur" formControlName="hauteur" min="1" max="4000" />
+            <!--<div *ngIf="isclicked && murs_non_porteurs.controls[i].get('hauteur')?.invalid" class="error-message">
+              La hauteur du mur est invalide.
+            </div>-->
           </div>
-          <div *ngIf="isclicked && murs_non_porteurs.controls[i].get('hauteur')?.invalid" class="error-message">
-            La hauteur du mur est invalide.
-          </div>
+        
           <div nz-col nzSpan="6" class="ant-col tooltip-srf">
             <label for="longueur">Longueur (cm)<span class="error-message">*</span> :</label>
             <input type="number" id="longueur" formControlName="longueur" min="1" max="10000" />
+            <!--<div *ngIf="isclicked && murs_non_porteurs.controls[i].get('longueur')?.invalid" class="error-message">
+              La longueur du mur est invalide.
+            </div>-->
           </div>
-          <div *ngIf="isclicked && murs_non_porteurs.controls[i].get('longueur')?.invalid" class="error-message">
-            La longueur du mur est invalide.
-          </div>
+          
         </div>
-
-        <div nz-col nzSpan="6" class="ant-col-6 tooltip-srf">
+        <div nz-col>
+        <div nz-col class="row-w-grid">
           <label for="epaisseur">Epaisseur (cm)<span class="error-message">*</span> :</label>
-          <nz-radio-group formControlName="epaisseur" class="radio-flx-spc">
+          <nz-radio-group formControlName="epaisseur" class="flx-radio-row">
             <div>
-              <label nz-radio nzValue="50">50</label>
-              <a nz-tooltip [nzTooltipTitle]="tooltip_type_50" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltip_type_50>
-                Pour plus d'informations, veuillez consulter :
-                <a href="#" target="_blank" class="link-tooltip">PDF</a>
-              </ng-template>
+              <label nz-radio nzValue="50"> 50</label>
             </div>
             <div>
-              <label nz-radio nzValue="70">70</label>
-              <a nz-tooltip [nzTooltipTitle]="tooltip_type_70" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltip_type_70>
-                Pour plus d'informations, veuillez consulter :
-                <a href="#" target="_blank" class="link-tooltip">PDF</a>
-              </ng-template>
+              <label nz-radio nzValue="70"> 70</label>
             </div>
             <div>
-              <label nz-radio nzValue="100">100</label>
-              <a nz-tooltip [nzTooltipTitle]="tooltip_type_100" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltip_type_100>
-                Pour plus d'informations, veuillez consulter :
-                <a href="#" target="_blank" class="link-tooltip">PDF</a>
-              </ng-template>
+              <label nz-radio nzValue="100"> 100</label>
             </div>
-          </nz-radio-group>
-        </div>
-        <div *ngIf="isclicked && murs_non_porteurs.controls[i].get('epaisseur')?.invalid" class="error-message">
+           
+          </nz-radio-group> 
+          <!--<div *ngIf="isclicked && murs_non_porteurs.controls[i].get('epaisseur')?.invalid" class="error-message">
           L'épaisseur est invalide.
+        </div>-->
+        
         </div>
-      </div>
-    </div>
-    <button
-      type="button"
-      class="dynamic-form-button add-btn"
-      (click)="addMurNonPorteurroup()"
-      *ngIf="murs_non_porteurs.length < 4"
-    >
-      Ajouter un mur <span nz-icon nzType="plus" nzTheme="outline"></span>
-    </button>
-  </form>
 
-  <nz-collapse>
+      </div>
+
+        
+  </div>
+  <div class="col-w-75">
+    <button type="button"  class="dynamic-form-button add-btn" (click)="addMurNonPorteurroup()"  *ngIf="murs_non_porteurs.length < 4">
+        [+] Ajouter un mur </button></div>
+    </div>
+    
+  </form>
+  
+  <nz-collapse class="row-w-collapse">
     <nz-collapse-panel
       nzHeader="Présence de portes"
       [nzActive]="is_active_Tp3"
@@ -98,7 +79,7 @@
         </div>
         <div formArrayName="portes">
           <div *ngFor="let mur of portes.controls; let i = index" [formGroupName]="i">
-            <div class="mur-btn-div">
+            <div class="mur-btn-div coll-100">
               <span class="mur-ttl">Porte nº{{i + 1}}</span>
               <button
                 type="button"
@@ -106,89 +87,55 @@
                 (click)="removeportesGroup(i)"
                 *ngIf="portes.length > 1"
               >
-                Retirer
+              <span class="icon-btn">[-]</span> Retirer
               </button>
             </div>
-            <div nz-row nzJustify="start">
-              <div nz-col nzSpan="6" class="ant-col-6  tooltip-srf">
+            
+              <div nz-col class="row-w-grid coll-100">
                 <label for="largeur">Largeur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
-                <nz-radio-group formControlName="largeur" class="radio-flx-spc">
+                <nz-radio-group formControlName="largeur" class="flx-radio-row">
                   <div>
-                    <label nz-radio nzValue="60">60</label>
-                    <a nz-tooltip [nzTooltipTitle]="tooltip_type_60" href="javascript:void(0)" class="info-icon">
-                      <i class="far fa-question-circle"></i>
-                    </a>
-                    <ng-template #tooltip_type_60>
-                      Pour plus d'informations, veuillez consulter :
-                      <a href="#" target="_blank" class="link-tooltip">PDF</a>
-                    </ng-template>
+                    <label nz-radio nzValue="60"> 60</label>
                   </div>
                   <div>
-                    <label nz-radio nzValue="70">70</label>
-                    <a nz-tooltip [nzTooltipTitle]="tooltip_type_70" href="javascript:void(0)" class="info-icon">
-                      <i class="far fa-question-circle"></i>
-                    </a>
-                    <ng-template #tooltip_type_70>
-                      Pour plus d'informations, veuillez consulter :
-                      <a href="#" target="_blank" class="link-tooltip">PDF</a>
-                    </ng-template>
+                    <label nz-radio nzValue="70"> 70</label>
                   </div>
                   <div>
-                    <label nz-radio nzValue="80">80</label>
-                    <a nz-tooltip [nzTooltipTitle]="tooltip_type_80" href="javascript:void(0)" class="info-icon">
-                      <i class="far fa-question-circle"></i>
-                    </a>
-                    <ng-template #tooltip_type_80>
-                      Pour plus d'informations, veuillez consulter :
-                      <a href="#" target="_blank" class="link-tooltip">PDF</a>
-                    </ng-template>
+                    <label nz-radio nzValue="80"> 80</label>
                   </div>
                   <div>
-                    <label nz-radio nzValue="90">90</label>
-                    <a nz-tooltip [nzTooltipTitle]="tooltip_type_90" href="javascript:void(0)" class="info-icon">
-                      <i class="far fa-question-circle"></i>
-                    </a>
-                    <ng-template #tooltip_type_90>
-                      Pour plus d'informations, veuillez consulter :
-                      <a href="#" target="_blank" class="link-tooltip">PDF</a>
-                    </ng-template>
+                    <label nz-radio nzValue="90"> 90</label>
                   </div>
-                  
-                </nz-radio-group>
-              </div>
-              <div *ngIf="isclicked && portes.controls[i].get('largeur')?.invalid " class="error-message">
+                
+                </nz-radio-group> 
+                 <!--<div *ngIf="isclicked && portes.controls[i].get('largeur')?.invalid " class="error-message">
                 La largeur est invalide.
+              </div>-->
               </div>
+              
 
-              <div nz-col nzSpan="6" class="ant-col-6  tooltip-srf">
-                <label for="type">Type <span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
-                <nz-radio-group formControlName="type" class="radio-flx-spc">
-                  <div  *ngFor="let option of types" >
+              <div nz-col class="row-w-grid coll-100">
+                <label for="gamme">Gamme <span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
+                <nz-radio-group formControlName="gamme" class="flx-radio-row">
+                  <div  *ngFor="let option of gammes" >
                     <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label"><span>{{option.Label}}</span></label>
-                    <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
+                    <!-- <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
                       <i class="far fa-question-circle"></i>
                     </a>
                     <ng-template #tooltipBonEtat>
                       {{option.Label}}
-                    </ng-template>
+                    </ng-template> -->
                   </div>
                   
                 </nz-radio-group>
             </div>
-            <div *ngIf="isclicked && portes.controls[i].get('type')?.invalid " class="error-message">
-              Le type de porte est requis.
-            </div>
-            </div>
+            
           </div>
+          
         </div>
-        <button
-          type="button"
-          class="dynamic-form-button add-btn"
-          (click)="addportesGroup()"
-          *ngIf="portes.length < 5"
-        >
-          Ajouter une porte<span nz-icon nzType="plus" nzTheme="outline"></span>
-        </button>
+        <div class="col-w-75 coll-100">
+          <button type="button" class="dynamic-form-button add-btn" (click)="addportesGroup()"
+          *ngIf="portes.length < 5">  [+] Ajouter une porte</button></div>
       </form>
     </nz-collapse-panel>
   </nz-collapse>

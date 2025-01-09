@@ -88,7 +88,6 @@ form{
     display: grid;
 }
 .srf-img{margin-block: 20px;margin-inline: auto;}
-/* @media only screen and (max-width: 800px) {
     .vald-btn, .add-btn{ width: fit-content;}
     .ant-col-6 {max-width: 100%;}
     .ant-steps-item-title {font-size: 11px !important;}
@@ -139,3 +138,31 @@ input{width: 100%!important;}
 .col-6-w{
     width: 100%;
 }
+/**********************************************/
+/* .plaf-dim .ant-row{
+    width: 80% !important;
+    margin: auto !important;
+    display: grid !important;
+    gap:48px !important;
+    grid-template-columns: 1fr 1fr!important;
+    align-items: center !important;
+}
+.row-w-grid.ant-col {
+        max-width: 80% !important;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        justify-items: start !important;
+        align-items: center !important;
+}
+.mur-btn-div.coll-100, .row-w-grid.ant-col.coll-100, .col-w-75.coll-100{width:100% !important; max-width: 100% !important;}
+.flx-radio-row{
+    display: grid;
+    grid-template-columns:repeat(4, auto);
+    gap: 13px;
+    align-items: center !important;
+}
+.col-w-75{max-width: 80% !important; margin: auto;}
+.add-btn{margin-top:10px !important;margin-bottom:30px !important;} */
+
+

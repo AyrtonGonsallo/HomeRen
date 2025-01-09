@@ -1,101 +1,118 @@
-<div class="dimsn-portes">
+<div class="plaf-dim">
   <form [formGroup]="posePortesForm" (ngSubmit)="onPosePortesSubmit()">
-    <div formArrayName="portes">
+    <div formArrayName="portes" style="">
+      <div *ngIf="isclicked && posePortesForm" class="error-message">
+        Les champs <span class="error-message">*</span> sont requises.
+      </div>
       <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i">
         <div class="mur-btn-div">
           <div style="margin-right:auto;text-align: left;">
             <span class="mur-ttl">Porte {{ i + 1 }}</span>
           </div>
-          <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">Retirer</button>
+          <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">[-] Retirer</button>
         </div>
 
-        <div class="form-group" nz-row nzJustify="start">
+        <div class="form-group" nz-col nzJustify="start" class="w-80">
           <!-- Type de porte -->
-          <div class="mur-btn-div">
-            <label class="mur-ttl">Type de porte <span class="error-message">*</span></label>
-          </div>
-          <div nz-col nzSpan="6" class="ant-col etat-srf3 tooltip-srf">
-            
-            <nz-radio-group formControlName="type_porte" class="radio-flx-spc">
-              <div class="div-mur-gm2" style="width:100%;">
-                <span class="mur-ttl2">
-                  Portes simple
-                </span> 
+          
+          
+            <div class="div-ttl-gris">
+              <label class="">Type de porte <span class="error-message">*</span></label>
+            </div>
+            <nz-radio-group formControlName="type_porte" style="display:block ;margin: auto;text-align: center;" class="brdr-bt">
+            <div  nz-col class="row-w-grid5">
+              <div class="">
+                <label class="">
+                  Portes simple :
+                </label> 
               </div>
+              <div class="flx-radio-row-3">
               <div *ngFor="let option of types_de_porte_simples">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                   {{ option.Label }}
                 </label>
-                <a nz-tooltip [nzTooltipTitle]="tooltip_type_porte" href="javascript:void(0)" class="info-icon">
+                <!--<a nz-tooltip [nzTooltipTitle]="tooltip_type_porte" href="javascript:void(0)" class="info-icon">
                   <i class="far fa-question-circle"></i>
-                </a>
+                </a>-->
                 <ng-template #tooltip_type_porte>
                   Type: {{ option.Label }}<br>
                   Pour plus d'informations, veuillez consulter :
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
                 </ng-template>
               </div>
-
-              <div class="div-mur-gm2" style="width:100%;">
-                <span class="mur-ttl2">
-                  Portes double
-                </span> 
               </div>
+             </div>
+
+
+             <div  nz-col class="row-w-grid5">
+              <div class="">
+                <label class="">
+                  Portes double :
+                </label> 
+              </div>
+              <div class="flx-radio-row-3">
               <div *ngFor="let option of types_de_porte_doubles">
               <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                 {{ option.Label }}
               </label>
-              <a nz-tooltip [nzTooltipTitle]="tooltip_type_porte" href="javascript:void(0)" class="info-icon">
+              <!--<a nz-tooltip [nzTooltipTitle]="tooltip_type_porte" href="javascript:void(0)" class="info-icon">
                 <i class="far fa-question-circle"></i>
-              </a>
+              </a>-->
               <ng-template #tooltip_type_porte>
                 Type: {{ option.Label }}<br>
                 Pour plus d'informations, veuillez consulter :
                 <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
               </ng-template>
             </div>
+           </div>
+           </div>
 
-              <div class="div-mur-gm2" style="width:100%;">
-                <span class="mur-ttl2">
-                  Portes coulissante
-                </span> 
+            <div  nz-col class="row-w-grid5">
+              <div class="">
+                <label class="">
+                  Portes coulissante :
+                </label> 
               </div>
+              <div class="flx-radio-row-3">
               <div *ngFor="let option of types_de_porte_coulissantes">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                   {{ option.Label }}
                 </label>
-                <a nz-tooltip [nzTooltipTitle]="tooltip_type_porte" href="javascript:void(0)" class="info-icon">
+                <!--<a nz-tooltip [nzTooltipTitle]="tooltip_type_porte" href="javascript:void(0)" class="info-icon">
                   <i class="far fa-question-circle"></i>
-                </a>
+                </a>-->
                 <ng-template #tooltip_type_porte>
                   Type: {{ option.Label }}<br>
                   Pour plus d'informations, veuillez consulter :
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
                 </ng-template>
               </div>
+              </div>
+              </div>
 
             </nz-radio-group>
             
             
             
-          </div>
-          <div *ngIf="isclicked && portes.controls[i].get('type_porte')?.invalid" class="error-message">
+        
+          <!--<div *ngIf="isclicked && portes.controls[i].get('type_porte')?.invalid" class="error-message">
             Type de porte requis.
-          </div>
+          </div>-->
 
           <!-- Nature de la porte -->
-          <div class="mur-btn-div">
-            <label class="mur-ttl">Nature de la porte <span class="error-message">*</span></label>
+          <div nz-col class="row-w-grid5">
+          <div class="">
+            <label class=" ">Nature de la porte <span class="error-message">*</span> :</label>
           </div>
-          <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-            <nz-radio-group formControlName="nature_porte" class="radio-flx-spc">
+          
+            <nz-radio-group formControlName="nature_porte" class="flx-radio-row3">
               <div *ngFor="let option of natures_porte">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                   {{ option.Label }}
                 </label>
-                <a nz-tooltip [nzTooltipTitle]="tooltip_nature_porte" href="javascript:void(0)" class="info-icon">
+                <!--<a nz-tooltip [nzTooltipTitle]="tooltip_nature_porte" href="javascript:void(0)" class="info-icon">
                   <i class="far fa-question-circle"></i>
-                </a>
+                </a>-->
                 <ng-template #tooltip_nature_porte>
                   Matériau: {{ option.Label }}<br>
                   Pour plus d'informations, veuillez consulter :
@@ -104,9 +121,9 @@
               </div>
             </nz-radio-group>
           </div>
-          <div *ngIf="isclicked && portes.controls[i].get('nature_porte')?.invalid" class="error-message">
+          <!--<div *ngIf="isclicked && portes.controls[i].get('nature_porte')?.invalid" class="error-message">
             La nature de la porte est requise.
-          </div>
+          </div>-->
 
 <!--
           <div class="mur-btn-div">
@@ -156,18 +173,19 @@
           </div>
 -->
           <!-- Gamme -->
-          <div class="mur-btn-div">
-            <label class="mur-ttl">Gamme <span class="error-message">*</span></label>
+          <div nz-col class="row-w-grid5">
+          <div class="">
+            <label class="">Gamme <span class="error-message">*</span> :</label>
           </div>
-          <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-            <nz-radio-group formControlName="gamme" class="radio-flx-spc">
+          
+            <nz-radio-group formControlName="gamme" class="flx-radio-row3">
               <div *ngFor="let option of gammes">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                   {{ option.Label }}
                 </label>
-                <a nz-tooltip [nzTooltipTitle]="tooltip_Gamme" href="javascript:void(0)" class="info-icon">
+                <!--<a nz-tooltip [nzTooltipTitle]="tooltip_Gamme" href="javascript:void(0)" class="info-icon">
                   <i class="far fa-question-circle"></i>
-                </a>
+                </a>-->
                 <ng-template #tooltip_Gamme>
                   Gamme: {{ option.Label }}<br>
                   Pour plus d'informations, veuillez consulter :
@@ -176,16 +194,20 @@
               </div>
             </nz-radio-group>
           </div>
-          <div *ngIf="isclicked && portes.controls[i].get('gamme')?.invalid" class="error-message">
+          <!--<div *ngIf="isclicked && portes.controls[i].get('gamme')?.invalid" class="error-message">
             Gamme requise.
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
 
-    <!-- Ajouter une porte -->
-    <button type="button" class="dynamic-form-button add-btn" (click)="addPortesGroup()" *ngIf="portes.length < 8">
-      Ajouter une porte <span nz-icon nzType="plus" nzTheme="outline"></span>
-    </button>
+
   </form>
+
+    <!-- Ajouter une porte -->
+    <div class="col-w-75">
+      <button type="button" class="dynamic-form-button add-btn" (click)="addPortesGroup()" *ngIf="portes.length < 8">
+        [+] Ajouter une porte </button>
+      </div>
+
 </div>

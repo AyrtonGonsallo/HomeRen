@@ -3,8 +3,6 @@
     <span class="recup-fin recap-piece">{{selectedPiece.Titre}}</span>
     
     <div *ngIf="appareils_a_remplacer">
-        À remplacer
-
         <div *ngFor="let appareil of appareils_a_remplacer">
             <div *ngIf="appareil.active">
                 <span class="recup-fin"><p>{{(appareil.titre)}}</p></span>

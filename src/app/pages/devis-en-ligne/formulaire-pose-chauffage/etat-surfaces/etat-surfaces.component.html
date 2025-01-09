@@ -1,4 +1,6 @@
 
+
+<div class="plaf-dim tooltip-srf">
 <form [formGroup]="poseRadiateursForm" (ngSubmit)="onPoseRadiateursSubmit()">
 
     <div formArrayName="radiateurs">
@@ -7,34 +9,38 @@
        <div class="mur-btn-div">
         <div class="ttl-mob" style="margin-right: auto;text-align: left;"><span class="mur-ttl">Radiateur {{i+1}}</span></div>
 
-         <button type="button" class="dynamic-form-button del-btn" (click)="removeRadiateurGroup(i)" *ngIf="radiateurs.length > 1">Retirer</button>
+         <button type="button" class="dynamic-form-button del-btn" (click)="removeRadiateurGroup(i)" *ngIf="radiateurs.length > 1">[-] Retirer</button>
 
        </div>
 
-       <div nz-row nzJustify="start" >
+       <div nz-col nzJustify="start" class="w-80">
         
 
-
-         <div class="mur-btn-div">
-          <label class="mur-ttl">Type <span class="error-message">*</span></label>
-        </div>
-        <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-          <nz-radio-group formControlName="type" class="radio-flx-spc">
+      <div nz-col class="row-w-grid3">
+         <div class="">
+          <label class="">Type <span class="error-message">*</span> :</label>
+         </div>
+        
+          <nz-radio-group formControlName="type" class="">
+            <div class="flx-radio-row2">
             <div *ngFor="let option of types">
               <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
-                <span>{{ option.Label }}</span>
+                <span>{{ option.Label }}</span> 
+                <!--<a nz-tooltip [nzTooltipTitle]="tooltip_Gamme" href="javascript:void(0)" class="info-icon">
+                <i class="fas fa-question-circle"></i>
+              </a>-->
               </label>
-              <a nz-tooltip [nzTooltipTitle]="tooltip_Gamme" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
+             
               <ng-template #tooltip_Gamme>
                 Type: {{ option.Label }}<br>
                 Pour plus d'informations, veuillez consulter :
                 <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
               </ng-template>
             </div>
+          </div>
           </nz-radio-group>
-        </div>
+        
+      </div>
         <div *ngIf="isclicked && radiateurs.controls[i].get('type')?.invalid" class="error-message">
           Le type est requis.
         </div>
@@ -42,6 +48,11 @@
      </div>
      
     </div>
-    <button type="button"  class="dynamic-form-button add-btn" (click)="addRadiateurGroup()" *ngIf="radiateurs.length < 4" >Ajouter un radiateur <span nz-icon nzType="plus" nzTheme="outline"></span></button>
 
   </form>
+
+  <div class="col-w-75">
+    <button type="button"  class="dynamic-form-button add-btn" (click)="addRadiateurGroup()" *ngIf="radiateurs.length < 4" >[+] Ajouter un radiateur</button>
+  </div>
+
+</div>

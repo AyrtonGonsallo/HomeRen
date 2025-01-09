@@ -1,7 +1,10 @@
 
-<div class="dimsn-portes">
+<div class="plaf-dim">
 <form [formGroup]="posePortesForm" (ngSubmit)="onPosePortesSubmit()">
     <div formArrayName="portes">
+        <div *ngIf="isclicked && posePortesForm" class="error-message">
+            Les champs <span class="error-message">*</span> sont requises.
+          </div>
         <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i">
             <div class="mur-btn-div">
                 <span class="mur-ttl">Porte {{i+1}}</span> - <label class="mur-ttl">Type de porte <span class="error-message">*</span></label>
@@ -64,6 +67,8 @@
         </div>
       
 
-    <button type="button" class="dynamic-form-button add-btn" (click)="addPortesGroup()" *ngIf="portes.length < 8">Ajouter une porte <span nz-icon nzType="plus" nzTheme="outline"></span></button>
-  </form>
+</form>
+<div class="col-w-75">
+    <button type="button" class="dynamic-form-button add-btn" (click)="addPortesGroup()" *ngIf="portes.length < 8">[+] Ajouter une porte </button>
+ </div>
 </div>

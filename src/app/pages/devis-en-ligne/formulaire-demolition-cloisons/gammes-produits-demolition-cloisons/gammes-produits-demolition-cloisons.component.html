@@ -3,7 +3,7 @@
 
   <div formArrayName="mursnonporteurs">
     <div *ngFor="let mur of mursnonporteurs.controls; let j = index" [formGroupName]="j">
-      <div class="div-mur-gm"><span class="mur-ttl">Mur {{j+1}}</span><span class="mur-ttl"> - </span><label for="cloison" class="mur-ttl">Cloison </label></div>
+      <div class="div-mur-gm"><span class="mur-ttl">Mur {{j+1}}</span><span class="mur-ttl"> - </span><label for="cloison" class="mur-ttl">Type </label></div>
       <div nz-row nzJustify="start">
         <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
           
@@ -41,7 +41,7 @@
 
   <div formArrayName="ouverturepartielles">
     <div *ngFor="let mur of ouverturepartielles.controls; let i = index" [formGroupName]="i">
-      <div class="div-mur-gm"><span class="mur-ttl">Ouverture {{i+1}}</span><span class="mur-ttl"> - </span><label for="cloison" class="mur-ttl">Cloison</label></div>
+      <div class="div-mur-gm"><span class="mur-ttl">Ouverture {{i+1}}</span><span class="mur-ttl"> - </span><label for="cloison" class="mur-ttl">Type de cloison</label></div>
       <div nz-row nzJustify="start">
         <div nz-col nzSpan="6" class="ant-col col-gm tooltip-srf etat-srf">
           
