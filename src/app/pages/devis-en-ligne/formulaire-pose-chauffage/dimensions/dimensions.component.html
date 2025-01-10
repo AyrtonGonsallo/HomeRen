@@ -1,11 +1,16 @@
 <div class="plaf-dim tooltip-srf">
   <form [formGroup]="poseChauffageForm" (ngSubmit)="onPoseChauffageSubmit()">
     <div *ngIf="isclicked && poseChauffageForm" class="error-message">
-      Les champs <span class="error-message">*</span> sont requises.
+      <div *ngIf="isclicked && poseChauffageForm.get('surface')?.invalid " class="error-message">
+        <br>La surface est invalide.
+      </div>
+      <div *ngIf="isclicked && poseChauffageForm.get('hauteur')?.invalid " class="error-message">
+        <br>La hauteur est invalide.
+       </div>
     </div>
 
     <!--<img class="srf-img" src="/assets/Rectangle.svg">-->
-    <img class="" src="/assets/sol.png" style="margin-block:30px;margin-inline:auto;">
+    
       <div nz-row nzJustify="start" class="ant-col-flx">
         
         <div nz-col nzSpan="6" class="">

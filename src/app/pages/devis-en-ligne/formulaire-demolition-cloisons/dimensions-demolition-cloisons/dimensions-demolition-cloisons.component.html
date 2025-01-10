@@ -13,6 +13,25 @@
                  <span class="mur-ttl">Démolition mur nº{{i+1}}</span>
                <button type="button" class="dynamic-form-button del-btn" (click)="removemursNonporteursGroup(i)" *ngIf="mursNonporteurs.length > 1"><span class="icon-btn">[-]</span> Retirer</button>
                </div>
+               
+
+                <div *ngIf="isclicked" class="error-message">
+                  <div *ngIf="isclicked && mursNonporteurs.controls[i].get('longueur')?.invalid " class="error-message left">
+                    La longueur est invalide.
+                  </div>
+                  <div *ngIf="isclicked && mursNonporteurs.controls[i].get('hauteur')?.invalid " class="error-message left" style="width: 100%;">
+                    La hauteur est invalide.
+                  </div>
+                  <div *ngIf="isclicked && mursNonporteurs.controls[i].get('epaisseur')?.invalid " class="error-message left">
+                    L'épaisseur est invalide.
+                  </div>
+                  <div *ngIf="isclicked && mursNonporteurs.controls[i].get('ndp')?.invalid " class="error-message left">
+                    Le nombre de portes est invalide.
+                  </div>
+                  <div *ngIf="isclicked && mursNonporteurs.controls[i].get('cloison')?.invalid " class="error-message left">
+                    Les cloisons sont requises.
+                  </div>
+                </div>
                <div nz-row nzJustify="start" class="ant-col-flx coll-100" >
                   <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                     <label for="longueur">Longueur (cm)<span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
@@ -63,7 +82,7 @@
                  </div>
 
                    <div  nz-col class="row-w-grid coll-100">
-                    <label for="cloison">Cloison :</label>
+                    <label for="cloison">Cloison<span class="error-message">*</span> :</label>
                       <nz-radio-group formControlName="cloison" class="flx-radio-row2">
                         <!-- Reusable template for displaying options with PDFs -->
                         <ng-container>
@@ -108,6 +127,35 @@
                <span class="mur-ttl">Ouverture mur nº{{i+1}}</span>
                <button type="button" class="dynamic-form-button del-btn" (click)="removeouverturePartielleGroup(i)" *ngIf="ouverturePartielle.length > 1"><span class="icon-btn">[-]</span> Retirer</button>
              </div>
+
+             <div *ngIf="isclicked" class="error-message">
+              <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur')?.invalid " class="error-message">
+                La longueur est invalide.
+              </div>
+              <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur')?.invalid " class="error-message">
+                La hauteur est invalide.
+              </div>
+              <div *ngIf="isclicked && ouverturePartielle.controls[i].get('epaisseur')?.invalid " class="error-message">
+                L'épaisseur est invalide.
+              </div>
+              <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur_ouverture')?.invalid " class="error-message">
+                La longueur de l'ouverture est invalide.
+              </div>
+              <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_depuis_le_sol')?.invalid " class="error-message">
+                La hauteur depuis le sol est invalide.
+              </div>
+              <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_ouverture')?.invalid " class="error-message">
+                La hauteur de l'ouverture est invalide.
+              </div>
+              <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_depuis_le_plafond')?.invalid " class="error-message">
+                La hauteur depuis le plafond est invalide.
+              </div>
+              <div *ngIf="isclicked && ouverturePartielle.controls[i].get('cloison')?.invalid " class="error-message">
+                Les cloisons sont requises.
+              </div>
+            </div>
+
+             
              <div nz-row nzJustify="start" class="ant-col-flx coll-100">
                
                <div nz-col nzSpan="6" class="ant-col tooltip-srf">
@@ -189,7 +237,7 @@
 
               <div nz-col class="row-w-grid coll-100">
                   
-                <label for="cloison">Cloison :</label>
+                <label for="cloison">Cloison<span class="error-message" *ngIf="is_active_Tp3">*</span> :</label>
                 <nz-radio-group formControlName="cloison" class="flx-radio-row2">
                   <!-- Reusable template for displaying options with PDFs -->
                   <ng-container>

@@ -79,7 +79,7 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
       const mursArray = this.poseRadiateursForm.get('radiateurs') as FormArray;
       form.radiateurs.forEach((rad: any) => {
         mursArray.push(this.fb.group({
-          gamme: [rad.gamme, ],
+          gamme: [rad.gamme, Validators.required],
         }));
       });
       
@@ -102,7 +102,7 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
         console.log("Radiateur "+(i+1))
           console.log("Ignorer le radiateur "+(i+1)+ " à remplacer ou deplacer")
           this.radiateurs.push(this.fb.group({
-            gamme: ["", ],
+            gamme: ["", Validators.required],
             visible: [false, ]
           }));
        

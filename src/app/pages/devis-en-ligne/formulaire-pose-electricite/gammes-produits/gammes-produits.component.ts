@@ -58,8 +58,12 @@ appareilGroup: any;
   }
   onAppareilsARemplacerSubmit(): boolean {
     this.glob_err_form2=""
+    const gamme_invalide: boolean = !!this.appareils_a_remplacer_form.get('gamme')?.invalid;
+
     const appareils_electrique_a_remplacerArray = this.appareils_a_remplacer_form.get('appareils_electrique_a_remplacer') as FormArray;
     let res=true
+    console.log("gammes ",this.appareils_a_remplacer_form.get('gamme')?.invalid)
+    res=res && !gamme_invalide
     for (let i = 0; i < appareils_electrique_a_remplacerArray.length; i++) {
       const group = appareils_electrique_a_remplacerArray.at(i) as FormGroup;
       const controls = group.controls;

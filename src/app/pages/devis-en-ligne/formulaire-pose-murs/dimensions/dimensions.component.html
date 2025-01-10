@@ -1,28 +1,40 @@
 <div class="plaf-dim tooltip-srf">
   <form [formGroup]="poseMursForm" (ngSubmit)="onPoseMursSubmit()">
+    
+
      <div formArrayName="murs">
       <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i" >
         <div class="mur-btn-div">
           <span class="mur-ttl">Mur {{i+1}}</span>
           <button type="button" class="dynamic-form-button del-btn" (click)="removeMurGroup(i)" *ngIf="murs.length > 1"><span class="icon-btn">[-]</span> Retirer</button>
         </div>
+
+        <div *ngIf="isclicked && poseMursForm" class="error-message">
+          <div *ngIf="isclicked && murs.controls[i].get('hauteur')?.invalid " class="error-message">
+            Hauteur invalide.
+          </div>
+          <div *ngIf="isclicked && murs.controls[i].get('longueur')?.invalid " class="error-message">
+            longueur invalide.
+          </div>
+          <div *ngIf="isclicked && murs.controls[i].get('depose')?.invalid " class="error-message">
+            Le revêtement à déposer est requis.
+          </div>
+        </div>
           <div nz-row nzJustify="start" >
          
           <div nz-col class="flx-radio-row2-w ant-col-6">
              <label for="hauteur">Hauteur (cm) <span class="error-message">*</span> : </label>
              <input type="number" id="hauteur" formControlName="hauteur" max="4000" min="1">
+             
            </div>
-           <!--<div *ngIf="isclicked && murs.controls[i].get('hauteur')?.invalid " class="error-message">
-            Hauteur invalide.
-          </div>-->
+           
 
           <div nz-col class="flx-radio-row2-w ant-col-6">
             <label for="longueur">Longueur (cm) <span class="error-message">*</span> : </label>
             <input type="number" id="longueur" formControlName="longueur" max="50000" min="1">
+            
           </div>
-           <!--<div *ngIf="isclicked && murs.controls[i].get('longueur')?.invalid " class="error-message">
-            longueur invalide.
-         </div>-->
+           
 
 
 
@@ -46,9 +58,7 @@
             </div>
           </nz-radio-group>
         </div>
-         <!--<div *ngIf="isclicked && murs.controls[i].get('depose')?.invalid " class="error-message">
-          Le revêtement à déposer est requis.
-        </div>-->
+         
         <div nz-col class="row-w-grid4 tooltip-srf">
           <label for="image">Image : <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
            <i class="fas fa-question-circle"></i>
@@ -63,9 +73,7 @@
         </div>
       </div>
 
-      <div *ngIf="isclicked && poseMursForm" class="error-message">
-        Les champs <span class="error-message">*</span> sont requises.
-      </div>
+      
 
        </div>
 

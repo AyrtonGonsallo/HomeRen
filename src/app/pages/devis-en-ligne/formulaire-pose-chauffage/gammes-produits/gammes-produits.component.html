@@ -1,9 +1,7 @@
 
 <form [formGroup]="poseRadiateursForm" (ngSubmit)="onPoseRadiateursSubmit()">
 
-  <div *ngIf="isclicked && poseRadiateursForm" class="error-message">
-    Les champs <span class="error-message">*</span> sont requises.
-  </div>
+  
   <div formArrayName="radiateurs">
     <div *ngFor="let radiateur of radiateurs.controls; let i = index" [formGroupName]="i">
       <div class="mur-btn-div" >
@@ -11,6 +9,12 @@
 
 
        </div>
+
+       <div *ngIf="isclicked && poseRadiateursForm" class="error-message">
+        <div *ngIf="isclicked && radiateurs.controls[i].get('gamme')?.invalid " class="error-message">
+          Les gammes sont requises.
+        </div>
+      </div>
       <div nz-col nzJustify="start" class="tooltip-srf" style="display:block !important;"></div>
         
           

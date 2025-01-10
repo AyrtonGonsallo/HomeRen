@@ -1,9 +1,7 @@
 <div class="plaf-dim">
   <form [formGroup]="posePortesForm" (ngSubmit)="onPosePortesSubmit()">
-    <div formArrayName="portes" style="">
-      <div *ngIf="isclicked && posePortesForm" class="error-message">
-        Les champs <span class="error-message">*</span> sont requises.
-      </div>
+    <div formArrayName="portes" >
+      
       <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i">
         <div class="mur-btn-div">
           <div style="margin-right:auto;text-align: left;">
@@ -11,6 +9,20 @@
           </div>
           <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">[-] Retirer</button>
         </div>
+
+
+        <div *ngIf="isclicked && posePortesForm" class="error-message">
+          <div *ngIf="isclicked && portes.controls[i].get('type_porte')?.invalid" class="error-message">
+            Type de porte requis.
+          </div>
+          <div *ngIf="isclicked && portes.controls[i].get('nature_porte')?.invalid" class="error-message">
+            La nature de la porte est requise.
+          </div>
+          <div *ngIf="isclicked && portes.controls[i].get('gamme')?.invalid" class="error-message">
+            Gamme requise.
+          </div>
+        </div>
+
 
         <div class="form-group" nz-col nzJustify="start" class="w-80">
           <!-- Type de porte -->
@@ -95,9 +107,7 @@
             
             
         
-          <!--<div *ngIf="isclicked && portes.controls[i].get('type_porte')?.invalid" class="error-message">
-            Type de porte requis.
-          </div>-->
+          
 
           <!-- Nature de la porte -->
           <div nz-col class="row-w-grid5">
@@ -121,57 +131,8 @@
               </div>
             </nz-radio-group>
           </div>
-          <!--<div *ngIf="isclicked && portes.controls[i].get('nature_porte')?.invalid" class="error-message">
-            La nature de la porte est requise.
-          </div>-->
+          
 
-<!--
-          <div class="mur-btn-div">
-            <label class="mur-ttl">Nature du mur <span class="error-message">*</span></label>
-          </div>
-          <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-            <nz-radio-group formControlName="nature_mur" class="radio-flx-spc">
-              <div>
-                  <label nz-radio nzValue="materiau plein">
-                    Matériau plein
-                  </label>
-                  <a nz-tooltip [nzTooltipTitle]="tooltip_nm_1" href="javascript:void(0)" class="info-icon">
-                    <i class="far fa-question-circle"></i>
-                  </a>
-                  <ng-template #tooltip_nm_1>
-                    Matériau plein<br> 
-                    Pour plus d'informations, veuillez consulter :
-                    <a href="" target="_blank" class="link-tooltip">PDF</a>
-                  </ng-template>
-              </div>
-              <div>
-                <label nz-radio nzValue="materiau creux">
-                  Matériau creux
-                </label>
-                <a nz-tooltip [nzTooltipTitle]="tooltip_nm_2" href="javascript:void(0)" class="info-icon">
-                  <i class="far fa-question-circle"></i>
-                </a>
-                <ng-template #tooltip_nm_2>
-                  Matériau creux<br> 
-                  Pour plus d'informations, veuillez consulter :
-                  <a href="" target="_blank" class="link-tooltip">PDF</a>
-                </ng-template>
-              </div>
-            </nz-radio-group>         
-          </div>
-          <div *ngIf="isclicked && portes.controls[i].get('nature_mur')?.invalid " class="error-message">
-              La nature du mur est requise.
-          </div>
--->
-          <!-- Épaisseur du mur 
-          <div nz-col nzSpan="6" class="tooltip-srf">
-            <label for="epaisseur_mur">Épaisseur du mur (cm) <span class="error-message">*</span> :</label>
-            <input type="number" id="epaisseur_mur" formControlName="epaisseur_mur" max="2000" min="1">
-          </div>
-          <div *ngIf="isclicked && portes.controls[i].get('epaisseur_mur')?.invalid" class="error-message">
-            L'épaisseur du mur est invalide.
-          </div>
--->
           <!-- Gamme -->
           <div nz-col class="row-w-grid5">
           <div class="">
@@ -194,9 +155,7 @@
               </div>
             </nz-radio-group>
           </div>
-          <!--<div *ngIf="isclicked && portes.controls[i].get('gamme')?.invalid" class="error-message">
-            Gamme requise.
-          </div>-->
+          
         </div>
       </div>
     </div>

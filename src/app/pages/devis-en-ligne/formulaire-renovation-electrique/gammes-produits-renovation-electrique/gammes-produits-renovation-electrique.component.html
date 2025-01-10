@@ -2,7 +2,12 @@
   <form [formGroup]="renovationElectriqueForm" (ngSubmit)="onRenovationElectriqueSubmit()">
     
     <div *ngIf="isclicked && renovationElectriqueForm" class="error-message">
-      Les champs <span class="error-message">*</span> sont requises.
+      <div *ngIf="isclicked && renovationElectriqueForm.get('surface')?.invalid " class="error-message">
+        La surface est invalide.
+     </div>
+     <div *ngIf="isclicked && renovationElectriqueForm.get('quantite_chauffage')?.invalid " class="error-message">
+      La quantité de chauffage est invalide.
+   </div>
     </div>
 
     <div class="w-80">
