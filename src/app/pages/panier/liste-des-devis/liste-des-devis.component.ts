@@ -4,6 +4,7 @@ import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-t
 import { Router } from '@angular/router';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ShoppingCartService } from '../../../services/shopping-cart.service';
+import { AuthServiceService } from '../../../services/auth-service.service';
 
 @Component({
   selector: 'app-liste-des-devis',
@@ -32,12 +33,35 @@ export class ListeDesDevisComponent {
       }
     );
   }
-  constructor(private router: Router,private panierService:ShoppingCartService,private userService: ApiConceptsEtTravauxService) {
+  constructor(private router: Router,private authService:AuthServiceService,private panierService:ShoppingCartService,private userService: ApiConceptsEtTravauxService) {
    
   }
   supprimer_devis(id:number){
     this.panierService.valider_devis(id)
    
+  }
+  isconnected=false
+  Check_login_and_send_mails_details(){
+    this.authService.getIsConnected().subscribe((isConnected) => {
+      this.isconnected = isConnected;
+      let user_id=this.authService.getUser().Id
+      if (this.isconnected) {
+        console.log('L\'utilisateur est connecté :', this.isconnected," id : ",user_id);
+        this.userService.sendAllPayedDevisPiecetoUser(user_id).subscribe(
+          (response) => {
+            console.log('Résultat de l\'envoi: ', response);
+          },
+          (error) => {
+            console.error('Erreur lors de la récupération des devis :', error);
+          }
+        );
+       
+      } else {
+        console.log('L\'utilisateur n\'est pas connecté.');
+        this.router.navigate(['/connexion']);
+        
+      }
+    });
   }
 
 }

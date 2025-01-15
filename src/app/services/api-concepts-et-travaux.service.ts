@@ -139,6 +139,9 @@ getAllPayedDevisPiecebyUsernameAndIp(data: any): Observable<any> {
 getAllPayedDevisPiecebyDeviceID(deviceid:string): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_no_payed_devis_piece_by_device_id/${deviceid}`);
 }
+sendAllPayedDevisPiecetoUser(userid:number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/send-liste-devis-email-to-user/${userid}`);
+}
 validerDevisPiece(id:number,body: any): Observable<any> {
   return this.http.put<any>(`${environment.apiUrl}/valider_devis_piece/${id}`,body);
 }
