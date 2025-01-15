@@ -7,6 +7,8 @@ import { Travail } from '../../../Models/Travail';
 import { GestionDesDevisService } from '../../../services/gestion-des-devis.service';
 import { ShoppingCartService } from '../../../services/shopping-cart.service';
 import { exit } from 'process';
+import { AuthServiceService } from '../../../services/auth-service.service';
+import { AbstractControl, FormControl, FormGroup, NonNullableFormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 interface ItemData {
   ID: number;
   Titre: string;
@@ -56,6 +58,8 @@ export class IndexComponent {
     this.loadEtapes()
     this.getIpAddress();
     this.getBrowserInfo();
+   
+
     const savedPieceId = sessionStorage.getItem('selectedPieceId');
     if (savedPieceId) {
     
@@ -72,9 +76,35 @@ export class IndexComponent {
   }
 
 
- 
-  constructor(private renderer: Renderer2,private message: NzMessageService,private userService: ApiConceptsEtTravauxService,private gestiondesdevisService: GestionDesDevisService,private panier:ShoppingCartService) {
- 
+  registrationForm: FormGroup<{
+    email: FormControl<string>;
+    password: FormControl<string>;
+    deviceID: FormControl<string>;
+    checkPassword: FormControl<string>;
+    agree: FormControl<boolean>;
+  }>;
+  loginForm: FormGroup<{
+    email: FormControl<string>;
+    password: FormControl<string>;
+    remember: FormControl<boolean>;
+  }>;
+  passwordVisible = false;
+
+  constructor(private fb: NonNullableFormBuilder,private renderer: Renderer2,private authService:AuthServiceService,private message: NzMessageService,private userService: ApiConceptsEtTravauxService,private gestiondesdevisService: GestionDesDevisService,private panier:ShoppingCartService) {
+    this.loginForm = this.fb.group({
+      email: this.fb.control('', [Validators.required]),
+      password: this.fb.control('', [Validators.required]),
+      remember: this.fb.control(true)
+    });
+
+    this.registrationForm = this.fb.group({
+      email: this.fb.control('', [Validators.email, Validators.required]),
+      password: this.fb.control('', [Validators.required]),
+      checkPassword: this.fb.control('', [Validators.required, this.confirmationValidator]),
+      deviceID: this.panier
+        .getUniqueDeviceId(),
+      agree: this.fb.control(false)
+    });
   }
 
 
@@ -394,7 +424,15 @@ export class IndexComponent {
         
       }
       else{
-        this.current += 1;
+        if(this.current<=5 && !this.isconnected){
+          this.current += 0;
+        }else if(this.current==5 && this.isconnected){
+          this.current +=0;
+        }
+        else{
+          this.current += 1;
+        }
+        
         this.changeContent();
       }
     
@@ -474,29 +512,130 @@ export class IndexComponent {
    return false
     
   }
+
+  display_modal_connection=false
+ 
+
+  isconnected=false
   done(): void {
-    this.gestiondesdevisService.clearDEGFormulaires()
-    const formulaires = this.gestiondesdevisService.getFormulaires();
-      const json = {
-        username: this.browserInfo,
-        ip: this.userIp,
-        piece:this.selectedPiece,
-        liste_des_travaux: formulaires,
-        deviceID:this.panier
-        .getUniqueDeviceId()
-      };
-      console.log('Formulaires soumis :', json);
-      this.userService.addDevisPiece(json).subscribe(
-        (response) => {
-          console.log('reponse de l\'api :', response);
-          let devis=response.devis
-          this.panier.addItem(devis)
+    this.authService.getIsConnected().subscribe((isConnected) => {
+      this.isconnected = isConnected;
+    
+      if (this.isconnected) {
+        console.log('L\'utilisateur est connecté :', this.isconnected," id : ",this.authService.getUser().Id);
+        this.gestiondesdevisService.clearDEGFormulaires()
+        const formulaires = this.gestiondesdevisService.getFormulaires();
+        const json = {
+          username: this.browserInfo,
+          ip: this.userIp,
+          piece:this.selectedPiece,
+          liste_des_travaux: formulaires,
+          deviceID:this.panier
+          .getUniqueDeviceId(),
+          UtilisateurID:this.authService.getUser().Id
+        };
+        console.log('Formulaires soumis :', json);
+        this.userService.addDevisPiece(json).subscribe(
+          (response) => {
+            console.log('reponse de l\'api :', response);
+            this.current=6
+            console.log('etape courrante :', this.current);
+            let devis=response.devis
+            this.panier.addItem(devis)
+            
+          },
+          (error) => {
+            console.error('Erreur lors de la récupération de l\'ajout du devis :', error);
+          }
+        );
+       
+      } else {
+        console.log('L\'utilisateur n\'est pas connecté.');
+        this.display_modal_connection=true
+        
+      }
+    });
+
+    
+  }
+  modal_connection_handleOk(): void {
+    this.display_modal_connection = false;
+  }
+
+  modal_connection_handleCancel(): void {
+    this.display_modal_connection = false;
+  }
+  
+  error_msg=""
+  has_error=false
+  submitLoginForm(): void {
+    if (this.loginForm.valid) {
+      console.log('submit', this.loginForm.value);
+      this.userService.loginFrontUtilisateur(this.loginForm.value).subscribe(
+        (response: any) => {
+          console.log('connexion reussie :', response);
+          this.authService.setUserWithoutRedirect(response)
+          this.modal_connection_handleCancel()
         },
-        (error) => {
-          console.error('Erreur lors de la récupération de l\'ajout du devis :', error);
+        (error: any) => {
+          console.error('Erreur lors de la connexion :', error.error.error);
+          this.error_msg=error.error.error
+          this.has_error=true
         }
       );
+    } else {
+      Object.values(this.loginForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
   }
+  submitRegistrationForm(): void {
+    if (this.registrationForm.valid) {
+      console.log('submit', this.registrationForm.value);
+      this.userService.addFrontUtilisateurWithData(this.registrationForm.value).subscribe(
+        (response: any) => {
+          console.log('inscription reussie:', response);
+          this.s_inscrire=false
+          this.se_connecter=true
+          
+        },
+        (error: any) => {
+          console.error('Erreur lors de l\'inscription\' :', error);
+        }
+      );
+    } else {
+      Object.values(this.registrationForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
+  }
+
+  confirmationValidator: ValidatorFn = (control: AbstractControl): { [s: string]: boolean } => {
+      if (!control.value) {
+        return { required: true };
+      } else if (control.value !== this.registrationForm.controls.password.value) {
+        return { confirm: true, error: true };
+      }
+      return {};
+    };
+    
+  se_connecter=true
+  s_inscrire=false
+  switch_form(){
+    this.se_connecter = !this.se_connecter
+    this.s_inscrire = !this.s_inscrire
+  }
+
+
+
+
+
   changeContent(): void {
     switch (this.current) {
       case 0: {
@@ -558,7 +697,7 @@ export class IndexComponent {
   }
 
   getNotaBene(): string {
-    const currentStep = this.etapes.find(
+    const currentStep = this.etapes?.find(
       (etape:any) =>
         etape.Etape === this.getStepName(this.current) &&
         (this.current <= 1 || this.current >= 5 || etape.TravailID === this.filteredTravail.ID)

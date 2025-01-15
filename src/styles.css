@@ -793,3 +793,6 @@ text-align: left !important;}
 }
 /********************s*********** fin *********************************************/
 
+.ant-modal-footer {
+    display: none !important;
+}

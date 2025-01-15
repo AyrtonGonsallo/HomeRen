@@ -11,14 +11,14 @@
                     Vous devez faire un choix.
                   </div>
                   <div class="row-w-grid-11 coll-100">
-                  <div nzspan="6" class="flx-radio-row2" style="padding-top: 12px;" *ngIf="appareils_salle_de_bain[i].AfficherLongueur">
-                    <label for="longueur">Longueur (cm>) :</label>
-                    <input id="longueur" type="number" formControlName="longueur" min="0"/>     
-                  </div>  
-                  <div nzspan="6" class="flx-radio-row2" style="padding-top: 12px;" *ngIf="appareils_salle_de_bain[i].AfficherLargeur">
-                    <label for="largeur">Largeur (cm>) :</label>
-                    <input id="largeur" type="number" formControlName="largeur" min="0"/>     
-                  </div>  
+                    <div nzspan="6" class="flx-radio-row2" style="padding-top: 12px;" *ngIf="appareils_salle_de_bain[i].AfficherLongueur">
+                      <label for="longueur">Longueur (cm) :</label>
+                      <input id="longueur" type="number" formControlName="longueur" min="0"/>     
+                    </div>  
+                    <div nzspan="6" class="flx-radio-row2" style="padding-top: 12px;" *ngIf="appareils_salle_de_bain[i].AfficherLargeur">
+                      <label for="largeur">Largeur (cm) :</label>
+                      <input id="largeur" type="number" formControlName="largeur" min="0"/>     
+                    </div>  
                 </div>
                   <div nzspan="6" class="flx-radio-row3" *ngIf="appareils_salle_de_bain[i].AfficherVasque">
                     <label for="nombre_de_vasque">Nombre de vasque :</label>

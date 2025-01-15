@@ -24,6 +24,18 @@ export class AuthServiceService {
   }
 
   /**
+   * Stocke les informations utilisateur après la connexion.
+   * @param user L'objet utilisateur à stocker.
+   */
+  setUserWithoutRedirect(user: any): void {
+    if (this.isBrowser()) {
+      localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+      this.isConnectedSubject.next(true);
+      //this.router.navigate(['/']);
+    }
+  }
+
+  /**
    * Récupère les informations utilisateur stockées.
    * @returns L'objet utilisateur ou null si aucune information n'est stockée.
    */

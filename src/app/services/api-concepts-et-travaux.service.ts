@@ -22,6 +22,10 @@ export class ApiConceptsEtTravauxService {
   addFrontUtilisateur(userData: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/add_front_utilisateur`, userData);
   }
+  addFrontUtilisateurWithData(userData: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/add_front_utilisateur_with_datas`, userData);
+  }
+  
   addParticulier(userData: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/add_particulier`, userData);
   }

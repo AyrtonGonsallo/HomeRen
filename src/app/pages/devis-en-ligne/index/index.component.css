@@ -208,3 +208,7 @@ ul{
     .pcs-devis {width: 100%;}
     .ttl-recap{font-size: 27px !important;}
 }
+
+.flx-cnt-btn {padding: 0px !important;height: 0px;color: var(--color1);background-color: transparent!important;}
+.flx-cnt-btn:hover{color: var(--color2);}
+.flx-cnt-btn span{font-size: 15px !important;}

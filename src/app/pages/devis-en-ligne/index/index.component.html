@@ -263,7 +263,7 @@
           <app-recap-pose-app-san [selectedPiece]="selectedPiece"></app-recap-pose-app-san>
         </div>
       </div>
-      <div class="devis-content" *ngIf="current == 6">
+      <div class="devis-content" *ngIf="current >= 6">
         <div class="msg-validation" *ngIf="!hide_finalisation_message">
           <img src="/assets/Frame.svg" alt="">
           <p> Votre devis en ligne est prêt !<br>
@@ -312,6 +312,105 @@
    </div>
 </div>
 
+
+<nz-modal class="no-footer" nzFooter="" [(nzVisible)]="display_modal_connection" nzTitle="Plonger dans l'univers HomeRen !" (nzOnCancel)="modal_connection_handleCancel()" (nzOnOk)="modal_connection_handleOk()">
+  <ng-container *nzModalContent>
+    <div *ngIf="has_error" class="error-message"> {{error_msg}}</div>
+    <div *ngIf="se_connecter">
+      <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="submitLoginForm()">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your username!">
+            <nz-input-group nzPrefixIcon="user">
+              <input type="text" nz-input formControlName="email" placeholder="E-mail" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your Password!">
+            <nz-input-group  [nzPrefix]="prefixTemplate">
+              <input   [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" placeholder="Mot de passe" />
+            </nz-input-group>
+            <ng-template #prefixTemplate>
+              <span
+                nz-icon
+                class="ant-input-password-icon"
+                [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                (click)="passwordVisible = !passwordVisible"
+              ></span>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <div nz-row class="login-form-margin">
+          <div nz-col [nzSpan]="12">
+            <label nz-checkbox formControlName="remember">
+              <span>Se souvenir de moi</span>
+            </label>
+          </div>
+          
+        </div>
+        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Se connecter</button>
+        <br>
+        Pas encore inscrit ? Créez votre compte en cliquant sur <button class="flx-cnt-btn" nz-button  (click)="switch_form()">S'inscrire</button>
+      </form>
+
+    </div>
+
+
+    <div *ngIf="s_inscrire">
+      <form nz-form [formGroup]="registrationForm" (ngSubmit)="submitRegistrationForm()">
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+            <input nz-input formControlName="email" id="email" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Mot de passe</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+            <input nz-input type="password" id="password" formControlName="password" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirmer le mot de passe</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+            <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
+            <ng-template #errorTpl let-control>
+              @if (control.errors?.['required']) {
+                Please confirm your password!
+              }
+              @if (control.errors?.['confirm']) {
+                Two passwords that you enter is inconsistent!
+              }
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        
+        <nz-form-item nz-row class="register-area">
+          <nz-form-control [nzSpan]="14" [nzOffset]="6">
+            <label nz-checkbox formControlName="agree">
+              <span>
+                J'ai lu les 
+                <a>conditions</a>
+              </span>
+            </label>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="register-area">
+          <nz-form-control [nzSpan]="14" [nzOffset]="6">
+            <button nz-button nzType="primary">S'inscrire</button>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="register-area">
+          <nz-form-control [nzSpan]="14" [nzOffset]="6" class="flx-connect">
+            Déja inscrit ? Connectez-vous en cliquant sur <button class="flx-cnt-btn" nz-button  (click)="switch_form()">Se connecter</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+
+
+  </ng-container>
+</nz-modal>
 
 
 

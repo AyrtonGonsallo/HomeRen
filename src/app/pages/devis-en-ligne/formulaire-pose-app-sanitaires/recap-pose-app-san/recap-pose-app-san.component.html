@@ -7,9 +7,9 @@
     <div *ngFor="let appareil of appareils_a_ajouter">
         <div *ngIf="appareil.active">
             <span class="recup-fin"><p>{{get_title(appareil.modele)}}</p></span>
-            <span class="recup-fin"><p>Longueur</p><p>:</p><p>{{(appareil.longueur)}} cm</p></span>
-            <span class="recup-fin"><p>Largeur</p><p>:</p><p>{{(appareil.largeur)}} cm</p></span>
-            <span class="recup-fin"><p>Nombre de vasque</p><p>:</p><p>{{(appareil.nombre_de_vasque)}}</p></span>
+            <span class="recup-fin" *ngIf="appareil.longueur"><p>Longueur</p><p>:</p><p>{{(appareil.longueur)}} cm</p></span>
+            <span class="recup-fin" *ngIf="appareil.largeur"><p>Largeur</p><p>:</p><p>{{(appareil.largeur)}} cm</p></span>
+            <span class="recup-fin" *ngIf="appareil.nombre_de_vasque"><p>Nombre de vasque</p><p>:</p><p>{{(appareil.nombre_de_vasque)}}</p></span>
            
         </div>
         
