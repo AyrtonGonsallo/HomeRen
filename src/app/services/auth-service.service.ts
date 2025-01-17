@@ -17,7 +17,10 @@ export class AuthServiceService {
    */
   setUser(user: any): void {
     if (this.isBrowser()) {
+      const expirationTime = new Date().getTime() + 2 * 60 * 1000; // 2 minutes
+
       localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+      localStorage.setItem(this.USER_KEY + '_expiration', expirationTime.toString());
       this.isConnectedSubject.next(true);
       this.router.navigate(['/']);
     }
@@ -29,7 +32,10 @@ export class AuthServiceService {
    */
   setUserWithoutRedirect(user: any): void {
     if (this.isBrowser()) {
+      const expirationTime = new Date().getTime() + 2 * 60 * 1000; // 2 minutes
+
       localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+      localStorage.setItem(this.USER_KEY + '_expiration', expirationTime.toString());
       this.isConnectedSubject.next(true);
       //this.router.navigate(['/']);
     }
@@ -41,6 +47,13 @@ export class AuthServiceService {
    */
   getUser(): any | null {
     if (this.isBrowser()) {
+      const expiration = localStorage.getItem(this.USER_KEY + '_expiration');
+      const now = new Date().getTime();
+
+      if (expiration && now > +expiration) {
+        this.logout(); // Expired, log out the user
+        return null;
+      }
       const user = localStorage.getItem(this.USER_KEY);
       return user ? JSON.parse(user) : null;
     }
@@ -53,6 +66,7 @@ export class AuthServiceService {
   logout(): void {
     if (this.isBrowser()) {
       localStorage.removeItem(this.USER_KEY);
+      localStorage.removeItem(this.USER_KEY + '_expiration');
       this.isConnectedSubject.next(false);
       this.router.navigate(['/connexion']);
     }

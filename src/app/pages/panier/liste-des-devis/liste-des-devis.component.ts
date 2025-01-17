@@ -26,7 +26,7 @@ export class ListeDesDevisComponent {
       (items) => {
         this.listOfData = items;
         console.log('Devis du panier: ', this.listOfData);
-        this.total=this.panierService.getTotal()
+        this.total=parseFloat(this.panierService.getTotal().toFixed(2));
       },
       (error) => {
         console.error('Erreur lors de la récupération des devis :', error);
