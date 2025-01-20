@@ -17,7 +17,7 @@ export class AuthServiceService {
    */
   setUser(user: any): void {
     if (this.isBrowser()) {
-      const expirationTime = new Date().getTime() + 2 * 60 * 1000; // 2 minutes
+      const expirationTime = new Date().getTime() + 15 * 60 * 1000; // 2 minutes
 
       localStorage.setItem(this.USER_KEY, JSON.stringify(user));
       localStorage.setItem(this.USER_KEY + '_expiration', expirationTime.toString());
@@ -32,7 +32,7 @@ export class AuthServiceService {
    */
   setUserWithoutRedirect(user: any): void {
     if (this.isBrowser()) {
-      const expirationTime = new Date().getTime() + 2 * 60 * 1000; // 2 minutes
+      const expirationTime = new Date().getTime() + 15 * 60 * 1000; // 2 minutes
 
       localStorage.setItem(this.USER_KEY, JSON.stringify(user));
       localStorage.setItem(this.USER_KEY + '_expiration', expirationTime.toString());

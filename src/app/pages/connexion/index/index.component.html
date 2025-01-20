@@ -40,23 +40,12 @@
           </nz-form-item>
           <nz-form-item nz-row class="register-area">
             <nz-form-control [nzSpan]="14" [nzOffset]="6">
-              <button nz-button  nzType="text" class="flx-cnt-btn" (click)="showModal()"><span>J’ai oublié mon mot de passe</span></button>
+              <a   nzType="text" class="flx-cnt-btn" (click)="showModal()"><span>J’ai oublié mon mot de passe</span></a>
 
             </nz-form-control>
           </nz-form-item>
 
-          <nz-modal [(nzVisible)]="isVisible" nzTitle="Récupération de mot de passe" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-            <ng-container *nzModalContent>
-              <form nz-form [formGroup]="passforgotForm" (ngSubmit)="submitpassForgotForm()">
-                <nz-form-item>
-                  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
-                  <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-                    <input nz-input formControlName="email" id="email" />
-                  </nz-form-control>
-                </nz-form-item>
-                </form>
-            </ng-container>
-          </nz-modal>
+          
           <nz-form-item nz-row class="register-area">
             <nz-form-control [nzSpan]="14" [nzOffset]="6">
               <button class="btn-envoyer" nz-button nzType="primary">Se connecter</button>
@@ -69,6 +58,24 @@
             </nz-form-item>
   
         </form>
+        <nz-modal [(nzVisible)]="isVisible" nzTitle="Récupération de mot de passe" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+          <ng-container *nzModalContent>
+            <form nz-form [formGroup]="passforgotForm" (ngSubmit)="submitpassForgotForm()">
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Email invalide!">
+                  <input nz-input formControlName="email" id="email" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item nz-row class="register-area">
+                <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                  
+                  <button nz-button nzType="primary" [disabled]="!passforgotForm.valid">Récupération</button>
+                </nz-form-control>
+              </nz-form-item>
+              </form>
+          </ng-container>
+        </nz-modal>
       </div>
 
 

@@ -144,3 +144,7 @@ form .ant-row {justify-content: space-around;}
     .a-form{margin-left: 0px; margin: auto;}
 
 }
+.no-dot > label::after{
+  display: none !important;
+  color: white !important;
+}
