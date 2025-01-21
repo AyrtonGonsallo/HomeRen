@@ -44,8 +44,9 @@ export class ListeDesDevisComponent {
   Check_login_and_send_mails_details(){
     this.authService.getIsConnected().subscribe((isConnected) => {
       this.isconnected = isConnected;
-      let user_id=this.authService.getUser().Id
+      
       if (this.isconnected) {
+        let user_id=this.authService.getUser().Id
         console.log('L\'utilisateur est connecté :', this.isconnected," id : ",user_id);
         this.userService.sendAllPayedDevisPiecetoUser(user_id).subscribe(
           (response) => {

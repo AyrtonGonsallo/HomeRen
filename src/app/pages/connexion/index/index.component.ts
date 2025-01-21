@@ -191,15 +191,24 @@ export class IndexComponent {
   passforgotForm: FormGroup<{
     email: FormControl<string>;
   }>;
+  recup_reussie=false
+  recup_echouee=false
   submitpassForgotForm(): void {
     if (this.passforgotForm.valid) {
       console.log('submit', this.passforgotForm.value);
       this.userService.restaurepassword(this.passforgotForm.value.email??'').subscribe(
         (response: any) => {
           console.log('restauration de mot de passe reussie:', response);
+          this.recup_reussie=true
+          setTimeout(() => {
+            this.isVisible=false
+          }, 5000);
+
+         
         },
         (error: any) => {
           console.error('Erreur lors de la restauration de mot de passe :', error);
+          this.recup_echouee=true
         }
       );
     } else {

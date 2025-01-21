@@ -604,6 +604,7 @@ export class IndexComponent {
         },
         (error: any) => {
           console.error('Erreur lors de l\'inscription\' :', error);
+          this.error_msg=error.error.error
         }
       );
     } else {

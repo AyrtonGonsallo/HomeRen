@@ -60,6 +60,9 @@
         </form>
         <nz-modal [(nzVisible)]="isVisible" nzTitle="Récupération de mot de passe" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
           <ng-container *nzModalContent>
+            
+            <nz-alert *ngIf="recup_reussie" nzType="success" nzMessage="Restauration du mot de passe réussie. Veuillez consulter l'adresse renseignée."></nz-alert>
+            <nz-alert *ngIf="recup_echouee" nzType="error" nzMessage="Une erreur s'est produite lors de la restauration du mot de passe."></nz-alert>
             <form nz-form [formGroup]="passforgotForm" (ngSubmit)="submitpassForgotForm()">
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
@@ -70,7 +73,7 @@
               <nz-form-item nz-row class="register-area">
                 <nz-form-control [nzSpan]="14" [nzOffset]="6">
                   
-                  <button nz-button nzType="primary" [disabled]="!passforgotForm.valid">Récupération</button>
+                  <button nz-button nzType="primary" [disabled]="!passforgotForm.valid">Envoyer</button>
                 </nz-form-control>
               </nz-form-item>
               </form>

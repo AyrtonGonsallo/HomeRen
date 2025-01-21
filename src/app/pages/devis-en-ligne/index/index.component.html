@@ -376,10 +376,10 @@
             <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
             <ng-template #errorTpl let-control>
               @if (control.errors?.['required']) {
-                Please confirm your password!
+                Merci de confirmer votre mot de passe!
               }
               @if (control.errors?.['confirm']) {
-                Two passwords that you enter is inconsistent!
+                Les mots de passe doivent coïncider!
               }
             </ng-template>
           </nz-form-control>
