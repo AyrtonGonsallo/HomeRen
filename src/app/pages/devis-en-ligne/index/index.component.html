@@ -86,7 +86,7 @@
               <div class="pcs-devis" id="piece-{{piece.ID}}" *ngFor="let piece of ppc.Pieces" (click)="selectPiece(piece.ID)">
                  <img src="{{baseurl}}{{piece.Image_presentation}}" alt="">
                  <p class="blanc pcs-devis-ttle"><strong>{{piece.Titre}}</strong></p>
-                 <div *ngIf="selectedPieceId === piece.ID" class="checkmark-overlay"> <i class="fas fa-check"></i></div>
+                 <div *ngIf="selectedPieceId === piece.ID" class="checkmark-overlay"><span nz-icon nzType="check" nzTheme="outline"></span></div>
               </div>
            </div>
         </div>
@@ -283,10 +283,13 @@
       </div>
    </div>
    <div class="steps-action">
+    <p *ngIf="current == 5" class="center"> <strong>Si vous souhaitez obtenir d'autres tarifs :</strong></p>
+
     <div nz-row class="div-btn-flx-frm">
       <div nz-col nzXs="20" nzSm="20" nzMd="20" nzLg="10" nzXl="10">
-        <button *ngIf="current == 5" nz-button nzType="default" (click)="addtask()" class="btn-suiv btn-add-pre" >
-          <span>Ajouter une prestation - {{selectedPiece?.Titre}}</span>
+        
+        <button *ngIf="current == 5" nz-button nzType="default" (click)="addtask()" class="btn-suiv btn-resp btn-retour" >
+          <span>Pour {{get_piece_prefix(selectedPiece?.ID)}} {{selectedPiece?.Titre}}</span>
         </button>
       </div>
       <div nz-col nzXs="20" nzSm="20" nzMd="20" nzLg="10" nzXl="10" class="div-btn-frm">
@@ -294,26 +297,29 @@
           <span>{{ current === 5 ? 'Finaliser mon devis - '+selectedPiece?.Titre : 'Suivant' }}</span>
           
         </button> -->
-        <button nz-button nzType="default" (click)="next()" *ngIf="current<6" [disabled]="disable_next()" class="btn-prect">
-          <span> {{ current === 5 ? 'Finaliser mon devis - '+selectedPiece?.Titre : 'Suivant' }} 
-            <span nz-icon nzType="{{ current === 5 ? 'file-done': 'arrow-right' }}" nzTheme="outline"></span> 
-          </span>
-         </button>
+        <button *ngIf="current == 5" nz-button nzType="default" (click)="submit_devis_and_choose_piece()" class=" btn-suiv btn-resp btn-retour" >
+          <span>Pour une autre pièce</span>
+        </button>
 
       </div>
     </div>
      
      <div *ngIf="current == 5">
-      <p class="dv-pc-ou"><strong>- ou -</strong></p>
+      <p class="dv-pc-ou" class="center"><strong>Si vous avez fini :</strong></p>
     </div>
-     <button *ngIf="current == 5" nz-button nzType="default" (click)="submit_devis_and_choose_piece()" class=" btn-suiv btn-resp btn-retour" >
-      <span>Choisir une autre pièce</span>
-    </button>
+    
+
+    <button nz-button nzType="default" (click)="next()" *ngIf="current<6" [disabled]="disable_next()" class="btn-prect">
+      <span> {{ current === 5 ? 'Recevoir mon devis' : 'Suivant' }} 
+        <!-- <span nz-icon nzType="{{ current === 5 ? 'file-done': 'arrow-right' }}" nzTheme="outline"></span>  -->
+      </span>
+     </button>
+
    </div>
 </div>
 
 
-<nz-modal class="no-footer" nzFooter="" [(nzVisible)]="display_modal_connection" nzTitle="Plonger dans l'univers HomeRen !" (nzOnCancel)="modal_connection_handleCancel()" (nzOnOk)="modal_connection_handleOk()">
+<nz-modal class="no-footer pop-devis" nzFooter="" [(nzVisible)]="display_modal_connection" nzTitle="Plonger dans l'univers HomeRen !" (nzOnCancel)="modal_connection_handleCancel()" (nzOnOk)="modal_connection_handleOk()">
   <ng-container *nzModalContent>
     <div *ngIf="has_error" class="error-message"> {{error_msg}}</div>
     <div *ngIf="se_connecter">
@@ -357,7 +363,7 @@
 
 
     <div *ngIf="s_inscrire">
-      <form nz-form [formGroup]="registrationForm" (ngSubmit)="submitRegistrationForm()">
+      <form nz-form [formGroup]="registrationForm" (ngSubmit)="submitRegistrationForm()" class="form-devis-pop">
         <nz-form-item>
           <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
@@ -390,7 +396,7 @@
             <label nz-checkbox formControlName="agree">
               <span>
                 J'ai lu les 
-                <a>conditions</a>
+                <a style="font-size: 13px;">conditions</a>
               </span>
             </label>
           </nz-form-control>

@@ -1,9 +1,8 @@
 
 <div class="recap-div devis-content">
-    <span class="recup-fin recap-piece">{{selectedPiece.Titre}}</span>
+    <span class="recup-fin recap-piece">{{selectedPiece.Titre}} - Installation de nouveaux équipements sanitaires</span>
     
     <div style="width: 100%;" class="left"><span class="mur-ttl">Pose de nouveaux équipements</span></div>
-
     <div *ngFor="let appareil of appareils_a_ajouter">
         <div *ngIf="appareil.active">
             <span class="recup-fin"><p>{{get_title(appareil.modele)}}</p></span>

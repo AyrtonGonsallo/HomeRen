@@ -58,12 +58,12 @@
             </nz-form-item>
   
         </form>
-        <nz-modal [(nzVisible)]="isVisible" nzTitle="Récupération de mot de passe" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <nz-modal [(nzVisible)]="isVisible" nzTitle="Récupération de mot de passe" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" class="pop-cnx">
           <ng-container *nzModalContent>
             
             <nz-alert *ngIf="recup_reussie" nzType="success" nzMessage="Restauration du mot de passe réussie. Veuillez consulter l'adresse renseignée."></nz-alert>
             <nz-alert *ngIf="recup_echouee" nzType="error" nzMessage="Une erreur s'est produite lors de la restauration du mot de passe."></nz-alert>
-            <form nz-form [formGroup]="passforgotForm" (ngSubmit)="submitpassForgotForm()">
+            <form nz-form [formGroup]="passforgotForm" (ngSubmit)="submitpassForgotForm()" class="form-cnx-pop">
               <nz-form-item>
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Email invalide!">

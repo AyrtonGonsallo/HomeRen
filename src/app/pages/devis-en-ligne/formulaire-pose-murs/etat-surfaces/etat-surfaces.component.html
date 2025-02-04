@@ -2,8 +2,9 @@
 <form [formGroup]="poseMursForm" (ngSubmit)="onPoseMursSubmit()">
 
   <div formArrayName="murs">
-   <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
+    <div class="mur-bg-div">Murs</div>
 
+   <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
      <div class="mur-btn-div">
        <span class="mur-ttl">Mur {{i+1}}</span>
      </div>

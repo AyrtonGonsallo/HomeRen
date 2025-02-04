@@ -440,7 +440,7 @@ export class IndexComponent {
     }, 2000);
    }
   
-    
+  
     
   }
   jump(): boolean {//pour les cas ou on doit sauter des etapes
@@ -511,6 +511,15 @@ export class IndexComponent {
     
    return false
     
+  }
+
+
+  get_piece_prefix(pieceID:number){
+    if(pieceID ==6){
+      return "le";
+    }else{
+      return "la";
+    }
   }
 
   display_modal_connection=false

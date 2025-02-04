@@ -3,6 +3,8 @@
     
 
      <div formArrayName="murs">
+      <div class="mur-bg-div">Murs</div>
+
       <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i" >
         <div class="mur-btn-div">
           <span class="mur-ttl">Mur {{i+1}}</span>
@@ -39,11 +41,11 @@
 
 
          </div>
-         <div nz-col class="row-w-grid4">
+         <div nz-col class="row-w-grid9">
           <label>
             Revêtement à déposer <span class="error-message">*</span>:</label> 
           
-          <nz-radio-group   formControlName="depose" class="flx-radio-row3">
+          <nz-radio-group   formControlName="depose" class="flx-radio-row2">
             <div *ngFor="let option of type_de_depose" class="parquet-option">
               <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix" class="radio-span">
                 <span>{{ option.Label }}</span>

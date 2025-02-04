@@ -32,7 +32,7 @@
                     Les cloisons sont requises.
                   </div>
                 </div>
-               <div nz-row nzJustify="start" class="ant-col-flx coll-100" >
+               <div nz-row nzJustify="start" class="ant-col-flx flx-radio-row3 coll-100">
                   <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                     <label for="longueur">Longueur (cm)<span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
                     <input type="number" id="longueur" formControlName="longueur" min="1" max="20000">
@@ -65,45 +65,43 @@
                       Le nombre de portes est invalide.
                     </div>-->
                    </div>
-                   
-                  
-                   <div nz-col nzSpan="6" class="ant-col tooltip-srf"> 
-                    <label for="image">Image : <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
-                      <i class="fas fa-question-circle"></i>
-                    </a></label>
-                    
-                    <input type="file" id="image" (change)="onmursNonporteursFileChange($event, i)" accept="image/*">
-                    
-                   <ng-template #tooltipImage>
-                     <div class="tooltip-content">
-                       <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
-                     </div>
-                   </ng-template> 
-                 </div>
-
-                   <div  nz-col class="row-w-grid coll-100">
-                    <label for="cloison">Cloison<span class="error-message">*</span> :</label>
-                      <nz-radio-group formControlName="cloison" class="flx-radio-row2">
-                        <!-- Reusable template for displaying options with PDFs -->
-                        <ng-container>
-                          <div *ngFor="let option of gammes_cloison" class="parquet-option">
-                            <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
-                              <span>
-                                <!-- Dynamically display the label based on the type -->
-                                 {{ option.Label }}
-                              </span>
-                            </label>
-                          
-                          </div>
-                        </ng-container>
-                      </nz-radio-group>
-                      <!-- <div *ngIf="isclicked && mursNonporteurs.controls[i].get('cloison')?.invalid " class="error-message left">
-                        Les cloisons sont requises.
-                      </div>-->
-                    </div>
-                  
-              
+                              
                 </div>
+
+                <div  nz-col class="row-w-grid coll-100 ">
+                  <label for="cloison">Cloison<span class="error-message">*</span> :</label>
+                    <nz-radio-group formControlName="cloison" class="flx-radio-row2">
+                      <!-- Reusable template for displaying options with PDFs -->
+                      <ng-container>
+                        <div *ngFor="let option of gammes_cloison" class="parquet-option">
+                          <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
+                            <span>
+                              <!-- Dynamically display the label based on the type -->
+                               {{ option.Label }}
+                            </span>
+                          </label>
+                        
+                        </div>
+                      </ng-container>
+                    </nz-radio-group>
+                    <!-- <div *ngIf="isclicked && mursNonporteurs.controls[i].get('cloison')?.invalid " class="error-message left">
+                      Les cloisons sont requises.
+                    </div>-->
+                  </div>
+                <div nz-col nzSpan="6" class="ant-col tooltip-srf"> 
+                  <label for="image">Image : <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
+                    <i class="fas fa-question-circle"></i>
+                  </a></label>
+                  
+                  <input type="file" id="image" (change)="onmursNonporteursFileChange($event, i)" accept="image/*">
+                  
+                 <ng-template #tooltipImage>
+                   <div class="tooltip-content">
+                     <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
+                   </div>
+                 </ng-template> 
+               </div>
+
               </div>
              </div>
               <div class="col-w-75 coll-100">
@@ -121,7 +119,7 @@
             {{glob_err_form2}}
           </div>
           <div formArrayName="ouverturePartielle">
-            <img src="/assets/dimensions.png" style="margin-top:30px;">
+            <!-- <img src="/assets/dimensions.png" style="margin-top:30px;">-->
            <div *ngFor="let mur of ouverturePartielle.controls; let i = index" [formGroupName]="i" >
              <div class="mur-btn-div coll-100">
                <span class="mur-ttl">Ouverture mur nº{{i+1}}</span>
@@ -156,17 +154,17 @@
             </div>
 
              
-             <div nz-row nzJustify="start" class="ant-col-flx coll-100">
+             <div nz-row nzJustify="start" class="ant-col-flx coll-100" style="grid-template-columns: 1fr!important;">
                
                <div nz-col nzSpan="6" class="ant-col tooltip-srf">
-                  <label for="longueur">Longueur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
+                  <label for="longueur">Longueur du mur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
                   <input type="number" id="longueur" formControlName="longueur" min="1" max="30000">
                 </div>
                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur')?.invalid " class="error-message">
                    La longueur est invalide.
                </div>-->
                 <div nz-col nzSpan="6" class="ant-col tooltip-srf">
-                  <label for="hauteur">Hauteur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
+                  <label for="hauteur">Hauteur du mur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
                   <input type="number" id="hauteur" formControlName="hauteur" min="1" max="3000">
                 </div>
                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur')?.invalid " class="error-message">
@@ -211,19 +209,7 @@
                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_depuis_le_plafond')?.invalid " class="error-message">
                   La hauteur depuis le plafond est invalide.
                 </div>-->
-                <div nz-col nzSpan="6" class="ant-col tooltip-srf"> 
-                  <label for="image">Image : <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
-                    <i class="fas fa-question-circle"></i>
-                 </a></label>
-                  
-                  <input type="file" id="image" (change)="onouverturePartielleFileChange($event, i)" accept="image/*">
-                  
-                 <ng-template #tooltipImage>
-                   <div class="tooltip-content">
-                     <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
-                   </div>
-                 </ng-template>
-                </div>
+                
 
                 
                
@@ -253,6 +239,22 @@
                   </ng-container>
                 </nz-radio-group>
               </div>
+
+              <div nz-col nzSpan="6" class="ant-col tooltip-srf"> 
+                <label for="image">Image : <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
+                  <i class="fas fa-question-circle"></i>
+               </a></label>
+                
+                <input type="file" id="image" (change)="onouverturePartielleFileChange($event, i)" accept="image/*">
+                
+               <ng-template #tooltipImage>
+                 <div class="tooltip-content">
+                   <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
+                 </div>
+               </ng-template>
+              </div>
+
+
             </div>
            </div>
            <div class="col-w-75 coll-100">

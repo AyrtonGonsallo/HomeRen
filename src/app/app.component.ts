@@ -68,13 +68,15 @@ isconnected=false
           this.userService.getFrontPageByTitle(title).subscribe(
             (response) => {
               this.page_seo_details = response;
-              console.log("Réponse de la requête getFrontPageByTitle", this.page_seo_details);
-              this.add_meta_for_url(); // Appeler directement après avoir récupéré les données
+              console.log("réponse de la requette getFrontPageByTitle",this.page_seo_details);
             },
             (error) => {
-              console.error('Erreur lors de la récupération des détails SEO :', error);
+              console.error('Erreur lors de la recuperation des details seo :', error);
             }
           );
+          setTimeout(() => {
+            this.add_meta_for_url()
+          }, 2000);
         }
           
 

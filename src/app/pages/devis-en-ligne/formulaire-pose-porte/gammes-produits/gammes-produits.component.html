@@ -1,7 +1,8 @@
 <div class="plaf-dim">
   <form [formGroup]="posePortesForm" (ngSubmit)="onPosePortesSubmit()">
     <div formArrayName="portes" >
-      
+      <div class="mur-bg-div">Portes</div>
+
       <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i">
         <div class="mur-btn-div">
           <div style="margin-right:auto;text-align: left;">
@@ -38,7 +39,7 @@
                   Portes simple :
                 </label> 
               </div>
-              <div class="flx-radio-row-3">
+              <div class="flx-radio-row3">
               <div *ngFor="let option of types_de_porte_simples">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                   {{ option.Label }}
@@ -62,7 +63,7 @@
                   Portes double :
                 </label> 
               </div>
-              <div class="flx-radio-row-3">
+              <div class="flx-radio-row3">
               <div *ngFor="let option of types_de_porte_doubles">
               <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                 {{ option.Label }}
@@ -85,7 +86,7 @@
                   Portes coulissante :
                 </label> 
               </div>
-              <div class="flx-radio-row-3">
+              <div class="flx-radio-row3">
               <div *ngFor="let option of types_de_porte_coulissantes">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                   {{ option.Label }}
@@ -139,7 +140,7 @@
             <label class="">Gamme <span class="error-message">*</span> :</label>
           </div>
           
-            <nz-radio-group formControlName="gamme" class="flx-radio-row3">
+            <nz-radio-group formControlName="gamme" class="flx-radio-row1">
               <div *ngFor="let option of gammes">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                   {{ option.Label }}

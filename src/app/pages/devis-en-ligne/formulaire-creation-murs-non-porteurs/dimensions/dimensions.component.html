@@ -4,8 +4,9 @@
       {{glob_err_form1}}
     </div>
     <div formArrayName="murs_non_porteurs">
-      
+      <div class="mur-bg-div">Murs</div>
       <div *ngFor="let mur of murs_non_porteurs.controls; let i = index" [formGroupName]="i">
+        
         <div class="mur-btn-div">
           <span class="mur-ttl">Mur {{i + 1}}</span>
           <button
@@ -78,7 +79,7 @@
   
   <nz-collapse class="row-w-collapse">
     <nz-collapse-panel
-      nzHeader="Présence de portes"
+      nzHeader="Portes"
       [nzActive]="is_active_Tp3"
       [nzExtra]="activerTp3"
       nzShowArrow="false"
@@ -134,7 +135,7 @@
 
               <div nz-col class="row-w-grid coll-100">
                 <label for="gamme">Gamme <span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
-                <nz-radio-group formControlName="gamme" class="flx-radio-row">
+                <nz-radio-group formControlName="gamme" class="flx-radio-row1">
                   <div  *ngFor="let option of gammes" >
                     <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label"><span>{{option.Label}}</span></label>
                     <!-- <a nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
