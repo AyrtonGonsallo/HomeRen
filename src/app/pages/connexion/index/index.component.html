@@ -35,7 +35,17 @@
           <nz-form-item class="cls-mdp col-5" >
               <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Mot de passe</nz-form-label>
               <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Aucun mot de passe renseigné">
-                 <input nz-input type="Password" id="password" formControlName="password"/>
+                <nz-input-group  [nzSuffix]="prefixTemplate">
+                  <input   id="password" [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" placeholder="Mot de passe" />
+                </nz-input-group>
+                <ng-template #prefixTemplate>
+                  <span
+                    nz-icon
+                    class="ant-input-password-icon"
+                    [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                    (click)="passwordVisible = !passwordVisible"
+                  ></span>
+                </ng-template>
               </nz-form-control>
           </nz-form-item>
           <nz-form-item nz-row class="register-area">

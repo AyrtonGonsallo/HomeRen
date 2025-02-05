@@ -29,6 +29,20 @@
       </div>
       <div>
         <a class="btn-site" (click)="Check_login_and_send_mails_details()">Valider mon panier</a>
+
+       
       </div>
     </div>
+
+    <nz-result
+      nzStatus="success" *ngIf="checkout_succeed"
+      nzTitle="Votre paiement à été accepté !"
+      nzSubTitle="Vous receverez les détails par mail."
+    >
+      
+    </nz-result>
+
+    <nz-result *ngIf="checkout_cancel" nzStatus="warning" nzTitle="Votre paiement à été annulé">
+      
+    </nz-result>
 </div>

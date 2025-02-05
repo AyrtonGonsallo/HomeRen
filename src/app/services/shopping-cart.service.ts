@@ -3,6 +3,7 @@ import { ApiConceptsEtTravauxService } from './api-concepts-et-travaux.service';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
+import { AuthServiceService } from './auth-service.service';
 interface CartItem {
      ID: number;
     Username: string;
@@ -23,7 +24,7 @@ export class ShoppingCartService {
   private itemsSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
   private items: CartItem[] = [];
 
-  constructor(private http: HttpClient, private userService: ApiConceptsEtTravauxService) {
+  constructor(private http: HttpClient, private userService: ApiConceptsEtTravauxService,private authService:AuthServiceService) {
     if (typeof window !== 'undefined') {
       this.initializeCart();
     }
@@ -67,8 +68,8 @@ export class ShoppingCartService {
   getTotal(): number {
     return this.items.reduce((total, item) => total + (item.Prix ?? 0), 0);
   }
-  valider_devis(id:number){
-    this.userService.validerDevisPiece(id,{"id":id}).subscribe(
+  delete_devis(id:number){
+    this.userService.deleteDevisPiece(id).subscribe(
       (response) => {
         console.log("devis validé")
         this.initializeCart()
@@ -78,6 +79,10 @@ export class ShoppingCartService {
       })
   }
 
+  
+refresh(){
+  this.initializeCart()
+}
 
 
   private initializeCart(): void {
@@ -92,7 +97,7 @@ export class ShoppingCartService {
             username: this.browserInfo,
             ip: this.userIp,
           };
-          this.userService.getAllPayedDevisPiecebyDeviceID(this.getUniqueDeviceId()).subscribe(
+          this.userService.getAllNoPayedDevisPiecebyUser(this.getUniqueDeviceId(),this.authService.getUser()?.Id??0).subscribe(
             (response) => {
               this.items = response;
               this.itemsSubject.next(this.items);

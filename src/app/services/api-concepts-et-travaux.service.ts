@@ -136,6 +136,13 @@ getAllPayedDevisPiecebyUsernameAndIp(data: any): Observable<any> {
   return this.http.post<any>(`${environment.apiUrl}/get_no_payed_devis_piece`, data);
 }
 
+createCheckoutSession(data: any): Observable<any> {
+  return this.http.post<any>(`${environment.apiUrl}/create-checkout-session`, data);
+}
+
+getAllNoPayedDevisPiecebyUser(deviceid:string,userid:number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_no_payed_devis_piece_by_user/${deviceid}/${userid}`);
+}
 getAllPayedDevisPiecebyDeviceID(deviceid:string): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_no_payed_devis_piece_by_device_id/${deviceid}`);
 }
@@ -144,6 +151,10 @@ sendAllPayedDevisPiecetoUser(userid:number): Observable<any> {
 }
 validerDevisPiece(id:number,body: any): Observable<any> {
   return this.http.put<any>(`${environment.apiUrl}/valider_devis_piece/${id}`,body);
+}
+
+deleteDevisPiece(id:number): Observable<any> {
+  return this.http.delete<any>(`${environment.apiUrl}/delete_devis_piece/${id}`);
 }
 get_etapes_devis(): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_etapes_devis`);
