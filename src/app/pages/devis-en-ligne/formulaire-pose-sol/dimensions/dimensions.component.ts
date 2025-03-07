@@ -108,5 +108,11 @@ export class PoseSolDimensionsComponent {
       );
 
     }
+
+    blockComma(event: KeyboardEvent) {
+      if (event.key === ',') {
+        event.preventDefault();
+      }
+    }
   }
   

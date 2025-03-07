@@ -714,12 +714,12 @@ export class IndexComponent {
     );
   
     if (!currentStep) {
-      return 'Pas de description pour cette étape';
+      return '';
     }
   
     // Si current est 0, 1, 5, ou 6, on prend la description générale
     if (this.current === 0 || this.current === 1 || this.current === 5 || this.current === 6) {
-      return currentStep.Description || 'Pas de description pour cette étape';
+      return currentStep.Description || '';
     }
   
     // Sinon, on prend la description de la pièce correspondante
@@ -737,7 +737,7 @@ export class IndexComponent {
       case 6:
         return currentStep.Description_salon || currentStep.Description;
       default:
-        return currentStep.Description || 'Pas de description pour cette étape';
+        return currentStep.Description || '';
     }
   }
   

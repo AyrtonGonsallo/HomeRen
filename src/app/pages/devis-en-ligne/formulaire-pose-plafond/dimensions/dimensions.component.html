@@ -22,12 +22,12 @@
         
         <div nz-col nzSpan="6" class="ant-col ">
            <label for="longueur">Longueur (cm) <span class="error-message">*</span> : </label>
-           <input type="number" id="longueur" formControlName="longueur" max="10000" min="1">
+           <input (keypress)="blockComma($event)"  type="number" id="longueur" formControlName="longueur" max="10000" min="1">
         </div>
         
         <div nz-col nzSpan="6" class="ant-col">
           <label for="largeur">Largeur (cm) <span class="error-message">*</span> : </label>
-          <input type="number" id="largeur" formControlName="largeur" max="10000" min="1">
+          <input (keypress)="blockComma($event)"  type="number" id="largeur" formControlName="largeur" max="10000" min="1">
         </div>
         <!--<div *ngIf="isclicked && posePlafondForm.get('largeur')?.invalid " class="error-message">
          La largeur est invalide.
@@ -37,7 +37,7 @@
       <div nz-col nzSpan="6" class="row-w-grid" [nzXs]="24" [nzSm]="6">
         <label for="hauteur">
           Hauteur du plafond (cm)<span class="error-message">*</span> : </label>
-        <input type="number" id="hauteur" formControlName="hauteur" required max="600" min="1">
+        <input (keypress)="blockComma($event)"  type="number" id="hauteur" formControlName="hauteur" required max="600" min="1">
       </div>
 
 
@@ -45,7 +45,7 @@
         <label for="image">Image : <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
          <i class="fas fa-question-circle"></i>
        </a></label>
-        <input type="file" id="image" (change)="onFileChange($event,posePlafondForm)" accept="image/*">
+        <input  type="file" id="image" (change)="onFileChange($event,posePlafondForm)" accept="image/*">
         
         <ng-template #tooltipImage>
          <div class="tooltip-content">

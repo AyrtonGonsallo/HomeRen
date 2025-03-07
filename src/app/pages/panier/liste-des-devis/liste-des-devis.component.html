@@ -1,11 +1,11 @@
 <div class="center section-panier">
-    <table>
+    <table *ngIf="!checkout_succeed">
         <thead>
           <tr>
             <th>ID</th>
             <th>Date</th>
             <th>Piece</th>
-            <th>Prix par tâches</th>
+            <th>Prix HT par tâches</th>
             <th>Prix</th>
             <th>Action</th>
           </tr>
@@ -16,16 +16,16 @@
             <td>{{ data.Date | date:'yyyy-MM-dd HH:mm:ss' }}</td>
             <td>{{ data.Piece?.Titre }}</td>
             <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }} : {{ tache?.Prix }}€<br></span></td>
-            <td>{{ data.Prix }}€</td>
+            <td>{{ data.Prix*1.2 }}€</td>
             <td>
               <a (click)="supprimer_devis(data.ID)"><fa-icon [icon]="faTrash" class="mr-10"></fa-icon></a>
             </td>
           </tr>
         </tbody>
     </table>
-    <div class="total-panier-container">
+    <div class="total-panier-container" *ngIf="!checkout_succeed">
       <div class="tot-pan">
-        Total ttc: {{total}}€
+        Total TTC : {{total}}€
       </div>
       <div>
         <a class="btn-site" (click)="Check_login_and_send_mails_details()">Valider mon panier</a>

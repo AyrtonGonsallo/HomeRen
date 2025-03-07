@@ -99,5 +99,11 @@ export class DimensionsPosePlafondComponent {
       }
     );
   }
+
+  blockComma(event: KeyboardEvent) {
+    if (event.key === ',') {
+      event.preventDefault();
+    }
+  }
   }
   

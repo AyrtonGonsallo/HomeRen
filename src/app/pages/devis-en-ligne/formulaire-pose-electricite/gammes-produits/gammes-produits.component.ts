@@ -258,6 +258,11 @@ load_gammes(){
   );
 }
 
+blockComma(event: KeyboardEvent) {
+  if (event.key === ',') {
+    event.preventDefault();
+  }
+}
 
   }
   

@@ -20,10 +20,29 @@
     <li><a routerLink="/faq" routerLinkActive="active">FAQ</a></li>
     <li><a routerLink="/form-artisan" routerLinkActive="active">Devenir partenaire</a></li>
     <li><a routerLink="/connexion" class="btn-hdr" *ngIf="!isconnected">Connexion</a> 
-      <button nz-button  *ngIf="isconnected" (click)="logout()">
-        Se déconnecter
-        <span nz-icon nzType="logout" nzTheme="outline"></span>
+      
+      <button
+        nz-button
+        nzType="primary" *ngIf="isconnected"
+        nz-popover
+        [nzPopoverTitle]="user?.Nom+' '+user?.Prenom"
+        [(nzPopoverVisible)]="out_visible"
+        (nzPopoverVisibleChange)="out_change($event)"
+        nzPopoverTrigger="click"
+        [nzPopoverContent]="contentTemplate"
+      >
+        Votre compte
       </button>
+      <ng-template #contentTemplate >
+        <a  href="{{baseurl}}/admin" target="_blank">
+          Acceder à l'espace membre
+          <span nz-icon nzType="login" nzTheme="outline"></span>
+        </a><br><br>
+        <button nz-button   (click)="logout()">
+          Se déconnecter
+          <span nz-icon nzType="logout" nzTheme="outline"></span>
+        </button>
+      </ng-template>
     </li>
     <li>
       <nz-badge [nzCount]="get_total_panier()">

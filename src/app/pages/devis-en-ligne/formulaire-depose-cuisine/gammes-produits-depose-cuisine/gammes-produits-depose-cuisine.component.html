@@ -12,7 +12,7 @@
                 </div>
                 <div nzspan="6" class="flx-radio-row3" style="padding-top: 12px;" *ngIf="appareils_cuisine[i].AfficherLongueur">
                   <label for="longueur">Longueur (cm) :</label>
-                  <input id="longueur" type="number" formControlName="longueur" min="0"/>     
+                  <input (keypress)="blockComma($event)"  id="longueur" type="number" formControlName="longueur" min="0"/>     
                 </div>  
 
                 <div  nz-col class="row-w-grid3">
@@ -66,7 +66,7 @@
                 <!-- Champ Quantité -->
                 <div nz-col class="flx-radio-row4" *ngIf="need_quantite(gammes_depose[i].ID)">
                     <label for="quantite">{{gammes_depose && gammes_depose[i] ? gammes_depose[i].Label : ''}} - quantité :</label>
-                    <input id="quantite" type="number" formControlName="quantite" min="0"/>
+                    <input (keypress)="blockComma($event)"  id="quantite" type="number" formControlName="quantite" min="0"/>
                     
                 </div>
                 <div *ngIf="gamme.get('quantite')?.invalid && isclicked" class="error-message">
@@ -75,7 +75,7 @@
 
                 <div nz-col nzSpan="24" class="flx-radio-row4" *ngIf="need_longueur(gammes_depose[i].ID)">
                   <label for="longueur">{{gammes_depose && gammes_depose[i] ? gammes_depose[i].Label : ''}} - longueur (cm) :</label>
-                  <input id="longueur" type="number" formControlName="longueur" min="0"/>
+                  <input (keypress)="blockComma($event)"  id="longueur" type="number" formControlName="longueur" min="0"/>
                 
               </div>
               <div *ngIf="gamme.get('longueur')?.invalid && isclicked" class="error-message">

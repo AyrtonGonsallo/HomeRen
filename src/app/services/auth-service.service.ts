@@ -72,6 +72,15 @@ export class AuthServiceService {
     }
   }
 
+  tomember(): void {
+    if (this.isBrowser()) {
+      localStorage.removeItem(this.USER_KEY);
+      localStorage.removeItem(this.USER_KEY + '_expiration');
+      this.isConnectedSubject.next(false);
+      window.location.href = 'https://dev.homeren.fr/admin';
+    }
+  }
+
   /**
    * Vérifie si un utilisateur est connecté.
    * @returns true si l'utilisateur est connecté, sinon false.

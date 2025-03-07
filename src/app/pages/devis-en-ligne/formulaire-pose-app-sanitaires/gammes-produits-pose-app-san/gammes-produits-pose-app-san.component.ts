@@ -255,5 +255,11 @@ tableauIds = [9, 37, 10, 2,35,38,6,36,34,42,39,40,41,];
 
   }
   
+
+  blockComma(event: KeyboardEvent) {
+    if (event.key === ',') {
+      event.preventDefault();
+    }
+  }
   }
   

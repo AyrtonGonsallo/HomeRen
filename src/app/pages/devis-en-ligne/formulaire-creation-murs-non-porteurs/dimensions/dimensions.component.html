@@ -30,7 +30,7 @@
         <div nz-row nzJustify="start" class="ant-col-flx">
           <div nz-col nzSpan="6" class="ant-col tooltip-srf">
             <label for="hauteur">Hauteur (cm)<span class="error-message">*</span> :</label>
-            <input type="number" id="hauteur" formControlName="hauteur" min="1" max="4000" />
+            <input type="number" id="hauteur" formControlName="hauteur" min="1" max="4000" (keypress)="blockComma($event)"/>
             <!--<div *ngIf="isclicked && murs_non_porteurs.controls[i].get('hauteur')?.invalid" class="error-message">
               La hauteur du mur est invalide.
             </div>-->
@@ -38,7 +38,7 @@
         
           <div nz-col nzSpan="6" class="ant-col tooltip-srf">
             <label for="longueur">Longueur (cm)<span class="error-message">*</span> :</label>
-            <input type="number" id="longueur" formControlName="longueur" min="1" max="10000" />
+            <input type="number" id="longueur" formControlName="longueur" min="1" max="10000" (keypress)="blockComma($event)" />
             <!--<div *ngIf="isclicked && murs_non_porteurs.controls[i].get('longueur')?.invalid" class="error-message">
               La longueur du mur est invalide.
             </div>-->

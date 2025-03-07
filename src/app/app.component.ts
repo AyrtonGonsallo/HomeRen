@@ -25,11 +25,26 @@ export class AppComponent implements OnInit{
   logout(){
     this.authService.logout()
   }
+
+  tomember(){
+    this.authService.tomember()
+  }
+  out_visible: boolean = false;
+
+  out_clickMe(): void {
+    this.out_visible = false;
+  }
+
+  out_change(value: boolean): void {
+    console.log(value);
+  }
+  user:any
 isconnected=false
   ngOnInit() {
     this.authService.getIsConnected().subscribe((isConnected) => {
       this.isconnected = isConnected;
       console.log('L\'utilisateur est connecté :', this.isconnected);
+      this.user=this.authService.getUser()
     });
     console.log(this.isconnected)
     this.metaService.updateTag({

@@ -252,7 +252,11 @@ appareilGroup: any;
 
 
   }
-  
+  blockComma(event: KeyboardEvent) {
+    if (event.key === ',') {
+      event.preventDefault();
+    }
+  }
   }
   
   

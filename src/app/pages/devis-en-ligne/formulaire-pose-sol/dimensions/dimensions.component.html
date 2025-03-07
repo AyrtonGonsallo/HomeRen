@@ -19,7 +19,7 @@
              Longueur (cm)
              <span class="error-message">*</span> :
            </label>
-           <input type="number" id="longueur" formControlName="longueur" min="1" max="10000"  required>
+           <input (keypress)="blockComma($event)"  type="number" id="longueur" formControlName="longueur" min="1" max="10000"  required>
            
           </div>
 
@@ -29,7 +29,7 @@
             Largeur (cm)
             <span class="error-message">*</span> :
           </label>
-          <input type="number" id="largeur" formControlName="largeur" min="1" max="10000"  required>
+          <input (keypress)="blockComma($event)"  type="number" id="largeur" formControlName="largeur" min="1" max="10000"  required>
          
         </div>
 
@@ -62,7 +62,7 @@
       <label for="image">Image :<a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
        <i class="fas fa-question-circle"></i>
      </a></label>
-      <input type="file" id="image" (change)="onFileChange($event,poseSolForm)" accept="image/*">
+      <input  type="file" id="image" (change)="onFileChange($event,poseSolForm)" accept="image/*">
       
      <ng-template #tooltipImage>
        <div class="tooltip-content">

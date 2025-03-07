@@ -35,7 +35,7 @@
                <div nz-row nzJustify="start" class="ant-col-flx flx-radio-row3 coll-100">
                   <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                     <label for="longueur">Longueur (cm)<span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
-                    <input type="number" id="longueur" formControlName="longueur" min="1" max="20000">
+                    <input (keypress)="blockComma($event)" type="number" id="longueur" formControlName="longueur" min="1" max="20000">
 
                   </div>
                   <!-- <div nz-col nzSpan="6" *ngIf="isclicked && mursNonporteurs.controls[i].get('longueur')?.invalid " class="error-message left">
@@ -44,7 +44,7 @@
                   
                   <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                     <label for="hauteur">Hauteur (cm)<span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
-                    <input type="number" id="hauteur" formControlName="hauteur" min="1" max="2000">
+                    <input (keypress)="blockComma($event)" type="number" id="hauteur" formControlName="hauteur" min="1" max="2000">
                     <!-- <div *ngIf="isclicked && mursNonporteurs.controls[i].get('hauteur')?.invalid " class="error-message left" style="width: 100%;">
                       La hauteur est invalide.
                     </div>-->
@@ -52,7 +52,7 @@
                   
                   <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                      <label for="epaisseur">Epaisseur (cm)<span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
-                     <input type="number" id="epaisseur" formControlName="epaisseur" min="1" max="20">
+                     <input (keypress)="blockComma($event)" type="number" id="epaisseur" formControlName="epaisseur" min="1" max="20">
                      <!-- <div *ngIf="isclicked && mursNonporteurs.controls[i].get('epaisseur')?.invalid " class="error-message left">
                       L'épaisseur est invalide.
                     </div>-->
@@ -60,7 +60,7 @@
                    
                    <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                      <label for="ndp">Nombre de portes <span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
-                     <input type="number" id="ndp" formControlName="ndp" min="0" max="20">
+                     <input (keypress)="blockComma($event)" type="number" id="ndp" formControlName="ndp" min="0" max="20">
                      <!-- <div *ngIf="isclicked && mursNonporteurs.controls[i].get('ndp')?.invalid " class="error-message left">
                       Le nombre de portes est invalide.
                     </div>-->
@@ -93,7 +93,7 @@
                     <i class="fas fa-question-circle"></i>
                   </a></label>
                   
-                  <input type="file" id="image" (change)="onmursNonporteursFileChange($event, i)" accept="image/*">
+                  <input (keypress)="blockComma($event)" type="file" id="image" (change)="onmursNonporteursFileChange($event, i)" accept="image/*">
                   
                  <ng-template #tooltipImage>
                    <div class="tooltip-content">
@@ -158,21 +158,21 @@
                
                <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                   <label for="longueur">Longueur du mur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
-                  <input type="number" id="longueur" formControlName="longueur" min="1" max="30000">
+                  <input (keypress)="blockComma($event)" type="number" id="longueur" formControlName="longueur" min="1" max="30000">
                 </div>
                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur')?.invalid " class="error-message">
                    La longueur est invalide.
                </div>-->
                 <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                   <label for="hauteur">Hauteur du mur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
-                  <input type="number" id="hauteur" formControlName="hauteur" min="1" max="3000">
+                  <input (keypress)="blockComma($event)" type="number" id="hauteur" formControlName="hauteur" min="1" max="3000">
                 </div>
                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur')?.invalid " class="error-message">
                    La hauteur est invalide.
                  </div>-->
                 <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                    <label for="epaisseur">Epaisseur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
-                   <input type="number" id="epaisseur" formControlName="epaisseur"  min="1" max="300">
+                   <input (keypress)="blockComma($event)" type="number" id="epaisseur" formControlName="epaisseur"  min="1" max="300">
                  </div>
                  <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('epaisseur')?.invalid " class="error-message">
                    L'épaisseur est invalide.
@@ -180,7 +180,7 @@
                  
                  <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                    <label for="longueur_ouverture">Longueur de l'ouverture (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
-                   <input type="number" id="longueur_ouverture" formControlName="longueur_ouverture"  min="1" max="30000"> 
+                   <input (keypress)="blockComma($event)" type="number" id="longueur_ouverture" formControlName="longueur_ouverture"  min="1" max="30000"> 
                  </div>
                  <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur_ouverture')?.invalid " class="error-message">
                    La longueur de l'ouverture est invalide.
@@ -188,7 +188,7 @@
 
                  <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                   <label for="hauteur_ouverture">hauteur de l'ouverture (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
-                  <input type="number" id="hauteur_ouverture" formControlName="hauteur_ouverture"  min="1" max="30000"> 
+                  <input (keypress)="blockComma($event)" type="number" id="hauteur_ouverture" formControlName="hauteur_ouverture"  min="1" max="30000"> 
                 </div>
                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_ouverture')?.invalid " class="error-message">
                   La hauteur de l'ouverture est invalide.
@@ -196,7 +196,7 @@
 
                 <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                   <label for="hauteur_depuis_le_sol">hauteur depuis le sol (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
-                  <input type="number" id="hauteur_depuis_le_sol" formControlName="hauteur_depuis_le_sol"  min="1" max="30000"> 
+                  <input (keypress)="blockComma($event)" type="number" id="hauteur_depuis_le_sol" formControlName="hauteur_depuis_le_sol"  min="1" max="30000"> 
                 </div>
                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_depuis_le_sol')?.invalid " class="error-message">
                   La hauteur depuis le sol est invalide.
@@ -204,7 +204,7 @@
 
                 <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                   <label for="hauteur_depuis_le_plafond">hauteur depuis le plafond (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
-                  <input type="number" id="hauteur_depuis_le_plafond" formControlName="hauteur_depuis_le_plafond"  min="1" max="30000"> 
+                  <input (keypress)="blockComma($event)" type="number" id="hauteur_depuis_le_plafond" formControlName="hauteur_depuis_le_plafond"  min="1" max="30000"> 
                 </div>
                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_depuis_le_plafond')?.invalid " class="error-message">
                   La hauteur depuis le plafond est invalide.

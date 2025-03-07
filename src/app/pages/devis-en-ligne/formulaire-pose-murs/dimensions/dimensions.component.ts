@@ -126,5 +126,10 @@ load_types(){
   );
 }
 
+blockComma(event: KeyboardEvent) {
+  if (event.key === ',') {
+    event.preventDefault();
+  }
+}
 }
 

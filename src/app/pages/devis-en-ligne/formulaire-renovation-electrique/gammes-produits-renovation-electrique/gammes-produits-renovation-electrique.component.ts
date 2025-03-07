@@ -89,7 +89,11 @@ export class GammesProduitsRenovationElectriqueComponent {
     }
   }
  
- 
+  blockComma(event: KeyboardEvent) {
+    if (event.key === ',') {
+      event.preventDefault();
+    }
+  }
  
   gammes_materiaux:any
   load_gammes(){

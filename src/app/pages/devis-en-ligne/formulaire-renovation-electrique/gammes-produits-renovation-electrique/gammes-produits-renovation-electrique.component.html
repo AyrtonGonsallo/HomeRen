@@ -16,7 +16,7 @@
         <div  nz-col class="">
         <div nz-col class="row-w-grid6">
           <label for="surface">Surface de la pièce (m²)<span class="error-message">*</span> : </label>
-          <input type="number" id="surface" formControlName="surface" max="100" min="1">
+          <input (keypress)="blockComma($event)"  type="number" id="surface" formControlName="surface" max="100" min="1">
         </div>
         <!--<div *ngIf="isclicked && renovationElectriqueForm.get('surface')?.invalid " class="error-message">
           La surface est invalide.
@@ -90,7 +90,7 @@
       <div nz-col nzSpan="6" class="" *ngIf="renovationElectriqueForm.get('chauffage_exist')?.value==true">
         <div  nz-col class="flx-radio-row4">
         <label for="quantite_chauffage">Quantité de chauffage <span class="error-message">*</span> : </label>
-        <input type="number" id="quantite_chauffage" formControlName="quantite_chauffage" max="10" min="1">
+        <input (keypress)="blockComma($event)"  type="number" id="quantite_chauffage" formControlName="quantite_chauffage" max="10" min="1">
         </div>
       <!--<div *ngIf="isclicked && renovationElectriqueForm.get('quantite_chauffage')?.invalid " class="error-message">
         La quantité de chauffage est invalide.

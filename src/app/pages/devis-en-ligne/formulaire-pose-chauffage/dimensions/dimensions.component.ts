@@ -80,6 +80,10 @@ export class PoseChauffageDimensionsComponent {
     });
   }
 
- 
+  blockComma(event: KeyboardEvent) {
+    if (event.key === ',') {
+      event.preventDefault();
+    }
+  }
   }
   
