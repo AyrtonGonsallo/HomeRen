@@ -108,6 +108,7 @@ export class ListeDesDevisComponent {
     const datas = {
       montant: this.total, // Assurez-vous que `this.total` est bien un nombre
       liste_devis: this.listOfData, // Une liste des devis
+      url_de_retour: environment.url_de_retour,
     };
   
     this.userService.createCheckoutSession(datas).subscribe(
