@@ -16,6 +16,7 @@ export class AppComponent implements OnInit{
   faLocationDot=faLocationDot;
   faCartShopping=faCartShopping;
   baseurl=environment.apiUrl
+  url_de_retour=environment.url_de_retour
   title = 'HomeRen';
   currentUrl: string ='';
   page_seo_details:any
