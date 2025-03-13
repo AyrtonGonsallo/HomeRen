@@ -23,10 +23,13 @@
           </tr>
         </tbody>
     </table>
-    <div class="tot-pan">
+    <div *ngIf="!checkout_succeed">
+      <div class="tot-pan">
       Total TTC : {{total | number:'1.2-2'}}€
     </div>
     <nz-divider></nz-divider>
+    </div>
+    
     <div class="total-panier-container" *ngIf="!checkout_succeed">
      
       <div>
