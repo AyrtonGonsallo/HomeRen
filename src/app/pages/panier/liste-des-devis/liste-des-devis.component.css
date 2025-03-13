@@ -30,6 +30,7 @@ th, td{
 }
 .tot-pan{
     font-weight: 900;
+    text-align: right;
     font-size: 18px;}
 
     @media only screen and (max-width: 497px) {
@@ -43,3 +44,22 @@ th, td{
         @media only screen and (max-width: 320px) {
         .total-panier-container{flex-direction: column; }
         }
+        .btn-site {
+            background-color: var(--color1);
+            border: none;
+            color: var(--color-black);
+            padding: 13px 28px;
+            text-align: center;
+            text-decoration: none;
+            font-family: 'Montserrat';
+            display: inline-block;
+            font-size: 16px;
+    }
+    .btn-site:hover {
+            background-color: var(--color2);
+            color: var(--color-white);
+    }
+    .ant-divider {
+       
+        border-top: 3px solid rgba(0, 0, 0, 0.06) !important;
+    }

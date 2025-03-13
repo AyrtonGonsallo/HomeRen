@@ -457,6 +457,8 @@ span.ant-radio + * {padding-left: 0px !important;}
 .page-form .ant-checkbox:hover { border-color:var(--color2)!important;}
 .page-form .ant-checkbox-checked .ant-checkbox-inner {border: none !important;background-color: var(--color2) !important; border-color: var(--color-white) !important; }
 .page-form .ant-input:focus-visible{border-width: 0px 0px 1px 0px !important;border-color:var(--color1)!important;}
+
+.section-connexion input{border-bottom-color: var(--color1) !important;}
 .ant-modal{
     width: 30% !important;
     height: 89%!important;
@@ -495,6 +497,12 @@ button.ant-btn.ng-star-inserted:hover { background-color: var(--color2);}
 
 }
 .col-6-w .etat-srf.tooltip-srf.ant-col.ant-col-6, .col-6-w .ant-col.ant-col-6{grid-template-columns: 2fr 1fr 0.5fr !important;}
+.mdp-oubli span{color: var(--color2);}
+.mdp-oubli:hover span{color: var(--color-black);}
+.cree-btn{font-weight: 700;color:var(--color-black) !important;}
+.cree-btn:hover{color:var(--color2) !important;}
+
+
 /**********************************************************************************************************************************************************************************************************************************************/
 /*************************************************************************************************/
 .ant-steps-item.ant-steps-item-active .ant-steps-item-title, .ant-steps-item.ant-steps-item-active svg{
@@ -698,8 +706,11 @@ text-align: left !important;}
 .sidebyside{display:flex;align-items: center !important;justify-content: center !important;}
 .ant-steps-item-custom > .ant-steps-item-container > .ant-steps-item-icon > .ant-steps-icon {line-height: 14px !important;}
 
-.total-panier-container .btn-site{color: var(--color-white)!important;}
+.total-panier-container .btn-site{color: var(--color-black)!important;}
 .steps-content input:focus{border: 1px solid var(--color1)!important;}
+.section-panier th, .section-panier span td{font-size: 'Montserrat' !important; font-size: 14px !important;}
+.div-btn-prect .btn-prect {height: 29px !important;}
+
 /********************************* style-popup**************************************************/
 .login-form .ant-input-affix-wrapper{border-bottom: 1px solid var(--color1) !important;border-left:0px !important;border-right:0px !important;border-top:0px !important;}
 .login-form .ant-input-affix-wrapper-focused{border-bottom: 1px solid var(--color2) !important;box-shadow: none !important;}

@@ -13,6 +13,6 @@ export const environment = {
     //url_de_retour:"https://homeren.fr/",
     url_de_retour:"http://localhost:4300/",
 
-    stripePublicKey:'pk_test_51PIqjhHuUJR23uZu6T6bqGO8kHYAH7Ghwg51XKHskHlQDoBiAZAOe4vQdOcts48ubKxXrbXisbKB9v9A3hkv79we00mSXjcHy8',
-    stripePrivateKey:'sk_test_51PIqjhHuUJR23uZuT8B8UCGKAObmNduji5iZwEgzb11SDEJpzHppuuy73Gh59iWsnnGvyfzNsxeZ7WJQ3isnKNAh00seDwsYiQ'
+    stripePublicKey:'pk_test_51R1pR3EDZMIS8WcN1uhuqtPviA3Dd8pEF4zJXY81VSTzZ70jGXGhLjavOwfXgkC3FI0fgF4ENGdcdIosDGFrUF4S00Z8IjZq4N',
+    stripePrivateKey:'sk_test_51R1pR3EDZMIS8WcNRA3mfHVgdM9I7UzIimfm00XwUcHMVeAu3jUIy2EFKtESsm9Ees8hCwO7j7SIuYFXqvdMOO0V00O02dyg9A'
   };

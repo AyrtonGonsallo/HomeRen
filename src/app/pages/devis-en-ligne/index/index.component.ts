@@ -73,6 +73,8 @@ export class IndexComponent {
 
       }, 100); 
     }
+
+    
   }
 
 
@@ -96,7 +98,10 @@ export class IndexComponent {
       password: this.fb.control('', [Validators.required]),
       remember: this.fb.control(true)
     });
-
+    this.passforgotForm= this.fb.group({
+      email: ['', [Validators.email, Validators.required]],
+      
+    });
     this.registrationForm = this.fb.group({
       email: this.fb.control('', [Validators.email, Validators.required]),
       password: this.fb.control('', [Validators.required]),
@@ -551,7 +556,7 @@ export class IndexComponent {
             console.log('etape courrante :', this.current);
             let devis=response.devis
             this.panier.addItem(devis)
-            
+            this.gestiondesdevisService.clearFormulaires()
           },
           (error) => {
             console.error('Erreur lors de la récupération de l\'ajout du devis :', error);
@@ -755,6 +760,54 @@ export class IndexComponent {
     return steps[stepNumber] || '';
   }
   
+  isVisible = false;
+  
+  showModal(): void {
+    this.isVisible = true;
+  }
 
+
+  
+  passforgotForm: FormGroup<{
+    email: FormControl<string>;
+  }>;
+  recup_reussie=false
+  recup_echouee=false
+  submitpassForgotForm(): void {
+    if (this.passforgotForm.valid) {
+      console.log('submit', this.passforgotForm.value);
+      this.userService.restaurepassword(this.passforgotForm.value.email??'').subscribe(
+        (response: any) => {
+          console.log('restauration de mot de passe reussie:', response);
+          this.recup_reussie=true
+          setTimeout(() => {
+            this.isVisible=false
+          }, 2000);
+
+         
+        },
+        (error: any) => {
+          console.error('Erreur lors de la restauration de mot de passe :', error);
+          this.recup_echouee=true
+        }
+      );
+    } else {
+      Object.values(this.passforgotForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
+  }
+  handleOk(): void {
+    this.submitpassForgotForm()
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
+  }
 
 }
