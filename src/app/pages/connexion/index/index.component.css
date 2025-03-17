@@ -148,3 +148,6 @@ form .ant-row {justify-content: space-around;}
 display: none !important;
 color: white !important;
 }
+.ant-result {
+  padding: 0px 32px;
+}

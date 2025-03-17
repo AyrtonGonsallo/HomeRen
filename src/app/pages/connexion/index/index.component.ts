@@ -33,6 +33,7 @@ export class IndexComponent {
           this.authService.setUser(response)
         },
         (error: any) => {
+          this.registration_done=false
           console.error('Erreur lors de la connexion :', error.error.error);
           this.error_msg=error.error.error
           this.has_error=true
@@ -143,10 +144,14 @@ export class IndexComponent {
           console.log('inscription reussie:', response);
           this.registration_done=true
           this.se_connecter=true
+          this.has_error=false
           
         },
         (error: any) => {
           console.error('Erreur lors de l\'inscription\' :', error);
+          this.has_error=true
+          this.error_msg=error.error.error
+          this.registration_done=false
         }
       );
     } else {

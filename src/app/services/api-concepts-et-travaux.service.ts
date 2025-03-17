@@ -140,6 +140,10 @@ createCheckoutSession(data: any): Observable<any> {
   return this.http.post<any>(`${environment.apiUrl}/create-checkout-session`, data);
 }
 
+updatePayedDevis(data: any): Observable<any> {
+  return this.http.post<any>(`${environment.apiUrl}/update-payed-devis`, data);
+}
+
 getAllNoPayedDevisPiecebyUser(deviceid:string,userid:number): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_no_payed_devis_piece_by_user/${deviceid}/${userid}`);
 }

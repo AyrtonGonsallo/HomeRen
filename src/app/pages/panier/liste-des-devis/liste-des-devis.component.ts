@@ -27,6 +27,53 @@ export class ListeDesDevisComponent {
     this.route.queryParams.subscribe(params => {
       if(parseInt(params['checkout'])==1){
         this.checkout_succeed=true
+         // Construire correctement l'objet à envoyer au serveur
+        
+         this.authService.getIsConnected().subscribe((isConnected) => {
+          this.isconnected = isConnected;
+        
+          if (!this.isconnected) {
+            console.log("L'utilisateur n'est pas connecté.");
+            this.router.navigate(['/connexion']);
+            return;
+          }
+        
+          this.panierService.getItems().subscribe(
+            (items) => {
+              this.listOfData = items;
+              const user_id = this.authService.getUser().Id;
+              console.log("L'utilisateur est connecté :", this.isconnected, " id : ", user_id);
+        
+              const datas = {
+                liste_devis: this.listOfData, // Une liste des devis
+              };
+        
+              // Envoyer le mail d'abord
+              this.userService.sendAllPayedDevisPiecetoUser(user_id).subscribe(
+                (mailResponse) => {
+                  console.log("Résultat de l'envoi du mail de paiement des devis : ", mailResponse);
+        
+                  // Ensuite, mettre à jour le statut des devis
+                  this.userService.updatePayedDevis(datas).subscribe(
+                    (updateResponse) => {
+                      console.log("Succès de la mise à jour du statut des devis : ", updateResponse);
+                    },
+                    (updateError) => {
+                      console.error("Erreur lors de la mise à jour du statut des devis :", updateError);
+                    }
+                  );
+                },
+                (mailError) => {
+                  console.error("Erreur lors de l'envoi du mail de paiement des devis :", mailError);
+                }
+              );
+            },
+            (error) => {
+              console.error("Erreur lors de la récupération des devis :", error);
+            }
+          );
+        });
+        
       }else if(parseInt(params['checkout'])==-1){
         this.checkout_cancel=true
       }
@@ -72,14 +119,7 @@ export class ListeDesDevisComponent {
         let user_id=this.authService.getUser().Id
         console.log('L\'utilisateur est connecté :', this.isconnected," id : ",user_id);
       
-        this.userService.sendAllPayedDevisPiecetoUser(user_id).subscribe(
-          (response) => {
-            console.log('Résultat de l\'envoi: ', response);
-          },
-          (error) => {
-            console.error('Erreur lors de la récupération des devis :', error);
-          }
-        );
+       
 
         if(this.page_actuelle_panier){
           setTimeout(() => {

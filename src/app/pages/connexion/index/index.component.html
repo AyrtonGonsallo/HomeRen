@@ -12,11 +12,7 @@
 
   <div class="col2-cnx"> 
 
-    <nz-result nzStatus="success" nzTitle="Inscription reussie!"  nzSubTitle="Vous pouvez à présent vous connecter." *ngIf="registration_done">
-    </nz-result>
-
-    <nz-result nzTitle="Erreur de connexion"  nzStatus="error" [nzSubTitle]="error_msg" *ngIf="has_error">
-    </nz-result>
+   
 
     <div class="ctct-title">
       <h1 class="txt1-pieces noir font-site center">Plonger dans l'univers HomeRen !</h1>
@@ -199,7 +195,7 @@
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Renseignez votre adresse postale">
             <input nz-input id="AdressePostale" formControlName="AdressePostale" />
         </nz-form-control>
-    </nz-form-item>
+      </nz-form-item>
 
       <nz-form-item *ngIf="role==3" class="cls-com-postal">
           <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="CommunePostale"  nzRequired>
@@ -235,7 +231,11 @@
 
       </form>
     </div>
-    
+    <nz-result nzStatus="success" nzTitle="Inscription reussie!"  nzSubTitle="Vous pouvez à présent vous connecter." *ngIf="!has_error && registration_done">
+    </nz-result>
+
+    <nz-result nzTitle="Erreur de connexion"  nzStatus="error" [nzSubTitle]="error_msg" *ngIf="!registration_done && has_error">
+    </nz-result>
 
   </div>
 
