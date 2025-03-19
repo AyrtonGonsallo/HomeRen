@@ -3,11 +3,11 @@
 <form [formGroup]="poseMursForm" (ngSubmit)="onPoseMursSubmit()">
 
   <div formArrayName="murs" class="tooltip-srf">
-    <div class="mur-bg-div">Murs</div>
+    
 
     <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
-      <div class="mur-btn-div">
-        <div style="text-align: left !important;width: 100%!important;"><span class="mur-ttl">Mur {{i+1}}</span> - <span for="gamme" class="mur-ttl">Gamme </span></div>
+      <div class="mur-btn-div  grid-1">
+        <div style="text-align: left !important;width: 100%!important;"><span class="mur-ttl">Choisissez le type de revêtement et la gamme du mur {{i+1}}</span></div>
       </div>
       <div nz-col nzJustify="start">
           
@@ -111,7 +111,7 @@
            </div>
 
            <div  nz-col class="row-w-grid3">
-              <div class="" style="">
+              <div class="" >
                 <label  class="" >Bois :</label>
                </div>
                <div class="flx-radio-row2-w">

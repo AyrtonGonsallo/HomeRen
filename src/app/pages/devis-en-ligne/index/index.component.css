@@ -212,3 +212,16 @@ ul{
 .flx-cnt-btn {padding: 0px !important;height: 0px;color: var(--color1);background-color: transparent!important;}
 .flx-cnt-btn:hover{color: var(--color2);}
 .flx-cnt-btn span{font-size: 15px !important;}
+.fs-13{
+    font-size: 13px !important;
+}
+.aic{
+    align-items: center;
+}
+.left{
+    width: fit-content;
+    margin-bottom: 10px;
+}
+.ant-divider{
+    border-top: 3px solid rgba(0, 0, 0, 0.06);
+}

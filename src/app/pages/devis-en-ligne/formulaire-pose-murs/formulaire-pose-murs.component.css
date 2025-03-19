@@ -102,3 +102,6 @@ form{
     @media screen and (max-width: 375px) {
     .plaf-dim input{ width: 90% !important;}
 }*/
+.grid-1{
+    grid-template-columns: 1fr !important;
+}

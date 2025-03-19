@@ -32,9 +32,31 @@
     
     <div class="total-panier-container" *ngIf="!checkout_succeed">
      
-      <div>
-        <a class="btn-site piece-btn  mt-15" (click)="Check_login_and_send_mails_details()"><b>Payer</b></a>
+      <div class="col-cards-btn">
 
+        <div class="div-cards">
+          <div class="image-container">
+            <img _ngcontent-ng-c2419133293="" src="/assets/controle-qualite.svg">
+            <span class="caption">Contrôle <br>de qualité</span>
+        </div>          
+        <div class="image-container">
+          <img src="/assets/service-info.svg" alt="Service Info">
+          <span class="caption">Service <br>Info</span>
+      </div>
+      
+      <div class="image-container">
+          <img src="/assets/paiement-securise.svg" alt="Paiement Sécurisé">
+          <span class="caption">Paiement <br>Sécurisé</span>
+      </div>
+          <img src="/assets/card-visa.png" alt="">
+          <img src="/assets/master-card.png" alt="">
+          <img src="/assets/cb-card.png" alt="">
+
+        </div>
+
+        <div>
+          <a class="btn-site piece-btn" (click)="Check_login_and_send_mails_details()"><b>Payer</b></a>
+        </div>
        
       </div>
     </div>

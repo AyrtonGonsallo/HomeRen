@@ -3,11 +3,11 @@
     
 
      <div formArrayName="murs">
-      <div class="mur-bg-div">Murs</div>
+     
 
       <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i" >
         <div class="mur-btn-div">
-          <span class="mur-ttl">Mur {{i+1}}</span>
+          <span class="mur-ttl">Dimensions du mur {{i+1}}</span>
           <button type="button" class="dynamic-form-button del-btn" (click)="removeMurGroup(i)" *ngIf="murs.length > 1"><span class="icon-btn">[-]</span> Retirer</button>
         </div>
 
@@ -61,7 +61,7 @@
           </nz-radio-group>
         </div>
          
-        <div nz-col class="row-w-grid4 tooltip-srf">
+        <div nz-col class="row-w-grid4 tooltip-srf" style="display: none;">
           <label for="image">Image : <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
            <i class="fas fa-question-circle"></i>
          </a></label>

@@ -1,17 +1,13 @@
-
 <div class="recap-div devis-content">
     <span class="recup-fin recap-piece">{{selectedPiece.Titre}} - Rénovation électrique partielle</span>
-    
     <div *ngIf="appareils_a_remplacer">
         <div *ngFor="let appareil of appareils_a_remplacer">
-            <div *ngIf="appareil.active">
-                <span class="recup-fin"><p>{{(appareil.titre)}}</p></span>
+            <div class="flx-line" *ngIf="appareil.active">
+                <span class="recup-fin"><p><strong>{{(appareil.titre)}}</strong></p></span>
                 <span class="recup-fin" *ngIf="appareil.nombre_a_remplacer > 0"><p>À remplacer</p><p>:</p><p>{{appareil.nombre_a_remplacer}}</p></span>
                 <span class="recup-fin" *ngIf="appareil.nombre_a_creer > 0"><p>À créer</p><p>:</p><p>{{appareil.nombre_a_creer}}</p></span>
             </div>
-            
         </div>
-    </div>    
+    </div>
     <span class="recup-fin"><p>Gamme d'appareillage</p><p>:</p><p>{{get_title(gamme)}}</p></span>
-
 </div>

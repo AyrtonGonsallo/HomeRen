@@ -2,18 +2,18 @@
 <form [formGroup]="poseMursForm" (ngSubmit)="onPoseMursSubmit()">
 
   <div formArrayName="murs">
-    <div class="mur-bg-div">Murs</div>
+    
 
    <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
      <div class="mur-btn-div">
-       <span class="mur-ttl">Mur {{i+1}}</span>
+       <span class="mur-ttl">Quel est l'état du mur {{i+1}} ?</span>
      </div>
 
      <div nz-row nzJustify="start" style="width: 100% !important;max-width: 100% !important;display: block !important;">
       
        <div nz-col nzSpan="12" class="" style="max-width: 100% !important;">
          <!-- <label for="etat">État de mur: </label> -->
-         <nz-radio-group formControlName="etat" class="rd-grp-w" style="">
+         <nz-radio-group formControlName="etat" class="rd-grp-w" >
            
            
           <div>

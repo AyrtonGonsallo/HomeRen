@@ -6,22 +6,15 @@
         <br>
         Pour commencer : sélectionnez une première pièce à rénover et laissez-vous guider !</p>   
     </div>
-    <div *ngIf="current == 1">
-      <h1 class="center black font-site ttl-recap">Quels travaux souhaitez-vous faire dans votre {{selectedPiece?.Titre}} ?</h1>
+    <div *ngIf="current >= 1 && current <= 4">
+      <h1 class="center black font-site ttl-recap">
+        Demande de devis 
+        <ng-container *ngIf="selectedPiece?.Titre">- {{ selectedPiece?.Titre }}</ng-container>
+        <ng-container *ngIf="filteredTravail?.Titre">- {{ filteredTravail?.Titre }}</ng-container>
+      </h1>
+      
     </div>
-    <div *ngIf="current == 2">
-       <h1 class="center black font-site ttl-recap">Quelles sont les dimensions <!--de votre {{selectedPiece?.Titre}}--> ?</h1> 
-      <!-- <h1 class="center gris font-site">{{filteredTravail.Titre}}</h1> -->
-    </div>
-    <div *ngIf="current == 3">
-      <h1 class="center black font-site ttl-recap">Quel est l'état des surfaces dans votre {{selectedPiece?.Titre}} ?</h1>
-      <!-- <h1 class="center gris font-site">{{filteredTravail.Titre}}</h1> -->
-    </div>
-    <div *ngIf="current == 4">
-      <h1 class="center black font-site ttl-recap" *ngIf="filteredTravail.ID != 2">Quelles type de {{selectedPiece?.Titre}} souhaitez vous ?</h1>
-      <h1 class="center black font-site ttl-recap" *ngIf="filteredTravail.ID == 2">Quelles type de {{selectedPiece?.Titre}} souhaitez vous ?</h1>
-      <!-- <h1 class="center gris font-site">{{filteredTravail.Titre}}</h1> -->
-    </div>
+   
     <div *ngIf="current == 5">
       <h1 class="center black font-site ttl-recap">Récapitulatif :</h1>
       <!-- {{filteredTravail.Titre}} - {{selectedPiece?.Titre}} -->
@@ -37,13 +30,13 @@
     </nz-step>
     <nz-step nzIcon="tool" nzTitle="Travaux" [nzDescription]="current >= 2 ? filteredTravail?.Titre : ''">
     </nz-step>
-    <nz-step nzIcon="setting" nzTitle="Étape 1" nzDescription="">
+    <nz-step nzIcon="setting" nzTitle="Étape 1" [nzDescription]="getNotaBeneSubtitle(2)">
     </nz-step>
-    <nz-step nzIcon="area-chart" nzTitle="Étape 2" nzDescription="">
+    <nz-step nzIcon="area-chart" nzTitle="Étape 2" [nzDescription]="getNotaBeneSubtitle(3)">
     </nz-step>
-    <nz-step nzIcon="table" nzTitle="Étape 3" nzDescription="">
+    <nz-step nzIcon="table" nzTitle="Étape 3" [nzDescription]="getNotaBeneSubtitle(4)">
     </nz-step>
-    <nz-step nzIcon="file-done" nzTitle="Recapitulatif" nzDescription="">
+    <nz-step nzIcon="file-done" nzTitle="Récapitulatif" nzDescription="">
      <span>recap</span>
     </nz-step>
     <nz-step nzIcon="check-circle" nzTitle="Finalisation" nzDescription="">
@@ -319,10 +312,14 @@
 </div>
 
 
-<nz-modal class="no-footer pop-devis" nzFooter="" [(nzVisible)]="display_modal_connection" nzTitle="Plonger dans l'univers HomeRen !" (nzOnCancel)="modal_connection_handleCancel()" (nzOnOk)="modal_connection_handleOk()">
+<nz-modal class="no-footer pop-devis" nzFooter="" [(nzVisible)]="display_modal_connection" nzTitle="Dernière étape pour recevoir votre devis" (nzOnCancel)="modal_connection_handleCancel()" (nzOnOk)="modal_connection_handleOk()">
   <ng-container *nzModalContent>
-    <div *ngIf="has_error" class="error-message"> {{error_msg}}</div>
+    
+    Pas encore inscrit ?  <button class="flx-cnt-btn" nz-button  (click)="switch_form()"><b>Créez votre compte</b></button>
+    <br>
+    <nz-divider></nz-divider>
     <div *ngIf="se_connecter">
+      <div class="left">Si vous avez déja un compte</div>
       <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="submitLoginForm()">
         <nz-form-item>
           <nz-form-control nzErrorTip="Please input your username!">
@@ -354,12 +351,21 @@
           </div>
           
         </div>
-        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Se connecter</button>
+        <div nz-row class="login-form-margin aic">
+          <div nz-col [nzSpan]="10">
+            <button nz-button class="login-form-button " [nzType]="'primary'">Se connecter</button>
+          </div>
+          <div nz-col [nzSpan]="14">
+            <a   nzType="text" class="" (click)="showModal()"><span class="fs-13">J’ai oublié mon mot de passe</span></a>
+          </div>
+          
+        </div>
+        
         <br>
-        Pas encore inscrit ?  <button class="flx-cnt-btn" nz-button  (click)="switch_form()"><b>Créez votre compte</b></button>
+       
         <nz-form-control [nzSpan]="20" [nzOffset]="2">
-          <a   nzType="text" class="" (click)="showModal()"><span>J’ai oublié mon mot de passe</span></a>
-          <nz-alert *ngIf="recup_reussie" nzType="success" nzMessage="Restauration du mot de passe réussie. Veuillez consulter l'adresse renseignée."></nz-alert>
+          <div *ngIf="has_error" class="error-message"> {{error_msg}}</div>
+          <nz-alert *ngIf="recup_reussie" nzType="success" nzMessage="Un lien de réinitialisation vous a été envoyé sur l'adresse email que vous avez renseigné"></nz-alert>
           <nz-alert *ngIf="recup_echouee" nzType="error" nzMessage="Une erreur s'est produite lors de la restauration du mot de passe."></nz-alert>
           
         </nz-form-control>

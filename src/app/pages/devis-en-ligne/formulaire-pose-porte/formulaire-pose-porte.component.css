@@ -183,3 +183,10 @@ form label{
     border: none;
     flex-direction: row;
 }*/
+.bg-light-gray{
+    background-color: #e3e3e3;
+    margin-top: 50px;
+}
+.grid-1{
+    grid-template-columns: 1fr !important;
+}

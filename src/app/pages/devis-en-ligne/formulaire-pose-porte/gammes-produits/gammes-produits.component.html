@@ -1,15 +1,15 @@
 <div class="plaf-dim">
   <form [formGroup]="posePortesForm" (ngSubmit)="onPosePortesSubmit()">
     <div formArrayName="portes" >
-      <div class="mur-bg-div">Portes</div>
-
-      <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i">
-        <div class="mur-btn-div">
-          <div style="margin-right:auto;text-align: left;">
-            <span class="mur-ttl">Porte {{ i + 1 }}</span>
-          </div>
-          <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">[-] Retirer</button>
+      <div class="mur-btn-div grid-1">
+        <div style="margin-right:auto;text-align: left;">
+          <span class="mur-ttl">Renseignez les caractéristiques de vos nouvelles portes</span>
         </div>
+
+      </div>
+
+      <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i" class="bg-light-gray">
+       
 
 
         <div *ngIf="isclicked && posePortesForm" class="error-message">
@@ -28,11 +28,12 @@
         <div class="form-group" nz-col nzJustify="start" class="w-80">
           <!-- Type de porte -->
           
-          
-            <div class="div-ttl-gris">
-              <label class="">Type de porte <span class="error-message">*</span></label>
+          <div  nz-col class="row-w-grid5">
+            <div class="">
+              <label class=""><u>Type et largeur de la porte {{ i + 1 }}</u><span class="error-message">*</span></label>
             </div>
-            <nz-radio-group formControlName="type_porte" style="display:block ;margin: auto;text-align: center;" class="brdr-bt">
+            </div>
+            <nz-radio-group formControlName="type_porte" style="display:block ;margin: auto;text-align: center;">
             <div  nz-col class="row-w-grid5">
               <div class="">
                 <label class="">
@@ -42,7 +43,7 @@
               <div class="flx-radio-row3">
               <div *ngFor="let option of types_de_porte_simples">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
-                  {{ option.Label }}
+                  {{ option.Label }} cm
                 </label>
                 <!--<a nz-tooltip [nzTooltipTitle]="tooltip_type_porte" href="javascript:void(0)" class="info-icon">
                   <i class="far fa-question-circle"></i>
@@ -66,7 +67,7 @@
               <div class="flx-radio-row3">
               <div *ngFor="let option of types_de_porte_doubles">
               <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
-                {{ option.Label }}
+                {{ option.Label }} cm
               </label>
               <!--<a nz-tooltip [nzTooltipTitle]="tooltip_type_porte" href="javascript:void(0)" class="info-icon">
                 <i class="far fa-question-circle"></i>
@@ -89,7 +90,7 @@
               <div class="flx-radio-row3">
               <div *ngFor="let option of types_de_porte_coulissantes">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
-                  {{ option.Label }}
+                  {{ option.Label }} cm
                 </label>
                 <!--<a nz-tooltip [nzTooltipTitle]="tooltip_type_porte" href="javascript:void(0)" class="info-icon">
                   <i class="far fa-question-circle"></i>
@@ -113,7 +114,7 @@
           <!-- Nature de la porte -->
           <div nz-col class="row-w-grid5">
           <div class="">
-            <label class=" ">Nature de la porte <span class="error-message">*</span> :</label>
+            <label class=" "><u>Nature de la porte {{ i + 1 }}</u><span class="error-message">*</span> :</label>
           </div>
           
             <nz-radio-group formControlName="nature_porte" class="flx-radio-row3">
@@ -137,7 +138,7 @@
           <!-- Gamme -->
           <div nz-col class="row-w-grid5">
           <div class="">
-            <label class="">Gamme <span class="error-message">*</span> :</label>
+            <label class=""><u>Gamme de la porte {{ i + 1 }}</u><span class="error-message">*</span> :</label>
           </div>
           
             <nz-radio-group formControlName="gamme" class="flx-radio-row1">
@@ -158,6 +159,8 @@
           </div>
           
         </div>
+        <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">[-] Retirer cette porte</button>
+
       </div>
     </div>
 

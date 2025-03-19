@@ -745,15 +745,34 @@ export class IndexComponent {
         return currentStep.Description || '';
     }
   }
+
+
+
+  getNotaBeneSubtitle(current:number): string {
+    const currentStep = this.etapes?.find(
+      (etape:any) =>
+        etape.Etape === this.getStepName(current) &&
+        (this.current > 1 && etape.TravailID === this.filteredTravail.ID)
+    );
+  
+    if (!currentStep) {
+      return '';
+    }
+  
+    console.log("etape",current,currentStep)
+      return currentStep.Sous_titre || '';
+    
+  
+  }
   
   // Fonction pour récupérer le nom de l'étape en fonction du numéro
   getStepName(stepNumber: number): string {
     const steps = [
       'Choix de la pièce',
       'Travaux',
-      'Dimensions',
-      'Etat de surfaces',
-      'Gamme de produits',
+      'Étape 1 (Dimensions)',
+      'Étape 2 (Etat de surfaces)',
+      'Étape 3 (Gamme de produits)',
       'Recapitulatif',
       'Finalisation'
     ];
