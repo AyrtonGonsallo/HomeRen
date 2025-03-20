@@ -8,7 +8,7 @@
 
       </div>
 
-      <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i" class="bg-light-gray">
+      <div *ngFor="let porte of portes.controls; let i = index" [formGroupName]="i" class="bg-light-gray row-w">
        
 
 
@@ -25,7 +25,7 @@
         </div>
 
 
-        <div class="form-group" nz-col nzJustify="start" class="w-80">
+        <div class="form-group" nz-col nzJustify="start" class="">
           <!-- Type de porte -->
           
           <div  nz-col class="row-w-grid5">
@@ -159,8 +159,9 @@
           </div>
           
         </div>
+        <div class="col-del-prt">
         <button type="button" (click)="removePortesGroup(i)" class="dynamic-form-button del-btn" *ngIf="portes.length > 1">[-] Retirer cette porte</button>
-
+        </div>
       </div>
     </div>
 
@@ -168,7 +169,7 @@
   </form>
 
     <!-- Ajouter une porte -->
-    <div class="col-w-75">
+    <div class="col-add-prt">
       <button type="button" class="dynamic-form-button add-btn" (click)="addPortesGroup()" *ngIf="portes.length < 8">
         [+] Ajouter une porte </button>
       </div>

@@ -53,7 +53,7 @@
           
             <div nz-col class="flx-radio-row1">
               <div *ngFor="let option of gammes_appareillage" class="parquet-option ant-col tooltip-srf ">
-                <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
+                <label nz-radio [nzValue]="option.ID + '-' + option.PrixMultiples + '-' + option.Label">
                   <span>
                     <!-- Dynamically display the label based on the type -->
                     {{ option.Label }}
