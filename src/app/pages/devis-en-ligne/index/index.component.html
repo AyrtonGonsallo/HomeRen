@@ -349,14 +349,42 @@
               <span>Se souvenir de moi</span>
             </label>
           </div>
-          
-        </div>
-        <div nz-row class="login-form-margin aic">
-          <div nz-col [nzSpan]="10">
+          <div nz-col [nzSpan]="12">
             <button nz-button class="login-form-button " [nzType]="'primary'">Se connecter</button>
           </div>
-          <div nz-col [nzSpan]="14">
-            <a   nzType="text" class="" (click)="showModal()"><span class="fs-13">J’ai oublié mon mot de passe</span></a>
+        </div>
+        <div nz-row class="login-form-margin aic">
+          
+          <div nz-col [nzSpan]="24">
+            <nz-collapse>
+              @for (panel of panels; track panel) {
+                <nz-collapse-panel [nzHeader]="panel.name" [nzActive]="panel.active" [nzDisabled]="panel.disabled">
+                  <div class="recup-title">Récupération de mot de passe</div>
+                  <ng-container class="recup-box">
+                      
+                     <form nz-form [formGroup]="passforgotForm" (ngSubmit)="submitpassForgotForm()" class="form-cnx-pop">
+                        <nz-form-item>
+                          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+                          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Email invalide!">
+                            <input nz-input formControlName="email" id="email" />
+                          </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item nz-row class="register-area">
+                          <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                            
+                            <button nz-button nzType="primary" [disabled]="!passforgotForm.valid">Envoyer</button>
+                          </nz-form-control>
+                        </nz-form-item>
+                        </form>
+
+                        <nz-alert *ngIf="recup_reussie" nzType="success" nzMessage="Un lien de réinitialisation vous a été envoyé sur l'adresse email que vous avez renseigné"></nz-alert>
+                        <nz-alert *ngIf="recup_echouee" nzType="error" nzMessage="Une erreur s'est produite lors de la restauration du mot de passe."></nz-alert>
+          
+                    </ng-container>
+                 
+                </nz-collapse-panel>
+              }
+            </nz-collapse>
           </div>
           
         </div>
@@ -365,30 +393,10 @@
        
         <nz-form-control [nzSpan]="20" [nzOffset]="2">
           <div *ngIf="has_error" class="error-message"> {{error_msg}}</div>
-          <nz-alert *ngIf="recup_reussie" nzType="success" nzMessage="Un lien de réinitialisation vous a été envoyé sur l'adresse email que vous avez renseigné"></nz-alert>
-          <nz-alert *ngIf="recup_echouee" nzType="error" nzMessage="Une erreur s'est produite lors de la restauration du mot de passe."></nz-alert>
           
         </nz-form-control>
       </form>
-      <nz-modal [(nzVisible)]="isVisible" nzTitle="Récupération de mot de passe" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" class="pop-cnx">
-        <ng-container *nzModalContent>
-          
-         <form nz-form [formGroup]="passforgotForm" (ngSubmit)="submitpassForgotForm()" class="form-cnx-pop">
-            <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Email invalide!">
-                <input nz-input formControlName="email" id="email" />
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item nz-row class="register-area">
-              <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                
-                <button nz-button nzType="primary" [disabled]="!passforgotForm.valid">Envoyer</button>
-              </nz-form-control>
-            </nz-form-item>
-            </form>
-        </ng-container>
-      </nz-modal>
+      
     </div>
 
 

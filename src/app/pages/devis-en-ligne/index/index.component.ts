@@ -528,7 +528,13 @@ export class IndexComponent {
   }
 
   display_modal_connection=false
- 
+  panels = [
+    {
+      active: false,
+      name: "J’ai oublié mon mot de passe",
+      disabled: false
+    }
+  ];
 
   isconnected=false
   done(): void {

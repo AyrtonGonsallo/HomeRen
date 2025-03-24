@@ -887,3 +887,9 @@ input:focus-visible, textarea:focus-visible {border: 0px !important;}
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
 }
+.login-form-margin .ant-collapse-header{
+    flex-direction: row-reverse !important;
+}
+.login-form-margin .ant-collapse-content-box{
+    border: 3px solid rgba(0, 0, 0, 0.06) !important;
+}
