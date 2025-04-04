@@ -1,8 +1,9 @@
 .bg-light-gray{
-    background-color: #e3e3e3;
+    background-color: #EFEFEF;
     padding: 15px;
     margin-top: 20px;
     margin-bottom: 20px;
+    border: 1px solid #ccc;
 }
 .grid-1{
     grid-template-columns: 1fr !important;

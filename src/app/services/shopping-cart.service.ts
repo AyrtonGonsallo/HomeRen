@@ -14,6 +14,8 @@ interface CartItem {
     Prix?: number ;
     Payed: number ;
     UtilisateurID?: number;
+    VisiteFaite:Boolean;
+    Visite:any;
     DevisTaches:any[];
 }
 

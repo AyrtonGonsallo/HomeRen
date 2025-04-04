@@ -18,6 +18,9 @@
               <div *ngFor="let option of gammes_peinture">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span> 
+                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                    <i class="fas fa-question-circle"></i>
+                  </a>
                 </label>
               
                 <ng-template #tooltipTemplate>
@@ -39,6 +42,9 @@
               <div *ngFor="let option of gammes_enduit">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
+                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                    <i class="fas fa-question-circle"></i>
+                  </a>
                 </label>
                 
                 <ng-template #tooltipTemplate>
@@ -57,6 +63,9 @@
               <div *ngFor="let option of gammes_papier">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
+                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                    <i class="fas fa-question-circle"></i>
+                  </a>
                 </label>
                 
                 <ng-template #tooltipTemplate>

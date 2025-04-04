@@ -41,14 +41,16 @@
 
 
          </div>
-         <div nz-col class="row-w-grid9">
-          <label>
-            Revêtement à déposer <span class="error-message">*</span>:</label> 
+         <div nz-col class="flx-radio-row1 row-w">
+          <label> Revêtement existant <span class="error-message">*</span>:</label> 
           
-          <nz-radio-group   formControlName="depose" class="flx-radio-row2">
+          <nz-radio-group   formControlName="depose" class="flx-radio-row3">
             <div *ngFor="let option of type_de_depose" class="parquet-option">
               <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix" class="radio-span">
                 <span>{{ option.Label }}</span>
+                <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltiptd1" href="javascript:void(0)" class="pdf-icon">
+                  <i class="fas fa-question-circle"></i>
+                </a>
               </label>
               <!--<a nz-tooltip [nzTooltipTitle]="tooltiptd1" href="javascript:void(0)" class="info-icon">
                 <i class="far fa-question-circle"></i>
@@ -57,6 +59,11 @@
                 Pour plus d'informations, veuillez consulter :
                 <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
               </ng-template>
+            </div>
+            <div  class="parquet-option ant-col tooltip-srf">
+              <label nz-radio nzValue="0:aucun:0">
+                <span>Aucun</span>
+              </label>
             </div>
           </nz-radio-group>
         </div>
@@ -82,6 +89,6 @@
 
     </form>
     <div class="col-w-75">
-      <button type="button"  class="dynamic-form-button add-btn" (click)="addMurGroup()" *ngIf="murs.length < 4" >[+] Ajouter un mur</button>
+      <button type="button"  class="dynamic-form-button add-btn" (click)="addMurGroup()" *ngIf="murs.length < 6" >[+] Ajouter un mur</button>
      </div>
 </div>

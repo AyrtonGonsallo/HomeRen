@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-travaux.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Piece } from '../../../Models/Piece';
@@ -24,7 +24,7 @@ interface ItemData {
 })
 export class IndexComponent {
   baseurl=environment.imagesUrl
-
+  @ViewChild('formContainer') formContainer!: ElementRef;
   //chargement des pieces
   pieces_par_categories: any
   etapes:any
@@ -66,7 +66,7 @@ export class IndexComponent {
       setTimeout(() => {
         this.selectedPieceId = parseInt(savedPieceId) ;
         this.selectPiece(this.selectedPieceId)
-        this.current = 1; // Restaurer d'autres états si nécessaire
+        this.current = 0; // Restaurer d'autres états si nécessaire
         console.log('Rechargement: pièce restaurée', savedPieceId);
         // Supprimer la valeur après récupération
         sessionStorage.removeItem('selectedPieceId');
@@ -154,6 +154,10 @@ export class IndexComponent {
       this.renderer.setStyle(selectedElement, 'border', '2px solid #FFC736');
       this.renderer.setStyle(selectedElement, 'filter', 'brightness(0.8)');
     }
+    setTimeout(() => {
+      this.next()
+    }, 700);
+    
   }
 
   selectPieceAndRedirect(pieceID: number): void {
@@ -294,6 +298,9 @@ export class IndexComponent {
 
    // New function to check if a travail exists in filteredTravaux by ID
    is_travail_selected(id: number): boolean {
+    if(!this.filteredTravail){
+      return false
+    }
     return this.filteredTravail.ID == id
   }
   is_one_piece_selected=false
@@ -320,6 +327,10 @@ export class IndexComponent {
   current = 0;
   index = 'First-content';
   pre(): void {
+    setTimeout(() => {
+      this.formContainer.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      console.log('formContainer:', this.formContainer?.nativeElement);
+    }, 0);
     if(this.jump_back()){
 
     }else{
@@ -353,6 +364,10 @@ export class IndexComponent {
     
   }
   addtask(): void {
+    setTimeout(() => {
+      this.formContainer.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      console.log('formContainer:', this.formContainer?.nativeElement);
+    }, 0);
     this.current = 1;
     this.triggerSubmitDimensionForm= false;
     this.triggerSubmitEtatSurfacesForm= false;
@@ -363,7 +378,10 @@ export class IndexComponent {
   public triggerSubmitEtatSurfacesForm: boolean = false;
   public triggerSubmitGammesProduitsForm: boolean = false;
   next(): void {
-    
+    setTimeout(() => {
+      this.formContainer.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+     // console.log('formContainer:', this.formContainer?.nativeElement);
+    }, 0);
    if(this.jump()){
 
    }else{
@@ -440,7 +458,7 @@ export class IndexComponent {
         
         this.changeContent();
       }
-    
+     
       
     }, 2000);
    }
@@ -578,6 +596,37 @@ export class IndexComponent {
 
     
   }
+
+  done_but_another_piece(): void {
+    
+        this.gestiondesdevisService.clearDEGFormulaires()
+        const formulaires = this.gestiondesdevisService.getFormulaires();
+        const json = {
+          username: this.browserInfo,
+          ip: this.userIp,
+          piece:this.selectedPiece,
+          liste_des_travaux: formulaires,
+          deviceID:this.panier
+          .getUniqueDeviceId(),
+          UtilisateurID:null
+        };
+        console.log('Formulaires soumis :', json);
+        this.userService.addDevisPiece(json).subscribe(
+          (response) => {
+            console.log('reponse de l\'api :', response);
+            this.current=6
+            console.log('etape courrante :', this.current);
+            let devis=response.devis
+            this.panier.addItem(devis)
+            this.gestiondesdevisService.clearFormulaires()
+          },
+          (error) => {
+            console.error('Erreur lors de la récupération de l\'ajout du devis :', error);
+          }
+        );
+    
+  }
+
   modal_connection_handleOk(): void {
     this.display_modal_connection = false;
   }
@@ -703,7 +752,7 @@ export class IndexComponent {
   }
   hide_finalisation_message=false;
   submit_devis_and_choose_piece(){
-    this.done()
+    this.done_but_another_piece()
     this.current+=1
     this.hide_finalisation_message=true
   }
@@ -718,6 +767,9 @@ export class IndexComponent {
   }
 
   getNotaBene(): string {
+    if (! this.filteredTravail) {
+      return '';
+    }
     const currentStep = this.etapes?.find(
       (etape:any) =>
         etape.Etape === this.getStepName(this.current) &&
@@ -755,6 +807,11 @@ export class IndexComponent {
 
 
   getNotaBeneSubtitle(current:number): string {
+
+    
+    if (!this.filteredTravail) {
+      return '';
+    }
     const currentStep = this.etapes?.find(
       (etape:any) =>
         etape.Etape === this.getStepName(current) &&
@@ -765,7 +822,7 @@ export class IndexComponent {
       return '';
     }
   
-    console.log("etape",current,currentStep)
+    //console.log("etape",current,currentStep)
       return currentStep.Sous_titre || '';
     
   
@@ -785,10 +842,10 @@ export class IndexComponent {
     return steps[stepNumber] || '';
   }
   
-  isVisible = false;
+  isrecupFormVisible = false;
   
   showModal(): void {
-    this.isVisible = true;
+    this.isrecupFormVisible = !this.isrecupFormVisible;
   }
 
 
@@ -806,7 +863,7 @@ export class IndexComponent {
           console.log('restauration de mot de passe reussie:', response);
           this.recup_reussie=true
           setTimeout(() => {
-            this.isVisible=false
+            //this.isVisible=false
           }, 2000);
 
          
@@ -825,14 +882,6 @@ export class IndexComponent {
       });
     }
   }
-  handleOk(): void {
-    this.submitpassForgotForm()
-    this.isVisible = false;
-  }
-
-  handleCancel(): void {
-    console.log('Button cancel clicked!');
-    this.isVisible = false;
-  }
+ 
 
 }

@@ -11,7 +11,9 @@
         Le revêtement à déposer est requis.
       </div>
     </div>
-
+    <div class="mur-btn-div">
+      <span class="mur-ttl">Dimensions {{get_designation()}}</span>
+    </div>
     <!--<img src="/assets/sol.png" alt="" style="margin-block:25px !important; margin:auto;">-->
      <div nz-row nzJustify="start" class="tooltip-srf">
         <div nz-col class="ant-col-6 flx-radio-row2-w">
@@ -42,34 +44,27 @@
       
       <nz-radio-group formControlName="depose" class="flx-radio-row2">
         
-        <div *ngFor="let option of gammes_depose" class="parquet-option">
+        <div *ngFor="let option of gammes_depose" class="parquet-option tooltip-srf">
           <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
              <span>  {{ option.Label }}</span>
+             <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+              <i class="fas fa-question-circle"></i>
+            </a>
           </label>
-          <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-            <i class="fas fa-question-circle"></i>
-          </a>
+          
           <ng-template #tooltipTemplate>
             Pour plus d'informations, veuillez consulter :
             <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
           </ng-template>
         </div>
-        
+        <div  class="parquet-option ant-col tooltip-srf">
+          <label nz-radio nzValue="0:aucun:0">
+            <span>Aucun</span>
+          </label>
+        </div>
       </nz-radio-group> 
 
     </div>
-    <div nz-col class="row-w-grid4 tooltip-srf">
-      <label for="image">Image :<a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
-       <i class="fas fa-question-circle"></i>
-     </a></label>
-      <input  type="file" id="image" (change)="onFileChange($event,poseSolForm)" accept="image/*">
-      
-     <ng-template #tooltipImage>
-       <div class="tooltip-content">
-         <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
-       </div>
-     </ng-template>
-   </div>
    
      
      

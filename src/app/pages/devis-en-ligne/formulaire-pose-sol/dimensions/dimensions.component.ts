@@ -13,7 +13,7 @@ export class PoseSolDimensionsComponent {
   baseurl=environment.imagesUrl
   isclicked=false
   poseSolForm: FormGroup;
-  
+  @Input() selectedPiece: any; // Déclaration de l'entrée selectedPiece
   @Input() surfacemax: number=0; 
   @Input() triggerSubmitDimensionForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
@@ -35,6 +35,15 @@ export class PoseSolDimensionsComponent {
       depose: ["", Validators.required],
       image: [null]
     });
+  }
+  get_designation(){
+    let titre=this.selectedPiece.Titre
+    let id=this.selectedPiece.ID
+    if(id ==6){
+      return 'du '+titre 
+    }else{
+      return 'de la '+titre 
+    }
   }
   onPoseSolSubmit(): void {
     this.formValidityChange.emit(this.poseSolForm.valid);

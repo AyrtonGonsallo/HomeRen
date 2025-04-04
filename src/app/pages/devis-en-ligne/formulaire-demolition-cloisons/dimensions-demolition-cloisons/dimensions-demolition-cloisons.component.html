@@ -10,7 +10,7 @@
             <div formArrayName="mursNonporteurs">
              <div *ngFor="let mur of mursNonporteurs.controls; let i = index" [formGroupName]="i" >
                <div class="mur-btn-div coll-100">
-                 <span class="mur-ttl">Démolition mur nº{{i+1}}</span>
+                 <span class="mur-ttl">Caractéristiques du mur nº{{i+1}}</span>
                <button type="button" class="dynamic-form-button del-btn" (click)="removemursNonporteursGroup(i)" *ngIf="mursNonporteurs.length > 1"><span class="icon-btn">[-]</span> Retirer</button>
                </div>
                
@@ -69,7 +69,7 @@
                 </div>
 
                 <div  nz-col class="row-w-grid coll-100 ">
-                  <label for="cloison">Cloison<span class="error-message">*</span> :</label>
+                  <label for="cloison">Types de cloison<span class="error-message">*</span> :</label>
                     <nz-radio-group formControlName="cloison" class="flx-radio-row2">
                       <!-- Reusable template for displaying options with PDFs -->
                       <ng-container>
@@ -88,7 +88,7 @@
                       Les cloisons sont requises.
                     </div>-->
                   </div>
-                <div nz-col nzSpan="6" class="ant-col tooltip-srf"> 
+                <!-- <div nz-col nzSpan="6" class="ant-col tooltip-srf"> 
                   <label for="image">Image : <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
                     <i class="fas fa-question-circle"></i>
                   </a></label>
@@ -100,7 +100,7 @@
                      <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
                    </div>
                  </ng-template> 
-               </div>
+               </div> -->
 
               </div>
              </div>
@@ -116,13 +116,13 @@
       <nz-collapse-panel nzHeader="Démolition partielle de murs non-porteurs" [nzActive]="is_active_Tp3" [nzExtra]="activerTp3" nzShowArrow="false" (nzActiveChange)="active_Tp3()">
         <form [formGroup]="ouverturePartielleForm" (ngSubmit)="onSubmitform3()">
           <div *ngIf="exist_glob_err_form2" class="error-message">
-            {{glob_err_form2}}
+            <p style="font-size: 14px;" [innerHTML]="glob_err_form2"></p>
           </div>
           <div formArrayName="ouverturePartielle">
             <!-- <img src="/assets/dimensions.png" style="margin-top:30px;">-->
            <div *ngFor="let mur of ouverturePartielle.controls; let i = index" [formGroupName]="i" >
              <div class="mur-btn-div coll-100">
-               <span class="mur-ttl">Ouverture mur nº{{i+1}}</span>
+               <span class="mur-ttl">Caractéristiques de l'ouverture sur le mur nº{{i+1}}</span>
                <button type="button" class="dynamic-form-button del-btn" (click)="removeouverturePartielleGroup(i)" *ngIf="ouverturePartielle.length > 1"><span class="icon-btn">[-]</span> Retirer</button>
              </div>
 
@@ -187,7 +187,7 @@
                  </div>-->
 
                  <div nz-col nzSpan="6" class="ant-col tooltip-srf">
-                  <label for="hauteur_ouverture">hauteur de l'ouverture (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
+                  <label for="hauteur_ouverture">Hauteur de l'ouverture (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
                   <input (keypress)="blockComma($event)" type="number" id="hauteur_ouverture" formControlName="hauteur_ouverture"  min="1" max="30000"> 
                 </div>
                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_ouverture')?.invalid " class="error-message">
@@ -195,7 +195,7 @@
                 </div>-->
 
                 <div nz-col nzSpan="6" class="ant-col tooltip-srf">
-                  <label for="hauteur_depuis_le_sol">hauteur depuis le sol (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
+                  <label for="hauteur_depuis_le_sol">Hauteur depuis le sol (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
                   <input (keypress)="blockComma($event)" type="number" id="hauteur_depuis_le_sol" formControlName="hauteur_depuis_le_sol"  min="1" max="30000"> 
                 </div>
                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_depuis_le_sol')?.invalid " class="error-message">
@@ -203,7 +203,7 @@
                 </div>-->
 
                 <div nz-col nzSpan="6" class="ant-col tooltip-srf">
-                  <label for="hauteur_depuis_le_plafond">hauteur depuis le plafond (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
+                  <label for="hauteur_depuis_le_plafond">Hauteur depuis le plafond (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
                   <input (keypress)="blockComma($event)" type="number" id="hauteur_depuis_le_plafond" formControlName="hauteur_depuis_le_plafond"  min="1" max="30000"> 
                 </div>
                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur_depuis_le_plafond')?.invalid " class="error-message">
@@ -223,7 +223,7 @@
 
               <div nz-col class="row-w-grid coll-100">
                   
-                <label for="cloison">Cloison<span class="error-message" *ngIf="is_active_Tp3">*</span> :</label>
+                <label for="cloison">Types de cloison<span class="error-message" *ngIf="is_active_Tp3">*</span> :</label>
                 <nz-radio-group formControlName="cloison" class="flx-radio-row2">
                   <!-- Reusable template for displaying options with PDFs -->
                   <ng-container>
@@ -239,7 +239,7 @@
                   </ng-container>
                 </nz-radio-group>
               </div>
-
+<!-- 
               <div nz-col nzSpan="6" class="ant-col tooltip-srf"> 
                 <label for="image">Image : <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
                   <i class="fas fa-question-circle"></i>
@@ -252,7 +252,7 @@
                    <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
                  </div>
                </ng-template>
-              </div>
+              </div> -->
 
 
             </div>

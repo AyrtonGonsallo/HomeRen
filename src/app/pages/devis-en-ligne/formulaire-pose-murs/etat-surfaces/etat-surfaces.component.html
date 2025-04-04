@@ -5,8 +5,15 @@
     
 
    <div *ngFor="let mur of murs.controls; let i = index" [formGroupName]="i">
-     <div class="mur-btn-div">
+     <div class="mur-btn-div tooltip-srf">
        <span class="mur-ttl">Quel est l'état du mur {{i+1}} ?</span>
+       <a  nz-tooltip [nzTooltipTitle]="General" href="javascript:void(0)" class="pdf-icon">
+        <i class="fas fa-question-circle"></i>
+      </a>
+      <ng-template #General>
+        Pour plus d'informations, veuillez consulter :
+        <a [href]="assetsUrl + 'modele_general.pdf'" target="_blank" class="link-tooltip">PDF</a>
+      </ng-template>
      </div>
 
      <div nz-row nzJustify="start" style="width: 100% !important;max-width: 100% !important;display: block !important;">

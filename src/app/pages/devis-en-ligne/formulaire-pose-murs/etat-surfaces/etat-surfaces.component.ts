@@ -25,6 +25,7 @@ export class EtatSurfacesComponent {
   disabled = true;
   radioValue = 'A';
   isclicked =false
+  assetsUrl=environment.assetsUrl
 //formulaires des poses et deposes
 poseMursForm: FormGroup;
 formulaire_dimensions:any

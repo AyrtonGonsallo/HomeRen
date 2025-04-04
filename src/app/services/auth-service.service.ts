@@ -67,7 +67,7 @@ export class AuthServiceService {
     if (this.isBrowser()) {
       localStorage.removeItem(this.USER_KEY);
       localStorage.removeItem(this.USER_KEY + '_expiration');
-      this.isConnectedSubject.next(false);
+      this.isConnectedSubject?.next(false);
       this.router.navigate(['/connexion']);
     }
   }
@@ -76,7 +76,7 @@ export class AuthServiceService {
     if (this.isBrowser()) {
       localStorage.removeItem(this.USER_KEY);
       localStorage.removeItem(this.USER_KEY + '_expiration');
-      this.isConnectedSubject.next(false);
+      this.isConnectedSubject?.next(false);
       window.location.href = 'https://dev.homeren.fr/admin';
     }
   }
@@ -96,6 +96,9 @@ export class AuthServiceService {
     return this.isConnectedSubject.asObservable();
   }
 
+  getIsConnectedPromise(): Promise<boolean|undefined> {
+    return this.isConnectedSubject.asObservable().toPromise();
+  }
   /**
    * Vérifie si le code s'exécute dans le navigateur.
    */

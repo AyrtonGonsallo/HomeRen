@@ -124,6 +124,30 @@ export class DimensionsDemolitionCloisonsComponent {
         this.glob_err_form2+=`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}. `
         res=res && false
       }
+
+      if (
+        (controls['hauteur_depuis_le_sol'].value+controls['hauteur_depuis_le_plafond'].value+controls['hauteur_ouverture'].value  != controls['hauteur'].value)
+      ) {
+        //console.error(`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}`);
+        //group.markAllAsTouched();
+        this.exist_glob_err_form2=true
+        this.glob_err_form2+=`<br>Hauteur de l'ouverture + Hauteur depuis le sol + Hauteur depuis le plafond = hauteur du mur ${i + 1}.`
+        res=res && false
+      }
+      if (controls['longueur_ouverture'].value > controls['longueur'].value) {
+        //console.error(`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}`);
+        //group.markAllAsTouched();
+        this.exist_glob_err_form2=true
+        this.glob_err_form2+=`<br>La longeur de l'ouverture doit être inférieure à celle du mur ${i + 1}.`
+        res=res && false
+      }
+      if (controls['hauteur_ouverture'].value > controls['hauteur'].value ) {
+        //console.error(`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}`);
+        //group.markAllAsTouched();
+        this.exist_glob_err_form2=true
+        this.glob_err_form2+=`<br> La hauteur de l'ouverture doit être inférieure à celle du mur ${i + 1}.`
+        res=res && false
+      }
     }
   
     

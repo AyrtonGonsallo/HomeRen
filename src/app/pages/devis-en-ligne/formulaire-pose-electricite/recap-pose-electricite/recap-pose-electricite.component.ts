@@ -24,7 +24,7 @@ export class RecapPoseElectriciteComponent {
     console.log("a remplacer ",this.appareils_a_remplacer );
   }
   get_title(slug:string){
-    return slug.split("-")[2];
+    return slug.split(":")[2];
   }
   get_label(slug: any): string {
     // Convert the value to a boolean if it is a string

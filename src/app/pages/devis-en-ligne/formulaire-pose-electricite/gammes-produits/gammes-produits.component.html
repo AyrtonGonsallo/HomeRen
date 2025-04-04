@@ -52,16 +52,17 @@
             <!-- Reusable template for displaying options with PDFs -->
           
             <div nz-col class="flx-radio-row1">
-              <div *ngFor="let option of gammes_appareillage" class="parquet-option ant-col tooltip-srf ">
-                <label nz-radio [nzValue]="option.ID + '-' + option.PrixMultiples + '-' + option.Label">
+              <div *ngFor="let option of gammes_appareillage" class="parquet-option  tooltip-srf ">
+                <label class="radio-span" nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                   <span>
                     <!-- Dynamically display the label based on the type -->
                     {{ option.Label }}
                   </span>
+                  <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                    <i class="fas fa-question-circle"></i>
+                  </a>
                 </label>
-                <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                  <i class="fas fa-question-circle"></i>
-                </a>
+                
                 <ng-template #tooltipTemplate>
                   Pour plus d'informations, veuillez consulter :
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>

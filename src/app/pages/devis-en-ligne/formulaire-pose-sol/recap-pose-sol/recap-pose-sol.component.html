@@ -4,10 +4,10 @@
 <span class="recup-fin"><p>Largeur</p><p>:</p><p>{{poseSolForm.formulaire["dimensions-pose-sol"].largeur}} cm</p></span>
 
 <span class="recup-fin"><p>État du sol</p><p>:</p><p>{{poseSolForm.formulaire["etat-surfaces-pose-sol"].etat}}</p></span>
-<span class="recup-fin"><p>Revètement à poser</p><p>:</p><p>{{get_title( poseSolForm.formulaire["gammes-produits-pose-sol"].gamme)}}</p></span>
+<span class="recup-fin"><p>Revêtement à poser</p><p>:</p><p>{{get_title( poseSolForm.formulaire["gammes-produits-pose-sol"].gamme)}}</p></span>
 <span class="recup-fin" *ngIf="poseSolForm.formulaire['gammes-produits-pose-sol'].gamme=='0:autre:0'"><p>Autre revêtement à poser</p><p>:</p><p>{{poseSolForm.formulaire["gammes-produits-pose-sol"].autre_gamme}}</p></span>
 <span class="recup-fin"><p>Revêtement à déposer</p><p>:</p><p>{{get_title(poseSolForm.formulaire["dimensions-pose-sol"].depose)}}</p></span>
-<span class="recup-fin" *ngIf="poseSolForm.formulaire['gammes-produits-pose-sol'].has_plinthes"><p>Linéaire</p><p>:</p><p>{{(poseSolForm.formulaire["gammes-produits-pose-sol"].lineaire)}} cm</p></span>
+<span class="recup-fin" *ngIf="poseSolForm.formulaire['gammes-produits-pose-sol'].has_plinthes"><p>Longueur totale de plinthe (linéaire)</p><p>:</p><p>{{(poseSolForm.formulaire["gammes-produits-pose-sol"].lineaire)}} cm</p></span>
 
 <span class="recup-fin" *ngIf="poseSolForm.formulaire['gammes-produits-pose-sol'].has_plinthes"><p>Plinthes</p><p>:</p><p>{{get_title(poseSolForm.formulaire["gammes-produits-pose-sol"].plinthes)}}</p></span>
 </div>

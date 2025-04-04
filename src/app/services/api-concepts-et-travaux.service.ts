@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 
 @Injectable({
@@ -144,15 +144,49 @@ updatePayedDevis(data: any): Observable<any> {
   return this.http.post<any>(`${environment.apiUrl}/update-payed-devis`, data);
 }
 
+updateVisitedDevis(data: any): Observable<any> {
+  return this.http.post<any>(`${environment.apiUrl}/update-visited-devis`, data);
+}
+
+// Méthode asynchrone pour updatePayedDevis
+async updatePayedDevisAsync(data: any): Promise<any> {
+  return lastValueFrom(this.updatePayedDevis(data));
+}
+
+// Méthode asynchrone pour updateVisitedDevis
+async updateVisitedDevisAsync(data: any): Promise<any> {
+  return lastValueFrom(this.updateVisitedDevis(data));
+}
+
+
 getAllNoPayedDevisPiecebyUser(deviceid:string,userid:number): Observable<any> {
-  return this.http.get<any>(`${environment.apiUrl}/get_no_payed_devis_piece_by_user/${deviceid}/${userid}`);
+  return this.http.get<any>(`${environment.apiUrl}/get_no_payed_devis_piece_by_user/${userid}/${deviceid}`);
+}
+getAllNoVisitedDevisPiecebyUser(deviceid:string,userid:number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_no_visited_devis_piece_by_user/${userid}/${deviceid}`);
 }
 getAllPayedDevisPiecebyDeviceID(deviceid:string): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_no_payed_devis_piece_by_device_id/${deviceid}`);
 }
-sendAllPayedDevisPiecetoUser(userid:number): Observable<any> {
-  return this.http.get<any>(`${environment.apiUrl}/send-liste-devis-email-to-user/${userid}`);
+getParametreById(id: number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_parametre/${id}`);
 }
+sendAllPayedDevisPiecetoUser(deviceid:string,userid:number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/send_payed_devis_liste_to_user/${userid}/${deviceid}`);
+}
+sendAllVisitedDevisPiecetoUser(deviceid: string, userid: number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/send_visited_devis_liste_to_user/${userid}/${deviceid}`);
+}
+
+async sendAllVisitedDevisPiecetoUserAsync(deviceid: string, userid: number): Promise<any> {
+  return lastValueFrom(this.sendAllVisitedDevisPiecetoUser(deviceid, userid));
+}
+
+async sendAllPayedDevisPiecetoUserAsync(deviceid: string, userid: number): Promise<any> {
+  return lastValueFrom(this.sendAllPayedDevisPiecetoUser(deviceid, userid));
+}
+
+
 validerDevisPiece(id:number,body: any): Observable<any> {
   return this.http.put<any>(`${environment.apiUrl}/valider_devis_piece/${id}`,body);
 }

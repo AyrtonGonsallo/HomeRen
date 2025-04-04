@@ -5,10 +5,10 @@
         
       <div nz-col nzSpan="" class="tooltip-srf">
         <div class="mur-btn-div" style="width: 100%;"><span class="mur-ttl">
-          Nouveau revêtement</span> 
+          Choix du nouveau revêtement</span> 
         </div>
         <nz-radio-group formControlName="gamme" class="w-100">
-          <div  nz-col class="row-w-grid1">
+          <div  nz-col class="row-w-grid3">
             <div>
               <label >
                 Peinture de sol :
@@ -18,6 +18,9 @@
               <div *ngFor="let option of gammes_peinture_sol">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span> 
+                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                    <i class="fas fa-question-circle"></i>
+                  </a>
                 </label>
               
                 <ng-template #tooltipTemplate>
@@ -29,7 +32,7 @@
             </div>
           </div>
 
-          <div  nz-col class="row-w-grid1">
+          <div  nz-col class="row-w-grid3">
             <div>
               <label >
                 Moquette :
@@ -39,6 +42,9 @@
               <div *ngFor="let option of gamme_moquette_sol">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
+                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                    <i class="fas fa-question-circle"></i>
+                  </a>
                 </label>
                 
                 <ng-template #tooltipTemplate>
@@ -49,7 +55,7 @@
               
             </div>
           </div>
-          <div  nz-col class="row-w-grid1">
+          <div  nz-col class="row-w-grid3">
             <div  ><label >
               Sol souple :</label> 
             </div>
@@ -57,6 +63,9 @@
               <div *ngFor="let option of gammes_sol_souple">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
+                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                    <i class="fas fa-question-circle"></i>
+                  </a>
                 </label>
                 
                 <ng-template #tooltipTemplate>
@@ -69,7 +78,7 @@
         
           </div>
 
-          <div  nz-col class="row-w-grid1">
+          <div  nz-col class="row-w-grid3">
             <div  ><label >
               Résine décorative :</label> 
             </div>
@@ -77,6 +86,9 @@
               <div *ngFor="let option of gamme_resine_decorative">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>  
+                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                    <i class="fas fa-question-circle"></i>
+                  </a>
                 </label>
 
                 <ng-template #tooltipTemplate>
@@ -90,7 +102,7 @@
           </div>
 
 
-          <div  nz-col class="row-w-grid1">
+          <div  nz-col class="row-w-grid3">
             <div  ><label >
               Carrelage :</label> 
             </div>
@@ -98,6 +110,9 @@
               <div *ngFor="let option of gammes_carrelage_sol">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span> 
+                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                    <i class="fas fa-question-circle"></i>
+                  </a>
                 </label>
 
                 <ng-template #tooltipTemplate>
@@ -109,14 +124,17 @@
             </div>
           </div>
 
-          <div  nz-col class="row-w-grid1">
+          <div  nz-col class="row-w-grid3">
             <div  ><label >
               Parquet Flottant :</label> 
             </div>
             <div  class="parquet-option">
               <div *ngFor="let option of gammes_parquet_flottant">
-                <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
+                <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix" style="margin-bottom:10px !important;">
                   <span>{{ option.Label }}</span> 
+                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                    <i class="fas fa-question-circle"></i>
+                  </a>
                 </label>
               
                 <ng-template #tooltipTemplate>
@@ -129,7 +147,7 @@
           </div>
 
 
-          <div  nz-col class="row-w-grid1">
+          <div  nz-col class="row-w-grid3">
             <div  ><label >
               Parquet Massif :</label> 
             </div>
@@ -137,6 +155,9 @@
               <div *ngFor="let option of gammes_parquet_massif">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
+                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
+                    <i class="fas fa-question-circle"></i>
+                  </a>
                 </label>
                 
                 <ng-template #tooltipTemplate>
@@ -149,7 +170,7 @@
           </div>
 
 
-          <div  nz-col class="row-w-grid1">
+          <div  nz-col class="row-w-grid3">
             <div  ><label >
               Autre :</label> 
             </div>
@@ -177,10 +198,10 @@
 
 
  <div class="w-81">    
-      <div nz-col  class="row-w-grid1" style="width: 100% !important;">
+      <div nz-col  class="row-w-grid3" style="width: 100% !important;">
         <label for="has_plinthes">Faut il des plinthes  ?</label>
         <nz-radio-group formControlName="has_plinthes" nzName="radiogroup" class="flx-radio-row2">
-          <label nz-radio [nzValue]="true">Oui</label>
+          <label style="margin-left: -8px;" nz-radio [nzValue]="true">Oui</label>
           <label nz-radio [nzValue]="false">Non</label>
         </nz-radio-group>
 
@@ -193,7 +214,7 @@
       <div nz-col class="row-w-grid1" [nzXs]="6" [nzSm]="6" *ngIf="poseSolForm.get('has_plinthes')?.value==true" style="width:100% !important;">
         
           <label for="lineaire">
-            Linéaire (cm) :
+           Longueur totale de plinthes -  linéaire (cm) :
           </label>
           <input (keypress)="blockComma($event)"  type="number" id="lineaire" formControlName="lineaire" min="1" max="10000">
        
@@ -210,7 +231,7 @@
            
           
           <nz-radio-group formControlName="plinthes" class="flx-radio-row1">
-            <div  nz-col class="row-w-grid1">
+            <div  nz-col class="row-w-grid3">
               <div>
                 <label>
                   Plinthes en bois :
@@ -234,7 +255,7 @@
               </div>
 
             </div>
-            <div  nz-col class="row-w-grid1">
+            <div  nz-col class="row-w-grid3">
               <div style="text-align: start;">
                 <label>
                   Plinhtes avec du carrelage :

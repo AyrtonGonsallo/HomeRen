@@ -28,13 +28,13 @@
         <div class="form-group" nz-col nzJustify="start" class="">
           <!-- Type de porte -->
           
-          <div  nz-col class="row-w-grid5">
+          <div  nz-col class="row-w-grid5" style="padding: 4px 0px !important;">
             <div class="">
               <label class=""><u>Type et largeur de la porte {{ i + 1 }}</u><span class="error-message">*</span></label>
             </div>
             </div>
             <nz-radio-group formControlName="type_porte" style="display:block ;margin: auto;text-align: center;">
-            <div  nz-col class="row-w-grid5">
+            <div  nz-col class="row-w-grid5" style="padding: 4px 0px !important;">
               <div class="">
                 <label class="">
                   Portes simple :
@@ -43,7 +43,7 @@
               <div class="flx-radio-row3">
               <div *ngFor="let option of types_de_porte_simples">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
-                  {{ option.Label }} cm
+                   {{ option.Label }} cm
                 </label>
                 <!--<a nz-tooltip [nzTooltipTitle]="tooltip_type_porte" href="javascript:void(0)" class="info-icon">
                   <i class="far fa-question-circle"></i>
@@ -58,13 +58,13 @@
              </div>
 
 
-             <div  nz-col class="row-w-grid5">
+             <div  nz-col class="row-w-grid5" style="padding: 4px 0px !important;">
               <div class="">
                 <label class="">
                   Portes double :
                 </label> 
               </div>
-              <div class="flx-radio-row3">
+              <div class="flx-radio-row3" style="gap: 1px !important;">
               <div *ngFor="let option of types_de_porte_doubles">
               <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                 {{ option.Label }} cm
@@ -81,7 +81,7 @@
            </div>
            </div>
 
-            <div  nz-col class="row-w-grid5">
+            <div  nz-col class="row-w-grid5" style="padding: 4px 0px 17px 0px !important;">
               <div class="">
                 <label class="">
                   Portes coulissante :
@@ -112,7 +112,7 @@
           
 
           <!-- Nature de la porte -->
-          <div nz-col class="row-w-grid5">
+          <div nz-col class="row-w-grid5" style="padding: 18px 0px !important;">
           <div class="">
             <label class=" "><u>Nature de la porte {{ i + 1 }}</u><span class="error-message">*</span> :</label>
           </div>
@@ -136,15 +136,18 @@
           
 
           <!-- Gamme -->
-          <div nz-col class="row-w-grid5">
+          <div nz-col class="row-w-grid5" style="padding: 18px 0px !important;">
           <div class="">
             <label class=""><u>Gamme de la porte {{ i + 1 }}</u><span class="error-message">*</span> :</label>
           </div>
           
-            <nz-radio-group formControlName="gamme" class="flx-radio-row1">
+            <nz-radio-group formControlName="gamme" class="flx-radio-row1 tooltip-srf">
               <div *ngFor="let option of gammes">
                 <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                   {{ option.Label }}
+                  <a nz-tooltip [nzTooltipTitle]="tooltip_Gamme" href="javascript:void(0)" class="info-icon">
+                    <i class="fas fa-question-circle"></i>
+                  </a>
                 </label>
                 <!--<a nz-tooltip [nzTooltipTitle]="tooltip_Gamme" href="javascript:void(0)" class="info-icon">
                   <i class="far fa-question-circle"></i>

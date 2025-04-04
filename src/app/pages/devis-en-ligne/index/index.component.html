@@ -1,7 +1,7 @@
-<div class="section-devis">
-  <div class="devis-title">
+<div class="section-devis" #formContainer>
+  <div  class="devis-title">
     <div *ngIf="current == 0">
-      <h1 class="center black font-site" style="font-size: 35px;">Demandez votre devis gratuit</h1> 
+      <h1  class="center black font-site" style="font-size: 35px;">Demandez votre devis gratuit</h1> 
       <p class="center f-w-4 fs-15 m-w-tt">Vous souhaitez rénover une ou plusieurs pièces de votre habitation ? Obtenez un devis gratuit sur <a class="fs-15 txt-dec gris" href="/">Homeren.fr</a> 
         <br>
         Pour commencer : sélectionnez une première pièce à rénover et laissez-vous guider !</p>   
@@ -9,8 +9,8 @@
     <div *ngIf="current >= 1 && current <= 4">
       <h1 class="center black font-site ttl-recap">
         Demande de devis 
-        <ng-container *ngIf="selectedPiece?.Titre"> - {{ selectedPiece?.Titre }}</ng-container>
-        <ng-container *ngIf="filteredTravail?.Titre"> - {{ filteredTravail?.Titre }}</ng-container>
+        <ng-container *ngIf="selectedPiece?.Titre"> - {{ selectedPiece?.Titre }}</ng-container><br>
+        <span class="font-site titre-ttl-recap"><ng-container  *ngIf="filteredTravail?.Titre">{{ filteredTravail?.Titre }}</ng-container></span>
       </h1>
       
     </div>
@@ -125,7 +125,7 @@
          </div>
          <!-- Formulaire pose Revetement de Sol -->
          <div *ngIf="is_travail_selected(9)">
-           <app-dimensions-pose-sol [surfacemax]="get_max()" [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-sol>
+           <app-dimensions-pose-sol [selectedPiece]="selectedPiece" [surfacemax]="get_max()" [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-sol>
          </div>
           <!-- Formulaire pose porte -->
           <div *ngIf="is_travail_selected(10)">
@@ -302,7 +302,7 @@
     </div>
     
 
-    <button nz-button nzType="default" (click)="next()" *ngIf="current<6" [disabled]="disable_next()" class="btn-prect">
+    <button nz-button nzType="default" (click)="next()" *ngIf="current<6 && current>0" [disabled]="disable_next()" class="btn-prect">
       <span> {{ current === 5 ? 'Recevoir mon devis' : 'Suivant' }} 
         <!-- <span nz-icon nzType="{{ current === 5 ? 'file-done': 'arrow-right' }}" nzTheme="outline"></span>  -->
       </span>
@@ -312,15 +312,15 @@
 </div>
 
 
-<nz-modal class="no-footer pop-devis" nzFooter="" [(nzVisible)]="display_modal_connection" nzTitle="Dernière étape pour recevoir votre devis" (nzOnCancel)="modal_connection_handleCancel()" (nzOnOk)="modal_connection_handleOk()">
-  <ng-container *nzModalContent>
-    
-    Pas encore inscrit ?  <button class="flx-cnt-btn" nz-button  (click)="switch_form()"><b>Créez votre compte</b></button>
+<nz-modal class="no-footer pop-devis" style="font-family: 'Montserrat-Bold';padding-left:20px;" nzFooter="" [(nzVisible)]="display_modal_connection" nzTitle="" (nzOnCancel)="modal_connection_handleCancel()" (nzOnOk)="modal_connection_handleOk()">
+  <div>
+  <ng-container *nzModalContent class="div-contain"> 
+    <span class="ttle-ppup"> DERNIÈRE ÉTAPE POUR RECEVOIR VOTRE DEVIS </span><br>
+    <span class="bold fs-14 ln-h"> > Pas encore inscrit ? </span>  <button class="flx-cnt-btn bold" nz-button  (click)="switch_form()"><b>Créez votre compte</b></button>
     <br>
-    <nz-divider></nz-divider>
     <div *ngIf="se_connecter">
-      <div class="left">Si vous avez déja un compte</div>
-      <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="submitLoginForm()">
+      <div class="left"> > Vous avez déja un compte :</div>
+      <form nz-form [formGroup]="loginForm" class="login-form-pup" (ngSubmit)="submitLoginForm()">
         <nz-form-item>
           <nz-form-control nzErrorTip="Please input your username!">
             <nz-input-group nzPrefixIcon="user">
@@ -343,81 +343,77 @@
             </ng-template>
           </nz-form-control>
         </nz-form-item>
-        <div nz-row class="login-form-margin">
-          <div nz-col [nzSpan]="12">
-            <label nz-checkbox formControlName="remember">
-              <span>Se souvenir de moi</span>
-            </label>
-          </div>
-          <div nz-col [nzSpan]="12">
+       
+        <div nz-row class="login-form-flx aic">
+          <div nz-col [nzSpan]="7">
             <button nz-button class="login-form-button " [nzType]="'primary'">Se connecter</button>
           </div>
-        </div>
-        <div nz-row class="login-form-margin aic">
           
-          <div nz-col [nzSpan]="24">
-            <nz-collapse>
-              @for (panel of panels; track panel) {
-                <nz-collapse-panel [nzHeader]="panel.name" [nzActive]="panel.active" [nzDisabled]="panel.disabled">
-                  <div class="recup-title">Récupération de mot de passe</div>
-                  <ng-container class="recup-box">
-                      
-                     <form nz-form [formGroup]="passforgotForm" (ngSubmit)="submitpassForgotForm()" class="form-cnx-pop">
-                        <nz-form-item>
-                          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
-                          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Email invalide!">
-                            <input nz-input formControlName="email" id="email" />
-                          </nz-form-control>
-                        </nz-form-item>
-                        <nz-form-item nz-row class="register-area">
-                          <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                            
-                            <button nz-button nzType="primary" [disabled]="!passforgotForm.valid">Envoyer</button>
-                          </nz-form-control>
-                        </nz-form-item>
-                        </form>
-
-                        <nz-alert *ngIf="recup_reussie" nzType="success" nzMessage="Un lien de réinitialisation vous a été envoyé sur l'adresse email que vous avez renseigné"></nz-alert>
-                        <nz-alert *ngIf="recup_echouee" nzType="error" nzMessage="Une erreur s'est produite lors de la restauration du mot de passe."></nz-alert>
-          
-                    </ng-container>
-                 
-                </nz-collapse-panel>
-              }
-            </nz-collapse>
-          </div>
+            <div nz-col [nzSpan]="16" class="col-w">
+              <label nz-checkbox formControlName="remember" style="flex-direction: row-reverse !important;">
+                  <span style="font-size:12px; font-family: 'Montserrat-Bold';color:#000;">Se souvenir de moi</span>
+                </label>
+              <a   nzType="text" class="icn-size" (click)="showModal()"><span class="fs-12" style="float: right !important;font-family: 'Montserrat-Bold'; font-size:12px;"> J’ai oublié mon mot de passe <span nz-icon nzType="left" nzTheme="outline" *ngIf="isrecupFormVisible"></span><span *ngIf="!isrecupFormVisible" nz-icon nzType="down" nzTheme="outline"></span></span></a>
+            </div> 
           
         </div>
         
-        <br>
-       
-        <nz-form-control [nzSpan]="20" [nzOffset]="2">
-          <div *ngIf="has_error" class="error-message"> {{error_msg}}</div>
+        <br><br>
+        
+        <div *ngIf="isrecupFormVisible" class="div-cnx-pop">
+          <div id="triangle-code2"></div>
+          <form  nz-form [formGroup]="passforgotForm" (ngSubmit)="submitpassForgotForm()" class="form-cnx-ppup">
+             <span class="ttle-ppup-cntr"> RÉCUPÉRATION DE VOTRE MOT DE PASSE </span>
+           <div class="mdp-flx">
+             <nz-form-item class="eml-cnx">
+              <!-- <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>-->
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Email invalide!">
+                <!-- <input nz-input formControlName="email" id="email" placeholder="E-mail du compte" />-->
+                <nz-input-group nzPrefixIcon="user">
+                  <input type="text" nz-input formControlName="email" placeholder="E-mail du compte" />
+                </nz-input-group>
+              </nz-form-control>
+             </nz-form-item>
+             <nz-form-item nz-row class="register-area">
+              <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                <button nz-button class="btn-recp-mdp" nzType="primary" [disabled]="!passforgotForm.valid">Envoyer</button>
+              </nz-form-control>
+             </nz-form-item>
+          </div>
           
-        </nz-form-control>
+          <nz-alert *ngIf="recup_reussie" class="custom-success-alert" nzType="success" nzMessage="Un lien de réinitialisation vous a été envoyé sur l'adresse email que vous avez renseigné"></nz-alert>
+          <nz-alert *ngIf="recup_echouee" class="custom-error-alert" nzType="error" nzMessage="Une erreur s'est produite lors de la restauration du mot de passe."></nz-alert>
+          <nz-form-control [nzSpan]="20" [nzOffset]="2">
+          <div *ngIf="has_error" class="error-message"> {{error_msg}}</div>
+          </nz-form-control>
+          
+            </form>
+            
+        </div>
+       
+        
       </form>
       
     </div>
 
 
     <div *ngIf="s_inscrire">
-      <form nz-form [formGroup]="registrationForm" (ngSubmit)="submitRegistrationForm()" class="form-devis-pop">
+      <form nz-form [formGroup]="registrationForm" (ngSubmit)="submitRegistrationForm()" class="form-devis-pop inscrip">
         <nz-form-item>
-          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
-          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-            <input nz-input formControlName="email" id="email" />
+          <nz-form-control [nzSm]="24" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+            <nz-input-group nzPrefixIcon="user">
+              <input nz-input formControlName="email" id="email" placeholder="E-mail"/>
+            </nz-input-group>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Mot de passe</nz-form-label>
-          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
-            <input nz-input type="password" id="password" formControlName="password" />
+          <nz-form-control [nzSm]="24" [nzXs]="24" nzErrorTip="Please input your password!">
+            <input nz-input type="password" id="password" formControlName="password" placeholder="Mot de passe"/>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirmer le mot de passe</nz-form-label>
-          <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
-            <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
+          <nz-form-control [nzSm]="24" [nzXs]="24" [nzErrorTip]="errorTpl">
+            <input nz-input type="password" formControlName="checkPassword" id="checkPassword" placeholder="Confirmer le mot de passe"/>
             <ng-template #errorTpl let-control>
               @if (control.errors?.['required']) {
                 Merci de confirmer votre mot de passe!
@@ -430,23 +426,22 @@
         </nz-form-item>
         
         <nz-form-item nz-row class="register-area">
-          <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <nz-form-control [nzSpan]="24" [nzOffset]="6">
             <label nz-checkbox formControlName="agree">
               <span>
-                J'ai lu les 
-                <a style="font-size: 13px;">conditions</a>
+                J'ai lu les <a style="font-size: 13px;">conditions</a>
               </span>
             </label>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item nz-row class="register-area">
-          <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <nz-form-control [nzSpan]="24" [nzOffset]="6">
             <button nz-button nzType="primary">S'inscrire</button>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item nz-row class="register-area">
-          <nz-form-control [nzSpan]="14" [nzOffset]="6" class="flx-connect">
-            Déja inscrit ? Connectez-vous en cliquant sur <button class="flx-cnt-btn" nz-button  (click)="switch_form()">Se connecter</button>
+          <nz-form-control [nzSpan]="24" [nzOffset]="6" class="flx-connect">
+            Déja inscrit ? <button class="flx-cnt-btn" nz-button  (click)="switch_form()">Connectez-vous</button>
           </nz-form-control>
         </nz-form-item>
       </form>
@@ -454,6 +449,7 @@
 
 
   </ng-container>
+</div>
 </nz-modal>
 
 

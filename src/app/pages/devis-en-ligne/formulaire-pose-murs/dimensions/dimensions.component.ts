@@ -35,7 +35,7 @@ get murs(): FormArray {
 }
 
 addMurGroup(): void {
-  if (this.murs.length < 4) {
+  if (this.murs.length < 6) {
     this.murs.push(this.createposeMurGroup());
   }
 }

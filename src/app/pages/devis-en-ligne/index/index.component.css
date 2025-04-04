@@ -189,7 +189,96 @@ ul{
 .ant-row.ng-pristine.ng-invalid.ant-row-start.ng-star-inserted.ng-touched {
     justify-content: space-between !important;
 }
-.ttl-recap{font-size: 31px;line-height: 1.2;margin-bottom: 20px !important;}
+.ttl-recap{font-size: 31px;line-height: 1;margin-bottom: 20px !important;}
+.titre-ttl-recap{text-transform: none !important; font-size: 22px !important;}
+#triangle-code2{
+    margin: 0 auto;
+    display: block;
+    height : 0;
+    width : 0;
+    border-right : 181px solid transparent;
+    border-bottom : 34px solid #B2B3B2;
+    border-left : 181px solid transparent;
+   }
+.login-form-flx{display: flex;}
+.ant-row.login-form-flx.aic {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+}
+.login-form-button{background-color: var(--color1) !important;color: var(--color-white)!important;}
+.login-form-button:hover{background-color: var(--color2) !important;}
+.login-form-pup .ant-input-affix-wrapper{border: 1px solid var(--color1) !important;}
+.login-form-pup .ant-form-item{margin-bottom:12px !important;border: none;}
+.login-form-pup .ant-form-item:focus{border: 2px solid var(--color1) !important;}
+.login-form-pup .ant-input-affix-wrapper:focus, .login-form-pup .ant-input-affix-wrapper-focused{
+    border: 2px solid var(--color1)!important;
+    box-shadow: none !important;
+}
+.form-cnx-ppup .ant-input-affix-wrapper{border: 1px solid #555 !important;}
+.form-cnx-ppup .ant-input-affix-wrapper:focus, .form-cnx-ppup .ant-input-affix-wrapper-focused{
+    border: 2px solid var(--color2)!important;
+    box-shadow: none !important;
+}
+.form-devis-pop.inscrip .ant-input{border-bottom: 0px !important;}
+.form-devis-pop.inscrip .ant-input-affix-wrapper{border-bottom: 1px solid var(--color1) !important; border-left: 1px solid var(--color1) !important; border-right: 1px solid var(--color1) !important;border-top: 1px solid var(--color1) !important;}
+.form-devis-pop.inscrip .ant-input-affix-wrapper:focus, .form-devis-pop.inscrip .ant-input-affix-wrapper-focused{
+    border: 2px solid var(--color1)!important;
+    box-shadow: none !important;
+}
+.login-form-pup input.ant-input.ng-pristine.ng-invalid.ant-input-stepperless.ng-star-inserted.ng-touched, .login-form-pup input.ant-input.ng-untouched.ng-pristine.ng-invalid.ant-input-stepperless.ng-star-inserted{font-family: 'Montserrat' !important;color: #000 !important;}
+.form-devis-pop.inscrip input.ant-input.ng-pristine.ng-invalid.ant-input-stepperless.ng-star-inserted.ng-touched, .form-devis-pop.inscrip input.ant-input.ng-untouched.ng-pristine.ng-invalid.ant-input-stepperless.ng-star-inserted{font-family: 'Montserrat' !important;}
+
+.login-form-pup .ant-input-password-icon.anticon{ color: #000 !important;}
+.form-cnx-ppup{width: 100%; max-width: 100%;background-color: #B2B3B2 !important; }
+.ant-modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:0px !important;
+}
+.form-cnx-ppup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+}
+.form-cnx-ppup .ant-form-item{
+    margin-bottom: 0px !important;
+}
+.mdp-flx {
+    width: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 3fr 1fr;
+}
+.eml-cnx, .eml-cnx nz-form-control.ant-form-item-control{display: block; width: 100%;max-width: 100% !important;margin-bottom: 0px !important;}
+.btn-recp-mdp{
+    background-color: #000 !important;
+    padding: 10px 8px !important;
+    height: 32px;
+    margin-left: -16px;
+}
+.ant-col.ant-col-7 {padding: 0px !important;}
+.form-cnx-ppup nz-alert.custom-error-alert{
+    background: #ffdbdb !important;
+    text-align: center !important;
+    width: 100% !important;
+}
+.form-cnx-ppup nz-alert.custom-success-alert{
+    background: #85D0F7 !important;
+    text-align: center !important;
+    width: 100% !important;
+}
+.icn-size span .anticon svg{font-size: 12px !important;}
+.ttle-ppup{font-family: 'Montserrat-Bold'!important;font-size: 15px !important;}
+.ttle-ppup-cntr{font-family: 'Montserrat-Bold';text-align: center;font-size: 15px !important;}
+.lin-h{line-height: 3!important;}
+
+
 /************************* Respo *************************/
 @media only screen and (max-width: 1440px) {
 }
@@ -206,7 +295,30 @@ ul{
 }
 @media only screen and (max-width: 497px) {
     .pcs-devis {width: 100%;}
-    .ttl-recap{font-size: 27px !important;}
+    .ttl-recap{font-size: 23px !important;margin-bottom: 14px !important;}
+    .titre-ttl-recap{font-size: 18px !important;}
+    .ant-row.login-form-flx.aic{ flex-direction: column !important;}
+    .ttle-ppup, .ttle-ppup-cntr{font-size: 15px;}
+    .col-w{width:100% !important; max-width: 100% !important;}
+    #triangle-code2{ border-right: 170px solid transparent;  border-left: 170px solid transparent;}
+    .lin-h{line-height: 2!important;}
+    .login-form-button span{ font-size: 13px !important;}
+
+
+}
+
+
+@media only screen and (max-width: 375px) {
+#triangle-code2 { border-right: 149px solid transparent; border-left: 149px solid transparent;}
+.mdp-flx { grid-template-columns: 1fr; gap: 10px;}
+.btn-recp-mdp { margin-left: -25%; width: 100%;}
+
+
+
+}
+@media only screen and (max-width: 320px) {
+    #triangle-code2{  border-right: 125px solid transparent; border-left: 125px solid transparent;}
+
 }
 
 .flx-cnt-btn {padding: 0px !important;height: 0px;color: var(--color1);background-color: transparent!important;}
@@ -224,9 +336,4 @@ ul{
 }
 .ant-divider{
     border-top: 3px solid rgba(0, 0, 0, 0.06);
-}
-.recup-title{
-    font-size: 16px;
-    font-weight: bolder;
-    margin-bottom: 20px;
 }

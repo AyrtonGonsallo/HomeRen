@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-etat-surfaces-pose-sol',
@@ -8,6 +9,7 @@ import { GestionDesDevisService } from '../../../../services/gestion-des-devis.s
   styleUrl: '../formulaire-pose-sol.component.css'
 })
 export class PoseSolEtatSurfacesComponent {
+  assetsUrl=environment.assetsUrl
   isclicked=false
   @Input() triggerSubmitEtatSurfacesForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
