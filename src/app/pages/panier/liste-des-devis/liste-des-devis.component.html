@@ -1,9 +1,45 @@
+<h1 class="center black font-site" style="font-size: 35px;">Panier</h1>
+
 <div class="center section-panier" *ngIf="!faire_visite_technicien && !visite_payee && !faire_acompte">
-  <h1 class="center black font-site">Vos Devis</h1>
-  <div>Vous n'avez pas d'élements dans votre panier<br>
-  Rendez vous sur la page devis en ligne pour commencer !</div>
+  <div>
+    <br><br>
+    Vous n'avez pas d'élements dans votre panier<br>
+    Rendez vous sur la page devis en ligne pour commencer !<br>
+  </div>
 </div>
-<div class="center section-panier" *ngIf="faire_visite_technicien || visite_payee">
+
+
+<div class="center section-panier" *ngIf="faire_visite_technicien">
+  <h2 class="center black  font-site">Paiement de la visite du technicien</h2>
+
+  <div *ngIf="listOfDevisToVisit?.length>0">
+    <span>Ci-dessous les tâches où vous avez fait le paiement mais qui doivent être validées par un technicien.</span>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Pièce</th>
+          <th>Prestation</th>
+          <th>Prix  TTC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of listOfDevisToVisit">
+          <td>{{ data.ID }}</td>
+          <td>{{ data.Date | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+          <td>{{ data.Piece?.Titre }}</td>
+          <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>
+          <td>{{ (data.Prix ) | number:'1.2-2'}}€</td>
+        </tr>
+      </tbody>
+    </table>
+    <br><br>
+
+  </div>
+  
+  <div *ngIf="listOfDevisToPayVisit?.length>0">
+    <span>Ci-dessous les tâches où vous devez faire le paiement pour la visite.</span>
     <table>
         <thead>
           <tr>
@@ -16,7 +52,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of listOfData">
+          <tr *ngFor="let data of listOfDevisToPayVisit">
             <td>{{ data.ID }}</td>
             <td>{{ data.Date | date:'yyyy-MM-dd HH:mm:ss' }}</td>
             <td>{{ data.Piece?.Titre }}</td>
@@ -30,18 +66,18 @@
     </table>
     <div >
       <div class="tot-pan">
-      Total TTC : {{total | number:'1.2-2'}}€
+      Total TTC : {{total_visite | number:'1.2-2'}}€
     </div>
     <nz-divider></nz-divider>
     </div>
     
     <div class="total-panier-container" >
       <div>
-        <p class="text-indicateur" *ngIf="!visite_payee && !checkout_succeed">
+        <p class="text-indicateur" *ngIf="!visite_payee">
           Un technicien doit venir faire une visite pour aller plus loin. 
           Vous pouvez payer les frais de la visite ({{prix_visite}} €) en cliquant sur le bouton ci-dessous.
         </p>
-        <p class="text-indicateur" *ngIf="visite_payee || (faire_visite_technicien && checkout_succeed)">
+        <p class="text-indicateur" *ngIf="visite_payee">
           Un technicien doit venir faire une visite pour aller plus loin. 
           Vous avez déja payé les frais de la visite ({{prix_visite}} €).
         </p>
@@ -68,18 +104,27 @@
 
         </div>
 
-        <div *ngIf="!visite_payee && !checkout_succeed">
+        <div *ngIf="!visite_payee">
           <a class="btn-site piece-btn" (click)="Check_login_and_send_mails_details_to_pay_visite()"><b>Payer</b></a>
         </div>
        
       </div>
     </div>
+  </div>
+
+  
 
     
 </div>
 
+
 <div class="center section-panier" *ngIf="faire_acompte">
-  <table >
+  <h2 class="center black  font-site">Paiement de l'acompte</h2>
+
+
+  <div *ngIf="listOfCurrentDevis?.length>0">
+    <span>Ci-dessous les tâches où vous avez payé l'acompte. Ce sont les tâches en cours.</span>
+    <table>
       <thead>
         <tr>
           <th>ID</th>
@@ -87,70 +132,96 @@
           <th>Pièce</th>
           <th>Prestation</th>
           <th>Prix  TTC</th>
-          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of listOfData">
+        <tr *ngFor="let data of listOfCurrentDevis">
           <td>{{ data.ID }}</td>
           <td>{{ data.Date | date:'yyyy-MM-dd HH:mm:ss' }}</td>
           <td>{{ data.Piece?.Titre }}</td>
           <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>
           <td>{{ (data.Prix ) | number:'1.2-2'}}€</td>
-          <td>
-            <a (click)="supprimer_devis(data.ID)"><fa-icon [icon]="faTrash" class="mr-10"></fa-icon></a>
-          </td>
         </tr>
       </tbody>
-  </table>
-  <div >
-    <div class="tot-pan">
-    Total TTC : {{total | number:'1.2-2'}}€
-  </div>
-  <nz-divider></nz-divider>
+    </table>
+
+    <br><br>
   </div>
   
-  <div class="total-panier-container" >
-    <div>
-      <p class="text-indicateur" *ngIf="!acompte_paye && !checkout_succeed">
-        La visite du technicien a été faite. 
-        Pour démarrer les travaux vous devez payer un acompte de {{taux_acompte}}%, ce qui fait {{prix_acompte | number:'1.2-2'}}€.
-      </p>
-      <p class="text-indicateur" *ngIf="acompte_paye || (faire_acompte && checkout_succeed)">
-        La visite du technicien a été faite. 
-        Vous avez payé l'acompte de {{taux_acompte}}%, ce qui fait {{prix_acompte | number:'1.2-2'}}€.
-        Les travaux pourrons démarrer bientôt.
-      </p>
+  <div *ngIf="listOfDevisToPayAcompt?.length>0">
+    <span >Ci-dessous les tâches où vous devez payer l'acompte.</span>
+    <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Pièce</th>
+            <th>Prestation</th>
+            <th>Prix  TTC</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listOfDevisToPayAcompt">
+            <td>{{ data.ID }}</td>
+            <td>{{ data.Date | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td>{{ data.Piece?.Titre }}</td>
+            <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>
+            <td>{{ (data.Prix ) | number:'1.2-2'}}€</td>
+           
+          </tr>
+        </tbody>
+    </table>
+    <div >
+      <div class="tot-pan">
+      Total TTC : {{total_acompte | number:'1.2-2'}}€
     </div>
-
-    <div class="col-cards-btn">
-
-      <div class="div-cards">
-        <div class="image-container">
-          <img _ngcontent-ng-c2419133293="" src="/assets/controle-qualite.svg">
-          <span class="caption">Contrôle <br>de qualité</span>
-      </div>          
-      <div class="image-container">
-        <img src="/assets/service-info.svg" alt="Service Info">
-        <span class="caption">Service <br>Info</span>
+    <nz-divider></nz-divider>
     </div>
     
-    <div class="image-container">
-        <img src="/assets/paiement-securise.svg" alt="Paiement Sécurisé">
-        <span class="caption">Paiement <br>Sécurisé</span>
-    </div>
-        <img src="/assets/card-visa.png" alt="">
-        <img src="/assets/master-card.png" alt="">
-        <img src="/assets/cb-card.png" alt="">
-
+    <div class="total-panier-container" >
+      <div>
+        <p class="text-indicateur" *ngIf="!acompte_paye">
+          La visite du technicien a été faite. 
+          Pour démarrer les travaux vous devez payer un acompte de {{taux_acompte}}%, ce qui fait {{prix_acompte | number:'1.2-2'}}€.
+        </p>
+        <p class="text-indicateur" *ngIf="acompte_paye">
+          La visite du technicien a été faite. 
+          Vous avez payé l'acompte de {{taux_acompte}}%, ce qui fait {{prix_acompte | number:'1.2-2'}}€.
+          Les travaux pourrons démarrer bientôt.
+        </p>
       </div>
-
-      <div *ngIf="!acompte_paye && !checkout_succeed">
-        <a class="btn-site piece-btn" (click)="Check_login_and_send_mails_details_to_pay_acompte()"><b>Payer</b></a>
+  
+      <div class="col-cards-btn">
+  
+        <div class="div-cards">
+          <div class="image-container">
+            <img _ngcontent-ng-c2419133293="" src="/assets/controle-qualite.svg">
+            <span class="caption">Contrôle <br>de qualité</span>
+        </div>          
+        <div class="image-container">
+          <img src="/assets/service-info.svg" alt="Service Info">
+          <span class="caption">Service <br>Info</span>
       </div>
-     
+      
+      <div class="image-container">
+          <img src="/assets/paiement-securise.svg" alt="Paiement Sécurisé">
+          <span class="caption">Paiement <br>Sécurisé</span>
+      </div>
+          <img src="/assets/card-visa.png" alt="">
+          <img src="/assets/master-card.png" alt="">
+          <img src="/assets/cb-card.png" alt="">
+  
+        </div>
+  
+        <div *ngIf="!acompte_paye && !checkout_succeed">
+          <a class="btn-site piece-btn" (click)="Check_login_and_send_mails_details_to_pay_acompte()"><b>Payer</b></a>
+        </div>
+       
+      </div>
     </div>
   </div>
+  
 
  
 </div>

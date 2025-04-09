@@ -162,12 +162,23 @@ async updateVisitedDevisAsync(data: any): Promise<any> {
 getAllNoPayedDevisPiecebyUser(deviceid:string,userid:number): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_no_payed_devis_piece_by_user/${userid}/${deviceid}`);
 }
+getAllDevisToPayAcomptbyUser(deviceid:string,userid:number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_all_devis_to_pay_acompt_by_user/${userid}/${deviceid}`);
+}
+getAllDevisToPayVisitbyUser(deviceid:string,userid:number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_all_devis_to_pay_visit_by_user/${userid}/${deviceid}`);
+}
 getAllNoVisitedDevisPiecebyUser(deviceid:string,userid:number): Observable<any> {
-  return this.http.get<any>(`${environment.apiUrl}/get_no_visited_devis_piece_by_user/${userid}/${deviceid}`);
+  return this.http.get<any>(`${environment.apiUrl}/get_no_visited_devis_piece_by_user/${deviceid}/${userid}`);
+}
+getAllCurrentDevisPiecebyDeviceID(deviceid:string,userid:number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_current_devis_piece_by_user/${deviceid}/${userid}`);
 }
 getAllPayedDevisPiecebyDeviceID(deviceid:string): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_no_payed_devis_piece_by_device_id/${deviceid}`);
 }
+
+
 getParametreById(id: number): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_parametre/${id}`);
 }

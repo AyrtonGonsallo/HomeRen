@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiConceptsEtTravauxService } from './api-concepts-et-travaux.service';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import { AuthServiceService } from './auth-service.service';
 interface CartItem {
@@ -137,4 +137,72 @@ refresh(){
   getBrowserInfo(): void {
     this.browserInfo = navigator.userAgent;
   }
+
+
+  getDevisToPayVisit(): Observable<CartItem[]> {
+    return this.userService.getAllDevisToPayVisitbyUser(
+      this.getUniqueDeviceId(),
+      this.authService.getUser()?.Id ?? 0
+    ).pipe(
+      map((response) => {
+        // transforme la réponse en CartItem[] si nécessaire
+        return response as CartItem[]; // ou applique une transformation ici
+      }),
+      catchError((error) => {
+        console.error('Erreur lors de la récupération des devis à payer la visite :', error?.error?.message);
+        return of([]); // retourne un Observable<CartItem[]> vide en cas d'erreur
+      })
+    );
+  }
+
+  getDevisToPayAcompte(): Observable<CartItem[]> {
+    return this.userService.getAllDevisToPayAcomptbyUser(
+      this.getUniqueDeviceId(),
+      this.authService.getUser()?.Id ?? 0
+    ).pipe(
+      map((response) => {
+        // transforme la réponse en CartItem[] si nécessaire
+        return response as CartItem[]; // ou applique une transformation ici
+      }),
+      catchError((error) => {
+        console.error('Erreur lors de la récupération des devis à payer la visite :', error?.error?.message);
+        return of([]); // retourne un Observable<CartItem[]> vide en cas d'erreur
+      })
+    );
+  }
+
+  getDevisEnAttenteDeVisite(): Observable<CartItem[]> {
+    return this.userService.getAllNoVisitedDevisPiecebyUser(
+      this.getUniqueDeviceId(),
+      this.authService.getUser()?.Id ?? 0
+    ).pipe(
+      map((response) => {
+        // transforme la réponse en CartItem[] si nécessaire
+        return response as CartItem[]; // ou applique une transformation ici
+      }),
+      catchError((error) => {
+        console.error('Erreur lors de la récupération des devis à payer la visite :', error?.error?.message);
+        return of([]); // retourne un Observable<CartItem[]> vide en cas d'erreur
+      })
+    );
+  }
+
+
+  getDevisTravauxEnCours(): Observable<CartItem[]> {
+    return this.userService.getAllCurrentDevisPiecebyDeviceID(
+      this.getUniqueDeviceId(),
+      this.authService.getUser()?.Id ?? 0
+    ).pipe(
+      map((response) => {
+        // transforme la réponse en CartItem[] si nécessaire
+        return response as CartItem[]; // ou applique une transformation ici
+      }),
+      catchError((error) => {
+        console.error('Erreur lors de la récupération des devis en cours :', error?.error?.message);
+        return of([]); // retourne un Observable<CartItem[]> vide en cas d'erreur
+      })
+    );
+  }
+
+
 }
