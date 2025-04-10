@@ -9,7 +9,7 @@
 </div>
 
 
-<div class="center section-panier" *ngIf="faire_visite_technicien">
+<div class="center section-panier" *ngIf="faire_visite_technicien || listOfDevisToVisit?.length>0">
   <h2 class="center black  font-site">Paiement de la visite du technicien</h2>
 
   <div *ngIf="listOfDevisToVisit?.length>0">
@@ -118,7 +118,7 @@
 </div>
 
 
-<div class="center section-panier" *ngIf="faire_acompte">
+<div class="center section-panier" *ngIf="faire_acompte || listOfCurrentDevis?.length>0">
   <h2 class="center black  font-site">Paiement de l'acompte</h2>
 
 
@@ -214,7 +214,7 @@
   
         </div>
   
-        <div *ngIf="!acompte_paye && !checkout_succeed">
+        <div *ngIf="!acompte_paye">
           <a class="btn-site piece-btn" (click)="Check_login_and_send_mails_details_to_pay_acompte()"><b>Payer</b></a>
         </div>
        

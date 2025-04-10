@@ -102,7 +102,8 @@ export class ListeDesDevisComponent {
       if ((!this.listOfDevisToPayAcompt && parametre_acompte)) {
         console.warn("accompte mais pas de devis listOfDevisToPayAcompt",this.listOfDevisToPayAcompt);
         return;
-      }else{
+      }
+      else if ((this.listOfDevisToPayAcompt && parametre_acompte)){
         this.visite_faite=true
         this.acompte_paye=true
       }
@@ -170,24 +171,26 @@ export class ListeDesDevisComponent {
           
           this.listOfDevisToPayAcompt = items;
           console.log('Devis ou il faut payer l\'acompte ', this.listOfDevisToPayAcompt);
-         
-          for(let item of items){
-            this.total_acompte+=item.Prix??0;
-            
-          }
-          this.prix_acompte=this.taux_acompte*this.total_acompte/100
-          this.faire_acompte=true
-          if(items[0]?.VisiteFaite){
-           
-           this.visite_faite=true
-            if(items[0]?.Visite?.Payed){
-              this.acompte_paye=true
-              console.log("le premier devis a l'acompte payee")
+          if(items.length>0){
+            for(let item of items){
+              this.total_acompte+=item.Prix??0;
+              
             }
+            this.prix_acompte=this.taux_acompte*this.total_acompte/100
+            this.faire_acompte=true
+            if(items[0]?.VisiteFaite){
             
-            
-            console.log("le premier devis n'a pas d'acompte donc il faut lui faire payer l'acompte - taux : ",this.prix_acompte)
-          }
+            this.visite_faite=true
+              if(items[0]?.Visite?.Payed){
+                this.acompte_paye=true
+                console.log("le premier devis a l'acompte payee")
+              }
+              
+              
+              console.log("le premier devis n'a pas d'acompte donc il faut lui faire payer l'acompte - taux : ",this.prix_acompte)
+            }
+         }
+         
          
           resolve(); //  Fin de la méthode (permet de continuer l'exécution)
         },
