@@ -22,21 +22,18 @@
             <!-- Reusable template for displaying options with PDFs -->
           
             <div class="flx-radio-row2-w">
-              <div *ngFor="let option of gammes_radiateurs" class="parquet-option nt-col tooltip-srf ">
-                <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
+              <div *ngFor="let option of gammes_radiateurs" class="parquet-option nt-col tooltip-srf flex-see-gamme" >
+                <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label"   class="with-link">
                   <span>
                     <!-- Dynamically display the label based on the type -->
                     {{ option.Label }}
                   </span>
-                  <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                    <i class="fas fa-question-circle"></i>
-                  </a>
+                 
                 </label>
+                <span>
+                  <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
+                </span>
                 
-                <ng-template #tooltipTemplate>
-                  Pour plus d'informations, veuillez consulter :
-                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                </ng-template>
               </div>
             </div>
           </nz-radio-group>

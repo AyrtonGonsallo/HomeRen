@@ -137,19 +137,15 @@
 
               <div nz-col class="row-w-grid coll-100">
                 <label for="gamme">Gamme <span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
-                <nz-radio-group formControlName="gamme" class="flx-radio-row1 tooltip-srf">
-                  <div  *ngFor="let option of gammes" >
-                    <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
+                <nz-radio-group formControlName="gamme" class="flx-radio-row1 tooltip-srf w-100">
+                  <div  *ngFor="let option of gammes"  class="flex-see-gamme">
+                    <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label" class="with-link">
                       <span>{{option.Label}}</span>
-                      <a *ngIf="option.Pdf"  nz-tooltip [nzTooltipTitle]="tooltipBonEtat" href="javascript:void(0)" class="info-icon">
-                        <i class="fas fa-question-circle"></i>
-                      </a>
+                      
                     </label>
-                     
-                    <ng-template #tooltipBonEtat>
-                      Pour plus d'informations, veuillez consulter :
-                      <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                    </ng-template>
+                    <span>
+                      <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
+                    </span>
                   </div>
                   
                 </nz-radio-group>

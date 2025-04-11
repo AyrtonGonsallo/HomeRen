@@ -120,6 +120,7 @@ img{width: fit-content;max-width: 100%;}
 .radio-flx-spc label span:nth-child(1){width: 17px;}
 .ant-radio {margin-left:10px !important;}
 .devis-content{width: 100%;}
+.w-100{width: 100%;}
 .del-btn{width: fit-content;}
 /*********** recap **********/
 .recup-fin {
@@ -352,15 +353,19 @@ label{font-family: 'Montserrat';font-weight: 600;}
     align-content: center;
     align-items: center;
 }
-form label{
+form label:not(.with-link){
     text-align: left;
     width: 100% !important;
+}
+.flex-see-gamme{
+    display: flex;
 }
 .devis-content p.ttl-dv-pc {
     margin-bottom: 4px;
 }
 .plaf-dim input{ border:1px solid var(--color1)!important;border-radius:2px !important;}
-.plaf-dim label{font-size: 13px !important;font-family: "Montserrat"; margin-bottom: 10px;}
+.plaf-dim label{font-size: 13px !important;font-family: "Montserrat"; }
+.plaf-dim label:not(.with-link){ margin-bottom: 10px;}
 .flx-radio-travaux{
     width: 90% !important;
 }
@@ -628,6 +633,16 @@ text-align: left !important;}
 
 
 .row-w-grid-96.ant-col {max-width: 96% !important;justify-items: start !important;align-items: start !important;}
+.row-w-grid12.ant-col {
+    padding:12px 0px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: auto;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 2fr;
+    justify-items: start !important;
+    align-items: start !important;}
 .row-w-grid1.ant-col {
     padding:12px 0px !important;
     max-width: 100% !important;
@@ -900,3 +915,12 @@ input:focus-visible, textarea:focus-visible {border: 0px !important;}
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
 }
+.see-gamme-link{
+    font-size: 13px;
+    color: #FFC736;
+    margin-left: 20px;
+}
+.see-gamme-link:hover{
+    color: #000000;
+}
+

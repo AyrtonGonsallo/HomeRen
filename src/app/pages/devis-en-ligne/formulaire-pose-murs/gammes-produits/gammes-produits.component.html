@@ -11,7 +11,7 @@
       </div>
       <div nz-col nzJustify="start">
           
-          <nz-radio-group formControlName="gamme" class="w-80">
+          <nz-radio-group formControlName="gamme" class="w-80 murs">
             <!-- Reusable template for displaying options with PDFs -->
             <ng-container>
               <div  nz-col class="row-w-grid3">
@@ -19,20 +19,16 @@
                 <label class="" >Peinture : </label>
                </div>
                <div class="">
-              <div *ngFor="let option of gammes_peinture" class="parquet-option">
-                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
+              <div *ngFor="let option of gammes_peinture" class="flex-see-gamme parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix" class="with-link">
                   <span>
                     <!-- Dynamically display the label based on the type -->
                     {{ option.Label }}
                   </span>
-                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                    <i class="fas fa-question-circle"></i>
-                  </a>
                 </label>
-                <ng-template #tooltipTemplate>
-                  Pour plus d'informations, veuillez consulter :
-                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                </ng-template>
+                <span>
+                  <a *ngIf="option.Pdf" class="see-gamme-link" target="_blank" [href]="baseurl + option.Pdf" >Voir la gamme</a>
+                </span>
               </div>
             </div>
             </div>
@@ -44,23 +40,16 @@
                 <label  class="" >Enduit :</label>
                </div>
                <div class="">
-              <div *ngFor="let option of gammes_enduit" class="parquet-option">
-                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
+              <div *ngFor="let option of gammes_enduit" class="flex-see-gamme parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix" class="with-link">
                   <span>
                     <!-- Dynamically display the label based on the type -->
                     {{ option.Label }}
                   </span>
-                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                    <i class="fas fa-question-circle"></i>
-                  </a>
                 </label>
-               <!-- <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                  <i class="far fa-question-circle"></i>
-                </a>-->
-                <ng-template #tooltipTemplate>
-                  Pour plus d'informations, veuillez consulter :
-                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                </ng-template>
+                <span>
+                  <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
+                </span>
               </div>
             </div>
             </div>
@@ -71,23 +60,16 @@
                 <label class="" >Papier :</label>
                </div>
                <div class="">
-              <div *ngFor="let option of gammes_papier" class="parquet-option">
-                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
+              <div *ngFor="let option of gammes_papier" class="flex-see-gamme parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix" class="with-link">
                   <span>
                     <!-- Dynamically display the label based on the type -->
                     {{ option.Label }}
                   </span>
-                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                    <i class="fas fa-question-circle"></i>
-                  </a>
                 </label>
-                <!--<a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                  <i class="far fa-question-circle"></i>
-                </a>-->
-                <ng-template #tooltipTemplate>
-                  Pour plus d'informations, veuillez consulter :
-                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                </ng-template>
+                 <span>
+                    <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
+                  </span>
               </div>
             </div>
             </div>
@@ -98,23 +80,16 @@
                 <label class="" >Carrelage :</label>
                </div>
                <div class="">
-              <div *ngFor="let option of gammes_carrelage" class="parquet-option">
-                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
+              <div *ngFor="let option of gammes_carrelage" class="flex-see-gamme parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix" class="with-link">
                   <span>
                     <!-- Dynamically display the label based on the type -->
                     {{ option.Label }}
                   </span>
-                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                    <i class="fas fa-question-circle"></i>
-                  </a>
                 </label>
-                <!--<a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                  <i class="far fa-question-circle"></i>
-                </a>-->
-                <ng-template #tooltipTemplate>
-                  Pour plus d'informations, veuillez consulter :
-                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                </ng-template>
+                <span>
+                    <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
+                  </span>
               </div>
             </div>
            </div>
@@ -124,23 +99,16 @@
                 <label  class="" >Bois :</label>
                </div>
                <div class="">
-              <div *ngFor="let option of gammes_bois" class="parquet-option">
-                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
+              <div *ngFor="let option of gammes_bois" class="flex-see-gamme parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix" class="with-link">
                   <span>
                     <!-- Dynamically display the label based on the type -->
                     {{ option.Label }}
                   </span>
-                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                    <i class="fas fa-question-circle"></i>
-                  </a>
                 </label>
-                <!--<a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                  <i class="far fa-question-circle"></i>
-                </a>-->
-                <ng-template #tooltipTemplate>
-                  Pour plus d'informations, veuillez consulter :
-                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                </ng-template>
+                <span>
+                    <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
+                  </span>
               </div>
             </div>
            </div>
@@ -151,23 +119,16 @@
                 <label  class="" >Tissus :</label>
                </div>
                <div class="">
-              <div *ngFor="let option of gammes_tissus" class="parquet-option">
-                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
+              <div *ngFor="let option of gammes_tissus" class="flex-see-gamme parquet-option">
+                <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix" class="with-link">
                   <span>
                     <!-- Dynamically display the label based on the type -->
                     {{ option.Label }}
                   </span>
-                  <a  nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                    <i class="fas fa-question-circle"></i>
-                  </a>
                 </label>
-                <!--<a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                  <i class="far fa-question-circle"></i>
-                </a>-->
-                <ng-template #tooltipTemplate>
-                  Pour plus d'informations, veuillez consulter :
-                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                </ng-template>
+                <span>
+                    <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
+                  </span>
               </div>
              </div>
             </div>

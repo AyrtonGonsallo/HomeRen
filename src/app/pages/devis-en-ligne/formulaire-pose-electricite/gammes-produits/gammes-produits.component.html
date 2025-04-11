@@ -44,7 +44,7 @@
 
       <div  class="form-group" nz-col nzJustify="start" class="w-80" style="display:block;">
 
-        <div nz-col class="row-w-grid1" style="padding:0px 16px !important;">
+        <div nz-col class="row-w-grid12" style="padding:0px 16px !important;">
           <div class="" >
           <label>Gamme d'appareillage :</label>
          </div>
@@ -52,21 +52,17 @@
             <!-- Reusable template for displaying options with PDFs -->
           
             <div nz-col class="flx-radio-row1">
-              <div *ngFor="let option of gammes_appareillage" class="parquet-option  tooltip-srf ">
-                <label class="radio-span" nz-radio [nzValue]="option.ID + '-' + option.PrixMultiples + '-' + option.Label">
+              <div *ngFor="let option of gammes_appareillage" class="parquet-option  tooltip-srf  flex-see-gamme">
+                <label class="radio-span" nz-radio [nzValue]="option.ID + '-' + option.PrixMultiples + '-' + option.Label"  class="with-link">
                   <span>
                     <!-- Dynamically display the label based on the type -->
                     {{ option.Label }}
                   </span>
-                  <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-                    <i class="fas fa-question-circle"></i>
-                  </a>
+                 
                 </label>
-                
-                <ng-template #tooltipTemplate>
-                  Pour plus d'informations, veuillez consulter :
-                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                </ng-template>
+                <span>
+                  <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
+                </span>
               </div>
             </div>
           </nz-radio-group>
