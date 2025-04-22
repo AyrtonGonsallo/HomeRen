@@ -45,7 +45,6 @@ appareilGroup: any;
   createPoseSalleDeBainGroup(): FormGroup {
     return this.fb.group({
       appareils_salle_de_bain: this.fb.array([]),
-      gammes_depose_form: this.fb.array([])
     });
   }
   get getposeSalleDeBainForm(): FormArray {
@@ -58,7 +57,6 @@ appareilGroup: any;
       return;
     }
     if (this.poseSalleDeBainForm.valid) {
-      this.gestiondesdevisService.addFormulaire("dimensions-pose-app-san",16,this.poseSalleDeBainForm.value)
       this.gestiondesdevisService.addFormulaire("etat-surfaces-pose-app-san",16,this.poseSalleDeBainForm.value)
       this.gestiondesdevisService.addFormulaire("gammes-produits-pose-app-san",16,this.poseSalleDeBainForm.value)
     // Envoyer les données au backend ou traiter comme nécessaire
@@ -119,11 +117,7 @@ appareilGroup: any;
     this.loadAppareils()
   }
 
-  gammes_depose: any[] = [];
-   // Getter pour accéder à la FormArray "gammes"
-   get gammes_depose_form(): FormArray {
-    return this.poseSalleDeBainForm.get('gammes_depose_form') as FormArray;
-  }
+ 
 tableauIds = [9, 37, 10, 2,35,38,6,36,34,42,39,40,41,];
 
   loadAppareils(){
@@ -145,6 +139,7 @@ tableauIds = [9, 37, 10, 2,35,38,6,36,34,42,39,40,41,];
 
         this.appareils_salle_de_bain.forEach(appareil => {
 
+          let titre=appareil.Titre
           let modele=""
           let active=false
           let longueur=0
@@ -164,6 +159,7 @@ tableauIds = [9, 37, 10, 2,35,38,6,36,34,42,39,40,41,];
              // Créer un FormGroup pour chaque appareil
           const appareilGroup = this.fb.group({});
               
+          appareilGroup.addControl("titre", this.fb.control(titre, ));
           appareilGroup.addControl("longueur", this.fb.control(longueur, ));
           appareilGroup.addControl("largeur", this.fb.control(largeur, ));
           appareilGroup.addControl("nombre_de_vasque", this.fb.control(nombre_de_vasque, ));
@@ -205,52 +201,7 @@ tableauIds = [9, 37, 10, 2,35,38,6,36,34,42,39,40,41,];
     );
 
 
-    this.userService.getGammesByTravailAndTypeOrdered(16, 'depose-salle-de-bain-salle-d-eau').subscribe(
-      (response: any) => {
-        this.gammes_depose = response
-        console.log("réponse de la requette  get depose salle de bain",this.gammes_depose);
-        let i=0
-
-        this.gammes_depose.forEach(gamme => {
-        
-          let quantite=0
-          let titre=gamme.Label
-          let prix=gamme.Prix
-          if(this.prec_formulaire_gamme){
-            let form=this.prec_formulaire_gamme.formulaire
-            quantite=form?.gammes_depose_form[i]?.quantite
-            titre=form?.gammes_depose_form[i]?.titre
-            prix=form?.gammes_depose_form[i]?.prix
-          }
-        
-             // Créer un FormGroup pour chaque appareil
-          const appareilGroup = this.fb.group({});
-              
-         
-          appareilGroup.addControl("quantite", this.fb.control(quantite, ));
-          appareilGroup.addControl("titre", this.fb.control(titre, ));
-          appareilGroup.addControl("prix", this.fb.control(prix, ));
-         
-
-          // Obtenez les contrôles pour pouvoir les manipuler
-          const quantiteControl = appareilGroup.get('quantite');
-          quantiteControl?.setValidators([Validators.required, Validators.min(0), Validators.max(50)]);
-          // Mettre à jour la validation pour forcer la vérification des erreurs
-          quantiteControl?.updateValueAndValidity();
-
-         
-           
-
-          // Ajouter le FormGroup de l'appareil au FormArray
-          (this.poseSalleDeBainForm.get('gammes_depose_form') as FormArray).push(appareilGroup);
-          i++
-          
-        });
-      },
-      (error) => {
-        console.error('Erreur lors de la recuperation des gammes_depose :', error);
-      }
-    );
+    
 
 
   }

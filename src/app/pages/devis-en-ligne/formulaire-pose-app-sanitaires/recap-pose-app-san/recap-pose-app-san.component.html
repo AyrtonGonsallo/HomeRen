@@ -2,10 +2,10 @@
 <div class="recap-div devis-content">
     <span class="recup-fin recap-piece">{{selectedPiece.Titre}} - Installation de nouveaux équipements sanitaires</span>
     
-    <div style="width: 100%;" class="left"><span class="mur-ttl">Pose de nouveaux équipements</span></div>
+
     <div *ngFor="let appareil of appareils_a_ajouter">
         <div *ngIf="appareil.active">
-            <span class="recup-fin"><p>{{get_title(appareil.modele)}}</p></span>
+            <span class="recup-fin"><p><strong>{{appareil.titre}}</strong></p><p><strong>:</strong></p><p><strong>{{get_title(appareil.modele)}}</strong></p></span>
             <span class="recup-fin" *ngIf="appareil.longueur"><p>Longueur</p><p>:</p><p>{{(appareil.longueur)}} cm</p></span>
             <span class="recup-fin" *ngIf="appareil.largeur"><p>Largeur</p><p>:</p><p>{{(appareil.largeur)}} cm</p></span>
             <span class="recup-fin" *ngIf="appareil.nombre_de_vasque"><p>Nombre de vasque</p><p>:</p><p>{{(appareil.nombre_de_vasque)}}</p></span>
@@ -17,8 +17,8 @@
     <div style="width: 100%;" class="left"><span class="mur-ttl">Dépose d'anciennes installations</span></div>
 
     <div *ngFor="let gamme of gammes_depose_form">
-        <div *ngIf="gamme.quantite>0">
-            <span class="recup-fin"><p>{{(gamme.titre)}}</p></span>
+        <div *ngIf="gamme.quantite>0" class="recp-flx">
+            <span class="recup-fin"><p><strong>{{(gamme.titre)}}</strong></p></span>
             <span class="recup-fin"><p>Nombre</p><p>:</p><p>{{(gamme.quantite)}} </p></span>
            
         </div>

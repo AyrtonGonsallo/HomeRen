@@ -1,235 +1,43 @@
-<div class="plaf-dim cuisine-div">
-   
- 
-  
-<nz-collapse>
-  <nz-collapse-panel nzHeader="Éléments de cuisine haut" [nzActive]="is_active_Ech" [nzExtra]="activerEch" nzShowArrow="false" (nzActiveChange)="active_Ech()">
-
-    <form [formGroup]="deposeElementCuisinesHautForm" (ngSubmit)="onPoseElementCuisinesSubmit()">
-      <div formArrayName="elementcuisines_haut">
-        <div *ngFor="let elementcuisine of elementcuisines_haut.controls; let i = index" [formGroupName]="i">
-          
-          
-          <div class="mur-btn-div">
-            <div class="ttl-mob" style="margin-right: auto;text-align: left;"> <span class="mur-ttl">Élements de cuisine haut</span> - <span class="elementcuisine-ttl mur-ttl">Haut {{i+1}}</span> </div>
-            <button type="button" class="dynamic-form-button del-btn" (click)="removeElementCuisine_hautGroup(i)" *ngIf="elementcuisines_haut.length > 1">Retirer</button>
-          </div>
-
-          <div nz-row nzJustify="start" class="cuisine-flx" >
-            <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-              <label for="hauteur">Hauteur(cm) 
-                <span class="error-message" *ngIf="is_active_Ech">*</span> :
-              </label>
-              <input type="number" id="hauteur" formControlName="hauteur" min="1" max="3000">
-              <a nz-tooltip [nzTooltipTitle]="tooltipSurfaceh" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltipSurfaceh>
-                <div class="tooltip-content">
-                  <strong>Calcul de la hauteur :</strong><br>
-                </div>
-              </ng-template>
-             
-            </div>
-            <div *ngIf="isclicked && elementcuisines_haut.controls[i].get('hauteur')?.invalid " class="error-message">
-              Hauteur invalide.
-          </div>
-             <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-              <label for="longueur">Longueur(cm) 
-                <span class="error-message" *ngIf="is_active_Ech">*</span> :
-              </label>
-              <input type="number" id="longueur" formControlName="longueur" min="1" max="8000">
-              <a nz-tooltip [nzTooltipTitle]="tooltipSurfacel" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltipSurfacel>
-                <div class="tooltip-content">
-                  <strong>Calcul de la longueur :</strong><br>
-                </div>
-              </ng-template>
-            </div>
-            <div *ngIf="isclicked && elementcuisines_haut.controls[i].get('longueur')?.invalid " class="error-message">
-              Longueur invalide.
-          </div>
-            <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-              <label for="profondeur">Profondeur(cm)
-                <span class="error-message"  *ngIf="is_active_Ech">*</span> :
-              </label>
-              <input type="number" id="profondeur" formControlName="profondeur"  min="1" max="9000">
-              <a nz-tooltip [nzTooltipTitle]="tooltipSurfacep" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltipSurfacep>
-                <div class="tooltip-content">
-                  <strong>Calcul de la profondeur :</strong><br>
-                </div>
-              </ng-template>
-            </div>
-            <div *ngIf="isclicked && elementcuisines_haut.controls[i].get('profondeur')?.invalid " class="error-message">
-              Profondeur invalide.
-          </div>
-            <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-              <label for="quantite">Quantité 
-                <span class="error-message"  *ngIf="is_active_Ech">*</span> :
-              </label>
-              <input type="number" id="quantite" formControlName="quantite" min="1" max="50">
-              <a nz-tooltip [nzTooltipTitle]="tooltipSurfaceq" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltipSurfaceq>
-                <div class="tooltip-content">
-                  <strong>Calcul de la quantité :</strong><br>
-                </div>
-              </ng-template>
-            </div>
-            <div *ngIf="isclicked && elementcuisines_haut.controls[i].get('quantite')?.invalid " class="error-message">
-              Quantite invalide.
-          </div>
-            
-            <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf"> 
-              <label for="image">Image :</label>
-              <input type="file" id="image" (change)="onElementCuisines_hautFileChange($event, i)" accept="image/*">
-              <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltipImage>
-                <div class="tooltip-content">
-                  <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
-                </div>
-              </ng-template>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-      <button type="button"  class="dynamic-form-button add-btn" (click)="addElementCuisine_hautGroup()" *ngIf="elementcuisines_haut.length < 4">Ajouter un élement de cuisine haut <span nz-icon nzType="plus" nzTheme="outline"></span></button>
-    </form>
-
-  </nz-collapse-panel>
-  <nz-collapse-panel nzHeader="Éléments de cuisine bas" [nzActive]="is_active_Ecb" [nzExtra]="activerEcb" nzShowArrow="false" (nzActiveChange)="active_Ecb()">
-    <form [formGroup]="deposeElementCuisinesBasForm" (ngSubmit)="onPoseElementCuisinesSubmit()">
-      <div formArrayName="elementcuisines_bas">
-        <div *ngFor="let elementcuisine of elementcuisines_bas.controls; let i = index" [formGroupName]="i">
-
-
-
-
-          <div class="mur-btn-div">
-            <div class="mur-ttl ttl-mob" style="margin-right: auto;text-align: left;"><span>Élements de cuisine bas</span> - <span class="elementcuisine-ttl">Bas {{i+1}}</span></div>
-            <button type="button" class="dynamic-form-button del-btn" (click)="removeElementCuisine_basGroup(i)" *ngIf="elementcuisines_bas.length > 1">Retirer</button>
-          </div>
-
-
-          <div nz-row nzJustify="start" class="cuisine-flx" >
-            <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-              <label for="hauteur">Hauteur (cm) 
-                <span class="error-message"  *ngIf="is_active_Ecb">*</span> :
-              </label>
-              <input type="number" id="hauteur" formControlName="hauteur"  min="1" max="3000">
-              <a nz-tooltip [nzTooltipTitle]="tooltipSurfaceh2" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltipSurfaceh2>
-                <div class="tooltip-content">
-                  <strong>Calcul de la hauteur :</strong><br>
-                </div>
-              </ng-template>
-            </div>
-            <div *ngIf="isclicked && elementcuisines_bas.controls[i].get('hauteur')?.invalid " class="error-message">
-              Hauteur invalide.
-          </div>
-             <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-              <label for="longueur">Longueur (cm) 
-                <span class="error-message"  *ngIf="is_active_Ecb">*</span> :
-              </label>
-              <input type="number" id="longueur" formControlName="longueur"  min="1" max="9000">
-              <a nz-tooltip [nzTooltipTitle]="tooltipSurfacel2" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltipSurfacel2>
-                <div class="tooltip-content">
-                  <strong>Calcul de la longueur :</strong><br>
-                </div>
-              </ng-template>
-            </div>
-            <div *ngIf="isclicked && elementcuisines_bas.controls[i].get('longueur')?.invalid " class="error-message">
-              Longueur invalide.
-          </div>
-            <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-              <label for="profondeur">Profondeur (cm) 
-                <span class="error-message" *ngIf="is_active_Ecb">*</span> :
-              </label>
-              <input type="number" id="profondeur" formControlName="profondeur"  min="1" max="7000">
-              <a nz-tooltip [nzTooltipTitle]="tooltipSurfacep2" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltipSurfacep2>
-                <div class="tooltip-content">
-                  <strong>Calcul de la profondeur :</strong><br>
-                </div>
-              </ng-template>
-            </div>
-            <div *ngIf="isclicked && elementcuisines_bas.controls[i].get('profondeur')?.invalid " class="error-message">
-              Profondeur invalide.
-          </div>
-            <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf">
-              <label for="quantite">Quantité 
-                <span class="error-message"  *ngIf="is_active_Ecb">*</span> :
-              </label>
-              <input type="number" id="quantite" formControlName="quantite"  min="1" max="50">
-              <a nz-tooltip [nzTooltipTitle]="tooltipSurfaceq2" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltipSurfaceq2>
-                <div class="tooltip-content">
-                  <strong>Calcul de la quantité :</strong><br>
-                </div>
-              </ng-template>
-            </div>
-            <div *ngIf="isclicked && elementcuisines_bas.controls[i].get('quantite')?.invalid " class="error-message">
-              Quantité invalide.
-          </div>
-            
-            <div nz-col nzSpan="6" class="ant-col etat-srf tooltip-srf"> 
-              <label for="image">Image :</label>
-              <input type="file" id="image" (change)="onElementCuisines_basFileChange($event, i)" accept="image/*">
-              <a nz-tooltip [nzTooltipTitle]="tooltipImage" href="javascript:void(0)" class="info-icon">
-                <i class="far fa-question-circle"></i>
-              </a>
-              <ng-template #tooltipImage>
-                <div class="tooltip-content">
-                  <p>Si votre mur possède des caractéristiques particulières, vous pouvez nous envoyer une photo.</p>
-                </div>
-              </ng-template>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-      <button type="button"  class="dynamic-form-button add-btn" (click)="addElementCuisine_basGroup()" *ngIf="elementcuisines_bas.length < 4">Ajouter un élement de cuisine bas <span nz-icon nzType="plus" nzTheme="outline"></span></button>
-    </form>
-  </nz-collapse-panel>
-</nz-collapse>
-
-<ng-template #activerEch>
-  <label nz-checkbox [(ngModel)]="is_active_Ech">
-    
-  </label>
-</ng-template>
-<ng-template #activerEcb>
-  <label nz-checkbox [(ngModel)]="is_active_Ecb">
-    
-  </label>
-</ng-template>
-
-
-
-
-
-
-
-
-
-
+<div class="renov-elec plaf-dim tooltip-srf">
+  <div  class="">
+    <form [formGroup]="poseCuisineForm" (ngSubmit)="onPoseCuisineSubmit()">
       
-    </div>
+
+      <div class="renov-elec-div ">
+        <span class="mur-ttl">Dépose d'anciennes installations</span>
+      </div>
+
+      <div formArrayName="gammes_depose_form">
+           
+              <div nz-row nzJustify="start" class="row-w-grid" style="width:80% !important;max-width:100% !important;">
+                        <div *ngFor="let gamme of gammes_depose_form.controls; let i = index" [formGroupName]="i">
+
+                <!-- Champ Quantité -->
+                <div nz-col class="flx-radio-row4" *ngIf="need_quantite(gammes_depose[i].ID)">
+                    <label for="quantite">{{gammes_depose && gammes_depose[i] ? gammes_depose[i].Label : ''}} - quantité :</label>
+                    <input (keypress)="blockComma($event)"  id="quantite" type="number" formControlName="quantite" min="0"/>
+                    
+                </div>
+                <div *ngIf="gamme.get('quantite')?.invalid && isclicked" class="error-message">
+                  Quantité invalide
+                </div>
+
+                <div nz-col nzSpan="24" class="flx-radio-row4" *ngIf="need_longueur(gammes_depose[i].ID)">
+                  <label for="longueur">{{gammes_depose && gammes_depose[i] ? gammes_depose[i].Label : ''}} - longueur (cm) :</label>
+                  <input (keypress)="blockComma($event)"  id="longueur" type="number" formControlName="longueur" min="0"/>
+                
+              </div>
+              <div *ngIf="gamme.get('longueur')?.invalid && isclicked" class="error-message">
+                Longueur invalide
+              </div>
+               
+              </div>
+              
+              
+          
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -13,7 +13,7 @@
     
       <div nz-col nzJustify="start" class="flx-radio-row1 w-80">
         
-        <div nz-col nzSpan="6" class="">
+        <div nz-col nzSpan="6" class="row-w">
           <label for="surface">Surface de la pièce (m²)<span class="error-message">*</span> : <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
             <i class="fas fa-question-circle"></i>
           </a></label>
@@ -27,16 +27,17 @@
               <p> Si la pièce fait 4m de long et 3m de large, la surface totale est de 12 m².</p>
             </div>
           </ng-template>
+
+          <label for="hauteur">Hauteur de la pièce (cm)<span class="error-message">*</span> :</label>
+          <input (keypress)="blockComma($event)"  type="number" id="hauteur" formControlName="hauteur" max="700" min="1">
+        
         </div>
         <!--<div *ngIf="isclicked && poseChauffageForm.get('surface')?.invalid " class="error-message">
           <br>La surface est invalide.
         </div>-->
 
 
-        <div nz-col nzSpan="6" class="">
-          <label for="hauteur">Hauteur de la pièce (cm)<span class="error-message">*</span> :</label>
-          <input (keypress)="blockComma($event)"  type="number" id="hauteur" formControlName="hauteur" max="700" min="1">
-        </div>
+       
        <!--  <div *ngIf="isclicked && poseChauffageForm.get('hauteur')?.invalid " class="error-message">
          <br>La hauteur est invalide.
         </div>-->

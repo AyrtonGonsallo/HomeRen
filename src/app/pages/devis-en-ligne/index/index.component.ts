@@ -414,8 +414,9 @@ export class IndexComponent {
       if(this.current==2 ){
         console.log("formulaire dim valide ? ",this.is_formulaire_dimensions_valid)
         if(this.is_formulaire_dimensions_valid){
-          if( this.filteredTravail.ID==2 ){
+          if( this.filteredTravail.ID==2 || this.filteredTravail.ID==16){
             this.current=4
+            this.triggerSubmitDimensionForm=!this.triggerSubmitDimensionForm
           }else if(  this.filteredTravail.ID==3 || this.filteredTravail.ID==4){
             this.current=5
           }
@@ -467,10 +468,7 @@ export class IndexComponent {
     
   }
   jump(): boolean {//pour les cas ou on doit sauter des etapes
-    if(this.is_one_travail_selected && this.filteredTravail.ID==2 && this.current<=2){
-      this.current=4
-      return true
-    }
+   
     if(this.is_one_travail_selected && this.filteredTravail.ID==11 && this.current<=2){
       this.current=4
       return true
@@ -489,10 +487,7 @@ export class IndexComponent {
       this.current=4
       return true
     }
-    if(this.is_one_travail_selected && this.filteredTravail.ID==16 && this.current<=2){
-      this.current=4
-      return true
-    }
+    
     
     
    return false
@@ -520,7 +515,7 @@ export class IndexComponent {
       return true
     }
     if(this.is_one_travail_selected && this.filteredTravail.ID==2 && this.current==4){
-      this.current=1
+      this.current=2
       return true
     }
     if(this.is_one_travail_selected && this.filteredTravail.ID==15 && this.current==4){
@@ -528,7 +523,7 @@ export class IndexComponent {
       return true
     }
     if(this.is_one_travail_selected && this.filteredTravail.ID==16 && this.current==4){
-      this.current=1
+      this.current=2
       return true
     }
     

@@ -15,7 +15,7 @@ export class RecapDeposeCuisineComponent {
     private gestiondesdevisService: GestionDesDevisService,
   ) {
     this.appareils_a_ajouter = this.gestiondesdevisService.getFormulaireByName("pose-elementcuisines").formulaire["gammes-produits-pose-elementcuisines"].appareils_cuisine;
-    this.gammes_depose_form = this.gestiondesdevisService.getFormulaireByName("pose-elementcuisines").formulaire["gammes-produits-pose-elementcuisines"].gammes_depose_form;
+    this.gammes_depose_form = this.gestiondesdevisService.getFormulaireByName("pose-elementcuisines").formulaire["dimensions-pose-elementcuisines"].gammes_depose_form;
 
     console.log("sanitaire ",this.appareils_a_ajouter );
     console.log("depose ",this.gammes_depose_form );

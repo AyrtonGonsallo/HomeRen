@@ -1,1 +1,32 @@
-<p>dimensions-pose-app-san works!</p>
+<div class="plaf-dim tooltip-srf">
+    <div  class="">
+      <form [formGroup]="poseSalleDeBainForm" (ngSubmit)="onPoseSalleDeBainSubmit()">
+        
+
+        <div class="renov-elec-div ">
+          <span class="mur-ttl">Dépose d'anciennes installations</span>
+        </div>
+        <div formArrayName="gammes_depose_form">
+          <div nz-row nzJustify="start" class="row-w-grid">
+          <div *ngFor="let gamme of gammes_depose_form.controls; let i = index" [formGroupName]="i">
+                          
+                  <!-- Champ Quantité -->
+                  <div nz-col  class="flx-radio-row4 ">
+                      <label for="quantite">{{gammes_depose && gammes_depose[i] ? gammes_depose[i].Label : ''}} - quantité :</label>
+                      <input (keypress)="blockComma($event)"  id="quantite" type="number" formControlName="quantite" min="0"/>
+                  </div>
+                  <div *ngIf="gamme.get('quantite')?.invalid && isclicked" class="error-message">
+                    Quantité invalide
+                  </div>
+                 
+                </div>
+                
+                </div>
+            
+          </div>
+        
+      </form>
+    </div>
+  </div>
+  
+  

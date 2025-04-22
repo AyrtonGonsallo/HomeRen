@@ -79,7 +79,7 @@ max-width: 82%; margin: auto;
 }
 .btn-prect span{font-size: 14px;}
 button.ant-btn.ant-btn-default.ng-star-inserted[_ngcontent-ng-c1938312052]{padding: 6px 10px !important;width: fit-content;height: 34px!important;}
-.div-btn-prect{width: 61%; margin-inline: auto; margin-top: 25px;display: flex;justify-content: space-between;}
+.div-btn-prect{width: 61%; margin-inline: auto; margin-top: 18px;display: flex;justify-content: space-between;}
 .div-btn-prect button span{font-size: 13px !important;}
 
 .btn-retour, .btn-suiv{background: var(--color1) !important;
@@ -194,12 +194,12 @@ ul{
 #triangle-code2{
     margin: 0 auto;
     display: block;
-    height : 0;
-    width : 0;
-    border-right : 181px solid transparent;
-    border-bottom : 34px solid #B2B3B2;
-    border-left : 181px solid transparent;
-   }
+    height: 0;
+    width: 0;
+    border-right: 240px solid transparent;
+    border-bottom: 47px solid #B2B3B2;
+    border-left: 240px solid transparent;
+}
 .login-form-flx{display: flex;}
 .ant-row.login-form-flx.aic {
     display: flex;
@@ -281,6 +281,8 @@ ul{
 
 /************************* Respo *************************/
 @media only screen and (max-width: 1440px) {
+#triangle-code2 { border-right: 278px solid transparent; border-bottom: 68px solid #B2B3B2; border-left: 278px solid transparent;}
+
 }
 @media only screen and (max-width: 1024px) {
 .pcs-devis {width: 31%;}

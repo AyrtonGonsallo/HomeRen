@@ -2,11 +2,11 @@
 <div class="recap-div devis-content">
     <span class="recup-fin recap-piece">{{selectedPiece.Titre}} - Pose de nouveaux équipements de cuisine</span>
     
-    <div style="width: 100%;" class="left"><span class="mur-ttl">Pose de nouveaux équipements</span></div>
 
     <div *ngFor="let appareil of appareils_a_ajouter">
         <div *ngIf="appareil.active">
-            <span class="recup-fin"><p>{{get_title(appareil.modele)}}</p></span>
+            <span class="recup-fin"><p><strong>{{appareil.titre}}</strong></p><p><strong>:</strong></p><p><strong>{{get_title(appareil.modele)}}</strong></p></span>
+
             <span class="recup-fin" *ngIf="appareil.longueur>0"><p>Longueur</p><p>:</p><p>{{(appareil.longueur)}} cm</p></span>
            
         </div>

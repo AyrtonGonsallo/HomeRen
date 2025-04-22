@@ -141,6 +141,9 @@
          <div *ngIf="is_travail_selected(13)">
            <app-dimensions-pose-electricite></app-dimensions-pose-electricite>
          </div>
+         <div *ngIf="is_travail_selected(16)">
+          <app-dimensions-pose-app-san [triggerSubmitDimensionForm]="triggerSubmitDimensionForm" (formValidityChange)="is_formulaire_dimensions_valid = $event"></app-dimensions-pose-app-san>
+        </div>
      </div>
      <div class="devis-content" *ngIf="current == 3">
        <div *ngIf="is_travail_selected(4)">
@@ -260,7 +263,7 @@
         <div class="msg-validation" *ngIf="!hide_finalisation_message">
           <img src="/assets/Frame.svg" alt="">
           <p> Votre devis en ligne est prêt !<br>
-            Vous le recevrez bientôt par email.
+            Vous pouvez consulter votre panier pour aller plus loin.
           </p>
         </div>
         <p class="ttl-dv-pc"><strong>Je rénove une pièce</strong></p>
@@ -342,8 +345,13 @@
               ></span>
             </ng-template>
           </nz-form-control>
+         
         </nz-form-item>
-       
+        
+        <nz-form-control [nzSpan]="20" [nzOffset]="2">
+          <div *ngIf="has_error|| true" class="error-message"> {{error_msg}}</div>
+          </nz-form-control>
+
         <div nz-row class="login-form-flx aic">
           <div nz-col [nzSpan]="7">
             <button nz-button class="login-form-button " [nzType]="'primary'">Se connecter</button>
@@ -355,7 +363,7 @@
                 </label>
               <a   nzType="text" class="icn-size" (click)="showModal()"><span class="fs-12" style="float: right !important;font-family: 'Montserrat-Bold'; font-size:12px;"> J’ai oublié mon mot de passe <span nz-icon nzType="left" nzTheme="outline" *ngIf="isrecupFormVisible"></span><span *ngIf="!isrecupFormVisible" nz-icon nzType="down" nzTheme="outline"></span></span></a>
             </div> 
-          
+            
         </div>
         
         <br><br>
@@ -367,7 +375,7 @@
            <div class="mdp-flx">
              <nz-form-item class="eml-cnx">
               <!-- <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>-->
-              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Email invalide!">
+              <nz-form-control style="font-size: 10px;" [nzSm]="14" [nzXs]="24" nzErrorTip="Email invalide!">
                 <!-- <input nz-input formControlName="email" id="email" placeholder="E-mail du compte" />-->
                 <nz-input-group nzPrefixIcon="user">
                   <input type="text" nz-input formControlName="email" placeholder="E-mail du compte" />
@@ -383,9 +391,7 @@
           
           <nz-alert *ngIf="recup_reussie" class="custom-success-alert" nzType="success" nzMessage="Un lien de réinitialisation vous a été envoyé sur l'adresse email que vous avez renseigné"></nz-alert>
           <nz-alert *ngIf="recup_echouee" class="custom-error-alert" nzType="error" nzMessage="Une erreur s'est produite lors de la restauration du mot de passe."></nz-alert>
-          <nz-form-control [nzSpan]="20" [nzOffset]="2">
-          <div *ngIf="has_error" class="error-message"> {{error_msg}}</div>
-          </nz-form-control>
+         
           
             </form>
             

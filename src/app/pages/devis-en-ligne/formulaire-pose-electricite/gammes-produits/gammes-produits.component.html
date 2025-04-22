@@ -8,6 +8,9 @@
       <div *ngIf="exist_glob_err_form2" class="error-message">
         {{glob_err_form2}}
       </div>
+      <div *ngIf="isclicked && appareils_a_remplacer_form.get('gamme')?.invalid " class="error-message">
+        Les gammes sont requises.
+      </div>
       <div formArrayName="appareils_electrique_a_remplacer" class="flx-pr">
         <div *ngFor="let appareilGroup of appareils_electrique_a_remplacer; let i = index" [formGroupName]="i">
           
@@ -43,33 +46,31 @@
 
 
       <div  class="form-group" nz-col nzJustify="start" class="w-80" style="display:block;">
-
+        
         <div nz-col class="row-w-grid12" style="padding:0px 16px !important;">
-          <div class="" >
-          <label>Gamme d'appareillage :</label>
-         </div>
-          <nz-radio-group formControlName="gamme" class="">
+
+          <label style="float: left;">Gamme d'appareillage :</label>
+
+          <nz-radio-group formControlName="gamme" class="" style="width: 100%;max-width: 100%;">
             <!-- Reusable template for displaying options with PDFs -->
           
-            <div nz-col class="flx-radio-row1">
+            <div nz-col class="">
               <div *ngFor="let option of gammes_appareillage" class="parquet-option  tooltip-srf  flex-see-gamme">
-                <label class="radio-span" nz-radio [nzValue]="option.ID + '-' + option.PrixMultiples + '-' + option.Label"  class="with-link">
+                <label style="width:fit-content !important;" class="radio-span" nz-radio [nzValue]="option.ID + '-' + option.PrixMultiples + '-' + option.Label"  class="with-link">
                   <span>
                     <!-- Dynamically display the label based on the type -->
                     {{ option.Label }}
                   </span>
                  
                 </label>
-                <span>
+                <span style="width:fit-content;">
                   <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
                 </span>
               </div>
             </div>
           </nz-radio-group>
         </div>
-          <div *ngIf="isclicked && appareils_a_remplacer_form.get('gamme')?.invalid " class="error-message">
-            Les gammes sont requises.
-          </div>
+          
 
       </div>
       

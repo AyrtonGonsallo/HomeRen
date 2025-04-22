@@ -2,7 +2,6 @@
 
 <div class="center section-panier" *ngIf="!faire_visite_technicien && !visite_payee && !faire_acompte">
   <div>
-    <br><br>
     Vous n'avez pas d'élements dans votre panier<br>
     Rendez vous sur la page devis en ligne pour commencer !<br>
   </div>
@@ -144,8 +143,6 @@
         </tr>
       </tbody>
     </table>
-
-    <br><br>
   </div>
   
   <div *ngIf="listOfDevisToPayAcompt?.length>0">

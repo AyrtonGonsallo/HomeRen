@@ -39,7 +39,6 @@ appareilGroup: any;
   createPoseCuisineGroup(): FormGroup {
     return this.fb.group({
       appareils_cuisine: this.fb.array([]),
-      gammes_depose_form: this.fb.array([])
     });
   }
   get getposeCuisineForm(): FormArray {
@@ -52,7 +51,6 @@ appareilGroup: any;
       return;
     }
     if (this.poseCuisineForm.valid) {
-      this.gestiondesdevisService.addFormulaire("dimensions-pose-elementcuisines",2,this.poseCuisineForm.value)
       this.gestiondesdevisService.addFormulaire("etat-surfaces-pose-elementcuisines",2,this.poseCuisineForm.value)
       this.gestiondesdevisService.addFormulaire("gammes-produits-pose-elementcuisines",2,this.poseCuisineForm.value)
     // Envoyer les données au backend ou traiter comme nécessaire
@@ -111,11 +109,7 @@ appareilGroup: any;
     this.loadAppareils()
   }
 
-  gammes_depose: any[] = [];
-   // Getter pour accéder à la FormArray "gammes"
-   get gammes_depose_form(): FormArray {
-    return this.poseCuisineForm.get('gammes_depose_form') as FormArray;
-  }
+ 
 
   need_quantite(id: number): boolean {
     const validIds = [103, 104, 116, 117, 118]; // Liste des IDs valides
@@ -150,6 +144,7 @@ appareilGroup: any;
         this.appareils_cuisine.forEach(appareil => {
 
           let modele=""
+          let titre=appareil.Titre
           let active=false
           let longueur=0
           let largeur=0
@@ -166,6 +161,7 @@ appareilGroup: any;
               
           appareilGroup.addControl("longueur", this.fb.control(longueur, ));
           appareilGroup.addControl("active", this.fb.control(active, ));
+          appareilGroup.addControl("titre", this.fb.control(titre, ));
           appareilGroup.addControl("modele", this.fb.control(modele, ));
          
 
@@ -199,56 +195,7 @@ appareilGroup: any;
     );
 
 
-    this.userService.getGammesByTravailAndType(2, 'depose-cuisine').subscribe(
-      (response: any) => {
-        this.gammes_depose = response
-        console.log("réponse de la requette  get depose salle de bain",this.gammes_depose);
-        let i=0
-
-        this.gammes_depose.forEach(gamme => {
-        
-          let quantite=0
-          let longueur=0
-          let titre=gamme.Label
-          let prix=gamme.Prix
-          if(this.prec_formulaire_gamme){
-            let form=this.prec_formulaire_gamme.formulaire
-            longueur=form?.gammes_depose_form[i]?.longueur
-            quantite=form?.gammes_depose_form[i]?.quantite
-            titre=form?.gammes_depose_form[i]?.titre
-            prix=form?.gammes_depose_form[i]?.prix
-          }
-        
-             // Créer un FormGroup pour chaque appareil
-          const appareilGroup = this.fb.group({});
-              
-          appareilGroup.addControl("longueur", this.fb.control(longueur, ));
-          appareilGroup.addControl("quantite", this.fb.control(quantite, ));
-          appareilGroup.addControl("titre", this.fb.control(titre, ));
-          appareilGroup.addControl("prix", this.fb.control(prix, ));
-         
-
-          // Obtenez les contrôles pour pouvoir les manipuler
-          const quantiteControl = appareilGroup.get('quantite');
-          const longueurControl = appareilGroup.get('longueur');
-          longueurControl?.setValidators([Validators.required, Validators.min(0), Validators.max(5000)]);
-          quantiteControl?.setValidators([Validators.required, Validators.min(0), Validators.max(50)]);
-          // Mettre à jour la validation pour forcer la vérification des erreurs
-          quantiteControl?.updateValueAndValidity();
-          longueurControl?.updateValueAndValidity();
-         
-           
-
-          // Ajouter le FormGroup de l'appareil au FormArray
-          (this.poseCuisineForm.get('gammes_depose_form') as FormArray).push(appareilGroup);
-          i++
-          
-        });
-      },
-      (error) => {
-        console.error('Erreur lors de la recuperation des gammes_depose :', error);
-      }
-    );
+   
 
 
   }

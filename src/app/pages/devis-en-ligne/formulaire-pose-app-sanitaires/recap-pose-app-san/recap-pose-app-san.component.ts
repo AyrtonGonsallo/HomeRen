@@ -14,7 +14,7 @@ export class RecapPoseAppSanComponent {
     private gestiondesdevisService: GestionDesDevisService,
   ) {
     this.appareils_a_ajouter = this.gestiondesdevisService.getFormulaireByName("pose-app-san").formulaire["gammes-produits-pose-app-san"].appareils_salle_de_bain;
-    this.gammes_depose_form = this.gestiondesdevisService.getFormulaireByName("pose-app-san").formulaire["gammes-produits-pose-app-san"].gammes_depose_form;
+    this.gammes_depose_form = this.gestiondesdevisService.getFormulaireByName("pose-app-san").formulaire["dimensions-pose-app-san"].gammes_depose_form;
 
     console.log("sanitaire ",this.appareils_a_ajouter );
     console.log("depose ",this.gammes_depose_form );
