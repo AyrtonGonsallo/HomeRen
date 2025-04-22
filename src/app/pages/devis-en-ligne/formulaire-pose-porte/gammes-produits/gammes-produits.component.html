@@ -142,21 +142,15 @@
           </div>
           
             <nz-radio-group formControlName="gamme" class="flx-radio-row1 tooltip-srf">
-                <div  *ngFor="let option of gammes" >
+                <div  *ngFor="let option of gammes" class="flex-see-gamme">
                   <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
                     <span>{{option.Label}}</span>
-                    <span>
-                      <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
-                    </span>
                   </label>
-                <!--<a nz-tooltip [nzTooltipTitle]="tooltip_Gamme" href="javascript:void(0)" class="info-icon">
-                  <i class="far fa-question-circle"></i>
-                </a>-->
-                <ng-template #tooltip_Gamme>
-                  Gamme: {{ option.Label }}<br>
-                  Pour plus d'informations, veuillez consulter :
-                  <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                </ng-template>
+                  <span class="w-100">
+                    <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
+                  </span>
+                
+               
               </div>
             </nz-radio-group>
           </div>

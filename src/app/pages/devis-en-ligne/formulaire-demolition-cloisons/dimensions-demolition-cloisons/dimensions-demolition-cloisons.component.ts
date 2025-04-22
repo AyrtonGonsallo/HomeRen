@@ -77,12 +77,14 @@ export class DimensionsDemolitionCloisonsComponent {
       if (
         controls['longueur'].value === '' ||
         controls['hauteur'].value === '' ||
+        controls['hauteur'].invalid ||
+        controls['longueur'].invalid ||
         controls['epaisseur'].value === '' ||
         controls['epaisseur'].invalid  ||
         controls['ndp'].value === '' ||
         controls['cloison'].value === ''
       ) {
-        //console.error(`Tous les champs doivent être remplis pour la démolition du mur ${i + 1}`);
+        console.error(`Tous les champs doivent être remplis pour la démolition du mur ${i + 1}`);
         this.exist_glob_err_form1=true
         this.glob_err_form1+=`Tous les champs doivent être remplis pour la démolition du mur ${i + 1}. `
         //group.markAllAsTouched(); // Affiche les erreurs pour ce groupe
@@ -167,9 +169,9 @@ export class DimensionsDemolitionCloisonsComponent {
   
   createmursNonporteursGroup(): FormGroup {
     return this.fb.group({
-      longueur: ['', this.is_active_Tp1 ? Validators.required : null],
-      hauteur: ['', this.is_active_Tp1 ? Validators.required : null],
-      epaisseur: ['', this.is_active_Tp1 ? Validators.required : null],
+      longueur: ['', this.is_active_Tp1 ? [Validators.required, Validators.min(100), Validators.max(3000)]  : null],
+      hauteur: ['', this.is_active_Tp1 ? [Validators.required, Validators.min(100), Validators.max(500)]  : null],
+      epaisseur: ['', this.is_active_Tp1 ? [Validators.required, Validators.min(3), Validators.max(30)]  : null],
       ndp: [0, this.is_active_Tp1 ? Validators.required : null],
       cloison: ["", this.is_active_Tp1 ? Validators.required : null],
       image: [null]
@@ -185,9 +187,16 @@ export class DimensionsDemolitionCloisonsComponent {
             // Appliquer les nouveaux validateurs en fonction de is_active_Tp1
             switch (key) {
               case 'longueur':
+                control.setValidators(this.is_active_Tp1 ? [Validators.required, Validators.min(100), Validators.max(3000)] : null);
+                break;
               case 'hauteur':
+                control.setValidators(this.is_active_Tp1 ? [Validators.required, Validators.min(100), Validators.max(500)] : null);
+                break;
               case 'epaisseur':
+                control.setValidators(this.is_active_Tp1 ? [Validators.required, Validators.min(3), Validators.max(30)] : null);
+                break;
               case 'ndp':
+                break;
               case 'cloison':
                 control.setValidators(this.is_active_Tp1 ? Validators.required : null);
                 break;
@@ -208,9 +217,34 @@ export class DimensionsDemolitionCloisonsComponent {
         Object.keys(group.controls).forEach((key) => {
           const control = group.get(key);
           if (control) {
-            control.setValidators(
-              this.is_active_Tp3 ? Validators.required : null
-            );
+            // Appliquer les nouveaux validateurs en fonction de is_active_Tp1
+            switch (key) {
+              case 'longueur':
+                control.setValidators(this.is_active_Tp3 ? [Validators.required, Validators.min(100), Validators.max(3000)] : null);
+                break;
+              case 'hauteur':
+                control.setValidators(this.is_active_Tp3 ? [Validators.required, Validators.min(100), Validators.max(500)] : null);
+                break;
+              case 'epaisseur':
+                control.setValidators(this.is_active_Tp3 ? [Validators.required, Validators.min(3), Validators.max(30)] : null);
+                break;
+              case 'longueur_ouverture':
+                control.setValidators(this.is_active_Tp3 ? [Validators.required, Validators.min(100), Validators.max(3000)] : null);
+                break;
+              case 'hauteur_depuis_le_plafond':
+                control.setValidators(this.is_active_Tp3 ? [Validators.required, Validators.min(10), Validators.max(500)] : null);
+                break;
+              case 'cloison':
+                control.setValidators(this.is_active_Tp3 ? Validators.required : null);
+                break;
+              case 'hauteur_ouverture':
+                control.setValidators(this.is_active_Tp3 ? [Validators.required, Validators.min(10), Validators.max(500)] : null);
+                break;
+              case 'hauteur_depuis_le_sol':
+                control.setValidators(this.is_active_Tp3 ? [Validators.required, Validators.min(10), Validators.max(500)] : null);
+                break;
+            }
+            // Mettre à jour la validité du champ
             control.updateValueAndValidity();
           }
         });

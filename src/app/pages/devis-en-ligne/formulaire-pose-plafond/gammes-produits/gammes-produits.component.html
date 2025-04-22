@@ -15,14 +15,13 @@
               </label> 
             </div>
             <div  class="parquet-option">
-              <div *ngFor="let option of gammes_peinture">
+              <div *ngFor="let option of gammes_peinture" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span> 
-                  <span>
+                </label>
+                <span class="w-100">
                   <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
                 </span>
-                </label>
-              
                 <ng-template #tooltipTemplate>
                   Pour plus d'informations, veuillez consulter :
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
@@ -39,14 +38,13 @@
               </label> 
             </div>
             <div  class="parquet-option">
-              <div *ngFor="let option of gammes_enduit">
+              <div *ngFor="let option of gammes_enduit" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
-                  <span>
+                </label>
+                <span class="w-100">
                   <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
                 </span>
-                </label>
-                
                 <ng-template #tooltipTemplate>
                   Pour plus d'informations, veuillez consulter :
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
@@ -60,14 +58,14 @@
               Papier :</label> 
             </div>
             <div  class="parquet-option">
-              <div *ngFor="let option of gammes_papier">
+              <div *ngFor="let option of gammes_papier" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
-                  <span>
+                 
+                </label>
+                <span class="w-100">
                   <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
                 </span>
-                </label>
-                
                 <ng-template #tooltipTemplate>
                   Pour plus d'informations, veuillez consulter :
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>

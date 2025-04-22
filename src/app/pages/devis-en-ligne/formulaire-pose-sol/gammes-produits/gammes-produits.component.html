@@ -15,14 +15,14 @@
               </label> 
             </div>
             <div  class="parquet-option">
-              <div *ngFor="let option of gammes_peinture_sol">
+              <div *ngFor="let option of gammes_peinture_sol" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span> 
-                  <span>
+                  
+                </label>
+                <span class="w-100">
                   <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
                 </span>
-                </label>
-              
                 <ng-template #tooltipTemplate>
                   Pour plus d'informations, veuillez consulter :
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
@@ -39,14 +39,14 @@
               </label> 
             </div>
             <div  class="parquet-option">
-              <div *ngFor="let option of gamme_moquette_sol">
+              <div *ngFor="let option of gamme_moquette_sol" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
-                  <span>
+                 
+                </label>
+                <span class="w-100">
                   <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
                 </span>
-                </label>
-                
                 <ng-template #tooltipTemplate>
                   Pour plus d'informations, veuillez consulter :
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
@@ -60,14 +60,14 @@
               Sol souple :</label> 
             </div>
             <div  class="parquet-option">
-              <div *ngFor="let option of gammes_sol_souple">
+              <div *ngFor="let option of gammes_sol_souple" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
-                  <span>
+                 
+                </label>
+                <span class="w-100">
                   <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
                 </span>
-                </label>
-                
                 <ng-template #tooltipTemplate>
                   Pour plus d'informations, veuillez consulter :
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
@@ -83,14 +83,14 @@
               Résine décorative :</label> 
             </div>
             <div  class="parquet-option">
-              <div *ngFor="let option of gamme_resine_decorative">
+              <div *ngFor="let option of gamme_resine_decorative" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>  
-                  <span>
+                
+                </label>
+                <span class="w-100">
                   <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
                 </span>
-                </label>
-
                 <ng-template #tooltipTemplate>
                   Pour plus d'informations, veuillez consulter :
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
@@ -107,14 +107,14 @@
               Carrelage :</label> 
             </div>
             <div  class="parquet-option">
-              <div *ngFor="let option of gammes_carrelage_sol">
+              <div *ngFor="let option of gammes_carrelage_sol" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span> 
-                  <span>
+                  
+                </label>
+                <span class="w-100">
                   <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
                 </span>
-                </label>
-
                 <ng-template #tooltipTemplate>
                   Pour plus d'informations, veuillez consulter :
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
@@ -129,14 +129,14 @@
               Parquet Flottant :</label> 
             </div>
             <div  class="parquet-option">
-              <div *ngFor="let option of gammes_parquet_flottant">
+              <div *ngFor="let option of gammes_parquet_flottant" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix" style="margin-bottom:10px !important;">
                   <span>{{ option.Label }}</span> 
-                  <span>
+                
+                </label>
+                <span class="w-100">
                   <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
                 </span>
-                </label>
-              
                 <ng-template #tooltipTemplate>
                   Pour plus d'informations, veuillez consulter :
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
@@ -152,14 +152,14 @@
               Parquet Massif :</label> 
             </div>
             <div  class="parquet-option">
-              <div *ngFor="let option of gammes_parquet_massif">
+              <div *ngFor="let option of gammes_parquet_massif" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
-                  <span>
+                
+                </label>
+                <span class="w-100">
                   <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
                 </span>
-                </label>
-                
                 <ng-template #tooltipTemplate>
                   Pour plus d'informations, veuillez consulter :
                   <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>

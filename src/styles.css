@@ -83,7 +83,7 @@ img{width: fit-content;max-width: 100%;}
   .add-btn{padding: 0px 10px; background-color: var(--color2);height: 37px;cursor: pointer;margin-block: 8px !important;}
   .del-btn, .add-btn{padding: 0px 7px !important; color: #000;background-color: var(--color1)!important;height: 31px !important;cursor: pointer;margin-block: 0px !important;}
 .add-btn:hover, .del-btn:hover{background-color: #000 !important;}
-
+.w-100{width:100% !important;max-width:100% !important;}
 .left{text-align: left !important;}
 .vald-btn{margin-top:30px;cursor: pointer;}
 .vald-btn, .add-btn{ width: fit-content;}
@@ -774,8 +774,6 @@ input:focus-visible, textarea:focus-visible {border: 0px !important;}
     display: inline-block;
     font-size: 13px;
     color: #FFC736;
-    margin-left: 20px;
-    margin-top:8px;
 }
 .see-gamme-link:hover{
     color: #000000;

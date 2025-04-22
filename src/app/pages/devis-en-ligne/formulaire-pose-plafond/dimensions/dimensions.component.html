@@ -27,12 +27,12 @@
         
         <div nz-col nzSpan="6" class="row-w flx-radio-row3" [nzXs]="24" [nzSm]="6">
            <label for="longueur">Longueur (cm) <span class="error-message">*</span> : </label>
-           <input (keypress)="blockComma($event)"  type="number" id="longueur" formControlName="longueur" max="10000" min="1">
+           <input (keypress)="blockComma($event)"  type="number" id="longueur" formControlName="longueur" max="3000" min="100">
         </div>
         
         <div nz-col nzSpan="6" class="row-w flx-radio-row3" [nzXs]="24" [nzSm]="6">
           <label for="largeur">Largeur (cm) <span class="error-message">*</span> : </label>
-          <input (keypress)="blockComma($event)"  type="number" id="largeur" formControlName="largeur" max="10000" min="1">
+          <input (keypress)="blockComma($event)"  type="number" id="largeur" formControlName="largeur" max="3000" min="100">
         </div>
         <!--<div *ngIf="isclicked && posePlafondForm.get('largeur')?.invalid " class="error-message">
          La largeur est invalide.
@@ -41,7 +41,7 @@
         <div nz-col nzSpan="6" class="row-w flx-radio-row3" [nzXs]="24" [nzSm]="6">
           <label for="hauteur">
             Hauteur du plafond (cm)<span class="error-message">*</span> : </label>
-          <input (keypress)="blockComma($event)"  type="number" id="hauteur" formControlName="hauteur" required max="600" min="1">
+          <input (keypress)="blockComma($event)"  type="number" id="hauteur" formControlName="hauteur" required max="500" min="100">
         </div>
 
       </div>
@@ -52,8 +52,17 @@
      
 
       <div nz-col class="ant-col0">
-        <div class="mur-btn-div grid-1">
-          <div style="margin-right:auto;text-align: left;"> <span class="mur-ttl">Revêtement existant</span>  </div>
+        <div class="mur-btn-div tooltip-srf">
+          <div style="margin-right:auto;text-align: left;"> 
+            <span class="mur-ttl">Revêtement existant</span>  
+          </div>
+          <a  nz-tooltip [nzTooltipTitle]="General" href="javascript:void(0)" class="pdf-icon">
+            <i class="fas fa-question-circle"></i>
+          </a>
+          <ng-template #General>
+            Pour plus d'informations, veuillez consulter :
+            <a [href]="assetsUrl + 'modele_general.pdf'" target="_blank" class="link-tooltip">PDF</a>
+          </ng-template>
           </div>
         <!-- <label class="">
          Revêtement à déposer  <span class="error-message">*</span> : </label>  -->
@@ -61,16 +70,10 @@
        <div *ngFor="let option of gammes_depose" class="parquet-option ant-col tooltip-srf">
          <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
            <span>{{ option.Label }}</span>
-           <a *ngIf="option.Pdf" nz-tooltip [nzTooltipTitle]="tooltipTemplate" href="javascript:void(0)" class="pdf-icon">
-           <i class="fas fa-question-circle"></i>
-         </a>
          </label>
          
          
-         <ng-template #tooltipTemplate>
-           Pour plus d'informations, veuillez consulter :
-           <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-         </ng-template>
+      
        </div>
 
        <div  class="parquet-option ant-col tooltip-srf">

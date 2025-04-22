@@ -17,7 +17,7 @@
           <label for="surface">Surface de la pièce (m²)<span class="error-message">*</span> : <a nz-tooltip [nzTooltipTitle]="tooltipSurface" href="javascript:void(0)" class="info-icon">
             <i class="fas fa-question-circle"></i>
           </a></label>
-          <input (keypress)="blockComma($event)"  type="number" id="surface" formControlName="surface" [max]="surfacemax" min="1">
+          <input (keypress)="blockComma($event)"  type="number" id="surface" formControlName="surface" [max]="surfacemax" min="2">
           
           <ng-template #tooltipSurface>
             <div class="tooltip-content">
@@ -29,7 +29,7 @@
           </ng-template>
 
           <label for="hauteur">Hauteur de la pièce (cm)<span class="error-message">*</span> :</label>
-          <input (keypress)="blockComma($event)"  type="number" id="hauteur" formControlName="hauteur" max="700" min="1">
+          <input (keypress)="blockComma($event)"  type="number" id="hauteur" formControlName="hauteur" max="500" min="100">
         
         </div>
         <!--<div *ngIf="isclicked && poseChauffageForm.get('surface')?.invalid " class="error-message">

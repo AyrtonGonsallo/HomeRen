@@ -11,6 +11,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class PoseSolDimensionsComponent {
   baseurl=environment.imagesUrl
+  assetsUrl=environment.assetsUrl
   isclicked=false
   poseSolForm: FormGroup;
   @Input() selectedPiece: any; // Déclaration de l'entrée selectedPiece

@@ -10,6 +10,7 @@ import { environment } from '../../../../environments/environment';
    styleUrl: '../formulaire-pose-plafond.component.css'
 })
 export class DimensionsPosePlafondComponent {
+  assetsUrl=environment.assetsUrl
   baseurl=environment.imagesUrl
   isclicked=false
   @Input() triggerSubmitDimensionForm!: boolean;

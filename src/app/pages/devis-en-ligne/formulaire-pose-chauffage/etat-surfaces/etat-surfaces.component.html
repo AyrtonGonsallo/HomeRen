@@ -4,7 +4,7 @@
 <form [formGroup]="poseRadiateursForm" (ngSubmit)="onPoseRadiateursSubmit()">
 
     <div formArrayName="radiateurs">
-      <div class="mur-bg-div">Radiateurs</div>
+    
 
      <div *ngFor="let radiateur of radiateurs.controls; let i = index" [formGroupName]="i">
 

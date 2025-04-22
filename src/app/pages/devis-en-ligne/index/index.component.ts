@@ -754,11 +754,11 @@ export class IndexComponent {
 
   get_max():number{
     if(this.selectedPieceId==4){
-      return 50;
+      return 70;
     }else if(this.selectedPieceId==6){
-      return 50;
+      return 70;
     }
-    return 100;
+    return 70;
   }
 
   getNotaBene(): string {

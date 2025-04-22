@@ -10,6 +10,7 @@ import { environment } from '../../../../environments/environment';
   styleUrl: '../formulaire-pose-murs.component.css'
 })
 export class DimensionsComponent {
+  assetsUrl=environment.assetsUrl
   baseurl=environment.imagesUrl
   isclicked=false
   @Input() triggerSubmitDimensionForm!: boolean;

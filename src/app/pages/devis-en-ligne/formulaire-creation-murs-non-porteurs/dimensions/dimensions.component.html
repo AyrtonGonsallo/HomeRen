@@ -29,7 +29,7 @@
         <div nz-row nzJustify="start" class="ant-col-flx">
           <div nz-col nzSpan="6" class="ant-col tooltip-srf">
             <label for="hauteur">Hauteur (cm)<span class="error-message">*</span> :</label>
-            <input type="number" id="hauteur" formControlName="hauteur" min="1" max="4000" (keypress)="blockComma($event)"/>
+            <input type="number" id="hauteur" formControlName="hauteur" min="100" max="500" (keypress)="blockComma($event)"/>
             <!--<div *ngIf="isclicked && murs_non_porteurs.controls[i].get('hauteur')?.invalid" class="error-message">
               La hauteur du mur est invalide.
             </div>-->
@@ -37,7 +37,7 @@
         
           <div nz-col nzSpan="6" class="ant-col tooltip-srf">
             <label for="longueur">Longueur (cm)<span class="error-message">*</span> :</label>
-            <input type="number" id="longueur" formControlName="longueur" min="1" max="10000" (keypress)="blockComma($event)" />
+            <input type="number" id="longueur" formControlName="longueur" min="100" max="3000" (keypress)="blockComma($event)" />
             <!--<div *ngIf="isclicked && murs_non_porteurs.controls[i].get('longueur')?.invalid" class="error-message">
               La longueur du mur est invalide.
             </div>-->
@@ -135,21 +135,17 @@
               </div>
               
 
-              <div nz-col class="row-w-grid coll-100">
+              <div nz-col class="row-w-grid w-100">
                 <label for="gamme">Gamme <span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
-                <nz-radio-group formControlName="gamme" class="flx-radio-row1 tooltip-srf">
-                  <div  *ngFor="let option of gammes" >
-                    <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
+                <nz-radio-group formControlName="gamme" class="flx-radio-row1 w-100">
+                  <div  *ngFor="let option of gammes"  class="flex-see-gamme">
+                    <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label" class="with-link">
                       <span>{{option.Label}}</span>
-                      <span>
-                        <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
-                      </span>
+                      
                     </label>
-                     
-                    <ng-template #tooltipBonEtat>
-                      Pour plus d'informations, veuillez consulter :
-                      <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
-                    </ng-template>
+                    <span class="w-100">
+                      <a *ngIf="option.Pdf" target="_blank" class="see-gamme-link" [href]="baseurl + option.Pdf">Voir la gamme</a>
+                    </span>
                   </div>
                   
                 </nz-radio-group>
