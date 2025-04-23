@@ -148,7 +148,7 @@ export class ListeDesDevisComponent {
 
     console.log("Checkout :", checkout);
 
-
+    
     await this.get_devis_en_attente_de_visite();
     await this.get_devis_en_cours();
     await this.get_devis_to_pay_datas();
@@ -165,6 +165,7 @@ export class ListeDesDevisComponent {
 
 
   get_devis_to_pay_datas(): Promise<void> {
+    this.total_acompte=0
     return new Promise((resolve, reject) => {
       this.panierService.getDevisToPayAcompte().subscribe(
         (items) => {
@@ -204,6 +205,7 @@ export class ListeDesDevisComponent {
   }
 
   get_devis_to_visit_datas(): Promise<void> {
+    this.total_visite=0
     return new Promise((resolve, reject) => {
 
       this.panierService.getDevisToPayVisit().subscribe(
@@ -219,6 +221,7 @@ export class ListeDesDevisComponent {
             this.total_visite+=item.Prix??0;
             
           }
+            
           if(items[0]?.Visite?.Paye && !items[0]?.VisiteFaite){
             this.visite_payee=true
             console.log("le premier devis a la visite payee")

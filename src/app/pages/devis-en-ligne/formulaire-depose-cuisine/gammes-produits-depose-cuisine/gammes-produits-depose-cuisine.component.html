@@ -6,7 +6,7 @@
           
           <!-- <div class="div-chauf-gm"><h3 class="ttl-type jaune">{{appareils_cuisine && appareils_cuisine[i] ? appareils_cuisine[i].Titre : ""}}</h3></div> -->
           <nz-collapse nzAccordion class="row-w-collapse">
-              <nz-collapse-panel [nzHeader]="'ajouter '+appareils_cuisine[i].Titre" [nzActive]="getAppareilActiveState(i)" [nzExtra]="activerTp" nzShowArrow="false" (nzActiveChange)="active_Tp(i)">
+              <nz-collapse-panel [nzHeader]="appareils_cuisine[i].Titre" [nzActive]="getAppareilActiveState(i)" [nzExtra]="activerTp" nzShowArrow="false" (nzActiveChange)="active_Tp(i)">
                 <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getAppareilModeleState(i)" class="error-message">
                   Vous devez faire un choix.
                 </div>

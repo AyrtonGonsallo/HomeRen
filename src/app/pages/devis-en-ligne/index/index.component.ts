@@ -760,7 +760,7 @@ export class IndexComponent {
     }
     return 70;
   }
-
+  
   getNotaBene(): string {
     if (! this.filteredTravail) {
       return '';
@@ -878,5 +878,16 @@ export class IndexComponent {
     }
   }
  
+
+  action_finale=""
+  get_action_finale(){
+    if(this.action_finale=="same_room"){
+      this.addtask()
+    }else if(this.action_finale=="other_room"){
+      this.submit_devis_and_choose_piece()
+    }else if(this.action_finale=="finish"){
+      this.next()
+    }
+  }
 
 }

@@ -278,39 +278,34 @@
         </div>
       </div>
    </div>
-   <div class="steps-action">
-    <p *ngIf="current == 5" class="center"> <strong>Si vous souhaitez obtenir d'autres tarifs :</strong></p>
+   
 
-    <div nz-row class="div-btn-flx-frm">
+   <div class="steps-action">
+    <p *ngIf="current == 5" class="center"> <strong>Pour continuer vous pouvez :</strong></p>
+
+    <div nz-row class="div-btn-flx-frm" *ngIf="current == 5">
       <div nz-col nzXs="20" nzSm="20" nzMd="20" nzLg="10" nzXl="10">
         
-        <button *ngIf="current == 5" nz-button nzType="default" (click)="addtask()" class="btn-suiv btn-resp btn-retour" >
-          <span>Pour {{get_piece_prefix(selectedPiece?.ID)}} {{selectedPiece?.Titre}}</span>
-        </button>
+        <nz-radio-group [(ngModel)]="action_finale">
+          <label nz-radio nzValue="same_room">demander un autre tarif pour {{get_piece_prefix(selectedPiece?.ID)}} {{selectedPiece?.Titre}}</label>
+          <label nz-radio nzValue="other_room">demander un autre tarif pour une autre pièce</label>
+          <label nz-radio nzValue="finish">demander votre devis</label>
+        </nz-radio-group>
       </div>
-      <div nz-col nzXs="20" nzSm="20" nzMd="20" nzLg="10" nzXl="10" class="div-btn-frm">
-        <!-- <button nz-button nzType="default" (click)="next()" *ngIf="current<6" [disabled]="disable_next()" class="btn-suiv btn-add-pre">
-          <span>{{ current === 5 ? 'Finaliser mon devis - '+selectedPiece?.Titre : 'Suivant' }}</span>
-          
-        </button> -->
-        <button *ngIf="current == 5" nz-button nzType="default" (click)="submit_devis_and_choose_piece()" class=" btn-suiv btn-resp btn-retour" >
-          <span>Pour une autre pièce</span>
-        </button>
-
-      </div>
-    </div>
-     
-     <div *ngIf="current == 5">
-      <p class="dv-pc-ou" class="center"><strong>Si vous avez fini :</strong></p>
+      
     </div>
     
 
-    <button nz-button nzType="default" (click)="next()" *ngIf="current<6 && current>0" [disabled]="disable_next()" class="btn-prect">
-      <span> {{ current === 5 ? 'Recevoir mon devis' : 'Suivant' }} 
-        <!-- <span nz-icon nzType="{{ current === 5 ? 'file-done': 'arrow-right' }}" nzTheme="outline"></span>  -->
+    <button nz-button nzType="default" (click)="get_action_finale()" *ngIf="current == 5" [disabled]="disable_next()" class="btn-prect">
+      <span> 
+        Go !
       </span>
      </button>
-
+     <button nz-button nzType="default" (click)="next()" *ngIf="current<6 && current>0 && current !=5" [disabled]="disable_next()" class="btn-prect">
+      <span> 
+        suivant
+      </span>
+     </button>
    </div>
 </div>
 

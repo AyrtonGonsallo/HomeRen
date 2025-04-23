@@ -55,9 +55,12 @@ th, td{
     }
     .col-cards-btn {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 6px;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+    margin-top: 24px;
     }
     .div-cards img{height: 25px;}
     .caption{font-family: "Montserrat-bold"; font-size: 6px; margin-top: 3px;}

@@ -9,10 +9,10 @@
 
 
 <div class="center section-panier" *ngIf="faire_visite_technicien || listOfDevisToVisit?.length>0">
-  <h2 class="center black  font-site">Paiement de la visite du technicien</h2>
+  <h2 class="center black bold font-site">VOS DEMANDES DE DEVIS</h2>
 
   <div *ngIf="listOfDevisToVisit?.length>0">
-    <span>Ci-dessous les tâches où vous avez fait le paiement mais qui doivent être validées par un technicien.</span>
+   
     <table>
       <thead>
         <tr>
@@ -26,7 +26,7 @@
       <tbody>
         <tr *ngFor="let data of listOfDevisToVisit">
           <td>{{ data.ID }}</td>
-          <td>{{ data.Date | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+          <td>{{ data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
           <td>{{ data.Piece?.Titre }}</td>
           <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>
           <td>{{ (data.Prix ) | number:'1.2-2'}}€</td>
@@ -38,7 +38,7 @@
   </div>
   
   <div *ngIf="listOfDevisToPayVisit?.length>0">
-    <span>Ci-dessous les tâches où vous devez faire le paiement pour la visite.</span>
+  
     <table>
         <thead>
           <tr>
@@ -53,7 +53,7 @@
         <tbody>
           <tr *ngFor="let data of listOfDevisToPayVisit">
             <td>{{ data.ID }}</td>
-            <td>{{ data.Date | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td>{{ data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
             <td>{{ data.Piece?.Titre }}</td>
             <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>
             <td>{{ (data.Prix ) | number:'1.2-2'}}€</td>
@@ -71,14 +71,15 @@
     </div>
     
     <div class="total-panier-container" >
+      <h2 class="center black bold font-site">VISITE DU TECHNICIEN</h2>
       <div>
         <p class="text-indicateur" *ngIf="!visite_payee">
-          Un technicien doit venir faire une visite pour aller plus loin. 
-          Vous pouvez payer les frais de la visite ({{prix_visite}} €) en cliquant sur le bouton ci-dessous.
+          Afin de valider votre devis, vous devez prévoir la visite de notre technicien.
+          Les frais de visite s'élèvent à ({{prix_visite}} €) 
         </p>
         <p class="text-indicateur" *ngIf="visite_payee">
           Un technicien doit venir faire une visite pour aller plus loin. 
-          Vous avez déja payé les frais de la visite ({{prix_visite}} €).
+          Vous avez déja payé les frais de la visite {{prix_visite}} €.
         </p>
       </div>
       <div class="col-cards-btn">
@@ -104,7 +105,7 @@
         </div>
 
         <div *ngIf="!visite_payee">
-          <a class="btn-site piece-btn" (click)="Check_login_and_send_mails_details_to_pay_visite()"><b>Payer</b></a>
+          <a class="btn-site piece-btn" (click)="Check_login_and_send_mails_details_to_pay_visite()"><b>Payer les frais de visite</b></a>
         </div>
        
       </div>
@@ -118,8 +119,7 @@
 
 
 <div class="center section-panier" *ngIf="faire_acompte || listOfCurrentDevis?.length>0">
-  <h2 class="center black  font-site">Paiement de l'acompte</h2>
-
+  <h2 class="center black bold font-site">VOS DEMANDES DE DEVIS</h2>
 
   <div *ngIf="listOfCurrentDevis?.length>0">
     <span>Ci-dessous les tâches où vous avez payé l'acompte. Ce sont les tâches en cours.</span>
@@ -136,7 +136,7 @@
       <tbody>
         <tr *ngFor="let data of listOfCurrentDevis">
           <td>{{ data.ID }}</td>
-          <td>{{ data.Date | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+          <td>{{ data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
           <td>{{ data.Piece?.Titre }}</td>
           <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>
           <td>{{ (data.Prix ) | number:'1.2-2'}}€</td>
@@ -146,7 +146,6 @@
   </div>
   
   <div *ngIf="listOfDevisToPayAcompt?.length>0">
-    <span >Ci-dessous les tâches où vous devez payer l'acompte.</span>
     <table>
         <thead>
           <tr>
@@ -161,7 +160,7 @@
         <tbody>
           <tr *ngFor="let data of listOfDevisToPayAcompt">
             <td>{{ data.ID }}</td>
-            <td>{{ data.Date | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td>{{ data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
             <td>{{ data.Piece?.Titre }}</td>
             <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>
             <td>{{ (data.Prix ) | number:'1.2-2'}}€</td>
@@ -177,10 +176,10 @@
     </div>
     
     <div class="total-panier-container" >
+      <h2 class="center black bold font-site">VISITE DU TECHNICIEN</h2>
       <div>
         <p class="text-indicateur" *ngIf="!acompte_paye">
-          La visite du technicien a été faite. 
-          Pour démarrer les travaux vous devez payer un acompte de {{taux_acompte}}%, ce qui fait {{prix_acompte | number:'1.2-2'}}€.
+          La visite du technicien a été effectuée le {{ listOfDevisToPayAcompt[0]?.Visite?.Date | date:'dd/MM/yyyy' }}.
         </p>
         <p class="text-indicateur" *ngIf="acompte_paye">
           La visite du technicien a été faite. 
@@ -189,6 +188,18 @@
         </p>
       </div>
   
+      <h2 class="center black bold font-site">PAIEMENT DE L'ACOMPTE</h2>
+      <div>
+        <p class="text-indicateur" *ngIf="!acompte_paye">
+          
+          Afin de démarrer les travaux vous devez verser un acompte de {{taux_acompte}}% du montant total, soit {{prix_acompte | number:'1.2-2'}}€.
+        </p>
+        <p class="text-indicateur" *ngIf="acompte_paye">
+          La visite du technicien a été faite. 
+          Vous avez payé l'acompte de {{taux_acompte}}%, ce qui fait {{prix_acompte | number:'1.2-2'}}€.
+          Les travaux pourrons démarrer bientôt.
+        </p>
+      </div>
       <div class="col-cards-btn">
   
         <div class="div-cards">
@@ -212,7 +223,7 @@
         </div>
   
         <div *ngIf="!acompte_paye">
-          <a class="btn-site piece-btn" (click)="Check_login_and_send_mails_details_to_pay_acompte()"><b>Payer</b></a>
+          <a class="btn-site piece-btn" (click)="Check_login_and_send_mails_details_to_pay_acompte()"><b>Payer l'acompte</b></a>
         </div>
        
       </div>

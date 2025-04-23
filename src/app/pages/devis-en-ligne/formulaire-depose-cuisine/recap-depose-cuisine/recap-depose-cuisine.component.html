@@ -5,10 +5,11 @@
 
     <div *ngFor="let appareil of appareils_a_ajouter">
         <div *ngIf="appareil.active">
-            <span class="recup-fin"><p><strong>{{appareil.titre}}</strong></p><p><strong>:</strong></p><p><strong>{{get_title(appareil.modele)}}</strong></p></span>
+            <span class="recup-fin"><p><strong>{{appareil.titre}}</strong></p></span>
 
-            <span class="recup-fin" *ngIf="appareil.longueur>0"><p>Longueur</p><p>:</p><p>{{(appareil.longueur)}} cm</p></span>
-           
+            <span class="recup-fin" *ngIf="appareil.longueur>0"><p>{{(appareil.longueur)}} cm</p></span>
+            <span class="recup-fin"><p>{{get_title(appareil.modele)}}</p></span>
+
         </div>
         
     </div>
@@ -16,9 +17,8 @@
     
     <div *ngFor="let gamme of gammes_depose_form">
         <div>
-            <span class="recup-fin" *ngIf="gamme.quantite>0 || gamme.longueur>0"><p>{{(gamme.titre)}}</p></span>
-            <span class="recup-fin" *ngIf="gamme.quantite>0"><p>Nombre</p><p>:</p><p>{{(gamme.quantite)}} </p></span>
-            <span class="recup-fin" *ngIf="gamme.longueur>0"><p>Longueur</p><p>:</p><p>{{(gamme.longueur)}} cm</p></span>
+            <span class="recup-fin" *ngIf="gamme.longueur>0"><p>{{(gamme.titre)}}</p><p>:</p><p>{{(gamme.longueur)}} cm</p></span>
+            <span class="recup-fin" *ngIf="gamme.quantite>0"><p>{{(gamme.titre)}}</p><p>:</p><p>{{(gamme.quantite)}} </p></span>
         </div>
         
     </div>
