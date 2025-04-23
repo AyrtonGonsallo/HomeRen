@@ -90,7 +90,7 @@ export class IndexComponent {
       password: ['', [Validators.required]],
       checkPassword: ['', [Validators.required, this.confirmationValidator]],
       nom: ['', [Validators.required]],
-      roleId:[0, [Validators.required,this.differentfromzeroValidator]],
+      roleId:[2, [Validators.required,this.differentfromzeroValidator]],
       CommunePostale:['', []],
       AdressePostale:['', []],
       CodePostal:['', []],

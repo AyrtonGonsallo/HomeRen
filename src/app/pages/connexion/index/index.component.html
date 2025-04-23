@@ -90,20 +90,7 @@
 
     <div class="register-form" *ngIf="!se_connecter">
       <form nz-form [formGroup]="registrationForm" (ngSubmit)="registrate()">
-        <nz-form-item>
-          <nz-form-label [nzSpan]="5" nzFor="roleId" class="role-lab ant-col ant-col-xs-24 ant-col-sm-6" nzRequired>Role</nz-form-label>
-          <nz-form-control [nzSpan]="12" nzErrorTip="Choisissez un role!" class="role-list ant-col ant-col-12">
-            <nz-select
-              id="roleId"
-              formControlName="roleId"
-              nzPlaceHolder="Artisan ou particulier ?"
-              (ngModelChange)="roleChange($event)"
-            >
-              <nz-option nzValue="2" nzLabel="Artisan"></nz-option>
-              <nz-option nzValue="3" nzLabel="Particulier"></nz-option>
-            </nz-select>
-          </nz-form-control>
-        </nz-form-item>
+        
 
         <nz-form-item>
           <nz-form-label
@@ -179,32 +166,7 @@
           </nz-form-control>
         </nz-form-item>
         
-        <nz-form-item *ngIf="role==3" class="cls-cod-postal col-5">
-          <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="CodePostal"  nzRequired>
-              <span>Code postal</span>
-          </nz-form-label>
-          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Renseignez votre code postal">
-              <input nz-input id="CodePostal" formControlName="CodePostal" />
-          </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item *ngIf="role==3" class="cls-cod-postal col-5">
-        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="AdressePostale"  nzRequired>
-            <span>Adresse postale</span>
-        </nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Renseignez votre adresse postale">
-            <input nz-input id="AdressePostale" formControlName="AdressePostale" />
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item *ngIf="role==3" class="cls-com-postal">
-          <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="CommunePostale"  nzRequired>
-              <span>Commune</span>
-          </nz-form-label>
-          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Renseignez votre commune">
-              <input nz-input id="CommunePostale" formControlName="CommunePostale" />
-          </nz-form-control>
-      </nz-form-item>
+       
 
         <nz-form-item nz-row class="register-area">
           <nz-form-control [nzSpan]="14" [nzOffset]="6" nzErrorTip="Acceptez l'accord">
