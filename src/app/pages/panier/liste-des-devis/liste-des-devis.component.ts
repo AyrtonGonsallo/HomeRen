@@ -26,7 +26,9 @@ export class ListeDesDevisComponent {
   listOfCurrentDevis: any 
   faTrash=faTrash;
   total_visite:number=0
+  total_attente_visite:number=0
   total_acompte:number=0
+  total:number=0
   baseurl=environment.imagesUrl
   checkout_succeed:boolean=false
   checkout_cancel:boolean=false
@@ -35,6 +37,7 @@ export class ListeDesDevisComponent {
   prix_visite=0
   prix_acompte=0
   device_id=""
+  res_titre=""
   
   get_params(){
     this.userService.getParametreById(2).subscribe(
@@ -64,7 +67,7 @@ export class ListeDesDevisComponent {
 
     await this.get_devis_to_pay_datas();
     await this.get_devis_to_visit_datas();
-    
+    await this.get_devis_en_attente_de_visite();
 
     console.log("faire visite",this.faire_visite_technicien)
     console.log("visite_payee",this.visite_payee)
@@ -100,10 +103,12 @@ export class ListeDesDevisComponent {
       }
 
       if ((!this.listOfDevisToPayAcompt && parametre_acompte)) {
+        
         console.warn("accompte mais pas de devis listOfDevisToPayAcompt",this.listOfDevisToPayAcompt);
         return;
       }
       else if ((this.listOfDevisToPayAcompt && parametre_acompte)){
+        this.res_titre="PAIEMENT DE L'ACOMPTE"
         this.visite_faite=true
         this.acompte_paye=true
       }
@@ -111,6 +116,8 @@ export class ListeDesDevisComponent {
       if ((!this.listOfDevisToPayVisit && parametre_visite)) {
         console.warn("visite mais pas de devis listOfDevisToPayVisit",this.listOfDevisToPayVisit);
         return;
+      }else if(this.listOfDevisToPayVisit && parametre_visite){
+        this.res_titre="VISITE DU TECHNICIEN"
       }
 
       const user_id = this.authService.getUser().Id;
@@ -248,7 +255,11 @@ export class ListeDesDevisComponent {
           
           this.listOfCurrentDevis = items;
           console.log("devis en cours ",this.listOfCurrentDevis);
-          
+          for(let item of items){
+            this.total+=item.Prix??0;
+            this.total_acompte+=item.Prix??0;
+          }
+          this.prix_acompte=this.taux_acompte*this.total_acompte/100
           resolve(); //  Fin de la méthode (permet de continuer l'exécution)
         },
         (error) => {
@@ -264,9 +275,13 @@ export class ListeDesDevisComponent {
     return new Promise((resolve, reject) => {
       this.panierService.getDevisEnAttenteDeVisite().subscribe(
         (items) => {
-         
+         this.total_attente_visite=0
           this.listOfDevisToVisit = items;
           console.log("devis a visiter ",this.listOfDevisToVisit);
+          for(let item of items){
+            this.total_attente_visite+=item.Prix??0;
+            
+          }
           resolve(); //  Fin de la méthode (permet de continuer l'exécution)
         },
         (error) => {

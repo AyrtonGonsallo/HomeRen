@@ -284,9 +284,9 @@
     <p *ngIf="current == 5" class="center"> <strong>Pour continuer vous pouvez :</strong></p>
 
     <div nz-row class="div-btn-flx-frm" *ngIf="current == 5">
-      <div nz-col nzXs="20" nzSm="20" nzMd="20" nzLg="10" nzXl="10">
+      <div nz-col nzXs="20" nzSm="20" nzMd="20" nzLg="24" nzXl="24">
         
-        <nz-radio-group [(ngModel)]="action_finale">
+        <nz-radio-group [(ngModel)]="action_finale" class="final-options">
           <label nz-radio nzValue="same_room">demander un autre tarif pour {{get_piece_prefix(selectedPiece?.ID)}} {{selectedPiece?.Titre}}</label>
           <label nz-radio nzValue="other_room">demander un autre tarif pour une autre pièce</label>
           <label nz-radio nzValue="finish">demander votre devis</label>

@@ -339,3 +339,8 @@ ul{
 .ant-divider{
     border-top: 3px solid rgba(0, 0, 0, 0.06);
 }
+.final-options{
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+}

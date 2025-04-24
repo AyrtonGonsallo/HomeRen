@@ -1,12 +1,12 @@
 <h1 class="center black font-site" style="font-size: 35px;">Panier</h1>
-
+<!--
 <div class="center section-panier" *ngIf="!faire_visite_technicien && !visite_payee && !faire_acompte">
   <div>
     Vous n'avez pas d'élements dans votre panier<br>
     Rendez vous sur la page devis en ligne pour commencer !<br>
   </div>
 </div>
-
+-->
 
 <div class="center section-panier" *ngIf="faire_visite_technicien || listOfDevisToVisit?.length>0">
   <h2 class="center black bold font-site">VOS DEMANDES DE DEVIS</h2>
@@ -33,8 +33,9 @@
         </tr>
       </tbody>
     </table>
-    <br><br>
-
+    <div class="tot-pan">
+      Total TTC : {{total_attente_visite | number:'1.2-2'}}€
+    </div>
   </div>
   
   <div *ngIf="listOfDevisToPayVisit?.length>0">
@@ -75,7 +76,7 @@
       <div>
         <p class="text-indicateur" *ngIf="!visite_payee">
           Afin de valider votre devis, vous devez prévoir la visite de notre technicien.
-          Les frais de visite s'élèvent à ({{prix_visite}} €) 
+          Les frais de visite s'élèvent à {{prix_visite}} € 
         </p>
         <p class="text-indicateur" *ngIf="visite_payee">
           Un technicien doit venir faire une visite pour aller plus loin. 
@@ -122,7 +123,6 @@
   <h2 class="center black bold font-site">VOS DEMANDES DE DEVIS</h2>
 
   <div *ngIf="listOfCurrentDevis?.length>0">
-    <span>Ci-dessous les tâches où vous avez payé l'acompte. Ce sont les tâches en cours.</span>
     <table>
       <thead>
         <tr>
@@ -143,6 +143,31 @@
         </tr>
       </tbody>
     </table>
+    <div >
+      <div class="tot-pan">
+        Total TTC : {{total | number:'1.2-2'}}€
+      </div>
+    </div>
+    
+    <div class="total-panier-container" >
+      <h2 class="center black bold font-site">VISITE DU TECHNICIEN</h2>
+      <div>
+        <p class="text-indicateur" >
+          La visite du technicien a été effectuée le {{ listOfCurrentDevis[0]?.Visite?.Date | date:'dd/MM/yyyy' }}.
+        </p>
+        
+      </div>
+  
+      <h2 class="center black bold font-site" *ngIf="!checkout_succeed">PAIEMENT DE L'ACOMPTE</h2>
+      <div>
+        <p class="text-indicateur" *ngIf="!checkout_succeed">
+          Le paiement de l'acompte de {{prix_acompte | number:'1.2-2'}}€ a été  effectué le  {{ listOfCurrentDevis[0]?.Visite?.Date | date:'dd/MM/yyyy' }}.
+        </p>
+      </div>
+    </div>
+
+
+
   </div>
   
   <div *ngIf="listOfDevisToPayAcompt?.length>0">
@@ -236,7 +261,8 @@
 
 
 <div class="center section-panier">
-    <nz-result
+  <h2 class="center black bold font-site">{{res_titre}}</h2>
+    <nz-result class="result-box"
       nzStatus="success" *ngIf="checkout_succeed"
       nzTitle="Votre paiement à été accepté !"
       nzSubTitle="Vous receverez les détails par mail."
