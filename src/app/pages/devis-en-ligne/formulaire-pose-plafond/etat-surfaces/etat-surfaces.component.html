@@ -22,43 +22,10 @@
                    <div nz-col nzSpan="12" class="" style="max-width: 100% !important;">
                      <!-- <label for="etat" class="etat-srf-ttl">État du surface: </label> -->
                      <nz-radio-group formControlName="etat" class="radio-flx-spc row-w">
-                      <div class="tooltip-srf">
-                        <label nz-radio nzValue="Bon" style="padding-block: 10px;">
-                          <span>Bon : reprise légère d'enduit</span>
-                           <!-- <a  nz-tooltip [nzTooltipTitle]="Bon" href="javascript:void(0)" class="pdf-icon">
-                            <i class="fas fa-question-circle"></i>
-                          </a>-->
+                      <div *ngFor="let option of etat_des_surfaces">
+                        <label nz-radio [nzValue]="option.ID + '-' + option.Label + '-' + option.Prix" style="padding-block: 10px;">
+                          <span>{{ option.Label }}</span>
                         </label>
-                         <!-- <ng-template #Bon>
-                          Pour plus d'informations, veuillez consulter :
-                          <a [href]="assetsUrl + 'modele_general.pdf'" target="_blank" class="link-tooltip">PDF</a>
-                        </ng-template>-->
-                      </div>
-                      
-                      <div  class="tooltip-srf">
-                        <label nz-radio nzValue="abimé" style="padding-block: 10px;">
-                          <span>Abimé : rebouchage, réparation de fissures</span>
-                           <!-- <a  nz-tooltip [nzTooltipTitle]="A" href="javascript:void(0)" class="pdf-icon">
-                            <i class="fas fa-question-circle"></i>
-                          </a>-->
-                        </label>
-                         <!-- <ng-template #A>
-                          Pour plus d'informations, veuillez consulter :
-                          <a [href]="assetsUrl + 'modele_general.pdf'" target="_blank" class="link-tooltip">PDF</a>
-                        </ng-template>-->
-                      </div>
-                      
-                      <div class="tooltip-srf">
-                        <label nz-radio nzValue="très abimé" style="padding-block: 10px;">
-                          <span>Très abimé : nécéssite la pose de plaques de plâtre</span>
-                           <!-- <a  nz-tooltip [nzTooltipTitle]="TA" href="javascript:void(0)" class="pdf-icon">
-                            <i class="fas fa-question-circle"></i>
-                          </a>-->
-                        </label>
-                         <!-- <ng-template #TA>
-                          Pour plus d'informations, veuillez consulter :
-                          <a [href]="assetsUrl + 'modele_general.pdf'" target="_blank" class="link-tooltip">PDF</a>
-                        </ng-template>-->
                       </div>
                     </nz-radio-group>
                     

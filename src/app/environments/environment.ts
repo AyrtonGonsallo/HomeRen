@@ -9,9 +9,9 @@ export const environment = {
     imagesUrl: 'https://homeren.fr/api-concepts-et-travaux/files/', 
     //imagesUrl: 'https://dev.homeren.fr/api-concepts-et-travaux/files/', // URL de l'API sur le dev
 
-    //assetsUrl: 'https://homeren.fr/assets/', 
+    assetsUrl: 'https://homeren.fr/assets/', 
     //assetsUrl: 'https://dev.homeren.fr/assets/', // URL de assets sur le dev
-    assetsUrl: 'http://localhost:4300/assets/', // URL de assets en local
+    //assetsUrl: 'http://localhost:4300/assets/', // URL de assets en local
 
     //url_de_retour:"https://dev.homeren.fr/",
     //url_de_retour:"https://homeren.fr/",

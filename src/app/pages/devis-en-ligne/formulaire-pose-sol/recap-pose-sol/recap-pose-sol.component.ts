@@ -25,4 +25,7 @@ export class RecapPoseSolComponent {
   get_title(slug:string){
     return slug.split(":")[1];
   }
+  get_title_etat(slug:string){
+    return slug.split("-")[1];
+  }
 }

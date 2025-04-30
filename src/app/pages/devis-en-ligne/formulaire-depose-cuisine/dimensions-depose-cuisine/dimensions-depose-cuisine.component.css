@@ -1,0 +1,15 @@
+.tache-cuisine .ant-row{
+    width: 80% !important;
+    margin: auto !important;
+    display: grid !important;
+    gap:0px 30px !important;
+    align-items: center !important;
+}
+
+.tache-cuisine .ant-col-6{
+    padding: 12px 0px !important;
+    /* border-bottom: 1px solid #E9E9E9; */
+}
+
+.tache-cuisine input{ border:1px solid var(--color1)!important;border-radius:2px !important;}
+.tache-cuisine label{font-size: 13px !important;font-family: "Montserrat"; margin-bottom: 10px;}

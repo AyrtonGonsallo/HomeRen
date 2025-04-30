@@ -77,6 +77,7 @@ createportesGroup(): FormGroup {
   return this.fb.group({
     gamme: ['', this.is_active_Tp3 ? Validators.required : null],
     largeur: ['', this.is_active_Tp3 ? Validators.required : null],
+    epaisseur: ['', this.is_active_Tp3 ? Validators.required : null],
   });
 }
 addportesGroup(): void {
@@ -159,7 +160,8 @@ onPosePortesSubmit(): boolean {
 
     if (
       controls['gamme'].value === '' ||
-      controls['largeur'].value === '' 
+      controls['epaisseur'].value === '' ||
+      controls['largeur'].value === ''
     ) {
       //console.error(`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}`);
       //group.markAllAsTouched();
@@ -211,7 +213,7 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
     form.portes.forEach((porte: any) => {
         porteArray.push(this.fb.group({
           gamme: [porte.gamme, this.is_active_Tp3 ? Validators.required : null],
-          
+          epaisseur: [porte.epaisseur, this.is_active_Tp3 ? Validators.required : null],
           largeur: [porte.largeur, this.is_active_Tp3 ? Validators.required : null],
          
         }));
@@ -244,15 +246,48 @@ markFormGroupTouched(formGroup: FormGroup) {
   });
 }
 
-gammes:any[]=[]
+gammes1:any[]=[]
+gammes2:any[]=[]
+gammes3:any[]=[]
+gammes4:any[]=[]
 load_gammes(){
-  this.userService.getGammesByTravailAndType(4,"type-de-porte-creation-murs-non-porteurs").subscribe(
+  this.userService.getGammesByTravailAndType(4,"type-de-porte-creation-murs-non-porteurs_ep_5").subscribe(
     (response: any) => {
-      console.log('recuperation des gammes type-de-porte-creation-murs-non-porteurs:', response);
-      this.gammes=response
+      console.log('recuperation des gammes type-de-porte-creation-murs-non-porteurs_ep_5:', response);
+      this.gammes1=response
     },
     (error: any) => {
-      console.error('Erreur lors de la recuperation des gammes type-de-porte-creation-murs-non-porteurs :', error);
+      console.error('Erreur lors de la recuperation des gammes type-de-porte-creation-murs-non-porteurs_ep_5 :', error);
+    }
+  );
+
+  this.userService.getGammesByTravailAndType(4,"type-de-porte-creation-murs-non-porteurs_ep_7").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes type-de-porte-creation-murs-non-porteurs_ep_7:', response);
+      this.gammes2=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes type-de-porte-creation-murs-non-porteurs_ep_7 :', error);
+    }
+  );
+
+  this.userService.getGammesByTravailAndType(4,"type-de-porte-creation-murs-non-porteurs_ep_10").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes type-de-porte-creation-murs-non-porteurs_ep_10:', response);
+      this.gammes3=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes type-de-porte-creation-murs-non-porteurs_ep_10 :', error);
+    }
+  );
+
+  this.userService.getGammesByTravailAndType(4,"type-de-porte-creation-murs-non-porteurs_ep_10+").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes type-de-porte-creation-murs-non-porteurs_ep_10+:', response);
+      this.gammes4=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes type-de-porte-creation-murs-non-porteurs_ep_10+ :', error);
     }
   );
 }

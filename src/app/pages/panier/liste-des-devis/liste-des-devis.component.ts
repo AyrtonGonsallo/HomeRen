@@ -299,7 +299,7 @@ export class ListeDesDevisComponent {
   }
   supprimer_devis(id:number){
     this.panierService.delete_devis(id)
-   
+    window.location.reload()
   }
   isconnected=false
 

@@ -5,7 +5,7 @@
     <div>
     <span class="recup-fin"><p>Hauteur</p><p>:</p><p>{{dimmur.hauteur}} cm</p></span>
     <span class="recup-fin"><p>Longueur</p><p>:</p><p>{{dimmur.longueur}} cm</p></span>
-    <span class="recup-fin"><p>État des surfaces</p><p>:</p><p>{{poseMursForm.formulaire['etat-surfaces-pose-murs'].murs[i].etat}} </p></span>
+    <span class="recup-fin"><p>État des surfaces</p><p>:</p><p>{{get_title_etat(poseMursForm.formulaire['etat-surfaces-pose-murs'].murs[i].etat)}} </p></span>
     <span class="recup-fin" ><p>Revêtement à déposer</p><p>:</p><p>{{get_title(dimmur.depose)}} </p></span>
     <span class="recup-fin" ><p>Gamme</p><p>:</p><p>{{get_title(poseMursForm.formulaire['gammes-produits-pose-murs'].murs[i].gamme)}} </p></span>
     </div>

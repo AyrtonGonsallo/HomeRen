@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GestionDesDevisService } from '../../../../services/gestion-des-devis.service';
 import { environment } from '../../../../environments/environment';
+import { ApiConceptsEtTravauxService } from '../../../../services/api-concepts-et-travaux.service';
 
 @Component({
   selector: 'app-etat-surfaces-pose-sol',
@@ -48,9 +49,9 @@ export class PoseSolEtatSurfacesComponent {
     }
   }
   
-  constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
+  constructor(private fb: FormBuilder,private userService:ApiConceptsEtTravauxService,private gestiondesdevisService: GestionDesDevisService) {
   
-    
+    this.load_types()
     const prev_form = this.gestiondesdevisService.getFormulaireByName('etat-surfaces-pose-sol');
     if (prev_form) {
       console.log("formulaire existant",prev_form)
@@ -92,5 +93,19 @@ export class PoseSolEtatSurfacesComponent {
         }
       });
     }
+
+
+    etat_des_surfaces:any
+load_types(){
+  this.userService.getGammesByTravailAndTypeOrdered(9,"etat-des-surfaces-sol").subscribe(
+    (response: any) => {
+      console.log('recuperation des etat-des-surfaces-murs	:', response);
+      this.etat_des_surfaces=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des etat-des-surfaces-murs	 :', error);
+    }
+  );
+}
   }
   

@@ -204,7 +204,7 @@
 
                 <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                   <label for="hauteur_depuis_le_plafond">Hauteur depuis le plafond (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>
-                  <input (keypress)="blockComma($event)" type="number" id="hauteur_depuis_le_plafond" formControlName="hauteur_depuis_le_plafond"  min="10" max="500"> 
+                  <input (keypress)="blockComma($event)" type="number" id="hauteur_depuis_le_plafond" formControlName="hauteur_depuis_le_plafond"  min="0" max="500"> 
                 </div>
               
 

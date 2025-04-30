@@ -73,11 +73,11 @@ export class ShoppingCartService {
   delete_devis(id:number){
     this.userService.deleteDevisPiece(id).subscribe(
       (response) => {
-        console.log("devis validé")
+        console.log("devis supprimé")
         this.initializeCart()
       },
       (error) => {
-        console.error('Erreur lors de la validation du devis :', error);
+        console.error('Erreur lors de la suppression du devis :', error);
       })
   }
 

@@ -232,7 +232,7 @@ export class DimensionsDemolitionCloisonsComponent {
                 control.setValidators(this.is_active_Tp3 ? [Validators.required, Validators.min(100), Validators.max(3000)] : null);
                 break;
               case 'hauteur_depuis_le_plafond':
-                control.setValidators(this.is_active_Tp3 ? [Validators.required, Validators.min(10), Validators.max(500)] : null);
+                control.setValidators(this.is_active_Tp3 ? [Validators.required, Validators.min(0), Validators.max(500)] : null);
                 break;
               case 'cloison':
                 control.setValidators(this.is_active_Tp3 ? Validators.required : null);

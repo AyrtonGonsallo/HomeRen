@@ -60,8 +60,8 @@ createposeMurGroup(): FormGroup {
     etat: ['', Validators.required],
   });
 }
-constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService) {
-  
+constructor(private fb: FormBuilder,private userService:ApiConceptsEtTravauxService,private gestiondesdevisService: GestionDesDevisService) {
+  this.load_types()
    const prev_form = this.gestiondesdevisService.getFormulaireByName('etat-surfaces-pose-murs');
     if (prev_form) {
       console.log("formulaire existant",prev_form)
@@ -118,7 +118,18 @@ markFormGroupTouched(formGroup: FormGroup) {
   });
 }
 
-
+etat_des_surfaces:any
+load_types(){
+  this.userService.getGammesByTravailAndTypeOrdered(5,"etat-des-surfaces-murs").subscribe(
+    (response: any) => {
+      console.log('recuperation des etat-des-surfaces-murs	:', response);
+      this.etat_des_surfaces=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des etat-des-surfaces-murs	 :', error);
+    }
+  );
+}
 
 
 }
