@@ -136,7 +136,7 @@ export class ListeDesDevisComponent {
         // Envoyer l'email
         const mailRequest = parametre_visite
           ? await this.userService.sendAllVisitedDevisPiecetoUserAsync(this.device_id, user_id)
-          : await this.userService.sendAllPayedDevisPiecetoUserAsync(this.device_id, user_id);
+          : await this.userService.sendAllPayedDevisPiecetoUserAsync(this.device_id, user_id,this.prix_acompte);
         console.log("Résultat de l'envoi du mail :", mailRequest);
 
         // Mettre à jour les devis
@@ -157,7 +157,7 @@ export class ListeDesDevisComponent {
 
     
     await this.get_devis_en_attente_de_visite();
-    await this.get_devis_en_cours();
+   
     await this.get_devis_to_pay_datas();
     await this.get_devis_to_visit_datas();
     // Rafraîchir le panier à la fin
@@ -247,28 +247,6 @@ export class ListeDesDevisComponent {
 
 
 
-
-  get_devis_en_cours(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.panierService.getDevisTravauxEnCours().subscribe(
-        (items) => {
-          
-          this.listOfCurrentDevis = items;
-          console.log("devis en cours ",this.listOfCurrentDevis);
-          for(let item of items){
-            this.total+=item.Prix??0;
-            this.total_acompte+=item.Prix??0;
-          }
-          this.prix_acompte=this.taux_acompte*this.total_acompte/100
-          resolve(); //  Fin de la méthode (permet de continuer l'exécution)
-        },
-        (error) => {
-          console.error('Erreur lors de la récupération des devis :', error);
-          reject(error); //  Bloque l'exécution si une erreur survient
-        }
-      );
-    });
-  }
 
 
   get_devis_en_attente_de_visite(): Promise<void> {

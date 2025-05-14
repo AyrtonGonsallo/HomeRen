@@ -14,6 +14,7 @@ const routes: Routes = [
     {path:'faq',loadChildren:()=>import('./pages/faq/faq.module').then(m=>m.FaqModule)},
     {path:'panier',loadChildren:()=>import('./pages/panier/panier.module').then(m=>m.PanierModule)},
     {path:'connexion',loadChildren:()=>import('./pages/connexion/connexion.module').then(m=>m.ConnexioModule)},
+    {path:'espace-membre',loadChildren:()=>import('./pages/espace-membre/espace-membre.module').then(m=>m.EspaceMembreModule)},
 
   ];
 

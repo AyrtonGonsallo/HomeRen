@@ -177,13 +177,16 @@ getAllCurrentDevisPiecebyDeviceID(deviceid:string,userid:number): Observable<any
 getAllPayedDevisPiecebyDeviceID(deviceid:string): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_no_payed_devis_piece_by_device_id/${deviceid}`);
 }
-
+getProjetsByUserId(userId: number): Observable<any> {
+  const url = `${environment.apiUrl}/get_user_projects/${userId}`;
+  return this.http.get<any>(url);
+}
 
 getParametreById(id: number): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_parametre/${id}`);
 }
-sendAllPayedDevisPiecetoUser(deviceid:string,userid:number): Observable<any> {
-  return this.http.get<any>(`${environment.apiUrl}/send_payed_devis_liste_to_user/${userid}/${deviceid}`);
+sendAllPayedDevisPiecetoUser(deviceid:string,userid:number,total:number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/send_payed_devis_liste_to_user/${userid}/${deviceid}/${total}`);
 }
 sendAllVisitedDevisPiecetoUser(deviceid: string, userid: number): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/send_visited_devis_liste_to_user/${userid}/${deviceid}`);
@@ -193,10 +196,13 @@ async sendAllVisitedDevisPiecetoUserAsync(deviceid: string, userid: number): Pro
   return lastValueFrom(this.sendAllVisitedDevisPiecetoUser(deviceid, userid));
 }
 
-async sendAllPayedDevisPiecetoUserAsync(deviceid: string, userid: number): Promise<any> {
-  return lastValueFrom(this.sendAllPayedDevisPiecetoUser(deviceid, userid));
+async sendAllPayedDevisPiecetoUserAsync(deviceid: string, userid: number,total:number): Promise<any> {
+  return lastValueFrom(this.sendAllPayedDevisPiecetoUser(deviceid, userid,total));
 }
-
+get_projet(userId: number): Observable<any> {
+  const url = `${environment.apiUrl}/get_project/${userId}`;
+  return this.http.get<any>(url);
+}
 
 validerDevisPiece(id:number,body: any): Observable<any> {
   return this.http.put<any>(`${environment.apiUrl}/valider_devis_piece/${id}`,body);

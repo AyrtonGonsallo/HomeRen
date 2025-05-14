@@ -1,0 +1,6 @@
+<div class="center section-panier">
+    <h1 class="center black bold font-site">VOS PROJETS EN COURS</h1>
+    <ul>
+        <li *ngFor="let data of listOfCurrentProjects">Projet #{{ data.Id }} crée le {{data.Date_de_creation | date:'dd/MM/yyyy' }} <a nz-button nzType="link" [href]="'/espace-membre/projet/'+data.Id">Détails</a> </li>
+    </ul>
+</div>

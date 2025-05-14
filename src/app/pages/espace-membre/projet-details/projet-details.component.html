@@ -1,0 +1,16 @@
+<div class="center section-panier">
+    <h1 class="center black bold font-site">DÉTAILS DU PROJET</h1>
+    <p>Date de création : {{projet?.Date_de_creation | date:'dd/MM/yyyy'}}</p>
+    <p>Visite : {{projet?.Devis[0]?.Visite?.DateDeProgrammation  | date:'dd/MM/yyyy HH:mm:ss' }}</p>
+    <p>Liste des prestations</p>
+    <ul>
+        <li *ngFor="let devis of projet?.Devis">
+          <ul>
+            <li *ngFor="let tache of devis?.DevisTaches">
+              {{ tache?.Travail?.Titre }}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    <p>État d'Avancement : {{projet?.Status}}</p>
+</div>

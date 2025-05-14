@@ -35,10 +35,19 @@
         Votre compte
       </button>
       <ng-template #contentTemplate >
-        <a  href="{{url_de_retour}}/admin" target="_blank">
-          Acceder à l'espace membre
-          <span nz-icon nzType="login" nzTheme="outline"></span>
-        </a><br><br>
+        <ul>
+          <li>
+            <a routerLink="/espace-membre/en-attente-de-visite" >Visite en attente de paiement</a>
+          </li>
+          <li>
+            <a routerLink="/espace-membre/projets-en-cours" >Projets en cours</a>
+          </li>
+          <li>
+            <a routerLink="/espace-membre/projets-finis" >Projets terminés</a>
+          </li>
+         
+        </ul>
+        <br><br>
         <button nz-button   (click)="logout()">
           Se déconnecter
           <span nz-icon nzType="logout" nzTheme="outline"></span>
