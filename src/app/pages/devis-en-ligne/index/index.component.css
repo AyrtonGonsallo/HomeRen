@@ -342,5 +342,7 @@ ul{
 .final-options{
     max-width: 350px;
     display: flex;
+    gap: 10px;
     flex-direction: column;
+    padding-bottom: 14px;
 }

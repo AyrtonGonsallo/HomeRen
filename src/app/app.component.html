@@ -19,8 +19,9 @@
     <li><a routerLink="/realisations" routerLinkActive="active">Réalisations</a></li>
     <li><a routerLink="/faq" routerLinkActive="active">FAQ</a></li>
     <li><a routerLink="/form-artisan" routerLinkActive="active">Devenir partenaire</a></li>
+   
     <li><a routerLink="/connexion" class="btn-hdr" *ngIf="!isconnected">Connexion</a> 
-      
+
       <button
         nz-button
         nzType="primary" *ngIf="isconnected"
@@ -28,7 +29,7 @@
         [nzPopoverTitle]="user?.Nom+' '+user?.Prenom"
         [(nzPopoverVisible)]="out_visible"
         (nzPopoverVisibleChange)="out_change($event)"
-        nzPopoverTrigger="click"
+        nzPopoverTrigger="hover"
         [nzPopoverContent]="contentTemplate"
       >
         Votre compte

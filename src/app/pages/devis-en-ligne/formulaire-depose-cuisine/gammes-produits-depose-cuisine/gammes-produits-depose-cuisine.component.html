@@ -10,7 +10,7 @@
                 <div class="ant-col etat-srf tooltip-srf" *ngIf="isclicked && getAppareilModeleState(i)" class="error-message">
                   Vous devez faire un choix.
                 </div>
-                <div nzspan="6" class="flx-radio-row3" style="padding-top: 12px;" *ngIf="appareils_cuisine[i].AfficherLongueur">
+                <div nz-col class="row-w-grid3" style="padding-top: 12px;" *ngIf="appareils_cuisine[i].AfficherLongueur">
                   <label for="longueur">Longueur (cm) :</label>
                   <input (keypress)="blockComma($event)"  id="longueur" type="number" formControlName="longueur" min="0"/>     
                 </div>  
