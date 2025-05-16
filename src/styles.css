@@ -535,17 +535,29 @@ button.ant-btn.btn-underline.ant-btn-default:hover, button.ant-btn.btn-underline
 .row-w-collapse .ant-collapse > .ant-collapse-item.ant-collapse-no-arrow > .ant-collapse-header{background-color: #555555 !important;}
 .ant-collapse > .ant-collapse-item.ant-collapse-no-arrow > .ant-collapse-header{padding-block: 0px !important;
 padding-left: 15px !important;
-background-color: #555555 !important;
-padding: 8px 15px !important;
-text-align: left !important;}
+background-color: #ffffff !important;
+padding: 4px 15px 9px !important;
+text-align: left !important;
+border-bottom: 1px solid #e7e5e5;
+}
 .ant-collapse > .ant-collapse-item { border-bottom: none !important;}
 .row-w-collapse .ant-collapse-header-text {
-    color: var(--color-white) !important;
+    color: var(--color-black) !important;
     font-family: "Montserrat-Bold";
-    font-size: 18px;
+    font-size: 15px;
 }
 .ant-collapse-header label span{margin-top: 2px !important;}
-.ant-collapse-header .ant-checkbox-inner{background-color: #555 !important; border: 2px solid #fff !important; border-radius:2px !important;}
+.ant-collapse-header .ant-checkbox-inner{
+    background-color: #ffffff !important;
+    border: 2px solid #a19b9b !important;
+    border-radius: 2px !important;}
+ .plaf-dim .ant-collapse label {
+        font-size: 13px !important;
+        font-family: "Montserrat";
+        margin-bottom: 0px !important;
+        margin-right: 10px !important;
+}
+.ant-collapse > .ant-collapse-item > .ant-collapse-header{flex-direction: row-reverse;}
 /************************************************************************/
 .row-w{width: 80% !important;margin-left: auto !important;margin-right: auto !important;}
 .plaf-dim .ant-row{
@@ -715,6 +727,16 @@ text-align: left !important;}
     justify-items: center;
     justify-content: center;
 }
+.flx-radio-row6 {
+    display: grid;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
+    padding-bottom: 10px;
+    justify-content: center;
+    width: 50%;
+}
 .brdr-bt{border-bottom: 1px solid var(--color2);}
 .div-ttl-gris{    
         text-align: left;
@@ -739,7 +761,7 @@ text-align: left !important;}
     padding-bottom: 8px;
     border-bottom: 1px solid var(--color1);
 }
-.div-sol .flx-radio-row2{padding-left: 0px !important;}
+.div-sol .flx-radio-row2{padding-left: 7px !important;}
 .rd-grp-w{width: 80% !important;max-width: 100% !important;}
 .w-80{width: 80% !important;max-width: 100% !important;margin: auto !important;}
 .row-w-grid3.ant-col nz-radio-group label{padding-bottom:10px;}

@@ -1,16 +1,47 @@
 <div class="center section-panier">
-    <h1 class="center black bold font-site">DÉTAILS DU PROJET</h1>
+    <h1 class="center black font-site">DÉTAILS DU PROJET</h1>
     <p>Date de création : {{projet?.Date_de_creation | date:'dd/MM/yyyy'}}</p>
-    <p>Visite : {{projet?.Devis[0]?.Visite?.DateDeProgrammation  | date:'dd/MM/yyyy HH:mm:ss' }}</p>
-    <p>Liste des prestations</p>
-    <ul>
-        <li *ngFor="let devis of projet?.Devis">
-          <ul>
-            <li *ngFor="let tache of devis?.DevisTaches">
-              {{ tache?.Travail?.Titre }}
-            </li>
-          </ul>
-        </li>
-      </ul>
+    <p>
+        Visite : {{ projet?.Devis[0]?.Visite?.DateDeProgrammation | date:'dd/MM/yyyy HH:mm:ss' }}
+        ({{ projet?.Devis[0]?.VisiteFaite ? 'effectuée' : 'programmée' }})
+    </p>
+    <p *ngIf="files && files[0]?.Url">Liste des prestations : <a class="download-link" target="_blank" [href]="apiUrl+files[0].Url">Télécharger les devis en PDF</a></p>
+    <p>Avancement :</p>
+    <p *ngIf="projet?.Date_de_debut_des_travaux && projet?.Status!='visite à faire'">Date de début des travaux : {{projet?.Date_de_debut_des_travaux | date:'dd/MM/yyyy'}}</p>
     <p>État d'Avancement : {{projet?.Status}}</p>
+    <p *ngIf="projet?.Date_de_fin_des_travaux && projet?.Status!='visite à faire'">Date de fin des travaux : {{projet?.Date_de_fin_des_travaux | date:'dd/MM/yyyy'}}</p>
+    
+    <div *ngIf="paiements?.length" class="title-paiment">
+        Paiements :
+    </div>
+    <div *ngIf="paiements?.length">
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Date </th>
+                    <th>Montant</th>
+                    <th>Mode de paiement</th>
+                    <th>Devis</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of paiements">
+                    <td>{{data.Type}}</td>
+                    <td>{{data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                    <td>{{data.Montant | number:'1.2-2'}}€</td>
+                    <td>{{data.TypeDePaiement}}</td>
+                    <td>
+                        {{ data.Type === 'visite' ? 'Tous les devis' : ('Devis #' + data.DevisID) }}
+                    </td>
+                </tr>
+            </tbody>
+            
+        </table>
+        <div class="solde-paiement">
+            Solde : {{solde | number:'1.2-2'}}€
+        </div>
+       
+    </div>
+    
 </div>

@@ -9,7 +9,7 @@ import { ProjetDetailsComponent } from './projet-details/projet-details.componen
 const routes: Routes = [
   { path: 'projets-en-cours', component: CurrentProjectsComponent },
   { path: 'projets-finis', component: EndProjectsComponent },
-  { path: 'en-attente-de-visite', component: DevisListeToVisitComponent },
+  { path: 'visites-technicien', component: DevisListeToVisitComponent },
   {path:'projet/:id',component:ProjetDetailsComponent}
 
 ];

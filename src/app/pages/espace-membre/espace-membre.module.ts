@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { SharedModule } from '../../shared/shared.module';
 import { EspaceMembreRoutingModule } from './espace-membre-routing.module';
 import { EspaceMembreComponent } from './espace-membre.component';
 import { DevisListeToVisitComponent } from './devis-liste-to-visit/devis-liste-to-visit.component';
@@ -18,7 +18,7 @@ import { ProjetDetailsComponent } from './projet-details/projet-details.componen
     ProjetDetailsComponent
   ],
   imports: [
-    CommonModule,
+    CommonModule,SharedModule,
     EspaceMembreRoutingModule
   ]
 })

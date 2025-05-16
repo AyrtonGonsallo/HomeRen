@@ -1,1 +1,6 @@
-<p>end-projects works!</p>
+<div class="center section-panier">
+    <h1 class="center black font-site">VOS PROJETS TERMINÉS</h1>
+    <ul class="projects-list">
+        <li *ngFor="let data of listOfCurrentProjects" class="projects-list-element"><span>Projet #{{ data.Id }} crée le {{data.Date_de_creation | date:'dd/MM/yyyy' }} </span><a  class="see-more" [href]="'/espace-membre/projet/'+data.Id">Détails</a> </li>
+    </ul>
+</div>

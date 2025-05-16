@@ -22,7 +22,7 @@ export class AuthServiceService {
       localStorage.setItem(this.USER_KEY, JSON.stringify(user));
       localStorage.setItem(this.USER_KEY + '_expiration', expirationTime.toString());
       this.isConnectedSubject.next(true);
-      this.router.navigate(['/']);
+      this.router.navigate(['/panier']);
     }
   }
 

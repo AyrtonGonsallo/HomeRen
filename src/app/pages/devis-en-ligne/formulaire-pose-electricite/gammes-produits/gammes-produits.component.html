@@ -20,14 +20,14 @@
                 <div class="ant-col" *ngIf="isclicked && getAppareilNombreState2(i)" class="error-message">
                   Vous devez faire un choix.
                 </div>
-                <div nz-row nzJustify="start" class="ant-col-flx coll-100" style="padding-block: 14px;" >
+                <div nz-col nzJustify="start" class="ant-col-flx coll-100" style="padding-block: 14px;" >
 
-                <div nz-col nzspan="6" class="flx-radio-row4">
+                <div nz-col class="flx-radio-row6">
                   <label for="nombre_a_creer">A remplacer<span class="error-message" *ngIf="getAppareilRemplActiveState(i)">*</span> : </label>
                   <input (keypress)="blockComma($event)"  type="number" id="nombre_a_creer" formControlName="nombre_a_creer" min="0">      
                 </div>  
 
-                <div nz-col nzspan="6" class="flx-radio-row4">
+                <div nz-col class="flx-radio-row6">
                   <label for="nombre_a_remplacer">A créer<span class="error-message" *ngIf="getAppareilRemplActiveState(i)">*</span> : </label>
                   <input (keypress)="blockComma($event)"  type="number" id="nombre_a_remplacer" formControlName="nombre_a_remplacer" min="0">      
                 </div> 

@@ -14,7 +14,7 @@
                 Peinture de sol :
               </label> 
             </div>
-            <div  class="parquet-option">
+            <div  class="parquet-option  w-100">
               <div *ngFor="let option of gammes_peinture_sol" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span> 
@@ -38,7 +38,7 @@
                 Moquette :
               </label> 
             </div>
-            <div  class="parquet-option">
+            <div  class="parquet-option  w-100">
               <div *ngFor="let option of gamme_moquette_sol" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
@@ -59,7 +59,7 @@
             <div  ><label >
               Sol souple :</label> 
             </div>
-            <div  class="parquet-option">
+            <div  class="parquet-option  w-100">
               <div *ngFor="let option of gammes_sol_souple" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
@@ -82,7 +82,7 @@
             <div  ><label >
               Résine décorative :</label> 
             </div>
-            <div  class="parquet-option">
+            <div  class="parquet-option  w-100">
               <div *ngFor="let option of gamme_resine_decorative" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>  
@@ -106,7 +106,7 @@
             <div  ><label >
               Carrelage :</label> 
             </div>
-            <div  class="parquet-option">
+            <div  class="parquet-option  w-100">
               <div *ngFor="let option of gammes_carrelage_sol" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span> 
@@ -128,7 +128,7 @@
             <div  ><label >
               Parquet Flottant :</label> 
             </div>
-            <div  class="parquet-option">
+            <div  class="parquet-option  w-100">
               <div *ngFor="let option of gammes_parquet_flottant" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix" style="margin-bottom:10px !important;">
                   <span>{{ option.Label }}</span> 
@@ -151,7 +151,7 @@
             <div  ><label >
               Parquet Massif :</label> 
             </div>
-            <div  class="parquet-option">
+            <div  class="parquet-option  w-100">
               <div *ngFor="let option of gammes_parquet_massif" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
@@ -174,7 +174,7 @@
             <div  ><label >
               Autre :</label> 
             </div>
-            <div  class="parquet-option">
+            <div  class="parquet-option  w-100">
               <label nz-radio nzValue="0:autre:0">
                 <span>autre</span>
               </label>
@@ -237,7 +237,7 @@
                   Plinthes en bois :
                 </label> 
               </div>
-              <div  class="parquet-option">
+              <div  class="parquet-option  w-100">
                 <div *ngFor="let option of gammes_plithes_bois">
                   <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                     <span>{{ option.Label }}</span>   
@@ -261,7 +261,7 @@
                   Plinhtes avec du carrelage :
                 </label> 
               </div>
-              <div  class="parquet-option">
+              <div  class="parquet-option  w-100">
                 <div *ngFor="let option of gammes_plithes_carrelage">
                   <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                     <span>{{ option.Label }}</span>  

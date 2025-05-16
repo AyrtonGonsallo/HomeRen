@@ -1,1 +1,19 @@
-<p>devis-liste-to-visit works!</p>
+<div class="center section-panier">
+    <h1 class="center black font-site">VOS PROJETS EN ATTENTE DE VISITE</h1>
+    <ul class="projects-list">
+        <li *ngFor="let data of listOfVisits" class="projects-list-element">
+            <span>
+              Visite HR-{{currentYear}}-{{ data.Visite.ID }} - 
+              créee le {{ data.Visite.Date | date:'dd/MM/yyyy' }} - 
+              <ng-container *ngIf="data.VisiteFaite == 1; else programmation">
+                terminée
+              </ng-container>
+              <ng-template #programmation>
+                {{ data.Visite.DateDeProgrammation ? 
+                  ('prévue le ' + (data.Visite.DateDeProgrammation | date:'dd/MM/yyyy à HH:mm')) 
+                  : 'à planifier' }}
+              </ng-template>
+            </span>
+        </li>
+    </ul>
+</div>

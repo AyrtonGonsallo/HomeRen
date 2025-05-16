@@ -14,7 +14,7 @@
                 Peinture :
               </label> 
             </div>
-            <div  class="parquet-option">
+            <div  class="parquet-option  w-100">
               <div *ngFor="let option of gammes_peinture" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span> 
@@ -37,7 +37,7 @@
                 Enduit :
               </label> 
             </div>
-            <div  class="parquet-option">
+            <div  class="parquet-option  w-100">
               <div *ngFor="let option of gammes_enduit" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
@@ -57,7 +57,7 @@
             <div  ><label >
               Papier :</label> 
             </div>
-            <div  class="parquet-option">
+            <div  class="parquet-option  w-100">
               <div *ngFor="let option of gammes_papier" class="flex-see-gamme">
                 <label nz-radio [nzValue]="option.ID +  ':' + option.Label+ ':' + option.Prix">
                   <span>{{ option.Label }}</span>
@@ -83,7 +83,7 @@
             <div  ><label >
               Autre :</label> 
             </div>
-            <div  class="parquet-option">
+            <div  class="parquet-option  w-100">
               <label nz-radio nzValue="0:autre:0">
                 <span>autre</span>
               </label>
@@ -99,7 +99,7 @@
       <div *ngIf="isclicked && posePlafondForm.get('gamme')?.invalid" class="error-message">
         Les gammes sont requises.
       </div>
-      <div nz-col nzSpan="6" class="w-81 ant-col tooltip-srf" [nzXs]="6" [nzSm]="6" *ngIf="posePlafondForm.get('gamme')?.value=='0:autre:0'">
+      <div nz-col nzSpan="6" class="w-80 ant-col tooltip-srf " [nzXs]="6" [nzSm]="6" *ngIf="posePlafondForm.get('gamme')?.value=='0:autre:0'">
         <label for="autre_gamme">
           Autre : </label>
         <input type="text" id="autre_gamme" formControlName="autre_gamme" >

@@ -17,6 +17,7 @@ interface CartItem {
     VisiteFaite:Boolean;
     Visite:any;
     DevisTaches:any[];
+    Projets:any[];
 }
 
 @Injectable({

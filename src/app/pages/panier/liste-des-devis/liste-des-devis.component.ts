@@ -133,9 +133,12 @@ export class ListeDesDevisComponent {
       console.log("Données à envoyer :", datas);
 
       try {
+        const devisList = (this.listOfDevisToPayVisit as { ID: number }[]).map(item => item.ID).join(',');
+
+
         // Envoyer l'email
         const mailRequest = parametre_visite
-          ? await this.userService.sendAllVisitedDevisPiecetoUserAsync(this.device_id, user_id)
+          ? await this.userService.sendAllVisitedDevisPiecetoUserAsync(this.device_id, user_id,devisList)
           : await this.userService.sendAllPayedDevisPiecetoUserAsync(this.device_id, user_id,this.prix_acompte);
         console.log("Résultat de l'envoi du mail :", mailRequest);
 

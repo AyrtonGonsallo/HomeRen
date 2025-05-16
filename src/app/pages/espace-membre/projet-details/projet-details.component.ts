@@ -5,6 +5,7 @@ import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-t
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NonNullableFormBuilder } from '@angular/forms';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-projet-details',
@@ -12,31 +13,35 @@ import { NonNullableFormBuilder } from '@angular/forms';
   styleUrl: './projet-details.component.css'
 })
 export class ProjetDetailsComponent {
+  solde=0
+  apiUrl = environment.imagesUrl.replace(/\/files\/?$/, '');
   projetId:string =  this.route.snapshot.paramMap.get('id')??'0';
-
-  ngOnInit(): void {
+  files:any
+  paiements:any
+  projet:any
+  async ngOnInit(): Promise<void> {
       this.getprojetDetails(this.projetId)
       
   
       
-    }
-    baseurl=environment.apiUrl
-    page_seo_details:any
-    constructor(private metaService: Meta,private titleService: Title,private route:ActivatedRoute,private fb: NonNullableFormBuilder,private router: Router,private message: NzMessageService,private userService: ApiConceptsEtTravauxService) {
+  }
+  baseurl=environment.apiUrl
+  page_seo_details:any
+  constructor(private metaService: Meta,private titleService: Title,private route:ActivatedRoute,private fb: NonNullableFormBuilder,private router: Router,private message: NzMessageService,private userService: ApiConceptsEtTravauxService) {
+
+  }
   
-    }
-  projet:any
   
     
   
   // Méthode pour récupérer les détails de l'utilisateur à partir de l'API
   getprojetDetails(id: string): void {
     this.userService.get_projet( parseInt(id, 10)).subscribe(
-      (response) => {
+      async (response) => {
         console.log("réponse de la requette get projet details",response);
        this.projet=response
-        
-       
+       this.getDevisFiles(this.projet.Devis[0].ID)
+       await this.get_all_devis_paiements()
         
       },
       (error) => {
@@ -45,4 +50,62 @@ export class ProjetDetailsComponent {
     );
     
   }
+
+  getDevisFiles(devisId: number): void {
+    this.userService.getFichiersByDevis(devisId).subscribe(
+      (response) => {
+        console.log("réponse de la requette fichiers",response);
+        this.files=response
+      },
+      (error) => {
+        console.error('Erreur lors de la recuperation des fichiers :', error);
+      }
+    );
+    
+  }
+
+
+
+  get_all_devis_paiements(): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let solde = 0;
+        let visiteAdded = false;
+        const allPaiements: any[] = [];
+  
+        for (const devis of this.projet.Devis) {
+          const devisId = devis.ID;
+          const response = await firstValueFrom(this.userService.get_all_devis_paiements(devisId));
+  
+          // response est un tableau de paiements pour ce devis
+          response.forEach((paiement: any) => {
+            if (paiement.Type === 'visite') {
+              if (!visiteAdded) {
+                solde += paiement.Montant;
+                allPaiements.push(paiement);
+                visiteAdded = true;
+              }
+              // si visiteAdded = true, on ignore les autres 'visite'
+            } else {
+              solde += paiement.Montant;
+              allPaiements.push(paiement);
+            }
+          });
+        }
+  
+        console.log("Paiements récupérés :", allPaiements);
+        this.paiements = allPaiements;
+        this.solde = solde;
+  
+        resolve();
+      } catch (error) {
+        console.error('Erreur lors de la récupération des paiements de tous les devis :', error);
+        reject(error);
+      }
+    });
+  }
+  
+
+
+  
 }

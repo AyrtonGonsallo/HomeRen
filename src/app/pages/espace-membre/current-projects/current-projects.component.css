@@ -7,7 +7,7 @@ table{
     margin-inline: auto;
 }
 .div-panier{ max-width: 1440px !important; margin: auto;padding: 4% 2%; overflow: hidden;}
-h1 {font-size: 23px !important;}
+h1 {font-size: 35px !important;}
 h2{font-size: 21px;}
 /* .center{
     display: block;
@@ -128,4 +128,35 @@ th, td{
 
 li{
     list-style: none;
+}
+
+.see-more{
+    background-color: var(--color1);
+    border: none;
+    color: black;
+    padding: 13px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: "MyFont" !important;
+}
+.see-more:hover{
+    background-color: var(--color2);
+    color: var(--color-white);
+}
+.projects-list-element{
+    margin: 0 0 10px 0;
+    display: flex;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+}
+.projects-list{
+    margin-top: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }

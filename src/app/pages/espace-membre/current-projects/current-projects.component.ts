@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class CurrentProjectsComponent {
   isconnected=false;
   user_id=0
+  currentYear: number = new Date().getFullYear();
   listOfCurrentProjects:any
   async ngOnInit(): Promise<void> {
     this.authService.getIsConnected().subscribe((isConnected) => {
@@ -31,7 +32,7 @@ export class CurrentProjectsComponent {
   get_current_projects(): Promise<void> {
     
     return new Promise((resolve, reject) => {
-      this.userService.getProjetsByUserId(this.user_id).subscribe(
+      this.userService.getCurrentsProjetsByUserId(this.user_id).subscribe(
         (items) => {
           
           this.listOfCurrentProjects = items;

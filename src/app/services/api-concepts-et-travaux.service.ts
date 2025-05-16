@@ -177,8 +177,16 @@ getAllCurrentDevisPiecebyDeviceID(deviceid:string,userid:number): Observable<any
 getAllPayedDevisPiecebyDeviceID(deviceid:string): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_no_payed_devis_piece_by_device_id/${deviceid}`);
 }
-getProjetsByUserId(userId: number): Observable<any> {
-  const url = `${environment.apiUrl}/get_user_projects/${userId}`;
+getCurrentsProjetsByUserId(userId: number): Observable<any> {
+  const url = `${environment.apiUrl}/get_current_user_projects/${userId}`;
+  return this.http.get<any>(url);
+}
+getEndedProjetsByUserId(userId: number): Observable<any> {
+  const url = `${environment.apiUrl}/get_ended_user_projects/${userId}`;
+  return this.http.get<any>(url);
+}
+getVisitByUserId(userId: number): Observable<any> {
+  const url = `${environment.apiUrl}/get_visits_by_user/${userId}`;
   return this.http.get<any>(url);
 }
 
@@ -188,12 +196,12 @@ getParametreById(id: number): Observable<any> {
 sendAllPayedDevisPiecetoUser(deviceid:string,userid:number,total:number): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/send_payed_devis_liste_to_user/${userid}/${deviceid}/${total}`);
 }
-sendAllVisitedDevisPiecetoUser(deviceid: string, userid: number): Observable<any> {
-  return this.http.get<any>(`${environment.apiUrl}/send_visited_devis_liste_to_user/${userid}/${deviceid}`);
+sendAllVisitedDevisPiecetoUser(deviceid: string, userid: number, devisList: string): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/send_visited_devis_liste_to_user/${userid}/${deviceid}/${devisList}`);
 }
 
-async sendAllVisitedDevisPiecetoUserAsync(deviceid: string, userid: number): Promise<any> {
-  return lastValueFrom(this.sendAllVisitedDevisPiecetoUser(deviceid, userid));
+async sendAllVisitedDevisPiecetoUserAsync(deviceid: string, userid: number, devisList: string): Promise<any> {
+  return lastValueFrom(this.sendAllVisitedDevisPiecetoUser(deviceid, userid,devisList));
 }
 
 async sendAllPayedDevisPiecetoUserAsync(deviceid: string, userid: number,total:number): Promise<any> {
@@ -204,6 +212,14 @@ get_projet(userId: number): Observable<any> {
   return this.http.get<any>(url);
 }
 
+getFichiersByDevis(devisId: number): Observable<any> {
+  const url = `${environment.apiUrl}/get_fichiers_by_devis/${devisId}`;
+  return this.http.get<any>(url);
+}
+get_all_devis_paiements(devisID: number): Observable<any> {
+  const url = `${environment.apiUrl}/get_all_devis_paiements/${devisID}`;
+  return this.http.get<any>(url);
+}
 validerDevisPiece(id:number,body: any): Observable<any> {
   return this.http.put<any>(`${environment.apiUrl}/valider_devis_piece/${id}`,body);
 }
