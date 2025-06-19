@@ -105,4 +105,14 @@ export class AuthServiceService {
   private isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
+
+  /**
+   * Vérifie si l'utilisateur est authentifié, sinon le redirige vers la page de connexion.
+   */
+  checkAuthenticationOrRedirect(): void {
+    if (!this.isAuthenticated()) {
+      this.router.navigate(['/connexion']);
+    }
+  }
+
 }

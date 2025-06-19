@@ -79,7 +79,7 @@ img{width: fit-content;max-width: 100%;}
     background-color: var(--color2);
     color: var(--color-white);
   }
-  .ant-checkbox:hover span.ant-checkbox-inner{border: 2px solid var(--color-white) !important;}
+  .ant-checkbox:hover span.ant-checkbox-inner{border: 2px solid #e7e5e5 !important; margin-top: 0px !important;  }
   .m-b-txt{margin-bottom: 30px;}
   label span, nz-form-label label{font-size: 13px !important;font-weight: 600;font-family: 'Montserrat';}
   .add-btn{padding: 0px 10px; background-color: var(--color2);height: 37px;cursor: pointer;margin-block: 8px !important;}
@@ -470,7 +470,7 @@ span.ant-radio + * {padding-left: 0px !important;}
 
 .section-connexion input{border-bottom-color: var(--color1) !important;}
 .ant-modal{
-    width: 30% !important;
+    width: 32% !important;
     height: 89%!important;
     display: flex !important;
     flex-wrap: wrap !important;
@@ -546,7 +546,7 @@ border-bottom: 1px solid #e7e5e5;
     font-family: "Montserrat-Bold";
     font-size: 15px;
 }
-.ant-collapse-header label span{margin-top: 2px !important;}
+
 .ant-collapse-header .ant-checkbox-inner{
     background-color: #ffffff !important;
     border: 2px solid #a19b9b !important;
@@ -557,7 +557,7 @@ border-bottom: 1px solid #e7e5e5;
         margin-bottom: 0px !important;
         margin-right: 10px !important;
 }
-.ant-collapse > .ant-collapse-item > .ant-collapse-header{flex-direction: row-reverse;}
+.ant-collapse > .ant-collapse-item > .ant-collapse-header{flex-direction: row-reverse; align-items: center;}
 /************************************************************************/
 .row-w{width: 80% !important;margin-left: auto !important;margin-right: auto !important;}
 .plaf-dim .ant-row{
@@ -719,6 +719,17 @@ border-bottom: 1px solid #e7e5e5;
     justify-content: center;
     align-content: space-evenly;
 }
+.row-w-grid8.ant-col {
+    padding: 12px 0px !important;
+    max-width: 100% !important;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.2fr 3fr;
+    justify-items: start !important;
+    align-items: center !important;
+    justify-content: center;
+    align-content: space-evenly;
+}
 .flx-radio-row4 {
     display: grid;
     grid-template-columns: 2fr 1fr !important;
@@ -798,6 +809,8 @@ input:focus-visible, textarea:focus-visible {border: 0px !important;}
 .form-cnx-ppup nz-alert.custom-success-alert .ant-alert-success {border: 1px solid #52bdf5!important;}
 .btn-recp-mdp span{font-family: "Montserrat" !important;}
 
+
+
 /*************************************************************************************************/
 .ant-modal-footer {
     display: none !important;
@@ -876,7 +889,7 @@ input:focus-visible, textarea:focus-visible {border: 0px !important;}
         .plaf-dim .ant-row {gap: 10px !important;}
         .flx-radio-row { grid-template-columns: repeat(2, auto) !important; gap: 0px 10px !important;}
         .row-w-grid.ant-col, .row-w-grid_3.ant-col { justify-items: stretch !important; align-items: start !important;}
-        .row-w-grid6.ant-col{grid-template-columns: 1fr !important;}
+        .row-w-grid6.ant-col, .row-w-grid8.ant-col{grid-template-columns: 1fr !important;}
         .renov-elec.plaf-dim .ant-collapse .ant-row {gap: 12px !important;}
 
     }

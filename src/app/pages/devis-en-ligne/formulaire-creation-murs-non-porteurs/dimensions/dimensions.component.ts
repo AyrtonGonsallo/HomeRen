@@ -77,11 +77,10 @@ createportesGroup(): FormGroup {
   return this.fb.group({
     gamme: ['', this.is_active_Tp3 ? Validators.required : null],
     largeur: ['', this.is_active_Tp3 ? Validators.required : null],
-    epaisseur: ['', this.is_active_Tp3 ? Validators.required : null],
   });
 }
 addportesGroup(): void {
-  if (this.portes.length < 4) {
+  if (this.portes.length < this.murs_non_porteurs.length) {
     this.portes.push(this.createportesGroup());
   }
   this.updateValidatorsForPortes()
@@ -136,7 +135,9 @@ onPoseMursNonPorteursSubmit(): boolean {
     if (
       controls['longueur'].value === '' ||
       controls['hauteur'].value === '' ||
-      controls['epaisseur'].value === '' 
+      controls['epaisseur'].value === '' ||
+      controls['longueur'].value > 3000 || controls['longueur'].value < 100 ||
+      controls['hauteur'].value > 500 || controls['hauteur'].value < 100
     ) {
       //console.error(`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}`);
       //group.markAllAsTouched();
@@ -160,7 +161,6 @@ onPosePortesSubmit(): boolean {
 
     if (
       controls['gamme'].value === '' ||
-      controls['epaisseur'].value === '' ||
       controls['largeur'].value === ''
     ) {
       //console.error(`Tous les champs doivent être remplis pour la démolition partielle du mur ${i + 1}`);
@@ -177,8 +177,8 @@ onPosePortesSubmit(): boolean {
 }
 createposeMurNonPorteurroup(): FormGroup {
   return this.fb.group({
-    hauteur: ['', Validators.required],
-    longueur: ['', Validators.required],
+    hauteur: ['',  [Validators.required, Validators.min(100), Validators.max(500)]],
+    longueur: ['',  [Validators.required, Validators.min(100), Validators.max(3000)]],
     epaisseur: ['', Validators.required],
   });
 }
@@ -213,7 +213,6 @@ constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDe
     form.portes.forEach((porte: any) => {
         porteArray.push(this.fb.group({
           gamme: [porte.gamme, this.is_active_Tp3 ? Validators.required : null],
-          epaisseur: [porte.epaisseur, this.is_active_Tp3 ? Validators.required : null],
           largeur: [porte.largeur, this.is_active_Tp3 ? Validators.required : null],
          
         }));

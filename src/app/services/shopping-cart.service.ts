@@ -100,7 +100,7 @@ refresh(){
             username: this.browserInfo,
             ip: this.userIp,
           };
-          this.userService.getAllNoPayedDevisPiecebyUser(this.getUniqueDeviceId(),this.authService.getUser()?.Id??0).subscribe(
+          this.userService.getAllNoPayedDevisPiecebyUser("sadsd",this.authService.getUser()?.Id??0).subscribe(//this.getUniqueDeviceId()
             (response) => {
               this.items = response;
               this.itemsSubject.next(this.items);
@@ -108,7 +108,7 @@ refresh(){
             (error) => {
               this.items = [];
               this.itemsSubject.next(this.items);
-              console.error('Erreur lors de la récupération des devis :', error.error.message);
+              console.error('Erreur lors de la récupération des devis :', error);
             }
           );
         },
@@ -142,7 +142,8 @@ refresh(){
 
   getDevisToPayVisit(): Observable<CartItem[]> {
     return this.userService.getAllDevisToPayVisitbyUser(
-      this.getUniqueDeviceId(),
+      //this.getUniqueDeviceId(),
+      "assa",
       this.authService.getUser()?.Id ?? 0
     ).pipe(
       map((response) => {
@@ -158,7 +159,8 @@ refresh(){
 
   getDevisToPayAcompte(): Observable<CartItem[]> {
     return this.userService.getAllDevisToPayAcomptbyUser(
-      this.getUniqueDeviceId(),
+      "sdad",
+      //this.getUniqueDeviceId(),
       this.authService.getUser()?.Id ?? 0
     ).pipe(
       map((response) => {
@@ -174,7 +176,8 @@ refresh(){
 
   getDevisEnAttenteDeVisite(): Observable<CartItem[]> {
     return this.userService.getAllNoVisitedDevisPiecebyUser(
-      this.getUniqueDeviceId(),
+      //this.getUniqueDeviceId(),
+      "asd",
       this.authService.getUser()?.Id ?? 0
     ).pipe(
       map((response) => {
@@ -191,7 +194,8 @@ refresh(){
 
   getDevisTravauxEnCours(): Observable<CartItem[]> {
     return this.userService.getAllCurrentDevisPiecebyDeviceID(
-      this.getUniqueDeviceId(),
+      //this.getUniqueDeviceId(),
+      "asda",
       this.authService.getUser()?.Id ?? 0
     ).pipe(
       map((response) => {

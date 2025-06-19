@@ -19,6 +19,14 @@ export class RecapPoseCreationMursNonPorteursComponent {
    
   }
 
+  get_epaisseur(dim:number){
+    if(dim==0){
+      return "supérieur à 10"
+    }else{
+      return dim+" cm"
+    }
+  }
+
   get_title(slug:string){
     return slug.split(":")[2];
   }

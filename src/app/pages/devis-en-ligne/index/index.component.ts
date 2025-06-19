@@ -504,6 +504,7 @@ export class IndexComponent {
     }
     if(this.is_one_travail_selected && this.filteredTravail.ID==4 && this.current==5){
       this.current=2
+      this.triggerSubmitDimensionForm =false;
       return true
     }
     if(this.is_one_travail_selected && this.filteredTravail.ID==13 && this.current==4){
@@ -512,6 +513,7 @@ export class IndexComponent {
     }
     if(this.is_one_travail_selected && this.filteredTravail.ID==3 && this.current>=4){
       this.current=2
+      this.triggerSubmitDimensionForm =false;
       return true
     }
     if(this.is_one_travail_selected && this.filteredTravail.ID==2 && this.current==4){

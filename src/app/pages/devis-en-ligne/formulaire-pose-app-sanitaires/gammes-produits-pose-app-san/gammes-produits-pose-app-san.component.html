@@ -11,28 +11,28 @@
                     Vous devez faire un choix.
                   </div>
                   
-                    <div nz-col class="row-w-grid5" style="padding-top: 12px;" *ngIf="appareils_salle_de_bain[i].AfficherLongueur">
+                    <div nz-col class="row-w-grid8" style="padding-top: 12px;" *ngIf="appareils_salle_de_bain[i].AfficherLongueur">
                       <label for="longueur">Longueur (cm) :</label>
                       <input (keypress)="blockComma($event)"  id="longueur" type="number" formControlName="longueur" min="0"/>     
                     </div>  
-                    <div nz-col class="row-w-grid5" style="padding-top: 12px;" *ngIf="appareils_salle_de_bain[i].AfficherLargeur">
+                    <div nz-col class="row-w-grid8" style="padding-top: 12px;" *ngIf="appareils_salle_de_bain[i].AfficherLargeur">
                       <label for="largeur">Largeur (cm) :</label>
                       <input (keypress)="blockComma($event)"  id="largeur" type="number" formControlName="largeur" min="0"/>     
                     </div>  
                 
-                  <div nz-col class="row-w-grid5" *ngIf="appareils_salle_de_bain[i].AfficherVasque">
+                  <div nz-col class="row-w-grid8" *ngIf="appareils_salle_de_bain[i].AfficherVasque">
                     <label for="nombre_de_vasque">Nombre de vasque :</label>
                     <input (keypress)="blockComma($event)"  id="nombre_de_vasque" type="number" formControlName="nombre_de_vasque" min="0"/>     
                   </div>  
 
-                  <div nz-col class="row-w-grid5" *ngIf="appareils_salle_de_bain[i].AfficherEncastreeApparente">
+                  <div nz-col class="row-w-grid8" *ngIf="appareils_salle_de_bain[i].AfficherEncastreeApparente">
                     <label for="encastre_ou_apparente">Encastré ou apparente  ?</label>
                     <nz-radio-group formControlName="encastre_ou_apparente" nzName="radiogroup" class="sidebyside">
                       <label nz-radio nzValue="encastré">Encastré</label>
                       <label nz-radio nzValue="apparente">Apparente</label>
                     </nz-radio-group>
                   </div> 
-                  <div  nz-col class="row-w-grid5">
+                  <div  nz-col class="row-w-grid8">
                   <div class="">
                     <label class=""> Gamme<span class="error-message" *ngIf="getAppareilActiveState(i)">*</span> :</label>  
                   </div>

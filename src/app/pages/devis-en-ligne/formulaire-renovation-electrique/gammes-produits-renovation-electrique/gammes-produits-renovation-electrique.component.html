@@ -26,28 +26,34 @@
        <div  nz-col class="">
        <div nz-col class="row-w-grid6">
         <div nz-col  class="">
-        <label for="mise_en_securite">Mise en sécurité : <!--<a nz-tooltip [nzTooltipTitle]="tooltipMise" href="javascript:void(0)" class="info-icon">
-          <i class="fas fa-question-circle"></i></a>--></label>
+        <label for="mise_en_securite">Mise en sécurité : 
+          <a nz-tooltip [nzTooltipTitle]="tooltipMiseSec" href="javascript:void(0)" class="info-icon">
+            <i class="fas fa-question-circle"></i>
+          </a>
+        </label>
         </div>
         <div nz-col  class="">
         <nz-radio-group  formControlName="mise_en_securite" id="mise_en_securite" nzName="radiogroup" class="sidebyside">
           <label nz-radio [nzValue]="true">Oui</label>
           <label nz-radio [nzValue]="false">Non</label>
         </nz-radio-group>
+        
        </div>
-        <ng-template #tooltipMise>
+        <ng-template #tooltipMiseSec>
           <div class="tooltip-content">
-            <strong>Mise en sécurité :</strong>
-            <a nz-tooltip [nzTooltipTitle]="tooltip_ren" href="javascript:void(0)" class="info-icon">
-              <i class="fas fa-question-circle"></i>
-            </a>
+            <strong>Explications :</strong>
+            La mise en sécurité vise à corriger les points les plus dangereux d'une installation électrique existante afin de prévenir les risques immédiats d’électrocution, d’incendie ou de dysfonctionnement, sans pour autant rendre l’installation totalement conforme aux normes actuelles.
             </div>
         </ng-template>  
       </div> 
     </div>
     <div  nz-col class="row-w-grid6">
        <div nz-col  class="">
-        <label for="renovation_conforme">Rénovation conforme à la norme C15100 </label>
+        <label for="renovation_conforme">Mise aux normes : 
+          <a nz-tooltip [nzTooltipTitle]="tooltipMiseNormes" href="javascript:void(0)" class="info-icon">
+            <i class="fas fa-question-circle"></i>
+          </a>
+        </label>
         </div> 
         <div>
         <nz-radio-group formControlName="renovation_conforme" id="renovation_conforme" nzName="radiogroup" class="sidebyside">
@@ -55,12 +61,10 @@
           <label nz-radio [nzValue]="false">Non</label>
         </nz-radio-group>
        </div>
-        <ng-template #tooltip_ren>
+        <ng-template #tooltipMiseNormes>
           <div class="tooltip-content">
-            <strong>Rénovation conforme à la norme C15100 </strong>
-            <a nz-tooltip [nzTooltipTitle]="tooltipchauffelec" href="javascript:void(0)" class="info-icon">
-              <i class="fas fa-question-circle"></i>
-            </a>
+            <strong>Explications :</strong>
+            La mise aux normes consiste à refaire l’installation pour qu’elle respecte intégralement les exigences en vigueur (notamment la norme NF C 15-100), comme si elle était neuve. Elle est plus complète, plus coûteuse, et parfois obligatoire dans le neuf ou lors de rénovations importantes.
             </div>
         </ng-template>  
       

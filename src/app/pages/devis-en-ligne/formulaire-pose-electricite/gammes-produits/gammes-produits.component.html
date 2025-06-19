@@ -2,7 +2,7 @@
 
   <div  class="div-s-b">
     <div class="renov-elec-div ">
-      <span class="mur-ttl">À remplacer sans changement de câble</span>   
+      <span class="mur-ttl">Appareils</span>   
     </div>
     <form [formGroup]="appareils_a_remplacer_form" (ngSubmit)="submit()">
       <div *ngIf="exist_glob_err_form2" class="error-message">
@@ -23,13 +23,33 @@
                 <div nz-col nzJustify="start" class="ant-col-flx coll-100" style="padding-block: 14px;" >
 
                 <div nz-col class="flx-radio-row6">
-                  <label for="nombre_a_creer">A remplacer<span class="error-message" *ngIf="getAppareilRemplActiveState(i)">*</span> : </label>
-                  <input (keypress)="blockComma($event)"  type="number" id="nombre_a_creer" formControlName="nombre_a_creer" min="0">      
+                  <label for="nombre_a_creer">À remplacer<span class="error-message" *ngIf="getAppareilRemplActiveState(i)">*</span> : 
+                    <a nz-tooltip [nzTooltipTitle]="tooltipRemplacement" href="javascript:void(0)" class="info-icon">
+                      <i class="fas fa-question-circle"></i>
+                    </a>
+                  </label>
+                  <input (keypress)="blockComma($event)"  type="number" id="nombre_a_creer" formControlName="nombre_a_creer" min="0"> 
+                  <ng-template #tooltipRemplacement>
+                    <div class="tooltip-content">
+                      <strong>Explications :</strong>
+                      Le remplacement se fera sans changement de cables.
+                      </div>
+                  </ng-template>       
                 </div>  
 
                 <div nz-col class="flx-radio-row6">
-                  <label for="nombre_a_remplacer">A créer<span class="error-message" *ngIf="getAppareilRemplActiveState(i)">*</span> : </label>
+                  <label for="nombre_a_remplacer">À créer<span class="error-message" *ngIf="getAppareilRemplActiveState(i)">*</span> : 
+                    <a nz-tooltip [nzTooltipTitle]="tooltipCreation" href="javascript:void(0)" class="info-icon">
+                      <i class="fas fa-question-circle"></i>
+                    </a>
+                  </label>
                   <input (keypress)="blockComma($event)"  type="number" id="nombre_a_remplacer" formControlName="nombre_a_remplacer" min="0">      
+                  <ng-template #tooltipCreation>
+                    <div class="tooltip-content">
+                      <strong>Explications :</strong>
+                       En cas de création les passages de cables se feront sous goulotte pvc blanc.
+                      </div>
+                  </ng-template> 
                 </div> 
               </div>  
               </nz-collapse-panel>
@@ -47,9 +67,10 @@
 
       <div  class="form-group" nz-col nzJustify="start" class="w-80" style="display:block;">
         
-        <div nz-col class="row-w-grid12" style="padding:0px 16px !important;">
-
-          <label style="float: left;">Gamme d'appareillage :</label>
+        <div nz-col class="row-w-grid12" style="padding-top:20px !important;">
+          <div class="renov-elec-div" style="width: 100%;max-width: 100%;">
+            <span class="mur-ttl">Gamme d'appareillage :</span>   
+          </div>
 
           <nz-radio-group formControlName="gamme" class="" style="width: 100%;max-width: 100%;">
             <!-- Reusable template for displaying options with PDFs -->

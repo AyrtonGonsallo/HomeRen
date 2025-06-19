@@ -13,10 +13,10 @@
 
         <div *ngIf="isclicked && poseMursForm" class="error-message">
           <div *ngIf="isclicked && murs.controls[i].get('hauteur')?.invalid " class="error-message">
-            Hauteur invalide.
+            Hauteur invalide. Elle doit être comprise entre 100 et 500.
           </div>
           <div *ngIf="isclicked && murs.controls[i].get('longueur')?.invalid " class="error-message">
-            longueur invalide.
+            longueur invalide. Elle doit être comprise entre 100 et 3000.
           </div>
           <div *ngIf="isclicked && murs.controls[i].get('depose')?.invalid " class="error-message">
             Le revêtement à déposer est requis.

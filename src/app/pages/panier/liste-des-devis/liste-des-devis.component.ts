@@ -58,10 +58,12 @@ export class ListeDesDevisComponent {
         console.error("Erreur lors de la recuperation des parametres :", e);
       }
     );
-    this.device_id=this.panierService.getUniqueDeviceId()
+    //this.device_id=this.panierService.getUniqueDeviceId()
+    this.device_id="dsds"
   }
 
   async ngOnInit(): Promise<void> {
+    this.authService.checkAuthenticationOrRedirect();
     this.get_params()
     this.page_actuelle_panier=true
 

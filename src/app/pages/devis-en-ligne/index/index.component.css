@@ -60,7 +60,7 @@ max-width: 82%; margin: auto;
     justify-content: center;
   }
   .steps-action {
-    margin-top: 10px;
+    margin-top: 40px;
     display: flex;
     justify-content: center;
   }
@@ -70,6 +70,7 @@ max-width: 82%; margin: auto;
     height: 42px;
 }
 .div-btn-flx-frm{
+    margin-top:20px;
     display: flex;
     flex-flow: row wrap;
     min-width: 0;
@@ -77,6 +78,18 @@ max-width: 82%; margin: auto;
     justify-content: space-between;
     align-items: center;
 }
+.styl-ttl {
+    font-size: 16px;
+    text-align: left !important;
+    font-weight: 900;
+    color: var(--color-black);
+    font-family: "Montserrat-Bold" !important;
+    margin-bottom: 10px !important;
+    margin-top: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color1);
+}
+button.ant-btn.btn-prect{ margin-block:20px;}
 .btn-prect span{font-size: 14px;}
 button.ant-btn.ant-btn-default.ng-star-inserted[_ngcontent-ng-c1938312052]{padding: 6px 10px !important;width: fit-content;height: 34px!important;}
 .div-btn-prect{width: 61%; margin-inline: auto; margin-top: 18px;display: flex;justify-content: space-between;}
@@ -202,12 +215,14 @@ ul{
 }
 .login-form-flx{display: flex;}
 .ant-row.login-form-flx.aic {
-    display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     flex-wrap: nowrap;
     align-items: flex-start;
 }
+.form-devis-pop.inscrip .ant-input {border: 1px solid var(--color1) !important;}
+.form-devis-pop.inscrip .ant-input::placeholder {font-weight: 100 !important;font-family: 'Montserrat'!important;}
+
 .login-form-button{background-color: var(--color1) !important;color: var(--color-white)!important;}
 .login-form-button:hover{background-color: var(--color2) !important;}
 .login-form-pup .ant-input-affix-wrapper{border: 1px solid var(--color1) !important;}
@@ -222,7 +237,7 @@ ul{
     border: 2px solid var(--color2)!important;
     box-shadow: none !important;
 }
-.form-devis-pop.inscrip .ant-input{border-bottom: 0px !important;}
+
 .form-devis-pop.inscrip .ant-input-affix-wrapper{border-bottom: 1px solid var(--color1) !important; border-left: 1px solid var(--color1) !important; border-right: 1px solid var(--color1) !important;border-top: 1px solid var(--color1) !important;}
 .form-devis-pop.inscrip .ant-input-affix-wrapper:focus, .form-devis-pop.inscrip .ant-input-affix-wrapper-focused{
     border: 2px solid var(--color1)!important;
@@ -230,6 +245,8 @@ ul{
 }
 .login-form-pup input.ant-input.ng-pristine.ng-invalid.ant-input-stepperless.ng-star-inserted.ng-touched, .login-form-pup input.ant-input.ng-untouched.ng-pristine.ng-invalid.ant-input-stepperless.ng-star-inserted{font-family: 'Montserrat' !important;color: #000 !important;}
 .form-devis-pop.inscrip input.ant-input.ng-pristine.ng-invalid.ant-input-stepperless.ng-star-inserted.ng-touched, .form-devis-pop.inscrip input.ant-input.ng-untouched.ng-pristine.ng-invalid.ant-input-stepperless.ng-star-inserted{font-family: 'Montserrat' !important;}
+
+input::placeholder{ color: #000 !important;}
 
 .login-form-pup .ant-input-password-icon.anticon{ color: #000 !important;}
 .form-cnx-ppup{width: 100%; max-width: 100%;background-color: #B2B3B2 !important; }
@@ -340,7 +357,7 @@ ul{
     border-top: 3px solid rgba(0, 0, 0, 0.06);
 }
 .final-options{
-    max-width: 350px;
+    max-width: 385px;
     display: flex;
     gap: 10px;
     flex-direction: column;
