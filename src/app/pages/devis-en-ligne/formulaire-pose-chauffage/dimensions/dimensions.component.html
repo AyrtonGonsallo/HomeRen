@@ -2,7 +2,7 @@
   <form [formGroup]="poseChauffageForm" (ngSubmit)="onPoseChauffageSubmit()">
     <div *ngIf="isclicked && poseChauffageForm" class="error-message">
       <div *ngIf="isclicked && poseChauffageForm.get('surface')?.invalid " class="error-message">
-        <br>La surface est invalide. Elle doit être comprise entre 2 et 70.
+        <br>La surface saisie est invalide. Elle doit être comprise entre 2 m² et 70 m².
       </div>
       <div *ngIf="isclicked && poseChauffageForm.get('hauteur')?.invalid " class="error-message">
         <br>La hauteur est invalide. Elle doit être comprise entre 100 et 500.

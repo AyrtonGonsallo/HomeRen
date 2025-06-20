@@ -99,11 +99,14 @@
       <div *ngIf="isclicked && posePlafondForm.get('gamme')?.invalid" class="error-message">
         Les gammes sont requises.
       </div>
-      <div nz-col nzSpan="6" class="w-80 ant-col tooltip-srf " [nzXs]="6" [nzSm]="6" *ngIf="posePlafondForm.get('gamme')?.value=='0:autre:0'">
-        <label for="autre_gamme">
-          Préciser : </label>
-        <input type="text" id="autre_gamme" formControlName="autre_gamme" >
+      <div class="w-80">
+        <div nz-col  class=" row-w-grid14 ant-col" *ngIf="posePlafondForm.get('gamme')?.value=='0:autre:0'">
+          <label for="autre_gamme">
+            Préciser : </label>
+          <input type="text" id="autre_gamme" formControlName="autre_gamme" >
+        </div>
       </div>
+      
 
 
     </div>
