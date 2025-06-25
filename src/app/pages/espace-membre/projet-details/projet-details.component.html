@@ -2,8 +2,8 @@
     <h1 class="center black font-site">DÉTAILS DU PROJET</h1>
     <p>Date de création : {{projet?.Date_de_creation | date:'dd/MM/yyyy'}}</p>
     <p>
-        Visite : {{ projet?.Devis[0]?.Visite?.DateDeProgrammation | date:'dd/MM/yyyy HH:mm:ss' }}
-        ({{ projet?.Devis[0]?.VisiteFaite ? 'effectuée' : 'programmée' }})
+        Visite : {{ projet?.Visite?.DateDeProgrammation | date:'dd/MM/yyyy HH:mm:ss' }}
+        ({{ projet?.VisiteFaite ? 'effectuée' : 'à faire' }})
     </p>
     <p *ngIf="files && files[0]?.Url">Liste des prestations : <a class="download-link" target="_blank" [href]="apiUrl+files[0].Url">Télécharger les devis en PDF</a></p>
     <p>Avancement :</p>
@@ -22,7 +22,6 @@
                     <th>Date </th>
                     <th>Montant</th>
                     <th>Mode de paiement</th>
-                    <th>Devis</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,9 +30,7 @@
                     <td>{{data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
                     <td>{{data.Montant | number:'1.2-2'}}€</td>
                     <td>{{data.TypeDePaiement}}</td>
-                    <td>
-                        {{ data.Type === 'visite' ? 'Tous les devis' : ('Devis #' + data.DevisID) }}
-                    </td>
+                    
                 </tr>
             </tbody>
             

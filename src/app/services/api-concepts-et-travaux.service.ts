@@ -159,23 +159,23 @@ async updateVisitedDevisAsync(data: any): Promise<any> {
 }
 
 
-getAllNoPayedDevisPiecebyUser(deviceid:string,userid:number): Observable<any> {
-  return this.http.get<any>(`${environment.apiUrl}/get_no_payed_devis_piece_by_user/${userid}/${deviceid}`);
+getAllNoPayedProjectPiecebyUser(deviceid:string,userid:number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_no_payed_project_by_user/${userid}/${deviceid}`);
 }
-getAllDevisToPayAcomptbyUser(deviceid:string,userid:number): Observable<any> {
-  return this.http.get<any>(`${environment.apiUrl}/get_all_devis_to_pay_acompt_by_user/${userid}/${deviceid}`);
+getAllProjectToPayAcomptbyUser(deviceid:string,userid:number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_all_project_to_pay_acompt_by_user/${userid}/${deviceid}`);
 }
-getAllDevisToPayVisitbyUser(deviceid:string,userid:number): Observable<any> {
-  return this.http.get<any>(`${environment.apiUrl}/get_all_devis_to_pay_visit_by_user/${userid}/${deviceid}`);
+getAllProjectToPayVisitbyUser(deviceid:string,userid:number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_all_projects_to_pay_visit_by_user/${userid}/${deviceid}`);
 }
-getAllNoVisitedDevisPiecebyUser(deviceid:string,userid:number): Observable<any> {
-  return this.http.get<any>(`${environment.apiUrl}/get_no_visited_devis_piece_by_user/${deviceid}/${userid}`);
+getAllNoVisitedProjectPiecebyUser(deviceid:string,userid:number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/get_one_no_visited_project_by_user/${deviceid}/${userid}`);
 }
 getAllCurrentDevisPiecebyDeviceID(deviceid:string,userid:number): Observable<any> {
-  return this.http.get<any>(`${environment.apiUrl}/get_current_devis_piece_by_user/${deviceid}/${userid}`);
+  return this.http.get<any>(`${environment.apiUrl}/get_current_project_piece_by_user/${deviceid}/${userid}`);
 }
 getAllPayedDevisPiecebyDeviceID(deviceid:string): Observable<any> {
-  return this.http.get<any>(`${environment.apiUrl}/get_no_payed_devis_piece_by_device_id/${deviceid}`);
+  return this.http.get<any>(`${environment.apiUrl}/get_no_payed_project_piece_by_device_id/${deviceid}`);
 }
 getCurrentsProjetsByUserId(userId: number): Observable<any> {
   const url = `${environment.apiUrl}/get_current_user_projects/${userId}`;
@@ -196,12 +196,12 @@ getParametreById(id: number): Observable<any> {
 sendAllPayedDevisPiecetoUser(deviceid:string,userid:number,total:number): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/send_payed_devis_liste_to_user/${userid}/${deviceid}/${total}`);
 }
-sendAllVisitedDevisPiecetoUser(deviceid: string, userid: number, devisList: string): Observable<any> {
-  return this.http.get<any>(`${environment.apiUrl}/send_visited_devis_liste_to_user/${userid}/${deviceid}/${devisList}`);
+sendAllVisitedDevisPiecetoUser(deviceid: string, userid: number, projet_id: number): Observable<any> {
+  return this.http.get<any>(`${environment.apiUrl}/send_visited_devis_liste_to_user/${userid}/${deviceid}/${projet_id}`);
 }
 
-async sendAllVisitedDevisPiecetoUserAsync(deviceid: string, userid: number, devisList: string): Promise<any> {
-  return lastValueFrom(this.sendAllVisitedDevisPiecetoUser(deviceid, userid,devisList));
+async sendAllVisitedDevisPiecetoUserAsync(deviceid: string, userid: number, projet_id: number): Promise<any> {
+  return lastValueFrom(this.sendAllVisitedDevisPiecetoUser(deviceid, userid,projet_id));
 }
 
 async sendAllPayedDevisPiecetoUserAsync(deviceid: string, userid: number,total:number): Promise<any> {
@@ -212,12 +212,12 @@ get_projet(userId: number): Observable<any> {
   return this.http.get<any>(url);
 }
 
-getFichiersByDevis(devisId: number): Observable<any> {
-  const url = `${environment.apiUrl}/get_fichiers_by_devis/${devisId}`;
+getFichiersByProjet(devisId: number): Observable<any> {
+  const url = `${environment.apiUrl}/get_fichiers_by_projet/${devisId}`;
   return this.http.get<any>(url);
 }
-get_all_devis_paiements(devisID: number): Observable<any> {
-  const url = `${environment.apiUrl}/get_all_devis_paiements/${devisID}`;
+get_all_projet_paiements(devisID: number): Observable<any> {
+  const url = `${environment.apiUrl}/get_all_projet_paiements/${devisID}`;
   return this.http.get<any>(url);
 }
 validerDevisPiece(id:number,body: any): Observable<any> {

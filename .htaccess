@@ -1,0 +1,28 @@
+
+
+RewriteEngine on
+
+# Conditions pour ignorer les fichiers, liens symboliques et répertoires existants
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+
+# Ignorer les requêtes qui commencent par /api-concepts-et-travaux
+RewriteCond %{REQUEST_URI} ^/api-concepts-et-travaux/ [NC]
+RewriteRule ^ - [L]
+
+# Rediriger toutes les autres requêtes vers index.html pour Angular
+RewriteRule ^(.*) /index.html [NC,L]
+
+#----------------------------------------------------------------cp:ppd
+# Section managed by cPanel: Password Protected Directories     -cp:ppd
+# - Do not edit this section of the htaccess file!              -cp:ppd
+#----------------------------------------------------------------cp:ppd
+AuthType Basic
+AuthName "Protected 'dev.homeren.fr'"
+AuthUserFile "/home/mala3315/.htpasswds/dev.homeren.fr/passwd"
+Require valid-user
+#----------------------------------------------------------------cp:ppd
+# End section managed by cPanel: Password Protected Directories -cp:ppd
+#----------------------------------------------------------------cp:ppd

@@ -21,8 +21,11 @@ export class ListeDesDevisComponent {
   acompte_paye=false
   faire_acompte=false
   listOfDevisToPayVisit: any 
+  projectToPayVisit: any 
   listOfDevisToPayAcompt: any 
+  projectToPayAcompt: any 
   listOfDevisToVisit: any 
+  ProjectToVisit: any 
   listOfCurrentDevis: any 
   faTrash=faTrash;
   total_visite:number=0
@@ -67,8 +70,9 @@ export class ListeDesDevisComponent {
     this.get_params()
     this.page_actuelle_panier=true
 
-    await this.get_devis_to_pay_datas();
     await this.get_devis_to_visit_datas();
+    await this.get_devis_to_pay_datas();
+    
     await this.get_devis_en_attente_de_visite();
 
     console.log("faire visite",this.faire_visite_technicien)
@@ -83,7 +87,8 @@ export class ListeDesDevisComponent {
 
     if (checkout === 1) {
       this.checkout_succeed = true;
-
+      this.faire_visite_technicien=false
+      this.faire_acompte=false
       // Vérifier si l'utilisateur est connecté
       const isConnected = await firstValueFrom(this.authService.getIsConnected().pipe(take(1))); 
 
@@ -127,7 +132,7 @@ export class ListeDesDevisComponent {
 
       // Préparer les données
       const datas = {
-        liste_devis: (parametre_acompte)?this.listOfDevisToPayAcompt:this.listOfDevisToPayVisit, 
+        projet_id: (parametre_acompte)?this.projectToPayAcompt.Id:this.projectToPayVisit.Id, 
         prix_acompte: this.prix_acompte,
         prix_visite: this.prix_visite
       };
@@ -135,12 +140,12 @@ export class ListeDesDevisComponent {
       console.log("Données à envoyer :", datas);
 
       try {
-        const devisList = (this.listOfDevisToPayVisit as { ID: number }[]).map(item => item.ID).join(',');
+        const visitprojet = parametre_visite?this.projectToPayVisit.Id:null
 
 
         // Envoyer l'email
         const mailRequest = parametre_visite
-          ? await this.userService.sendAllVisitedDevisPiecetoUserAsync(this.device_id, user_id,devisList)
+          ? await this.userService.sendAllVisitedDevisPiecetoUserAsync(this.device_id, user_id,visitprojet)
           : await this.userService.sendAllPayedDevisPiecetoUserAsync(this.device_id, user_id,this.prix_acompte);
         console.log("Résultat de l'envoi du mail :", mailRequest);
 
@@ -161,10 +166,10 @@ export class ListeDesDevisComponent {
     console.log("Checkout :", checkout);
 
     
-    await this.get_devis_en_attente_de_visite();
-   
-    await this.get_devis_to_pay_datas();
+    
     await this.get_devis_to_visit_datas();
+    await this.get_devis_to_pay_datas();
+    await this.get_devis_en_attente_de_visite();
     // Rafraîchir le panier à la fin
     this.panierService.refresh();
     
@@ -179,30 +184,35 @@ export class ListeDesDevisComponent {
   get_devis_to_pay_datas(): Promise<void> {
     this.total_acompte=0
     return new Promise((resolve, reject) => {
-      this.panierService.getDevisToPayAcompte().subscribe(
-        (items) => {
-          
-          this.listOfDevisToPayAcompt = items;
-          console.log('Devis ou il faut payer l\'acompte ', this.listOfDevisToPayAcompt);
-          if(items.length>0){
-            for(let item of items){
-              this.total_acompte+=item.Prix??0;
-              
-            }
-            this.prix_acompte=this.taux_acompte*this.total_acompte/100
-            this.faire_acompte=true
-            if(items[0]?.VisiteFaite){
-            
-            this.visite_faite=true
-              if(items[0]?.Visite?.Payed){
-                this.acompte_paye=true
-                console.log("le premier devis a l'acompte payee")
+      this.panierService.getProjectToPayAcompte().subscribe(
+        (projet) => {
+          if(projet.Devis){
+            this.projectToPayAcompt = projet
+            this.listOfDevisToPayAcompt = projet.Devis;
+            console.log('Devis ou il faut payer l\'acompte ', this.listOfDevisToPayAcompt);
+            if(this.listOfDevisToPayAcompt?.length>0){
+              for(let item of this.listOfDevisToPayAcompt){
+                this.total_acompte+=item.Prix??0;
+                
               }
+              this.prix_acompte=this.taux_acompte*this.total_acompte/100
+              this.faire_acompte=true
+              if(this.projectToPayAcompt?.VisiteFaite){
               
-              
-              console.log("le premier devis n'a pas d'acompte donc il faut lui faire payer l'acompte - taux : ",this.prix_acompte)
-            }
-         }
+              this.visite_faite=true
+                if(this.projectToPayAcompt?.Visite?.Payed){
+                  this.acompte_paye=true
+                  console.log("le premier devis a l'acompte payee")
+                }
+                
+                
+                console.log("le premier devis n'a pas d'acompte donc il faut lui faire payer l'acompte - taux : ",this.prix_acompte)
+              }
+          }else{
+            console.log("rien")
+          }
+          }
+          
          
          
           resolve(); //  Fin de la méthode (permet de continuer l'exécution)
@@ -220,24 +230,28 @@ export class ListeDesDevisComponent {
     this.total_visite=0
     return new Promise((resolve, reject) => {
 
-      this.panierService.getDevisToPayVisit().subscribe(
-        (items) => {
-          
-          this.listOfDevisToPayVisit = items;
-          console.log('Devis ou il faut payer la visite: ', this.listOfDevisToPayVisit);
-          if(items.length>0){
-            this.faire_visite_technicien=true
-          } 
-          console.log("le premier devis n'a pas de visite donc il faut lui faire payer la visite - prix : ",this.prix_visite)
-          for(let item of items){
-            this.total_visite+=item.Prix??0;
+      this.panierService.getProjectToPayVisit().subscribe(
+        (projet) => {
+          if(projet.Devis){
+            this.projectToPayVisit=projet
+            this.listOfDevisToPayVisit = projet.Devis;
+            console.log('projet ou il faut payer la visite: ', this.projectToPayVisit);
+            if(!this.projectToPayVisit?.Visite){
+              this.faire_visite_technicien=true
+              console.log("le projet n'a pas de visite donc il faut lui faire payer la visite - prix : ",this.prix_visite)
+            } 
             
+            for(let item of this.listOfDevisToPayVisit){
+              this.total_visite+=item.Prix??0;
+              
+            }
+              
+            if(this.projectToPayVisit?.Visite?.Paye && !this.projectToPayVisit?.VisiteFaite){
+              this.visite_payee=true
+              console.log("le premier devis a la visite payee")
+            }
           }
-            
-          if(items[0]?.Visite?.Paye && !items[0]?.VisiteFaite){
-            this.visite_payee=true
-            console.log("le premier devis a la visite payee")
-          }
+         
           resolve(); //  Fin de la méthode (permet de continuer l'exécution)
         },
         (error) => {
@@ -256,15 +270,19 @@ export class ListeDesDevisComponent {
 
   get_devis_en_attente_de_visite(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.panierService.getDevisEnAttenteDeVisite().subscribe(
-        (items) => {
-         this.total_attente_visite=0
-          this.listOfDevisToVisit = items;
-          console.log("devis a visiter ",this.listOfDevisToVisit);
-          for(let item of items){
-            this.total_attente_visite+=item.Prix??0;
-            
+      this.panierService.getProjectEnAttenteDeVisite().subscribe(
+        (projet) => {
+          if(projet.Devis){
+            this.total_attente_visite=0
+            this.ProjectToVisit = projet;
+            this.listOfDevisToVisit = projet.Devis;
+            console.log("devis a visiter ",this.listOfDevisToVisit);
+            for(let item of this.listOfDevisToVisit){
+              this.total_attente_visite+=item.Prix??0;
+              
+            }
           }
+         
           resolve(); //  Fin de la méthode (permet de continuer l'exécution)
         },
         (error) => {

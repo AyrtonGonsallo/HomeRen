@@ -6,18 +6,17 @@ import { v4 as uuidv4 } from 'uuid';
 import { AuthServiceService } from './auth-service.service';
 interface CartItem {
      ID: number;
-    Username: string;
-    AdresseIP: string;
-    Date: Date;
-    Commentaire?: string;
-    PieceID: number;
-    Prix?: number ;
+    Nom: string;
+    Description: string;
+    Date_de_creation: Date;
+    Client?: any;
+    Artisans: any[];
+    Status?: string ;
     Payed: number ;
     UtilisateurID?: number;
     VisiteFaite:Boolean;
     Visite:any;
-    DevisTaches:any[];
-    Projets:any[];
+    Devis:any[];
 }
 
 @Injectable({
@@ -69,7 +68,7 @@ export class ShoppingCartService {
   }
 
   getTotal(): number {
-    return this.items.reduce((total, item) => total + (item.Prix ?? 0), 0);
+    return this.items[0].Devis.reduce((total, item) => total + (item.Prix ?? 0), 0);
   }
   delete_devis(id:number){
     this.userService.deleteDevisPiece(id).subscribe(
@@ -100,7 +99,7 @@ refresh(){
             username: this.browserInfo,
             ip: this.userIp,
           };
-          this.userService.getAllNoPayedDevisPiecebyUser("sadsd",this.authService.getUser()?.Id??0).subscribe(//this.getUniqueDeviceId()
+          this.userService.getAllNoPayedProjectPiecebyUser("sadsd",this.authService.getUser()?.Id??0).subscribe(//this.getUniqueDeviceId()
             (response) => {
               this.items = response;
               this.itemsSubject.next(this.items);
@@ -140,59 +139,59 @@ refresh(){
   }
 
 
-  getDevisToPayVisit(): Observable<CartItem[]> {
-    return this.userService.getAllDevisToPayVisitbyUser(
+  getProjectToPayVisit(): Observable<CartItem> {
+    return this.userService.getAllProjectToPayVisitbyUser(
       //this.getUniqueDeviceId(),
       "assa",
       this.authService.getUser()?.Id ?? 0
     ).pipe(
       map((response) => {
         // transforme la réponse en CartItem[] si nécessaire
-        return response as CartItem[]; // ou applique une transformation ici
+        return response as CartItem; // ou applique une transformation ici
       }),
       catchError((error) => {
         console.error('Erreur lors de la récupération des devis à payer la visite :', error?.error?.message);
-        return of([]); // retourne un Observable<CartItem[]> vide en cas d'erreur
+        return of({} as CartItem); // retourne un Observable<CartItem[]> vide en cas d'erreur
       })
     );
   }
 
-  getDevisToPayAcompte(): Observable<CartItem[]> {
-    return this.userService.getAllDevisToPayAcomptbyUser(
+  getProjectToPayAcompte(): Observable<CartItem> {
+    return this.userService.getAllProjectToPayAcomptbyUser(
       "sdad",
       //this.getUniqueDeviceId(),
       this.authService.getUser()?.Id ?? 0
     ).pipe(
       map((response) => {
         // transforme la réponse en CartItem[] si nécessaire
-        return response as CartItem[]; // ou applique une transformation ici
+        return response as CartItem; // ou applique une transformation ici
       }),
       catchError((error) => {
         console.error('Erreur lors de la récupération des devis à payer la visite :', error?.error?.message);
-        return of([]); // retourne un Observable<CartItem[]> vide en cas d'erreur
+        return of({} as CartItem); // retourne un Observable<CartItem[]> vide en cas d'erreur
       })
     );
   }
 
-  getDevisEnAttenteDeVisite(): Observable<CartItem[]> {
-    return this.userService.getAllNoVisitedDevisPiecebyUser(
+  getProjectEnAttenteDeVisite(): Observable<CartItem> {
+    return this.userService.getAllNoVisitedProjectPiecebyUser(
       //this.getUniqueDeviceId(),
       "asd",
       this.authService.getUser()?.Id ?? 0
     ).pipe(
       map((response) => {
         // transforme la réponse en CartItem[] si nécessaire
-        return response as CartItem[]; // ou applique une transformation ici
+        return response as CartItem; // ou applique une transformation ici
       }),
       catchError((error) => {
         console.error('Erreur lors de la récupération des devis à payer la visite :', error?.error?.message);
-        return of([]); // retourne un Observable<CartItem[]> vide en cas d'erreur
+        return of({} as CartItem); // retourne un Observable<CartItem[]> vide en cas d'erreur
       })
     );
   }
 
 
-  getDevisTravauxEnCours(): Observable<CartItem[]> {
+  getDevisTravauxEnCours(): Observable<CartItem> {
     return this.userService.getAllCurrentDevisPiecebyDeviceID(
       //this.getUniqueDeviceId(),
       "asda",
@@ -200,11 +199,11 @@ refresh(){
     ).pipe(
       map((response) => {
         // transforme la réponse en CartItem[] si nécessaire
-        return response as CartItem[]; // ou applique une transformation ici
+        return response as CartItem; // ou applique une transformation ici
       }),
       catchError((error) => {
         console.error('Erreur lors de la récupération des devis en cours :', error?.error?.message);
-        return of([]); // retourne un Observable<CartItem[]> vide en cas d'erreur
+        return of({} as CartItem); // retourne un Observable<CartItem[]> vide en cas d'erreur
       })
     );
   }

@@ -40,8 +40,8 @@ export class ProjetDetailsComponent {
       async (response) => {
         console.log("réponse de la requette get projet details",response);
        this.projet=response
-       this.getDevisFiles(this.projet.Devis[0].ID)
-       await this.get_all_devis_paiements()
+       this.getProjetFiles(this.projet.Id)
+       await this.get_all_projet_paiements()
         
       },
       (error) => {
@@ -51,8 +51,8 @@ export class ProjetDetailsComponent {
     
   }
 
-  getDevisFiles(devisId: number): void {
-    this.userService.getFichiersByDevis(devisId).subscribe(
+  getProjetFiles(projetId: number): void {
+    this.userService.getFichiersByProjet(projetId).subscribe(
       (response) => {
         console.log("réponse de la requette fichiers",response);
         this.files=response
@@ -66,16 +66,15 @@ export class ProjetDetailsComponent {
 
 
 
-  get_all_devis_paiements(): Promise<void> {
+  get_all_projet_paiements(): Promise<void> {
     return new Promise(async (resolve, reject) => {
       try {
         let solde = 0;
         let visiteAdded = false;
         const allPaiements: any[] = [];
   
-        for (const devis of this.projet.Devis) {
-          const devisId = devis.ID;
-          const response = await firstValueFrom(this.userService.get_all_devis_paiements(devisId));
+        
+          const response = await firstValueFrom(this.userService.get_all_projet_paiements(parseInt (this.projetId)));
   
           // response est un tableau de paiements pour ce devis
           response.forEach((paiement: any) => {
@@ -91,7 +90,7 @@ export class ProjetDetailsComponent {
               allPaiements.push(paiement);
             }
           });
-        }
+        
   
         console.log("Paiements récupérés :", allPaiements);
         this.paiements = allPaiements;
