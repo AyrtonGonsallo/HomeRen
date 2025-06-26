@@ -290,3 +290,12 @@
     
   </form>
 </div>
+
+
+    <nz-modal nzClassName="modal_lineaire" nzWrapClassName="modal_lineaire_wrap" [(nzVisible)]="afficher_confirmation_lineaire" nzOkText="C'est ok" nzCancelText="Je veux modifier" nzTitle="Confirmation" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <ng-container *nzModalContent>
+        <p>La longueur linéaire de plinthe que vous avez déclarée est supérieure au périmètre de la pièce.</p>
+       
+      </ng-container>
+    </nz-modal>
+

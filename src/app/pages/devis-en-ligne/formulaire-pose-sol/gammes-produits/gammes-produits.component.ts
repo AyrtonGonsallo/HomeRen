@@ -12,16 +12,56 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 })
 export class PoseSolGammesProduitsComponent {
   baseurl=environment.imagesUrl
-  isclicked=false
+  isclicked = false;
+  cond_lineaire = false;
+  afficher_confirmation_lineaire = false;
+  ignorerVerifLineaire = false;
+    showModal(): void {
+    this.afficher_confirmation_lineaire = true;
+  }
+
+  handleOk(): void {
+    console.log('Il va faire avec ce linéaire!');
+    this.ignorerVerifLineaire = true; // ✅ on ignore la vérif maintenant
+    this.cond_lineaire = true;
+    this.afficher_confirmation_lineaire = false;
+  }
+
+  handleCancel(): void {
+    console.log('Il va changer le linéaire!');
+    this.afficher_confirmation_lineaire = false;
+    this.cond_lineaire = false;
+  }
   @Input() triggerSubmitGammesProduitsForm!: boolean;
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['triggerSubmitGammesProduitsForm']) {
-      console.log("trigger de soumission: ",this.triggerSubmitGammesProduitsForm)
-      if(this.triggerSubmitGammesProduitsForm==true){
-        this.isclicked=true
+    
+    const dimWrapper = this.gestiondesdevisService.getFormulaireByName("dimensions-pose-sol");
+    const dim = dimWrapper?.formulaire;
+
+    if (dim && dim.longueur > 0 && dim.largeur > 0) {
+      const perimetre = 2 * (dim.longueur + dim.largeur);
+      const lineaire = this.poseSolForm.controls["lineaire"].value;
+
+      if (lineaire > 0) {
+         console.log("périmètre = ",perimetre,"; linéaire = ",lineaire, "; lineaire > perimetre = ",lineaire > perimetre,"; cond_lineaire = ",this.cond_lineaire ) 
+        if (!this.ignorerVerifLineaire && lineaire > perimetre) {
+          this.showModal();
+          this.cond_lineaire = false;
+        } else {
+          this.cond_lineaire = true;
+        }
+      } else {
+        this.cond_lineaire = true; // pas de vérif si 0
+      }
+      console.log("cond_linéaire = ",this.cond_lineaire)
+    }
+
+    // Soumission si cond_lineaire OK
+    if (this.cond_lineaire && changes['triggerSubmitGammesProduitsForm']) {
+      if (this.triggerSubmitGammesProduitsForm === true) {
+        this.isclicked = true;
         this.onPoseSolSubmit();
       }
-      
     }
   }
   @Output() formValidityChange = new EventEmitter<boolean>();
@@ -40,11 +80,12 @@ export class PoseSolGammesProduitsComponent {
 
   onPoseSolSubmit(): void {
     this.formValidityChange.emit(this.poseSolForm.valid);
+    
     if (this.poseSolForm.invalid) {
       this.markFormGroupTouched(this.poseSolForm);
       return;
     }
-    if (this.poseSolForm.valid) {
+    if ( this.poseSolForm.valid) {
       //console.log(this.poseSolForm.value);
       this.gestiondesdevisService.addFormulaire('gammes-produits-pose-sol',9, this.poseSolForm.value);
     // Envoyer les données au backend ou traiter comme nécessaire

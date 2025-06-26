@@ -486,7 +486,7 @@ span.ant-radio + * {padding-left: 0px !important;}
         border-right-width: 0px !important;
 }
 .ant-modal-content {padding: 20px 20px;}
-.ant-modal-content .ng-star-inserted {text-align: left !important; font-family: 'Montserrat-bold'; padding: 0px !important; background: transparent !important;border-bottom: none !important; border-radius: 0px !important;}
+nz-modal-container > div:not(.modal_lineaire) > div.ant-modal-content .ng-star-inserted {text-align: left !important; font-family: 'Montserrat-bold'; padding: 0px !important; background: transparent !important;border-bottom: none !important; border-radius: 0px !important;}
 button.ant-btn.ng-star-inserted span{color:var(--color-white) !important;}
 button.ant-btn.ng-star-inserted:hover { background-color: var(--color2);}
 .ant-modal-close:hover{ background-color: transparent;}
@@ -810,11 +810,11 @@ input:focus-visible, textarea:focus-visible {border: 0px !important;}
 .btn-recp-mdp span{font-family: "Montserrat" !important;}
 
 
-
 /*************************************************************************************************/
-.ant-modal-footer {
+nz-modal-container > div:not(.modal_lineaire) > div > div.ant-modal-footer {
     display: none !important;
 }
+
 .flx-line.ng-star-inserted {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
