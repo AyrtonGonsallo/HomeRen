@@ -179,7 +179,7 @@
         <h2 class="center black bold font-site">VISITE DU TECHNICIEN</h2>
         <div>
           <p class="text-indicateur" *ngIf="!acompte_paye">
-            La visite du technicien a été effectuée le {{ listOfDevisToPayAcompt[0]?.Visite?.Date | date:'dd/MM/yyyy' }}.
+            La visite du technicien a été effectuée le {{ visite_Acompte?.Date | date:'dd/MM/yyyy' }}.
           </p>
           <p class="text-indicateur" *ngIf="acompte_paye">
             La visite du technicien a été faite.

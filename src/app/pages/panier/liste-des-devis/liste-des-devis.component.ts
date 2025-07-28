@@ -15,6 +15,7 @@ import { it } from 'node:test';
   styleUrl: './liste-des-devis.component.css'
 })
 export class ListeDesDevisComponent {
+  visite_Acompte:any
   faire_visite_technicien=false
   visite_payee=false
   visite_faite=false
@@ -189,6 +190,7 @@ export class ListeDesDevisComponent {
           if(projet.Devis){
             this.projectToPayAcompt = projet
             this.listOfDevisToPayAcompt = projet.Devis;
+            this.visite_Acompte = projet.Visite
             console.log('Devis ou il faut payer l\'acompte ', this.listOfDevisToPayAcompt);
             if(this.listOfDevisToPayAcompt?.length>0){
               for(let item of this.listOfDevisToPayAcompt){
