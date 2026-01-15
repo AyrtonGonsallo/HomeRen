@@ -252,7 +252,7 @@ gammes4:any[]=[]
 load_gammes(){
   this.userService.getGammesByTravailAndType(4,"type-de-porte-creation-murs-non-porteurs_ep_5").subscribe(
     (response: any) => {
-      console.log('recuperation des gammes type-de-porte-creation-murs-non-porteurs_ep_5:', response);
+      console.log('recuperation des gammes gammes1 type-de-porte-creation-murs-non-porteurs_ep_5:', response);
       this.gammes1=response
     },
     (error: any) => {
@@ -262,7 +262,7 @@ load_gammes(){
 
   this.userService.getGammesByTravailAndType(4,"type-de-porte-creation-murs-non-porteurs_ep_7").subscribe(
     (response: any) => {
-      console.log('recuperation des gammes type-de-porte-creation-murs-non-porteurs_ep_7:', response);
+      console.log('recuperation des gammes gammes2 type-de-porte-creation-murs-non-porteurs_ep_7:', response);
       this.gammes2=response
     },
     (error: any) => {
@@ -272,7 +272,7 @@ load_gammes(){
 
   this.userService.getGammesByTravailAndType(4,"type-de-porte-creation-murs-non-porteurs_ep_10").subscribe(
     (response: any) => {
-      console.log('recuperation des gammes type-de-porte-creation-murs-non-porteurs_ep_10:', response);
+      console.log('recuperation des gammes gammes3 type-de-porte-creation-murs-non-porteurs_ep_10:', response);
       this.gammes3=response
     },
     (error: any) => {
@@ -286,7 +286,7 @@ load_gammes(){
       this.gammes4=response
     },
     (error: any) => {
-      console.error('Erreur lors de la recuperation des gammes type-de-porte-creation-murs-non-porteurs_ep_10+ :', error);
+      console.error('Erreur lors de la recuperation des gammes gammes4 type-de-porte-creation-murs-non-porteurs_ep_10+ :', error);
     }
   );
 }

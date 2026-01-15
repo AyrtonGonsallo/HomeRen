@@ -37,6 +37,7 @@ export class RealisationsListeComponent {
       }
     );
   }
+  activePieceId: number | null = null;
   pieces: Piece[] = [];
   avis: Avis[] = [];
   realisations: Realisation[] = [];
@@ -52,15 +53,34 @@ export class RealisationsListeComponent {
     );
   }
   filter_by_piece(pid:number){
-    this.userService.getRealisationsByPiece(pid).subscribe(
+    
+    if(pid==this.activePieceId){
+      this.activePieceId=null
+      this.userService.getRealisations().subscribe(
+      (response) => {
+        this.realisations = response;
+        console.log("réponse de la requette get realisations",this.realisations);
+      },
+      (error) => {
+        console.error('Erreur lors de la recuperation des realisations :', error);
+      }
+    );
+
+    }else{
+      this.activePieceId=pid
+       this.userService.getRealisationsByPiece(pid).subscribe(
       (response2) => {
         this.realisations = response2;
-        console.log("réponse de la requette filtrer par piece ",this.realisations);
+        console.log("réponse de la requette filtrer par piece ",pid,this.realisations);
       },
       (error) => {
         console.error('Erreur lors de la recuperation de la requette filtrer par piece :', error);
       }
+
     );
+
+    }
+   
   }
   init_splide() {
     var splide = new Splide( '.splide', {

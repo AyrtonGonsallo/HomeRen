@@ -13,7 +13,7 @@
 
 
     <div class="liste-check-box">
-      <div class="c-v-b-1" *ngFor="let piece of pieces" (click)="filter_by_piece(piece.ID)">
+      <div class="c-v-b-1" *ngFor="let piece of pieces" (click)="filter_by_piece(piece.ID)" [class.active]="activePieceId === piece.ID">
         <input type="checkbox" id="piece-{{piece.ID}}"  name="1" value="{{piece.Titre}}" >
         <img class="c-b-img" src="{{baseurl}}{{piece.Image_principale}}"/>
         <label class="font-site2 fs-18" for="pieces"> {{piece.Titre}}</label>
