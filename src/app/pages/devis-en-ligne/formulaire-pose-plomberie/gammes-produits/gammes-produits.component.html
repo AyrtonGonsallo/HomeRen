@@ -18,7 +18,7 @@
 
 
                   <nz-radio-group formControlName="modele" class="radio-flx-spc ">
-                    <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
+                    <div *ngFor="let modele of appareilGroup.Modeles" nz-row nzJustify="start">
                       <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf">
                         <div> 
                           <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">
@@ -102,7 +102,7 @@
                 Gamme</span> <span class="error-message" *ngIf="getAppareilSalledeBainActiveState(i)">*</span> : 
               </div>
               <nz-radio-group formControlName="modele" class="radio-flx-spc">
-                <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
+                <div *ngFor="let modele of appareilGroup.Modeles" nz-row nzJustify="start">
                   <div nz-col nzSpan="12" class="ant-col tooltip-srf etat-srf">
                     
                       <label nz-radio [nzValue]="modele.ID + ':' + modele.Titre + ':' + modele.Prix">

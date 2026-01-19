@@ -58,7 +58,7 @@ export class FormulairePoseElectriciteComponent {
         this.appareils_electrique = response;
         console.log("réponse de la requette getEquipementsBytype:electrique ",this.appareils_electrique);
         this.appareils_electrique.forEach(appareil => {
-          const modeleEquipements = appareil.ModeleEquipements;
+          const modeleEquipements = appareil.Modeles;
     
           // Créer un FormGroup pour chaque appareil
           const appareilGroup = this.fb.group({});

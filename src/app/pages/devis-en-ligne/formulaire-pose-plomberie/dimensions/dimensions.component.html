@@ -5,7 +5,7 @@
         <div formArrayName="appareils_cuisine">
           <div *ngFor="let appareilGroup of appareils_cuisine; let i = index" [formGroupName]="i">
             <h3>{{appareils_cuisine && appareils_cuisine[i] ? appareils_cuisine[i].Titre :""}}</h3>
-            <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
+            <div *ngFor="let modele of appareilGroup.Modeles" nz-row nzJustify="start">
                 <div nz-col nzSpan="12" class="ant-col">
                     <label for="{{appareilGroup.Titre}} {{modele.Titre}}">{{modele.Titre}}</label>
                     <input type="checkbox" id="{{appareilGroup.Titre}} {{modele.Titre}}" formControlName="{{appareilGroup.Titre}} {{modele.Titre}}">      
@@ -40,7 +40,7 @@
             
               <h3>{{appareils_salle_de_bain && appareils_salle_de_bain[i] ? appareils_salle_de_bain[i].Titre :""}}</h3>
               <nz-radio-group formControlName="{{appareilGroup.Titre}}" class="radio-flx-spc">
-                <div *ngFor="let modele of appareilGroup.ModeleEquipements" nz-row nzJustify="start">
+                <div *ngFor="let modele of appareilGroup.Modeles" nz-row nzJustify="start">
                   <div nz-col nzSpan="12" class="ant-col">
                     
                     <div> 

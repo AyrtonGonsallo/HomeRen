@@ -165,7 +165,7 @@ appareilGroup: any;
   loadAppareils(){
     this.userService.getEquipementsByPiece(7).subscribe(
       (response: Equipement[]) => {
-        this.appareils_cuisine = response.filter(equipement => equipement.ModeleEquipements && equipement.ModeleEquipements.length > 0);
+        this.appareils_cuisine = response.filter(equipement => equipement.Modeles && equipement.Modeles.length > 0);
         console.log("réponse de la requette getEquipementsByPiece:cuisine ",this.appareils_cuisine);
         let i=0
         this.appareils_cuisine.forEach(appareil => {
@@ -225,7 +225,7 @@ appareilGroup: any;
     );
     this.userService.getEquipementsByPiece(5).subscribe(
       (response: Equipement[]) => {
-        this.appareils_salle_de_bain = response.filter(equipement => equipement.ModeleEquipements && equipement.ModeleEquipements.length > 0);
+        this.appareils_salle_de_bain = response.filter(equipement => equipement.Modeles && equipement.Modeles.length > 0);
         console.log("réponse de la requette  getEquipementsByPiece:salledebain",this.appareils_salle_de_bain);
         let i=0
         this.appareils_salle_de_bain.forEach(appareil => {

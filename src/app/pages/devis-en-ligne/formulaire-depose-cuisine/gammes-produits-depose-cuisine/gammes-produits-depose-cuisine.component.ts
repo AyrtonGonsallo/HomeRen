@@ -137,7 +137,7 @@ appareilGroup: any;
     
     this.userService.getEquipementsByPiece(7).subscribe(
       (response: Equipement[]) => {
-        this.appareils_cuisine = response.filter(equipement => equipement.ModeleEquipements && equipement.ModeleEquipements.length > 0);
+        this.appareils_cuisine = response.filter(equipement => equipement.Modeles && equipement.Modeles.length > 0);
         console.log("réponse de la requette  getEquipementsByPiece:Cuisine",this.appareils_cuisine);
         let i=0
 
