@@ -381,15 +381,25 @@ export class DimensionsDemolitionCloisonsComponent {
       inputElement.value = ''; // Reset the input if the file is invalid
     }
   }
+  gammes_cloison_partielle:any
 
-
-  gammes_cloison:any
+  gammes_cloison_complete:any
 
 load_gammes(){
-  this.userService.getGammesByTravailAndType(3,"cloison").subscribe(
+  this.userService.getGammesByTravailAndType(3,"cloison-demolition-complete").subscribe(
     (response: any) => {
       console.log('recuperation des gammes cloison:', response);
-      this.gammes_cloison=response
+      this.gammes_cloison_complete=response
+    },
+    (error: any) => {
+      console.error('Erreur lors de la recuperation des gammes cloison :', error);
+    }
+  );
+
+  this.userService.getGammesByTravailAndType(3,"cloison-ouverture-partielle").subscribe(
+    (response: any) => {
+      console.log('recuperation des gammes cloison:', response);
+      this.gammes_cloison_partielle=response
     },
     (error: any) => {
       console.error('Erreur lors de la recuperation des gammes cloison :', error);

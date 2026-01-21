@@ -48,6 +48,9 @@ export class ApiConceptsEtTravauxService {
     const url = `${environment.apiUrl}/get_nbr_pieces/${total}`;
     return this.http.get<any>(url);
   }
+  get_parametre_by_id_or_nom(id: number,nom:string): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/get_parametre_by_id_or_nom/${id}/${nom}`);
+  }
   get_questions_par_categorie(c_id:number): Observable<any> {
     const url = `${environment.apiUrl}/get_questions_par_categorie/${c_id}`;
     return this.http.get<any>(url);

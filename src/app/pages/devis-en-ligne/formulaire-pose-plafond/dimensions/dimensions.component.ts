@@ -90,7 +90,7 @@ export class DimensionsPosePlafondComponent {
   }
   gammes_depose:any
   load_gamme(){
-    this.userService.getGammesByTravailAndType(8,"depose-revetement-plafond").subscribe(
+    this.userService.getGammesByTravailAndType(8,"service-depose-revetement-plafond").subscribe(
       (response: any) => {
         console.log('recuperation des gammes gammes_depose:', response);
         this.gammes_depose=response

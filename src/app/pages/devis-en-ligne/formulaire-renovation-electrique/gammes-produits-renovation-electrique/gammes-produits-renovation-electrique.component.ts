@@ -66,7 +66,7 @@ export class GammesProduitsRenovationElectriqueComponent {
   
   prec_formulaire_gamme:any
   constructor(private fb: FormBuilder,private gestiondesdevisService: GestionDesDevisService,private userService:ApiConceptsEtTravauxService) {
-    this.load_gammes()
+  
     
     this.prec_formulaire_gamme = this.gestiondesdevisService.getFormulaireByName('gammes-produits-renovation-electrique');
     if (this.prec_formulaire_gamme) {
@@ -95,21 +95,8 @@ export class GammesProduitsRenovationElectriqueComponent {
     }
   }
  
-  gammes_materiaux:any
-  load_gammes(){
-
-    this.userService.getGammesByTravailAndType(15,"materiaux").subscribe(
-      (response: any) => {
-        console.log('recuperation des gammes materiaux:', response);
-        this.gammes_materiaux=response
-      },
-      (error: any) => {
-        console.error('Erreur lors de la recuperation des  gammes_materiaux :', error);
-      }
-    );
-    
   
-  }
+
 
 
   }

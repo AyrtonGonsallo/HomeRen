@@ -116,13 +116,13 @@ markFormGroupTouched(formGroup: FormGroup) {
 
 type_de_depose:any
 load_types(){
-  this.userService.getGammesByTravailAndTypeOrdered(5,"depose-murs	").subscribe(
+  this.userService.getGammesByTravailAndTypeOrdered(5,"service-depose-murs").subscribe(
     (response: any) => {
-      console.log('recuperation des types depose-murs	:', response);
+      console.log('recuperation des types service-depose-murs	:', response);
       this.type_de_depose=response
     },
     (error: any) => {
-      console.error('Erreur lors de la recuperation des types depose-murs	 :', error);
+      console.error('Erreur lors de la recuperation des types service-depose-murs	 :', error);
     }
   );
 }

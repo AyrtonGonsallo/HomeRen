@@ -28,7 +28,7 @@
             <td>{{ data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
             <td>{{ data.Piece?.Titre }}</td>
             <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>
-            <td>{{ (data.Prix ) | number:'1.2-2'}}€</td>
+            <td>{{ calculerPrixTTC(data.Prix ) | number:'1.2-2'}}€</td>
           </tr>
         </tbody>
       </table>
@@ -55,7 +55,7 @@
               <td>{{ data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
               <td>{{ data.Piece?.Titre }}</td>
               <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>
-              <td>{{ (data.Prix ) | number:'1.2-2'}}€</td>
+              <td>{{ calculerPrixTTC(data.Prix ) | number:'1.2-2'}}€</td>
               <td>
                 <a (click)="supprimer_devis(data.ID)"><fa-icon [icon]="faTrash" class="mr-10"></fa-icon></a>
               </td>
@@ -124,7 +124,7 @@
             <td>{{ data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
             <td>{{ data.Piece?.Titre }}</td>
             <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>
-            <td>{{ (data.Prix ) | number:'1.2-2'}}€</td>
+            <td>{{ calculerPrixTTC(data.Prix ) | number:'1.2-2'}}€</td>
           </tr>
         </tbody>
       </table>
@@ -165,7 +165,7 @@
               <td>{{ data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
               <td>{{ data.Piece?.Titre }}</td>
               <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>
-              <td>{{ (data.Prix ) | number:'1.2-2'}}€</td>
+              <td>{{ calculerPrixTTC(data.Prix ) | number:'1.2-2'}}€</td>
             </tr>
           </tbody>
       </table>

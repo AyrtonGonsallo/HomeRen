@@ -128,7 +128,7 @@ markFormGroupTouched(formGroup: FormGroup) {
 }
 gammes_radiateurs:any
 load_gammes(){
-  this.userService.getGammesByTravailAndType(12,"radiateur").subscribe(
+  this.userService.getGammesByTravailAndType(12,"gamme-de-radiateur").subscribe(
     (response: any) => {
       console.log('recuperation des gammes radiateur:', response);
       this.gammes_radiateurs=response

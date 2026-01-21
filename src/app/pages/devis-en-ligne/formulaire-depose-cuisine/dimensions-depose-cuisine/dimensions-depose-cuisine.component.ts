@@ -100,10 +100,6 @@ export class DimensionsDeposeCuisineComponent {
    need_quantite(id: number): boolean {
      const validIds = [103, 104, 116, 117, 118]; // Liste des IDs valides
    
-     // Vérifie si l'ID est dans la liste des IDs valides
-     if (!validIds.includes(id)) {
-       return false;
-     }
    
      return true;
    }
@@ -124,7 +120,7 @@ export class DimensionsDeposeCuisineComponent {
     
  
  
-     this.userService.getGammesByTravailAndType(2, 'depose-cuisine').subscribe(
+     this.userService.getGammesByTravailAndType(2, 'service-depose-cuisine').subscribe(
        (response: any) => {
          this.gammes_depose = response
          const orderByID = [102, 115, 103, 104, 118, 117, 116];
@@ -133,7 +129,7 @@ export class DimensionsDeposeCuisineComponent {
         this.gammes_depose = response.sort((a: { ID: number; }, b: { ID: number; }) => {
             return orderByID.indexOf(a.ID) - orderByID.indexOf(b.ID);
         });
-         console.log("réponse de la requette  get depose salle de bain",this.gammes_depose);
+         console.log("réponse de la requette  get service-depose-cuisine",this.gammes_depose);
          let i=0
  
          this.gammes_depose.forEach(gamme => {

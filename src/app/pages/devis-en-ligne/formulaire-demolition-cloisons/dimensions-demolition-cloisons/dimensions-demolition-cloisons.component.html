@@ -73,7 +73,7 @@
                     <nz-radio-group formControlName="cloison" class="flx-radio-row2">
                       <!-- Reusable template for displaying options with PDFs -->
                       <ng-container>
-                        <div *ngFor="let option of gammes_cloison" class="parquet-option">
+                        <div *ngFor="let option of gammes_cloison_complete" class="parquet-option">
                           <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
                             <span>
                               <!-- Dynamically display the label based on the type -->
@@ -218,7 +218,7 @@
                 <nz-radio-group formControlName="cloison" class="flx-radio-row2">
                   <!-- Reusable template for displaying options with PDFs -->
                   <ng-container>
-                    <div *ngFor="let option of gammes_cloison" class="parquet-option">
+                    <div *ngFor="let option of gammes_cloison_partielle" class="parquet-option">
                       <label nz-radio [nzValue]="option.ID + ':' + option.Label + ':' + option.Prix">
                         <span>
                           <!-- Dynamically display the label based on the type -->

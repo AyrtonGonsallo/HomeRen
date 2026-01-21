@@ -66,7 +66,38 @@ export class ListeDesDevisComponent {
     this.device_id="dsds"
   }
 
+  
+  tva = 0
+  coefficient = 0
+  load_parametres(){
+    this.userService.get_parametre_by_id_or_nom(6,"TVA")
+        .subscribe(
+          (data) => {
+            this.tva=(1+data.Valeur/100);
+            console.log("tva value ",this.tva)
+          },
+          (error) => {
+            console.error('Erreur lors de la recupération des parametres', error);
+          });
+
+    this.userService.get_parametre_by_id_or_nom(1,"coefficient")
+        .subscribe(
+          (data) => {
+            this.coefficient=data.Valeur;
+             console.log("coeff value ",this.coefficient)
+          },
+          (error) => {
+            console.error('Erreur lors de la recupération des parametres', error);
+          });
+  }
+
+  calculerPrixTTC(prix: number): number {
+    const total = prix * this.coefficient * this.tva;
+    return Math.round(total * 100) / 100; // arrondi à 2 décimales
+  }
+
   async ngOnInit(): Promise<void> {
+    this.load_parametres()
     this.authService.checkAuthenticationOrRedirect();
     this.get_params()
     this.page_actuelle_panier=true
@@ -194,7 +225,7 @@ export class ListeDesDevisComponent {
             console.log('Devis ou il faut payer l\'acompte ', this.listOfDevisToPayAcompt);
             if(this.listOfDevisToPayAcompt?.length>0){
               for(let item of this.listOfDevisToPayAcompt){
-                this.total_acompte+=item.Prix??0;
+                this.total_acompte+=this.calculerPrixTTC(item.Prix??0);
                 
               }
               this.prix_acompte=this.taux_acompte*this.total_acompte/100
@@ -244,7 +275,7 @@ export class ListeDesDevisComponent {
             } 
             
             for(let item of this.listOfDevisToPayVisit){
-              this.total_visite+=item.Prix??0;
+              this.total_visite+=this.calculerPrixTTC(item.Prix??0);
               
             }
               
@@ -280,7 +311,7 @@ export class ListeDesDevisComponent {
             this.listOfDevisToVisit = projet.Devis;
             console.log("devis a visiter ",this.listOfDevisToVisit);
             for(let item of this.listOfDevisToVisit){
-              this.total_attente_visite+=item.Prix??0;
+              this.total_attente_visite+=this.calculerPrixTTC(item.Prix??0);
               
             }
           }
