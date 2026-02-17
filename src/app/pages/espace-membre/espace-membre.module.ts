@@ -7,6 +7,7 @@ import { DevisListeToVisitComponent } from './devis-liste-to-visit/devis-liste-t
 import { CurrentProjectsComponent } from './current-projects/current-projects.component';
 import { EndProjectsComponent } from './end-projects/end-projects.component';
 import { ProjetDetailsComponent } from './projet-details/projet-details.component';
+import { PaiementsComponent } from './paiements/paiements.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ProjetDetailsComponent } from './projet-details/projet-details.componen
     DevisListeToVisitComponent,
     CurrentProjectsComponent,
     EndProjectsComponent,
-    ProjetDetailsComponent
+    ProjetDetailsComponent,
+    PaiementsComponent
   ],
   imports: [
     CommonModule,SharedModule,

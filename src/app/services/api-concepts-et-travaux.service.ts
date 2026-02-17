@@ -219,8 +219,8 @@ getFichiersByProjet(devisId: number): Observable<any> {
   const url = `${environment.apiUrl}/get_fichiers_by_projet/${devisId}`;
   return this.http.get<any>(url);
 }
-get_all_projet_paiements(devisID: number): Observable<any> {
-  const url = `${environment.apiUrl}/get_all_projet_paiements/${devisID}`;
+get_all_projet_paiements(projetID: number): Observable<any> {
+  const url = `${environment.apiUrl}/get_all_projet_paiements/${projetID}`;
   return this.http.get<any>(url);
 }
 validerDevisPiece(id:number,body: any): Observable<any> {
