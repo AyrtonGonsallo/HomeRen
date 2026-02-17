@@ -27,15 +27,15 @@
           <nz-radio-group formControlName="type" class="">
             <div class="flx-radio-row2">
             <div *ngFor="let option of types">
-              <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Label">
-                <span>{{ option.Label }}</span> 
+              <label nz-radio [nzValue]="option.ID + ':' + option.Prix + ':' + option.Titre">
+                <span>{{ option.Titre }}</span> 
                 <!--<a nz-tooltip [nzTooltipTitle]="tooltip_Gamme" href="javascript:void(0)" class="info-icon">
                 <i class="fas fa-question-circle"></i>
               </a>-->
               </label>
              
               <ng-template #tooltip_Gamme>
-                Type: {{ option.Label }}<br>
+                Type: {{ option.Titre }}<br>
                 Pour plus d'informations, veuillez consulter :
                 <a [href]="baseurl + option.Pdf" target="_blank" class="link-tooltip">PDF</a>
               </ng-template>

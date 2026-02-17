@@ -130,13 +130,13 @@ gammes_radiateurs:any
 load_gammes(){
 
 
-  this.userService.getEquipementsByType("radiateur").subscribe(
+  this.userService.getEquipementsByType("gamme-de-radiateur").subscribe(
     (response: any) => {
-      console.log('recuperation des getEquipementsByType radiateur:', response[0].Modeles);
+      console.log('recuperation des getEquipementsByType gamme-de-radiateur:', response[0].Modeles);
       this.gammes_radiateurs=response[0].Modeles
     },
     (error: any) => {
-      console.error('Erreur lors de la recuperation des getEquipementsByType radiateur :', error);
+      console.error('Erreur lors de la recuperation des getEquipementsByType gamme-de-radiateur :', error);
     }
   );
 }

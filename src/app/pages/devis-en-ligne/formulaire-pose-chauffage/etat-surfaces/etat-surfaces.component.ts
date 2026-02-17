@@ -122,14 +122,17 @@ markFormGroupTouched(formGroup: FormGroup) {
 
 types:any
 load_types(){
-  this.userService.getGammesByTravailAndType(12,"type-de-radiateur").subscribe(
+
+  this.userService.getEquipementsByType("type-de-radiateur").subscribe(
     (response: any) => {
-      console.log('recuperation des gammes type-de-radiateur:', response);
-      this.types=response
+      console.log('recuperation des getEquipementsByType type-de-radiateur:', response[0].Modeles);
+      this.types=response[0].Modeles
     },
     (error: any) => {
-      console.error('Erreur lors de la recuperation des gammes type-de-radiateur :', error);
+      console.error('Erreur lors de la recuperation des getEquipementsByType type-de-radiateur :', error);
     }
   );
+
+ 
 }
 }

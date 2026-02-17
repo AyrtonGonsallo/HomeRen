@@ -227,13 +227,15 @@ export class IndexComponent {
       console.log("precedent",this.filteredTravail.ID)
     }
     this.is_one_travail_selected=true
+    console.log("travaux",this.travaux)
+    console.log("id nouveau travail",travailID)
     this.filteredTravail = this.travaux.filter(travail => travail.ID === travailID)[0];
     const selectedElement = document.getElementById(`tache-${travailID}`);
     if (selectedElement) {
       this.renderer.setStyle(selectedElement, 'border', '2px solid #FFC736');
       this.renderer.setStyle(selectedElement, 'filter', 'brightness(0.8)');
     }
-    //console.log(this.filteredTravail)
+    console.log("nouveau",this.filteredTravail)
   }
 
 // chargement des travaux a faire dans la piece
@@ -700,7 +702,15 @@ export class IndexComponent {
   }
 
 
+ajouter_portes_apres_creation_mnp(){
 
+ this.current = 1
+  this.selectTravail(10)
+  setTimeout(() => {
+    this.current = 4
+  }, 2000);
+  
+}
 
 
   changeContent(): void {

@@ -282,6 +282,12 @@
 
    <div class="steps-action">
 
+     <div *ngIf="is_travail_selected(4) && current ==5" >
+      <button nz-button nzType="default" (click)="ajouter_portes_apres_creation_mnp()" >
+           <span>Ajouter des portes</span>
+         </button>
+    </div>
+
       <p *ngIf="current == 5" class="fs-23 styl-ttl"> <strong>Pour continuer vous pouvez :</strong></p>
     
 
