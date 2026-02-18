@@ -167,10 +167,10 @@ li{
     border: none !important;
     box-shadow: none;
     padding: 11px 15px !important;
-    height: 46px;
+    width: fit-content;
     font-size: 14px !important;
-    color: #fff;
+    color: #000000;
     border-radius: 0px;
-    background: var(--color2) !important;
+    background: var(--color1) !important;
     cursor: pointer;
 }
