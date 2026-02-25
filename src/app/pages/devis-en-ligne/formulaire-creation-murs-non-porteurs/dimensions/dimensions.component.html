@@ -48,19 +48,9 @@
         <div nz-col class="row-w-grid">
           <label for="epaisseur">Épaisseur (cm)<span class="error-message">*</span> :</label>
           <nz-radio-group formControlName="epaisseur" class="flx-radio-row">
-            <div>
-              <label nz-radio nzValue="5"> 5</label>
+            <div *ngFor="let type of type_epaisseur">
+              <label nz-radio [nzValue]="type.ID + ':' + type.Prix + ':' + type.Label"> {{ type.Label }}</label>
             </div>
-            <div>
-              <label nz-radio nzValue="7"> 7</label>
-            </div>
-            <div>
-              <label nz-radio nzValue="10"> 10</label>
-            </div>
-            <div>
-              <label nz-radio nzValue="0"> supérieur à 10</label>
-            </div>
-           
           </nz-radio-group> 
           <!--<div *ngIf="isclicked && murs_non_porteurs.controls[i].get('epaisseur')?.invalid" class="error-message">
           L'épaisseur est invalide.

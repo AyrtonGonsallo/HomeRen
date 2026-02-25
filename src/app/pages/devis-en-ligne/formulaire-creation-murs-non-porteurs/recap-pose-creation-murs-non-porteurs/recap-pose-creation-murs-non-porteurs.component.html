@@ -6,7 +6,7 @@
         <div>
         <span class="recup-fin"><p>Hauteur</p><p>:</p><p>{{dimmur.hauteur}} cm</p></span>
         <span class="recup-fin"><p>Longueur</p><p>:</p><p>{{dimmur.longueur}} cm</p></span>
-        <span class="recup-fin"><p>Épaisseur</p><p>:</p><p>{{get_epaisseur(dimmur.epaisseur)}} </p></span>
+        <span class="recup-fin"><p>Épaisseur</p><p>:</p><p>{{(get_title(dimmur.epaisseur))}} cm </p></span>
         </div>
     </div>
     <div *ngIf="cmnpForm.formulaire['gammes-produits-creation-murs-non-porteurs--portes'].has_portes">
