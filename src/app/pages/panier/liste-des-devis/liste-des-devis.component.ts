@@ -91,8 +91,8 @@ export class ListeDesDevisComponent {
           });
   }
 
-  calculerPrixTTC(prix: number): number {
-    const total = prix * this.coefficient * this.tva;
+  calculerPrixTTC(prix: number,tva:number): number {
+    const total = prix * this.coefficient * (1+tva/100);
     return Math.round(total * 100) / 100; // arrondi à 2 décimales
   }
 
@@ -225,7 +225,6 @@ export class ListeDesDevisComponent {
             console.log('Devis ou il faut payer l\'acompte ', this.listOfDevisToPayAcompt);
             if(this.listOfDevisToPayAcompt?.length>0){
               for(let item of this.listOfDevisToPayAcompt){
-                this.total_acompte+=this.calculerPrixTTC(item.Prix??0);
                 
               }
               this.prix_acompte=this.taux_acompte*this.total_acompte/100
@@ -275,7 +274,7 @@ export class ListeDesDevisComponent {
             } 
             
             for(let item of this.listOfDevisToPayVisit){
-              this.total_visite+=this.calculerPrixTTC(item.Prix??0);
+              this.total_visite+=this.calculerPrixTTC(item.Prix??0,item.Tva.Valeur);
               
             }
               
@@ -311,7 +310,7 @@ export class ListeDesDevisComponent {
             this.listOfDevisToVisit = projet.Devis;
             console.log("devis a visiter ",this.listOfDevisToVisit);
             for(let item of this.listOfDevisToVisit){
-              this.total_attente_visite+=this.calculerPrixTTC(item.Prix??0);
+              this.total_attente_visite+=this.calculerPrixTTC(item.Prix??0,item.Tva.Valeur);
               
             }
           }
