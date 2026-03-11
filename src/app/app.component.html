@@ -82,12 +82,12 @@
     <div class="div-flx ftr-2">
         <img class="img-ftr" src="/assets/icon-blanc.svg">
         <h4 class="blanc font-site">Nos services</h4>
-        <a class="blanc font-site2 fs-18 mb-10" href="/">Salon</a>
-        <a class="blanc font-site2 fs-18 mb-10" href="/">Salle à manger</a>
-        <a class="blanc font-site2 fs-18 mb-10" href="/">Cuisine</a>
-        <a class="blanc font-site2 fs-18 mb-10" href="/">Chambre</a>
-        <a class="blanc font-site2 fs-18 mb-10" href="/">Salle de bain</a>
-        <a class="blanc font-site2 fs-18 mb-10" href="/">Salle d’eau / WC</a>
+
+        <div class="div-flx " *ngFor="let piece_bc of pieces" >
+          <a *ngFor="let piece of piece_bc.Pieces" class="blanc font-site2 fs-18 mb-10" [href]="'/pieces/pieces-details/'+piece.ID">
+            {{piece.Titre}}
+          </a>
+        </div>
     </div>
     <div class="div-flx ftr-3">
         <img class="img-ftr" src="/assets/icon-blanc.svg">

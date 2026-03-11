@@ -780,7 +780,7 @@ ajouter_portes_apres_creation_mnp(){
     const currentStep = this.etapes?.find(
       (etape:any) =>
         etape.Etape === this.getStepName(this.current) &&
-        (this.current <= 1 || this.current >= 5 || etape.TravailID === this.filteredTravail.ID)
+        ( etape.TravailID === this.filteredTravail.ID)
     );
   
     if (!currentStep) {
@@ -789,9 +789,11 @@ ajouter_portes_apres_creation_mnp(){
   
     // Si current est 0, 1, 5, ou 6, on prend la description générale
     if (this.current === 0 || this.current === 1 || this.current === 5 || this.current === 6) {
+      console.log(" this.filteredTravail",this.filteredTravail," this.current",this.current," currentStep",currentStep)
       return currentStep.Description || '';
     }
   
+    
     // Sinon, on prend la description de la pièce correspondante
     switch (this.selectedPieceId) {
       case 4:
@@ -806,9 +808,14 @@ ajouter_portes_apres_creation_mnp(){
         return currentStep.Description_cuisine || currentStep.Description;
       case 6:
         return currentStep.Description_salon || currentStep.Description;
+      case 15:
+        return currentStep.Description_garage || currentStep.Description;
+      case 16:
+        return currentStep.Description_buanderie || currentStep.Description;
       default:
         return currentStep.Description || '';
     }
+    
   }
 
 
