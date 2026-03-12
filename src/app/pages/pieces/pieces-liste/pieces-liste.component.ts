@@ -53,7 +53,7 @@ export class PiecesListeComponent {
   
 
   loadPieces(): void {
-    this.userService.getNbrPieces(6).subscribe(
+    this.userService.getNbrPieces(100).subscribe(
       (response) => {
         this.pieces = response;
         console.log("réponse de la requette getPieces",this.pieces);

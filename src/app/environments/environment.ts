@@ -2,7 +2,7 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:3000', // URL de l'API locale
+    apiUrl: 'http://192.168.100.3:3000', // URL de l'API locale
     //apiUrl: 'https://dev.homeren.fr/api-concepts-et-travaux', // URL de l'API sur le dev
     //apiUrl: 'https://homeren.fr/api-concepts-et-travaux', // URL de l'API en prod
     
@@ -11,11 +11,11 @@ export const environment = {
 
     //assetsUrl: 'https://homeren.fr/assets/', 
     //assetsUrl: 'https://dev.homeren.fr/assets/', // URL de assets sur le dev
-    assetsUrl: 'http://localhost:4300/assets/', // URL de assets en local
+    assetsUrl: 'http://192.168.100.3:4300/assets/', // URL de assets en local
 
     //url_de_retour:"https://dev.homeren.fr/",
     //url_de_retour:"https://homeren.fr/",
-    url_de_retour:"http://localhost:4300/",
+    url_de_retour:"http://192.168.100.3:4300/",
 
 
     stripePublicKey:'pk_test_51R9q3v2LlVGoDCjrxz4Ivi2x9jcTR5uR0eHItkmfmW2r4GFBlx9i1cHSYnObuWm9YTFz2CapFwWCHXdUkg5KXOSJ00kZluesGa',

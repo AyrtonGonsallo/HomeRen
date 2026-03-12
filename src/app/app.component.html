@@ -83,11 +83,11 @@
         <img class="img-ftr" src="/assets/icon-blanc.svg">
         <h4 class="blanc font-site">Nos services</h4>
 
-        <div class="div-flx " *ngFor="let piece_bc of pieces" >
-          <a *ngFor="let piece of piece_bc.Pieces" class="blanc font-site2 fs-18 mb-10" [href]="'/pieces/pieces-details/'+piece.ID">
+        
+          <a *ngFor="let piece of pieces" class="blanc font-site2 fs-18 mb-10" [href]="'/pieces/pieces-details/'+piece.ID">
             {{piece.Titre}}
           </a>
-        </div>
+       
     </div>
     <div class="div-flx ftr-3">
         <img class="img-ftr" src="/assets/icon-blanc.svg">
@@ -103,6 +103,7 @@
   <p class="blanc m-w-ftr font-site2 fs-13 mt-18">© 2025 | Conception :<a href="https://nash-digital.com/"> Nash, création site web</a> | <a href="/mentions-legales">Mentions légales</a></p>
 
 </div>
+<!--
 
 <nz-dropdown-menu #menu="nzDropdownMenu"  class="drop-dwn">
   <ul class="ul-menu" nz-menu nzSelectable >
@@ -119,3 +120,5 @@
     </div>
   </ul>
 </nz-dropdown-menu>
+
+-->

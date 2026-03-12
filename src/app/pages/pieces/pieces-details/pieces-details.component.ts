@@ -33,6 +33,7 @@ export class PiecesDetailsComponent {
       this.page_seo_details = data['data'].seoDetails;
       this.add_meta_for_url()    
       this.load_realisations()
+      this.loadPiece(parseInt(this.piece_id) )
     });
    
   }
@@ -107,7 +108,7 @@ export class PiecesDetailsComponent {
               this.galerie = response2;
               console.log("réponse de la requette get galerie",this.galerie);
               setTimeout(() => {
-                //this.init_splide()
+                this.init_splide()
               }, 100); 
             },
             (error) => {
@@ -136,24 +137,81 @@ load_realisations(){
   );
 }
   
-init_splide() {
-  var splide = new Splide('.splide', {
-    perPage : 3,
-    cover   : true,
-    height  : '10rem',
-    lazyLoad: 'nearby',
-    breakpoints: {
-      800: {
-        perPage: 2, 
-        height : 'auto',
-      },
-      497: {
-        perPage: 1, 
-        height : 'auto',
-      }
-    },
-  });
 
-  splide.mount();
-}
+
+
+  init_splide() {
+    console.log("splide initialisé")
+
+    var maincarousel = new Splide( '#main-carousel', {
+         type       : 'fade',
+         heightRatio: 0.5,
+         pagination : false,
+         arrows     : false,
+         rewind          : true,
+      } );
+
+
+    var thumbcarousel=
+    new Splide( '#thumbnail-carousel', {
+      fixedWidth  : 100,
+      fixedHeight : 60,
+      gap         : 10,
+      rewind      : true,
+      pagination  : false,
+      isNavigation: true,
+      breakpoints : {
+        600: {
+          fixedWidth : 60,
+          fixedHeight: 44,
+        },
+      },
+    } )
+
+
+    // var main = new Splide( '#main-slider', {
+    //   type       : 'fade',
+    //   heightRatio: 0.5,
+    //   pagination : false,
+    //   arrows     : false,
+    //   cover      : true,
+    // } );
+    
+    // var thumbnails = new Splide( '#thumbnail-slider', {
+    //   rewind          : true,
+    //   fixedWidth      : 104,
+    //   fixedHeight     : 58,
+    //   isNavigation    : true,
+    //   gap             : 10,
+    //   focus           : 'center',
+    //   pagination      : false,
+    //   cover           : true,
+    //   dragMinThreshold: {
+    //     mouse: 4,
+    //     touch: 10,
+    //   },
+    //   breakpoints : {
+    //     640: {
+    //       fixedWidth  : 66,
+    //       fixedHeight : 38,
+    //     },
+    //   },
+    // } );
+    setTimeout(() => {
+      // main.sync( thumbnails );
+      // main.mount();
+      // 
+      // thumbnails.mount();
+      maincarousel.sync( thumbcarousel );
+       maincarousel.mount();
+      thumbcarousel.mount();
+    }, 100);
+   
+    
+  }
+
+
+
+
+
 }

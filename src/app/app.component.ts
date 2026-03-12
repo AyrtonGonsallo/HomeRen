@@ -188,7 +188,7 @@ isconnected=false
   }
   pieces: any[] = [];
   loadPieces(): void {
-    this.userService.get_pieces_par_categories().subscribe(
+    this.userService.getPieces().subscribe(
       (response) => {
         this.pieces = response;
         console.log("réponse de la requette getPieces",this.pieces);
