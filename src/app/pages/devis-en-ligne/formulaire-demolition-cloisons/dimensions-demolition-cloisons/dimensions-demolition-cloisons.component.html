@@ -22,9 +22,6 @@
                   <div *ngIf="isclicked && mursNonporteurs.controls[i].get('hauteur')?.invalid " class="error-message left" style="width: 100%;">
                     La hauteur est invalide.
                   </div>
-                  <div *ngIf="isclicked && mursNonporteurs.controls[i].get('epaisseur')?.invalid " class="error-message left">
-                    L'épaisseur est invalide.
-                  </div>
                   <div *ngIf="isclicked && mursNonporteurs.controls[i].get('ndp')?.invalid " class="error-message left">
                     Le nombre de portes est invalide.
                   </div>
@@ -50,13 +47,7 @@
                     </div>-->
                   </div>
                   
-                  <div nz-col nzSpan="6" class="ant-col tooltip-srf">
-                     <label for="epaisseur">Epaisseur (cm)<span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
-                     <input (keypress)="blockComma($event)" type="number" id="epaisseur" formControlName="epaisseur" min="3" max="30">
-                     <!-- <div *ngIf="isclicked && mursNonporteurs.controls[i].get('epaisseur')?.invalid " class="error-message left">
-                      L'épaisseur est invalide.
-                    </div>-->
-                    </div>
+             
                    
                    <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                      <label for="ndp">Nombre de portes <span class="error-message" *ngIf="is_active_Tp1">*</span> : </label>
@@ -133,9 +124,6 @@
               <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur')?.invalid " class="error-message">
                 La hauteur est invalide. Elle doit être comprise entre 100 et 500.
               </div>
-              <div *ngIf="isclicked && ouverturePartielle.controls[i].get('epaisseur')?.invalid " class="error-message">
-                L'épaisseur est invalide.  Elle doit être comprise entre 3 et 30.
-              </div>
               <div *ngIf="isclicked && ouverturePartielle.controls[i].get('longueur_ouverture')?.invalid " class="error-message">
                 La longueur de l'ouverture est invalide. Elle doit être comprise entre 100 et 3000.
               </div>
@@ -170,13 +158,7 @@
                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('hauteur')?.invalid " class="error-message">
                    La hauteur est invalide.
                  </div>-->
-                <div nz-col nzSpan="6" class="ant-col tooltip-srf">
-                   <label for="epaisseur">Epaisseur (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> : </label>
-                   <input (keypress)="blockComma($event)" type="number" id="epaisseur" formControlName="epaisseur"  min="3" max="30">
-                 </div>
-                 <!-- <div *ngIf="isclicked && ouverturePartielle.controls[i].get('epaisseur')?.invalid " class="error-message">
-                   L'épaisseur est invalide.
-                 </div>-->
+               
                  
                  <div nz-col nzSpan="6" class="ant-col tooltip-srf">
                    <label for="longueur_ouverture">Longueur de l'ouverture (cm)<span class="error-message" *ngIf="is_active_Tp3">*</span> :  </label>

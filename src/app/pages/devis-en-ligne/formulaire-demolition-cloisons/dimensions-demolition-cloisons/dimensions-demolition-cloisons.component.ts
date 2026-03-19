@@ -79,8 +79,6 @@ export class DimensionsDemolitionCloisonsComponent {
         controls['hauteur'].value === '' ||
         controls['hauteur'].invalid ||
         controls['longueur'].invalid ||
-        controls['epaisseur'].value === '' ||
-        controls['epaisseur'].invalid  ||
         controls['ndp'].value === '' ||
         controls['cloison'].value === ''
       ) {
@@ -112,8 +110,6 @@ export class DimensionsDemolitionCloisonsComponent {
       if (
         controls['longueur'].value === '' ||
         controls['hauteur'].value === '' ||
-        controls['epaisseur'].value === '' ||
-        controls['epaisseur'].invalid ||
         controls['longueur_ouverture'].value === '' ||
         controls['hauteur_ouverture'].value === '' ||
         controls['hauteur_depuis_le_sol'].value === '' ||
@@ -171,7 +167,6 @@ export class DimensionsDemolitionCloisonsComponent {
     return this.fb.group({
       longueur: ['', this.is_active_Tp1 ? [Validators.required, Validators.min(100), Validators.max(3000)]  : null],
       hauteur: ['', this.is_active_Tp1 ? [Validators.required, Validators.min(100), Validators.max(500)]  : null],
-      epaisseur: ['', this.is_active_Tp1 ? [Validators.required, Validators.min(3), Validators.max(30)]  : null],
       ndp: [0, this.is_active_Tp1 ? Validators.required : null],
       cloison: ["", this.is_active_Tp1 ? Validators.required : null],
       image: [null]
@@ -192,9 +187,7 @@ export class DimensionsDemolitionCloisonsComponent {
               case 'hauteur':
                 control.setValidators(this.is_active_Tp1 ? [Validators.required, Validators.min(100), Validators.max(500)] : null);
                 break;
-              case 'epaisseur':
-                control.setValidators(this.is_active_Tp1 ? [Validators.required, Validators.min(3), Validators.max(30)] : null);
-                break;
+             
               case 'ndp':
                 break;
               case 'cloison':
@@ -225,9 +218,7 @@ export class DimensionsDemolitionCloisonsComponent {
               case 'hauteur':
                 control.setValidators(this.is_active_Tp3 ? [Validators.required, Validators.min(100), Validators.max(500)] : null);
                 break;
-              case 'epaisseur':
-                control.setValidators(this.is_active_Tp3 ? [Validators.required, Validators.min(3), Validators.max(30)] : null);
-                break;
+              
               case 'longueur_ouverture':
                 control.setValidators(this.is_active_Tp3 ? [Validators.required, Validators.min(100), Validators.max(3000)] : null);
                 break;
@@ -268,7 +259,6 @@ export class DimensionsDemolitionCloisonsComponent {
     return this.fb.group({
       longueur: ['', this.is_active_Tp3 ? Validators.required : null],
       hauteur: ['', this.is_active_Tp3 ? Validators.required : null],
-      epaisseur: ['', this.is_active_Tp3 ? Validators.required : null],
       longueur_ouverture: ['', this.is_active_Tp3 ? Validators.required : null],
       hauteur_ouverture : ['', this.is_active_Tp3 ? Validators.required : null],
       hauteur_depuis_le_sol: ['', this.is_active_Tp3 ? Validators.required : null],
@@ -310,7 +300,6 @@ export class DimensionsDemolitionCloisonsComponent {
         mursArray.push(this.fb.group({
           longueur: [mursNonporteur.longueur, this.is_active_Tp1 ? Validators.required : null],
           hauteur: [mursNonporteur.hauteur, this.is_active_Tp1 ? Validators.required : null],
-          epaisseur: [mursNonporteur.epaisseur, this.is_active_Tp1 ? Validators.required : null],
           ndp: [mursNonporteur.ndp, this.is_active_Tp1 ? Validators.required : null],
           cloison: [mursNonporteur.cloison, this.is_active_Tp1 ? Validators.required : null],
           image: [mursNonporteur.image]
@@ -326,7 +315,6 @@ export class DimensionsDemolitionCloisonsComponent {
         ouvertureArray.push(this.fb.group({
           longueur: [ouverture.longueur, this.is_active_Tp3 ? Validators.required : null],
           hauteur: [ouverture.hauteur, this.is_active_Tp3 ? Validators.required : null],
-          epaisseur: [ouverture.epaisseur, this.is_active_Tp3 ? Validators.required : null],
           longueur_ouverture: [ouverture.longueur_ouverture, this.is_active_Tp3 ? Validators.required : null],
           hauteur_ouverture : [ouverture.hauteur_ouverture, this.is_active_Tp3 ? Validators.required : null],
           hauteur_depuis_le_sol: [ouverture.hauteur_depuis_le_sol, this.is_active_Tp3 ? Validators.required : null],

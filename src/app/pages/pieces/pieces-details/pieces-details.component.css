@@ -9,6 +9,7 @@
     background-position: top center;
     background-size: cover;
 }
+.bg-realis{background-color:#F2F2F2; }
 .section-t-bar h1, .section-t-bar p{color: var(--color-white);}
 .liste-realisations, .sec-gal-piece{
     max-width: 1440px;

@@ -43,7 +43,7 @@ nav {
 .liste-check-box{
     width: 100%;
     display: flex;
-    gap: 20px;
+    gap: 10px;
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
@@ -51,7 +51,7 @@ nav {
     justify-content: space-between;
 }
 .c-v-b-1{
-    width: 14%;
+    width: 11%;
     gap: 10px;
     background-color: #FFC736;
     display: flex;
