@@ -8,6 +8,7 @@
             <tr>
               <th>ID</th>
               <th>Date</th>
+              <th>Date de paiement</th>
               <th>Titre</th>
               <th>Projet</th>
               <th>Prix</th>
@@ -19,6 +20,7 @@
             <tr *ngFor="let data of listOfCurrentpaiements">
               <td>{{ data.ID }}</td>
               <td>{{ data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+              <td>{{ data.DatedePaiement | date:'dd/MM/yyyy HH:mm:ss' }}</td>
               <td>{{ data.Titre }}</td>
               <td>Projet  HR-{{currentYear}}-{{ data.ProjetID }}</td>
               <td>{{ (data.Montant ) | number:'1.2-2'}}€</td>
@@ -27,7 +29,7 @@
                     <span *ngIf="!data.Status">Non payé</span>
               </td>
               <td>
-                <a *ngIf="data.Lien && !data.Status" [href]="data.Lien" target="_blank" class="pay_button">Payer</a>
+                <a *ngIf="data.Lien && !data.Status" [href]="data.Lien" target="_blank" class="pay_button" >Payer</a>
                 <button class="pay_button"
                 *ngIf="data.ReferenceVirement && !data.Status"
                 (click)="copy_ref(data.ReferenceVirement)"

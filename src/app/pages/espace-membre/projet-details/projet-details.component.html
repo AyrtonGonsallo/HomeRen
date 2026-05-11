@@ -6,7 +6,7 @@
         ({{ projet?.VisiteFaite ? 'effectuée' : 'à faire' }})
     </p>
     <p *ngIf="files && files[0]?.Url">Liste des prestations : <a class="download-link" target="_blank" [href]="apiUrl+files[0].Url">Télécharger les devis en PDF</a></p>
-    <p>Avancement :</p>
+    <p>Avancement : {{projet?.ProgressionTravaux}}%</p>
     <p *ngIf="projet?.Date_de_debut_des_travaux && projet?.Status!='visite à faire'">Date de début des travaux : {{projet?.Date_de_debut_des_travaux | date:'dd/MM/yyyy'}}</p>
     <p>État d'Avancement : {{projet?.Status}}</p>
     <p *ngIf="projet?.Date_de_fin_des_travaux && projet?.Status!='visite à faire'">Date de fin des travaux : {{projet?.Date_de_fin_des_travaux | date:'dd/MM/yyyy'}}</p>
@@ -18,18 +18,27 @@
         <table>
             <thead>
                 <tr>
+                    <th>Titre</th>
                     <th>Type</th>
                     <th>Date </th>
+                    <th>Date de paiement</th>
                     <th>Montant</th>
                     <th>Mode de paiement</th>
+                    <th>Statut</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let data of paiements">
+                    <td>{{data.Titre}}</td>
                     <td>{{data.Type}}</td>
                     <td>{{data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                    <td>{{data.DatedePaiement | date:'dd/MM/yyyy HH:mm:ss' }}</td>
                     <td>{{data.Montant | number:'1.2-2'}}€</td>
                     <td>{{data.TypeDePaiement}}</td>
+                    <td> 
+                        <span *ngIf="data.Status"  style="font-size: 16px; color: rgb(0, 204, 34);" nzTheme="outline">payé </span>
+                        <span *ngIf="!data.Status"  style="font-size: 16px; color: rgb(242, 38, 23)" nzTheme="outline">à payer</span>
+                    </td>
                     
                 </tr>
             </tbody>

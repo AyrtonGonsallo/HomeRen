@@ -37,6 +37,8 @@ export class GammesProduitsRenovationElectriqueComponent {
       mise_en_securite: [false,Validators.required],
 
     });
+
+
   }
 
 
@@ -84,9 +86,20 @@ export class GammesProduitsRenovationElectriqueComponent {
      
     } else {
       console.log("formulaire non existant")
-      this.renovationElectriqueForm = this.createRenovationElectriqueGroup();
-     
+      this.renovationElectriqueForm = this.createRenovationElectriqueGroup(); 
     }
+    // logique
+    this.renovationElectriqueForm.get('renovation_conforme')?.valueChanges.subscribe(val => {
+      if (val) {
+        this.renovationElectriqueForm.get('mise_en_securite')?.setValue(true, { emitEvent: false });
+      }
+    });
+
+    this.renovationElectriqueForm.get('mise_en_securite')?.valueChanges.subscribe(val => {
+      if (!val) {
+        this.renovationElectriqueForm.get('renovation_conforme')?.setValue(false, { emitEvent: false });
+      }
+    });
   }
  
   blockComma(event: KeyboardEvent) {

@@ -225,8 +225,9 @@ export class ListeDesDevisComponent {
             console.log('Devis ou il faut payer l\'acompte ', this.listOfDevisToPayAcompt);
             if(this.listOfDevisToPayAcompt?.length>0){
               for(let item of this.listOfDevisToPayAcompt){
-                
+                this.total_acompte+=this.calculerPrixTTC(item.Prix??0,item.Tva.Valeur);
               }
+              console.log('infos ',this.taux_acompte,this.total_acompte)
               this.prix_acompte=this.taux_acompte*this.total_acompte/100
               this.faire_acompte=true
               if(this.projectToPayAcompt?.VisiteFaite){

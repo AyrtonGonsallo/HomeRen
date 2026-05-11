@@ -451,6 +451,9 @@
             </label>
           </nz-form-control>
         </nz-form-item>
+        <nz-form-control [nzSpan]="20" [nzOffset]="2">
+          <div *ngIf="has_error|| true" class="error-message"> {{error_msg}}</div>
+          </nz-form-control>
         <nz-form-item nz-row class="register-area">
           <nz-form-control [nzSpan]="24" [nzOffset]="6">
             <button nz-button nzType="primary" class="login-form-button">S'inscrire</button>

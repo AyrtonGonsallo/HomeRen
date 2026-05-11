@@ -9,6 +9,7 @@ import { ShoppingCartService } from '../../../services/shopping-cart.service';
 import { exit } from 'process';
 import { AuthServiceService } from '../../../services/auth-service.service';
 import { AbstractControl, FormControl, FormGroup, NonNullableFormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { take } from 'rxjs';
 interface ItemData {
   ID: number;
   Titre: string;
@@ -554,47 +555,50 @@ export class IndexComponent {
   ];
 
   isconnected=false
+  private isSubmitting = false;
   done(): void {
-    this.authService.getIsConnected().subscribe((isConnected) => {
-      this.isconnected = isConnected;
-    
-      if (this.isconnected) {
-        console.log('L\'utilisateur est connecté :', this.isconnected," id : ",this.authService.getUser().Id);
-        this.gestiondesdevisService.clearDEGFormulaires()
-        const formulaires = this.gestiondesdevisService.getFormulaires();
-        const json = {
-          username: this.browserInfo,
-          ip: this.userIp,
-          piece:this.selectedPiece,
-          liste_des_travaux: formulaires,
-          deviceID:this.panier
-          .getUniqueDeviceId(),
-          UtilisateurID:this.authService.getUser().Id
-        };
-        console.log('Formulaires soumis :', json);
-        this.userService.addDevisPiece(json).subscribe(
-          (response) => {
-            console.log('reponse de l\'api :', response);
-            this.current=6
-            console.log('etape courrante :', this.current);
-            let devis=response.devis
-            this.panier.addItem(devis)
-            this.gestiondesdevisService.clearFormulaires()
-          },
-          (error) => {
-            console.error('Erreur lors de la récupération de l\'ajout du devis :', error);
-          }
-        );
-       
-      } else {
-        console.log('L\'utilisateur n\'est pas connecté.');
-        this.display_modal_connection=true
-        
-      }
-    });
+  this.authService.getIsConnected().pipe(take(1)).subscribe((isConnected) => {
 
-    
-  }
+    this.isconnected = isConnected;
+
+    if (!isConnected) {
+      this.display_modal_connection = true;
+      return;
+    }
+
+    if (this.isSubmitting) {
+      console.log("Déjà en cours de soumission, ignoré");
+      return;
+    }
+
+    this.isSubmitting = true;
+    console.log('Utilisateur connecté :', this.authService.getUser().Id); 
+    this.gestiondesdevisService.clearDEGFormulaires(); 
+    const formulaires = this.gestiondesdevisService.getFormulaires();
+
+    const json = {
+      username: this.browserInfo,
+      ip: this.userIp,
+      piece: this.selectedPiece,
+      liste_des_travaux: formulaires,
+      deviceID: this.panier.getUniqueDeviceId(),
+      UtilisateurID: this.authService.getUser().Id
+    };
+
+    this.userService.addDevisPiece(json).subscribe(
+      (response) => {
+        this.current = 6;
+        this.panier.addItem(response.devis);
+        this.gestiondesdevisService.clearFormulaires();
+        this.isSubmitting = false;
+      },
+      (error) => {
+        console.error(error);
+        this.isSubmitting = false;
+      }
+    );
+  });
+}
 
   done_but_another_piece(): void {
     
@@ -610,6 +614,7 @@ export class IndexComponent {
           UtilisateurID:null
         };
         console.log('Formulaires soumis :', json);
+        
         this.userService.addDevisPiece(json).subscribe(
           (response) => {
             console.log('reponse de l\'api :', response);
@@ -623,6 +628,7 @@ export class IndexComponent {
             console.error('Erreur lors de la récupération de l\'ajout du devis :', error);
           }
         );
+        
     
   }
 
@@ -644,6 +650,7 @@ export class IndexComponent {
           console.log('connexion reussie :', response);
           this.authService.setUserWithoutRedirect(response)
           this.modal_connection_handleCancel()
+          this.get_action_finale()
         },
         (error: any) => {
           console.error('Erreur lors de la connexion :', error.error.error);
@@ -673,6 +680,7 @@ export class IndexComponent {
         (error: any) => {
           console.error('Erreur lors de l\'inscription\' :', error);
           this.error_msg=error.error.error
+          this.has_error==true
         }
       );
     } else {
