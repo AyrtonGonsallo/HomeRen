@@ -8,6 +8,7 @@ import { Piece } from '../../../Models/Piece';
 import Splide from '@splidejs/splide';
 import { Avis } from '../../../Models/Avis';
 import { environment } from '../../../environments/environment';
+import { Galerie } from '../../../Models/Galerie';
 
 @Component({
   selector: 'app-realisations-liste',
@@ -38,50 +39,115 @@ export class RealisationsListeComponent {
     );
   }
   activePieceId: number | null = null;
+  activeStyleId: number | null = null;
+  activetype: string | null = null;
+  types = [
+    'Réalisation','Proposition'
+  ]
   pieces: Piece[] = [];
   avis: Avis[] = [];
   realisations: Realisation[] = [];
+  filtered_realisations_ou_propositions: Galerie[] = [];
+  realisations_ou_propositions: Galerie[] = [];
+  styles: any[] = [];
   loadRealisations(): void {
-    this.userService.getRealisations().subscribe(
-      (response) => {
-        this.realisations = response;
-        console.log("réponse de la requette get realisations",this.realisations);
-      },
-      (error) => {
-        console.error('Erreur lors de la recuperation des realisations :', error);
-      }
-    );
-  }
-  filter_by_piece(pid:number){
     
-    if(pid==this.activePieceId){
-      this.activePieceId=null
-      this.userService.getRealisations().subscribe(
+    
+     this.userService.getRealisationsouPropositions().subscribe(
       (response) => {
-        this.realisations = response;
-        console.log("réponse de la requette get realisations",this.realisations);
+        this.realisations_ou_propositions = response;
+        this.filtered_realisations_ou_propositions = response;
+        console.log("réponse de la requette get realisations_ou_propositions",this.realisations_ou_propositions);
       },
       (error) => {
-        console.error('Erreur lors de la recuperation des realisations :', error);
+        console.error('Erreur lors de la recuperation des realisations_ou_propositions :', error);
       }
     );
 
-    }else{
-      this.activePieceId=pid
-       this.userService.getRealisationsByPiece(pid).subscribe(
-      (response2) => {
-        this.realisations = response2;
-        console.log("réponse de la requette filtrer par piece ",pid,this.realisations);
+     this.userService.getAllStyles().subscribe(
+      (response) => {
+        this.styles = response;
+        console.log("réponse de la requette get styles",this.styles);
       },
       (error) => {
-        console.error('Erreur lors de la recuperation de la requette filtrer par piece :', error);
+        console.error('Erreur lors de la recuperation des styles :', error);
       }
-
     );
-
-    }
-   
   }
+  
+
+  applyFilters() {
+
+    this.filtered_realisations_ou_propositions =
+      this.realisations_ou_propositions.filter(r => {
+
+        // PIECE
+        const pieceOk =
+          !this.activePieceId ||
+          r.Pieces?.some(
+            (p: any) => p.ID === this.activePieceId
+          );
+
+        // STYLE
+        const styleOk =
+          !this.activeStyleId ||
+          r.Styles?.some(
+            (s: any) => s.ID === this.activeStyleId
+          );
+
+        // TYPE
+        const typeOk =
+          !this.activetype ||
+          r.Type === this.activetype;
+
+        // COMBINAISON
+        return pieceOk && styleOk && typeOk;
+      });
+  }
+
+  filter_by_piece(pid: number) {
+
+    if (pid === this.activePieceId) {
+
+      this.activePieceId = null;
+
+    } else {
+
+      this.activePieceId = pid;
+    }
+
+    this.applyFilters();
+  }
+
+  filter_by_style(pid: number) {
+
+    if (pid === this.activeStyleId) {
+
+      this.activeStyleId = null;
+
+    } else {
+
+      this.activeStyleId = pid;
+    }
+
+    this.applyFilters();
+  }
+
+  filter_by_type(type: string) {
+
+    if (type === this.activetype) {
+
+      this.activetype = null;
+
+    } else {
+
+      this.activetype = type;
+    }
+
+    this.applyFilters();
+  }
+
+
   init_splide() {
     var splide = new Splide( '.splide', {
       perPage: 3,

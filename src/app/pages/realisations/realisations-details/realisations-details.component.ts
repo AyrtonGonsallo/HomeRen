@@ -9,6 +9,7 @@ import { environment } from '../../../environments/environment';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import Splide from '@splidejs/splide';
 import { Meta, Title } from '@angular/platform-browser';
+import { Galerie } from '../../../Models/Galerie';
 @Component({
   selector: 'app-realisations-details',
   templateUrl: './realisations-details.component.html',
@@ -33,11 +34,10 @@ export class RealisationsDetailsComponent {
     }, 2000);
 
     this.loadPieces()
-    this.loadRealisations()
+   this.loadlastgaleries()
     this.loadRealisation(parseInt(this.res_id))
   }
   res_id:string =  this.route.snapshot.paramMap.get('id')??'0';
-  galerie:any
   baseurl=environment.imagesUrl
   page_seo_details:any
   constructor(private metaService: Meta,private titleService: Title,private route: ActivatedRoute,private fb: NonNullableFormBuilder,private router: Router,private message: NzMessageService,private userService: ApiConceptsEtTravauxService) {
@@ -55,41 +55,34 @@ export class RealisationsDetailsComponent {
     );
   }
   pieces: Piece[] = [];
-  realisations: Realisation[] = [];
+  last_galeries: Galerie[] = [];
 
-  realisation: any ;
-  loadRealisations(): void {
-    this.userService.getNbrRealisations(3).subscribe(
+  galerie: any ;
+  loadlastgaleries(): void {
+    this.userService.get_nbr_galeries(3).subscribe(
       (response) => {
-        this.realisations = response;
-        console.log("réponse de la requette getrealisations",this.realisations);
+        this.last_galeries = response;
+        console.log("réponse de la requette loadlastgaleries",this.last_galeries);
       },
       (error) => {
-        console.error('Erreur lors de la recuperation des realisations :', error);
+        console.error('Erreur lors de la recuperation des last_galeries :', error);
       }
     );
   }
 
   loadRealisation(id:number): void {
-    this.userService.getRealisation(id).subscribe(
+    this.userService.get_galerie(id).subscribe(
       (response) => {
-        this.realisation = response;
-        console.log("réponse de la requette getrealisation",this.realisation);
-        this.userService.get_galerie(this.realisation.GalerieID).subscribe(
-          (response2) => {
-            this.galerie = response2;
-            console.log("réponse de la requette get galerie",this.galerie);
-            if (typeof document !== 'undefined') {
-              this.init_splide();
-            }
-          },
-          (error) => {
-            console.error('Erreur lors de la recuperation de la galerie :', error);
-          }
-        );
+        this.galerie = response;
+        console.log("réponse de la requette get_galerie",this.galerie);
+
+        if (typeof document !== 'undefined') {
+          this.init_splide();
+        }
+        
       },
       (error) => {
-        console.error('Erreur lors de la recuperation des realisation :', error);
+        console.error('Erreur lors de la recuperation des get_galerie :', error);
       }
     );
   }
@@ -125,39 +118,7 @@ export class RealisationsDetailsComponent {
     } )
 
 
-    // var main = new Splide( '#main-slider', {
-    //   type       : 'fade',
-    //   heightRatio: 0.5,
-    //   pagination : false,
-    //   arrows     : false,
-    //   cover      : true,
-    // } );
-    
-    // var thumbnails = new Splide( '#thumbnail-slider', {
-    //   rewind          : true,
-    //   fixedWidth      : 104,
-    //   fixedHeight     : 58,
-    //   isNavigation    : true,
-    //   gap             : 10,
-    //   focus           : 'center',
-    //   pagination      : false,
-    //   cover           : true,
-    //   dragMinThreshold: {
-    //     mouse: 4,
-    //     touch: 10,
-    //   },
-    //   breakpoints : {
-    //     640: {
-    //       fixedWidth  : 66,
-    //       fixedHeight : 38,
-    //     },
-    //   },
-    // } );
     setTimeout(() => {
-      // main.sync( thumbnails );
-      // main.mount();
-      // 
-      // thumbnails.mount();
       maincarousel.sync( thumbcarousel );
        maincarousel.mount();
       thumbcarousel.mount();
@@ -169,22 +130,22 @@ export class RealisationsDetailsComponent {
   add_meta_for_url(){
     
         
-    this.titleService.setTitle(this.page_seo_details.Content_balise_title.replace('%Titre%', this.realisation.Titre));
+    this.titleService.setTitle(this.page_seo_details.Content_balise_title.replace('%Titre%', this.galerie.Titre));
     this.metaService.updateTag({ 
       name: 'description',
-      content: this.page_seo_details.Content_balise_description.replace('%Description%', this.realisation.Description)
+      content: this.page_seo_details.Content_balise_description.replace('%Description%', this.galerie.Description)
     });
     this.metaService.updateTag({ 
       name: 'title',
-      content: this.page_seo_details.Content_balise_title.replace('%Titre%', this.realisation.Titre)
+      content: this.page_seo_details.Content_balise_title.replace('%Titre%', this.galerie.Titre)
     });
     this.metaService.updateTag({
       property: 'og:title',
-      content: this.page_seo_details.Content_balise_og_title.replace('%Titre%', this.realisation.Titre)
+      content: this.page_seo_details.Content_balise_og_title.replace('%Titre%', this.galerie.Titre)
     });
     this.metaService.updateTag({
       property: 'og:description',
-      content: this.page_seo_details.Content_balise_og_description.replace('%Description%', this.realisation.Description)
+      content: this.page_seo_details.Content_balise_og_description.replace('%Description%', this.galerie.Description)
     });
     this.metaService.updateTag({
       property: 'og:url',

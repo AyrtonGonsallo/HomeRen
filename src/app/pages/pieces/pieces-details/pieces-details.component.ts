@@ -16,7 +16,7 @@ import { Meta, Title } from '@angular/platform-browser';
 })
 export class PiecesDetailsComponent {
   piece_id:string =  '6';
-  galerie:any
+  galeries:any[]=[]
   baseurl=environment.imagesUrl
   piece:any
   realisations:any
@@ -102,20 +102,7 @@ export class PiecesDetailsComponent {
       (response) => {
         this.piece = response;
         console.log("réponse de la requette get piece",this.piece);
-        if(this.piece.GalerieID){
-          this.userService.get_galerie(this.piece.GalerieID).subscribe(
-            (response2) => {
-              this.galerie = response2;
-              console.log("réponse de la requette get galerie",this.galerie);
-              setTimeout(() => {
-                this.init_splide()
-              }, 100); 
-            },
-            (error) => {
-              console.error('Erreur lors de la recuperation de la galerie :', error);
-            }
-          );
-        }
+       
         
       },
       (error) => {
@@ -123,16 +110,20 @@ export class PiecesDetailsComponent {
       }
     );
   }
+
+
 load_realisations(){
   
-  this.userService.getRealisationsByPiece(parseInt(this.piece_id)).subscribe(
-    (response) => {
-      this.realisations= response;
-      console.log("réponse de la requette get realisations by piece",this.realisations);
-      
+  this.userService.get_galeries_by_piece(parseInt(this.piece_id)).subscribe(
+    (response2) => {
+      this.galeries = response2;
+      console.log("réponse de la requette get_galeries_by_piece",this.galeries);
+      setTimeout(() => {
+        this.init_splide()
+      }, 100); 
     },
     (error) => {
-      console.error('Erreur lors de la recuperation des realisation :', error);
+      console.error('Erreur lors de la recuperation des get_galeries_by_piece :', error);
     }
   );
 }

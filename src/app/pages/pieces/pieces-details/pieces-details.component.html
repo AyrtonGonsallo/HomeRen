@@ -16,19 +16,19 @@
     </div>
     
    
-    <div class="bg-realis" *ngIf="realisations.length">
+    <div class="bg-realis" *ngIf="galeries.length">
       <div class="sec-gal-piece">
         <div class="title-realis">
           <h2 class="center">Nos réalisations sur la rénovation de {{piece?.Titre}}</h2>
         </div>
         <div class="liste-filtre ">
-          <div cl-piece *ngFor="let realisation of realisations"> 
-            <a [href]="'/realisations/realisations-details/'+realisation.ID">
-              <img class="img-pc" [src]="baseurl  + realisation.Image_principale"  alt="">
+          <div cl-piece *ngFor="let galerie of galeries"> 
+            <a [href]="'/realisations/realisations-details/'+galerie.ID">
+              <img class="img-pc" [src]="baseurl  + galerie.cover_image"  alt="">
             </a>
-            <p class="cat-pc font-site2 fs-18">{{realisation?.Piece?.Titre}}</p>
-            <a [href]="'/realisations/realisations-details/'+realisation.ID">
-              <p class="txt-pc font-site2 fs-18">{{realisation.Titre}}</p>
+            <p class="cat-pc font-site2 fs-18" *ngFor="let piece of galerie?.Pieces">{{piece?.Titre}}</p>
+            <a [href]="'/realisations/realisations-details/'+galerie.ID">
+              <p class="txt-pc font-site2 fs-18">{{galerie.Titre}}</p>
             </a>
           </div>
         </div>
@@ -36,35 +36,6 @@
     </div>
 
 
-    <div class="galerie-piece sec-gal-piece" *ngIf="galerie">
-      <div class="title-realis">
-        <h2 class="center">Galerie {{piece?.Titre}}</h2><br>
-      </div>
-      <div>
-        <div id="main-carousel" class="splide main-realis">
-          <div class="splide__track">
-            <ul class="splide__list">
-              <li class="splide__slide" *ngFor="let image of galerie?.images; let i = index">
-                <img [src]="baseurl  + image.Url" alt="Image 1">
-              </li>
-            </ul>
-          </div>
-        </div>
-        <section
-          id="thumbnail-carousel"
-          class="splide realis-carousl"
-          aria-label="The carousel with thumbnails. Selecting a thumbnail will change the Beautiful Gallery carousel."
-        >
-          <div class="splide__track">
-            <ul class="splide__list splide-realis">
-              <li class="splide__slide" *ngFor="let image of galerie.images; let i = index">
-                <img [src]="baseurl  + image.Url" alt="">
-              </li>	
-            </ul>
-          </div>
-        </section>
-      </div>
-    </div>
 
     <div class="bg-phrase-dacc">
       <div class="section-phrase-dacc">

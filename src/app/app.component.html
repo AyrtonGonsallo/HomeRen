@@ -26,7 +26,7 @@
         nz-button
         nzType="primary" *ngIf="isconnected"
         nz-popover
-        [nzPopoverTitle]="user?.Nom+' '+user?.Prenom"
+        [nzPopoverTitle]="'Bienvenue '+user?.Nom+' '+user?.Prenom"
         [(nzPopoverVisible)]="out_visible"
         (nzPopoverVisibleChange)="out_change($event)"
         nzPopoverTrigger="hover"
@@ -35,6 +35,7 @@
         Votre compte
       </button>
       <ng-template #contentTemplate >
+        <!--
         <ul>
           <li>
             <a routerLink="/espace-membre/visites-technicien" >Visites technicien</a>
@@ -51,6 +52,9 @@
          
         </ul>
         <br><br>
+        
+        -->
+        
         <button nz-button   (click)="logout()">
           Se déconnecter
           <span nz-icon nzType="logout" nzTheme="outline"></span>

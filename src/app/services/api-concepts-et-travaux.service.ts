@@ -44,6 +44,16 @@ export class ApiConceptsEtTravauxService {
     const url = `${environment.apiUrl}/get_realisations`;
     return this.http.get<any>(url);
   }
+  getRealisationsouPropositions(): Observable<any> {
+    const url = `${environment.apiUrl}/get_galeries`;
+    return this.http.get<any>(url);
+  }
+  getAllStyles(): Observable<any> {
+    const url = `${environment.apiUrl}/get_all_styles`;
+    return this.http.get<any>(url);
+  }
+  
+  
   getNbrPieces(total:number): Observable<any> {
     const url = `${environment.apiUrl}/get_nbr_pieces/${total}`;
     return this.http.get<any>(url);
@@ -63,6 +73,10 @@ export class ApiConceptsEtTravauxService {
     const url = `${environment.apiUrl}/get_nbr_realisations/${total}`;
     return this.http.get<any>(url);
   }
+   get_nbr_galeries(total:number): Observable<any> {
+    const url = `${environment.apiUrl}/get_nbr_galeries/${total}`;
+    return this.http.get<any>(url);
+  }
   getRealisation(id:number): Observable<any> {
     const url = `${environment.apiUrl}/get_realisation/${id}`;
     return this.http.get<any>(url);
@@ -71,10 +85,15 @@ export class ApiConceptsEtTravauxService {
     const url = `${environment.apiUrl}/get_galerie/${id}`;
     return this.http.get<any>(url);
   }
+  get_galeries_by_piece(id: number): Observable<any> {
+    const url = `${environment.apiUrl}/get_galeries_by_piece/${id}`;
+    return this.http.get<any>(url);
+  }
   getRealisationsByPiece(pid:number): Observable<any> {
     const url = `${environment.apiUrl}/get_realisations_by_piece/${pid}`;
     return this.http.get<any>(url);
   }
+  
   get_pieces_par_categories(): Observable<any> {
     const url = `${environment.apiUrl}/get_pieces_par_categories/`;
     return this.http.get<any>(url);
@@ -234,6 +253,9 @@ get_etapes_devis(): Observable<any> {
   return this.http.get<any>(`${environment.apiUrl}/get_etapes_devis`);
 }
 
-
+get_espace_membre_stats(userId: number): Observable<any> {
+  const url = `${environment.apiUrl}/get_espace_membre_stats/${userId}`;
+  return this.http.get<any>(url);
+}
 
 }

@@ -1,7 +1,11 @@
 export interface Galerie {
     ID: number;
     Titre: string;
-    Total: string;
-    images:[]
+    Type: string;
+    cover_image: string;
+    Description?: string;
+    Images:any[];
+    Pieces:any[]
+    Styles:any[]
   }
   

@@ -1,1 +1,33 @@
-<p>espace-membre works!</p>
+<div class="center section-panier">
+    <h1 class="center black font-site">Espace client</h1>
+
+Bienvenue {{user?.Nom}} {{user?.Prenom}},
+
+
+<div>
+  {{ espace_membre_stats.to_visite_projets.length }}
+  {{ getLabel(espace_membre_stats.to_visite_projets.length, 'Visite de technicien', 'Visites de techniciens') }}
+
+  <a routerLink="/espace-membre/visites-technicien">voir plus</a>
+</div>
+
+<div>
+  {{ espace_membre_stats.current_projects.length }}
+  {{ getLabel(espace_membre_stats.current_projects.length, 'Projet en cours', 'Projets en cours') }}
+
+  <a routerLink="/espace-membre/projets-en-cours">voir plus</a>
+</div>
+
+<div>
+  {{ espace_membre_stats.ended_projects.length }}
+  {{ getLabel(espace_membre_stats.ended_projects.length, 'Projet terminé', 'Projets terminés') }}
+
+  <a routerLink="/espace-membre/projets-finis">voir plus</a>
+</div>
+
+<div>
+  {{ espace_membre_stats.all_paiements.length }}
+  {{ getLabel(espace_membre_stats.all_paiements.length, 'Paiement', 'Paiements') }}
+
+  <a routerLink="/espace-membre/paiements">voir plus</a>
+</div>

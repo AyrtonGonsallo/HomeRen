@@ -3,68 +3,92 @@
 
 <div class="page-realisations">
 
-    <div class="section-t-bar">   
-      <h1 class="font-site center white">Nos plus belles réalisations</h1>
-        <p class="fs-27 center">Découvrez nos solutions d’aménagement pièce par pièce et faites le plein d’inspiration !</p>
+  <div class="section-t-bar">   
+    <h1 class="font-site center white">Nos plus belles réalisations</h1>
+    <p class="fs-27 center">Découvrez nos solutions d’aménagement pièce par pièce et faites le plein d’inspiration !</p>
   </div>
   
- 
+
   <div class="liste-realisations">
+    <div class="liste-check-box">
+      <div class="c-v-b-1" *ngFor="let type of types" (click)="filter_by_type(type)" [class.active]="activetype === type">
+        <input type="checkbox" id="piece-{{type}}"  name="1" value="{{type}}" >
+        <!--
+          <img class="c-b-img" src="{{baseurl}}{{piece.Image_principale}}"/>
+        -->
+        <label class="font-site2 fs-18" for="types"> {{type}}</label>
+      </div>
+    </div>
+  </div>
 
-
+  <div class="liste-realisations">
     <div class="liste-check-box">
       <div class="c-v-b-1" *ngFor="let piece of pieces" (click)="filter_by_piece(piece.ID)" [class.active]="activePieceId === piece.ID">
         <input type="checkbox" id="piece-{{piece.ID}}"  name="1" value="{{piece.Titre}}" >
-        <img class="c-b-img" src="{{baseurl}}{{piece.Image_principale}}"/>
+        <!--
+          <img class="c-b-img" src="{{baseurl}}{{piece.Image_principale}}"/>
+        -->
         <label class="font-site2 fs-18" for="pieces"> {{piece.Titre}}</label>
       </div>
-
-    
+    </div>
   </div>
 
-<div></div>
+  <div class="liste-realisations">
+    <div class="liste-check-box">
+      <div class="c-v-b-1" *ngFor="let style of styles" (click)="filter_by_style(style.ID)" [class.active]="activeStyleId === style.ID">
+        <input type="checkbox" id="style-{{style.ID}}"  name="1" value="{{style.Titre}}" >
+        <!--
+          <img class="c-b-img" src="{{baseurl}}{{piece.Image_principale}}"/>
+        -->
+        <label class="font-site2 fs-18" for="styles"> {{style.Titre}}</label>
+      </div>
+    </div>
+  </div>
 
-</div>
-
-
-<div class="liste-filtre">
-   <div cl-piece *ngFor="let realisation of realisations"> 
-
-   <a [href]="'/realisations/realisations-details/'+realisation.ID"><img class="img-pc" src="https://homeren.fr/api-concepts-et-travaux/files/{{realisation.Image_principale}}" alt="">
-   </a><p class="cat-pc font-site2 fs-18">{{realisation?.Piece?.Titre}}</p>
-          <a [href]="'/realisations/realisations-details/'+realisation.ID">
-          <p class="txt-pc font-site2 fs-18">{{realisation.Titre}}</p></a>
-   </div>
-   
-</div>
+  
 
 
-
-<div class="bg-avis">
-<div class="section-avis">
-
-  <div class="col1-avis">
-    <img class="img1-piece center" src="/assets/icon-blanc.svg">
-    <h2 class=" center blanc font-site">Nos avis clients</h2>
-    <p class=" center blanc font-site2 m-w-p">Découvrez ce que nos clients disent de nos services de rénovation et comment nous avons transformé leurs espaces de vie.</p>
-</div>
-
-
-  <div class="splide splide-avis" id="carousel">
-    <div class="splide__track">
-      <ul class="splide__list">
-        <li class="splide__slide" *ngFor="let a of avis">
-            <h4 class="nom-avis center jaune">{{a?.Utilisateur}}</h4>
-            <p class="text-avis center" [innerHTML]="a?.Message"></p>
-        </li>
-        
-      </ul>
+  <div class="liste-filtre">
+    <div cl-piece *ngFor="let galerie of filtered_realisations_ou_propositions"> 
+      <a [href]="'/realisations/realisations-details/'+galerie.ID">
+        <img class="img-pc" src="https://homeren.fr/api-concepts-et-travaux/files/{{galerie.cover_image}}" alt="">
+      </a>
+      <p class="cat-pc font-site2 fs-18">{{galerie?.Type}}</p>
+      <p class="cat-pc font-site2 fs-18" *ngFor="let piece of galerie?.Pieces">{{piece?.Titre}}</p>
+      <p class="cat-pc font-site2 fs-18" *ngFor="let style of galerie?.Styles">{{style?.Titre}}</p>
+      
+      <a [href]="'/realisations/realisations-details/'+galerie.ID">
+      <p class="txt-pc font-site2 fs-18">{{galerie.Titre}}</p></a>
     </div>
   </div>
 
 
-</div>
-</div>
+
+  <div class="bg-avis">
+    <div class="section-avis">
+
+      <div class="col1-avis">
+          <img class="img1-piece center" src="/assets/icon-blanc.svg">
+          <h2 class=" center blanc font-site">Nos avis clients</h2>
+          <p class=" center blanc font-site2 m-w-p">Découvrez ce que nos clients disent de nos services de rénovation et comment nous avons transformé leurs espaces de vie.</p>
+      </div>
+
+
+      <div class="splide splide-avis" id="carousel">
+        <div class="splide__track">
+          <ul class="splide__list">
+            <li class="splide__slide" *ngFor="let a of avis">
+                <h4 class="nom-avis center jaune">{{a?.Utilisateur}}</h4>
+                <p class="text-avis center" [innerHTML]="a?.Message"></p>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
 
 
 

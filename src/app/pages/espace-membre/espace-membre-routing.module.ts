@@ -8,6 +8,7 @@ import { ProjetDetailsComponent } from './projet-details/projet-details.componen
 import { PaiementsComponent } from './paiements/paiements.component';
 
 const routes: Routes = [
+  { path: '', component:EspaceMembreComponent},
   { path: 'projets-en-cours', component: CurrentProjectsComponent },
   { path: 'projets-finis', component: EndProjectsComponent },
   { path: 'visites-technicien', component: DevisListeToVisitComponent },
