@@ -7,45 +7,74 @@
     <h1 class="font-site center white">Nos plus belles réalisations</h1>
     <p class="fs-27 center">Découvrez nos solutions d’aménagement pièce par pièce et faites le plein d’inspiration !</p>
   </div>
-  
 
-  <div class="liste-realisations">
-    <div class="liste-check-box">
-      <div class="c-v-b-1" *ngFor="let type of types" (click)="filter_by_type(type)" [class.active]="activetype === type">
-        <input type="checkbox" id="piece-{{type}}"  name="1" value="{{type}}" >
-        <!--
-          <img class="c-b-img" src="{{baseurl}}{{piece.Image_principale}}"/>
-        -->
-        <label class="font-site2 fs-18" for="types"> {{type}}</label>
-      </div>
-    </div>
+
+<div class="tag-realis font-site">   
+  <!-- Types
+  <nz-select class="select" [(ngModel)]="tag_types" nzMode="multiple" (ngModelChange)="applyFilters()" [nzSize]="size" nzShowSearch>
+      <nz-option *ngFor="let type of types" [nzLabel]="type" [nzValue]="type"></nz-option>
+    </nz-select>
+
+    Styles
+    <nz-select class="select"  [(ngModel)]="tag_styles" nzMode="multiple" (ngModelChange)="applyFilters()" [nzSize]="size" nzShowSearch>
+      <nz-option *ngFor="let style of styles" [nzLabel]="style.Titre" [nzValue]="style.ID"></nz-option>
+    </nz-select>
+
+    Pièces
+    <nz-select class="select"  [(ngModel)]="tag_pieces" nzMode="multiple" (ngModelChange)="applyFilters()" [nzSize]="size" nzShowSearch>
+      <nz-option *ngFor="let piece of pieces" [nzLabel]="piece.Titre" [nzValue]="piece.ID"></nz-option>
+    </nz-select> -->
+
+
+<div class="filter-row">
+  <div class="filter-label">Types</div>
+  <nz-select
+    class="select"
+    [(ngModel)]="tag_types"
+    nzMode="multiple"
+    (ngModelChange)="applyFilters()"
+    [nzSize]="size"
+    nzShowSearch
+    [nzDropdownMatchSelectWidth]="true"
+    [nzMaxTagCount]="2"
+  >
+    <nz-option *ngFor="let type of types" [nzLabel]="type" [nzValue]="type"></nz-option>
+  </nz-select>
+</div>
+
+<div class="filter-row">
+  <div class="filter-label">Styles</div>
+  <nz-select
+    class="select drag-scroll"
+    [(ngModel)]="tag_styles"
+    nzMode="multiple"
+    (ngModelChange)="applyFilters()"
+    [nzSize]="size"
+    nzShowSearch
+  >
+    <nz-option *ngFor="let style of styles" [nzLabel]="style.Titre" [nzValue]="style.ID"></nz-option>
+  </nz-select>
+</div>
+
+
+<div class="filter-row">
+  <div class="filter-label">Pièces</div>
+
+  <nz-select
+    class="select drag-scroll"
+    [(ngModel)]="tag_pieces"
+    nzMode="multiple"
+    (ngModelChange)="applyFilters()"
+    [nzSize]="size"
+    nzShowSearch
+  >
+    <nz-option *ngFor="let piece of pieces" [nzLabel]="piece.Titre" [nzValue]="piece.ID"></nz-option>
+  </nz-select>
+</div>
+
+
+
   </div>
-
-  <div class="liste-realisations">
-    <div class="liste-check-box">
-      <div class="c-v-b-1" *ngFor="let piece of pieces" (click)="filter_by_piece(piece.ID)" [class.active]="activePieceId === piece.ID">
-        <input type="checkbox" id="piece-{{piece.ID}}"  name="1" value="{{piece.Titre}}" >
-        <!--
-          <img class="c-b-img" src="{{baseurl}}{{piece.Image_principale}}"/>
-        -->
-        <label class="font-site2 fs-18" for="pieces"> {{piece.Titre}}</label>
-      </div>
-    </div>
-  </div>
-
-  <div class="liste-realisations">
-    <div class="liste-check-box">
-      <div class="c-v-b-1" *ngFor="let style of styles" (click)="filter_by_style(style.ID)" [class.active]="activeStyleId === style.ID">
-        <input type="checkbox" id="style-{{style.ID}}"  name="1" value="{{style.Titre}}" >
-        <!--
-          <img class="c-b-img" src="{{baseurl}}{{piece.Image_principale}}"/>
-        -->
-        <label class="font-site2 fs-18" for="styles"> {{style.Titre}}</label>
-      </div>
-    </div>
-  </div>
-
-  
 
 
   <div class="liste-filtre">
@@ -53,9 +82,12 @@
       <a [href]="'/realisations/realisations-details/'+galerie.ID">
         <img class="img-pc" src="https://homeren.fr/api-concepts-et-travaux/files/{{galerie.cover_image}}" alt="">
       </a>
-      <p class="cat-pc font-site2 fs-18">{{galerie?.Type}}</p>
-      <p class="cat-pc font-site2 fs-18" *ngFor="let piece of galerie?.Pieces">{{piece?.Titre}}</p>
-      <p class="cat-pc font-site2 fs-18" *ngFor="let style of galerie?.Styles">{{style?.Titre}}</p>
+      <div class="cat-pc">
+        <p class="font-site2 fs-14">{{galerie?.Type}}</p>
+        <p class="font-site2 fs-14" *ngFor="let piece of galerie?.Pieces">{{piece?.Titre}}</p>
+        <p class="font-site2 fs-14" *ngFor="let style of galerie?.Styles">{{style?.Titre}}</p>
+      </div>
+      
       
       <a [href]="'/realisations/realisations-details/'+galerie.ID">
       <p class="txt-pc font-site2 fs-18">{{galerie.Titre}}</p></a>

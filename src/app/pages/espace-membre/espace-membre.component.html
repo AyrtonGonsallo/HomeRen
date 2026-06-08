@@ -1,33 +1,39 @@
-<div class="center section-panier">
-    <h1 class="center black font-site">Espace client</h1>
+<div class="center section-panier width-site">
 
-Bienvenue {{user?.Nom}} {{user?.Prenom}},
+    <h1 class="center font-site gris">Bienvenue {{user?.Nom}} {{user?.Prenom}} dans votre espace HomeRen</h1>
+
+<div class="div-login">
 
 
-<div>
-  {{ espace_membre_stats.to_visite_projets.length }}
-  {{ getLabel(espace_membre_stats.to_visite_projets.length, 'Visite de technicien', 'Visites de techniciens') }}
+<div class="item-login">
+  <span class="chiffre-log black fs-40 font-site2 f-w600">{{ espace_membre_stats.current_projects.length }}</span>
+   <span class="text-log fs-27 font-site2 black">{{ getLabel(espace_membre_stats.current_projects.length, 'Projet en cours', 'Projets en cours') }}</span>
+  <a routerLink="/espace-membre/projets-en-cours" class="btn-site login">voir plus</a>
+</div>
+<div class="item-login">
+  <span class="chiffre-log black fs-40 font-site2 f-w600">{{ espace_membre_stats.to_visite_projets.length }}</span>
+  <span class="text-log fs-27 font-site2 black">{{ getLabel(espace_membre_stats.to_visite_projets.length, 'Visite de technicien', 'Visites de techniciens') }}</span>
 
-  <a routerLink="/espace-membre/visites-technicien">voir plus</a>
+  <a routerLink="/espace-membre/visites-technicien" class="btn-site login">voir plus</a>
+</div>
+<div class="item-login">
+  <span class="chiffre-log black fs-40 font-site2 f-w600">{{ espace_membre_stats.ended_projects.length }}</span>
+   <span class="text-log fs-27 font-site2 black">{{ getLabel(espace_membre_stats.ended_projects.length, 'Projet terminé', 'Projets terminés') }}</span>
+
+  <a routerLink="/espace-membre/projets-finis" class="btn-site login">voir plus</a>
 </div>
 
-<div>
-  {{ espace_membre_stats.current_projects.length }}
-  {{ getLabel(espace_membre_stats.current_projects.length, 'Projet en cours', 'Projets en cours') }}
+<div class="item-login">
+  <span class="chiffre-log black fs-40 font-site2 f-w600">{{ espace_membre_stats.all_paiements.length }}</span>
+   <span class="text-log fs-27 font-site2 black">{{ getLabel(espace_membre_stats.all_paiements.length, 'Paiement', 'Paiements') }}</span>
 
-  <a routerLink="/espace-membre/projets-en-cours">voir plus</a>
+  <a routerLink="/espace-membre/paiements" class="btn-site login">voir plus</a>
+</div>
 </div>
 
-<div>
-  {{ espace_membre_stats.ended_projects.length }}
-  {{ getLabel(espace_membre_stats.ended_projects.length, 'Projet terminé', 'Projets terminés') }}
-
-  <a routerLink="/espace-membre/projets-finis">voir plus</a>
+<div class="contact-login">
+<div class="blanc fs-21 f-w-4">Si vous avez une question, une difficulté contactez-nous sur : <a href="tel:02 00 00 00 00" class="blanc fs-21">02 00 00 00 00</a>
+<br>ou par mail: <a href="mailto:suppor@thomeren.com" class="blanc fs-21">support&#64;homeren.com</a></div>
 </div>
 
-<div>
-  {{ espace_membre_stats.all_paiements.length }}
-  {{ getLabel(espace_membre_stats.all_paiements.length, 'Paiement', 'Paiements') }}
-
-  <a routerLink="/espace-membre/paiements">voir plus</a>
 </div>

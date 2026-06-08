@@ -114,6 +114,7 @@ tableauIds = [9, 37, 10, 2,35,38,6,36,34,42,39,40,41,];
         this.gammes_depose.forEach(gamme => {
         
           let quantite=0
+          let id=gamme.ID
           let titre=gamme.Label
           let prix=gamme.Prix
           if(this.prec_formulaire_gamme){
@@ -126,7 +127,7 @@ tableauIds = [9, 37, 10, 2,35,38,6,36,34,42,39,40,41,];
              // Créer un FormGroup pour chaque appareil
           const appareilGroup = this.fb.group({});
               
-         
+         appareilGroup.addControl("id", this.fb.control(id, ));
           appareilGroup.addControl("quantite", this.fb.control(quantite, ));
           appareilGroup.addControl("titre", this.fb.control(titre, ));
           appareilGroup.addControl("prix", this.fb.control(prix, ));

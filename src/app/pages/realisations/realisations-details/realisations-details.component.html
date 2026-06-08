@@ -5,20 +5,17 @@
     <h1 class="center black font-site">{{galerie?.Titre}}</h1>
 
     <div class="center fs-30 m-w-p  infos" >
-
-       Type : <p class="font-site2 fs-18">{{galerie?.Type}}</p>
-      Pieces : <p class="font-site2 fs-18" *ngFor="let piece of galerie?.Pieces">{{piece?.Titre}}</p>
-      Styles : <p class="font-site2 fs-18" *ngFor="let style of galerie?.Styles">{{style?.Titre}}</p>
-
+        <p class="font-site2 fs-14">{{galerie?.Type}}</p>
+        <p class="font-site2 fs-14" *ngFor="let piece of galerie?.Pieces">{{piece?.Titre}}</p>
+        <p class="font-site2 fs-14" *ngFor="let style of galerie?.Styles">{{style?.Titre}}</p>
     </div>
    
     <div class="center fs-30 m-w-p" [innerHTML]="galerie?.Description"></div>
-      <a class="btn-site res-det" href="/devis-en-ligne">Devis en ligne</a>
     </div>
 
 
   <div class="galerie-piece">
-    <div>
+    <!--<div>
       <div id="main-carousel" class="splide main-realis">
         <div class="splide__track">
           <ul class="splide__list">
@@ -40,12 +37,33 @@
           </ul>
         </div>
       </section>
-    </div>
+    </div>-->
+<div class="masonry-gallery">
+
+  <!-- 1ère image full width -->
+  <div
+    class="masonry-item masonry-item--hero"
+    *ngIf="galerie?.Images?.length"
+    (click)="openImage(0)"
+  >
+    <img [src]="baseurl + galerie.Images[0].Url" alt="image" />
+  </div>
+
+  <!-- reste en grid -->
+  <div
+    class="masonry-item"
+    *ngFor="let image of galerie?.Images?.slice(1); let i = index"
+    (click)="openImage(i + 1)"
+  >
+    <img [src]="baseurl + image.Url" alt="image" />
+  </div>
+
+</div>
   </div>    
 </div>
 
-<div class="section3">
-  <h2 class="center">Nos dernières réalisations</h2>
+<!-- <div class="section3">
+  <h2 class="center">Nos dernières galeries</h2>
   <div class="liste-filtre">
     <div cl-piece *ngFor="let galerie of last_galeries"> 
       <a [href]="'/realisations/realisations-details/'+galerie.ID">
@@ -55,7 +73,7 @@
       <a [href]="'/realisations/realisations-details/'+galerie.ID"><p class="txt-pc font-site2 fs-18">{{galerie.Titre}}</p></a>
     </div>
  </div>
-</div>
+</div> -->
 
 
 <div class="bg-phrase-dacc">

@@ -17,7 +17,35 @@ import { Galerie } from '../../../Models/Galerie';
   
 })
 export class RealisationsDetailsComponent {
-  
+  selectedImage: any = null;
+  currentImageIndex: number = 0;
+  isModalOpen: boolean = false;
+
+  openImage(index: number): void {
+    this.currentImageIndex = index;
+    this.selectedImage = this.galerie?.Images?.[index];
+    this.isModalOpen = true;
+
+  }
+  closeModal(): void {
+  this.isModalOpen = false;
+  }
+
+  nextImage(): void {
+    if (!this.galerie?.Images?.length) return;
+    this.currentImageIndex =
+      (this.currentImageIndex + 1) % this.galerie.Images.length;
+    this.selectedImage = this.galerie.Images[this.currentImageIndex];
+  }
+
+  prevImage(): void {
+    if (!this.galerie?.Images?.length) return;
+    this.currentImageIndex =
+    (this.currentImageIndex - 1 + this.galerie.Images.length) %
+    this.galerie.Images.length;
+    this.selectedImage = this.galerie.Images[this.currentImageIndex];
+
+  }
   faCheck=faCheck;
   ngOnInit(): void {
     this.userService.getFrontPageByTitle("realisations-details").subscribe(

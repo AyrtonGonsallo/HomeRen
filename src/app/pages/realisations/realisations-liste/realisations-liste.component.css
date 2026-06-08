@@ -40,6 +40,34 @@ nav {
     flex-direction: row;
     align-items: center;
 }
+.tag-realis{
+    padding-top: 4%;
+    padding-inline: 4%;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    max-width: 1440px;
+    margin: auto;
+}
+.tag-realis .filter-row{    
+    display: flex;
+    gap: 0px !important;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    overflow:hidden !important;}
+
+.filter-row .ant-select { width: 100% !important;}
+.filter-row {
+    position:relative;
+    border: 2px solid #000;
+    padding: 6px 0px;
+}
+.filter-row .filter-label {
+    position: absolute;
+    left: 9px;
+    z-index: 99;
+}
 .liste-check-box{
     width: 100%;
     display: flex;
@@ -76,17 +104,23 @@ label.font-site2.fs-18 {
 .c-v-b-1:hover .c-b-img, .c-v-b-1:focus-within .c-b-img{filter:brightness(9);}
 .c-v-b-1:hover label, .c-v-b-1:focus-within label{color:white;}
 .cl-piece{position: relative !important;width:30% !important;}
-p.cat-pc {
-    padding: 5px 20px;
-    width: fit-content;
-    background-color: #FFC736;
-    margin-top: -55px;
-    margin-left: 30px;
+.cat-pc{
+    margin-top: -86px;
+    margin-left: 11px;
     margin-bottom: 30px;
     position: relative;
-    z-index: 9999;
+    z-index: 9;
+    min-height: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: flex-end;
 }
-
+.cat-pc p {
+    padding: 4px 8px;
+    width: fit-content;
+    background-color: #FFC736;
+}
 .bg-avis{background-color: var(--color2);}
 
 
@@ -102,7 +136,7 @@ p.cat-pc {
     .c-v-b-1 {width: 19%;}
     .liste-check-box{justify-content: center; }
     .section-avis { gap: 29px;}
-    
+    .tag-realis {gap: 10px;}
 }
 @media only screen and (max-width: 497px) {
     .liste-filtre {grid-template-columns: 1fr !important;}
@@ -110,6 +144,7 @@ p.cat-pc {
     .liste-realisations, .section-t-bar, .liste-filtre{padding: 20px;}
     .liste-check-box { gap: 10px;}
     .section-avis {  padding: 4% 3% 15% 3%;}
+    .tag-realis {flex-direction: column;}
 }
 /******************** css caroussel ************************/
 .col1-avis {
@@ -126,4 +161,7 @@ p.cat-pc {
   background-color: #555;
   color: #fff;
   font-weight: bold;
+}
+.select{
+    width: 200px;
 }

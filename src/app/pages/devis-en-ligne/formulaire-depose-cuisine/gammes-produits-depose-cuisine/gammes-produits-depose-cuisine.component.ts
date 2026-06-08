@@ -144,6 +144,7 @@ appareilGroup: any;
         this.appareils_cuisine.forEach(appareil => {
 
           let modele=""
+          let id=appareil.ID
           let titre=appareil.Titre
           let active=false
           let longueur=0
@@ -159,6 +160,7 @@ appareilGroup: any;
              // Créer un FormGroup pour chaque appareil
           const appareilGroup = this.fb.group({});
               
+          appareilGroup.addControl("id", this.fb.control(id, ));
           appareilGroup.addControl("longueur", this.fb.control(longueur, ));
           appareilGroup.addControl("active", this.fb.control(active, ));
           appareilGroup.addControl("titre", this.fb.control(titre, ));

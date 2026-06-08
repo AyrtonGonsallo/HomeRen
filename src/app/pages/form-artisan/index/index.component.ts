@@ -16,6 +16,7 @@ export class IndexComponent {
     AdressePostale: FormControl<string>;
     Nom: FormControl<string>;
     Prenom: FormControl<string>;
+    RaisonSociale: FormControl<string>;
     Email: FormControl<string>;
     Password: FormControl<string>;
     Telephone: FormControl<string>;
@@ -34,7 +35,7 @@ export class IndexComponent {
       this.userService.addParticulier(this.validateForm.value).subscribe(
         (response) => {
           console.log('Utilisateur ajouté avec succès :', response);
-          this.message.create('success', `Utilisateur ajouté avec succès`);
+          this.message.create('success', `Demande envoyée avec succès`);
               //this.router.navigate(['/administration/comptes']);
         },
         (error) => {
@@ -82,6 +83,7 @@ export class IndexComponent {
       Password: ['', [Validators.required]],
       checkPassword: ['', [Validators.required, this.confirmationValidator]],
       Nom: ['', [Validators.required]],
+      RaisonSociale: ['', [Validators.required]],
       Prenom: ['', [Validators.required]],
       Telephone: ['', [Validators.required]],
       Agree: [false, [this.requiredTrueValidator()]], // Utilisation du validateur personnalisé

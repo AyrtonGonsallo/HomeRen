@@ -9,6 +9,7 @@ import Splide from '@splidejs/splide';
 import { Avis } from '../../../Models/Avis';
 import { environment } from '../../../environments/environment';
 import { Galerie } from '../../../Models/Galerie';
+import { NzSelectSizeType } from 'ng-zorro-antd/select';
 
 @Component({
   selector: 'app-realisations-liste',
@@ -16,6 +17,11 @@ import { Galerie } from '../../../Models/Galerie';
   styleUrl: './realisations-liste.component.css'
 })
 export class RealisationsListeComponent {
+
+   size: NzSelectSizeType = 'default';
+  tag_types: string[] = [];
+tag_styles: number[] = [];
+tag_pieces: number[] = [];
 
   baseurl=environment.imagesUrl
   ngOnInit(): void {
@@ -78,32 +84,32 @@ export class RealisationsListeComponent {
 
   applyFilters() {
 
-    this.filtered_realisations_ou_propositions =
-      this.realisations_ou_propositions.filter(r => {
+  this.filtered_realisations_ou_propositions =
+    this.realisations_ou_propositions.filter(r => {
 
-        // PIECE
-        const pieceOk =
-          !this.activePieceId ||
-          r.Pieces?.some(
-            (p: any) => p.ID === this.activePieceId
-          );
+      // PIECES
+      const pieceOk =
+        this.tag_pieces.length === 0 ||
+        r.Pieces?.some(
+          (p: any) => this.tag_pieces.includes(p.ID)
+        );
 
-        // STYLE
-        const styleOk =
-          !this.activeStyleId ||
-          r.Styles?.some(
-            (s: any) => s.ID === this.activeStyleId
-          );
+      // STYLES
+      const styleOk =
+        this.tag_styles.length === 0 ||
+        r.Styles?.some(
+          (s: any) => this.tag_styles.includes(s.ID)
+        );
 
-        // TYPE
-        const typeOk =
-          !this.activetype ||
-          r.Type === this.activetype;
+      // TYPES
+      const typeOk =
+        this.tag_types.length === 0 ||
+        this.tag_types.includes(r.Type);
 
-        // COMBINAISON
-        return pieceOk && styleOk && typeOk;
-      });
-  }
+      // COMBINAISON
+      return pieceOk && styleOk && typeOk;
+    });
+}
 
   filter_by_piece(pid: number) {
 

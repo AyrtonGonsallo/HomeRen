@@ -136,6 +136,7 @@ export class DimensionsDeposeCuisineComponent {
          
            let quantite=0
            let longueur=0
+           let id=gamme.ID
            let titre=gamme.Label
            let prix=gamme.Prix
            if(this.prec_formulaire_gamme){
@@ -149,6 +150,7 @@ export class DimensionsDeposeCuisineComponent {
               // Créer un FormGroup pour chaque appareil
            const appareilGroup = this.fb.group({});
                
+           appareilGroup.addControl("id", this.fb.control(id, ));
            appareilGroup.addControl("longueur", this.fb.control(longueur, ));
            appareilGroup.addControl("quantite", this.fb.control(quantite, ));
            appareilGroup.addControl("titre", this.fb.control(titre, ));

@@ -140,6 +140,7 @@ tableauIds = [9, 37, 10, 2,35,38,6,36,34,42,39,40,41,];
 
         this.appareils_salle_de_bain.forEach(appareil => {
 
+     
           let titre=appareil.Titre
           let modele=""
           let active=false
