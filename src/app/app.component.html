@@ -16,7 +16,7 @@
     </a>-->
     
     <li><a  routerLinkActive="active" routerLink="/devis-en-ligne">Devis en ligne</a></li>
-    <li><a routerLink="/realisations" routerLinkActive="active">Réalisations</a></li>
+    <li><a routerLink="/galeries" routerLinkActive="active">Galeries</a></li>
     <li><a routerLink="/faq" routerLinkActive="active">FAQ</a></li>
     <li><a routerLink="/form-artisan" routerLinkActive="active">Devenir partenaire</a></li>
    
@@ -26,6 +26,7 @@
         nz-button
         nzType="primary" *ngIf="isconnected"
         nz-popover
+        [nzPopoverOverlayClassName]="'espace-membre-menu'"
         [nzPopoverTitle]="'Bienvenue '+user?.Nom+' '+user?.Prenom"
         [(nzPopoverVisible)]="out_visible"
         (nzPopoverVisibleChange)="out_change($event)"
@@ -35,8 +36,11 @@
         Votre compte
       </button>
       <ng-template #contentTemplate >
-        <!--
+        
         <ul>
+          <li>
+            <a routerLink="/espace-membre" >Espace membre</a>
+          </li>
           <li>
             <a routerLink="/espace-membre/visites-technicien" >Visites technicien</a>
           </li>
@@ -53,7 +57,7 @@
         </ul>
         <br><br>
         
-        -->
+        
         
         <button nz-button   (click)="logout()">
           Se déconnecter
@@ -97,7 +101,7 @@
         <img class="img-ftr" src="/assets/icon-blanc.svg">
         <h4 class="blanc font-site">Découvrir</h4>
         <a class="blanc font-site2 fs-18 mb-10" href="/qui-somme-nous">Qui somme nous</a>
-        <a class="blanc font-site2 fs-18 mb-10" href="/realisations">Nos réalisations</a>
+        <a class="blanc font-site2 fs-18 mb-10" href="/galeries">Nos galeries</a>
         <a class="blanc font-site2 fs-18 mb-10" href="/devis-en-ligne">Demander un devis</a>
         <a class="blanc font-site2 fs-18 mb-10" href="/faq">FAQ</a>
         <a class="blanc font-site2 fs-18 mb-10" href="/contact">Contactez-nous</a>

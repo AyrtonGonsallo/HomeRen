@@ -196,15 +196,23 @@ img.img2-presenta {
 .col2-artisan{padding-right:9%;}
 .col1-artisan{position: relative;}
 .img1-artisan{position: absolute;bottom: -60px; left: 82px;}
-
-.cat-pc {
-        width: fit-content;
-        position: relative;
-        padding: 8px 15px;
-        background-color: var(--color1);
-        margin-top: -58px;
-        margin-left: 25px;
-    }
+.cat-pc{
+    margin-top: -86px;
+    margin-left: 11px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 9;
+    min-height: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: flex-end;
+}
+.cat-pc p {
+    padding: 4px 8px;
+    width: fit-content;
+    background-color: #FFC736;
+}
 /*************** responsive ****************/
 @media only screen and (max-width: 1440px) {
 .section-presentation{padding: 4% 4%;}

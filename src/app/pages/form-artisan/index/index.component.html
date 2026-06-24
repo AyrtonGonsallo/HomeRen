@@ -11,11 +11,11 @@
 
 
   <div class="col-60">
-    <h1>Devenir Partenaire de Homeren</h1>
+    <h1 class="center black font-site" style="font-size: 35px;">Devenir Partenaire de Homeren</h1>
     <span>Vous êtes un artisan ou une entreprise et vous souhaitez intervenir comme prestataire sur les chantiers Homeren, créez un compte (c'est gratuit !) et nous vous recontacterons pour finaliser votre demande.</span>
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
     <nz-form-item class="cls-nom col-5">
-      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="Nom"  nzRequired nzTooltipTitle="Votre nom" >
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="Nom"  nzRequired  >
           <span>Nom</span>
       </nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="votre Nom!">
@@ -24,7 +24,7 @@
     </nz-form-item>
 
     <nz-form-item class="cls-prenom col-5">
-       <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="Prenom"  nzRequired nzTooltipTitle="Votre prénom" >
+       <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="Prenom"  nzRequired  >
           <span>Prénom</span>
        </nz-form-label>
        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="votre prenom!">
@@ -33,7 +33,7 @@
     </nz-form-item>
 
     <nz-form-item class="cls-nom col-5">
-      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="RaisonSociale"  nzRequired nzTooltipTitle="Votre raison sociale" >
+      <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="RaisonSociale"  nzRequired  >
           <span>Raison sociale</span>
       </nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="votre RaisonSociale!">

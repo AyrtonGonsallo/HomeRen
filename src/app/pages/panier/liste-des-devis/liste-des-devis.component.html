@@ -10,6 +10,8 @@
   -->
   <div class="center section-panier" *ngIf="faire_visite_technicien || listOfDevisToVisit?.length>0">
     <h1 class="center black bold font-site">VOS DEMANDES DE DEVIS</h1>
+
+    <!--
   <div class="table-wraper">
     <div *ngIf="listOfDevisToVisit?.length>0">
       <table>
@@ -37,28 +39,27 @@
       </div>
     </div>
   </div>
+  -->
     <div *ngIf="listOfDevisToPayVisit?.length>0">
       <table>
           <thead>
             <tr>
               <th>ID</th>
+              <th>Projet</th>
               <th>Date</th>
               <th>Pièce</th>
               <th>Prestation</th>
               <th>Prix  TTC</th>
-              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let data of listOfDevisToPayVisit">
               <td>{{ data.ID }}</td>
+              <td>{{ data.ProjetDevis.projet_id }}</td>
               <td>{{ data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
               <td>{{ data.Piece?.Titre }}</td>
               <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>
               <td>{{ calculerPrixTTC(data.Prix,data.Tva.Valeur  ) | number:'1.2-2'}}€</td>
-              <td>
-                <a (click)="supprimer_devis(data.ID)"><fa-icon [icon]="faTrash" class="mr-10"></fa-icon></a>
-              </td>
             </tr>
           </tbody>
       </table>
@@ -112,6 +113,7 @@
         <thead>
           <tr>
             <th>ID</th>
+            <th>Projet</th>
             <th>Date</th>
             <th>Pièce</th>
             <th>Prestation</th>
@@ -121,6 +123,7 @@
         <tbody>
           <tr *ngFor="let data of listOfCurrentDevis">
             <td>{{ data.ID }}</td>
+            <td>{{ data.ProjetDevis.projet_id }}</td>
             <td>{{ data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
             <td>{{ data.Piece?.Titre }}</td>
             <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>
@@ -153,6 +156,7 @@
           <thead>
             <tr>
               <th>ID</th>
+              <th>Projet</th>
               <th>Date</th>
               <th>Pièce</th>
               <th>Prestation</th>
@@ -162,6 +166,7 @@
           <tbody>
             <tr *ngFor="let data of listOfDevisToPayAcompt">
               <td>{{ data.ID }}</td>
+              <td>{{ data.ProjetDevis.projet_id }}</td>
               <td>{{ data.Date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
               <td>{{ data.Piece?.Titre }}</td>
               <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>

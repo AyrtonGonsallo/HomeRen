@@ -15,7 +15,7 @@ export const environment = {
 
     //url_de_retour:"https://dev.homeren.fr/",
     //url_de_retour:"https://homeren.fr/",
-    url_de_retour:"http://192.168.100.3:4300/",
+    url_de_retour:"http://localhost:4300/",
 
 
     stripePublicKey:'pk_test_51R9q3v2LlVGoDCjrxz4Ivi2x9jcTR5uR0eHItkmfmW2r4GFBlx9i1cHSYnObuWm9YTFz2CapFwWCHXdUkg5KXOSJ00kZluesGa',

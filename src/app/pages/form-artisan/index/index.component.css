@@ -1,8 +1,5 @@
 /* styles.css */
-@font-face {
-  font-family: 'MyFont';
-  src: url('/assets/Panchang-Variable.ttf') format("truetype");
-}
+
 :root {
   --color1:#FFC736;
   --color2:#555555;

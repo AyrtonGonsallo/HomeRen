@@ -46,6 +46,7 @@ export class ShoppingCartService {
   }
 
   addItem(item: CartItem): void {
+    //console.log("this.items",this.items)
     const existingItem = this.items.find(i => i.ID === item.ID);
     if (!existingItem) {
       this.items.push(item);
@@ -64,6 +65,7 @@ export class ShoppingCartService {
   }
 
   getItemCount(): number {
+    //console.log('toalt afficher sur picto panier',this.items)
     return this.items.length;
   }
 
@@ -101,7 +103,8 @@ refresh(){
           };
           this.userService.getAllNoPayedProjectPiecebyUser("sadsd",this.authService.getUser()?.Id??0).subscribe(//this.getUniqueDeviceId()
             (response) => {
-              this.items = response;
+              this.items = [response];
+              // console.log('remplissage total affiche sur picto panier',this.items)
               this.itemsSubject.next(this.items);
             },
             (error) => {

@@ -18,10 +18,46 @@ import { NzSelectSizeType } from 'ng-zorro-antd/select';
 })
 export class RealisationsListeComponent {
 
-   size: NzSelectSizeType = 'default';
+  size: NzSelectSizeType = 'default';
   tag_types: string[] = [];
-tag_styles: number[] = [];
-tag_pieces: number[] = [];
+  tag_styles: number[] = [];
+  tag_pieces: number[] = [];
+
+  add_type(type: string) {
+    const index = this.tag_types.indexOf(type);
+
+    if (index > -1) {
+      this.tag_types.splice(index, 1);
+    } else {
+      this.tag_types.push(type);
+    }
+
+    this.applyFilters();
+  }
+
+  add_style(style_id: number) {
+    const index = this.tag_styles.indexOf(style_id);
+
+    if (index > -1) {
+      this.tag_styles.splice(index, 1);
+    } else {
+      this.tag_styles.push(style_id);
+    }
+
+    this.applyFilters();
+  }
+
+  add_piece(piece_id: number) {
+    const index = this.tag_pieces.indexOf(piece_id);
+
+    if (index > -1) {
+      this.tag_pieces.splice(index, 1);
+    } else {
+      this.tag_pieces.push(piece_id);
+    }
+
+    this.applyFilters();
+  }
 
   baseurl=environment.imagesUrl
   ngOnInit(): void {

@@ -23,11 +23,11 @@
         </div>
         <div class="liste-filtre ">
           <div cl-piece *ngFor="let galerie of galeries"> 
-            <a [href]="'/realisations/realisations-details/'+galerie.ID">
+            <a [href]="'/galeries/realisations-details/'+galerie.ID">
               <img class="img-pc" [src]="baseurl  + galerie.cover_image"  alt="">
             </a>
             <p class="cat-pc font-site2 fs-18" *ngFor="let piece of galerie?.Pieces">{{piece?.Titre}}</p>
-            <a [href]="'/realisations/realisations-details/'+galerie.ID">
+            <a [href]="'/galeries/realisations-details/'+galerie.ID">
               <p class="txt-pc font-site2 fs-18">{{galerie.Titre}}</p>
             </a>
           </div>

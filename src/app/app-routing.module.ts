@@ -5,7 +5,7 @@ const routes: Routes = [
   { path:'',loadChildren:()=>import('./pages/accueil/accueil.module').then(m=>m.AccueilModule)},
     {path:'form-artisan',loadChildren:()=>import('./pages/form-artisan/form-artisan.module').then(m=>m.FormArtisanModule)},
     {path:'form-particulier',loadChildren:()=>import('./pages/form-particulier/form-particulier.module').then(m=>m.FormParticulierModule)},
-    {path:'realisations',loadChildren:()=>import('./pages/realisations/realisations.module').then(m=>m.RealisationsModule)},
+    {path:'galeries',loadChildren:()=>import('./pages/realisations/realisations.module').then(m=>m.RealisationsModule)},
     {path:'pieces',loadChildren:()=>import('./pages/pieces/pieces.module').then(m=>m.PiecesModule)},
     {path:'mentions-legales',loadChildren:()=>import('./pages/mentions-legales/mentions-legales.module').then(m=>m.MentionsLegalesModule)},
     {path:'contact',loadChildren:()=>import('./pages/contact/contact.module').then(m=>m.ContactModule)},

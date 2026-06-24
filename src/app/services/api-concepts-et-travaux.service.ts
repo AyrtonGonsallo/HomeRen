@@ -73,6 +73,11 @@ export class ApiConceptsEtTravauxService {
     const url = `${environment.apiUrl}/get_nbr_realisations/${total}`;
     return this.http.get<any>(url);
   }
+
+  getNbrGaleries(total:number): Observable<any> {
+    const url = `${environment.apiUrl}/get_nbr_galeries/${total}`;
+    return this.http.get<any>(url);
+  }
    get_nbr_galeries(total:number): Observable<any> {
     const url = `${environment.apiUrl}/get_nbr_galeries/${total}`;
     return this.http.get<any>(url);

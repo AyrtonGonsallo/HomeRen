@@ -5,7 +5,7 @@ import { RealisationsListeComponent } from './realisations-liste/realisations-li
 
 const routes: Routes = [
   {path:'',component:RealisationsListeComponent},
-  { path: 'realisations-details/:id', component: RealisationsDetailsComponent},
+  { path: 'galeries-details/:id', component: RealisationsDetailsComponent},
 ];
 
 @NgModule({

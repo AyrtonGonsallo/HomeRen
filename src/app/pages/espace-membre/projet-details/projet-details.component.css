@@ -93,10 +93,10 @@ th, td{
     }
 
     @media only screen and (max-width: 497px) {
-        .section-panier th, .section-panier td{
+        .section-projet th, .section-projet td{
             padding: 10px 5px !important; }
 
-        .section-panier th, .section-panier td span, .section-panier td { font-size: 12px !important;}
+        .section-projet th, .section-projet td span, .section-projet td { font-size: 12px !important;}
         .total-panier-container { margin-top: 20px;}
 
 
@@ -164,7 +164,7 @@ li{
     font-weight: 900;
     text-align: left;
     font-size: 18px;
-    max-width: 612px;
+    max-width: 1076px;
     margin-top: 20px;
     margin-inline: auto;
 }
@@ -173,7 +173,10 @@ li{
     font-weight: 900;
     text-align: left;
     font-size: 18px;
-    max-width: 612px;
+    max-width: 1076px;
     margin-bottom: 20px;
     margin-inline: auto;
+}
+.section-projet{
+max-width: 1440px !important; margin: auto;padding: 4% 2%; overflow: hidden;
 }

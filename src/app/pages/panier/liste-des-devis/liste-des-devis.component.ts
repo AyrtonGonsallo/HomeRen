@@ -8,6 +8,7 @@ import { AuthServiceService } from '../../../services/auth-service.service';
 import { HttpClient } from '@angular/common/http';
 import { filter, firstValueFrom, from, of, switchMap, take, tap } from 'rxjs';
 import { it } from 'node:test';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-liste-des-devis',
@@ -186,6 +187,15 @@ export class ListeDesDevisComponent {
           ? await this.userService.updateVisitedDevisAsync(datas)
           : await this.userService.updatePayedDevisAsync(datas);
         console.log("Résultat de la mise à jour :", updateRequest);
+
+        this.message.success('Le paiement a bien été effectué. Vous serez redirigé vers la liste des projets dans 10 secondes.', {
+            nzDuration: 10000
+          });
+
+        setTimeout(() => {
+          this.router.navigate(['/espace-membre/projets-en-cours']);
+        }, 10000); // 
+
       } catch (error) {
         console.error("Erreur lors de l'envoi ou de la mise à jour :", error);
       }
@@ -328,7 +338,7 @@ export class ListeDesDevisComponent {
 
 
 
-  constructor(private route: ActivatedRoute,private router: Router,private authService:AuthServiceService,private panierService:ShoppingCartService,private userService: ApiConceptsEtTravauxService) {
+  constructor(private message: NzMessageService,private route: ActivatedRoute,private router: Router,private authService:AuthServiceService,private panierService:ShoppingCartService,private userService: ApiConceptsEtTravauxService) {
    
   }
   supprimer_devis(id:number){

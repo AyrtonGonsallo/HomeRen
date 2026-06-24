@@ -6,6 +6,7 @@ import { ApiConceptsEtTravauxService } from '../../../services/api-concepts-et-t
 import { Piece } from '../../../Models/Piece';
 import { Realisation } from '../../../Models/Realisation';
 import { environment } from '../../../environments/environment';
+import { Galerie } from '../../../Models/Galerie';
 
 
 
@@ -59,16 +60,16 @@ export class IndexComponent {
 
 
   pieces: Piece[] = [];
-  realisations: Realisation[] = [];
+  realisations: Galerie[] = [];
 
   loadRealisations(): void {
-    this.userService.getNbrRealisations(3).subscribe(
+    this.userService.getNbrGaleries(3).subscribe(
       (response) => {
         this.realisations = response;
-        console.log("réponse de la requette getrealisations",this.realisations);
+        console.log("réponse de la requette getNbrGaleries",this.realisations);
       },
       (error) => {
-        console.error('Erreur lors de la recuperation des realisations :', error);
+        console.error('Erreur lors de la recuperation des getNbrGaleries :', error);
       }
     );
   }

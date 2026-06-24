@@ -557,52 +557,75 @@ export class IndexComponent {
   isconnected=false
   private isSubmitting = false;
   done(): void {
-  this.authService.getIsConnected().pipe(take(1)).subscribe((isConnected) => {
+    //enregistre le devis courrant et termine les etapes. on le force a se connecter pour avoir son id et son projet auquel ajouter le devis
+    this.authService.getIsConnected().pipe(take(1)).subscribe((isConnected) => {
 
-    this.isconnected = isConnected;
+      this.isconnected = isConnected;
 
-    if (!isConnected) {
-      this.display_modal_connection = true;
-      return;
-    }
-
-    if (this.isSubmitting) {
-      console.log("Déjà en cours de soumission, ignoré");
-      return;
-    }
-
-    this.isSubmitting = true;
-    console.log('Utilisateur connecté :', this.authService.getUser().Id); 
-    this.gestiondesdevisService.clearDEGFormulaires(); 
-    const formulaires = this.gestiondesdevisService.getFormulaires();
-
-    const json = {
-      username: this.browserInfo,
-      ip: this.userIp,
-      piece: this.selectedPiece,
-      liste_des_travaux: formulaires,
-      deviceID: this.panier.getUniqueDeviceId(),
-      UtilisateurID: this.authService.getUser().Id
-    };
-
-    this.userService.addDevisPiece(json).subscribe(
-      (response) => {
-        this.current = 6;
-        this.panier.addItem(response.devis);
-        this.gestiondesdevisService.clearFormulaires();
-        this.isSubmitting = false;
-      },
-      (error) => {
-        console.error(error);
-        this.isSubmitting = false;
+      if (!isConnected) {
+        this.display_modal_connection = true;
+        return;
       }
-    );
-  });
-}
+
+      if (this.isSubmitting) {
+        console.log("Déjà en cours de soumission, ignoré");
+        return;
+      }
+
+      this.isSubmitting = true;
+      console.log('Utilisateur connecté :', this.authService.getUser().Id); 
+      this.gestiondesdevisService.clearDEGFormulaires(); 
+      const formulaires = this.gestiondesdevisService.getFormulaires();
+
+      const json = {
+        username: this.browserInfo,
+        ip: this.userIp,
+        piece: this.selectedPiece,
+        liste_des_travaux: formulaires,
+        deviceID: this.panier.getUniqueDeviceId(),
+        UtilisateurID: this.authService.getUser().Id
+      };
+
+      this.userService.addDevisPiece(json).subscribe(
+        (response) => {
+          this.current = 6;
+          this.panier.addItem(response.devis);
+          this.gestiondesdevisService.clearFormulaires();
+          this.isSubmitting = false;
+        },
+        (error) => {
+          console.error(error);
+          this.isSubmitting = false;
+        }
+      );
+    });
+  }
 
   done_but_another_piece(): void {
+    //enregistre le devis courrant et renvoi l'utilisateur a l'etape 1. on le force a se connecter pour avoir son id et son projet auquel ajouter le devis
     
-        this.gestiondesdevisService.clearDEGFormulaires()
+
+    this.authService.getIsConnected().pipe(take(1)).subscribe((isConnected) => {
+
+      this.isconnected = isConnected;
+
+      if (!isConnected) {
+        this.display_modal_connection = true;
+        return;
+      }
+
+      if (this.isSubmitting) {
+        console.log("Déjà en cours de soumission, ignoré");
+        return;
+      }
+
+      this.isSubmitting = true;//interference avec l'autre
+      console.log('Utilisateur connecté :', this.authService.getUser().Id); 
+      
+
+      //copier l'autre
+
+       this.gestiondesdevisService.clearDEGFormulaires()
         const formulaires = this.gestiondesdevisService.getFormulaires();
         const json = {
           username: this.browserInfo,
@@ -611,23 +634,36 @@ export class IndexComponent {
           liste_des_travaux: formulaires,
           deviceID:this.panier
           .getUniqueDeviceId(),
-          UtilisateurID:null
+          UtilisateurID:this.authService.getUser().Id
         };
         console.log('Formulaires soumis :', json);
         
         this.userService.addDevisPiece(json).subscribe(
           (response) => {
-            console.log('reponse de l\'api :', response);
-            this.current=6
-            console.log('etape courrante :', this.current);
+            
+            this.current=0//repartir choisir une piece
             let devis=response.devis
-            this.panier.addItem(devis)
+            
             this.gestiondesdevisService.clearFormulaires()
+            this.isSubmitting = false
+            this.is_one_travail_selected = false
+
+            console.log('devis enregistre maintenant choisir une autre piece ', response);
+            console.log('etape courrante choisir une autre piece :', this.current);
+            console.log('isSubmitting ', this.isSubmitting);
+            console.log('is_one_travail_selected ', this.is_one_travail_selected);
+
+            this.panier.addItem(devis)
           },
           (error) => {
-            console.error('Erreur lors de la récupération de l\'ajout du devis :', error);
+            console.error('Erreur lors de la récupération de l\'enregistrement du devis pour choisir une autre piece :', error);
           }
         );
+
+    });
+
+
+       
         
     
   }
@@ -768,8 +804,8 @@ ajouter_portes_apres_creation_mnp(){
   hide_finalisation_message=false;
   submit_devis_and_choose_piece(){
     this.done_but_another_piece()
-    this.current+=1
-    this.hide_finalisation_message=true
+    //this.current+=1
+    //this.hide_finalisation_message=true
   }
 
   get_max():number{
