@@ -50,6 +50,7 @@
               <th>Pièce</th>
               <th>Prestation</th>
               <th>Prix  TTC</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -60,6 +61,9 @@
               <td>{{ data.Piece?.Titre }}</td>
               <td><span *ngFor="let tache of data?.DevisTaches">{{ tache?.Travail?.Titre }}<br></span></td>
               <td>{{ calculerPrixTTC(data.Prix,data.Tva.Valeur  ) | number:'1.2-2'}}€</td>
+              <td>
+                <a (click)="supprimer_devis(data.ID)"><fa-icon [icon]="faTrash" class="mr-10"></fa-icon></a>
+              </td>
             </tr>
           </tbody>
       </table>

@@ -223,13 +223,18 @@ export class ProjetDetailsComponent {
     console.log('faire_acompte',faire_acompte)
     let amount=0
     let liste =[]
+    let id_paiement = 0
     if(faire_acompte){
       amount=parseFloat(this.prix_acompte.toFixed(2))
       console.log("crearion de la session stripe",amount)
       liste=this.projet.Devis
+      const acompte = this.paiements.find((p:any) => p.Type === 'acompte');
+      id_paiement = acompte?.ID ?? null;
     }else{
       amount=this.prix_visite
       liste=this.projet.Devis
+      const visite = this.paiements.find((p:any) => p.Type === 'visite');
+      id_paiement = visite?.ID ?? null;
     }
     // Construire correctement l'objet à envoyer au serveur
     const datas = {
@@ -238,6 +243,8 @@ export class ProjetDetailsComponent {
       url_de_retour: environment.url_de_retour,
       payer_visite:!faire_acompte,
       payer_acompte:faire_acompte,
+      projet_id:this.projet.Id,
+      id_paiement: id_paiement
     };
   
     this.userService.createCheckoutSession(datas).subscribe(

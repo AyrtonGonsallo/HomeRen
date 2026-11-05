@@ -4,16 +4,20 @@ export const environment = {
     production: false,
     apiUrl: 'http://192.168.100.3:3000', // URL de l'API locale
     //apiUrl: 'https://dev.homeren.fr/api-concepts-et-travaux', // URL de l'API sur le dev
+    //apiUrl: 'https://preprod.homeren.fr/api-concepts-et-travaux', // URL de l'API sur le preprod
     //apiUrl: 'https://homeren.fr/api-concepts-et-travaux', // URL de l'API en prod
     
     imagesUrl: 'https://homeren.fr/api-concepts-et-travaux/files/', 
     //imagesUrl: 'https://dev.homeren.fr/api-concepts-et-travaux/files/', // URL de l'API sur le dev
+    //imagesUrl: 'https://preprod.homeren.fr/api-concepts-et-travaux/files/', // URL de l'API sur le preprod
 
-    assetsUrl: 'https://homeren.fr/assets/', 
+    //assetsUrl: 'https://homeren.fr/assets/', 
     //assetsUrl: 'https://dev.homeren.fr/assets/', // URL de assets sur le dev
-    //assetsUrl: 'http://192.168.100.3:4300/assets/', // URL de assets en local
+    //assetsUrl: 'https://preprod.homeren.fr/assets/', // URL de assets sur le preprod
+    assetsUrl: 'http://192.168.100.3:4300/assets/', // URL de assets en local
 
     //url_de_retour:"https://dev.homeren.fr/",
+    //url_de_retour:"https://preprod.homeren.fr/",
     //url_de_retour:"https://homeren.fr/",
     url_de_retour:"http://localhost:4300/",
 

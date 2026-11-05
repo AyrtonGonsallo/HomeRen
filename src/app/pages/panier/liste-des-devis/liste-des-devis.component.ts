@@ -136,6 +136,8 @@ export class ListeDesDevisComponent {
 
       console.log("parametre_visite :", parametre_visite);
       console.log("parametre_acompte :", parametre_acompte);
+      console.log('this.projectToPayVisit.Id',this.projectToPayVisit?.Id)
+      console.log('this.projectToPayAcompt.Id',this.projectToPayAcompt?.Id)
 
       if (!(parametre_visite || parametre_acompte)) {
         console.warn("Aucune action requise, arrêt du processus.");
@@ -159,6 +161,7 @@ export class ListeDesDevisComponent {
       }else if(this.listOfDevisToPayVisit && parametre_visite){
         this.res_titre="VISITE DU TECHNICIEN"
       }
+
 
       const user_id = this.authService.getUser().Id;
       console.log("Utilisateur ID :", user_id);
